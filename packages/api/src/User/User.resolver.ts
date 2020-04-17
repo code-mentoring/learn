@@ -13,8 +13,7 @@ export class UserResolver {
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
   users() {
-    console.log('here');
-    return []
+    return this.userService.findAll();
   }
 
   @Mutation(() => User)
