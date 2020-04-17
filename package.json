@@ -1,0 +1,15 @@
+{
+  "name": "@code-mentoring/learn",
+  "version": "0.0.0",
+  "description": "Learning website for Code Mentoring",
+  "main": "index.js",
+  "author": "Tristan Matthias <hello@tristanmatthias.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "lerna": "^3.20.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
