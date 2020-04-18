@@ -35,4 +35,8 @@ export class AuthService {
       }),
     };
   }
+
+  verify(token: string) {
+    return this.jwtService.verify(token);
+  }
 }

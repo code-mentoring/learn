@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { LoginOutput } from './Auth.entity';
 import { AuthService } from './Auth.service';
@@ -17,5 +17,17 @@ export class AuthResolver {
     const user = await this.authService.validateUser(email, password)
     if (!user) throw new Error('Invalid login credentials')
     return this.authService.sign(user);
+  }
+
+  @Query(() => Boolean)
+  async verifyToken(
+    @Args('accessToken') token: string
+  ) {
+    try {
+      this.authService.verify(token);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
