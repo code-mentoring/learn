@@ -1,0 +1,22 @@
+html {
+  @apply text-grey-900;
+}
+
+h1 {
+  @apply text-6xl font-title font-extrabold leading-tight;
+  @apply text-primary-500;
+}
+
+h2 {
+  @apply text-4xl font-title font-bold leading-tight;
+  @apply text-secondary-500;
+}
+
+h3 {
+  @apply text-2xl font-black font-title leading-tight;
+  @apply text-primary-500;
+}
+
+p {
+  @apply font-normal text-base leading-7;
+}

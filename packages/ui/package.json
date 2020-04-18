@@ -1,0 +1,15 @@
+{
+  "name": "@code-mentoring/ui",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "formik": "^2.1.4",
+    "graphql-tag": "^2.10.3",
+    "react-table": "^7.0.4"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/react-table": "^7.0.16"
+  }
+}
