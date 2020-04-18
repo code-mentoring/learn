@@ -3,7 +3,7 @@ import config from 'config';
 import path from 'path';
 
 const db = process.env.NODE_ENV === 'production'
-  ? { uri: process.env.DATABASE_URL}
+  ? { url: process.env.DATABASE_URL }
   : config.get('db') as {}
 
 
