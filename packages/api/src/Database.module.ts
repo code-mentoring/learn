@@ -3,13 +3,17 @@ import config from 'config';
 import path from 'path';
 
 const db = process.env.NODE_ENV === 'production'
-  ? { url: process.env.DATABASE_URL }
+  ? {
+    type: 'postgres',
+    url: process.env.DATABASE_URL
+  }
   : config.get('db') as {}
 
 
 export const DatabaseModule = TypeOrmModule.forRoot({
 
   ...db,
+  url
 
   entities: [path.join(__dirname, '**/**.entity{.ts,.js}')],
   synchronize: true,
