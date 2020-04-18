@@ -17,9 +17,11 @@ export class AuthService {
     const user = await this.usersService.findByEmail(email);
     if (!user) return null;
 
-    const valid = await new Promise(res => bcrypt.compare(password, user.password, err =>
-      res(!Boolean(err))
-    ));
+    const valid = await new Promise(res => bcrypt.compare(password, user.password, (err, result) => {
+      if (err) res(false);
+      else res(result)
+    }));
+
     if (!valid) return null;
 
     const {password: p, ...result} = user;
