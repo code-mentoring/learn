@@ -6,6 +6,9 @@
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start-api": "cd packages/api; yarn start"
+  },
   "dependencies": {
     "lerna": "^3.20.2"
   },
