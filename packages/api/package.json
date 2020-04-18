@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "nest start --watch",
+    "build": "nest build",
     "start": "node dist/main.js",
     "types": "graphql-codegen"
   },
