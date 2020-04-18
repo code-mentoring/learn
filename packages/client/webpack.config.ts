@@ -94,7 +94,7 @@ const config: Configuration = {
     }),
     new replacePlugin({
       values: {
-        '%%API_HOST%%': isProd ? 'http://api.codementoring.co' : 'http://localhost:4000',
+        '%%API_HOST%%': isProd ? 'https://api.codementoring.co' : 'http://localhost:4000',
         '%%IS_PROD%%': isProd
       }
     })
