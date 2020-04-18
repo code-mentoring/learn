@@ -1,0 +1,10 @@
+schema: src/schema.gql
+
+generates:
+  types.ts:
+    plugins:
+      - typescript
+
+  fragments.json:
+    plugins:
+      - fragment-matcher

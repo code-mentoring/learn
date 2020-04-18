@@ -2,8 +2,10 @@
   "name": "@code-mentoring/api",
   "version": "0.0.0",
   "scripts": {
-    "dev": "nest start --watch"
+    "dev": "nest start --watch",
+    "types": "graphql-codegen"
   },
+  "types": "types.ts",
   "dependencies": {
     "@nestjs/cli": "^7.1.2",
     "@nestjs/common": "^7.0.8",
@@ -29,6 +31,9 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.13.2",
+    "@graphql-codegen/fragment-matcher": "^1.13.2",
+    "@graphql-codegen/typescript": "^1.13.2",
     "@types/bcrypt": "^3.0.0",
     "@types/config": "^0.0.36",
     "@types/passport-jwt": "^3.0.3",

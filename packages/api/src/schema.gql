@@ -16,11 +16,12 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type LoginOutput {
-  token: String!
+  accessToken: String!
 }
 
 type Query {
   users: [User!]!
+  verifyToken(accessToken: String!): Boolean!
 }
 
 type Mutation {
