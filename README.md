@@ -1,4 +1,4 @@
-# learn.codemntoring.co
+# learn.codementoring.co
 - Lerna
 - React front end
 - NestJS backend
