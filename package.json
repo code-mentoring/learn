@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "postinstall": "yarn build",
+    "build": "lerna run build",
     "start-api": "cd packages/api; yarn start"
   },
   "dependencies": {
