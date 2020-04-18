@@ -13,7 +13,6 @@ const db = process.env.NODE_ENV === 'production'
 export const DatabaseModule = TypeOrmModule.forRoot({
 
   ...db,
-  url
 
   entities: [path.join(__dirname, '**/**.entity{.ts,.js}')],
   synchronize: true,
