@@ -25,7 +25,11 @@ This is a running list of those who are actively contributing to this project.
 | Name | Role | Slack handle | Weekly Availability | Joined |
 |------|------|--------|---------------------|--------|
 | 🧢 Tristan Matthias | Project Lead | `@Tristan Matthias` | 20 hours | Apr 2020 |
-|  Frank Kim | Front-end | `@Frank Kim` | 10 hours | Apr 2020 |
+| 🧢 Shane Sheridan | Scrum Master | `@Shane Sheridan` | 6 hours | Apr 2020 |
+| Folke Westergren | Front End | `@Folke` | 5-10 hours | Apr 2020 |
+| Lee Yang |  backend  | `@Lee` | 5-10 hours | Apr 2020 |
+| Kevin Gilbert | Backend Dev | `@Kevin` | 5-10 hours | Apr 2020 |
+| Frank Kim | Front-end | `@Frank Kim` | 10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
