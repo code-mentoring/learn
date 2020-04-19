@@ -30,6 +30,9 @@ This is a running list of those who are actively contributing to this project.
 | Lee Yang |  backend  | `@Lee` | 5-10 hours | Apr 2020 |
 | Kevin Gilbert | Backend Dev | `@Kevin` | 5-10 hours | Apr 2020 |
 | Rajat Bansal | Front End Dev | `@Rajat Bansal` | 15-20 hours | Apr 2020 |
+| Frank Kim | Front-end | `@Frank Kim` | 10 hours | Apr 2020 |
+| Weiwei Zhang | Front-end | `@Weiwei Zhang` | 5-10 hours | Apr 2020 |
+| Tomoya Kuroda | Full-stack | `@Tomoya` | 10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
