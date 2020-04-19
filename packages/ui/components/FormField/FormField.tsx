@@ -6,6 +6,7 @@ import { firstUpper } from '../../lib/text';
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 import { useBrixFormContext } from '../Form/Form';
 import { Select } from '../Select/Select';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { TextField, TextFieldProps } from '../TextField/TextField';
 
 
@@ -230,7 +231,8 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
   const LC = labelComponent;
 
   return <div className={classnames('form-field', className, {
-    [`col-span-${colSpan}`]: colSpan !== 2
+    [`col-span-${colSpan}`]: colSpan !== 2,
+    'pt-2': !Boolean(label)
   })}>
     {label &&
       (LC ? <LC htmlFor={name}>{label}</LC> : <label htmlFor={name}>{firstUpper(label)}</label>)
@@ -242,7 +244,7 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
       {...extraProps}
       onChange={extraProps.onChange || onChange}
     /> : null}
-    {typeof error === 'string' && <span className="error">{firstUpper(error)}</span>}
+    {typeof error === 'string' && <ErrorMessage error={error} className="text-right" />}
   </div>;
 };
 

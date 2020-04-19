@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { Form as FormikForm, FormikConfig, FormikContextType, FormikProvider, useFormik } from 'formik';
 import React, { PropsWithoutRef, useEffect } from 'react';
 
-import { FormStatus } from '../FormStatus/FormStatus';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface FormProps<Values extends object> extends
   Partial<FormikConfig<Values>>,
@@ -61,9 +61,7 @@ export const Form: React.FunctionComponent<FormProps<any>> = ({
 
   return <BrixFormContext.Provider value={ctx}>
     <FormikProvider value={form}>
-      {(error || success) &&
-        <FormStatus error={Boolean(error)}>{error || success}</FormStatus>
-      }
+      {error && <ErrorMessage error={error} /> }
       <FormikForm children={children} className={classnames(className, { 'with-submit': canSubmit })} style={style} />
     </FormikProvider>
   </BrixFormContext.Provider>;

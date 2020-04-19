@@ -1,0 +1,9 @@
+form {
+  button {
+    @apply w-full;
+  }
+
+  .form-field + button {
+    @apply mt-4;
+  }
+}

@@ -5,7 +5,6 @@ export * from './Checkbox/Checkbox';
 export * from './Form/Form';
 export * from './Form/QueryForm';
 export * from './FormField/FormField';
-export * from './FormStatus/FormStatus';
 export * from './Grid/Grid';
 export * from './Icon/Icon';
 export * from './Loader/Loader';
