@@ -21,12 +21,21 @@ This is a running list of those who are actively contributing to this project.
 > smoothly. If they ask for something, please 🙏 listen to what they say carefully.
 > All maintainers are approved through Code Mentoring's leadership team.
 
+### The Team
 | Name | Role | Slack handle | Weekly Availability | Joined |
 |------|------|--------|---------------------|--------|
 | 🧢 Tristan Matthias | Project Lead | `@Tristan Matthias` | 20 hours | Apr 2020 |
 
 
-### 💬 Communication
+## 🔧 What can I work on?
+We use Github to track our issues. Look for any issues labelled `help wanted`. If
+there is nobody assigned, comment that you'd like to take it over, and a maintainer
+will assign you.
+
+You can view [all issues needing help here](https://github.com/code-mentoring/learn/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+
+
+## 💬 Communication
 We use our Slack community (`#project-cm` channel) for discussions on the project,
 and Github projects for tracking issues.
 
