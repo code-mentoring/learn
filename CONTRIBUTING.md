@@ -26,7 +26,8 @@ This is a running list of those who are actively contributing to this project.
 |------|------|--------|---------------------|--------|
 | 🧢 Tristan Matthias | Project Lead | `@Tristan Matthias` | 20 hours | Apr 2020 |
 | 🧢 Shane Sheridan | Scrum Master | `@Shane Sheridan` | 6 hours | Apr 2020 |
-| 🧢 Lee Yang |  backend  | `@Lee` | 5-10 hours | Apr 2020 |
+| Folke Westergren | Front End | `@Folke` | 5-10 hours | Apr 2020 |
+| Lee Yang |  backend  | `@Lee` | 5-10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
