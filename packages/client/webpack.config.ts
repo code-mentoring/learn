@@ -20,7 +20,7 @@ const config: Configuration = {
   },
 
   output: {
-    publicPath: '/'
+    publicPath: './'
   },
 
   devServer: {

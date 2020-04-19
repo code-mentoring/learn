@@ -6,14 +6,18 @@
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
   "private": true,
+
   "scripts": {
     "postinstall": "yarn build",
     "build": "lerna run build",
-    "start-api": "cd packages/api; yarn start"
+    "start-api": "cd packages/api; yarn start",
+    "start-api-win": "cd packages/api && yarn start"
   },
+
   "dependencies": {
     "lerna": "^3.20.2"
   },
+  
   "workspaces": [
     "packages/*"
   ]
