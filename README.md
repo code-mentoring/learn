@@ -91,7 +91,7 @@ load the front-end.
 
 ---
 
-## Credits
+## 👏 Credits
 This project is built and maintained by the community of [Code Mentoring](https://codementoring.co).
 
 *Built by the people, for the people*
