@@ -1,0 +1,33 @@
+input {
+  @apply inline-block align-middle rounded border-grey-300 border-2 font-sans text-sm
+    h-10 px-3 text-grey-900;
+
+  &:hover { @apply border-grey-400; }
+  &:focus { @apply border-primary-500; }
+
+  &.icon-left { @apply pl-10 }
+  &.icon-right { @apply pr-10 }
+}
+
+
+.input {
+  position: relative;
+  @apply text-grey-300;
+
+  input {
+    @apply w-full;
+  }
+
+
+  svg {
+    padding: 5%;
+    position: absolute;
+  }
+
+  .icon2 {
+    right: 0;
+  }
+
+
+  &.error input { @apply border-error }
+}

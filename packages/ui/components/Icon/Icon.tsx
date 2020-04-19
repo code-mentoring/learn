@@ -25,7 +25,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
   size = 'medium',
   ...props
 }) => {
-  const colorClass = color ? `color-${color}` : null;
+  const colorClass = color ? `text-${color}` : null;
 
   const sizeClass = `h-${typeof size === 'number' ? size : sizeMap[size]}`
 

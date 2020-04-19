@@ -5,6 +5,10 @@
 
 @import "./components/buttons";
 @import "./components/text";
+@import "./components/input";
+@import "./components/icon";
+@import "./components/form";
+@import "./components/error-message";
 
 *, *:focus {
   outline: none !important;
@@ -13,5 +17,4 @@
 body, #app {
   background: #e4e0f3;
   min-height: 100vh;
-  /* min-width: 100vw; */
 }

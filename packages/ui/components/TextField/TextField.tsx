@@ -50,8 +50,7 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
   const icon2: IconType | undefined = err ? 'exclamation' : iconSecondary;
   const icon2Color = err ? 'error' : iconSecondaryColor;
 
-
-  return <div className={classnames('input', className, {
+  return <div className={classnames("input", className, {
     loading,
     suffix,
     disabled,
@@ -59,9 +58,13 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
   })}>
     {loading
       ? <Loader />
-      : icon && <Icon icon={icon} color={iconColor} />}
-    {icon2 && <Icon icon={icon2} color={icon2Color} />}
+      : icon && <Icon icon={icon} color={iconColor} className="icon1"/>}
+    {icon2 && <Icon icon={icon2} color={icon2Color} className="icon2"/>}
     <Comp
+      className={classnames({
+        'icon-left': Boolean(icon),
+        'icon-right': Boolean(icon2)
+      })}
       textarea={textarea}
       {...props}
       value={value}
