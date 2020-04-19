@@ -34,6 +34,7 @@ This is a running list of those who are actively contributing to this project.
 | Weiwei Zhang | Front-end | `@Weiwei Zhang` | 5-10 hours | Apr 2020 |
 | Tomoya Kuroda | Full-stack | `@Tomoya` | 10 hours | Apr 2020 |
 | Ahmed Alhassan | Front End | `@Ahmed Alhassan` | 8 hours | Apr 2020 |
+| Rayser Castrillo | backend | `@rayser` | 5 - 10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
