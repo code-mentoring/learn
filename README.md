@@ -36,10 +36,10 @@ database used by the industry for projects of all sizes.
 ## 🙋‍♀️ How you can get involved
 Code Mentoring is an open community for all types and levels of develoeprs,
 designers, hackers and tinkerers. If you want to get involved, or see something
-you want to build (or even a bug fix), head over to our [Contributing](/CONTRIBUTING)
+you want to build (or even a bug fix), head over to our [Contributing](CONTRIBUTING.md)
 document for more information.
 
-> Please read our branching strategy in [Contributing](/CONTRIBUTING).
+> Please read our branching strategy in [Contributing](CONTRIBUTING.md).
 >
 > This is important if you want to contribute!
 
