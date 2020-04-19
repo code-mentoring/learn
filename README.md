@@ -39,6 +39,16 @@ designers, hackers and tinkerers. If you want to get involved, or see something
 you want to build (or even a bug fix), head over to our [Contributing](/CONTRIBUTING)
 document for more information.
 
+> Please read our branching strategy in [Contributing](/CONTRIBUTING).
+>
+> This is important if you want to contribute!
+
+### 💬 Communication
+We use our Slack community (`#project-cm` channel) for discussions on the project,
+and Github projects for tracking issues.
+
+We also have a **weekly standup call at 6pm EST** on Hangouts. Message one of the
+maintainers for access to slack or to get a meeting invite.
 
 ---
 
