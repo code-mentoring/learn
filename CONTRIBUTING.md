@@ -25,6 +25,7 @@ This is a running list of those who are actively contributing to this project.
 | Name | Role | Slack handle | Weekly Availability | Joined |
 |------|------|--------|---------------------|--------|
 | 🧢 Tristan Matthias | Project Lead | `@Tristan Matthias` | 20 hours | Apr 2020 |
+|  Frank Kim | Front-end | `@Frank Kim` | 10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
