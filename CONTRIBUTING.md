@@ -29,6 +29,7 @@ This is a running list of those who are actively contributing to this project.
 | Folke Westergren | Front End | `@Folke` | 5-10 hours | Apr 2020 |
 | Lee Yang |  backend  | `@Lee` | 5-10 hours | Apr 2020 |
 | Kevin Gilbert | Backend Dev | `@Kevin` | 5-10 hours | Apr 2020 |
+| Frankie Law | Front End or Back End | `@Frankie` | 5-10 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
