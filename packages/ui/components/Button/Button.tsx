@@ -1,25 +1,30 @@
 import classnames from 'classnames';
 import React, { HTMLProps } from 'react';
+import { Size, WithColor } from '../../lib/classes';
 
-import { composeClass, WithColor, WithSize } from '../../lib/classes';
 
-export type ButtonProps = HTMLProps<HTMLButtonElement> & WithColor & WithSize & {
-  circle?: boolean;
-  hollow?: boolean;
+
+export type ButtonProps = WithColor & {
+  text?: boolean;
+  size?: Size
 };
 
-export const Button: React.FunctionComponent<ButtonProps> = ({
+export const Button: React.FunctionComponent<ButtonProps & Omit<HTMLProps<HTMLButtonElement>, 'size'>> = ({
   children,
-  circle,
   type,
   className,
-  hollow,
+  text,
+  color,
+  size,
   ...props
 }) => {
-  const styles = composeClass(props, { color: 'bg', size: true }, className);
+  const classes: any = {};
+  if (color) classes[`btn-${color}`] = true;
+  if (size) classes[`btn-${size}`] = true;
+  if (text) classes[`btn-text`] = true;
 
   return <button
-    className={classnames(styles, { circle, hollow })}
+    className={classnames("btn", classes, className)}
     {...props}
-  />;
+  >{children}</button>;
 };

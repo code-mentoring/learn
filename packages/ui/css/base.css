@@ -6,6 +6,9 @@
 @import "./components/buttons";
 @import "./components/text";
 
+*, *:focus {
+  outline: none !important;
+}
 
 body, #app {
   background: #e4e0f3;

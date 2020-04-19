@@ -1,11 +1,15 @@
 // const defaultTheme = require('tailwindcss/defaultTheme')
 
 const primary = {
-  100: '#FAF9FF',
-  200: '#f4f2fb',
-  400: '#C4BEE0',
+  100: '#998BE4',
+  200: '#5C45D4',
+  300: '#472ECF',
+  400: '#3317CA',
   500: '#1F00C5',
-  900: '#1F00C5',
+  600: '#1A00A2',
+  700: '#170090',
+  800: '#14007E',
+  900: '#11006C',
 }
 
 const secondary = {
@@ -38,9 +42,17 @@ module.exports = {
       white: '#fff',
       black: '#000',
       grey: {
-        500: '#C4BEE0',
-        900: '#11006C'
-      }
+        100: '#F8F7FC',
+        200: '#EAE7F6',
+        300: '#DCD8F0',
+        400: '#CEC8EB',
+        500: '#C0B9E5',
+        600: '#B2AAE0',
+        700: '#928CB8',
+        800: '#514E66',
+        900: '#211F29'
+      },
+      error: tertiary['900']
     },
     linearGradientColors: theme => ({
       // lightBlue: ['red', 'white' ]
