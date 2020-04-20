@@ -1,4 +1,4 @@
-# Project CM - Code Mentoring's Learning platform
+# Project CM - Code Mentoring's Learning platform (The Duolingo of Coding)
 ### 🔗 [learn.codementoring.co](https://learn.codementoring.co)
 > Welcome to Project CM 👋, we're glad you're here! This project was born from our
 community over at [codementoring.co](https://codementoring.co). The goal of this
