@@ -23,7 +23,6 @@ This is a running list of those who are actively contributing to this project.
 > All maintainers are approved through Code Mentoring's leadership team.
 
 ### The Team
-
 | Name                | Role                  | Slack handle        | Weekly Availability | Joined   |
 | ------------------- | --------------------- | ------------------- | ------------------- | -------- |
 | 🧢 Tristan Matthias | Project Lead          | `@Tristan Matthias` | 20 hours            | Apr 2020 |
@@ -39,6 +38,7 @@ This is a running list of those who are actively contributing to this project.
 | Ahmed Alhassan      | Front End             | `@Ahmed Alhassan`   | 8 hours             | Apr 2020 |
 | Rayser Castrillo    | backend               | `@rayser`           | 5 - 10 hours        | Apr 2020 |
 | Suzy Nakayama       | Full-stack            | `@Suzy Nakayama`    | 10 hours            | Apr 2020 |
+| Ellie Xiang         | Full-stack            | `@Ellie`.           | 8+ hours            | Apr 2020 |
 
 ## 🔧 What can I work on?
 
