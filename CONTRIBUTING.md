@@ -28,18 +28,18 @@ This is a running list of those who are actively contributing to this project.
 | ------------------- | --------------------- | ------------------- | ------------------- | -------- |
 | 🧢 Tristan Matthias | Project Lead          | `@Tristan Matthias` | 20 hours            | Apr 2020 |
 | 🧢 Shane Sheridan   | Scrum Master          | `@Shane Sheridan`   | 6 hours             | Apr 2020 |
-| 🧢 Rajat Bansal     | Front-end             | `@Rajat Bansal`     | 15-20 hours         | Apr 2020 |
+| 🧢 Rajat Bansal     | WWW Lead              | `@Rajat Bansal`     | 15-20 hours         | Apr 2020 |
 | Frankie Law         | Full stack            | `@Frankie`          | 5-10 hours          | Apr 2020 |
+| Suzy Nakayama       | Full-stack            | `@Suzy Nakayama`    | 10 hours            | Apr 2020 |
+| Tomoya Kuroda       | Full-stack            | `@Tomoya`           | 10 hours            | Apr 2020 |
+| Ellie Xiang         | Full-stack            | `@Ellie`.           | 8+ hours            | Apr 2020 |
 | Folke Westergren    | Front-end             | `@Folke`            | 5-10 hours          | Apr 2020 |
-| Lee Yang            | Back-end              | `@Lee`              | 5-10 hours          | Apr 2020 |
-| Kevin Gilbert       | Back-end              | `@Kevin`            | 5-10 hours          | Apr 2020 |
 | Frank Kim           | Front-end             | `@Frank Kim`        | 10 hours            | Apr 2020 |
 | Weiwei Zhang        | Front-end             | `@Weiwei Zhang`     | 5-10 hours          | Apr 2020 |
-| Tomoya Kuroda       | Full-stack            | `@Tomoya`           | 10 hours            | Apr 2020 |
 | Ahmed Alhassan      | Front-end             | `@Ahmed Alhassan`   | 8 hours             | Apr 2020 |
+| Lee Yang            | Back-end              | `@Lee`              | 5-10 hours          | Apr 2020 |
+| Kevin Gilbert       | Back-end              | `@Kevin`            | 5-10 hours          | Apr 2020 |
 | Rayser Castrillo    | Back-end              | `@rayser`           | 5 - 10 hours        | Apr 2020 |
-| Suzy Nakayama       | Full-stack            | `@Suzy Nakayama`    | 10 hours            | Apr 2020 |
-| Ellie Xiang         | Full-stack            | `@Ellie`.           | 8+ hours            | Apr 2020 |
 | Lan Phan            | Testing & Front-end.  | `@Lan Phan`         | 3 - 6 hours         | Apr 2020 |
 
 ## 🔧 What can I work on?
