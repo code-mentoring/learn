@@ -1,5 +1,11 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @ObjectType()
 export class User {
@@ -19,10 +25,9 @@ export class User {
   createdAt: Date;
 }
 
-
 @Entity('user')
-@Unique("Email", ['email'])
-export class UserWithPassword implements User  {
+@Unique('Email', ['email'])
+export class UserWithPassword implements User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -42,7 +47,6 @@ export class UserWithPassword implements User  {
   createdAt: Date;
 }
 
-
 @InputType()
 export class UserInput {
   @Field()
@@ -56,4 +60,19 @@ export class UserInput {
 
   @Field()
   password: string;
+}
+
+@ObjectType()
+export class Me {
+  @Field(() => ID)
+  id: string;
+
+  @Field()
+  firstName: string;
+
+  @Field()
+  lastName: string;
+
+  @Field()
+  email: string;
 }
