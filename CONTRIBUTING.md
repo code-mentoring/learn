@@ -36,6 +36,7 @@ This is a running list of those who are actively contributing to this project.
 | Tomoya Kuroda | Full-stack | `@Tomoya` | 10 hours | Apr 2020 |
 | Ahmed Alhassan | Front End | `@Ahmed Alhassan` | 8 hours | Apr 2020 |
 | Rayser Castrillo | backend | `@rayser` | 5 - 10 hours | Apr 2020 |
+| Lan Phan | Testing & Front-end | `@Lan Phan` | 3 - 6 hours | Apr 2020 |
 
 
 ## 🔧 What can I work on?
