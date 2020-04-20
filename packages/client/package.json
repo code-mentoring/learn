@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "webpack-dev-server",
-    "devWebpack": "webpack -p",
-    "build-mac": "NODE_ENV=production webpack -p; cp _redirects dist/_redirects",
-    "build-win": "set NODE_ENV=development && npm run devWebpack && copy .\\_redirects .\\dist",
+
+    "build-mac": "cross-env NODE_ENV=production webpack -p; cp _redirects dist/_redirects",
+    "build-win": "cross-env NODE_ENV=development webpack -p && copy .\\_redirects .\\dist",
     "build": "node build.js"
   },
+
   "devDependencies": {
     "@apollo/react-hooks": "^3.1.5",
     "@lifeomic/axios-fetch": "^1.4.2",
@@ -33,6 +34,7 @@
     "autoprefixer": "^9.7.6",
     "classnames": "^2.2.6",
     "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.5.2",
     "formik": "^2.1.4",
     "graphql": "^15.0.0",
