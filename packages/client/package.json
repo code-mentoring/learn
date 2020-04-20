@@ -3,12 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "webpack-dev-server",
-
-    "build-mac": "cross-env NODE_ENV=production webpack -p; cp _redirects dist/_redirects",
-    "build-win": "cross-env NODE_ENV=development webpack -p && copy .\\_redirects .\\dist",
-    "build": "node build.js"
+    "build": "cross-env NODE_ENV=production webpack -p"
   },
-
   "devDependencies": {
     "@apollo/react-hooks": "^3.1.5",
     "@lifeomic/axios-fetch": "^1.4.2",
