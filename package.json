@@ -9,8 +9,7 @@
   "scripts": {
     "postinstall": "yarn build",
     "build": "lerna run build",
-    "start-api": "cd packages/api; yarn start",
-    "start-api-win": "cd packages/api && yarn start"
+    "start": "lerna run start --stream --scope @code-mentoring/api"
   },
   "dependencies": {
     "lerna": "^3.20.2"
