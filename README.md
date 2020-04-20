@@ -1,4 +1,4 @@
-# Project CM - Code Mentoring's Learning platform
+# Project CM - Code Mentoring's Learning platform (The Duolingo of Coding)
 ### 🔗 [learn.codementoring.co](https://learn.codementoring.co)
 > Welcome to Project CM 👋, we're glad you're here! This project was born from our
 community over at [codementoring.co](https://codementoring.co). The goal of this
@@ -12,6 +12,7 @@ project is to bring free, fun education to anyone who wants to learn how to code
     - [💬 Communication](#%f0%9f%92%ac-communication)
     - [📞 Weekly standup](#%f0%9f%93%9e-weekly-standup)
   - [📦 Installation and Setup](#%f0%9f%93%a6-installation-and-setup)
+  - [🎨 Design files](#%f0%9f%8e%a8-design-files)
   - [👏 Credits](#%f0%9f%91%8f-credits)
 
 
@@ -110,6 +111,14 @@ yarn dev
 Once the API is running, open [http://localhost:8080](https://localhost:8080) to
 load the front-end.
 
+
+---
+
+## 🎨 Design files
+We use Figma for this project.
+- [All UI elements can be found here](https://www.figma.com/file/MfOc0a8Ac9Zoh9RppoEuiD/CM-UI?node-id=0%3A1&viewport=657%2C444%2C1.0679636001586914)
+- [All mockups can be found here](
+https://www.figma.com/file/Fd2OguMlOscLwHQfA74YF7/app?node-id=0%3A1&viewport=-4927%2C1603%2C0.633924663066864)
 
 ---
 

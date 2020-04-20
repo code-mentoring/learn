@@ -40,6 +40,7 @@
     "@types/config": "^0.0.36",
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
-    "@types/uuid": "^7.0.2"
+    "@types/uuid": "^7.0.2",
+    "mongodb": "^3.5.6"
   }
 }

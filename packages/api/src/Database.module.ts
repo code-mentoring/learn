@@ -9,7 +9,6 @@ const db = process.env.NODE_ENV === 'production'
   }
   : config.get('db') as {}
 
-
 export const DatabaseModule = TypeOrmModule.forRoot({
 
   ...db,
