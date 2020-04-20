@@ -75,3 +75,13 @@ strategy to maintain the project. **PLEASE FOLLOW THIS FORMAT**
   to keep these as SMALL AS POSSIBLE so our PR reviews are not to challenging. If
   a maintainer asks you to reduce your PR size, please do so.
 - `release/vX.X.X` Used to release the sprints work into production.
+
+
+## PRs
+
+As per git flow, all PRs should be on branches with the names `feature/name-of-feature`.
+**They should be requested to merge into the `develop` branch, NOT THE `master` branch.**
+
+When a PR is ready, please make sure to request a review from a 🧢 maintainer.
+Once the maintainer has approved your PR, it will be merged for you into `develop`.
+Congratulations 🎉! #alwaysbeshipping ⛵️
