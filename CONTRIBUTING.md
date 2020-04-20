@@ -28,6 +28,7 @@ This is a running list of those who are actively contributing to this project.
 | ------------------- | ------------------------- | ------------------- | ------------------------------------------------------ | ------------------- | -------- |
 | 🧢 Tristan Matthias | Project Lead              | `@Tristan Matthias` | [@tristanMatthias](https://github.com/tristanMatthias) | 20 hours            | Apr 2020 |
 | 🧢 Shane Sheridan   | Scrum Master              | `@Shane Sheridan`   | [@shane215](https://github.com/shane215)               | 6 hours             | Apr 2020 |
+| 🧢 Quim Granados    | Full-stack                | `@Quim Granados`    | [@quimgv](https://github.com/quimgv)                   | 10-20 hours         | Apr 2020 |
 | 🧢 Rajat Bansal     | WWW Lead                  | `@Rajat Bansal`     | [@rjtbansal](https://github.com/rjtbansal)             | 15-20 hours         | Apr 2020 |
 | Frank Kim           | Documentation / Front-end | `@Frank Kim`        | [@heyfranksmile](https://github.com/heyfranksmile)     | 10 hours            | Apr 2020 |
 | Frankie Law         | Full stack                | `@Frankie`          | [@FrankieLaw](https://github.com/FrankieLaw)           | 5-10 hours          | Apr 2020 |
@@ -75,7 +76,6 @@ strategy to maintain the project. **PLEASE FOLLOW THIS FORMAT**
   to keep these as SMALL AS POSSIBLE so our PR reviews are not to challenging. If
   a maintainer asks you to reduce your PR size, please do so.
 - `release/vX.X.X` Used to release the sprints work into production.
-
 
 ## PRs
 
