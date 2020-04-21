@@ -1,3 +1,5 @@
+/* eslint-disable no-console, no-underscore-dangle */
+import fragments from '@code-mentoring/api/fragments.json';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { ApolloClient, ApolloError } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
@@ -5,7 +7,6 @@ import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import axios from 'axios';
-import fragments from "@code-mentoring/api/fragments.json";
 
 import { CONFIG } from '../config';
 import { LocalStorage } from './localStorage';
@@ -53,7 +54,6 @@ const getCache = async () =>
       switch (object.__typename) {
         default:
           if (object.id) return `${object.__typename}.${object.id}`;
-          return;
       }
     },
     fragmentMatcher: await getFragmentMatcher()
@@ -63,14 +63,16 @@ let client: ApolloClient<any>;
 
 export const getClient = async () => {
   if (client) return client;
-  return client = new ApolloClient({
+  client = new ApolloClient({
     link: authLink.concat(
       ApolloLink.from([
         errorLink,
         uploadLink
-      ])),
+      ])
+    ),
     cache: await getCache()
   });
+  return client;
 };
 
 

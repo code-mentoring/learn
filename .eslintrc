@@ -1,0 +1,57 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import"],
+  "extends": ["airbnb"],
+
+  "env":{
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "ts": {
+        "alwaysTryTypes": true // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
+      "node": {
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "error",
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": 0,
+    "import-name": 0,
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "^_",
+      "args": "after-used",
+      "ignoreRestSiblings": true
+    }],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": 0, // Typescript handles this
+    "consistent-return": 0,
+    "no-useless-constructor": 0, // Needed by NestJS dep injection
+    "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
+    "max-classes-per-file": 0, // Leads to too many files
+    "class-methods-use-this": 0,
+    "comma-dangle": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"],
+    "computed-property-spacing": ["error", "never"],
+    "object-curly-newline": 0,
+    "react/jsx-wrap-multilines": [0, "never"],
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-closing-tag-location": 0,
+    "arrow-parens": ["error", "as-needed"],
+    "react/jsx-curly-newline": 0,
+    "implicit-arrow-linebreak": 0
+  }
+}

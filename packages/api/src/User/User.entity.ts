@@ -21,8 +21,8 @@ export class User {
 
 
 @Entity('user')
-@Unique("Email", ['email'])
-export class UserWithPassword implements User  {
+@Unique('Email', ['email'])
+export class UserWithPassword implements User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

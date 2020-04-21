@@ -16,11 +16,11 @@ const usersQuery = gql`query {
   }
 }`;
 
-export interface LeaderboardWidgetProps extends CardProps {}
+export interface LeaderboardWidgetProps extends CardProps { }
 
 
-export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = (props) => {
-  const {data, loading, error} = useQuery<{users: User[]}>(usersQuery);
+export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
+  const { data, loading, error } = useQuery<{ users: User[] }>(usersQuery);
 
   if (loading) return <Card><Loader /></Card>;
 
@@ -29,9 +29,9 @@ export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = (props) => {
     {error
       ? <ErrorMessage error={error.message} />
       : data!.users.map(u => <div className="text-primary-500 font-semibold">
-        <img className="rounded-circle inline-block mr-3" src="http://placehold.it/30x30" alt="User profile pic"/>
+        <img className="rounded-circle inline-block mr-3" src="http://placehold.it/30x30" alt="User profile pic" />
         <span>{u.firstName} {u.lastName}</span>
       </div>)
     }
-  </Card>
-}
+  </Card>;
+};

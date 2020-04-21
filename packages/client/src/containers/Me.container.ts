@@ -20,7 +20,7 @@ const useAuth = () => {
   const [getMe, { data, error, loading, called }] = useLazyQuery<{ me: User }>(meQuery, {});
 
   useEffect(() => {
-    status === 'signedIn' && getMe();
+    if (status === 'signedIn') getMe();
   }, [status]);
 
   return {

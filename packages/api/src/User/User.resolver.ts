@@ -7,7 +7,6 @@ import { UserService } from './User.service';
 
 @Resolver('User')
 export class UserResolver {
-
   constructor(private readonly userService: UserService) { }
 
   @UseGuards(GQLAuthGuard)
