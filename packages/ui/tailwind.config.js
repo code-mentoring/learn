@@ -65,7 +65,8 @@ module.exports = {
       title: ['"Butler"', 'serif'],
     },
     borderRadius: {
-      default: '8px'
+      default: '8px',
+      circle: '50%'
     }
   },
   corePlugins: {},
