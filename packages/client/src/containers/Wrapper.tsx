@@ -3,9 +3,10 @@ import { Auth } from './Auth.container';
 import { Me } from './Me.container';
 
 
-export const ContainerWrapper: React.FunctionComponent = ({ children }) =>
+export const ContainerWrapper: React.FC = ({ children }) => (
   <Auth.Provider>
-  <Me.Provider>
-    {children}
-  </Me.Provider>;
-  </Auth.Provider>;
+    <Me.Provider>
+      {children}
+    </Me.Provider>
+  </Auth.Provider>
+);

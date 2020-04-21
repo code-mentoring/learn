@@ -17,7 +17,7 @@ import { AuthModule } from './Auth';
       installSubscriptionHandlers: true,
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
       context: ({ req }) => ({ req })
-    }),
-  ],
+    })
+  ]
 })
 export class AppModule { }

@@ -8,7 +8,6 @@ import Logo from '../../images/logo.svg';
 import { getGQLError } from '../../lib/apollo';
 
 
-
 const loginValidation = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required()

@@ -7,7 +7,7 @@ const db = process.env.NODE_ENV === 'production'
     type: 'postgres',
     url: process.env.DATABASE_URL
   }
-  : config.get('db') as {}
+  : config.get('db') as {};
 
 export const DatabaseModule = TypeOrmModule.forRoot({
 
@@ -17,5 +17,5 @@ export const DatabaseModule = TypeOrmModule.forRoot({
   synchronize: true,
   // @ts-ignore
   useNewUrlParser: true,
-  logging: false,
-})
+  logging: false
+});

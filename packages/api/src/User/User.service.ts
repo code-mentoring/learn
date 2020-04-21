@@ -11,7 +11,7 @@ import { UserInput, UserWithPassword } from './User.entity';
 export class UserService {
   constructor(
     @InjectRepository(UserWithPassword)
-    private readonly userRepository: Repository<UserWithPassword>,
+    private readonly userRepository: Repository<UserWithPassword>
   ) { }
 
   async findAll(): Promise<UserWithPassword[]> {
@@ -19,7 +19,7 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return this.userRepository.findOne({where: {email}});
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async create(input: UserInput): Promise<UserWithPassword> {
