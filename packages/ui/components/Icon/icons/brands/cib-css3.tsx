@@ -1,6 +1,6 @@
 import React from "react";
 
-export const IconCssShiled: React.FC<{ className?: string }> = (props) => (
+export const IconCSS: React.FC<{ className?: string }> = (props) => (
 	<svg
 		{...props}
 		xmlns="http://www.w3.org/2000/svg"
