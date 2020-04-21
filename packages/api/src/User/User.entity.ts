@@ -1,5 +1,11 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @ObjectType()
 export class User {
@@ -18,7 +24,6 @@ export class User {
   @Field()
   createdAt: Date;
 }
-
 
 @Entity('user')
 @Unique('Email', ['email'])
@@ -41,7 +46,6 @@ export class UserWithPassword implements User {
   @CreateDateColumn()
   createdAt: Date;
 }
-
 
 @InputType()
 export class UserInput {
