@@ -17,7 +17,7 @@ const secondary = {
   400: '#23ddb8',
   500: '#0DD2AB',
   600: '#0bb996',
-  900: '#0bb996',
+  900: '#11866E',
 };
 
 const tertiary = {
@@ -25,7 +25,7 @@ const tertiary = {
   400: '#ffa8d9',
   500: '#FF91D0',
   600: '#f86abb',
-  900: '#f86abb',
+  900: '#C21578',
 };
 
 module.exports = {
