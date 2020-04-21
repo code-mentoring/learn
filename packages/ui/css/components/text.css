@@ -17,6 +17,10 @@ h3 {
   @apply text-primary-500;
 }
 
+h4 {
+  @apply text-sm text-grey-700 font-sans font-extrabold uppercase tracking-wider;
+}
+
 p {
   @apply font-normal text-base leading-7;
 }
