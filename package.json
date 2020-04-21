@@ -10,7 +10,7 @@
     "postinstall": "yarn build",
     "build": "lerna run build",
     "start": "lerna run start --stream --scope @code-mentoring/api",
-    "lint": "tslint --project ./tslint.json",
+    "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
