@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { User, UserInput, Me } from './User.entity';
+import { User, UserInput } from './User.entity';
 import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 
@@ -17,8 +17,8 @@ export class UserResolver {
   }
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => Me)
-  me(@CurrentUser() user: any) {
+  @Query(() => User)
+  me(@CurrentUser() user: User) {
     return user;
   }
 

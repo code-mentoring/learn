@@ -61,18 +61,3 @@ export class UserInput {
   @Field()
   password: string;
 }
-
-@ObjectType()
-export class Me {
-  @Field(() => ID)
-  id: string;
-
-  @Field()
-  firstName: string;
-
-  @Field()
-  lastName: string;
-
-  @Field()
-  email: string;
-}
