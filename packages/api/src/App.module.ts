@@ -5,19 +5,21 @@ import path from 'path';
 import { UserModule } from './User';
 import { DatabaseModule } from './Database.module';
 import { AuthModule } from './Auth';
+import { PathModule } from './Path';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
+    PathModule,
 
     DatabaseModule,
 
     GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
-      context: ({ req }) => ({ req })
-    })
-  ]
+      context: ({ req }) => ({ req }),
+    }),
+  ],
 })
-export class AppModule { }
+export class AppModule {}

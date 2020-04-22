@@ -19,15 +19,25 @@ type LoginOutput {
   accessToken: String!
 }
 
+type EPath {
+  id: ID!
+  name: String!
+  icon: String!
+  description: String!
+  createdAt: DateTime!
+}
+
 type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  paths: [EPath!]!
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
   login(password: String!, email: String!): LoginOutput!
+  createPath(pathInput: PathInput!): EPath!
 }
 
 input UserInput {
@@ -35,4 +45,10 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+}
+
+input PathInput {
+  name: String!
+  icon: String!
+  description: String!
 }
