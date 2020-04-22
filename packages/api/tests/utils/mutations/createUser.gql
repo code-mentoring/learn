@@ -1,5 +1,9 @@
-mutation($email:String!,$password:String!){
-  createUser(email:$email, password:$password) {
-    accessToken
+mutation($user: UserInput!){
+  createUser(user: $user) {
+    id
+    firstName
+    lastName
+    email
+    createdAt
   }
 }
