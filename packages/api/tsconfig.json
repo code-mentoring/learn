@@ -8,6 +8,6 @@
     "./src/**/*.ts"
   ],
   "exclude": [
-    "./tests"
+    "./tests/**/*"
   ]
 }
