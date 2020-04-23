@@ -3,7 +3,7 @@ import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
-import { User, UserInput } from '../../types';
+import { User, UserInput, LoginOutput } from '../../types';
 import mutations from './mutations';
 
 /**
@@ -51,6 +51,12 @@ export abstract class TestClient {
   static createUser(user: UserInput): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
+
+  static login(email: string, password: string): Promise<LoginOutput> {
+    return this._request('login', mutations.login, { email, password });
+  }
+
+  // ------------------------------------------------------------------- Queries
 
 
   // ----------------------------------------------------------------- Private
