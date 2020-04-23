@@ -2,7 +2,7 @@
 
 #### `ui` is the core library for all UI and React components across Code Mentoring. It's used by `client`, `www` repo, and any other future projects.
 
-[To check out more information for packages/ui](https://github.com/code-mentoring/learn/wiki/UI) ✅
+[To check out more information for packages/ui](https://github.com/code-mentoring/learn/wiki/UI)  ✅
        
             
 ## 🗺 Getting around / project structure
