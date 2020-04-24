@@ -6,7 +6,8 @@
     "build": "nest build",
     "start": "node dist/main.js",
     "types": "graphql-codegen",
-    "test": "jest"
+    "test": "jest",
+    "seed": "dropdb code_mentoring_learning && createdb code_mentoring_learning && ts-node src/Database/seeders"
   },
   "types": "types.ts",
   "dependencies": {
@@ -40,12 +41,16 @@
     "@nestjs/testing": "^7.0.8",
     "@types/bcrypt": "^3.0.0",
     "@types/config": "^0.0.36",
+    "@types/faker": "^4.1.11",
     "@types/jwt-decode": "^2.2.1",
+    "@types/listr": "^0.14.2",
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.8",
     "@types/uuid": "^7.0.2",
+    "faker": "^4.1.0",
     "jwt-decode": "^2.2.0",
+    "listr": "^0.14.3",
     "mongodb": "^3.5.6",
     "supertest": "^4.0.2",
     "ts-jest": "^25.4.0",
