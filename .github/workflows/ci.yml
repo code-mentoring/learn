@@ -27,9 +27,12 @@ jobs:
       with:
         node-version: ${{ matrix.node_version }}
       
-    - name: Package scripts
-      run: |
-        yarn install
-        yarn lint
-        yarn build
-        yarn test
+    # Run scripts separately for easier debugging.
+    - name: Install
+      run: yarn install 
+    - name: Lint
+      run: yarn lint
+    - name: Build
+      run: yarn build
+    - name: Test
+      run: yarn test
