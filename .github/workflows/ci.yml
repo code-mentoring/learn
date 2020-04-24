@@ -27,7 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node_version }}
       
-    - name: yarn install
+    - name: yarn install, lint
       run: |
         yarn install
         yarn lint
