@@ -5,8 +5,7 @@ on:
 push:
 branches:
 - master
-- develop 
-- release/'*'
+- develop
 pull_request:
 branches:
 - master
