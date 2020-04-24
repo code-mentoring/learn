@@ -8,7 +8,7 @@ import { getClient } from './lib/apollo';
 import { AppRouter } from './router/AppRouter';
 import { ContainerWrapper } from './containers/Wrapper';
 
-(async() => {
+(async () => {
   ReactDOM.render(
     <ApolloProvider client={await getClient()}>
       <ContainerWrapper>

@@ -7,6 +7,7 @@ import { Configuration } from 'webpack';
 
 // const favicon = require('favicons-webpack-plugin');
 const replacePlugin = require('webpack-plugin-replace');
+const copyPlugin = require( 'copy-webpack-plugin' );
 
 const isProd = process.env.NODE_ENV === 'production';
 console.log(process.env.NODE_ENV);
@@ -97,7 +98,8 @@ const config: Configuration = {
         '%%API_HOST%%': isProd ? 'https://api.codementoring.co' : 'http://localhost:4000',
         '%%IS_PROD%%': isProd
       }
-    })
+    }),
+    new copyPlugin( [{ from:'./_redirects', to:'./' }] )
   ]
 
 };

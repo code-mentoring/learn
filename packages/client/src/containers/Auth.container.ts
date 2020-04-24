@@ -3,9 +3,9 @@ import gql from 'graphql-tag';
 import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
 
+import { LoginOutput, MutationLoginArgs } from '@code-mentoring/api';
 import { history } from '../lib/history';
 import { LocalStorage } from '../lib/localStorage';
-import { LoginOutput, MutationLoginArgs } from '@code-mentoring/api';
 
 type AuthStatus = 'signingIn' | 'signedIn' | 'signedOut' | 'verifying';
 
@@ -38,8 +38,8 @@ const useAuth = () => {
     setStatus('signedOut');
   };
 
-  const login = (email: string, password: string, redirect?: string) => {
-    if (redirect) setRedirect(redirect);
+  const login = (email: string, password: string, _redirect?: string) => {
+    if (_redirect) setRedirect(_redirect);
     loginFunc({ variables: { email, password } });
   };
 

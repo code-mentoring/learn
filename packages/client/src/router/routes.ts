@@ -9,12 +9,12 @@ export const linkParams = <T extends Params = {}>(
   link: string,
   usePrefix = true
 ) =>
-  (params?: T | false) => {
-    const l = `${usePrefix ? CONFIG.prefix : ''}${link}`;
-    if (params === false) return l;
+    (params?: T | false) => {
+      const l = `${usePrefix ? CONFIG.prefix : ''}${link}`;
+      if (params === false) return l;
 
-    return generatePath(l, params);
-  };
+      return generatePath(l, params);
+    };
 
 export const routes = {
   login: linkParams('/login'),

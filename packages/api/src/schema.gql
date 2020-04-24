@@ -21,6 +21,7 @@ type LoginOutput {
 
 type Query {
   users: [User!]!
+  me: User!
   verifyToken(accessToken: String!): Boolean!
 }
 
