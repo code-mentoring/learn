@@ -15,13 +15,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type EPathUser {
-  id: ID!
-  pathId: String!
-  userId: String!
-  completed: Boolean!
-}
-
 type User {
   id: ID!
   firstName: String!
@@ -44,8 +37,8 @@ type Query {
 type Mutation {
   createUser(user: UserInput!): User!
   login(password: String!, email: String!): LoginOutput!
-  createPath(pathInput: PathInput!): EPath!
-  createPathUser(pathId: String!, userId: String!): EPathUser!
+  createPath(path: PathInput!): EPath!
+  joinPath(pathId: String!): Boolean!
 }
 
 input UserInput {

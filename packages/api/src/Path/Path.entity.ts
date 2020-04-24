@@ -1,12 +1,6 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  OneToMany,
-  Unique,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+
 import { PathUser } from '../PathUser/PathUser.entity';
 
 
@@ -47,7 +41,7 @@ export class Path {
   createdAt: Date;
 
   @OneToMany(() => PathUser, pathUser => pathUser.path)
-  pathUser!: PathUser[];
+  pathUser: PathUser[];
 }
 
 @InputType()

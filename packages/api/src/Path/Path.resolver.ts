@@ -1,10 +1,11 @@
 import { UseGuards } from '@nestjs/common';
-import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
+import { CurrentUser } from '../User/CurrentUser.decorator';
+import { User } from '../User/User.entity';
 import { EPath, PathInput } from './Path.entity';
 import { PathService } from './Path.service';
-// import { EPathUser } from './PathUser.entity';
 
 @Resolver('Path')
 export class PathResolver {
@@ -18,13 +19,16 @@ export class PathResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => EPath)
-  createPath(@Args('pathInput') pathInput: PathInput) {
-    return this.pathService.create(pathInput);
+  createPath(@Args('path') path: PathInput) {
+    return this.pathService.create(path);
   }
 
-  // @UseGuards(GQLAuthGuard)
-  // @Mutation(() => EPathUser)
-  // createPathUser(@Args('userId') userId: string,@Args('pathId') pathId: string) {
-  //   return this.pathService.createPathUser(userId, pathId);
-  // }
+  @UseGuards(GQLAuthGuard)
+  @Mutation(() => Boolean)
+  async joinPath(
+    @Args('pathId') pathId: string,
+    @CurrentUser() user: User
+  ) {
+    return Boolean(await this.pathService.addUserToPath(pathId, user.id));
+  }
 }

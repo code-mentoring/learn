@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as uuid from 'uuid';
 
-import { Path, EPath, PathInput } from './Path.entity';
-// import { EPathUser, PathUser } from './PathUser.entity';
+import { PathUser } from '../PathUser/PathUser.entity';
+import { EPath, Path, PathInput } from './Path.entity';
 
 @Injectable()
 export class PathService {
   constructor(
-    @InjectRepository(Path)
-    private readonly pathRepository: Repository<Path>
+    @InjectRepository(Path) private readonly pathRepository: Repository<Path>,
+    @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>
   ) {}
 
   async findAll(): Promise<EPath[]> {
@@ -19,20 +18,15 @@ export class PathService {
 
   async create(pathInput: PathInput): Promise<EPath> {
     const path = new Path();
-    path.id = uuid.v4();
     Object.assign(path, pathInput);
     return this.pathRepository.save(path);
   }
 
-  // async createPathUser(userId: string, pathId: string): Promise<EPathUser> {
-  //   try {
-  //     const {id} = await PathUser.create({userId, pathId}).save();
-  //     const pathUser = await PathUser.findOne({where: {id}})
-  //     if(!pathUser) throw new Error('NOT FOUND');
-  //     return pathUser;
-  //   } catch(e) {
-  //     throw new Error(e);
-  //   }
-  // }
+  async addUserToPath(pathId: string, userId: string) {
+    return this.pathUserRepository.create({ userId, pathId }).save();
+    // const path = await this.pathRepository.findOneOrFail({ where: { id: pathId }, relations: ['users'] });
+    // const user = await this.userRepository.findOneOrFail({ where: { id: userId } });
+    // path.users.push(user);
+    // return this.pathRepository.save(path);
+  }
 }
-

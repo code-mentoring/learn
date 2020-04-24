@@ -1,41 +1,35 @@
-import { Entity, Column, ManyToOne, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
-import { Field, ObjectType, ID } from "@nestjs/graphql";
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
-import { Path } from "../Path/Path.entity";
-import { UserWithPassword } from "../User/User.entity";
+import { Path } from '../Path/Path.entity';
+import { UserWithPassword } from '../User/User.entity';
 
 @ObjectType()
-export class EPathUser {
-    @Field(() =>ID)
+@Entity()
+@Unique(['userId', 'pathId'])
+export class PathUser extends BaseEntity {
+    @PrimaryGeneratedColumn('uuid')
+    @Field()
     id: string;
 
+    @Column()
     @Field()
     pathId: string;
 
+    @Column()
     @Field()
     userId: string;
 
+    @Column({ default: false })
     @Field()
     completed: boolean;
-}
 
-@Entity()
-export class PathUser extends BaseEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-
-    @Column()
-    public pathId!: string;
-
-    @Column()
-    public userId!: string;
-
-    @Column()
-    public completed!: boolean;
+    @CreateDateColumn()
+    joined: Date;
 
     @ManyToOne(() => Path, path => path.pathUser)
-    public path!: Path;
+     path: Path;
 
     @ManyToOne(() => UserWithPassword, user => user.pathUser)
-    public user!: UserWithPassword;
+     user: UserWithPassword;
 }
