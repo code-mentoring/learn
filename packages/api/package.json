@@ -2,8 +2,8 @@
   "name": "@code-mentoring/api",
   "version": "0.0.0",
   "scripts": {
-    "dev": "nest start --watch",
-    "build": "nest build",
+    "dev": "rimraf dist && nest start --watch",
+    "build": "rimraf dist && nest build",
     "start": "node dist/main.js",
     "types": "graphql-codegen"
   },
