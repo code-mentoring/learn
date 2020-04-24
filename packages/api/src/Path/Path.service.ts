@@ -24,9 +24,5 @@ export class PathService {
 
   async addUserToPath(pathId: string, userId: string) {
     return this.pathUserRepository.create({ userId, pathId }).save();
-    // const path = await this.pathRepository.findOneOrFail({ where: { id: pathId }, relations: ['users'] });
-    // const user = await this.userRepository.findOneOrFail({ where: { id: userId } });
-    // path.users.push(user);
-    // return this.pathRepository.save(path);
   }
 }
