@@ -6,7 +6,7 @@ push:
 branches:
 - master
 - develop 
-- release/*
+- release/'*'
 pull_request:
 branches:
 - master
