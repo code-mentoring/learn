@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Path {
+  id: String!
+  name: String!
+  icon: String!
+  description: String!
+}
+
 type User {
   id: ID!
   firstName: String!
@@ -23,11 +30,14 @@ type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  paths: [Path!]!
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
   login(password: String!, email: String!): LoginOutput!
+  createPath(path: PathInput!): Path!
+  joinPath(pathId: String!): Boolean!
 }
 
 input UserInput {
@@ -35,4 +45,10 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+}
+
+input PathInput {
+  name: String!
+  icon: String!
+  description: String!
 }

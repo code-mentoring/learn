@@ -5,8 +5,8 @@ import path from 'path';
 import { AuthModule } from './Auth';
 import { DatabaseModule } from './Database';
 import { UserModule } from './User';
-import { Path } from './Path/Path.entity';
-import { PathUser } from './PathUser/PathUser.entity';
+import { PathModule } from './Path';
+import { PathUserModule } from './PathUser';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -14,8 +14,8 @@ import { PathUser } from './PathUser/PathUser.entity';
 export const appImports = [
   AuthModule,
   UserModule,
-  Path,
-  PathUser,
+  PathModule,
+  PathUserModule,
 
   DatabaseModule,
 
