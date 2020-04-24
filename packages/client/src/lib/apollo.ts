@@ -55,6 +55,7 @@ const getCache = async () =>
         default:
           if (object.id) return `${object.__typename}.${object.id}`;
       }
+      return null;
     },
     fragmentMatcher: await getFragmentMatcher()
   });

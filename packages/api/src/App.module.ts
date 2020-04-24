@@ -2,24 +2,34 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import path from 'path';
 
-import { UserModule } from './User';
-import { DatabaseModule } from './Database.module';
 import { AuthModule } from './Auth';
-import { PathModule } from './Path';
+import { DatabaseModule } from './Database';
+import { UserModule } from './User';
+import { Path } from './Path/Path.entity';
+import { PathUser } from './PathUser/PathUser.entity';
 
+/**
+ * Export these dependencies so they can be used in testing
+ */
+export const appImports = [
+  AuthModule,
+  UserModule,
+  Path,
+  PathUser,
+
+  DatabaseModule,
+
+  GraphQLModule.forRoot({
+    installSubscriptionHandlers: true,
+    autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
+    context: ({ req }) => ({ req })
+  })
+];
+
+/**
+ * Main App module for NestJS
+ */
 @Module({
-  imports: [
-    AuthModule,
-    UserModule,
-    PathModule,
-
-    DatabaseModule,
-
-    GraphQLModule.forRoot({
-      installSubscriptionHandlers: true,
-      autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
-      context: ({ req }) => ({ req })
-    })
-  ]
+  imports: appImports
 })
 export class AppModule {}

@@ -53,6 +53,7 @@
     "arrow-parens": ["error", "as-needed"],
     "react/jsx-curly-newline": 0,
     "implicit-arrow-linebreak": 0,
-    "import/no-cycle": 0
+    "no-underscore-dangle": 0,
+    "padded-blocks": 0
   }
 }
