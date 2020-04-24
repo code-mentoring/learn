@@ -4,6 +4,7 @@ import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { EPath, PathInput } from './Path.entity';
 import { PathService } from './Path.service';
+// import { EPathUser } from './PathUser.entity';
 
 @Resolver('Path')
 export class PathResolver {
@@ -20,4 +21,10 @@ export class PathResolver {
   createPath(@Args('pathInput') pathInput: PathInput) {
     return this.pathService.create(pathInput);
   }
+
+  // @UseGuards(GQLAuthGuard)
+  // @Mutation(() => EPathUser)
+  // createPathUser(@Args('userId') userId: string,@Args('pathId') pathId: string) {
+  //   return this.pathService.createPathUser(userId, pathId);
+  // }
 }

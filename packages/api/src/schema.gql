@@ -2,11 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type EPath {
   id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
+  name: String!
+  icon: String!
+  description: String!
   createdAt: DateTime!
 }
 
@@ -15,16 +15,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type LoginOutput {
-  accessToken: String!
+type EPathUser {
+  id: ID!
+  pathId: String!
+  userId: String!
+  completed: Boolean!
 }
 
-type EPath {
+type User {
   id: ID!
-  name: String!
-  icon: String!
-  description: String!
+  firstName: String!
+  lastName: String!
+  email: String!
   createdAt: DateTime!
+}
+
+type LoginOutput {
+  accessToken: String!
 }
 
 type Query {
@@ -38,6 +45,7 @@ type Mutation {
   createUser(user: UserInput!): User!
   login(password: String!, email: String!): LoginOutput!
   createPath(pathInput: PathInput!): EPath!
+  createPathUser(pathId: String!, userId: String!): EPathUser!
 }
 
 input UserInput {

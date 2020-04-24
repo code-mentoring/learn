@@ -4,7 +4,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
+  Unique,
 } from 'typeorm';
+import { PathUser } from '../PathUser/PathUser.entity';
+
 
 @ObjectType()
 export class EPath {
@@ -25,6 +29,7 @@ export class EPath {
 }
 
 @Entity('path')
+@Unique('Name', ['name'])
 export class Path {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -40,6 +45,9 @@ export class Path {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(() => PathUser, pathUser => pathUser.path)
+  pathUser!: PathUser[];
 }
 
 @InputType()

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import * as uuid from 'uuid';
 
 import { Path, EPath, PathInput } from './Path.entity';
+// import { EPathUser, PathUser } from './PathUser.entity';
 
 @Injectable()
 export class PathService {
@@ -22,4 +23,16 @@ export class PathService {
     Object.assign(path, pathInput);
     return this.pathRepository.save(path);
   }
+
+  // async createPathUser(userId: string, pathId: string): Promise<EPathUser> {
+  //   try {
+  //     const {id} = await PathUser.create({userId, pathId}).save();
+  //     const pathUser = await PathUser.findOne({where: {id}})
+  //     if(!pathUser) throw new Error('NOT FOUND');
+  //     return pathUser;
+  //   } catch(e) {
+  //     throw new Error(e);
+  //   }
+  // }
 }
+

@@ -6,12 +6,14 @@ import { UserModule } from './User';
 import { DatabaseModule } from './Database.module';
 import { AuthModule } from './Auth';
 import { PathModule } from './Path';
+import { PathUserModule } from './PathUser';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
     PathModule,
+    PathUserModule,
 
     DatabaseModule,
 
