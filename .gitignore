@@ -4,3 +4,5 @@ node_modules/
 packages/api/config/development.yml
 packages/api/config/test.yml
 dist
+
+/database

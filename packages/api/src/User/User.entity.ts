@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  Unique,
+  Unique
 } from 'typeorm';
 
 @ObjectType()
