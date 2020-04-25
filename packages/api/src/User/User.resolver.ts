@@ -8,7 +8,7 @@ import { CurrentUser } from './CurrentUser.decorator';
 
 @Resolver('User')
 export class UserResolver {
-  
+
   constructor(private readonly userService: UserService) { }
 
   @UseGuards(GQLAuthGuard)
