@@ -7,7 +7,7 @@
     "start": "node dist/main.js",
     "types": "graphql-codegen",
     "test": "jest",
-    "seed": "dropdb code_mentoring_learning && createdb code_mentoring_learning && ts-node src/Database/seeders"
+    "seed": "ts-node src/Database/seeders"
   },
   "types": "types.ts",
   "dependencies": {
