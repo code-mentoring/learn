@@ -78,11 +78,135 @@ strategy to maintain the project. **PLEASE FOLLOW THIS FORMAT**
   a maintainer asks you to reduce your PR size, please do so.
 - `release/vX.X.X` Used to release the sprints work into production.
 
+## Commit Messages
+
+### Message Structure
+
+A commit message consists of three distinct parts separated by a blank line: the title, an **optional** body and an **optional** footer. The layout looks like this:
+
+`type(scope?): subject`
+
+`Body`
+
+`Footer`
+
+The title consists of the type of the message and subject.
+
+### :exclamation: Command Line
+
+This is how you commit your message with all three parts with a blank line:
+
+`git commit -m "type(scope)?: subject" -m "Body..." -m "Footer..."`
+
+### The Type
+The type is contained within the title and can be one of these types:
+
+- **feat**: a new feature
+- **fix**: a bug fix
+- **docs**: changes to documentation
+- **style**: formatting, missing semicolons, etc; no code change
+- **refactor**: refactoring production code
+- **test**: adding tests, refactoring test; no production code change
+- **chore**: updating build tasks, package manager configs, etc; no production code change
+
+### The Scope
+The scope describes the category of your change and the commonly used are of the following: 
+- build, 
+- chore,
+- ci,
+- docs,
+- feat,
+- fix,
+- perf,
+- refactor,
+- revert,
+- style,
+- test
+
+NOTE: These strict type and scope can be found in **commitlint.config.js** 
+
+### The Subject
+
+Subjects should be no greater than 50 characters, does not begin with a capital letter and do not end with a period.
+Use an imperative tone to describe what a commit does, rather than what it did. For example, use change; not changed or changes.
+
+### The Body
+
+Not all commits are complex enough to warrant a body, therefore it is optional and only used when a commit requires a bit of explanation and context. Use the body to explain the what and why of a commit, not the how.
+When writing a body, the blank line between the title and the body is required and you should limit the length of each line to no more than 100 characters.
+
+### The Footer
+
+The footer is optional and is used to reference issue tracker IDs.
+
 ## PRs
 
 As per git flow, all PRs should be on branches with the names `feature/name-of-feature`.
 **They should be requested to merge into the `develop` branch, NOT THE `master` branch.**
 
+### Approaches to writing a PR ###
+
+Include the purpose of this Pull Request. For example:
+
+`This is a spike to explore…`
+
+`This simplifies the display of…`
+
+`This fixes handling of…`
+
+Consider providing an overview of why the work is taking place (with any relevant links); don’t assume familiarity with the history.
+
+Be explicit about what feedback you want, a quick pair of :eyes: on the code, discussion on the technical approach, critique on design or a review of copy.
+
+### Feature breaking
+
+Whenever it’s possible, break pull requests into smaller ones.
+
+Let’s say that you need to create a subscribe feature on your app. It's just a form that accepts an email address and saves it. Without knowing how your app works, I can already break it in 8 pull requests.
+
+- Create a model to save emails
+- Create a route to receive requests
+- Create a controller
+- Create a service to save it in the database (business logic)
+- Create a policy to handle access control
+- Create a subscribe component (frontend)
+- Create a button to call the subscribe component
+- Add the subscribe button in the interface
+
+### Title
+
+Make a self-explanatory title describing what the pull request does.
+
+### Description
+
+Detail with what was changed, why it was changed, and how it was changed.
+If necessary, add some screenshots or a GIF or video of you using the feature.
+
 When a PR is ready, please make sure to request a review from a 🧢 maintainer.
 Once the maintainer has approved your PR, it will be merged for you into `develop`.
+
+## Offering feedback ## 
+
+- Familiarize yourself with the context of the issue, and reasons why this Pull Request exists.
+- If you disagree strongly, consider giving it a few minutes before responding; think before you react.
+- Ask, don’t tell. (“What do you think about trying…?” rather than “Don’t do…”)
+- Explain your reasons why code should be changed. (Not in line with the style guide? A personal preference?)
+- Offer ways to simplify or improve code.
+- Avoid using derogatory terms, like “stupid”, when referring to the work someone has produced.
+- Be humble. (“I’m not sure, let’s try…”)
+- Avoid hyperbole. (“NEVER do…”)
+- Aim to develop professional skills, group knowledge and product quality, through group critique.
+- Be aware of negative bias with online communication. (If content is neutral, we assume the tone is negative.) Can you use positive language as opposed to neutral?
+- Use emoji to clarify tone. Compare “:sparkles: :sparkles: Looks good :+1: :sparkles: :sparkles:” to “Looks good.”
+
+## Responding to feedback ##
+
+- Consider leading with an expression of appreciation, especially when feedback has been mixed.
+- Ask for clarification. (“I don’t understand, can you clarify?”)
+- Offer clarification, explain the decisions you made to reach a solution in question.
+- Try to respond to every comment.
+- Link to any follow up commits or Pull Requests. (“Good call! Done in 1682851”)
+- If there is growing confusion or debate, ask yourself if the written word is still the best form of communication. Talk (virtually) face-to-face, then mutually consider posting a follow-up to summarize any offline discussion (useful for others who are following along, now or later).
+- These guidelines were inspired partly by Thoughtbot’s [code review](https://github.com/thoughtbot/guides/tree/master/code-review) guide.
+
 Congratulations 🎉! #alwaysbeshipping ⛵️
