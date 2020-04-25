@@ -24,6 +24,7 @@ export class Path extends BaseEntity {
   description: string;
 
   @CreateDateColumn()
+  @Field()
   createdAt: Date;
 
   @OneToMany(() => PathUser, pathUser => pathUser.path)

@@ -3,8 +3,9 @@ import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
-import { User, UserInput, LoginOutput } from '../../types';
+import { User, UserInput, LoginOutput, Path, PathInput } from '../../types';
 import mutations from './mutations';
+import queries from './queries';
 
 /**
  * A helper class to test the API
@@ -13,6 +14,8 @@ export abstract class TestClient {
   static db: DatabaseService;
 
   static app: any;
+
+  static token: string;
 
 
   /**
@@ -56,8 +59,19 @@ export abstract class TestClient {
     return this._request('login', mutations.login, { email, password });
   }
 
+  static createPath(path: PathInput): Promise<Path> {
+    return this._request('createPath', mutations.createPath, { path });
+  }
+
+  static joinPath(pathId: string): Promise<Boolean> {
+    return this._request('joinPath', mutations.joinPath, { pathId });
+  }
+
   // ------------------------------------------------------------------- Queries
 
+  static getPathByName(name: string): Promise<Path> {
+    return this._request('getPathByName', queries.getPathByName, { name });
+  }
 
   // ----------------------------------------------------------------- Private
   /**
@@ -67,8 +81,10 @@ export abstract class TestClient {
    * @param variables Variables to pass if needed
    */
   private static async _request<T>(name: string, query: string, variables?: any): Promise<T> {
+
     const res = await request(this.app.getHttpServer())
       .post('/graphql')
+      .set('Authorization', `Bearer ${this.token}`)
       .send({ query, variables });
 
     if (res.body.errors) throw new Error(res.body.errors[0].message);

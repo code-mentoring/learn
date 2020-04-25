@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -14,6 +14,12 @@ export class PathService {
 
   async findAll(): Promise<Path[]> {
     return this.pathRepository.find();
+  }
+
+  async findByName(name: string): Promise<Path> {
+    const path = await this.pathRepository.findOne({ where: { name } });
+    if (!path) throw new NotFoundException('Path not found');
+    return path;
   }
 
   async create(pathInput: PathInput): Promise<Path> {

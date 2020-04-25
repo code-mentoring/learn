@@ -25,7 +25,7 @@ export class DatabaseService {
   async DANGEROUSLY_RESET_DATABASE() {
     Promise.all(this.connection.entityMetadatas.map(async entity => {
       const repository = await this.getRepository(entity.name);
-      await repository.clear();
+      await repository.query(`TRUNCATE TABLE \"${entity.tableName}\" CASCADE`);
     }));
   }
 }

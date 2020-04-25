@@ -7,7 +7,13 @@ type Path {
   name: String!
   icon: String!
   description: String!
+  createdAt: DateTime!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type User {
   id: ID!
@@ -16,11 +22,6 @@ type User {
   email: String!
   createdAt: DateTime!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type LoginOutput {
   accessToken: String!
@@ -31,6 +32,7 @@ type Query {
   me: User!
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
+  getPathByName(name: String!): Path!
 }
 
 type Mutation {

@@ -18,6 +18,12 @@ export class PathResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => Path)
+  getPathByName(@Args('name') name: string) {
+    return this.pathService.findByName(name);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => Path)
   createPath(@Args('path') path: PathInput) {
     return this.pathService.create(path);
