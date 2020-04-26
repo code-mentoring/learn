@@ -6,12 +6,15 @@ import { DatabaseService } from '../../src/Database/Database.service';
 import { User, UserInput, LoginOutput, Path, PathInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
+import { SeederService } from '../../src/Database/seeders/Seeders.service';
 
 /**
  * A helper class to test the API
  */
 export abstract class TestClient {
   static db: DatabaseService;
+
+  static seeder: SeederService;
 
   static app: any;
 
@@ -31,10 +34,11 @@ export abstract class TestClient {
    */
   static async start(resetDatabase = true) {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: appImports
+      imports: [...appImports, SeederService]
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
+    this.seeder = await moduleFixture.resolve(SeederService);
     if (resetDatabase) await this.resetDatabase();
 
 
@@ -51,12 +55,14 @@ export abstract class TestClient {
 
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput): Promise<User> {
+  static createUser(user: UserInput = this.seeder.randomUserInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
-  static login(email: string, password: string): Promise<LoginOutput> {
-    return this._request('login', mutations.login, { email, password });
+  static async login(email: string, password: string, storeToken = true): Promise<LoginOutput> {
+    const res = await this._request<LoginOutput>('login', mutations.login, { email, password });
+    if (storeToken) this.token = res.accessToken;
+    return res;
   }
 
   static createPath(path: PathInput): Promise<Path> {
@@ -71,6 +77,15 @@ export abstract class TestClient {
 
   static getPathByName(name: string): Promise<Path> {
     return this._request('getPathByName', queries.getPathByName, { name });
+  }
+
+
+  // ----------------------------------------------------------------- Workflows
+  static async workflowSignup() {
+    const userInput = await this.seeder.randomUserInput();
+    const user = await this.createUser(userInput);
+    const { accessToken } = await this.login(user.email, userInput.password);
+    return { password: userInput.password, user, accessToken };
   }
 
   // ----------------------------------------------------------------- Private
