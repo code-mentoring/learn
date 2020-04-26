@@ -13,12 +13,10 @@ export interface DropdownMenuProps extends CardProps {
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, subjects, ...props }) => (
   <Card padding={4} {...props}>
     <h4 className="text-center mb-4">{title}</h4>
-    {subjects ? (
+    {subjects && (
       subjects.map(item => (
         <Link to={`/${item}`} key={item}>{item}</Link>
       ))
-    ) : (
-      null
     )
     }
   </Card>
