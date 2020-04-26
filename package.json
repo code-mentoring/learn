@@ -11,7 +11,9 @@
     "build": "lerna run build",
     "start": "lerna run start --stream --scope @code-mentoring/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "start-db": "docker-compose up -d",
+    "test": "lerna run test"
   },
   "dependencies": {
     "lerna": "^3.20.2"
