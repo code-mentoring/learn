@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from '@code-mentoring/ui';
+import { Icon, PathIcon } from '@code-mentoring/ui';
 import { ErrorMessage } from '@code-mentoring/ui/components/ErrorMessage/ErrorMessage';
 import LogoMark from '../../images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
@@ -53,11 +53,10 @@ export const AppHeader: React.FC = () => {
 			</div>
 
 			<div className="inline font-semibold float-right mr-16">
-				<Icon
-					icon="javascript"
-					size="medium"
-					style={{ color: "#EED81A" }}
-					className="inline cursor-pointer"
+				<PathIcon
+          icon="js"
+          size="medium"
+          className="inline cursor-pointer"
 					onMouseEnter={() => handleHover("paths", true)}
 					onMouseLeave={() => handleHover("paths", false)}
 				/>
