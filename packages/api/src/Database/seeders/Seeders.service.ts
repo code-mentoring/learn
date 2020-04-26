@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Connection, Repository, getRepository } from 'typeorm';
 import Listr from 'listr';
 
-import { UserWithPassword } from '../../User/User.entity';
+import { UserWithPassword, UserInput } from '../../User/User.entity';
 import { DatabaseService } from '../Database.service';
 
 @Injectable()
@@ -25,22 +25,25 @@ export class SeederService {
     return this.connection.getRepository(entity);
   }
 
+  randomUserInput(input: Partial<UserInput> = {}): UserInput {
+    return {
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      password: 'secret',
+      ...input
+    };
+  }
+
   /**
    * Seeds users in the database
    * @param num Number of users you want to create
    */
   async seedUsers(num: number = 3) {
-    return Promise.all(Array(num).fill(undefined).map(async (_, i) => {
-      const firstName = faker.name.firstName();
-      const lastName = faker.name.lastName();
-
-      return getRepository<UserWithPassword>('user').create({
-        firstName,
-        lastName,
-        email: `user${i}@test.com`,
-        password: `user${i}123`
-      }).save();
-    }));
+    return Promise.all(Array(num).fill(undefined).map(async (_, i) =>
+      getRepository<UserWithPassword>('user').create(
+        this.randomUserInput({ email: `user${i}@test.com` })
+      ).save()));
   }
 
   /**

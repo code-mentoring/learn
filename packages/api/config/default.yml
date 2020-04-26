@@ -1,5 +1,6 @@
 server:
   port: 4000
+  logger: true
 
 db:
   type: 'postgres'
