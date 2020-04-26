@@ -2,6 +2,7 @@ import faker from 'faker';
 import { Inject, Injectable } from '@nestjs/common';
 import { Connection, Repository, getRepository } from 'typeorm';
 import Listr from 'listr';
+import bcrypt from 'bcrypt';
 
 import { UserWithPassword } from '../../User/User.entity';
 import { DatabaseService } from '../Database.service';
@@ -38,7 +39,7 @@ export class SeederService {
         firstName,
         lastName,
         email: `user${i}@test.com`,
-        password: `user${i}123`
+        password: await bcrypt.hash(`user${i}123`, 10)
       }).save();
     }));
   }
