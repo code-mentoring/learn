@@ -3,8 +3,10 @@ server:
 
 db:
   type: 'postgres'
-  port: 5432
+  port: 5555
   database: code_mentoring_learning
+  username: codementoring
+  password: codementoring
 
 auth:
   jwtSecret: secret
