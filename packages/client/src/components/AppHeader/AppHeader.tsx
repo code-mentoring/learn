@@ -57,17 +57,17 @@ export const AppHeader: React.FC = () => {
           icon="js"
           size="medium"
           className="inline cursor-pointer"
-          onMouseEnter={() => handleHover("paths", true)}
-          onMouseLeave={() => handleHover("paths", false)}
+          onMouseEnter={() => handleHover('paths', true)}
+          onMouseLeave={() => handleHover('paths', false)}
         />
         {path && hover && (
           <DropdownMenu
             title="My Paths"
             subjects={paths}
             data={null}
-            className={`absolute bg-white flex flex-col paths`}
-            onMouseEnter={() => handleHover("paths", true)}
-            onMouseLeave={() => handleHover("paths", false)}
+            className="absolute bg-white flex flex-col paths"
+            onMouseEnter={() => handleHover('paths', true)}
+            onMouseLeave={() => handleHover('paths', false)}
           />
         )}
 
@@ -78,8 +78,8 @@ export const AppHeader: React.FC = () => {
 
         <button
           type="button"
-          onMouseEnter={() => handleHover("menu", true)}
-          onMouseLeave={() => handleHover("menu", false)}
+          onMouseEnter={() => handleHover('menu', true)}
+          onMouseLeave={() => handleHover('menu', false)}
         >
           <img
             className="rounded-circle inline-block cursor-pointer"
@@ -92,9 +92,9 @@ export const AppHeader: React.FC = () => {
             title="My Account"
             subjects={menuItems}
             data={me}
-            className={`absolute top-20 left-20 bg-white flex flex-col menu`}
-            onMouseEnter={() => handleHover("menu", true)}
-            onMouseLeave={() => handleHover("menu", false)}
+            className="absolute top-20 left-20 bg-white flex flex-col menu"
+            onMouseEnter={() => handleHover('menu', true)}
+            onMouseLeave={() => handleHover('menu', false)}
           />
         )}
       </div>
