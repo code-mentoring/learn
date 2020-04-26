@@ -11,7 +11,9 @@
     "build": "lerna run build",
     "start": "lerna run start --stream --scope @code-mentoring/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "start-db": "docker-compose up -d",
+    "test": "lerna run test"
   },
   "dependencies": {
     "lerna": "^3.20.2"
@@ -20,6 +22,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "cross-env": "^7.0.2",
@@ -28,6 +31,7 @@
     "eslint-import-resolver-ts": "^0.4.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0"
+    "eslint-plugin-react": "^7.19.0",
+    "jest": "^25.4.0"
   }
 }
