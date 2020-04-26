@@ -4,7 +4,8 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  Unique
+  Unique,
+  BaseEntity
 } from 'typeorm';
 
 @ObjectType()
@@ -27,7 +28,7 @@ export class User {
 
 @Entity('user')
 @Unique('Email', ['email'])
-export class UserWithPassword implements User {
+export class UserWithPassword extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
