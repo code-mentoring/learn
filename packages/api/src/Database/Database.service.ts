@@ -30,7 +30,7 @@ export class DatabaseService {
     } else {
       await Promise.all(this.connection.entityMetadatas.map(async entity => {
         const repository = await this.getRepository(entity.name);
-        await repository.query(`TRUNCATE TABLE \"${entity.tableName}\" CASCADE`);
+        await repository.query(`TRUNCATE TABLE "${entity.tableName}" CASCADE`);
       }));
     }
   }
