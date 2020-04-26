@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Loader, Icon } from '@code-mentoring/ui';
+import { Loader, Icon, PathIcon } from '@code-mentoring/ui';
 import { User } from '@code-mentoring/api';
 import { ErrorMessage } from '@code-mentoring/ui/components/ErrorMessage/ErrorMessage';
 import LogoMark from '../../images/logo-mark.svg';
@@ -72,10 +72,9 @@ export const AppHeader: React.FC = () => {
       </div>
 
       <div className="inline font-semibold float-right mr-16">
-        <Icon
-          icon="javascript"
+        <PathIcon
+          icon="js"
           size="medium"
-          style={{ color: '#EED81A' }}
           className="inline cursor-pointer"
           onClick={() => toggleClick('classes', !state.classes)}
         />

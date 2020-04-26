@@ -1,0 +1,8 @@
+import React from 'react';
+
+export const IconHTML: React.FC<{ className?: string }> = props => <svg {...props} width="43" height="48" viewBox="0 0 43 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M42.9474 0H0L3.78947 42.9474L21.4737 48L39.1579 42.9474L42.9474 0Z" fill="#E65100" />
+  <path d="M21.4736 3.78955V44.0843L35.621 40.0422L38.7789 3.78955H21.4736Z" fill="#FF6D00" />
+  <path fillRule="evenodd" clipRule="evenodd" d="M33.0947 10.1052L32.7157 15.1579H21.4736V10.1052H33.0947ZM21.4736 20.2104V25.2631H27.0315L26.6526 30.9473L21.4736 32.7157V38.021L31.4526 34.7368L32.3368 20.2104H21.4736Z" fill="white" />
+  <path fillRule="evenodd" clipRule="evenodd" d="M21.4733 15.1579H15.2838L15.6627 20.2105H21.4733V25.2631H10.8627L9.97852 10.1052H21.4733V15.1579ZM21.4735 38.0211V32.7159L16.2945 30.9474L16.0419 27.7896H10.9893L11.4945 34.7369L21.4735 38.0211Z" fill="#EEEEEE" />
+</svg>;
