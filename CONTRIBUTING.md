@@ -82,13 +82,9 @@ strategy to maintain the project. **PLEASE FOLLOW THIS FORMAT**
 
 ### Message Structure
 
-A commit message consists of three distinct parts separated by a blank line: the title, an **optional** body and an **optional** footer. The layout looks like this:
+A commit message consists of three distinct parts separated by a blank line: the title, an **optional** body and an **optional** footer but we'll be focusing only on the subject. The layout looks like this:
 
 `type(scope?): subject`
-
-`Body`
-
-`Footer`
 
 The title consists of the type of the message and subject.
 
@@ -96,7 +92,7 @@ The title consists of the type of the message and subject.
 
 This is how you commit your message with all three parts with a blank line:
 
-`git commit -m "type(scope)?: subject" -m "Body..." -m "Footer..."`
+`git commit -m "type(scope)?: subject"
 
 ### The Type
 The type is contained within the title and can be one of these types:
@@ -129,15 +125,6 @@ NOTE: These strict type and scope can be found in **commitlint.config.js**
 
 Subjects should be no greater than 50 characters, does not begin with a capital letter and do not end with a period.
 Use an imperative tone to describe what a commit does, rather than what it did. For example, use change; not changed or changes.
-
-### The Body
-
-Not all commits are complex enough to warrant a body, therefore it is optional and only used when a commit requires a bit of explanation and context. Use the body to explain the what and why of a commit, not the how.
-When writing a body, the blank line between the title and the body is required and you should limit the length of each line to no more than 100 characters.
-
-### The Footer
-
-The footer is optional and is used to reference issue tracker IDs.
 
 ## PRs
 
@@ -175,7 +162,7 @@ Let’s say that you need to create a subscribe feature on your app. It's just a
 
 ### Title
 
-Make a self-explanatory title describing what the pull request does.
+Make a self-explanatory title describing what the pull request does. (Issue reference can be put in the subject. EG: ci: fixes #44)
 
 ### Description
 
