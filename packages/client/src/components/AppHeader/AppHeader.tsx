@@ -6,12 +6,9 @@ import LogoMark from '../../images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
 import { Me } from '../../containers/Me.container';
 
-// ! Tried to use module.css but it's coming back as an empty object
-// ! I read online that, because of TS, the easiest way to import is
-// ! requiring.
-// import styles from './AppHeader.module.css';
-// let styles = require('./AppHeader.module.css');
-import './AppHeader.css';
+import styles from './AppHeader.module.css';
+
+console.log(styles);
 
 // TODO: Replace user profile picture when #27 is completed.
 // TODO: Replace the class icon with the actual class the student is
@@ -101,4 +98,3 @@ export const AppHeader: React.FC = () => {
     </nav>
   );
 };
-
