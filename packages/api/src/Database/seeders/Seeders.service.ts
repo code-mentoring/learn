@@ -16,7 +16,10 @@ export class SeederService {
    * Initializes the database service
    * @param connection The connection, which gets injected
    */
-  constructor(@Inject('Connection') public connection: Connection, @Inject('UserService') public userService: UserService) { }
+  constructor(
+    @Inject('Connection') public connection: Connection,
+    public userService: UserService
+  ) { }
 
   db = new DatabaseService(this.connection);
 

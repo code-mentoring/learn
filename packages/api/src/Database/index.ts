@@ -12,7 +12,10 @@ import { UserWithPassword } from '../User/User.entity';
  * Main Database Module, used in App.module and testing
  */
 @Module({
-  imports: [TypeORMModule, TypeOrmModule.forFeature([UserWithPassword]), UserService],
+  imports: [
+    TypeORMModule,
+    TypeOrmModule.forFeature([UserWithPassword])
+  ],
   providers: [DatabaseService, SeederService, UserService],
   exports: [DatabaseService, SeederService]
 })
