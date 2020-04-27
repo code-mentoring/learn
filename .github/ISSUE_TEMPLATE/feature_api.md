@@ -1,7 +1,7 @@
 ---
 name: 💡 Feature request - API
 about: Propose a new idea for the API
-labels: 'api', 'enhancement', 'help wanted'
+labels: api, enhancement, help wanted
 ---
 
 ## The story:

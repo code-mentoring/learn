@@ -1,7 +1,7 @@
 ---
 name: 🐞 API Bug report
 about: Create a bug report to help us improve the project
-labels: 'bug', 'help wanted'
+labels: bug, help wanted
 ---
 
 ## The bug relates to:

@@ -1,7 +1,7 @@
 ---
 name: 💡 Feature request - UI Component
 about: Propose a new UI component
-labels: 'ui', 'enhancement', 'help wanted'
+labels: ui, enhancement, help wanted
 ---
 
 ## The story:
