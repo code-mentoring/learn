@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, PathIcon } from '@code-mentoring/ui';
-import { ErrorMessage } from '@code-mentoring/ui/components/ErrorMessage/ErrorMessage';
 import LogoMark from '../../images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
 import { Me } from '../../containers/Me.container';
-
 import styles from './AppHeader.module.css';
-
-console.log(styles);
 
 // TODO: Replace user profile picture when #27 is completed.
 // TODO: Replace the class icon with the actual class the student is
@@ -17,30 +13,17 @@ console.log(styles);
 //          depending on the page(ie.points, course)
 
 export const AppHeader: React.FC = () => {
-  const { me, error } = Me.useContainer();
-  const [menu, setMenu] = useState(false);
-  const [path, setPath] = useState(false);
-  const [hover, setHover] = useState(false);
-
-  if (error) return <ErrorMessage error={error.message} />;
+  const { me } = Me.useContainer();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showPathMenu, setShowPathMenu] = useState(false);
 
   const paths = ['HTML5', 'JavaScript', 'React'];
   const menuItems = ['Profile', 'Settings', 'Help', 'Logout'];
 
-  const handleHover = (where: string, bool: boolean) => {
-    if (where === 'menu') {
-      setMenu(bool);
-      setHover(bool);
-    } else {
-      setPath(bool);
-      setHover(bool);
-    }
-  };
-
   return (
-    <nav className="border-b-2 border-solid border-grey-500 p-4">
+    <nav className="border-b-2 border-solid border-grey-500 p-2 sm:p-4">
       <Link to="/dashboard">
-        <LogoMark className="logo h-10 inline ml-20" />
+        <LogoMark className="logo h-10 inline ml-1 sm:ml-20" />
       </Link>
 
       <div className="inline text-grey-700 font-bold text-sm uppercase">
@@ -49,22 +32,23 @@ export const AppHeader: React.FC = () => {
         </Link>
       </div>
 
-      <div className="inline font-semibold float-right mr-16">
+      <div className="inline font-semibold float-right mr-1 sm:mr-16">
         <PathIcon
           icon="js"
           size="medium"
           className="inline cursor-pointer"
-          onMouseEnter={() => handleHover('paths', true)}
-          onMouseLeave={() => handleHover('paths', false)}
+          onMouseEnter={() => setShowPathMenu(true)}
+          onMouseLeave={() => setShowPathMenu(false)}
+          onClick={() => setShowPathMenu(!showPathMenu)}
         />
-        {path && hover && (
+        {showPathMenu && (
           <DropdownMenu
             title="My Paths"
             subjects={paths}
-            data={null}
-            className="absolute bg-white flex flex-col paths"
-            onMouseEnter={() => handleHover('paths', true)}
-            onMouseLeave={() => handleHover('paths', false)}
+            className={`absolute bg-white flex flex-col ${styles.paths}`}
+            onMouseEnter={() => setShowPathMenu(true)}
+            onMouseLeave={() => setShowPathMenu(false)}
+            onClick={() => setShowPathMenu(!showPathMenu)}
           />
         )}
 
@@ -75,8 +59,9 @@ export const AppHeader: React.FC = () => {
 
         <button
           type="button"
-          onMouseEnter={() => handleHover('menu', true)}
-          onMouseLeave={() => handleHover('menu', false)}
+          onMouseEnter={() => setShowProfileMenu(true)}
+          onMouseLeave={() => setShowProfileMenu(false)}
+          onClick={() => setShowProfileMenu(!showProfileMenu)}
         >
           <img
             className="rounded-circle inline-block cursor-pointer"
@@ -84,14 +69,15 @@ export const AppHeader: React.FC = () => {
             alt="User profile pic"
           />
         </button>
-        {menu && hover && (
+        {showProfileMenu && (
           <DropdownMenu
             title="My Account"
             subjects={menuItems}
             data={me}
-            className="absolute top-20 left-20 bg-white flex flex-col menu"
-            onMouseEnter={() => handleHover('menu', true)}
-            onMouseLeave={() => handleHover('menu', false)}
+            className={`absolute top-20 left-20 bg-white flex flex-col ${styles.menu}`}
+            onMouseEnter={() => setShowProfileMenu(true)}
+            onMouseLeave={() => setShowProfileMenu(false)}
+            onClick={() => setShowProfileMenu(!showProfileMenu)}
           />
         )}
       </div>

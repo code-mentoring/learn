@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 export interface DropdownMenuProps extends CardProps {
   title: string;
-  subjects: string[] | undefined;
-  data?: any;
+  subjects: string[];
+  data?: object;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, subjects, ...props }) => (
