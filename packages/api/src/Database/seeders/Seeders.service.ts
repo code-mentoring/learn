@@ -4,7 +4,7 @@ import Listr from 'listr';
 import { Connection, Repository } from 'typeorm';
 
 import { UserInput } from '../../User/User.entity';
-import { UserService } from '../../User/User.service';
+import { UserService, UserService } from '../../User/User.service';
 import { DatabaseService } from '../Database.service';
 
 
