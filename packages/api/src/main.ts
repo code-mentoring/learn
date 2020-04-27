@@ -9,6 +9,8 @@ async function bootstrap() {
   });
   app.useGlobalPipes(new ValidationPipe());
 
+  // test coverage
+
   await app.listen(process.env.PORT || config.get('server.port'));
   // eslint-disable-next-line no-console
   console.log(`Application is running on: ${await app.getUrl()}`);
