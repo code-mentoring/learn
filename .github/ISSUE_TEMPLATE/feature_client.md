@@ -1,7 +1,7 @@
 ---
 name: 💡 Feature request - Client
 about: Propose a new feature for the `client` React project
-labels: client, enhancement, help wanted
+labels: project:client, type:enhancement, help wanted
 ---
 
 ## The story:
