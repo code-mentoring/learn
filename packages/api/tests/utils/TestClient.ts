@@ -5,6 +5,7 @@ import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { User, UserInput, LoginOutput } from '../../types';
 import mutations from './mutations';
+import { TestLogger } from './TestLogger.service';
 
 /**
  * A helper class to test the API
@@ -28,7 +29,9 @@ export abstract class TestClient {
    */
   static async start(resetDatabase = true) {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: appImports
+      imports: appImports,
+      providers: [TestLogger],
+      exports: [TestLogger]
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
@@ -36,6 +39,7 @@ export abstract class TestClient {
 
 
     this.app = moduleFixture.createNestApplication();
+    this.app.useLogger(this.app.get(TestLogger));
     await this.app.init();
   }
 
