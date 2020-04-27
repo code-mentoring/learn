@@ -34,11 +34,11 @@ export abstract class TestClient {
    */
   static async start(resetDatabase = true) {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [...appImports, SeederService]
+      imports: [...appImports]
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
-    this.seeder = await moduleFixture.resolve(SeederService);
+    this.seeder = await moduleFixture.get(SeederService);
     if (resetDatabase) await this.resetDatabase();
 
 
