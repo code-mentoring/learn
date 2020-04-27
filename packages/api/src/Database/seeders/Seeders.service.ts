@@ -1,10 +1,12 @@
-import faker from 'faker';
 import { Inject, Injectable } from '@nestjs/common';
-import { Connection, Repository, getRepository } from 'typeorm';
+import faker from 'faker';
 import Listr from 'listr';
+import { Connection, Repository } from 'typeorm';
 
-import { UserWithPassword, UserInput } from '../../User/User.entity';
+import { UserInput } from '../../User/User.entity';
+import { UserService } from '../../User/User.service';
 import { DatabaseService } from '../Database.service';
+
 
 @Injectable()
 export class SeederService {
@@ -13,7 +15,10 @@ export class SeederService {
    * Initializes the database service
    * @param connection The connection, which gets injected
    */
-  constructor(@Inject('Connection') public connection: Connection) { }
+  constructor(
+    @Inject('Connection') public connection: Connection,
+    public userService: UserService
+  ) { }
 
   db = new DatabaseService(this.connection);
 
@@ -41,9 +46,9 @@ export class SeederService {
    */
   async seedUsers(num: number = 3) {
     return Promise.all(Array(num).fill(undefined).map(async (_, i) =>
-      getRepository<UserWithPassword>('user').create(
+      this.userService.create(
         this.randomUserInput({ email: `user${i}@test.com` })
-      ).save()));
+      )));
   }
 
   /**
