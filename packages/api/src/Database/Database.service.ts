@@ -21,7 +21,7 @@ export class DatabaseService {
   /**
    * Loops over all tables and removes everything!
    * BE CAREFUL
-   * Used in testing
+   * Used in testing and seeders
    */
   async DANGEROUSLY_RESET_DATABASE() {
     if (config.get('db.type') === 'sqlite') {
