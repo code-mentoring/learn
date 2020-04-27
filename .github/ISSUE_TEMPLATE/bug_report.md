@@ -1,5 +1,5 @@
 ---
-name: 🐞 API Bug report
+name: 🐞 Bug report
 about: Create a bug report to help us improve the project
 labels: bug, help wanted
 ---
