@@ -12,7 +12,7 @@ export class UserService {
     @InjectRepository(UserWithPassword)
     private readonly userRepository: Repository<UserWithPassword>,
     @InjectRepository(UserPreferences)
-    private readonly userPreferencesRespository: Repository<UserPreferences>
+    private readonly userPreferencesRepository: Repository<UserPreferences>
   ) { }
 
   async findAll(): Promise<UserWithPassword[]> {
@@ -30,6 +30,6 @@ export class UserService {
   }
 
   async updatePreferences(input: UserPreferencesInput): Promise<UserPreferences> {
-    return this.userPreferencesRespository.create(input).save();
+    return this.userPreferencesRepository.create(input).save();
   }
 }
