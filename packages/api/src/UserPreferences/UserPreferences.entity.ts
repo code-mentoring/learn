@@ -25,17 +25,25 @@ export class UserPreferences extends BaseEntity {
     @Field()
     why: string;
 
+    @Column()
+    @Field()
+    @IsInt()
+    @Min(1)
+    @Max(10)
+    codingAbility: number;
+
 }
 
 @InputType()
 export class UserPreferencesInput {
-    @Field()
-    userId: string;
 
     @Field()
     practiceGoal: number;
 
     @Field()
     why: string;
+
+    @Field()
+    codingAbility: number;
 
 }

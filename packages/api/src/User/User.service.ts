@@ -29,7 +29,11 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  async updatePreferences(input: UserPreferencesInput): Promise<UserPreferences> {
-    return this.userPreferencesRepository.create(input).save();
+  async updatePreferences(userId: string, input: UserPreferencesInput): Promise<UserPreferences> {
+    const userPreferences = await this.userPreferencesRepository.findOne({ where: { userId } });
+    if (userPreferences) {
+      return this.userPreferencesRepository.save({ ...userPreferences, ...input });
+    }
+    return this.userPreferencesRepository.create({ userId, ...input }).save();
   }
 }
