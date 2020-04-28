@@ -1,6 +1,6 @@
 server:
   port: 4000
-  logger: true
+  logger: ['error', 'warn']
 
 db:
   type: 'postgres'
