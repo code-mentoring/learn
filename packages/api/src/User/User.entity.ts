@@ -1,8 +1,8 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
-
+import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
 
 @ObjectType()
 export class User {
@@ -45,6 +45,11 @@ export class UserWithPassword extends BaseEntity {
 
   @OneToMany(() => PathUser, pathUser => pathUser.user)
   pathUser: PathUser[];
+
+  @OneToOne(() => UserPreferences)
+  @JoinColumn()
+  userPreferences: UserPreferences;
+
 }
 
 @InputType()
