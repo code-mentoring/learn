@@ -22,13 +22,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: codecov/codecov-action@v1
-      with:
-        # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        file: ./packages/api/coverage/lcov.info # optional
-        flags: unittests # optional
-        name: codecov-umbrella # optional
-        fail_ci_if_error: true # optional (default = false)
+    # - uses: codecov/codecov-action@v1
+    #   with:
+    #     # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+    #     file: ./packages/api/coverage/lcov.info # optional
+    #     flags: unittests # optional
+    #     name: codecov-umbrella # optional
+    #     fail_ci_if_error: true # optional (default = false)
 
     - name: Use Node.js ${{ matrix.node_version }}
       uses: actions/setup-node@v1
@@ -45,3 +45,11 @@ jobs:
     - name: Test
       run: yarn test
 
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./packages/api/coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
