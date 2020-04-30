@@ -1,16 +1,20 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { User, UserInput } from './User.entity';
 import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 import { UserPreferences, UserPreferencesInput } from '../UserPreferences/UserPreferences.entity';
+import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
 
-@Resolver('User')
+@Resolver(() => User)
 export class UserResolver {
 
-  constructor(private readonly userService: UserService) { }
+  constructor(
+    private readonly userService: UserService,
+    private readonly userPreferencesService: UserPreferencesService
+  ) { }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
@@ -32,6 +36,16 @@ export class UserResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => UserPreferences)
   updatePreferences(@CurrentUser() user: User, @Args({ name: 'input', type: () => UserPreferencesInput }) input: UserPreferencesInput) {
-    return this.userService.updatePreferences(user.id, input);
+    return this.userPreferencesService.update(user.id, input);
+  }
+
+  // ---------------------------------------------------------------------------
+  // -------------------------------------------------------------------- Fields
+  // ---------------------------------------------------------------------------
+
+  @ResolveField(() => UserPreferences)
+  async userPreferences(@Parent() user: User) {
+    const userPreferences = await this.userPreferencesService.findByUser(user.id);
+    return userPreferences;
   }
 }
