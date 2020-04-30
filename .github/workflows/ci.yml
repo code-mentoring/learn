@@ -42,18 +42,18 @@ jobs:
       run: yarn lint
     - name: Build
       run: yarn build
-    - name: Test
+    - name: Test and coverage
       run: yarn coverage
 
     # - name: Upload coverage to Codecov
     #   run: yarn coverage
 
-    - name: Coverage
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.coveralls_token }}
-        path-to-lcov: ./packages/api/coverage/lcov.info
-        base-path: ./packages/api
+    # - name: Coverage
+    #   uses: coverallsapp/github-action@master
+    #   with:
+    #     github-token: ${{ secrets.coveralls_token }}
+    #     path-to-lcov: ./packages/api/coverage/lcov.info
+    #     base-path: ./packages/api
 
     # - name: Upload coverage to Codecov
     #   uses: codecov/codecov-action@v1
