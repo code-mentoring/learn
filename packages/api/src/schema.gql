@@ -60,9 +60,9 @@ input UserInput {
 }
 
 input UserPreferencesInput {
-  practiceGoal: Float!
-  why: String!
-  codingAbility: Float!
+  practiceGoal: Float
+  why: String
+  codingAbility: Float
 }
 
 input PathInput {

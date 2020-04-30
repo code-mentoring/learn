@@ -37,13 +37,13 @@ export class UserPreferences extends BaseEntity {
 @InputType()
 export class UserPreferencesInput {
 
-    @Field()
-    practiceGoal: number;
+    @Field({ nullable: true })
+    practiceGoal?: number;
 
-    @Field()
-    why: string;
+    @Field({ nullable: true })
+    why?: string;
 
-    @Field()
-    codingAbility: number;
+    @Field({ nullable: true })
+    codingAbility?: number;
 
 }
