@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -11,9 +11,8 @@ export class UserPreferencesService {
     private readonly userPreferencesRepository: Repository<UserPreferences>
   ) { }
 
-  async findByUser(userId: string): Promise<UserPreferences> {
+  async findByUser(userId: string): Promise<UserPreferences | undefined> {
     const userPreference = await this.userPreferencesRepository.findOne({ where: { userId } });
-    if (!userPreference) throw new NotFoundException('User preference not found');
     return userPreference;
   }
 
