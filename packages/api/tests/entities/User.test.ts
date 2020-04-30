@@ -1,4 +1,5 @@
 import { TestClient } from '../utils/TestClient';
+import { UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 
 
 describe('User entity', () => {
@@ -46,6 +47,7 @@ describe('User entity', () => {
   describe('Query: me', () => {
     beforeEach(() => TestClient.setup());
     it('should return a user when logged in', async () => {
+      expect.assertions(6);
       const user = await TestClient.me();
       expect(user.id).toBeDefined();
       expect(user.email).toBeDefined();
@@ -53,6 +55,27 @@ describe('User entity', () => {
       expect(user.lastName).toBeDefined();
       expect(user.userPreferences).toBeNull();
       expect(user.createdAt).toBeDefined();
+    });
+  });
+
+  describe('Mutation: updatePreferences', () => {
+    beforeEach(() => TestClient.setup());
+    it('should update user preferences', async () => {
+      expect.assertions(5);
+      const input: UserPreferencesInput = {
+        why: 'why',
+        codingAbility: 5,
+        practiceGoal: 4
+      };
+      const userPreferences = await TestClient.updatePreferences(input);
+      expect(userPreferences.id).toBeDefined();
+      expect(userPreferences.why).toEqual(input.why);
+      expect(userPreferences.practiceGoal).toEqual(input.practiceGoal);
+      expect(userPreferences.codingAbility).toEqual(input.codingAbility);
+
+      // Check that after updating preferences me returns user preferences filled
+      const mePost = await TestClient.me();
+      expect(mePost.userPreferences).not.toBeNull();
     });
   });
 

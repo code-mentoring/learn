@@ -4,6 +4,13 @@ mutation($user: UserInput!){
     firstName
     lastName
     email
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
     createdAt
   }
 }
