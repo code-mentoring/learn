@@ -57,6 +57,14 @@ export abstract class TestClient {
     await this.app.close();
   }
 
+  /**
+   * Resets the database, creates a user and log the user in
+   */
+  static async setup() {
+    await this.resetDatabase();
+    await this.workflowSignup();
+  }
+
 
   // ----------------------------------------------------------------- Mutations
   static createUser(user: UserInput = this.seeder.randomUserInput()): Promise<User> {
