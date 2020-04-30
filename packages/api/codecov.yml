@@ -1,0 +1,10 @@
+comment:
+  require_changes: true  # Only post a comment if coverage changes.
+
+coverage:
+  status:
+    project:
+      default:
+        # basic
+        target: auto
+        threshold: 0%

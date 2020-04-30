@@ -5,3 +5,4 @@ packages/api/config/development.yml
 dist
 
 /database
+packages/*/coverage

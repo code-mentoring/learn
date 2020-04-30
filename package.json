@@ -13,9 +13,11 @@
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
     "start-db": "docker-compose up -d",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "coverage": "lerna run coverage"
   },
   "dependencies": {
+    "codecov": "^3.6.5",
     "lerna": "^3.20.2"
   },
   "workspaces": [
