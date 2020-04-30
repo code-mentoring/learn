@@ -43,7 +43,7 @@ jobs:
     - name: Build
       run: yarn build
     - name: Test
-      run: yarn test
+      run: yarn coverage
 
     # - name: Upload coverage to Codecov
     #   run: yarn coverage
