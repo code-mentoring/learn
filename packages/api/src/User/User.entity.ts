@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, OneToOne } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
@@ -17,6 +17,9 @@ export class User {
 
   @Field()
   email: string;
+
+  @Field(() => UserPreferences, { nullable: true })
+  userPreferences?: UserPreferences;
 
   @Field()
   createdAt: Date;
@@ -47,7 +50,6 @@ export class UserWithPassword extends BaseEntity {
   pathUser: PathUser[];
 
   @OneToOne(() => UserPreferences)
-  @JoinColumn()
   userPreferences: UserPreferences;
 
 }
