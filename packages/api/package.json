@@ -7,6 +7,7 @@
     "start": "node dist/main.js",
     "types": "graphql-codegen",
     "test": "jest",
+    "coverage": "codecov",
     "seed": "ts-node src/Database/seeders"
   },
   "types": "types.ts",
