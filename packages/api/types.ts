@@ -20,12 +20,22 @@ export type Path = {
 };
 
 
+export type UserPreferences = {
+   __typename?: 'UserPreferences';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  practiceGoal: Scalars['Float'];
+  why: Scalars['String'];
+  codingAbility: Scalars['Float'];
+};
+
 export type User = {
    __typename?: 'User';
   id: Scalars['ID'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   email: Scalars['String'];
+  userPreferences?: Maybe<UserPreferences>;
   createdAt: Scalars['DateTime'];
 };
 
@@ -40,6 +50,7 @@ export type Query = {
   me: User;
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
+  getPathByName: Path;
 };
 
 
@@ -47,9 +58,15 @@ export type QueryVerifyTokenArgs = {
   accessToken: Scalars['String'];
 };
 
+
+export type QueryGetPathByNameArgs = {
+  name: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
   createUser: User;
+  updatePreferences: UserPreferences;
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
@@ -58,6 +75,11 @@ export type Mutation = {
 
 export type MutationCreateUserArgs = {
   user: UserInput;
+};
+
+
+export type MutationUpdatePreferencesArgs = {
+  input: UserPreferencesInput;
 };
 
 
@@ -81,6 +103,12 @@ export type UserInput = {
   lastName: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type UserPreferencesInput = {
+  practiceGoal: Scalars['Float'];
+  why: Scalars['String'];
+  codingAbility: Scalars['Float'];
 };
 
 export type PathInput = {

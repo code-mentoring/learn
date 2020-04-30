@@ -1,0 +1,16 @@
+query me {
+  me {
+    id
+    firstName
+    lastName
+    email
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
+    createdAt
+  }
+}

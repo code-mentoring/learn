@@ -91,6 +91,10 @@ export abstract class TestClient {
     return this._request('getPathByName', queries.getPathByName, { name });
   }
 
+  static me(): Promise<User> {
+    return this._request('me', queries.me);
+  }
+
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {

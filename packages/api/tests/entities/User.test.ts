@@ -21,6 +21,7 @@ describe('User entity', () => {
       expect(user.email).toEqual(input.email);
       expect(user.firstName).toEqual(input.firstName);
       expect(user.lastName).toEqual(input.lastName);
+      expect(user.userPreferences).toBeNull();
       // @ts-ignore Access invalid property to test
       expect(user.password).toBeUndefined();
       expect(user.createdAt).toBeDefined();
@@ -37,8 +38,21 @@ describe('User entity', () => {
         // @ts-ignore Deliberately missing email to test error
         await TestClient.createUser(input);
       } catch (e) {
-        expect(e.message).toContain('Field \"email\" of required type \"String!\" was not provided');
+        expect(e.message).toContain('Field "email" of required type "String!" was not provided');
       }
+    });
+  });
+
+  describe('Query: me', () => {
+    beforeEach(() => TestClient.setup());
+    it('should return a user when logged in', async () => {
+      const user = await TestClient.me();
+      expect(user.id).toBeDefined();
+      expect(user.email).toBeDefined();
+      expect(user.firstName).toBeDefined();
+      expect(user.lastName).toBeDefined();
+      expect(user.userPreferences).toBeNull();
+      expect(user.createdAt).toBeDefined();
     });
   });
 
