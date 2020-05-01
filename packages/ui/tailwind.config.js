@@ -1,7 +1,7 @@
 // const defaultTheme = require('tailwindcss/defaultTheme')
 
 const primary = {
-  100: '#998BE4',
+  100: '#F6F8FF',
   200: '#5C45D4',
   300: '#472ECF',
   400: '#3317CA',
@@ -9,15 +9,15 @@ const primary = {
   600: '#1A00A2',
   700: '#170090',
   800: '#14007E',
-  900: '#11006C',
-}
+  900: '#11006C'
+};
 
 const secondary = {
   100: '#F3FAF8',
   400: '#23ddb8',
   500: '#0DD2AB',
   600: '#0bb996',
-  900: '#11866E',
+  900: '#11866E'
 };
 
 const tertiary = {
@@ -25,7 +25,7 @@ const tertiary = {
   400: '#ffa8d9',
   500: '#FF91D0',
   600: '#f86abb',
-  900: '#C21578',
+  900: '#C21578'
 };
 
 module.exports = {
@@ -56,13 +56,12 @@ module.exports = {
     },
     linearGradientColors: theme => ({
       // lightBlue: ['red', 'white' ]
-      lightBlue: [theme('colors.white'), theme('colors.blue.200') ]
+      lightBlue: [theme('colors.white'), theme('colors.blue.200')]
     }),
-
 
     fontFamily: {
       sans: ['"Open Sans"', 'helvetica', 'sans-serif'],
-      title: ['"Butler"', 'serif'],
+      title: ['"Butler"', 'serif']
     },
     borderRadius: {
       default: '8px',
@@ -70,7 +69,8 @@ module.exports = {
     }
   },
   corePlugins: {},
-  plugins: [
-    require('tailwindcss-gradients')
-  ],
-}
+  plugins: [require('tailwindcss-gradients')],
+  variants: {
+    borderWidth: ['responsive', 'last', 'hover', 'focus']
+  }
+};
