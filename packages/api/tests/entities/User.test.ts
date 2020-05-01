@@ -7,6 +7,11 @@ describe('User entity', () => {
   beforeAll(async () => { await TestClient.start(); });
   afterAll(async () => { await TestClient.stop(); });
 
+  const setup = async () => {
+    await TestClient.resetDatabase();
+    await TestClient.workflowSignup();
+  };
+
   describe('Mutation: createUser', () => {
     it('should create a user successfully', async () => {
       const input = {
@@ -45,7 +50,7 @@ describe('User entity', () => {
   });
 
   describe('Query: me', () => {
-    beforeEach(() => TestClient.setup());
+    beforeEach(setup);
     it('should return a user when logged in', async () => {
       expect.assertions(6);
       const user = await TestClient.me();
@@ -59,7 +64,7 @@ describe('User entity', () => {
   });
 
   describe('Mutation: updatePreferences', () => {
-    beforeEach(() => TestClient.setup());
+    beforeEach(setup);
     it('should update user preferences', async () => {
       expect.assertions(5);
       const input: UserPreferencesInput = {

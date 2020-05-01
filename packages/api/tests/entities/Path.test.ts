@@ -10,12 +10,16 @@ const pathInput: PathInput = {
 beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
 
+const setup = async () => {
+  await TestClient.resetDatabase();
+  await TestClient.workflowSignup();
+};
 
 describe('Path entity', () => {
 
 
   describe('Mutation: createPath', () => {
-    beforeEach(() => TestClient.setup());
+    beforeEach(setup);
 
     it('should create a path successfully', async () => {
       expect.assertions(5);
@@ -48,7 +52,7 @@ describe('Path entity', () => {
   });
 
   describe('Mutation: Join Path', () => {
-    beforeEach(() => TestClient.setup());
+    beforeEach(setup);
 
     it('join a path successfully', async () => {
       await TestClient.createPath(pathInput);
