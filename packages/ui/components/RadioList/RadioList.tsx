@@ -1,78 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
-// import '../../css/components/RadioList.css';
+
+import { Radio } from '../Radio/Radio';
 
 
 export interface Options {
   label: string;
-  name: string;
-  subLabel: string;
+  value: any;
+  subLabel?: string;
 }
 
 export interface RadioListProps {
   className?: string;
+  name: string;
   options: Array<Options>;
-  onChange: () => void;
+  value?: any;
+  onChange?: (value: any) => void;
 }
 
 export const RadioList: React.FC<RadioListProps> = ({
   className,
   options,
   onChange,
+  name,
+  value,
   ...props
 }) => {
+  // Internal state for which value is selected
+  const [chosenOption, setChosenOption] = useState<any>(value);
 
-  const [chosenOption, setChosenOption] = useState<string>('');
+  // Update the onChange whenever a radio item is clicked
+  useEffect(() => {
+    if (onChange) onChange(chosenOption);
+  }, [chosenOption]);
 
-  const handleClick = (label: string) => {
-    setChosenOption(label);
-  };
+  return <div
+    className={classnames('radio-list', className)}
+    {...props}
+  >
+    {options.map(option => {
+      // Is the current option selected?
+      const check = chosenOption === option.value;
 
-  const handleChange = () => {
-    onChange();
-  };
-
-  return (
-    <form
-      className={classnames(
-        'rounded border-2 border-grey-500 w-1/5',
-        className
-      )}
-      {...props}
-      onChange={handleChange}
-    >
-      {options.map(option => {
-        const selectedDiv = 'text-grey-800 flex items-center justify-between w-100 border-b-2 border-grey-500 px-3 py-1 last:border-b-0 active:border focus-within:border-primary-900';
-        const check = chosenOption === option.label;
-        const computedProperty = { selected: check };
-
-        return (
-          <div
-            key={option.label}
-            className={classnames(selectedDiv, computedProperty)}
-          >
-            <div>
-              <input
-                type="radio"
-                id={option.label}
-                name={option.name}
-                value={option.label}
-                className="hidden"
-                onClick={() => handleClick(option.label)}
-              />
-              <label htmlFor={option.label} className="pl-1 text-body">
-                <span className="w-3 h-3 inline-block mt-2 mr-2 rounded border-2 border-grey-500 cursor-pointer radio" />
-                {option.label}
-              </label>
-            </div>
-            <div>
-              {option.subLabel && (
-                <p className="text-grey-500 text-sm">{option.subLabel}</p>
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </form>
-  );
+      return <label
+        key={option.label}
+        className={classnames({ active: check })}
+      >
+        <Radio
+          name={name}
+          value={option.label}
+          className="mr-3"
+          onChange={e => {
+            if ((e.target as HTMLInputElement).checked) setChosenOption(option.value);
+          }}
+          defaultChecked={check}
+        />
+        <span>{option.label}</span>
+        {option.subLabel
+          && <small className="text-grey-600 text-sm">{option.subLabel}</small>
+        }
+      </label>;
+    })}
+  </div>;
 };
