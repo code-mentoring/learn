@@ -9,8 +9,16 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserWithPassword, UserPreferences])],
-  providers: [UserResolver, UserService, UserWithPassword, UserPreferencesService],
+  imports: [TypeOrmModule.forFeature([
+    UserWithPassword,
+    UserPreferences
+  ])],
+  providers: [
+    UserResolver,
+    UserService,
+    UserWithPassword,
+    UserPreferencesService
+  ],
   exports: [UserService]
 })
 export class UserModule {}

@@ -35,7 +35,10 @@ export class UserResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => UserPreferences)
-  updatePreferences(@CurrentUser() user: User, @Args({ name: 'input', type: () => UserPreferencesInput }) input: UserPreferencesInput) {
+  updatePreferences(
+    @CurrentUser() user: User,
+    @Args({ name: 'input', type: () => UserPreferencesInput }) input: UserPreferencesInput
+  ) {
     return this.userPreferencesService.update(user.id, input);
   }
 
