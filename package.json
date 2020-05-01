@@ -13,7 +13,8 @@
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
     "start-db": "docker-compose up -d",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "kill-api": "kill-port 4000"
   },
   "dependencies": {
     "lerna": "^3.20.2"
@@ -35,7 +36,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.5",
-    "jest": "^25.4.0"
+    "jest": "^25.4.0",
+    "kill-port": "^1.6.0"
   },
   "husky": {
     "hooks": {
