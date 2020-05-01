@@ -12,8 +12,7 @@ export class UserPreferencesService {
   ) { }
 
   async findByUser(userId: string): Promise<UserPreferences | undefined> {
-    const userPreference = await this.userPreferencesRepository.findOne({ where: { userId } });
-    return userPreference;
+    return this.userPreferencesRepository.findOne({ where: { userId } });
   }
 
   async update(userId: string, input: UserPreferencesInput): Promise<UserPreferences> {
