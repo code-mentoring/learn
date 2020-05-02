@@ -46,7 +46,7 @@ type Query {
 
 type Mutation {
   createUser(user: UserInput!): User!
-  updatePreferences(input: UserPreferencesInput!): UserPreferences!
+  updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!

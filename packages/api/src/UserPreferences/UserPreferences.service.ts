@@ -16,9 +16,11 @@ export class UserPreferencesService {
   }
 
   async update(userId: string, input: UserPreferencesInput): Promise<UserPreferences> {
-    const userPreferences = await this.userPreferencesRepository.findOne({ where: { userId } });
-    if (userPreferences) {
-      return this.userPreferencesRepository.save({ ...userPreferences, ...input });
+    // Upsert with validation check
+    const existing = await this.userPreferencesRepository.findOne({ where: { userId } });
+    if (existing) {
+      Object.assign(existing, input);
+      return this.userPreferencesRepository.save(existing);
     }
     return this.userPreferencesRepository.create({ userId, ...input }).save();
   }
