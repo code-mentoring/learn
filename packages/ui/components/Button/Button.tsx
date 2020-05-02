@@ -1,7 +1,6 @@
 import classnames from 'classnames';
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import { Size, WithColor } from '../../lib/classes';
-
 
 
 export type ButtonProps = WithColor & {
@@ -9,9 +8,8 @@ export type ButtonProps = WithColor & {
   size?: Size
 };
 
-export const Button: React.FunctionComponent<ButtonProps & Omit<HTMLProps<HTMLButtonElement>, 'size'>> = ({
+export const Button: React.FunctionComponent<ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'>> = ({
   children,
-  type,
   className,
   text,
   color,
@@ -21,10 +19,12 @@ export const Button: React.FunctionComponent<ButtonProps & Omit<HTMLProps<HTMLBu
   const classes: any = {};
   if (color) classes[`btn-${color}`] = true;
   if (size) classes[`btn-${size}`] = true;
-  if (text) classes[`btn-text`] = true;
+  if (text) classes['btn-text'] = true;
 
   return <button
-    className={classnames("btn", classes, className)}
+    type="button"
+    className={classnames('btn', classes, className)}
     {...props}
-  >{children}</button>;
+  >{children}
+  </button>;
 };
