@@ -1,11 +1,13 @@
-import { Field, ObjectType, InputType } from '@nestjs/graphql';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
-import { IsInt, Min, Max } from 'class-validator';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { IsInt, Max, Min } from 'class-validator';
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+
+import { CMBaseEntity } from '../lib/Base.entity';
 
 @ObjectType()
 @Entity()
 @Unique(['userId'])
-export class UserPreferences extends BaseEntity {
+export class UserPreferences extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')
     @Field()
     id: string;
@@ -31,7 +33,6 @@ export class UserPreferences extends BaseEntity {
     @Min(1)
     @Max(10)
     codingAbility: number;
-
 }
 
 @InputType()
