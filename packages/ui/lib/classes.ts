@@ -9,11 +9,10 @@ export type Color =
   'grey-600' |
   'grey-700' |
   'grey-800' |
-  'grey-900';
+  'grey-900' |
+  'green';
 
-export type Size =
-  'small';
-  'large';
+export type Size = 'small' | 'large';
 
 export interface WithColor { color?: Color; }
 export interface WithSize { size?: Size; }
