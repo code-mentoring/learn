@@ -37,9 +37,9 @@ export class UserResolver {
   @Mutation(() => UserPreferences)
   updatePreferences(
     @CurrentUser() user: User,
-    @Args({ name: 'input', type: () => UserPreferencesInput }) input: UserPreferencesInput
+    @Args('preferences', { type: () => UserPreferencesInput }) preferences: UserPreferencesInput
   ) {
-    return this.userPreferencesService.update(user.id, input);
+    return this.userPreferencesService.update(user.id, preferences);
   }
 
   // ---------------------------------------------------------------------------
