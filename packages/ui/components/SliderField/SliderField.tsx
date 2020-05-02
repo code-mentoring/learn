@@ -7,15 +7,17 @@ import './style.css';
 interface SliderFieldProps {
   min?: number;
   max?: number;
-  onChange?:any;
+  onChange?: (v: number) => void;
+  value?: number;
 }
 
 export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
   min = 0,
   max = 10,
-  onChange
+  onChange,
+  value = 0
 }) => {
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(value);
 
   const marks: Marks = {};
   [...Array(max + 1).keys()].forEach(i => {
@@ -49,9 +51,9 @@ export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
       }}
       marks={marks}
       step={null}
-      onChange={value => {
-        setSliderValue(value);
-        if (onChange) onChange(value);
+      onChange={(v: number) => {
+        setSliderValue(v);
+        if (onChange) onChange(v);
       }}
     />
   </>;
