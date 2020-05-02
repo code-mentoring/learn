@@ -1,0 +1,5 @@
+.rc-slider-dot:first-child,
+.rc-slider-dot:last-child {
+  border: none;
+  background-color: inherit;
+}
