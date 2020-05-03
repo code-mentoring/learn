@@ -46,7 +46,7 @@ export class SeederService {
   randomUserPreferenceInput(): UserPreferencesInput {
     return {
       practiceGoal: Math.floor(Math.random() * 4) + 1,
-      why: faker.lorem.sentence(), 
+      why: faker.lorem.sentence(),
       codingAbility: Math.floor(Math.random() * 10) + 1
     };
   }
@@ -56,18 +56,19 @@ export class SeederService {
    * @param num Number of users you want to create
    */
   async seedUsers(num: number = 3) {
-    return Promise.all(Array(num).fill(undefined).map(async (_, i) =>{
+    return Promise.all(Array(num).fill(undefined).map(async (_, i) => {
       const user = await this.userService.create(
         this.randomUserInput({ email: `user${i}@test.com` })
       );
 
-      if ( i % 2 === 0){
+      if (i % 2 === 0) {
         await this.userPreferencesService.update(
           user.id,
-          this.randomUserPreferenceInput());
+          this.randomUserPreferenceInput()
+        );
       }
-  }))
-}
+    }));
+  }
 
   /**
    * Seeds all entities in the database
