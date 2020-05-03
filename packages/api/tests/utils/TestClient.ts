@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import 'jest-extended';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';

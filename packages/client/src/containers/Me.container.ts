@@ -12,6 +12,7 @@ const meQuery = gql`{
     lastName
     id
     email
+    profileImage
   }
 }`;
 

@@ -4,6 +4,7 @@ mutation($user: UserInput!){
     firstName
     lastName
     email
+    profileImage
     userPreferences {
       id
       why
