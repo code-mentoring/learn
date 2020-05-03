@@ -1,5 +1,5 @@
-mutation($user: UserInput!){
-  createUser(user: $user) {
+query me {
+  me {
     id
     firstName
     lastName

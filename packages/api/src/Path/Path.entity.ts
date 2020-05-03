@@ -1,12 +1,13 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, BaseEntity } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
+import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
 
 @ObjectType()
 @Entity('path')
 @Unique('Name', ['name'])
-export class Path extends BaseEntity {
+export class Path extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;

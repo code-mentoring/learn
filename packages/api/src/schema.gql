@@ -15,11 +15,20 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type UserPreferences {
+  id: String!
+  userId: String!
+  practiceGoal: Float!
+  why: String!
+  codingAbility: Float!
+}
+
 type User {
   id: ID!
   firstName: String!
   lastName: String!
   email: String!
+  userPreferences: UserPreferences
   createdAt: DateTime!
 }
 
@@ -37,6 +46,7 @@ type Query {
 
 type Mutation {
   createUser(user: UserInput!): User!
+  updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
@@ -47,6 +57,12 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+}
+
+input UserPreferencesInput {
+  practiceGoal: Float
+  why: String
+  codingAbility: Float
 }
 
 input PathInput {

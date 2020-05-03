@@ -8,6 +8,7 @@ import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
+import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
 
 /**
  * A helper class to test the API
@@ -77,16 +78,24 @@ export abstract class TestClient {
     return this._request('joinPath', mutations.joinPath, { pathId });
   }
 
+  static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
+    return this._request('updatePreferences', mutations.updatePreferences, { preferences });
+  }
+
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
     return this._request('getPathByName', queries.getPathByName, { name });
   }
 
+  static me(): Promise<User> {
+    return this._request('me', queries.me);
+  }
+
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = await this.seeder.randomUserInput();
+    const userInput = this.seeder.randomUserInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };

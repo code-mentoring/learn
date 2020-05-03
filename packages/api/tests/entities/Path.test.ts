@@ -7,14 +7,13 @@ const pathInput: PathInput = {
   description: 'Description text'
 };
 
+beforeAll(async () => { await TestClient.start(); });
+afterAll(async () => { await TestClient.stop(); });
+
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
 };
-
-beforeAll(async () => { await TestClient.start(); });
-afterAll(async () => { await TestClient.stop(); });
-
 
 describe('Path entity', () => {
 

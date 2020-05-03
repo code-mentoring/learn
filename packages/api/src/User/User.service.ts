@@ -10,7 +10,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserWithPassword)
     private readonly userRepository: Repository<UserWithPassword>
-  ) { }
+  ) {}
 
   async findAll(): Promise<UserWithPassword[]> {
     return this.userRepository.find();

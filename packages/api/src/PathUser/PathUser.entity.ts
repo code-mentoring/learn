@@ -1,13 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
+import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
 import { UserWithPassword } from '../User/User.entity';
 
 @ObjectType()
 @Entity()
 @Unique(['userId', 'pathId'])
-export class PathUser extends BaseEntity {
+export class PathUser extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')
     @Field()
     id: string;
@@ -28,8 +29,8 @@ export class PathUser extends BaseEntity {
     joined: Date;
 
     @ManyToOne(() => Path, path => path.pathUser)
-     path: Path;
+    path: Path;
 
     @ManyToOne(() => UserWithPassword, user => user.pathUser)
-     user: UserWithPassword;
+    user: UserWithPassword;
 }
