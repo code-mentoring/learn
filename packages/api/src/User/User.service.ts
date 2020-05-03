@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import bcrypt from 'bcrypt';
-import {Md5} from 'md5-typescript';
+import { Md5 } from 'md5-typescript';
 import { Repository } from 'typeorm';
 
 import { UserInput, UserWithPassword } from './User.entity';
