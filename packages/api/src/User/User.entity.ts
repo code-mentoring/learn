@@ -19,6 +19,9 @@ export class User {
   @Field()
   email: string;
 
+  @Field()
+  profileImage: string;
+
   @Field(() => UserPreferences, { nullable: true })
   userPreferences?: UserPreferences;
 
@@ -40,6 +43,9 @@ export class UserWithPassword extends CMBaseEntity {
 
   @Column()
   email: string;
+
+  @Field()
+  profileImage: string;
 
   @Column()
   password: string;

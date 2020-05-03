@@ -35,6 +35,7 @@ export type User = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   email: Scalars['String'];
+  profileImage: Scalars['String'];
   userPreferences?: Maybe<UserPreferences>;
   createdAt: Scalars['DateTime'];
 };
