@@ -32,7 +32,7 @@ export const AppHeader: React.FC = () => {
         </Link>
       </div>
 
-      <div className="inline font-semibold float-right mr-1 sm:mr-16">
+      <div className="inline-flex items-center font-semibold float-right mr-1 sm:mr-16">
         <PathIcon
           icon="js"
           size="medium"
@@ -64,8 +64,8 @@ export const AppHeader: React.FC = () => {
           onClick={() => setShowProfileMenu(!showProfileMenu)}
         >
           <img
-            className="rounded-circle inline-block cursor-pointer"
-            src="http://placehold.it/30x30"
+            className="rounded-circle inline-block cursor-pointer h-10"
+            src={me?.profileImage}
             alt="User profile pic"
           />
         </button>
