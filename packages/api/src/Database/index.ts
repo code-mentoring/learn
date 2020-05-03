@@ -7,6 +7,7 @@ import { SeederService } from './seeders/Seeders.service';
 import { UserService } from '../User/User.service';
 import { UserWithPassword } from '../User/User.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
+import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
 
 
 /**
@@ -20,7 +21,7 @@ import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
       UserPreferences
     ])
   ],
-  providers: [DatabaseService, SeederService, UserService],
+  providers: [DatabaseService, SeederService, UserService, UserPreferencesService],
   exports: [DatabaseService, SeederService]
 })
 export class DatabaseModule { }
