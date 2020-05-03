@@ -44,7 +44,7 @@ export class UserWithPassword extends CMBaseEntity {
   @Column()
   email: string;
 
-  @Field()
+  @Column()
   profileImage: string;
 
   @Column()
