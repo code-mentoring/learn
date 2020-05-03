@@ -78,8 +78,8 @@ export abstract class TestClient {
     return this._request('joinPath', mutations.joinPath, { pathId });
   }
 
-  static updatePreferences(input: UserPreferencesInput): Promise<UserPreferences> {
-    return this._request('updatePreferences', mutations.updatePreferences, { input });
+  static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
+    return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
   // ------------------------------------------------------------------- Queries
