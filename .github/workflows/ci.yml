@@ -56,6 +56,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Step that prints name of pull request's base branch
+        run: |
+          echo "Pull request's base branch is: ${BRANCH}"
+        env:
+          BRANCH: ${{ github.ref }}
+
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
@@ -86,12 +92,6 @@ jobs:
 
       # - name: Generate .npmrc
       #   run: touch ~/.npmrc; echo "https://npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
-      - name: Step that prints name of pull request's base branch
-        run: |
-          echo "Pull request's base branch is: ${BASE_BRANCH}"
-        env:
-          BASE_BRANCH: ${{ github.base_ref }}
 
       - name: Publish
         run: yarn publish:ci ${{ secrets.NPM_TOKEN }}
