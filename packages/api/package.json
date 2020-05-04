@@ -1,6 +1,6 @@
 {
   "name": "@code-mentoring/api",
-  "version": "0.0.1-feature-ci-publish.0",
+  "version": "0.0.2-feature-ci-publish.0",
   "scripts": {
     "dev": "rimraf dist && nest start --watch",
     "build": "rimraf dist && nest build",
