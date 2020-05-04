@@ -55,10 +55,14 @@ export const ProgressPath: React.FC<PathProgress> = ({ progress }) => {
         <Icon
           icon="x"
           size="small"
+          width="40"
+          height="40"
+          x="4"
+          y="4"
           className="text-primary-200"
         />
       </svg>
-      <p className="text-center text-sm text-secondary-500 font-sans font-extrabold ">{`${progress}%`}</p>
+      <p className="text-center text-sm text-secondary-500 font-sans font-extrabold" style={{ letterSpacing: '1px' }}>{`${progress}%`}</p>
     </div>
   );
 };
