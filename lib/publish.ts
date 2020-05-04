@@ -8,7 +8,8 @@ import execa from 'execa';
   const isCI = Boolean(process.env.CI);
   if (!isCI) throw new Error('Do not run this command in a non CI environment');
 
-  const branch = process.env.BRANCH;
+  let branch = process.env.BRANCH!;
+  branch = branch.replace(/[/\s]/g, '-');
   console.log(`Publishing to ${branch}`);
 
   const subprocess = execa('yarn', [
