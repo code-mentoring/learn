@@ -18,6 +18,7 @@ const meQuery = gql`{
       practiceGoal
       codingAbility
     }
+    profileImage
   }
 }`;
 

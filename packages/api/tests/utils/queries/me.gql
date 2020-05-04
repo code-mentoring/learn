@@ -4,6 +4,7 @@ query me {
     firstName
     lastName
     email
+    profileImage
     userPreferences {
       id
       why

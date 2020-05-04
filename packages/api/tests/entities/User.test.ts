@@ -27,6 +27,7 @@ describe('User entity', () => {
       expect(user.email).toEqual(input.email);
       expect(user.firstName).toEqual(input.firstName);
       expect(user.lastName).toEqual(input.lastName);
+      expect(user.profileImage).toBeString();
       expect(user.userPreferences).toBeNull();
       // @ts-ignore Access invalid property to test
       expect(user.password).toBeUndefined();

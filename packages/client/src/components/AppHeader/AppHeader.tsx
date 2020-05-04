@@ -74,8 +74,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
           onClick={() => setShowProfileMenu(!showProfileMenu)}
         >
           <img
-            className="rounded-circle inline-block cursor-pointer"
-            src="http://placehold.it/30x30"
+            className="rounded-circle inline-block cursor-pointer h-10"
+            src={me?.profileImage}
             alt="User profile pic"
           />
         </button>

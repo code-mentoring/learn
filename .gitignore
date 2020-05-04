@@ -6,3 +6,4 @@ dist
 
 /database
 packages/*/coverage
+package-lock.json

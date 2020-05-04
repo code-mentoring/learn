@@ -6,6 +6,8 @@ import { Connection, Repository } from 'typeorm';
 import { UserInput } from '../../User/User.entity';
 import { UserService } from '../../User/User.service';
 import { DatabaseService } from '../Database.service';
+import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
+import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
 
 
 @Injectable()
@@ -17,7 +19,8 @@ export class SeederService {
    */
   constructor(
     @Inject('Connection') public connection: Connection,
-    public userService: UserService
+    public userService: UserService,
+    public userPreferencesService: UserPreferencesService
   ) { }
 
   db = new DatabaseService(this.connection);
@@ -40,15 +43,31 @@ export class SeederService {
     };
   }
 
+  randomUserPreferenceInput(): UserPreferencesInput {
+    return {
+      practiceGoal: Math.floor(Math.random() * 4) + 1,
+      why: faker.lorem.sentence(),
+      codingAbility: Math.floor(Math.random() * 10) + 1
+    };
+  }
+
   /**
    * Seeds users in the database
    * @param num Number of users you want to create
    */
   async seedUsers(num: number = 3) {
-    return Promise.all(Array(num).fill(undefined).map(async (_, i) =>
-      this.userService.create(
+    return Promise.all(Array(num).fill(undefined).map(async (_, i) => {
+      const user = await this.userService.create(
         this.randomUserInput({ email: `user${i}@test.com` })
-      )));
+      );
+
+      if (i % 2 === 0) {
+        await this.userPreferencesService.update(
+          user.id,
+          this.randomUserPreferenceInput()
+        );
+      }
+    }));
   }
 
   /**
