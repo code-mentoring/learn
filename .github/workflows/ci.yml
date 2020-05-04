@@ -42,12 +42,10 @@ jobs:
 
 
     # Run scripts separately for easier debugging.
-    - name: Install
+    - name: Install & build
       run: yarn install --frozen-lock-file
     - name: Lint
       run: yarn lint
-    - name: Build
-      run: yarn build
     - name: Test and coverage
       run: yarn coverage
 
