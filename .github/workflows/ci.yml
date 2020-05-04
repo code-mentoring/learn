@@ -87,7 +87,7 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Publish
-        run: lerna publish -y --canary --preid ${GITHUB_REF##*/} --npm-tag=${GITHUB_REF##*/} --force-publish=*
+        run: yarn lerna publish -y --canary --preid ${GITHUB_REF##*/} --npm-tag=${GITHUB_REF##*/} --force-publish=*
 
       - name: Enable "include administrators" branch protection
         uses: benjefferies/branch-protection-bot@master
