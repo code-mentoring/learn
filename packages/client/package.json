@@ -66,5 +66,8 @@
   "dependencies": {
     "@code-mentoring/api": "^0.0.1-feature-ci-publish.0",
     "@code-mentoring/ui": "^0.0.1-feature-ci-publish.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

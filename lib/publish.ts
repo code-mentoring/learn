@@ -15,8 +15,8 @@ import execa from 'execa';
   const subprocess = execa('yarn', [
     'lerna',
     'publish',
+    'prepatch',
     '-y',
-    '--canary',
     `--preid=${branch}`,
     `--dist-tag=${branch}`,
     '--force-publish=*',

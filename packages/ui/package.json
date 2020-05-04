@@ -11,5 +11,8 @@
   "devDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/react-table": "^7.0.16"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
