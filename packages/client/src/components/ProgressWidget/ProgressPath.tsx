@@ -1,67 +1,63 @@
+import { PathIcon } from '@code-mentoring/ui';
 import React from 'react';
+
 import styles from './ProgressPath.module.css';
 
-// TODO: Replace Icon with PathIcon
-// TODO: Figure out how to center PathIcon in progress circle
 
 interface PathProgress {
   icon: any;
   progress: number;
+  size?: number;
+  strokeWidth?: number;
+  baseStroke?: string;
+  progressStroke?: string;
 }
 
-export const ProgressPath: React.FC<PathProgress> = ({ progress }) => {
-  const attributes = {
-    size: 48,
-    strokeWidth: 4,
-    baseStroke: '#EAE7F6',
-    progressStroke: '#0DD2AB'
-  };
-
-  const center = attributes.size / 2;
-  const radius = center - attributes.strokeWidth / 2;
+export const ProgressPath: React.FC<PathProgress> = ({
+  size = 48,
+  strokeWidth = 3,
+  baseStroke = 'grey-300',
+  progressStroke = 'secondary-500',
+  progress,
+  icon
+}) => {
+  const center = size / 2;
+  const radius = center - strokeWidth / 2;
   const circumference = 2 * Math.PI * radius;
   const progressValue = ((100 - progress) / 100) * circumference;
 
-  return (
-    <div className="inline-block mx-1">
+  return <div className="text-center">
+    <div className="graphic relative inline-block">
       <svg
-        width={attributes.size}
-        height={attributes.size}
+        width={size}
+        height={size}
       >
-        <g>
-          <circle
-            stroke={attributes.baseStroke}
-            cx={center}
-            cy={center}
-            r={radius}
-            strokeWidth={attributes.strokeWidth}
-            fill="none"
-          />
-        </g>
-        <g>
-          <circle
-            stroke={attributes.progressStroke}
-            cx={center}
-            cy={center}
-            r={radius}
-            strokeWidth={attributes.strokeWidth}
-            fill="none"
-            strokeDasharray={circumference}
-            strokeDashoffset={progressValue}
-            className="svg-rotate transform -rotate-90"
-          />
-        </g>
-        <Icon
-          icon="x"
-          size="small"
-          width="40"
-          height="40"
-          x="4"
-          y="4"
-          className="text-primary-200"
+        <circle
+          className={`stroke-current text-${baseStroke}`}
+          stroke={baseStroke}
+          cx={center}
+          cy={center}
+          r={radius}
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <circle
+          cx={center}
+          cy={center}
+          r={radius}
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={progressValue}
+          className={`stroke-current text-${progressStroke} ${styles.svgRotate} transform -rotate-90`}
         />
       </svg>
-      <p className="text-center text-sm text-secondary-500 font-sans font-extrabold" style={{ letterSpacing: '1px' }}>{`${progress}%`}</p>
+      <PathIcon
+        icon={icon}
+        size={8}
+        className="absolute left-0 top-0 m-2 text-grey-200"
+      />
     </div>
     <p className={`text-center text-sm text-${progressStroke} font-sans font-extrabold tracking-widest`}>{`${progress}%`}</p>
+  </div>;
 };
