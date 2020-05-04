@@ -60,7 +60,7 @@ jobs:
         run: |
           echo "Pull request's base branch is: ${BRANCH}"
         env:
-          BRANCH: ${{ github.ref }}
+          BRANCH: ${{ github.head_ref }}
 
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
@@ -96,10 +96,10 @@ jobs:
       - name: Publish
         run: yarn publish:ci ${{ secrets.NPM_TOKEN }}
 
-      - name: Enable "include administrators" branch protection
-        uses: benjefferies/branch-protection-bot@master
-        if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
-        with:
-          access-token: ${{ secrets.ACCESS_TOKEN }}
-          owner: benjefferies
-          repo: branch-protection-bot
+      # - name: Enable "include administrators" branch protection
+      #   uses: benjefferies/branch-protection-bot@master
+      #   if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+      #   with:
+      #     access-token: ${{ secrets.ACCESS_TOKEN }}
+      #     owner: benjefferies
+      #     repo: branch-protection-bot
