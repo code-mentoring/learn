@@ -12,7 +12,7 @@ import { formattedBranchName } from './branchName';
   const branch = await formattedBranchName();
   console.log(`Publishing to ${branch}`);
 
-  const { stdout } = await execa('yarn', [
+  const { stdout, exitCode } = await execa('yarn', [
     'lerna',
     'publish',
     '-y',
@@ -22,6 +22,8 @@ import { formattedBranchName } from './branchName';
     '--force-publish=*',
     `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`
   ]);
+
   console.log(stdout);
+  if (exitCode) process.exit(exitCode);
 
 })();
