@@ -45,7 +45,7 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = props => {
                 cy={24}
                 r={23}
                 strokeWidth={4}
-                strokeDasharray="10,10"
+                strokeDasharray="4,7"
                 fill="none"
               />
             </g>
