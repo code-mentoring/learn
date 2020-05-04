@@ -4,7 +4,8 @@ import {
   Redirect, Route, RouteProps, Router, Switch, useHistory
 } from 'react-router';
 
-import { OnboardingWorkflowPage } from '../pages/OnboardWorkflow/OnboardWorkflow.page';
+import { Wizard } from '../containers/Wizard.container';
+import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { Auth } from '../containers/Auth.container';
 import { Me } from '../containers/Me.container';
 import { history as History } from '../lib/history';
@@ -49,7 +50,12 @@ export const AppRouter = () => (
         <Switch>
           <Route exact path={routes.home(false)} component={DashboardPage} />
           <Route exact path={routes.logout(false)} component={LogoutPage} />
-          <Route path={routes.onboardingWorkflow(false)} component={OnboardingWorkflowPage} />
+          <Route path={routes.onboardingWorkflow(false)}>
+            <Wizard.Provider>
+              <OnboardingPage />
+            </Wizard.Provider>
+          </Route>
+
           <Redirect to={routes.home(false)} />
         </Switch>
       </AuthRoute>
