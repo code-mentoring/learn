@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, PathIcon } from '@code-mentoring/ui';
+
 import LogoMark from '../../images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
 import { Me } from '../../containers/Me.container';
@@ -12,7 +13,16 @@ import styles from './AppHeader.module.css';
 // TODO: Add conditionals for things that are supposed to appear
 //          depending on the page(ie.points, course)
 
-export const AppHeader: React.FC = () => {
+export interface AppHeaderProps {
+  minimal?: boolean;
+}
+
+/**
+ *
+ * @param minimal minimal appheader only shows the logo and
+ * the user profile. Example of use: Welcome wizard
+ */
+export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
   const { me } = Me.useContainer();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showPathMenu, setShowPathMenu] = useState(false);
@@ -26,22 +36,22 @@ export const AppHeader: React.FC = () => {
         <LogoMark className="logo h-10 inline ml-1 sm:ml-20" />
       </Link>
 
-      <div className="inline text-grey-700 font-bold text-sm uppercase">
+      {!minimal && <div className="inline text-grey-700 font-bold text-sm uppercase">
         <Link to="/friends" className="mx-3">
           Friends
         </Link>
-      </div>
+      </div>}
 
       <div className="inline font-semibold float-right mr-1 sm:mr-16">
-        <PathIcon
+        {!minimal && <PathIcon
           icon="js"
           size="medium"
           className="inline cursor-pointer"
           onMouseEnter={() => setShowPathMenu(true)}
           onMouseLeave={() => setShowPathMenu(false)}
           onClick={() => setShowPathMenu(!showPathMenu)}
-        />
-        {showPathMenu && (
+        />}
+        {showPathMenu && !minimal && (
           <DropdownMenu
             title="My Paths"
             subjects={paths}
@@ -52,10 +62,10 @@ export const AppHeader: React.FC = () => {
           />
         )}
 
-        <div className="text-tertiary-500 inline ml-8 mr-8">
+        {!minimal && <div className="text-tertiary-500 inline ml-8 mr-8">
           <span className="text-lg">5</span>
           <Icon icon="fire" size="small" className="inline ml-1 mb-1" />
-        </div>
+        </div>}
 
         <button
           type="button"

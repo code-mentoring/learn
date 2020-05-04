@@ -35,7 +35,7 @@ export const RadioList: React.FC<RadioListProps> = ({
   }, [chosenOption]);
 
   return <div
-    className={classnames('radio-list', className)}
+    className={classnames('radio-list w-full', className)}
     {...props}
   >
     {options.map(option => {

@@ -1,5 +1,6 @@
-input {
-  @apply inline-block align-middle rounded border-grey-300 border-2 font-sans text-sm
+input,
+textarea {
+  @apply inline-block align-middle rounded border-grey-300 border-2 font-sans text-sm w-full
     h-10 px-3 text-grey-900;
 
   &:hover { @apply border-grey-400; }
@@ -9,10 +10,14 @@ input {
   &.icon-right { @apply pr-10 }
 }
 
+textarea {
+  height: inherit;
+}
+
 
 .input {
   position: relative;
-  @apply text-grey-300;
+  @apply text-grey-300 w-full;
 
   input {
     @apply w-full;

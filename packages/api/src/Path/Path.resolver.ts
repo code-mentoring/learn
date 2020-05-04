@@ -35,6 +35,15 @@ export class PathResolver {
     @Args('pathId') pathId: string,
     @CurrentUser() user: User
   ) {
-    return Boolean(await this.pathService.addUserToPath(pathId, user.id));
+    return Boolean(await this.pathService.addUserToPath(user.id, pathId));
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Mutation(() => Boolean)
+  async joinPaths(
+    @Args('paths', { type: () => [String] }) paths: string[],
+    @CurrentUser() user: User
+  ) {
+    return Boolean(await this.pathService.addUserToPath(user.id, paths));
   }
 }
