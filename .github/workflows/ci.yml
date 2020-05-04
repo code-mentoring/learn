@@ -43,7 +43,7 @@ jobs:
 
     # Run scripts separately for easier debugging.
     - name: Install
-      run: yarn install
+      run: yarn install --frozen-lock-file
     - name: Lint
       run: yarn lint
     - name: Build
@@ -77,7 +77,7 @@ jobs:
 
       # Run scripts separately for easier debugging.
       - name: Install
-        run: yarn install
+        run: yarn install --frozen-lock-file
 
       # NOTE: Workaround for https://github.community/t5/GitHub-Actions/How-to-push-to-protected-branches-in-a-GitHub-Action/td-p/29609
       - name: Temporarily disable "include administrators" branch protection
