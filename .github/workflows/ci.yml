@@ -1,4 +1,3 @@
-
 name: CI
 
 on:
@@ -37,3 +36,26 @@ jobs:
       run: yarn build
     - name: Test and coverage
       run: yarn coverage
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # NOTE: Workaround for https://github.community/t5/GitHub-Actions/How-to-push-to-protected-branches-in-a-GitHub-Action/td-p/29609
+      - name: Temporarily disable "include administrators" branch protection
+        uses: benjefferies/branch-protection-bot@master
+        if: always()
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Publish
+        run: lerna publish -y --canary --preid ${GITHUB_REF##*/} --npm-tag=${GITHUB_REF##*/} --force-publish=*
+
+      - name: Enable "include administrators" branch protection
+        uses: benjefferies/branch-protection-bot@master
+        if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          owner: benjefferies
+          repo: branch-protection-bot
