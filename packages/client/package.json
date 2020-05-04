@@ -1,6 +1,6 @@
 {
   "name": "@code-mentoring/learn-client",
-  "version": "0.0.2-feature-ci-publish.0",
+  "version": "0.0.3-feature-ci-publish.0",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p"
@@ -64,10 +64,11 @@
     "yup": "^0.28.3"
   },
   "dependencies": {
-    "@code-mentoring/api": "^0.0.2-feature-ci-publish.0",
-    "@code-mentoring/ui": "^0.0.2-feature-ci-publish.0"
+    "@code-mentoring/api": "^0.0.3-feature-ci-publish.0",
+    "@code-mentoring/ui": "^0.0.3-feature-ci-publish.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "4e5b0ed488ad424e9b78e0f829ed695975f94a00"
 }

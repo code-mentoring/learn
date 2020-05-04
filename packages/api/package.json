@@ -1,6 +1,6 @@
 {
   "name": "@code-mentoring/api",
-  "version": "0.0.2-feature-ci-publish.0",
+  "version": "0.0.3-feature-ci-publish.0",
   "scripts": {
     "dev": "rimraf dist && nest start --watch",
     "build": "rimraf dist && nest build",
@@ -62,5 +62,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "4e5b0ed488ad424e9b78e0f829ed695975f94a00"
 }
