@@ -1,4 +1,5 @@
 import execa from 'execa';
+
 import { formattedBranchName } from './branchName';
 
 
@@ -12,7 +13,7 @@ import { formattedBranchName } from './branchName';
   const branch = await formattedBranchName();
   console.log(`Publishing to ${branch}`);
 
-  const { stdout, exitCode } = await execa('yarn', [
+  const subprocess = execa('yarn', [
     'lerna',
     'publish',
     '-y',
@@ -22,8 +23,9 @@ import { formattedBranchName } from './branchName';
     '--force-publish=*',
     `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`
   ]);
+  subprocess.stdout!.pipe(process.stdout);
 
-  console.log(stdout);
+  const { exitCode } = await subprocess;
   if (exitCode) process.exit(exitCode);
 
 })();
