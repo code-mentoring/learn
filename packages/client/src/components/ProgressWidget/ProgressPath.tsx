@@ -1,6 +1,5 @@
 import React from 'react';
-import { Icon } from '@code-mentoring/ui';
-import './ProgressPath.css';
+import styles from './ProgressPath.module.css';
 
 // TODO: Replace Icon with PathIcon
 // TODO: Figure out how to center PathIcon in progress circle
@@ -64,5 +63,5 @@ export const ProgressPath: React.FC<PathProgress> = ({ progress }) => {
       </svg>
       <p className="text-center text-sm text-secondary-500 font-sans font-extrabold" style={{ letterSpacing: '1px' }}>{`${progress}%`}</p>
     </div>
-  );
+    <p className={`text-center text-sm text-${progressStroke} font-sans font-extrabold tracking-widest`}>{`${progress}%`}</p>
 };
