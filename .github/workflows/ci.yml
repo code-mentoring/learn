@@ -39,8 +39,19 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    needs: build
+
     steps:
       - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      # Run scripts separately for easier debugging.
+      - name: Install
+        run: yarn install
 
       # NOTE: Workaround for https://github.community/t5/GitHub-Actions/How-to-push-to-protected-branches-in-a-GitHub-Action/td-p/29609
       - name: Temporarily disable "include administrators" branch protection
