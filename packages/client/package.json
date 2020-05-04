@@ -1,6 +1,6 @@
 {
   "name": "@code-mentoring/learn-client",
-  "version": "0.0.0",
+  "version": "0.0.1-feature-ci-publish.0",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p"
@@ -64,7 +64,7 @@
     "yup": "^0.28.3"
   },
   "dependencies": {
-    "@code-mentoring/api": "^0.0.0",
-    "@code-mentoring/ui": "^0.0.0"
+    "@code-mentoring/api": "^0.0.1-feature-ci-publish.0",
+    "@code-mentoring/ui": "^0.0.1-feature-ci-publish.0"
   }
 }
