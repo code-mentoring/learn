@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 
-const PostCSSConfig = require('@code-mentoring/ui/postcss.config');
+const PostCSSConfig = require('@codement/ui/postcss.config');
 
 // const favicon = require('favicons-webpack-plugin');
 const replacePlugin = require('webpack-plugin-replace');

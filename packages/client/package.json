@@ -1,5 +1,5 @@
 {
-  "name": "@code-mentoring/learn-client",
+  "name": "@codement/learn-client",
   "version": "0.0.3-feature-ci-publish.0",
   "scripts": {
     "dev": "webpack-dev-server",
@@ -64,11 +64,11 @@
     "yup": "^0.28.3"
   },
   "dependencies": {
-    "@code-mentoring/api": "^0.0.3-feature-ci-publish.0",
-    "@code-mentoring/ui": "^0.0.3-feature-ci-publish.0"
+    "@codement/api": "^0.0.3-feature-ci-publish.0",
+    "@codement/ui": "^0.0.3-feature-ci-publish.0"
   },
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "4e5b0ed488ad424e9b78e0f829ed695975f94a00"
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
 }

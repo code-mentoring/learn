@@ -1,4 +1,4 @@
-const config = require('@code-mentoring/ui/tailwind.config');
+const config = require('@codement/ui/tailwind.config');
 
 module.exports = {
   ...config

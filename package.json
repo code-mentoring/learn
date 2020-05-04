@@ -1,5 +1,5 @@
 {
-  "name": "@code-mentoring/learn",
+  "name": "@codement/learn",
   "version": "0.0.0",
   "description": "Learning website for Code Mentoring",
   "main": "index.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "yarn build",
     "build": "lerna run build",
-    "start": "lerna run start --stream --scope @code-mentoring/api",
+    "start": "lerna run start --stream --scope @codement/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
     "start-db": "docker-compose up -d",
