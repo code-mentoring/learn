@@ -1,6 +1,6 @@
 {
   "name": "@codement/learn-client",
-  "version": "0.0.3-feature-ci-publish.0",
+  "version": "0.0.4-feature-ci-publish.0",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p"
@@ -64,8 +64,8 @@
     "yup": "^0.28.3"
   },
   "dependencies": {
-    "@codement/api": "^0.0.3-feature-ci-publish.0",
-    "@codement/ui": "^0.0.3-feature-ci-publish.0"
+    "@codement/api": "^0.0.4-feature-ci-publish.0",
+    "@codement/ui": "^0.0.4-feature-ci-publish.0"
   },
   "publishConfig": {
     "access": "public"
