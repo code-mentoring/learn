@@ -56,9 +56,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Step that prints name of pull request's base branch
+      - name: Get branch
         run: |
-          echo "Pull request's base branch is: ${BRANCH}"
+          echo "Using branch: ${BRANCH}"
         env:
           BRANCH: ${{ github.head_ref }}
 
@@ -90,16 +90,13 @@ jobs:
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
-      # - name: Generate .npmrc
-      #   run: touch ~/.npmrc; echo "https://npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
       - name: Publish
         run: yarn publish:ci ${{ secrets.NPM_TOKEN }}
 
-      # - name: Enable "include administrators" branch protection
-      #   uses: benjefferies/branch-protection-bot@master
-      #   if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
-      #   with:
-      #     access-token: ${{ secrets.ACCESS_TOKEN }}
-      #     owner: benjefferies
-      #     repo: branch-protection-bot
+      - name: Enable "include administrators" branch protection
+        uses: benjefferies/branch-protection-bot@master
+        if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          owner: benjefferies
+          repo: branch-protection-bot

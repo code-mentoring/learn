@@ -10,7 +10,7 @@ import { formattedBranchName } from './branchName';
   const isCI = Boolean(process.env.CI);
   if (!isCI) throw new Error('Do not run this command in a non CI environment');
 
-  const branch = await formattedBranchName();
+  const branch = process.env.BRANCH || await formattedBranchName();
   console.log(`Publishing to ${branch}`);
 
   const subprocess = execa('yarn', [
