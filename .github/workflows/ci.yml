@@ -88,7 +88,7 @@ jobs:
       #   run: touch ~/.npmrc; echo "https://npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
       - name: Publish
-        run: yarn publish
+        run: yarn publish:ci
 
       - name: Enable "include administrators" branch protection
         uses: benjefferies/branch-protection-bot@master

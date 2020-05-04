@@ -16,7 +16,7 @@
     "test": "lerna run test",
     "kill-api": "kill-port 4000",
     "coverage": "lerna run coverage",
-    "publish": "ts-node lib/publish"
+    "publish:ci": "ts-node lib/publish"
   },
   "dependencies": {
     "codecov": "^3.6.5",
