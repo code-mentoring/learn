@@ -51,6 +51,7 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  joinPaths(paths: [String!]!): Boolean!
 }
 
 input UserInput {

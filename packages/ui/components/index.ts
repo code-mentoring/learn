@@ -15,3 +15,4 @@ export * from './Select/Select';
 // export * from './Table/Table';
 export * from './TextField/TextField';
 export * from './RadioList/RadioList';
+export * from './SliderField/SliderField';
