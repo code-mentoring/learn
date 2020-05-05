@@ -30,7 +30,7 @@ import execa from 'execa';
     default:
       if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
       tag = branch.replace(/[/\s]/g, '-');
-      bump = '';
+      bump = undefined;
       extraFlags = extraFlags.concat(
         `--preid=${tag}`,
         '--canary'
