@@ -28,11 +28,11 @@ import execa from 'execa';
     default:
       if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
       tag = branch.replace(/[/\s]/g, '-');
-      bump = undefined;
+      bump = 'prerelease';
       extraFlags = extraFlags.concat(
-        `--preid=${tag}`,
-        '--canary',
-        '--exact'
+        `--preid=${tag}`
+        // '--canary',
+        // '--exact'
       );
   }
 
