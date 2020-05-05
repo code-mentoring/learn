@@ -1,0 +1,95 @@
+.backgroundGreen{
+    border-color: transparent green transparent green ;  /*top right bottom left*/
+    background: rgb(184, 245, 235)
+}
+.backgoundGrey{
+    border-color: transparent grey  transparent grey ;  /*top right bottom left*/
+    background: white;
+}
+.backgoundBlue{
+    border-color: transparent rgb(22, 7, 226)  transparent rgb(22, 7, 226) ;  /*top right bottom left*/
+    background: lightgrey;
+}
+.hexagonCircle { 
+    position: relative;
+margin: 10em auto 8em;
+height: 5em;
+width: 8.66em;
+/* width: 2.5em;
+height: 4.33em; */
+border-radius: 1em/.5em;
+transition: opacity .5s;
+cursor: pointer;
+/* border-color: red transparent red transparent;  top right bottom left */
+border-width: 4px;
+} 
+
+.hexagonCircle:before { 
+    position: absolute;
+width: inherit;
+height: inherit;
+border-radius: inherit;
+background: inherit;
+content: '';
+-webkit-transform: rotate(60deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(60deg);  /* IE 9 */
+          transform: rotate(60deg);/* Firefox 16+, IE 10+, Opera */
+border-color: inherit;  
+border-width: inherit;        
+        } 
+
+.hexagonCircle:after { 
+position: absolute;
+width: inherit;
+height: inherit;
+border-radius: inherit;
+background: inherit;
+content: '';
+-webkit-transform: rotate(-60deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(-60deg);  /* IE 9 */
+          transform: rotate(-60deg);/* Firefox 16+, IE 10+, Opera */
+border-color: inherit;
+border-width: inherit;     
+        } 
+
+
+
+
+.checkmark{
+  font-size: 16px; /* this determines the size of the list text and therefore checkmark size*/
+  list-style-type: none; /* remove default list style */
+  margin-bottom: 1em; /* lists need to be able to breathe */
+  padding: 0.25em 0 0 2.5em; /* make room for the circle */
+  position: relative; /* because we want to position the circle in an absolute fashion */
+  margin: -14em auto 9em 14em;  /* top right bottom left  */
+}
+
+.checkmark:before {
+    content: " "; /* the circle itself is empty */
+    display: block;
+    border: solid 0.8em green; /* create a colored area...*/
+    border-radius: .8em; /* ... and turn it into a circle*/
+    height: 0;
+    width: 0;
+    position: absolute; /* the circle is then put into place*/
+    left: 0.5em;
+    top: 40%; 
+    margin-top: -0.5em;
+  }
+
+  .checkmark:after {
+    content: " ";
+    display: block;
+    width: 0.3em; /* the short bar of the mark is half as long as the long bar*/
+    height: 0.6em;
+    border: solid white;
+    border-width: 0 0.2em 0.2em 0; /* creates the inverted "L" shape*/
+    position: absolute;
+    left: 1em;
+    top: 40%;
+    margin-top: -0.2em;
+    -webkit-transform: rotate(45deg); /* tilts the shape*/
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
