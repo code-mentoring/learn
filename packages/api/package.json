@@ -1,6 +1,6 @@
 {
   "name": "@codement/api",
-  "version": "0.0.1-feature-ci-publish.1",
+  "version": "0.0.1-feature-ci-publish.2",
   "scripts": {
     "dev": "rimraf dist && nest start --watch",
     "build": "rimraf dist && nest build",
