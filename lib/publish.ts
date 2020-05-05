@@ -31,7 +31,8 @@ import execa from 'execa';
       bump = undefined;
       extraFlags = extraFlags.concat(
         `--preid=${tag}`,
-        '--canary'
+        '--canary',
+        '--exact'
       );
   }
 
@@ -42,7 +43,7 @@ import execa from 'execa';
     'publish',
     bump,
     '-y',
-    // `--dist-tag=${tag}`,
+    `--dist-tag=${tag}`,
     '--force-publish=*',
     ...extraFlags
   ].filter(f => f) as string[];
