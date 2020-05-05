@@ -13,31 +13,41 @@ import execa from 'execa';
   if (!isCI) throw new Error('Do not run this command in a non CI environment');
 
   let tag = branch.replace(/[/\s]/g, '-');
+  let bump;
+  let extraFlags: string[] = [];
+
   switch (branch) {
     case 'master':
       tag = 'stable';
+      bump = 'minor';
       break;
+
     case 'develop':
       tag = 'beta';
+      bump = 'patch';
       break;
+
     default:
-      if (branch.startsWith('feature/')) {
-        tag = branch.replace(/[/\s]/g, '-');
-      } else throw new Error(`Unknown branch ${branch}`);
+      if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
+      tag = branch.replace(/[/\s]/g, '-');
+      bump = 'prepatch';
+      extraFlags = extraFlags.concat(`--preid=${tag}`);
   }
 
   console.log(`Publishing to tag: ${tag}`);
 
+
   const subprocess = execa('yarn', [
     'lerna',
     'publish',
-    'prepatch',
+    bump,
     '-y',
-    `--preid=${tag}`,
     `--dist-tag=${tag}`,
     '--force-publish=*',
-    `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`
+    `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`,
+    ...extraFlags
   ]);
+
   subprocess.stdout!.pipe(process.stdout);
 
   const { exitCode } = await subprocess;

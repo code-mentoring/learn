@@ -1,0 +1,43 @@
+name: Publish Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Configure CI Git User
+        run: |
+          git config --global user.name '@tristanMatthias'
+          git config --global user.email 'tristanMatthias@users.noreply.github.com'
+          git remote set-url origin https://$GITHUB_ACTOR:$ACCESS_TOKEN@github.com/bennypowers/apollo-elements
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Checkout and pull branch
+        run: git checkout "${GITHUB_REF:11}" && git pull
+
+      - name: Install Packages
+        run: yarn install --frozen-lock-file
+
+      - name: Authenticate with Registry
+        run: |
+          yarn logout
+          echo "registry=http://registry.npmjs.org/" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish packages
+        run: yarn publish develop $NPM_TOKEN
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Needed for semantic release
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

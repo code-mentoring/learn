@@ -1,0 +1,116 @@
+# name: Publish develop branch
+
+# on:
+#   push:
+#     branches:
+#     - develop
+#     - feature/'*'
+#   pull_request:
+#     branches:
+#     - master
+#     - develop
+
+# jobs:
+#   publish:
+#     name: Publish to NPM
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+#         if: github.event_name == 'pull_request'
+#         with:
+#           fetch-depth: 0
+#           ref: ${{ github.event.pull_request.head.ref }}
+
+#       - uses: actions/checkout@v2
+#         if: github.event_name == 'push'
+#         with:
+#           fetch-depth: 0
+
+#       - name: Use Node.js ${{ matrix.node_version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node_version }}
+
+#       - name: Get yarn cache directory path
+#         id: yarn-cache-dir-path
+#         run: echo "::set-output name=dir::$(yarn cache dir)"
+
+#       - uses: actions/cache@v1
+#         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+#         with:
+#           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+#           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#           restore-keys: |
+#             ${{ runner.os }}-yarn-
+
+#       # Run scripts separately for easier debugging.
+#       - name: Install
+#         run: yarn install --frozen-lock-file
+
+#       # NOTE: Workaround for https://github.community/t5/GitHub-Actions/How-to-push-to-protected-branches-in-a-GitHub-Action/td-p/29609
+#       - name: Temporarily disable "include administrators" branch protection
+#         uses: benjefferies/branch-protection-bot@master
+#         if: always()
+#         with:
+#           access-token: ${{ secrets.ACCESS_TOKEN }}
+
+#       - name: Publish
+#         run: yarn publish:ci $BRANCH ${{ secrets.NPM_TOKEN }}
+#         env:
+#           BRANCH: ${{ github.head_ref }}
+
+#       - name: Enable "include administrators" branch protection
+#         uses: benjefferies/branch-protection-bot@master
+#         if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+#         with:
+#           access-token: ${{ secrets.ACCESS_TOKEN }}
+#           owner: benjefferies
+#           repo: branch-protection-bot
+
+
+
+name: Publish
+
+on:
+  push:
+    branches:
+      - feature/*
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Configure CI Git User
+        run: |
+          git config --global user.name '@tristanMatthias'
+          git config --global user.email 'tristanMatthias@users.noreply.github.com'
+          git remote set-url origin https://$GITHUB_ACTOR:$ACCESS_TOKEN@github.com/bennypowers/apollo-elements
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Checkout and pull branch
+        run: git checkout "${GITHUB_REF:11}" && git pull
+
+      - name: Install Packages
+        run: yarn install --frozen-lock-file
+
+      - name: Authenticate with Registry
+        run: |
+          yarn logout
+          echo "registry=http://registry.npmjs.org/" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish packages
+        run: yarn publish $BRANCH $NPM_TOKEN
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Needed for semantic release
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          BRANCH: ${{ github.head_ref }}
