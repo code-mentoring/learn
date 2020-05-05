@@ -10,7 +10,6 @@
 @import "./components/form";
 @import "./components/error-message";
 @import "./components/radio-list.css";
-/* @import "./components/hexagon.css"; */
 
 *, *:focus {
   outline: none !important;
