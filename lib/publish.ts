@@ -44,7 +44,7 @@ import execa from 'execa';
     '-y',
     `--dist-tag=${tag}`,
     '--force-publish=*',
-    `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`,
+    // `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`,
     ...extraFlags
   ]);
 
