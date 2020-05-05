@@ -4,7 +4,7 @@
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "version": "0.0.6-feature-ci-publish.0",
+  "version": "0.0.6-feature-ci-publish.1",
   "command": {
     "publish": {
       "npmClient": "npm"
