@@ -125,7 +125,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish packages
-        run: yarn publish $BRANCH $NPM_TOKEN
+        run: yarn publish:ci $BRANCH $NPM_TOKEN
         env:
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Needed for semantic release
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
