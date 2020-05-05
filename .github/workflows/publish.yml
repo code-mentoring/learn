@@ -46,14 +46,8 @@ jobs:
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
-
       - name: Publish
-        run: git checkout $BRANCH
-        env:
-          BRANCH: ${{ github.head_ref }}
-
-      - name: Publish
-        run: yarn publish:ci ${{ secrets.NPM_TOKEN }}
+        run: yarn publish:ci $BRANCH ${{ secrets.NPM_TOKEN }}
         env:
           BRANCH: ${{ github.head_ref }}
 
