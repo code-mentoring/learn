@@ -29,11 +29,7 @@ import execa from 'execa';
       if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
       tag = branch.replace(/[/\s]/g, '-');
       bump = 'prerelease';
-      extraFlags = extraFlags.concat(
-        `--preid=${tag}`
-        // '--canary',
-        // '--exact'
-      );
+      extraFlags = extraFlags.concat(`--preid=${tag}`);
   }
 
   console.log(`Publishing to tag: ${tag}`);
