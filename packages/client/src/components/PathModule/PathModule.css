@@ -12,3 +12,7 @@
     fill:  #FFFFFF;
     stroke: #C4BEE0
 }
+
+.checkmark {
+    visibility: visible
+}
