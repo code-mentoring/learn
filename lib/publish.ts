@@ -30,7 +30,7 @@ import execa from 'execa';
     default:
       if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
       tag = branch.replace(/[/\s]/g, '-');
-      bump = 'prepatch';
+      bump = '';
       extraFlags = extraFlags.concat(
         `--preid=${tag}`,
         '--canary'
@@ -45,7 +45,7 @@ import execa from 'execa';
     'publish',
     bump,
     '-y',
-    `--dist-tag=${tag}`,
+    // `--dist-tag=${tag}`,
     '--force-publish=*',
     // `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`,
     ...extraFlags
