@@ -105,7 +105,7 @@ jobs:
         run: |
           git config --global user.name '@tristanMatthias'
           git config --global user.email 'tristanMatthias@users.noreply.github.com'
-          git remote set-url origin https://$GITHUB_ACTOR:$ACCESS_TOKEN@github.com/bennypowers/apollo-elements
+          git remote set-url origin https://$GITHUB_ACTOR:$ACCESS_TOKEN@github.com/code-mentoring/learn
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
