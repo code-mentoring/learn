@@ -30,12 +30,12 @@ jobs:
         node-version: ${{ matrix.node_version }}
 
     - name: Restore Lerna node modules
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      uses: actions/cache@master
+      with:
+        path: |
+          node_modules
+          */*/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
     - name: Install Packages
         run: yarn install --frozen-lock-file
