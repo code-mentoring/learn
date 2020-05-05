@@ -7,6 +7,6 @@ export const DashboardPage = () => (
   <Page title="Dashboard" type="dashboard" className="bg-white">
     <h1>Dashboard</h1>
     {/* <LeaderboardWidget className="w-64" /> */}
-    <PathModule selectedModule = "1" selectedUser = "1" />
+    <PathModule />
   </Page>
 );
