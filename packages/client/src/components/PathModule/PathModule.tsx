@@ -1,68 +1,95 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+// import { useQuery } from '@apollo/react-hooks';
+// import gql from 'graphql-tag';
 // import { Path } from '@code-mentoring/api';
-import './hexagon.css';
+import  './PathModule.css';
 // import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 
-interface PathModuleProps {
-    lesson: string;
-    state: string;
-  };
 
-  interface Module {
-      name : string;
-      type : string;
-      state : string;
+  interface PathModuleProps {
+      selectedUser : string;
+      selectedModule : string;
   }
-  //user -> userPath[] --> path --> module[] --> userModule (completedAt)
-  const pathModuleQuery = gql`query {
-    pathModule {
-      name
-      type
-      state
-    }
-  }`;
-
-  // query{
-  //   getPathModuleById(name:"(pathId : string)")
-  //   {
-  //     id
+  // //user -> userPath[] --> path --> module[] --> userModule (completedAt)
+  // const pathModuleQuery = gql`query {
+  //   pathModule {
   //     name
   //     type
   //     state
   //   }
-  // }
-
-// <style>
-//   .completed-border {
-//     border-color: yellow transparent yellow transparent;  /*top right bottom left*/
-//   }
-//   .open-border
-//   {
-//     border-color: blue transparent blue transparent;  /*top right bottom left*/
-//   }
-// </style>
-
-export const PathModule : React.FunctionComponent<PathModuleProps> = ({lesson,state}) => {
-  const { data, loading, error } = useQuery<{ pathModules: Module[] }>(pathModuleQuery);
-
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
-
-  return(
-    <div>
-        <div className="border hexagon-circle"></div>
-        <div className="text-center mb-4" > {lesson}</div>
-        <div className="text-center mb-4" > {state}</div>
-    </div>
-    )
+  // }`;
+  
+  interface PathModule {
+    name : string;
+    type : string;
+    state : string;
   }
 
-// ReactDOM.render(
-//     <PathModule />,
-//     document.getElementById('pathmodule')
-//   );
+  // const pathModuleMocks: PathModule[] = [
+  //   {
+  //   name : 'Intro to JS',
+  //   type : 'lesson',
+  //   state : 'completed'
+  //   },
+  //   {
+  //     name : 'Variables',
+  //     type : 'lesson',
+  //     state : 'open'
+  //     },
+  //     {
+  //       name : 'Basic Maths',
+  //       type : 'lesson',
+  //       state : 'locked'
+  //       },
+
+  // ]
+//mock data  
+  const data: PathModule = 
+    {
+      name : 'Intro to JS',
+      type : 'lesson',
+      state : 'completed'
+    }
+    // {
+    //   name : 'Variables',
+    //   type : 'lesson',
+    //   state : 'open'
+    // }
+    // {
+    //   name : 'Basic Maths',
+    //   type : 'lesson',
+    //   state : 'locked'
+    // }
+
+  function getBackgroundStyle(state:string ):string {
+   switch(state) {
+    case "completed":
+      return 'backgroundGreen : true ';
+    case "open":
+      return 'backgoundBlue : true';
+    default:
+      return 'backgoundGrey : true';
+  }}
+  
+export const PathModule : React.FunctionComponent<PathModuleProps> = ({selectedModule, selectedUser}) => {
+    console.log(selectedModule, selectedUser);
+    return <div>{
+    // const data = useQuery<{pathModule: PathModule}>(pathModuleQuery);
+
+    // pathModuleMocks.map((data) => 
+    // {  
+    //   return
+        <div>
+            <div className={classnames(`hexagonCircle ${getBackgroundStyle(data.state)} ` )}></div>
+            {/* <div className={classnames(`checkmark : ${data.state === 'completed'})}`)}></div> */}
+            <div className="text-center mb-4" > {data.name}</div>
+            <div className="text-center mb-4" > {data.state}</div>
+       </div>
+    //   }
+    // )
+  }
+  </div> }
 
 
 

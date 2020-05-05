@@ -1,12 +1,12 @@
 import React from 'react';
 import { Page } from '../../components/Page/Page';
 // import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoardWidget';
-import { PathModuleMock } from '../../components/PathModule/PathModuleMock';
+import { PathModule } from '../../components/PathModule/PathModule';
 
 export const DashboardPage = () => (
   <Page title="Dashboard" type="dashboard" className="bg-white">
     <h1>Dashboard</h1>
     {/* <LeaderboardWidget className="w-64" /> */}
-    <PathModuleMock />
+    <PathModule selectedModule = "1" selectedUser = "1" />
   </Page>
 );
