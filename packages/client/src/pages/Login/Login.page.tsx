@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormField } from '@code-mentoring/ui';
+import { Button, Card, Form, FormField } from '@codement/ui';
 import React from 'react';
 import * as yup from 'yup';
 

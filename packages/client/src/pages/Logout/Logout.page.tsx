@@ -1,4 +1,4 @@
-import { Loader } from '@code-mentoring/ui';
+import { Loader } from '@codement/ui';
 import React from 'react';
 
 import { Auth } from '../../containers/Auth.container';
