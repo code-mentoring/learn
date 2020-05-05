@@ -22,6 +22,14 @@ export class PathService {
     return path;
   }
 
+  async findByUser(userId: string): Promise<Path[]> {
+    const userPaths = await this.pathUserRepository.find({
+      relations: ['path'],
+      where: { userId }
+    });
+    return userPaths.map(up => up.path);
+  }
+
   async create(pathInput: PathInput): Promise<Path> {
     return this.pathRepository.create(pathInput).save();
   }
