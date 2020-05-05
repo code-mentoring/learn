@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardProps } from '@code-mentoring/ui/components/Card/Card';
+import { Card, CardProps } from '@codement/ui/components/Card/Card';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Loader } from '@code-mentoring/ui';
-import { User } from '@code-mentoring/api';
-import { ErrorMessage } from '@code-mentoring/ui/components/ErrorMessage/ErrorMessage';
+import { Loader } from '@codement/ui';
+import { User } from '@codement/api';
+import { ErrorMessage } from '@codement/ui/components/ErrorMessage/ErrorMessage';
 
 // TODO: Replace user profile picture when #27 is completed
 

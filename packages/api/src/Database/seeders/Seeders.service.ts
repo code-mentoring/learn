@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import faker from 'faker';
 import Listr from 'listr';
 import { Connection, Repository } from 'typeorm';
-import { Md5 } from 'md5-typescript';
 
 import { UserInput } from '../../User/User.entity';
 import { UserService } from '../../User/User.service';
@@ -34,12 +33,11 @@ export class SeederService {
     return this.connection.getRepository(entity);
   }
 
-  randomUserInput(input: Partial<UserInput> = {}): UserInput & {profileImage: string} {
+  randomUserInput(input: Partial<UserInput> = {}): UserInput {
     return {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
-      profileImage: `https://www.gravatar.com/avatar/${Md5.init(input.email)}`,
       password: 'secret',
       ...input
     };

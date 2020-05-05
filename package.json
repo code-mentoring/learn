@@ -1,5 +1,5 @@
 {
-  "name": "@code-mentoring/learn",
+  "name": "@codement/learn",
   "version": "0.0.0",
   "description": "Learning website for Code Mentoring",
   "main": "index.js",
@@ -9,13 +9,14 @@
   "scripts": {
     "postinstall": "yarn build",
     "build": "lerna run build",
-    "start": "lerna run start --stream --scope @code-mentoring/api",
+    "start": "lerna run start --stream --scope @codement/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
     "start-db": "docker-compose up -d",
     "test": "lerna run test",
     "kill-api": "kill-port 4000",
-    "coverage": "lerna run coverage"
+    "coverage": "lerna run coverage",
+    "publish:ci": "ts-node lib/publish"
   },
   "dependencies": {
     "codecov": "^3.6.5",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@types/execa": "^2.0.0",
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
@@ -37,6 +39,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
+    "execa": "^4.0.0",
     "husky": "^4.2.5",
     "jest": "^25.4.0",
     "jest-extended": "^0.11.5",
