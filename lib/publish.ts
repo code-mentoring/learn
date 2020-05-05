@@ -3,10 +3,8 @@ import execa from 'execa';
 
 (async () => {
   const [,,
-    branch = process.env.BRANCH,
-    npmToken = process.env.NPM_TOKEN
+    branch = process.env.BRANCH
   ] = process.argv;
-  if (!npmToken) throw new Error('No NPM_TOKEN configured');
 
   if (!branch) throw new Error('No branch supplied!');
   const isCI = Boolean(process.env.CI);
@@ -39,17 +37,17 @@ import execa from 'execa';
 
   console.log(`Publishing to tag: ${tag}`);
 
-
-  const subprocess = execa('yarn', [
+  const args = [
     'lerna',
     'publish',
     bump,
     '-y',
     // `--dist-tag=${tag}`,
     '--force-publish=*',
-    // `--registry="https://npm.pkg.github.com/:_authToken=${npmToken}"`,
     ...extraFlags
-  ]);
+  ].filter(f => f) as string[];
+
+  const subprocess = execa('yarn', args);
 
   subprocess.stdout!.pipe(process.stdout);
 
