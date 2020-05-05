@@ -1,41 +1,32 @@
+import { useQuery } from '@apollo/react-hooks';
+import { Path } from '@code-mentoring/api';
 import { Card, CardProps, Icon } from '@code-mentoring/ui';
+import gql from 'graphql-tag';
 import React from 'react';
 
 import { ProgressPath } from './ProgressPath';
 
 
-// TODO: Fetch user paths to replace mocked paths
+const myPathsQuery = gql`query {
+  myPaths { id name icon }
+}`;
 
 export interface ProgressWidgetProps extends CardProps { }
 
 export const ProgressWidget: React.FC<ProgressWidgetProps> = props => {
 
-  const paths = [
-    {
-      id: 1,
-      name: 'JavaScript',
-      icon: 'js',
-      description: 'JavaScript Path',
-      progress: 10
-    },
-    {
-      id: 2,
-      name: 'HTML5',
-      icon: 'html',
-      description: 'HTML5 Path',
-      progress: 82
-    }
-  ];
+  const { data } = useQuery<{myPaths: Path[]}>(myPathsQuery);
 
   return (
     <Card {...props}>
       <h4 className="text-center mb-4">Progress</h4>
       <div className="grid grid-cols-3">
-        {paths && paths.map(path => (
+        {data?.myPaths.map(path => (
           <ProgressPath
             key={path.id}
             icon={path.icon}
-            progress={path.progress}
+            // TODO: Add progress to myPaths
+            progress={50}
           />
         ))}
         <div className="text-center">
