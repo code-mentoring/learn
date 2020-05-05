@@ -17,10 +17,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Publish
-        run: git checkout $BRANCH
-        env:
-          BRANCH: ${{ github.head_ref }}
 
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
@@ -49,6 +45,12 @@ jobs:
         if: always()
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
+
+
+      - name: Publish
+        run: git checkout $BRANCH
+        env:
+          BRANCH: ${{ github.head_ref }}
 
       - name: Publish
         run: yarn publish:ci ${{ secrets.NPM_TOKEN }}
