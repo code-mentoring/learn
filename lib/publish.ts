@@ -31,7 +31,10 @@ import execa from 'execa';
       if (!branch.startsWith('feature/')) throw new Error(`Unknown branch ${branch}`);
       tag = branch.replace(/[/\s]/g, '-');
       bump = 'prepatch';
-      extraFlags = extraFlags.concat(`--preid=${tag}`);
+      extraFlags = extraFlags.concat(
+        `--preid=${tag}`,
+        '--canary'
+      );
   }
 
   console.log(`Publishing to tag: ${tag}`);
