@@ -37,8 +37,17 @@ jobs:
     - name: Lint
       run: yarn lint
 
-    - name: Test and coverage
+    - name: Test
       run: yarn coverage
+
+    - name: Coverage
+      if: matrix.os == 'ubuntu-latest' # Only run coverage on ubuntu
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./packages/api/coverage/lcov.info # optional
+        flags: unittests # optional
+        fail_ci_if_error: true # optional (default = false)
 
 
   publish:
