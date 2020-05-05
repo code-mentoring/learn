@@ -109,8 +109,8 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Checkout and pull branch
-        run: git checkout "${GITHUB_REF:11}" && git pull
+      # - name: Checkout and pull branch
+      #   run: git checkout "${GITHUB_REF:11}" && git pull
 
       - name: Install Packages
         run: yarn install --frozen-lock-file
