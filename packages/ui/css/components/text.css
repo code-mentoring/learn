@@ -3,6 +3,10 @@ html {
 }
 
 h1 {
+  @apply text-2xl font-sans font-extrabold text-primary-500;
+}
+
+h1.title {
   @apply text-6xl font-title font-extrabold leading-tight;
   @apply text-primary-500;
 }
@@ -23,4 +27,9 @@ h4 {
 
 p {
   @apply font-normal text-base leading-7;
+}
+
+
+.body-2 {
+  @apply font-sans text-sm text-grey-700;
 }

@@ -11,9 +11,7 @@ export type Color =
   'grey-800' |
   'grey-900';
 
-export type Size =
-  'small';
-  'large';
+export type Size = 'small' | 'large';
 
 export interface WithColor { color?: Color; }
 export interface WithSize { size?: Size; }
