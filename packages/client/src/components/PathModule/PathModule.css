@@ -1,18 +1,44 @@
 .completed {
-    fill:  #D7FAF3;
-    stroke: #0DD2AB
+    fill:  #D7FAF3;  /* path */
+    stroke: #0DD2AB; /* path */
+    color: #0DD2AB;   /* font color*/
 }
 
 .open {
     fill:  #EEEBF6;
-    stroke: #1F00C5
+    stroke: #1F00C5;
+    color: #1F00C5;
 }
 
 .locked {
     fill:  #FFFFFF;
-    stroke: #C4BEE0
+    stroke: #C4BEE0;
+    color: #C4BEE0;
 }
 
-.checkmark {
-    visibility: visible
+div.relative{
+    position: relative;
+}
+
+    .hexagon {
+        position: relative;  /* top middle to div.relatived*/
+        width: 66px;
+        height: 66px;
+        margin: auto;
+    }
+
+        .checkmark {     /* absolute postion to hexagon*/
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 22px;
+            height: 22px;
+        }
+.name {
+    position: relative;
+    font-family: 'Open Sans';
+    font-style: SemiBold;
+    font-size: 12px;
+    letter-spacing: 0.75px;
+    text-align: center;
 }
