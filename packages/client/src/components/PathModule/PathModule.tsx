@@ -4,6 +4,7 @@ import { Hexagon } from './Icons/hexagon';
 import { CheckMark } from './Icons/checkMark';
 import styles from './PathModule.module.css';
 
+//TODO: mockModule need to be replaced by API query when the Module API is ready
 const mockModule = {
   id: 2,
   name: 'Intro to JS',
