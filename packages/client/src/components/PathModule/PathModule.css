@@ -16,29 +16,7 @@
     color: #C4BEE0;
 }
 
-div.relative{
-    position: relative;
-}
-
-    .hexagon {
-        position: relative;  /* top middle to div.relatived*/
-        width: 66px;
-        height: 66px;
-        margin: auto;
-    }
-
-        .checkmark {     /* absolute postion to hexagon*/
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            width: 22px;
-            height: 22px;
-        }
-.name {
-    position: relative;
-    font-family: 'Open Sans';
-    font-style: SemiBold;
-    font-size: 12px;
-    letter-spacing: 0.75px;
-    text-align: center;
+.checkmark {
+    top: -2px;
+    right: 16px;
 }
