@@ -17,6 +17,7 @@ export interface OnboardingStepProps {
   graphic: React.ReactNode;
   footerSteps?: FooterStepsProps
   submit?: boolean;
+  exact?: boolean;
 }
 
 export const OnboardingStep: React.FC<OnboardingStepProps> = ({
@@ -25,10 +26,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   graphic,
   footerSteps,
   submit,
-  children
+  children,
+  exact
 }) => {
   const { submit: submitWizard } = Wizard.useContainer();
-  return <Route exact path={path}>
+  return <Route exact={exact} path={path}>
     <CenterWrapper>
       <div className={classnames('flex flex-col items-center', intro.className)}>
         <h3 className="mb-3">{intro.title}</h3>

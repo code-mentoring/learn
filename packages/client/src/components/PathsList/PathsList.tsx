@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Path } from '@code-mentoring/api';
-import { PathIcon, Icon } from '@code-mentoring/ui';
+import { Path } from '@codement/api';
+import { PathIcon, Icon } from '@codement/ui';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import classnames from 'classnames';

@@ -2,7 +2,7 @@ import { createContainer } from 'unstated-next';
 import { useState } from 'react';
 import gql from 'graphql-tag';
 
-import { UserPreferences } from '@code-mentoring/api';
+import { UserPreferences } from '@codement/api';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router';
 import { routes } from '../router/routes';

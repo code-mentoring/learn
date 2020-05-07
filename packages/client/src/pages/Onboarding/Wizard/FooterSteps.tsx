@@ -1,9 +1,10 @@
-import { Button } from '@code-mentoring/ui';
+import { Button } from '@codement/ui';
 import classnames from 'classnames';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
+import { routes } from '../../../router/routes';
 import { SelectedPath } from '../../../components/PathsList/PathsList';
 import { Wizard } from '../../../containers/Wizard.container';
 import { WizardSteps } from '../steps';
@@ -19,14 +20,11 @@ export interface FooterStepsProps {
 export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   nextLink,
   backLink,
-  submit,
-  step
+  submit
 }) => {
   const history = useHistory();
   const location = useLocation();
   const { wizardState } = Wizard.useContainer();
-
-  const state = wizardState[step as keyof typeof wizardState];
 
   return <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
 
@@ -39,6 +37,15 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
 
         {Object.keys(wizardState as unknown as WizardSteps).map((key, i) => {
           let isFilled: boolean = false;
+          const state = wizardState[key as keyof typeof wizardState];
+
+          let redirect: string;
+          if (key === WizardSteps.codingAbility) {
+            redirect = routes.onboardingWorkflowCodingAbility();
+          }
+          if (key === WizardSteps.why) redirect = routes.onboardingWorkflowWhy();
+          if (key === WizardSteps.paths) redirect = routes.onboardingWorkflowPaths();
+          if (key === WizardSteps.practiceGoal) redirect = routes.onboardingWorkflowPracticeGoal();
 
           if (Array.isArray(state)) {
             if ((state as SelectedPath[]).length > 0) isFilled = true;
@@ -48,10 +55,15 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
             key={key}
             className={classnames('w-4 h-4 rounded-circle', {
               'ml-4': i !== 0,
-              'bg-grey-200': !isFilled,
+              'bg-grey-200 pointer-events-none': !isFilled,
               'bg-green-400 border-0': isFilled,
               'border-2 border-primary-500 border-solid': location.pathname.includes(`/${key}`)
             })}
+            onClick={() => history.push(redirect)}
+            onKeyDown={() => history.push(redirect)}
+            role="button"
+            tabIndex={0}
+            aria-label="steps"
           />;
         })}
       </div>

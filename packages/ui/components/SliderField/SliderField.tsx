@@ -3,6 +3,7 @@ import Slider, { Marks } from 'rc-slider';
 
 // TODO: change to module
 import './style.css';
+import 'rc-slider/assets/index.css';
 
 interface SliderFieldProps {
   min?: number;
@@ -21,7 +22,7 @@ export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
 
   const marks: Marks = {};
   [...Array(max + 1).keys()].forEach(i => {
-    marks[i] = sliderValue >= i ? `${i}` : '';
+    marks[i] = '';
   });
 
   return <>

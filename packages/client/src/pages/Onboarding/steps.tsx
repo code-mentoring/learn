@@ -90,10 +90,6 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
       <CompletedLeftIcon />
       <CompletedMiddleIcon />
       <CompletedRightIcon />
-    </ >,
-    footerSteps: {
-      step: WizardSteps.completed,
-      backLink: routes.onboardingWorkflowPracticeGoal()
-    }
+    </ >
   }
 ];

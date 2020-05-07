@@ -1,4 +1,4 @@
-import { Button, Options, RadioList, SliderField, TextField } from '@code-mentoring/ui';
+import { Button, Options, RadioList, SliderField, TextField } from '@codement/ui';
 import React from 'react';
 import { Switch, useHistory } from 'react-router';
 
@@ -45,7 +45,7 @@ export const OnboardingPage = () => {
     <Switch>
 
       {/* 1. Welcome page */}
-      <OnboardingStep {...steps[0]}>
+      <OnboardingStep {...steps[0]} exact>
         <Button
           color="success"
           size="large"
