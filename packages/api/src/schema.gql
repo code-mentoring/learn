@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previous: Module
+  path: Path!
+}
+
 type Path {
   id: String!
   name: String!
@@ -43,6 +52,7 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  modules: [Module!]!
 }
 
 type Mutation {
@@ -51,6 +61,7 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  createModule(previousId: String, pathId: String!, module: ModuleInput!): Module!
 }
 
 input UserInput {
@@ -70,4 +81,10 @@ input PathInput {
   name: String!
   icon: String!
   description: String!
+}
+
+input ModuleInput {
+  name: String!
+  icon: String!
+  type: String!
 }
