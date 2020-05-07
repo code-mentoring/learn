@@ -12,6 +12,12 @@ const meQuery = gql`{
     lastName
     id
     email
+    userPreferences {
+      id
+      why
+      practiceGoal
+      codingAbility
+    }
     profileImage
     userPreferences {
       id
