@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Connection, Repository } from 'typeorm';
+import config from 'config';
 
 @Injectable()
 export class DatabaseService {
@@ -20,12 +21,17 @@ export class DatabaseService {
   /**
    * Loops over all tables and removes everything!
    * BE CAREFUL
-   * Used in testing
+   * Used in testing and seeders
    */
   async DANGEROUSLY_RESET_DATABASE() {
-    Promise.all(this.connection.entityMetadatas.map(async entity => {
-      const repository = await this.getRepository(entity.name);
-      await repository.clear();
-    }));
+    if (config.get('db.type') === 'sqlite') {
+      await this.connection.dropDatabase();
+      await this.connection.synchronize(true);
+    } else {
+      await Promise.all(this.connection.entityMetadatas.map(async entity => {
+        const repository = await this.getRepository(entity.name);
+        await repository.query(`TRUNCATE TABLE "${entity.tableName}" CASCADE`);
+      }));
+    }
   }
 }

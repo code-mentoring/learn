@@ -1,0 +1,6 @@
+server:
+  logger: false
+
+db:
+  type: "sqlite"
+  database: ":memory:"

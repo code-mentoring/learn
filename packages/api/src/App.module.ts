@@ -5,6 +5,8 @@ import path from 'path';
 import { AuthModule } from './Auth';
 import { DatabaseModule } from './Database';
 import { UserModule } from './User';
+import { PathModule } from './Path';
+import { PathUserModule } from './PathUser';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -12,6 +14,8 @@ import { UserModule } from './User';
 export const appImports = [
   AuthModule,
   UserModule,
+  PathModule,
+  PathUserModule,
 
   DatabaseModule,
 
@@ -28,4 +32,4 @@ export const appImports = [
 @Module({
   imports: appImports
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks';
-import { User } from '@code-mentoring/api';
+import { User } from '@codement/api';
 import gql from 'graphql-tag';
 import { useEffect } from 'react';
 import { createContainer } from 'unstated-next';
@@ -12,6 +12,7 @@ const meQuery = gql`{
     lastName
     id
     email
+    profileImage
   }
 }`;
 

@@ -2,11 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
+type Path {
+  id: String!
+  name: String!
+  icon: String!
+  description: String!
   createdAt: DateTime!
 }
 
@@ -14,6 +14,24 @@ type User {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type UserPreferences {
+  id: String!
+  userId: String!
+  practiceGoal: Float!
+  why: String!
+  codingAbility: Float!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  profileImage: String!
+  userPreferences: UserPreferences
+  createdAt: DateTime!
+}
 
 type LoginOutput {
   accessToken: String!
@@ -23,11 +41,16 @@ type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  paths: [Path!]!
+  getPathByName(name: String!): Path!
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
+  updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
+  createPath(path: PathInput!): Path!
+  joinPath(pathId: String!): Boolean!
 }
 
 input UserInput {
@@ -35,4 +58,16 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+}
+
+input UserPreferencesInput {
+  practiceGoal: Float
+  why: String
+  codingAbility: Float
+}
+
+input PathInput {
+  name: String!
+  icon: String!
+  description: String!
 }

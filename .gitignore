@@ -2,5 +2,9 @@ node_modules/
 *.log
 .DS_Store
 packages/api/config/development.yml
-packages/api/config/test.yml
 dist
+
+/database
+packages/*/coverage
+package-lock.json
+.npmrc

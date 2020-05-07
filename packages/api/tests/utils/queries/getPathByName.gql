@@ -1,0 +1,9 @@
+query getPathByName($name: String!) {
+  getPathByName(name: $name) {
+    id
+    name
+    icon
+    description
+    createdAt
+  }
+}

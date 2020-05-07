@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormField } from '@code-mentoring/ui';
+import { Button, Card, Form, FormField } from '@codement/ui';
 import React from 'react';
 import * as yup from 'yup';
 
@@ -20,7 +20,7 @@ export const LoginPage = () => {
     login(e.email, e.password);
   };
 
-  return <Page title="Login" type="login" className="grid items-center justify-center bg-blue-500 text-center">
+  return <Page title="Login" type="login" header={false} className="grid items-center justify-center bg-blue-500 text-center">
     <Card className="center bg-white w-64" padding={4}>
       <Logo className="logo h-12 inline m-6" />
       <Form onSubmit={submit} error={getGQLError(loginError)} validationSchema={loginValidation}>

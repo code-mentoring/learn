@@ -31,3 +31,29 @@ input {
 
   &.error input { @apply border-error }
 }
+
+
+
+.radio {
+  input {
+    @apply hidden;
+  }
+
+  &, span {
+    @apply h-4 w-4;
+    font-size: 0;
+  }
+
+  span {
+    @apply inline-flex rounded-circle border-grey-500 border-2 items-center justify-center;
+  }
+
+  input:checked + span {
+    @apply border-primary-500;
+
+    &:after {
+      content: '';
+      @apply rounded w-2 h-2 bg-primary-500;
+    }
+  }
+}

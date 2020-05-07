@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-underscore-dangle */
-import fragments from '@code-mentoring/api/fragments.json';
+import fragments from '@codement/api/fragments.json';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { ApolloClient, ApolloError } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';

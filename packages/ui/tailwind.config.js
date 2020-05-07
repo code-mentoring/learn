@@ -1,31 +1,39 @@
 // const defaultTheme = require('tailwindcss/defaultTheme')
 
 const primary = {
-  100: '#998BE4',
-  200: '#5C45D4',
-  300: '#472ECF',
-  400: '#3317CA',
+  100: '#F6F8FF',
+  200: '#D5DEFF',
+  300: '#8F9FF0',
+  400: '#5665E7',
   500: '#1F00C5',
   600: '#1A00A2',
   700: '#170090',
   800: '#14007E',
-  900: '#11006C',
-}
+  900: '#11006C'
+};
 
 const secondary = {
   100: '#F3FAF8',
-  400: '#23ddb8',
+  200: '#D5F7ED',
+  300: '#99F4DA',
+  400: '#23DDB8',
   500: '#0DD2AB',
-  600: '#0bb996',
-  900: '#11866E',
+  600: '#0BB996',
+  700: '#1B9F85',
+  800: '#1D826D',
+  900: '#156555'
 };
 
 const tertiary = {
   100: '#FFF8FC',
-  400: '#ffa8d9',
+  200: '#FFEEF8',
+  300: '#FFD6ED',
+  400: '#FFA8D9',
   500: '#FF91D0',
-  600: '#f86abb',
-  900: '#C21578',
+  600: '#F86ABB',
+  700: '#DF469D',
+  800: '#C43586',
+  900: '#962465'
 };
 
 module.exports = {
@@ -56,13 +64,12 @@ module.exports = {
     },
     linearGradientColors: theme => ({
       // lightBlue: ['red', 'white' ]
-      lightBlue: [theme('colors.white'), theme('colors.blue.200') ]
+      lightBlue: [theme('colors.white'), theme('colors.blue.200')]
     }),
-
 
     fontFamily: {
       sans: ['"Open Sans"', 'helvetica', 'sans-serif'],
-      title: ['"Butler"', 'serif'],
+      title: ['"Butler"', 'serif']
     },
     borderRadius: {
       default: '8px',
@@ -70,7 +77,8 @@ module.exports = {
     }
   },
   corePlugins: {},
-  plugins: [
-    require('tailwindcss-gradients')
-  ],
-}
+  plugins: [require('tailwindcss-gradients')],
+  variants: {
+    borderWidth: ['responsive', 'last', 'hover', 'focus']
+  }
+};

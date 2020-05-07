@@ -1,0 +1,9 @@
+mutation createPath($path: PathInput!) {
+  createPath(path: $path) {
+    id
+    name
+    icon
+    description
+    createdAt
+  }
+}

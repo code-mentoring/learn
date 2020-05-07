@@ -4,7 +4,7 @@
 community over at [codementoring.co](https://codementoring.co). The goal of this
 project is to bring free, fun education to anyone who wants to learn how to code.
 
-- [Project CM - Code Mentoring's Learning platform](#project-cm---code-mentorings-learning-platform)
+- [Project CM - Code Mentoring's Learning platform (The Duolingo of Coding)](#project-cm---code-mentorings-learning-platform-the-duolingo-of-coding)
     - [🔗 learn.codementoring.co](#%f0%9f%94%97-learncodementoringco)
   - [❓Why this project exists](#%e2%9d%93why-this-project-exists)
   - [💻 What this project uses for technology](#%f0%9f%92%bb-what-this-project-uses-for-technology)
@@ -12,6 +12,10 @@ project is to bring free, fun education to anyone who wants to learn how to code
     - [💬 Communication](#%f0%9f%92%ac-communication)
     - [📞 Weekly standup](#%f0%9f%93%9e-weekly-standup)
   - [📦 Installation and Setup](#%f0%9f%93%a6-installation-and-setup)
+  - [🗺 Getting around / project structure](#%f0%9f%97%ba-getting-around--project-structure)
+  - [🏃🏿‍♂️ Running the project](#%f0%9f%8f%83%f0%9f%8f%bf%e2%80%8d%e2%99%82%ef%b8%8f-running-the-project)
+    - [API:](#api)
+    - [Client:](#client)
   - [🎨 Design files](#%f0%9f%8e%a8-design-files)
   - [👏 Credits](#%f0%9f%91%8f-credits)
 
@@ -70,21 +74,9 @@ maintainers for access to slack or to get a meeting invite.
 2. **Install [Yarn](https://yarnpkg.com/)** Check the website for information on how to install
 3. **Clone the project.** Git clone the project to somewhere you want to work on
 your local machine
-4. **Install Postgres database.** This will be needed to run the project locally
-5. **Setup database**
-   1. Create a user on your new Postgres database
-   2. Create a database called `code_mentoring_learning` in Postgres
-   3. Create your local development settings file under: `packages/api/config/development.yml`
-   4. Add the following to that file:
-   ```yml
-   db:
-     username: USER YOU JUST CREATED IN POSTGRESS
-     password: PASSWORD YOU USED
-    ```
-
-
-6. **Install dependencies**: Inside the *__root__* of the project, run `yarn` and wait for install
-7. Setup is complete 🎉!
+4. **Install docker.** This will be needed to run the database locally
+5. **Install dependencies**: Inside the *__root__* of the project, run `yarn` and wait for install
+6. Setup is complete 🎉!
 
 ## 🗺 Getting around / project structure
 Project CM is divided into 3 (currently) main packages.

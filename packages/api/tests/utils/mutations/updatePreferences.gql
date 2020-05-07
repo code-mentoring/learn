@@ -1,0 +1,8 @@
+mutation updatePreferences($preferences: UserPreferencesInput!) {
+  updatePreferences(preferences: $preferences) {
+    id
+    why
+    practiceGoal
+    codingAbility
+  }
+}
