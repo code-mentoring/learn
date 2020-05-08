@@ -19,6 +19,7 @@ export const PathIcon: React.FunctionComponent<PathIconProps> = ({
 
   const klass = classnames('path-icon', className, sizeClass);
   const Ikon = icons[icon];
+  
   if (!Ikon) return null;
   return <Ikon {...props} className={klass} />;
 };
