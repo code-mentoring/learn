@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, JoinColumn } from 'typeorm';
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
 
 
-enum ModuleType {
+export enum ModuleType {
   assignment = 'assignment',
   lesson = 'lesson'
 }
@@ -47,13 +47,8 @@ export class EModule extends CMBaseEntity {
   @Column('enum', { name: 'type', enum: ModuleType })
   type: ModuleType;
 
-  @Column({ nullable: true })
-  previousId: string;
-
-  @Column()
-  pathId: string;
-
   @ManyToOne(() => EModule, { nullable: true })
+  @JoinColumn({ name: 'previous' })
   previous: EModule;
 
   @ManyToOne(() => Path, path => path.module, { nullable: false })
@@ -72,4 +67,10 @@ export class ModuleInput {
 
   @Field()
   type: ModuleType;
+
+  @Field({ nullable: true })
+  previous?: string;
+
+  @Field()
+  path: string;
 }
