@@ -1,0 +1,30 @@
+mutation($user: UserInput!){
+  createUser(user: $user) {
+    id
+    firstName
+    lastName
+    email
+    profileImage
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
+    createdAt
+  }
+}
+
+
+mutation{
+  createFriendRequest(creatFriendRequest:{
+  {
+    id
+    from
+    to
+    accepted
+    requested
+  }
+  
+}

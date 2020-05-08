@@ -23,6 +23,21 @@ type UserPreferences {
   codingAbility: Float!
 }
 
+type Friends {
+  id: String!
+  user1Id: String!
+  user2Id: String!
+  since: DateTime!
+}
+
+type FriendRequests {
+  id: String!
+  from: String!
+  to: String!
+  accepted: Boolean
+  requested: DateTime!
+}
+
 type User {
   id: ID!
   firstName: String!
@@ -31,6 +46,8 @@ type User {
   profileImage: String!
   userPreferences: UserPreferences
   createdAt: DateTime!
+  friendRequestFrom: [FriendRequests!]!
+  friendRequestTo: [FriendRequests!]!
 }
 
 type LoginOutput {
@@ -43,6 +60,12 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  friendRequests: [FriendRequests!]!
+  getFriendRequestsFromMe: [FriendRequests!]!
+  getFriendRequestsToMe: [FriendRequests!]!
+  myFriends: [Friends!]!
+  friends: [Friends!]!
+  getMyFridendById(userId: String!): [Friends!]!
 }
 
 type Mutation {
@@ -51,6 +74,9 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  createFriendRequest(createFriendRequest: FriendRequestsInput!): FriendRequests!
+  updateFriendRequest(updateFriendRequest: FriendRequestsInput!): FriendRequests!
+  addFriend(friend: FriendsInput!): Friends!
 }
 
 input UserInput {
@@ -70,4 +96,15 @@ input PathInput {
   name: String!
   icon: String!
   description: String!
+}
+
+input FriendRequestsInput {
+  from: String!
+  to: String!
+  accepted: Boolean
+}
+
+input FriendsInput {
+  user1Id: String!
+  user2Id: String!
 }

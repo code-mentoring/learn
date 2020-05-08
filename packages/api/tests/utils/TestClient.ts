@@ -10,6 +10,8 @@ import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
+import { FriendRequestsInput, FriendRequests } from '../../src/FriendRequests/FriendRequests.entity';
+import { FriendsInput, Friends } from '../../src/Friends/Friends.entity';
 
 /**
  * A helper class to test the API
@@ -83,6 +85,19 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
+  static createFriendRequest(friendRequestInput: FriendRequestsInput): Promise<FriendRequests> {
+    return this._request('createFriendRequest', mutations.createFriendRequest, {friendRequestInput});
+  }
+
+  static updateFriendRequest(friendRequestInput: FriendRequestsInput): Promise<FriendRequests> {
+    return this._request('updateFriendRequest', mutations.updateFriendRequest, { friendRequestInput });
+  }
+
+  static addFriend(friendsInput: FriendsInput): Promise<Friends> {
+    return this._request('addFriend', mutations.addFriend, { friendsInput });
+  }
+
+
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -92,6 +107,8 @@ export abstract class TestClient {
   static me(): Promise<User> {
     return this._request('me', queries.me);
   }
+
+
 
 
   // ----------------------------------------------------------------- Workflows

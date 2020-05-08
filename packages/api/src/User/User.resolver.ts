@@ -1,19 +1,21 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
-
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { User, UserInput } from './User.entity';
 import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 import { UserPreferences, UserPreferencesInput } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
+import { FriendRequests } from '../FriendRequests/FriendRequests.entity';
+import { FriendRequestsService } from '../FriendRequests/FriendRequests.service';
 
 @Resolver(() => User)
 export class UserResolver {
 
   constructor(
     private readonly userService: UserService,
-    private readonly userPreferencesService: UserPreferencesService
+    private readonly userPreferencesService: UserPreferencesService,
+    private readonly friendRequestsService: FriendRequestsService
   ) { }
 
   @UseGuards(GQLAuthGuard)
@@ -51,4 +53,16 @@ export class UserResolver {
     const userPreferences = await this.userPreferencesService.findByUser(user.id);
     return userPreferences;
   }
+
+  @ResolveField(() => [FriendRequests])
+  async friendRequestFrom(@Parent() @CurrentUser() user: User) {
+    const friendRequestFrom = await this.friendRequestsService.findByTo(user.id);
+    return friendRequestFrom;
+    }
+  
+  @ResolveField(() => [FriendRequests])
+  async friendRequestTo(@Parent() @CurrentUser() user: User) {
+    const friendRequestTo = await this.friendRequestsService.findByFrom(user.id);
+    return friendRequestTo;
+    }
 }
