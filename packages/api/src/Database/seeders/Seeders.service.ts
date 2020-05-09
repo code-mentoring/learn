@@ -1,14 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import faker from 'faker';
 import Listr from 'listr';
 import { Connection, Repository } from 'typeorm';
 
-import { UserInput } from '../../User/User.entity';
 import { UserService } from '../../User/User.service';
 import { DatabaseService } from '../Database.service';
-import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
+import { PathService } from '../../Path/Path.service';
+import { randomUserInput, randomUserPreferenceInput, randomPath } from './random';
+import { UserWithPassword } from '../../User/User.entity';
 
+interface CTX {
+  users: UserWithPassword[];
+}
 
 @Injectable()
 export class SeederService {
@@ -20,7 +23,8 @@ export class SeederService {
   constructor(
     @Inject('Connection') public connection: Connection,
     public userService: UserService,
-    public userPreferencesService: UserPreferencesService
+    public userPreferencesService: UserPreferencesService,
+    public pathService: PathService
   ) { }
 
   db = new DatabaseService(this.connection);
@@ -33,40 +37,40 @@ export class SeederService {
     return this.connection.getRepository(entity);
   }
 
-  randomUserInput(input: Partial<UserInput> = {}): UserInput {
-    return {
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      email: faker.internet.email(),
-      password: 'secret',
-      ...input
-    };
-  }
-
-  randomUserPreferenceInput(): UserPreferencesInput {
-    return {
-      practiceGoal: Math.floor(Math.random() * 4) + 1,
-      why: faker.lorem.sentence(),
-      codingAbility: Math.floor(Math.random() * 10) + 1
-    };
-  }
-
   /**
    * Seeds users in the database
    * @param num Number of users you want to create
    */
-  async seedUsers(num: number = 3) {
+  async seedUsers(num: number = 3): Promise<UserWithPassword[]> {
     return Promise.all(Array(num).fill(undefined).map(async (_, i) => {
       const user = await this.userService.create(
-        this.randomUserInput({ email: `user${i}@test.com` })
+        randomUserInput({ email: `user${i}@test.com` })
       );
 
       if (i % 2 === 0) {
         await this.userPreferencesService.update(
           user.id,
-          this.randomUserPreferenceInput()
+          randomUserPreferenceInput()
         );
       }
+      return user;
+    }));
+  }
+
+  async seedPaths(users: UserWithPassword[]) {
+    const paths = [
+      { name: 'javascript', icon: 'js' },
+      { name: 'css', icon: 'css' },
+      { name: 'html  ', icon: 'html' }
+    ];
+    return Promise.all(paths.map(async (path, i) => {
+      const newPath = await this.pathService.create(
+        randomPath({ name: path.name, icon: path.icon })
+      );
+      if (i === 0) {
+        await this.pathService.addUserToPath(newPath.id, users[0].id);
+      }
+      return newPath;
     }));
   }
 
@@ -83,8 +87,14 @@ export class SeederService {
       },
       {
         title: 'Create users',
-        task: async () => {
-          await this.seedUsers();
+        task: async (ctx: CTX) => {
+          ctx.users = await this.seedUsers();
+        }
+      },
+      {
+        title: 'Create paths',
+        task: async (ctx: CTX) => {
+          await this.seedPaths(ctx.users);
         }
       }
     ]).run();
