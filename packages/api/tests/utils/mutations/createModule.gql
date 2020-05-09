@@ -1,0 +1,16 @@
+mutation createModule($module: ModuleInput!) {
+  createModule(module: $module) {
+    id
+    name
+    icon
+    type
+    previous {
+      id
+      name
+    }
+    path {
+      id
+      name
+    }
+  }
+}

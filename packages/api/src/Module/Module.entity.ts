@@ -44,7 +44,7 @@ export class EModule extends CMBaseEntity {
   @Column()
   icon: string;
 
-  @Column('enum', { name: 'type', enum: ModuleType })
+  @Column({ type: 'simple-enum', enum: ModuleType })
   type: ModuleType;
 
   @ManyToOne(() => EModule, { nullable: true })
