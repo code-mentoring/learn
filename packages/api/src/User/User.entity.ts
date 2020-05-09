@@ -61,7 +61,7 @@ export class UserWithPassword extends CMBaseEntity {
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
 
-  @OneToMany(() => Friends, friends => friends.user1 || friends.user2, { nullable: true })
+  @OneToMany(() => Friends, friends => { friends.user1, friends.user2 }, { nullable: true })
   friends?: Friends[];
 
   @OneToMany(() => FriendRequests, friendRequestsTo => friendRequestsTo.toUser, { nullable: true })

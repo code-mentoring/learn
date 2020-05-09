@@ -8,14 +8,16 @@ import { UserPreferences, UserPreferencesInput } from '../UserPreferences/UserPr
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
 import { FriendRequests } from '../FriendRequests/FriendRequests.entity';
 import { FriendRequestsService } from '../FriendRequests/FriendRequests.service';
+import { Friends } from '../Friends/Friends.entity';
+import { FriendsService } from '../Friends/Friends.service';
 
 @Resolver(() => User)
 export class UserResolver {
-
   constructor(
     private readonly userService: UserService,
     private readonly userPreferencesService: UserPreferencesService,
-    private readonly friendRequestsService: FriendRequestsService
+    private readonly friendRequestsService: FriendRequestsService,
+    private readonly friendsService: FriendsService
   ) { }
 
   @UseGuards(GQLAuthGuard)
@@ -65,4 +67,10 @@ export class UserResolver {
     const friendRequestTo = await this.friendRequestsService.findByFrom(user.id);
     return friendRequestTo;
     }
+
+  @ResolveField(() => [Friends])
+  async friends(@Parent() @CurrentUser() user: User) {
+    const friendRequestTo = await this.friendsService.findbyOneId(user.id);
+    return friendRequestTo;
+    }  
 }

@@ -92,11 +92,10 @@ export abstract class TestClient {
   static updateFriendRequest(friendRequestInput: FriendRequestsInput): Promise<FriendRequests> {
     return this._request('updateFriendRequest', mutations.updateFriendRequest, { friendRequestInput });
   }
-
+  
   static addFriend(friendsInput: FriendsInput): Promise<Friends> {
     return this._request('addFriend', mutations.addFriend, { friendsInput });
   }
-
 
   // ------------------------------------------------------------------- Queries
 
@@ -108,7 +107,29 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  static friendRequests(): Promise< [FriendRequests] > {
+    return this._request('friendRequests', queries.friendRequests);
+  }
 
+  static getFriendRequestsFromMe: Promise< [FriendRequests] > {
+    return this._request('getFriendRequestsFromMe', queries.getFriendRequestsFromMe);
+  }
+
+  static getFriendRequestsToMe: Promise< [FriendRequests] > {
+    return this._request('getFriendRequestsToMe', queries.getFriendRequestsToMe);
+  }
+
+  static getMyFriends: Promise< [Friends] > {
+    return this._request('getMyFriends', queries.getMyFriends);
+  }
+
+  static friends: Promise< [Friends] > {
+    return this._request('friends', queries.friends);
+  }
+
+  static getMyFridendsById(userId: String): Promise< [Friends] > {
+    return this._request('getMyFridendsById', queries.getMyFridendsById);
+  }
 
 
   // ----------------------------------------------------------------- Workflows

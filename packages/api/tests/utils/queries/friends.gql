@@ -1,0 +1,8 @@
+query  {
+  friends {
+    id
+    user1Id
+    user2Id
+    since
+  }
+}

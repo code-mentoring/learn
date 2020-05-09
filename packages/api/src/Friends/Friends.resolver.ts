@@ -16,10 +16,11 @@ export class FriendsResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
-  myFriends(@CurrentUser() user: User) {
+  getMyFriends(@CurrentUser() user: User) {
     return this.friendsService.findbyOneId(user.id);
   }
   
+  // no use case for dumping the friends table
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
   friends() {
@@ -28,7 +29,7 @@ export class FriendsResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
-  getMyFridendById(
+  getMyFridendsById(
     @Args('userId') userId: string,
     @CurrentUser() me: User) {
       return this.friendsService.findByTwoId(me.id, userId);

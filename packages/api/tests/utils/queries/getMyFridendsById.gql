@@ -1,0 +1,8 @@
+query ($id: String!) {
+  getMyFridendsById (userId : $id) {
+    id
+    user1Id
+    user2Id
+    since
+  }
+}

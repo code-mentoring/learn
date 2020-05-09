@@ -11,6 +11,7 @@ import { FriendRequestsService } from './FriendRequests.service';
 export class FriendRequestsResolver {
   constructor(private readonly friendRequestsService: FriendRequestsService) {}
 
+  // no use case to dump all the friend_request table
   @UseGuards(GQLAuthGuard)
   @Query(() => [FriendRequests])
   friendRequests() {

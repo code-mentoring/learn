@@ -48,6 +48,7 @@ type User {
   createdAt: DateTime!
   friendRequestFrom: [FriendRequests!]!
   friendRequestTo: [FriendRequests!]!
+  friends: [Friends!]!
 }
 
 type LoginOutput {
@@ -63,9 +64,9 @@ type Query {
   friendRequests: [FriendRequests!]!
   getFriendRequestsFromMe: [FriendRequests!]!
   getFriendRequestsToMe: [FriendRequests!]!
-  myFriends: [Friends!]!
+  getMyFriends: [Friends!]!
   friends: [Friends!]!
-  getMyFridendById(userId: String!): [Friends!]!
+  getMyFridendsById(userId: String!): [Friends!]!
 }
 
 type Mutation {

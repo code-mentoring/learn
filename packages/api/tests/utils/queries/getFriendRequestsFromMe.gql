@@ -1,0 +1,9 @@
+query  {
+  getFriendRequestsFromMe {
+    id
+    from
+    to
+    accepted
+    requested
+  }
+}

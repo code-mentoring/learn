@@ -7,5 +7,8 @@ export default {
   login: fs.readFileSync(path.join(__dirname, './login.gql')).toString(),
   createPath: fs.readFileSync(path.join(__dirname, './createPath.gql')).toString(),
   joinPath: fs.readFileSync(path.join(__dirname, './joinPath.gql')).toString(),
-  updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString()
+  updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString(),
+  createFriendRequest: fs.readFileSync(path.join(__dirname, './createFriendRequest.gql')).toString(),
+  updateFriendRequest: fs.readFileSync(path.join(__dirname, './updateFriendRequest.gql')).toString(),
+  addFriend: fs.readFileSync(path.join(__dirname, './addFriend.gql')).toString(),
 };

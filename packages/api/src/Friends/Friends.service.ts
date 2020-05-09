@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -41,6 +41,10 @@ export class FriendsService {
   }
 
   async create(friendsInput: FriendsInput): Promise<Friends> {
+    if (friendsInput.user1Id === friendsInput.user2Id)
+      throw new NotFoundException('You can\'t add yourself as friend');
+    if (this.findByTwoId(friendsInput.user1Id, friendsInput.user2Id))
+      throw new NotFoundException('The friendship exist already');  
     return this.friendsRepository.create(friendsInput).save();
   }
 }

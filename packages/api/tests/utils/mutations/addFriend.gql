@@ -1,0 +1,8 @@
+mutation ($friend: FriendsInput!) {
+  addFriend( friend : $friend) {
+    id
+    user1Id
+    user2Id
+    since
+  }
+}

@@ -14,7 +14,7 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<UserWithPassword[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['friendRequestsTo'] });
   }
 
   async findByEmail(email: string) {
