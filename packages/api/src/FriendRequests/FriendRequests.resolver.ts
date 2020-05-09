@@ -39,6 +39,6 @@ export class FriendRequestsResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => FriendRequests)
   updateFriendRequest(@Args('updateFriendRequest') friendRequestsInput: FriendRequestsInput) {
-    return this.friendRequestsService.updateAccepted(friendRequestsInput);
+    return this.friendRequestsService.updateFriendRequest(friendRequestsInput);
   }
 }

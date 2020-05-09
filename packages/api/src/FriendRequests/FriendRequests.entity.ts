@@ -43,6 +43,6 @@ export class FriendRequestsInput {
   @Field()
   to: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   accepted: boolean;
 }

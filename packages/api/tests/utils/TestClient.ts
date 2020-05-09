@@ -85,12 +85,12 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static createFriendRequest(friendRequestInput: FriendRequestsInput): Promise<FriendRequests> {
-    return this._request('createFriendRequest', mutations.createFriendRequest, {friendRequestInput});
+  static createFriendRequest(friendRequest: FriendRequestsInput): Promise<FriendRequests> {
+    return this._request('createFriendRequest', mutations.createFriendRequest, {friendRequest});
   }
 
-  static updateFriendRequest(friendRequestInput: FriendRequestsInput): Promise<FriendRequests> {
-    return this._request('updateFriendRequest', mutations.updateFriendRequest, { friendRequestInput });
+  static updateFriendRequest(friendRequest: FriendRequestsInput): Promise<FriendRequests> {
+    return this._request('updateFriendRequest', mutations.updateFriendRequest, { friendRequest });
   }
   
   static addFriend(friend: FriendsInput): Promise<Friends> {

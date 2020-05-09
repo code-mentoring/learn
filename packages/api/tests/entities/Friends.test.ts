@@ -1,5 +1,5 @@
 import { TestClient } from '../utils/TestClient';
-import { User } from '../../src/User/User.entity';
+import {User} from '../../src/User/User.entity';
 
 describe('Friends entity', () => {
 
@@ -23,7 +23,6 @@ describe('Friends entity', () => {
   };
 
   describe('Mutation: addFriend', () => {
-    
     beforeEach(setup);
 
     it('should create friend successfully', async () => {

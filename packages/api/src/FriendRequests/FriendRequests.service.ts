@@ -7,7 +7,8 @@ import { FriendRequests, FriendRequestsInput } from './FriendRequests.entity';
 @Injectable()
 export class FriendRequestsService {
   constructor(
-    @InjectRepository(FriendRequests) private readonly friendRequestsRepository: Repository<FriendRequests>
+    @InjectRepository(FriendRequests)
+      private readonly friendRequestsRepository: Repository<FriendRequests>
   ) {}
 
   async findAll(): Promise<FriendRequests[]> {
@@ -15,9 +16,6 @@ export class FriendRequestsService {
   }
 
   async findByFrom(from: string): Promise<FriendRequests[]> {
-    // const friendRequests = await this.friendRequestsRepository.find({ where: { from: from } });
-    // if (!friendRequests) throw new NotFoundException('not found');
-    // return friendRequests;
     return this.friendRequestsRepository.find({ where: { from: from } });
   }
 
@@ -34,12 +32,13 @@ export class FriendRequestsService {
   }
 
   async create(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
+    const existing = await this.friendRequestsRepository.findOne({ where: { from: friendRequestsInput.from, to: friendRequestsInput.to }});
+    if (existing) throw new NotFoundException('request already exist');
     return this.friendRequestsRepository.create(friendRequestsInput).save();
   }
 
-  async updateAccepted(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
+  async updateFriendRequest(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
     const existing = await this.friendRequestsRepository.findOne({ where: { from: friendRequestsInput.from, to: friendRequestsInput.to }});
-    console.log(existing);
     if (existing) {
       Object.assign(existing, friendRequestsInput);
       return this.friendRequestsRepository.save(existing);
