@@ -53,6 +53,7 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   modules: [Module!]!
+  pathModules(pathId: String!): [Module!]!
 }
 
 type Mutation {

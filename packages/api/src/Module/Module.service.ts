@@ -8,11 +8,18 @@ import { Path } from '../Path/Path.entity';
 @Injectable()
 export class ModuleService {
   constructor(
-    @InjectRepository(EModule) private readonly moduleRepository: Repository<EModule>
+    @InjectRepository(EModule) private readonly moduleRepository: Repository<EModule>,
+    @InjectRepository(Path) private readonly pathRepository: Repository<Path>
   ) {}
 
   async findAll(): Promise<Module[]> {
     return this.moduleRepository.find({ relations: ['previous', 'path'] });
+  }
+
+  async findByPath(pathId: string): Promise<Module[]> {
+    const path = await this.pathRepository.findOne({ where: { id: pathId } });
+    if (!path) throw new NotFoundException();
+    return this.moduleRepository.find({ where: { path }, relations: ['previous', 'path'] });
   }
 
   async create(

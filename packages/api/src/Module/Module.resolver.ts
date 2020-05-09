@@ -16,6 +16,12 @@ export class ModuleResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => [Module])
+  pathModules(@Args('pathId') pathId: string) {
+    return this.moduleService.findByPath(pathId);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => Module)
   createModule(
     @Args('module') module: ModuleInput
