@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Assignment } from '../Assignment/Assignment.entity';
@@ -11,14 +11,6 @@ export class AssignmentFile extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
-
-  @Column()
-  @Field()
-  author: string;
-
-  @Column()
-  @Field()
-  assignmentId: string;
 
   @Column()
   @Field()
@@ -36,7 +28,8 @@ export class AssignmentFile extends CMBaseEntity {
   assignment: Assignment;
 
   @ManyToOne(() => UserWithPassword, user => user.assignmentFile)
-    user: UserWithPassword;
+  @JoinColumn({ name: 'author' })
+  author: UserWithPassword;
 }
 
 @InputType()

@@ -1,9 +1,9 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 // import { Module } from '../Module/Module.entity';
-// import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
+import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 
 @ObjectType()
 @Entity('assignment')
@@ -21,8 +21,8 @@ export class Assignment extends CMBaseEntity {
   @Field()
   description: string;
 
-  // @OneToMany(() => AssignmentFile, assignmentFile => assignmentFile.assignment)
-  // assignmentFiles: AssignmentFile[];
+  @OneToMany(() => AssignmentFile, assignmentFile => assignmentFile.assignment)
+  assignmentFile: AssignmentFile[];
 
 
   // @ManyToOne(() => Module, module =>  module.assignment)
