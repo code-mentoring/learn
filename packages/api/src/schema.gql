@@ -37,12 +37,18 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Assignment {
+  id: String!
+  description: String!
+}
+
 type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  assignments: [Assignment!]!
 }
 
 type Mutation {
@@ -51,6 +57,7 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  createAssignment(assignment: AssignmentInput!): Assignment!
 }
 
 input UserInput {
@@ -69,5 +76,9 @@ input UserPreferencesInput {
 input PathInput {
   name: String!
   icon: String!
+  description: String!
+}
+
+input AssignmentInput {
   description: String!
 }
