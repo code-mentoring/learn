@@ -1,11 +1,13 @@
 import { TestClient } from '../utils/TestClient';
 import { UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 
-
 describe('User entity', () => {
-
-  beforeAll(async () => { await TestClient.start(); });
-  afterAll(async () => { await TestClient.stop(); });
+  beforeAll(async () => {
+    await TestClient.start();
+  });
+  afterAll(async () => {
+    await TestClient.stop();
+  });
 
   const setup = async () => {
     await TestClient.resetDatabase();
@@ -18,7 +20,7 @@ describe('User entity', () => {
         email: 'fake@user.com',
         firstName: 'Bob',
         lastName: 'Brown',
-        password: 'secret'
+        password: 'secret',
       };
 
       const user = await TestClient.createUser(input);
@@ -40,12 +42,14 @@ describe('User entity', () => {
         const input = {
           firstName: 'Bob',
           lastName: 'Brown',
-          password: 'secret'
+          password: 'secret',
         };
         // @ts-ignore Deliberately missing email to test error
         await TestClient.createUser(input);
       } catch (e) {
-        expect(e.message).toContain('Field "email" of required type "String!" was not provided');
+        expect(e.message).toContain(
+          'Field "email" of required type "String!" was not provided'
+        );
       }
     });
   });
@@ -68,7 +72,7 @@ describe('User entity', () => {
     const preferences: UserPreferencesInput = {
       why: 'why',
       codingAbility: 5,
-      practiceGoal: 4
+      practiceGoal: 4,
     };
     beforeEach(setup);
     it('should update user preferences', async () => {
@@ -100,4 +104,17 @@ describe('User entity', () => {
     });
   });
 
+  describe('Query: searchUsers', () => {
+    beforeEach(setup);
+    it('should return a list of users matching the specified parameters', async () => {
+      expect.assertions(6);
+      //const users = await TestClient;
+      // expect(user.id).toBeDefined();
+      // expect(user.email).toBeDefined();
+      // expect(user.firstName).toBeDefined();
+      // expect(user.lastName).toBeDefined();
+      // expect(user.userPreferences).toBeNull();
+      // expect(user.createdAt).toBeDefined();
+    });
+  });
 });

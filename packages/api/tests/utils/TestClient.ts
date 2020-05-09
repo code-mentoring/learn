@@ -9,7 +9,11 @@ import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
+import {
+  UserPreferencesInput,
+  UserPreferences,
+} from '../../src/UserPreferences/UserPreferences.entity';
+import { UserWithPassword } from '../../src/User/User.entity';
 
 /**
  * A helper class to test the API
@@ -22,7 +26,6 @@ export abstract class TestClient {
   static app: any;
 
   static token: string;
-
 
   /**
    * Reset the entire database
@@ -39,13 +42,12 @@ export abstract class TestClient {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: appImports,
       providers: [TestLogger],
-      exports: [TestLogger]
+      exports: [TestLogger],
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
     this.seeder = await moduleFixture.get(SeederService);
     if (resetDatabase) await this.resetDatabase();
-
 
     this.app = moduleFixture.createNestApplication();
     this.app.useLogger(this.app.get(TestLogger));
@@ -59,14 +61,22 @@ export abstract class TestClient {
     await this.app.close();
   }
 
-
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput = this.seeder.randomUserInput()): Promise<User> {
+  static createUser(
+    user: UserInput = this.seeder.randomUserInput()
+  ): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
-  static async login(email: string, password: string, storeToken = true): Promise<LoginOutput> {
-    const res = await this._request<LoginOutput>('login', mutations.login, { email, password });
+  static async login(
+    email: string,
+    password: string,
+    storeToken = true
+  ): Promise<LoginOutput> {
+    const res = await this._request<LoginOutput>('login', mutations.login, {
+      email,
+      password,
+    });
     if (storeToken) this.token = res.accessToken;
     return res;
   }
@@ -79,8 +89,12 @@ export abstract class TestClient {
     return this._request('joinPath', mutations.joinPath, { pathId });
   }
 
-  static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
-    return this._request('updatePreferences', mutations.updatePreferences, { preferences });
+  static updatePreferences(
+    preferences: UserPreferencesInput
+  ): Promise<UserPreferences> {
+    return this._request('updatePreferences', mutations.updatePreferences, {
+      preferences,
+    });
   }
 
   // ------------------------------------------------------------------- Queries
@@ -93,6 +107,9 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  // static searchUsers(param: string): Promise<UserWithPassword[]> {
+  //   return this._request('searchUsers', queries.searchUsers, {param})
+  // }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
@@ -109,8 +126,11 @@ export abstract class TestClient {
    * @param query GQL Query or mutation to run
    * @param variables Variables to pass if needed
    */
-  private static async _request<T>(name: string, query: string, variables?: any): Promise<T> {
-
+  private static async _request<T>(
+    name: string,
+    query: string,
+    variables?: any
+  ): Promise<T> {
     const res = await request(this.app.getHttpServer())
       .post('/graphql')
       .set('Authorization', `Bearer ${this.token}`)

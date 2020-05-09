@@ -21,6 +21,12 @@ export class UserService {
     return this.userRepository.findOne({ where: { email } });
   }
 
+  async searchUsers(param: string): Promise<UserWithPassword[]> {
+    return this.userRepository.find({
+      where: [{ firstName: param }, { lastName: param }, { email: param }],
+    });
+  }
+
   async create(input: UserInput): Promise<UserWithPassword> {
     const user = this.userRepository.create(input);
     user.password = await bcrypt.hash(input.password, 10);

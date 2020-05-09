@@ -39,6 +39,7 @@ type LoginOutput {
 
 type Query {
   users: [User!]!
+  search(param: String!): [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
