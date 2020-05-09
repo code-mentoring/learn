@@ -63,7 +63,7 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
-  updateModule(module: UpdateModuleInput!): Module!
+  updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
 }
 

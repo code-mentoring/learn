@@ -8,5 +8,7 @@ export default {
   createPath: fs.readFileSync(path.join(__dirname, './createPath.gql')).toString(),
   joinPath: fs.readFileSync(path.join(__dirname, './joinPath.gql')).toString(),
   updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString(),
-  createModule: fs.readFileSync(path.join(__dirname, './createModule.gql')).toString()
+  createModule: fs.readFileSync(path.join(__dirname, './createModule.gql')).toString(),
+  updateModule: fs.readFileSync(path.join(__dirname, './updateModule.gql')).toString(),
+  deleteModule: fs.readFileSync(path.join(__dirname, './deleteModule.gql')).toString()
 };

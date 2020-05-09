@@ -10,6 +10,7 @@ import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
+import { UpdateModuleInput } from '../../src/Module/Module.entity';
 
 /**
  * A helper class to test the API
@@ -85,6 +86,14 @@ export abstract class TestClient {
 
   static createModule(module: ModuleInput): Promise<Module> {
     return this._request('createModule', mutations.createModule, { module });
+  }
+
+  static updateModule(update: UpdateModuleInput): Promise<Module> {
+    return this._request('updateModule', mutations.updateModule, { update });
+  }
+
+  static deleteModule(moduleId: string): Promise<Module> {
+    return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
   // ------------------------------------------------------------------- Queries

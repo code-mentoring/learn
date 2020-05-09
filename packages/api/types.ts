@@ -89,6 +89,8 @@ export type Mutation = {
   createPath: Path;
   joinPath: Scalars['Boolean'];
   createModule: Module;
+  updateModule: Module;
+  deleteModule: Scalars['Boolean'];
 };
 
 
@@ -122,6 +124,16 @@ export type MutationCreateModuleArgs = {
   module: ModuleInput;
 };
 
+
+export type MutationUpdateModuleArgs = {
+  module: UpdateModuleInput;
+};
+
+
+export type MutationDeleteModuleArgs = {
+  moduleId: Scalars['String'];
+};
+
 export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -147,4 +159,13 @@ export type ModuleInput = {
   type: Scalars['String'];
   previous?: Maybe<Scalars['String']>;
   path: Scalars['String'];
+};
+
+export type UpdateModuleInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  previous?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
 };

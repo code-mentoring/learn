@@ -32,9 +32,9 @@ export class ModuleResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Module)
   updateModule(
-    @Args('module') module: UpdateModuleInput
+    @Args('update') update: UpdateModuleInput
   ) {
-    return this.moduleService.update(module);
+    return this.moduleService.update(update);
   }
 
   @UseGuards(GQLAuthGuard)

@@ -1,11 +1,12 @@
 import { Path } from '../../types';
 import { TestClient } from '../utils/TestClient';
 import { pathInput } from './Path.test';
+import { UpdateModuleInput, ModuleType } from '../../src/Module/Module.entity';
 
 export const moduleInput = {
   name: 'module name',
   icon: 'icon',
-  type: 'lesson'
+  type: ModuleType.lesson
 };
 
 
@@ -19,7 +20,7 @@ const setup = async () => {
   await TestClient.workflowSignup();
 };
 
-describe.only('Module entity', () => {
+describe('Module entity', () => {
   let path: Path;
   describe('Mutation: createModule', () => {
     beforeEach(async () => {
@@ -66,4 +67,49 @@ describe.only('Module entity', () => {
     });
   });
 
+  describe('Mutation: updateModule', () => {
+    beforeEach(async () => {
+      await setup();
+      path = await TestClient.createPath(pathInput);
+    });
+
+    it('should update a module successfully', async () => {
+      expect.assertions(6);
+      const modulePrev = await TestClient.createModule({ ...moduleInput, name: 'previous', path: path.id });
+      const module = await TestClient.createModule({ ...moduleInput, path: path.id });
+      const path2 = await TestClient.createPath({ ...pathInput, name: 'path 2' });
+      const update: UpdateModuleInput = {
+        id: module.id,
+        name: 'New name',
+        icon: 'new icon',
+        type: ModuleType.assignment,
+        previous: modulePrev.id,
+        path: path2.id
+      };
+      const updated = await TestClient.updateModule(update);
+
+      expect(updated.id).toBeDefined();
+      expect(updated.name).toEqual(update.name);
+      expect(updated.icon).toEqual(update.icon);
+      expect(updated.type).toEqual(update.type);
+      expect(updated.path.id).toEqual(path2.id);
+      expect(updated.previous.id).toEqual(modulePrev.id);
+
+    });
+  });
+
+  describe('Mutation: deleteModule', () => {
+    beforeEach(async () => {
+      await setup();
+      path = await TestClient.createPath(pathInput);
+    });
+
+    it('should delete a module successfully', async () => {
+      expect.assertions(1);
+      const module = await TestClient.createModule({ ...moduleInput, path: path.id });
+      const deleted = await TestClient.deleteModule(module.id);
+      expect(deleted).toBe(true);
+
+    });
+  });
 });
