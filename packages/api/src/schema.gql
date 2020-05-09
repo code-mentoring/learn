@@ -43,6 +43,7 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  myPaths: [Path!]!
 }
 
 type Mutation {
