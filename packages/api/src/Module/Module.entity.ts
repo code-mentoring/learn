@@ -74,3 +74,25 @@ export class ModuleInput {
   @Field()
   path: string;
 }
+
+@InputType()
+export class UpdateModuleInput {
+
+  @Field()
+  id: string;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  icon?: string;
+
+  @Field({ nullable: true })
+  type?: ModuleType;
+
+  @Field({ nullable: true })
+  previous?: string;
+
+  @Field({ nullable: true })
+  path?: string;
+}

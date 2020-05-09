@@ -63,6 +63,8 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
+  updateModule(module: UpdateModuleInput!): Module!
+  deleteModule(moduleId: String!): Boolean!
 }
 
 input UserInput {
@@ -90,4 +92,13 @@ input ModuleInput {
   type: String!
   previous: String
   path: String!
+}
+
+input UpdateModuleInput {
+  id: String!
+  name: String
+  icon: String
+  type: String
+  previous: String
+  path: String
 }
