@@ -8,6 +8,7 @@ import { UserModule } from './User';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { AssignmentModule } from './Assignment';
+import { AssignmentFileModule } from './AssignmentFile';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -18,6 +19,7 @@ export const appImports = [
   PathModule,
   PathUserModule,
   AssignmentModule,
+  AssignmentFileModule,
 
   DatabaseModule,
 
