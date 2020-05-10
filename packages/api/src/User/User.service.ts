@@ -23,7 +23,7 @@ export class UserService {
 
   async searchUsers(param: string): Promise<UserWithPassword[]> {
     return this.userRepository.find({
-      where: [{ firstName: param }, { lastName: param }, { email: param }],
+      where: [{ firstName: param }, { lastName: param }, { email: param }]
     });
   }
 
