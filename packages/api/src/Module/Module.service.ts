@@ -2,13 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { EModule, Module, ModuleInput, UpdateModuleInput } from './Module.entity';
+import { Module, ModuleInput, UpdateModuleInput } from './Module.entity';
 import { Path } from '../Path/Path.entity';
 
 @Injectable()
 export class ModuleService {
   constructor(
-    @InjectRepository(EModule) private readonly moduleRepository: Repository<EModule>,
+    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>,
     @InjectRepository(Path) private readonly pathRepository: Repository<Path>
   ) {}
 
@@ -26,7 +26,7 @@ export class ModuleService {
     moduleInput: ModuleInput
   ): Promise<Module> {
 
-    const newModule = new EModule();
+    const newModule = new Module();
     newModule.name = moduleInput.name;
     newModule.icon = moduleInput.icon;
     newModule.type = moduleInput.type;
@@ -35,9 +35,9 @@ export class ModuleService {
     if (!path) throw new NotFoundException();
     newModule.path = path;
 
-    let previous: EModule | undefined;
+    let previous: Module | undefined;
     if (moduleInput.previous) {
-      previous = await EModule.findOne({ id: moduleInput.previous });
+      previous = await Module.findOne({ id: moduleInput.previous });
       if (!previous) throw new NotFoundException();
       newModule.previous = previous;
     }

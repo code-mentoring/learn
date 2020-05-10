@@ -11,47 +11,33 @@ export enum ModuleType {
 }
 
 @ObjectType()
-export class Module extends CMBaseEntity {
-
-  @Field()
-  id: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  icon: string;
-
-  @Field()
-  type: ModuleType;
-
-  @Field(() => Module, { nullable: true })
-  previous?: Module;
-
-  @Field(() => Path)
-  path: Path;
-}
-
 @Entity('module')
 @Unique('module_name', ['name'])
-export class EModule extends CMBaseEntity {
+export class Module extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
+  @Field()
   id: string;
 
   @Column()
+  @Field()
   name: string;
 
   @Column()
+  @Field()
   icon: string;
 
   @Column({ type: 'simple-enum', enum: ModuleType })
+  @Field()
   type: ModuleType;
 
-  @ManyToOne(() => EModule, { nullable: true })
+
+  @ManyToOne(() => Module, { nullable: true })
   @JoinColumn({ name: 'previous' })
-  previous: EModule;
+  @Field(() => Module, { nullable: true })
+  previous?: Module;
 
   @ManyToOne(() => Path, path => path.module, { nullable: false })
+  @Field(() => Path)
   path: Path;
 
 }
