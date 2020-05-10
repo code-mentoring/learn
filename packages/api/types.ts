@@ -16,6 +16,8 @@ export type Module = {
   name: Scalars['String'];
   icon: Scalars['String'];
   type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
   previous?: Maybe<Module>;
   path: Path;
 };
@@ -126,7 +128,7 @@ export type MutationCreateModuleArgs = {
 
 
 export type MutationUpdateModuleArgs = {
-  module: UpdateModuleInput;
+  update: UpdateModuleInput;
 };
 
 
@@ -157,15 +159,20 @@ export type ModuleInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   type: Scalars['String'];
-  previous?: Maybe<Scalars['String']>;
-  path: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
 };
 
 export type UpdateModuleInput = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  previous?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
+  type?: Maybe<ModuleType>;
+  previousId?: Maybe<Scalars['String']>;
+  pathId?: Maybe<Scalars['String']>;
 };
+
+export enum ModuleType {
+  Assignment = 'assignment',
+  Lesson = 'lesson'
+}

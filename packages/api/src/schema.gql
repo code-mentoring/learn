@@ -100,7 +100,12 @@ input UpdateModuleInput {
   id: String!
   name: String
   icon: String
-  type: String
+  type: ModuleType
   previousId: String
   pathId: String
+}
+
+enum ModuleType {
+  assignment
+  lesson
 }

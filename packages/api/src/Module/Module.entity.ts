@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
-import { ObjectType, Field, InputType } from '@nestjs/graphql';
+import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
@@ -8,6 +8,8 @@ export enum ModuleType {
   assignment = 'assignment',
   lesson = 'lesson'
 }
+
+registerEnumType(ModuleType, { name: 'ModuleType' });
 
 @ObjectType()
 @Entity('module')
@@ -78,7 +80,7 @@ export class UpdateModuleInput {
   @Field({ nullable: true })
   icon?: string;
 
-  @Field({ nullable: true })
+  @Field(() => ModuleType, { nullable: true })
   type?: ModuleType;
 
   @Field({ nullable: true })

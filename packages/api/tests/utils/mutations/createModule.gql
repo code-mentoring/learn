@@ -4,13 +4,7 @@ mutation createModule($module: ModuleInput!) {
     name
     icon
     type
-    previous {
-      id
-      name
-    }
-    path {
-      id
-      name
-    }
+    pathId
+    previousId
   }
 }

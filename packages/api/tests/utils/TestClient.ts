@@ -11,6 +11,7 @@ import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { randomUserInput } from '../../src/Database/seeders/random';
 
 /**
  * A helper class to test the API
@@ -62,7 +63,7 @@ export abstract class TestClient {
 
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput = this.seeder.randomUserInput()): Promise<User> {
+  static createUser(user: UserInput = randomUserInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
@@ -109,7 +110,7 @@ export abstract class TestClient {
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = this.seeder.randomUserInput();
+    const userInput = randomUserInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };

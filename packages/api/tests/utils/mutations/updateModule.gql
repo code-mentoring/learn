@@ -4,10 +4,12 @@ mutation updateModule($update: UpdateModuleInput!) {
     name
     icon
     type
+    previousId
     previous {
       id
       name
     }
+    pathId
     path {
       id
       name
