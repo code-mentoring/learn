@@ -1,6 +1,5 @@
 import { TestClient } from '../utils/TestClient';
-import { User, UserInput } from '../../src/User/User.entity';
-import { FriendRequests } from '../../src/FriendRequests/FriendRequests.entity';
+import { FriendRequests, User, UserInput } from '../../types';
 
 describe('FriendRequests entity', () => {
 

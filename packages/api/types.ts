@@ -52,6 +52,12 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
+  friendRequests: Array<FriendRequests>;
+  getFriendRequestsFromMe: Array<FriendRequests>;
+  getFriendRequestsToMe: Array<FriendRequests>;
+  getMyFriends: Array<Friends>;
+  friends: Array<Friends>;
+  getMyFridendsById: Array<Friends>; 
 };
 
 
@@ -64,6 +70,10 @@ export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
 };
 
+export type QueryGetMyFridendsByIdArgs = {
+  userId: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
   createUser: User;
@@ -71,6 +81,9 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  createFriendRequest: FriendRequests;
+  updateFriendRequest: FriendRequests;
+  addFriend: Friends;
 };
 
 
@@ -99,6 +112,18 @@ export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
 };
 
+export type MutationCreateFriendRequestArgs = {
+  createFriendRequest: FriendRequestsInput;
+};
+
+export type MutationUpdateFriendRequestRequestArgs = {
+  updateFriendRequest: FriendRequestsInput;
+};
+
+export type MutationAddFriendRequestArgs = {
+  friend: FriendsInput;
+};
+
 export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -112,8 +137,34 @@ export type UserPreferencesInput = {
   codingAbility: Scalars['Float'];
 };
 
-export type PathInput = {
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  description: Scalars['String'];
+  export type PathInput = {
+    name: Scalars['String'];
+    icon: Scalars['String'];
+    description: Scalars['String'];
+  };
+  
+  export type Friends = {
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  since: Scalars['DateTime'];
+};
+
+export type FriendsInput = {
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+};
+
+export type FriendRequests = {
+  id: Scalars['String'];
+  from: Scalars['String'];
+  to: Scalars['String'];
+  accepted: Scalars['Boolean'];
+  requested: Scalars['DateTime'];
+};
+
+export type FriendRequestsInput = {
+  from: Scalars['String'];
+  to: Scalars['String'];
+  accepted: Scalars['String'];
 };

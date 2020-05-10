@@ -5,13 +5,11 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestsInput, FriendRequests, FriendsInput, Friends } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
-import { FriendRequestsInput, FriendRequests } from '../../src/FriendRequests/FriendRequests.entity';
-import { FriendsInput, Friends } from '../../src/Friends/Friends.entity';
 
 /**
  * A helper class to test the API

@@ -1,6 +1,5 @@
 import { TestClient } from '../utils/TestClient';
-import { User } from '../../src/User/User.entity';
-import { Friends } from '../../src/Friends/Friends.entity';
+import { Friends, User } from '../../types';
 
   let me: User;
   let user2: User;
@@ -23,8 +22,6 @@ import { Friends } from '../../src/Friends/Friends.entity';
   beforeAll(async () => { await TestClient.start(); });
   afterAll(async () => { await TestClient.stop(); });
 
-
-
   describe('Mutation: addFriend', () => {
     beforeEach(setup);
 
@@ -43,18 +40,18 @@ import { Friends } from '../../src/Friends/Friends.entity';
     });
 
     it('should throw error due to duplicate user1&user2', async () => {
-        const input = {
-          user1Id: me.id,
-          user2Id: user2.id,
-        };
+      const input = {
+        user1Id: me.id,
+        user2Id: user2.id,
+      };
   
-        const friend = await TestClient.addFriend(input);
+      const friend = await TestClient.addFriend(input);
 
-        try {
-            await TestClient.addFriend(input);
-          } catch (e) {
-            expect(e.message).toContain('UNIQUE constraint');
-          }
+      try {
+          await TestClient.addFriend(input);
+        } catch (e) {
+          expect(e.message).toContain('UNIQUE constraint');
+        }
       });
 
     it('should throw error if user1Id missing', async () => {

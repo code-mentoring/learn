@@ -21,7 +21,6 @@ export class FriendsResolver {
     return this.friendsService.findbyOneId(user.id);
   }
 
-  // no use case for dumping the friends table
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
   friends() {
@@ -44,26 +43,4 @@ export class FriendsResolver {
   ) {
     return this.friendsService.create(friend);
   }
-
-  // ---------------------------------------------------------------------------
-  // -------------------------------------------------------------------- Fields
-  // ---------------------------------------------------------------------------
-
-  // @ResolveField(() => UserWithPassword)
-  // async user1(
-  //   @Parent() friends: Friends,
-  //   ) {
-  //       const user = await this.userService.findById(friends.user1Id);
-  //       if (!user) throw new NotFoundException('not found');
-  //       return user;
-  //   }
-
-  //   @ResolveField(() => UserWithPassword)
-  //   async user2(
-  //     @Parent() friends: Friends,
-  //     ) {
-  //         const user = await this.userService.findById(friends.user2Id);
-  //         if (!user) throw new NotFoundException('not found');
-  //         return user;
-  //     }
 }

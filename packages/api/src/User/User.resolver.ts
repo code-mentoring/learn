@@ -6,18 +6,12 @@ import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 import { UserPreferences, UserPreferencesInput } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
-// import { FriendRequests } from '../FriendRequests/FriendRequests.entity';
-// import { FriendRequestsService } from '../FriendRequests/FriendRequests.service';
-// import { Friends } from '../Friends/Friends.entity';
-// import { FriendsService } from '../Friends/Friends.service';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
-    private readonly userPreferencesService: UserPreferencesService,
-    // private readonly friendRequestsService: FriendRequestsService,
-    // private readonly friendsService: FriendsService
+    private readonly userPreferencesService: UserPreferencesService
   ) { }
 
   @UseGuards(GQLAuthGuard)
@@ -55,22 +49,4 @@ export class UserResolver {
     const userPreferences = await this.userPreferencesService.findByUser(user.id);
     return userPreferences;
   }
-
-  // @ResolveField(() => [FriendRequests])
-  // async friendRequestFrom(@Parent() @CurrentUser() user: User) {
-  //   const friendRequestFrom = await this.friendRequestsService.findByTo(user.id);
-  //   return friendRequestFrom;
-  // }
-
-  // @ResolveField(() => [FriendRequests])
-  // async friendRequestTo(@Parent() @CurrentUser() user: User) {
-  //   const friendRequestTo = await this.friendRequestsService.findByFrom(user.id);
-  //   return friendRequestTo;
-  // }
-
-  // @ResolveField(() => [Friends])
-  // async friends(@Parent() @CurrentUser() user: User) {
-  //   const friendRequestTo = await this.friendsService.findbyOneId(user.id);
-  //   return friendRequestTo;
-  // }
 }
