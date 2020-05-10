@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, Assignment, AssignmentInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -81,6 +81,10 @@ export abstract class TestClient {
 
   static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
+  }
+
+  static createAssignment(assignment: AssignmentInput): Promise<Assignment> {
+    return this._request('createAssignment', mutations.createAssignment, { assignment });
   }
 
   // ------------------------------------------------------------------- Queries

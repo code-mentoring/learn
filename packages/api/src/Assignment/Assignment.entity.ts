@@ -13,10 +13,6 @@ export class Assignment extends CMBaseEntity {
   @Field()
   id: string;
 
-  // @Column()
-  // @Field()
-  // moduleId: string;
-
   @Column()
   @Field()
   description: string;

@@ -40,6 +40,12 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
+
+export type Assignment = {
+  id: Scalars['String'];
+  description: Scalars['String'];
+};
+
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
@@ -115,5 +121,9 @@ export type UserPreferencesInput = {
 export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
+  description: Scalars['String'];
+};
+
+export type AssignmentInput = {
   description: Scalars['String'];
 };

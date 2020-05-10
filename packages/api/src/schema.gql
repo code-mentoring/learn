@@ -20,6 +20,13 @@ type Assignment {
   description: String!
 }
 
+type AssignmentFile {
+  id: String!
+  name: String!
+  type: String!
+  content: String!
+}
+
 type UserPreferences {
   id: String!
   userId: String!
@@ -49,6 +56,7 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   assignments: [Assignment!]!
+  assignmentFiles: [AssignmentFile!]!
 }
 
 type Mutation {
@@ -58,6 +66,7 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createAssignment(assignment: AssignmentInput!): Assignment!
+  createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
 }
 
 input UserInput {
@@ -81,4 +90,10 @@ input PathInput {
 
 input AssignmentInput {
   description: String!
+}
+
+input AssignmentFileInput {
+  name: String!
+  type: String!
+  content: String!
 }
