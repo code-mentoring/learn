@@ -42,9 +42,6 @@ export class FriendRequestsInput {
 
   @Field()
   toId: string;
-
-  @Field({ nullable: true })
-  accepted?: boolean;
 }
 
 @InputType()

@@ -54,17 +54,6 @@ type LoginOutput {
   accessToken: String!
 }
 
-type Module {
-  id: String!
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
-  previous: Module
-  path: Path!
-}
-
 type Query {
   users: [User!]!
   me: User!
@@ -85,6 +74,7 @@ type Mutation {
   createFriendRequest(createInput: FriendRequestsInput!): FriendRequests!
   confirmRejectRequest(input: ConfirmRejectInput!): Boolean!
   addFriend(friend: FriendsInput!): Friends!
+  deleteFriend(friend: FriendsInput!): Boolean!
 }
 
 input UserInput {
@@ -109,14 +99,13 @@ input PathInput {
 input FriendRequestsInput {
   fromId: String!
   toId: String!
-  accepted: Boolean
 }
 
 input ConfirmRejectInput {
   fromId: String!
   toId: String!
-  accepted: Boolean!
   id: String!
+  accepted: Boolean!
 }
 
 input FriendsInput {

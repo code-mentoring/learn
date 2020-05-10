@@ -1,9 +1,0 @@
-query  {
-  friendRequests {
-    id
-    from
-    to
-    accepted
-    requested
-  }
-}

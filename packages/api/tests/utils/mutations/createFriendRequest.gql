@@ -1,8 +1,8 @@
 mutation ($friendRequest: FriendRequestsInput!) {
   createFriendRequest( createFriendRequest : $friendRequest) {
     id
-    from
-    to
+    fromId
+    toId
     accepted
     requested
   }

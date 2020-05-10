@@ -11,36 +11,6 @@ export class FriendsService {
     @InjectRepository(Friends) private readonly friendsRepository: Repository<Friends>
   ) {}
 
-  // async findByUser1(userId: string): Promise<Friends[]> {
-  //   return this.friendsRepository.find({ where: { user1Id: userId } });
-  // }
-
-  // async findByUser2(userId: string): Promise<Friends[]> {
-  //   return this.friendsRepository.find({ where: { user2Id: userId } });
-  // }
-
-  // async findByTwoId(id1: string, id2: string): Promise<Friends[]> {
-  //   return this.friendsRepository.find({
-  //     where: [
-  //       { user1Id: id1, user2Id: id2 },
-  //       { user2Id: id1, user1Id: id2 }
-  //     ]
-  //   });
-  // }
-
-  // async findbyOneId(id: string): Promise<Friends[]> {
-  //   return this.friendsRepository.find({
-  //     where: [
-  //       { user1Id: id },
-  //       { user2Id: id }
-  //     ]
-  //   });
-  // }
-
-  // async findAll(): Promise<Friends[]> {
-  //   return this.friendsRepository.find();
-  // }
-
   async findUserFriendsById(userId: string): Promise<UserWithPassword[]> {
     const friends = await this.friendsRepository.find({
       where: [{ user1Id: userId }, { user2Id: userId }],
@@ -55,5 +25,13 @@ export class FriendsService {
     return this.friendsRepository.create(friendsInput).save();
   }
 
-  // TODO: delete
+  async delete(friendsInput: FriendsInput): Promise<Boolean> {
+    const a = Boolean(await this.friendsRepository.delete(
+      { user1Id: friendsInput.user1Id, user2Id: friendsInput.user2Id }
+    ));
+    const b = Boolean(await this.friendsRepository.delete(
+      { user1Id: friendsInput.user2Id, user2Id: friendsInput.user1Id }
+    ));
+    return a || b;
+  }
 }

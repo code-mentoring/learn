@@ -55,9 +55,7 @@ export type Query = {
   friendRequests: Array<FriendRequests>;
   getFriendRequestsFromMe: Array<FriendRequests>;
   getFriendRequestsToMe: Array<FriendRequests>;
-  getMyFriends: Array<Friends>;
-  friends: Array<Friends>;
-  getMyFridendsById: Array<Friends>; 
+  getUserFriends: Array<User>; 
 };
 
 
@@ -70,7 +68,7 @@ export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
 };
 
-export type QueryGetMyFridendsByIdArgs = {
+export type QueryGetUserFriends = {
   userId: Scalars['String'];
 };
 

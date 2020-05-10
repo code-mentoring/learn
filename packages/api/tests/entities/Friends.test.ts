@@ -81,10 +81,10 @@ import { Friends, User } from '../../types';
     });
   });
 
-  describe('Query: getMyFriends', () => {
+  describe('Query: getUserFriends', () => {
     beforeEach(setup);
     it('should return null since no friends', async () => {
-      const friends = await TestClient.getMyFriends();
+      const friends = await TestClient.getUserFriends(me.id);
       expect(friends.length).toEqual(0);
     });
 
@@ -94,12 +94,12 @@ import { Friends, User } from '../../types';
         user2Id: user2.id,
       };
       await TestClient.addFriend(input);
-      const friends = await TestClient.getMyFriends();
+      const friends = await TestClient.getUserFriends(me.id);
 
       expect(friends.length).toEqual(1);
-      expect(friends[0].user1Id).toEqual(me.id);
-      expect(friends[0].user2Id).toEqual(user2.id);
-      expect(friends[0].since).toBeDefined();
+      expect(friends[0].id).toEqual(user2.id);
+      expect(friends[0].firstName).toEqual(user2.firstName);
+      expect(friends[0].lastName).toEqual(user2.firstName);
     });
 
     it('should return two friend', async () => {
@@ -115,17 +115,17 @@ import { Friends, User } from '../../types';
 
       await TestClient.addFriend(input1);
       await TestClient.addFriend(input2);
-      const friends : Friends[] = await TestClient.getMyFriends();
+      const friends : User[] = await TestClient.getUserFriends(me.id);
 
       expect(friends.length).toEqual(2);
 
-      expect(friends[0].user1Id).toEqual(me.id);
-      expect(friends[0].user2Id).toEqual(user2.id);
-      expect(friends[0].since).toBeDefined();
+      expect(friends[0].id).toEqual(user2.id);
+      expect(friends[0].firstName).toEqual(user2.firstName);
+      expect(friends[0].lastName).toEqual(user2.firstName);
 
-      expect(friends[1].user1Id).toEqual(user3.id);
-      expect(friends[1].user2Id).toEqual(me.id);
-      expect(friends[1].since).toBeDefined();
+      expect(friends[1].id).toEqual(user3.id);
+      expect(friends[1].firstName).toEqual(user3.firstName);
+      expect(friends[1].lastName).toEqual(user3.firstName);
     });
 
     it('should return two friend', async () => {
@@ -148,30 +148,17 @@ import { Friends, User } from '../../types';
       await TestClient.addFriend(input2);
       await TestClient.addFriend(input3);
 
-      const friends : Friends[] = await TestClient.getMyFriends();
+      const friends : User[] = await TestClient.getMyFriends();
 
       expect(friends.length).toEqual(2);
 
-      expect(friends[0].user1Id).toEqual(me.id);
-      expect(friends[0].user2Id).toEqual(user2.id);
-      expect(friends[0].since).toBeDefined();
+      expect(friends[0].id).toEqual(user2.id);
+      expect(friends[0].firstName).toEqual(user2.firstName);
+      expect(friends[0].lastName).toEqual(user2.firstName);
 
-      expect(friends[1].user1Id).toEqual(user3.id);
-      expect(friends[1].user2Id).toEqual(me.id);
-      expect(friends[1].since).toBeDefined();
-    });
-  });
-
-  describe('Query: getMyFriendsById', () => {
-    beforeEach(setup);
-    it('should return null since no friends match the id', async () => {
-      const input = {
-        user1Id: me.id,
-        user2Id: user2.id,
-      };
-      await TestClient.addFriend(input);
-      const friends = await TestClient.getMyFridendsById(user3.id);
-      expect(friends.length).toEqual(0);
+      expect(friends[1].id).toEqual(user3.id);
+      expect(friends[1].firstName).toEqual(user3.firstName);
+      expect(friends[1].lastName).toEqual(user3.firstName);
     });
   });
 });

@@ -27,12 +27,6 @@ export class FriendRequestsService {
     return friendRequests;
   }
 
-  async findByFromTo(from: string, to: string): Promise<FriendRequests[]> {
-    const friendRequests = await this.friendRequestsRepository.find({ where: { from, to } });
-    if (!friendRequests) throw new NotFoundException('not found');
-    return friendRequests;
-  }
-
   async create(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
     return this.friendRequestsRepository.create(friendRequestsInput).save();
   }

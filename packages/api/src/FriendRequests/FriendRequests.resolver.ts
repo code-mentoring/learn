@@ -11,13 +11,6 @@ import { FriendRequestsService } from './FriendRequests.service';
 export class FriendRequestsResolver {
   constructor(private readonly friendRequestsService: FriendRequestsService) {}
 
-  // no use case to dump all the friend_request table
-  // @UseGuards(GQLAuthGuard)
-  // @Query(() => [FriendRequests])
-  // friendRequests() {
-  //   return this.friendRequestsService.findAll();
-  // }
-
   @UseGuards(GQLAuthGuard)
   @Query(() => [FriendRequests])
   getFriendRequestsFromMe(@CurrentUser() useId: string) {
@@ -35,12 +28,6 @@ export class FriendRequestsResolver {
   createFriendRequest(@Args('createInput') createInput: FriendRequestsInput) {
     return this.friendRequestsService.create(createInput);
   }
-
-  // @UseGuards(GQLAuthGuard)
-  // @Mutation(() => FriendRequests)
-  // updateFriendRequest(@Args('updateInput') updateInput: FriendRequestsInput) {
-  //   return this.friendRequestsService.updateFriendRequest(updateInput);
-  // }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)

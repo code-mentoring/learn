@@ -13,27 +13,6 @@ export class FriendsResolver {
     private readonly friendsService: FriendsService
   ) {}
 
-  // @UseGuards(GQLAuthGuard)
-  // @Query(() => [Friends])
-  // getMyFriends(@CurrentUser() user: User) {
-  //   return this.friendsService.findbyOneId(user.id);
-  // }
-
-  // @UseGuards(GQLAuthGuard)
-  // @Query(() => [Friends])
-  // friends() {
-  //   return this.friendsService.findAll();
-  // }
-
-  // @UseGuards(GQLAuthGuard)
-  // @Query(() => [Friends])
-  // getMyFridendsById(
-  //   @Args('userId') userId: string,
-  //   @CurrentUser() me: User
-  // ) {
-  //   return this.friendsService.findByTwoId(me.id, userId);
-  // }
-
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
   getUserFriends(@Args('userId') userId: string) {
@@ -48,5 +27,11 @@ export class FriendsResolver {
     return this.friendsService.create(friend);
   }
 
-  // TODO: delete friend
+  @UseGuards(GQLAuthGuard)
+  @Mutation(() => Boolean)
+  async deleteFriend(
+    @Args('friend') friend: FriendsInput
+  ) {
+    return this.friendsService.delete(friend);
+  }
 }
