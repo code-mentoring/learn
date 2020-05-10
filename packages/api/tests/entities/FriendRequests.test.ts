@@ -1,5 +1,6 @@
 import { TestClient } from '../utils/TestClient';
-import { User } from '../../src/User/User.entity';
+import { User, UserInput } from '../../src/User/User.entity';
+import { FriendRequests } from '../../src/FriendRequests/FriendRequests.entity';
 
 describe('FriendRequests entity', () => {
 
@@ -13,7 +14,7 @@ describe('FriendRequests entity', () => {
 
   const setup = async () => {
     await TestClient.resetDatabase();
-    const userInput = TestClient.seeder.randomUserInput();
+    const userInput : UserInput = TestClient.seeder.randomUserInput();
     me = await TestClient.createUser(userInput);
     await TestClient.login(me.email, userInput.password);
 
@@ -47,7 +48,7 @@ describe('FriendRequests entity', () => {
         to: user2.id,
       };
   
-      const friendRequest = await TestClient.createFriendRequest(input);
+      await TestClient.createFriendRequest(input);
 
       try {
           const request = await TestClient.createFriendRequest(input);
@@ -165,13 +166,13 @@ describe('FriendRequests entity', () => {
         to: user2.id,
       };
       await TestClient.createFriendRequest(input);
-      const friends = await TestClient.getFriendRequestsFromMe();
+      const friendRequests = await TestClient.getFriendRequestsFromMe();
 
-      expect(friends.length).toEqual(1);
-      expect(friends[0].from).toEqual(me.id);
-      expect(friends[0].to).toEqual(user2.id);
-      expect(friends[0].accepted).toBeNull;
-      expect(friends[0].requested).toBeDefined();
+      expect(friendRequests.length).toEqual(1);
+      expect(friendRequests[0].from).toEqual(me.id);
+      expect(friendRequests[0].to).toEqual(user2.id);
+      expect(friendRequests[0].accepted).toBeNull;
+      expect(friendRequests[0].requested).toBeDefined();
     });
 
     it('should return two friend request', async () => {
@@ -193,7 +194,7 @@ describe('FriendRequests entity', () => {
       await TestClient.createFriendRequest(input1);
       await TestClient.createFriendRequest(input2);
       await TestClient.createFriendRequest(input3);
-      const friendRequests = await TestClient.getFriendRequestsFromMe();
+      const friendRequests : FriendRequests[] = await TestClient.getFriendRequestsFromMe();
 
       expect(friendRequests.length).toEqual(2);
 
@@ -257,7 +258,7 @@ describe('FriendRequests entity', () => {
       await TestClient.createFriendRequest(input1);
       await TestClient.createFriendRequest(input2);
       await TestClient.createFriendRequest(input3);
-      const friendRequests = await TestClient.getFriendRequestsToMe();
+      const friendRequests : FriendRequests[] = await TestClient.getFriendRequestsToMe();
 
       expect(friendRequests.length).toEqual(2);
 
@@ -314,10 +315,11 @@ describe('FriendRequests entity', () => {
       await TestClient.createFriendRequest(input1);
       await TestClient.createFriendRequest(input2);
       await TestClient.createFriendRequest(input3);
-      const friendRequests = await TestClient.friendRequests();
+
+      const friendRequests : FriendRequests[] = await TestClient.friendRequests();
 
       expect(friendRequests.length).toEqual(3);
-
+      
       expect(friendRequests[0].from).toEqual(me.id);
       expect(friendRequests[0].to).toEqual(user2.id);
       expect(friendRequests[0].accepted).toBeNull;

@@ -1,10 +1,6 @@
 import { TestClient } from '../utils/TestClient';
-import {User} from '../../src/User/User.entity';
-
-describe('Friends entity', () => {
-
-  beforeAll(async () => { await TestClient.start(); });
-  afterAll(async () => { await TestClient.stop(); });
+import { User } from '../../src/User/User.entity';
+import { Friends } from '../../src/Friends/Friends.entity';
 
   let me: User;
   let user2: User;
@@ -21,6 +17,13 @@ describe('Friends entity', () => {
     user3 = await TestClient.createUser(TestClient.seeder.randomUserInput());
     user4 = await TestClient.createUser(TestClient.seeder.randomUserInput());  
   };
+
+  describe('Friends entity', () => {
+
+  beforeAll(async () => { await TestClient.start(); });
+  afterAll(async () => { await TestClient.stop(); });
+
+
 
   describe('Mutation: addFriend', () => {
     beforeEach(setup);
@@ -115,7 +118,7 @@ describe('Friends entity', () => {
 
       await TestClient.addFriend(input1);
       await TestClient.addFriend(input2);
-      const friends = await TestClient.getMyFriends();
+      const friends : Friends[] = await TestClient.getMyFriends();
 
       expect(friends.length).toEqual(2);
 
@@ -148,7 +151,7 @@ describe('Friends entity', () => {
       await TestClient.addFriend(input2);
       await TestClient.addFriend(input3);
 
-      const friends = await TestClient.getMyFriends();
+      const friends : Friends[] = await TestClient.getMyFriends();
 
       expect(friends.length).toEqual(2);
 

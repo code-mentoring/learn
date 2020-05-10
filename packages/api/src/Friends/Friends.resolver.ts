@@ -5,22 +5,22 @@ import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { FriendsService } from './Friends.service';
-import { Friends, FriendsInput} from './Friends.entity';
+import { Friends, FriendsInput } from './Friends.entity';
 
 @Resolver('Friends')
 export class FriendsResolver {
   userService: any;
+
   constructor(
     private readonly friendsService: FriendsService
-    ) {}
+  ) {}
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
   getMyFriends(@CurrentUser() user: User) {
-    
     return this.friendsService.findbyOneId(user.id);
   }
-  
+
   // no use case for dumping the friends table
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friends])
@@ -32,16 +32,17 @@ export class FriendsResolver {
   @Query(() => [Friends])
   getMyFridendsById(
     @Args('userId') userId: string,
-    @CurrentUser() me: User) {
-      return this.friendsService.findByTwoId(me.id, userId);
+    @CurrentUser() me: User
+  ) {
+    return this.friendsService.findByTwoId(me.id, userId);
   }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Friends)
   async addFriend(
-    @Args('friend') friend: FriendsInput,
+    @Args('friend') friend: FriendsInput
   ) {
-        return this.friendsService.create(friend);
+    return this.friendsService.create(friend);
   }
 
   // ---------------------------------------------------------------------------
@@ -63,7 +64,6 @@ export class FriendsResolver {
   //     ) {
   //         const user = await this.userService.findById(friends.user2Id);
   //         if (!user) throw new NotFoundException('not found');
-  //         return user; 
-  //     }  
-
-  }
+  //         return user;
+  //     }
+}

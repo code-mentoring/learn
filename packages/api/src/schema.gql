@@ -46,9 +46,6 @@ type User {
   profileImage: String!
   userPreferences: UserPreferences
   createdAt: DateTime!
-  friendRequestFrom: [FriendRequests!]!
-  friendRequestTo: [FriendRequests!]!
-  friends: [Friends!]!
 }
 
 type LoginOutput {

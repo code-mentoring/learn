@@ -6,7 +6,7 @@ import { UserWithPassword } from '../User/User.entity';
 
 @ObjectType()
 @Entity()
-@Unique('friendship', ['user1Id', 'user2Id'] )
+@Unique('friendship', ['user1Id', 'user2Id'])
 export class Friends extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')
     @Field()
@@ -19,16 +19,16 @@ export class Friends extends CMBaseEntity {
     @Column()
     @Field()
     user2Id: string;
- 
+
     @CreateDateColumn()
     @Field()
-    since: Date;    
-    
-    @ManyToOne(() => UserWithPassword, user1 => user1.friends)
-    user1: UserWithPassword; 
+    since: Date;
 
-    @ManyToOne(() => UserWithPassword, user2 => user2.friends)
-    user2: UserWithPassword; 
+    @ManyToOne(() => UserWithPassword, user1 => user1.user1)
+    user1: UserWithPassword;
+
+    @ManyToOne(() => UserWithPassword, user2 => user2.user2)
+    user2: UserWithPassword;
 }
 
 @InputType()

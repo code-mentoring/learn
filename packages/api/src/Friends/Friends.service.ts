@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -11,29 +11,29 @@ export class FriendsService {
   ) {}
 
   async findByUser1(userId: string): Promise<Friends[]> {
-    return this.friendsRepository.find({ where: { user1Id: userId }});
+    return this.friendsRepository.find({ where: { user1Id: userId } });
   }
 
   async findByUser2(userId: string): Promise<Friends[]> {
-    return this.friendsRepository.find({ where: { user2Id: userId }});
+    return this.friendsRepository.find({ where: { user2Id: userId } });
   }
 
   async findByTwoId(id1: string, id2: string): Promise<Friends[]> {
-    return this.friendsRepository.find({ 
-        where: [
-          { user1Id: id1, user2Id: id2 },
-          { user2Id: id1, user1Id: id2 }
-        ] 
-      });
+    return this.friendsRepository.find({
+      where: [
+        { user1Id: id1, user2Id: id2 },
+        { user2Id: id1, user1Id: id2 }
+      ]
+    });
   }
 
   async findbyOneId(id: string): Promise<Friends[]> {
-    return (await this.friendsRepository.find({
-        where: [
-          { user1Id: id }, 
-          { user2Id: id }
-        ]
-      }));
+    return this.friendsRepository.find({
+      where: [
+        { user1Id: id },
+        { user2Id: id }
+      ]
+    });
   }
 
   async findAll(): Promise<Friends[]> {
@@ -41,11 +41,6 @@ export class FriendsService {
   }
 
   async create(friendsInput: FriendsInput): Promise<Friends> {
-    if (friendsInput.user1Id === friendsInput.user2Id)
-      throw new NotFoundException('You can\'t add yourself as friend');
-    
-    //  if ((await this.findByTwoId(friendsInput.user1Id, friendsInput.user2Id)).length != 0)
-    //   throw new NotFoundException('The friendship exist already');  
     return this.friendsRepository.create(friendsInput).save();
   }
 }

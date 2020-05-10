@@ -14,17 +14,17 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<UserWithPassword[]> {
-    return this.userRepository.find({ relations: ['friendRequestsTo'] });
+    return this.userRepository.find({ relations: ['user1', 'user2', 'friendRequestsFrom', 'friendRequestsTo'] });
   }
 
   async findByEmail(email: string) {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  async findById(id: string): Promise<UserWithPassword>  {
-     const user = await this.userRepository.findOne({ where: { id } });
-     if (!user) throw new NotFoundException('not found');
-     return user;
+  async findById(id: string): Promise<UserWithPassword> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) throw new NotFoundException('not found');
+    return user;
   }
 
   async create(input: UserInput): Promise<UserWithPassword> {
