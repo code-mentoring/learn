@@ -3,7 +3,6 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { CurrentUser } from '../User/CurrentUser.decorator';
-// import { User } from '../User/User.entity';
 import { FriendRequestsInput, FriendRequests, ConfirmRejectInput } from './FriendRequests.entity';
 import { FriendRequestsService } from './FriendRequests.service';
 

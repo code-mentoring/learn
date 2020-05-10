@@ -2,7 +2,6 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-// import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { FriendsService } from './Friends.service';
 import { Friends, FriendsInput } from './Friends.entity';

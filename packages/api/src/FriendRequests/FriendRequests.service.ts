@@ -51,15 +51,4 @@ export class FriendRequestsService {
       return false;
     }
   }
-
-  // async updateFriendRequest(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
-  //   const existing = await this.friendRequestsRepository.findOne(
-  //     { where: { from: friendRequestsInput.from, to: friendRequestsInput.to } }
-  //   );
-  //   if (existing) {
-  //     Object.assign(existing, friendRequestsInput);
-  //     return this.friendRequestsRepository.save(existing);
-  //   }
-  //   throw new NotFoundException('not found');
-  // }
 }
