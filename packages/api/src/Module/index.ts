@@ -4,11 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module as EModule } from './Module.entity';
 import { ModuleResolver } from './Module.resolver';
 import { ModuleService } from './Module.service';
-import { Path } from '../Path/Path.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([EModule, Path])
+    TypeOrmModule.forFeature([EModule])
   ],
   providers: [ModuleResolver, ModuleService]
 })

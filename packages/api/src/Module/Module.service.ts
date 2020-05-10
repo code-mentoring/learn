@@ -1,15 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Module, ModuleInput, UpdateModuleInput } from './Module.entity';
-import { Path } from '../Path/Path.entity';
 
 @Injectable()
 export class ModuleService {
   constructor(
-    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>,
-    @InjectRepository(Path) private readonly pathRepository: Repository<Path>
+    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>
   ) {}
 
   async findAll(): Promise<Module[]> {
@@ -17,9 +15,7 @@ export class ModuleService {
   }
 
   async findByPath(pathId: string): Promise<Module[]> {
-    const path = await this.pathRepository.findOne({ where: { id: pathId } });
-    if (!path) throw new NotFoundException();
-    return this.moduleRepository.find({ where: { path }, relations: ['previous', 'path'] });
+    return this.moduleRepository.find({ where: { pathId }, relations: ['previous', 'path'] });
   }
 
   async create(
