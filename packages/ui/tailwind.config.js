@@ -45,7 +45,6 @@ module.exports = {
       '3/4': '75%',
       'full': '100%',
     },
-
     colors: {
       primary,
       blue: primary,
@@ -82,6 +81,12 @@ module.exports = {
     borderRadius: {
       default: '8px',
       circle: '50%'
+    },
+    extend: {
+      inset: {
+        '6': '1.5rem',
+        '12': '3rem'
+      }
     }
   },
   corePlugins: {},

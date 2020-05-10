@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Path } from '@code-mentoring/api';
-import { Card, CardProps, Icon } from '@code-mentoring/ui';
+import { Path } from '@codement/api';
+import { Card, CardProps, Icon } from '@codement/ui';
 import gql from 'graphql-tag';
 import React from 'react';
 
@@ -11,14 +11,19 @@ const myPathsQuery = gql`query {
   myPaths { id name icon }
 }`;
 
-export interface ProgressWidgetProps extends CardProps { }
+export interface ProgressWidgetProps extends CardProps {
+  setShow: any;
+}
 
-export const ProgressWidget: React.FC<ProgressWidgetProps> = props => {
+export const ProgressWidget: React.FC<ProgressWidgetProps> = ({
+  setShow,
+  ...otherProps
+}) => {
 
   const { data } = useQuery<{myPaths: Path[]}>(myPathsQuery);
 
   return (
-    <Card {...props}>
+    <Card {...otherProps}>
       <h4 className="text-center mb-4">Progress</h4>
       <div className="grid grid-cols-3">
         {data?.myPaths.map(path => (
@@ -29,7 +34,13 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = props => {
             progress={50}
           />
         ))}
-        <div className="text-center">
+        <div
+          className="text-center"
+          onClick={() => setShow(true)}
+          onKeyDown={() => setShow(true)}
+          role="button"
+          tabIndex={0}
+        >
           <div className="graphic cursor-pointer relative h-12 inline-block">
             <svg className="text-grey-300 w-12 h-12">
               <circle

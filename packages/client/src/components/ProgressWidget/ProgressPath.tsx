@@ -1,4 +1,4 @@
-import { PathIcon } from '@code-mentoring/ui';
+import { PathIcon } from '@codement/ui';
 import React from 'react';
 
 import styles from './ProgressPath.module.css';
