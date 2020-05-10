@@ -8,6 +8,8 @@ import { UserModule } from './User';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { ModuleModule } from './Module';
+import { ConceptModule } from './Concepts/Concept.index';
+import { UserConceptModule } from './UserConcepts/UserConcept.index';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -18,6 +20,8 @@ export const appImports = [
   PathModule,
   PathUserModule,
   ModuleModule,
+  ConceptModule,
+  UserConceptModule,
 
   DatabaseModule,
 

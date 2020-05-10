@@ -48,6 +48,13 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+}
+
 type Query {
   users: [User!]!
   me: User!
@@ -56,6 +63,8 @@ type Query {
   getPathByName(name: String!): Path!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
+  getConcepts: [Concept!]!
+  getConceptByName(name: String!): Concept!
 }
 
 type Mutation {
@@ -67,6 +76,7 @@ type Mutation {
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
+  createConcept(concept: ConceptInput!): Concept!
 }
 
 input UserInput {
@@ -108,4 +118,8 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
+input ConceptInput {
+  name: String!
+  icon: String!
+  description: String!
 }
