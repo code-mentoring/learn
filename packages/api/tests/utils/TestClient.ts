@@ -5,11 +5,13 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, ModuleInput, Module } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
+import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { randomUserInput } from '../../src/Database/seeders/random';
 
 /**
  * A helper class to test the API
@@ -61,7 +63,7 @@ export abstract class TestClient {
 
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput = this.seeder.randomUserInput()): Promise<User> {
+  static createUser(user: UserInput = randomUserInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
@@ -83,6 +85,18 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
+  static createModule(module: ModuleInput): Promise<Module> {
+    return this._request('createModule', mutations.createModule, { module });
+  }
+
+  static updateModule(update: UpdateModuleInput): Promise<Module> {
+    return this._request('updateModule', mutations.updateModule, { update });
+  }
+
+  static deleteModule(moduleId: string): Promise<Module> {
+    return this._request('deleteModule', mutations.deleteModule, { moduleId });
+  }
+
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -96,7 +110,7 @@ export abstract class TestClient {
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = this.seeder.randomUserInput();
+    const userInput = randomUserInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };
