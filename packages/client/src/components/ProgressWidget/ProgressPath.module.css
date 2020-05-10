@@ -1,0 +1,5 @@
+/* allows svg element to rotate around its own center */
+.svgRotate {
+  transform-box: fill-box;
+  transform-origin: center;
+}
