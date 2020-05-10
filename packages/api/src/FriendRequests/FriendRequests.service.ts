@@ -32,10 +32,6 @@ export class FriendRequestsService {
   }
 
   async create(friendRequestsInput: FriendRequestsInput): Promise<FriendRequests> {
-    const existing = await this.friendRequestsRepository.findOne(
-      { where: { from: friendRequestsInput.from, to: friendRequestsInput.to } }
-    );
-    if (existing) throw new NotFoundException('request already exist');
     return this.friendRequestsRepository.create(friendRequestsInput).save();
   }
 

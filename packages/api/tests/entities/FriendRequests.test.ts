@@ -54,7 +54,7 @@ describe('FriendRequests entity', () => {
           const request = await TestClient.createFriendRequest(input);
           console.log(request);
         } catch (e) {
-          expect(e.message).toContain('request already exist');
+          expect(e.message).toContain('SQLITE_CONSTRAINT: UNIQUE constraint failed: friend_requests.from, friend_requests.to');
         }
     });
 
