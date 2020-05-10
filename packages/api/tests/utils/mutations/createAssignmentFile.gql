@@ -1,0 +1,8 @@
+mutation ($assignmentFile:AssignmentFileInput!) {
+  createAssignmentFile(assignmentFile:$assignmentFile) {
+    id
+    name
+    type
+    content
+  }
+}

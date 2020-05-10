@@ -46,6 +46,13 @@ export type Assignment = {
   description: Scalars['String'];
 };
 
+export type AssignmentFile = {
+  id: Scalars['String'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  content: Scalars['String'];
+};
+
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
@@ -126,4 +133,10 @@ export type PathInput = {
 
 export type AssignmentInput = {
   description: Scalars['String'];
+};
+
+export type AssignmentFileInput = {
+  name: Scalars['String'];
+  type: Scalars['String'];
+  content: Scalars['String'];
 };
