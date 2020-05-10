@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Path } from '@code-mentoring/api';
-import { Card, CardProps, Icon } from '@code-mentoring/ui';
+import { Path } from '@codement/api';
+import { Card, CardProps, Icon } from '@codement/ui';
 import gql from 'graphql-tag';
 import React from 'react';
 
