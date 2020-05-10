@@ -12,4 +12,4 @@ import { AssignmentFileService } from './AssignmentFile.service';
   providers: [AssignmentFileResolver, AssignmentFileService],
   exports: [AssignmentFileService]
 })
-export class AsignmentFileModule {}
+export class AssignmentFileModule {}
