@@ -61,6 +61,8 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createConcept(concept: ConceptInput!): Concept!
+  updateConcept(update: ConceptInput!): Concept!
+  deleteConcept(delete: ConceptInput!): Concept!
 }
 
 input UserInput {

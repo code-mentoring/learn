@@ -22,4 +22,14 @@ export class ConceptResolver {
         return this.conceptService.createConcept(concept)
     }
 
+    @Mutation(_type => Concept)
+    updateConcept(@Args('update') concept: ConceptInput) {
+        return this.conceptService.updateConcept(concept)
+    }
+
+    @Mutation(_type => Concept)
+    deleteConcept(@Args('delete') concept: ConceptInput) {
+        return this.conceptService.deleteConcept(concept)
+    }
+
 }
