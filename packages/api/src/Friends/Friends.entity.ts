@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn, Unique, CreateDateColumn, ManyToOne } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
-import { UserWithPassword } from '../User/User.entity';
+import { UserWithPassword, User } from '../User/User.entity';
 
 @ObjectType()
 @Entity()
@@ -24,10 +24,12 @@ export class Friends extends CMBaseEntity {
     @Field()
     since: Date;
 
-    @ManyToOne(() => UserWithPassword, user1 => user1.user1)
+    @ManyToOne(() => UserWithPassword)
+    @Field(() => User)
     user1: UserWithPassword;
 
-    @ManyToOne(() => UserWithPassword, user2 => user2.user2)
+    @ManyToOne(() => UserWithPassword)
+    @Field(() => User)
     user2: UserWithPassword;
 }
 

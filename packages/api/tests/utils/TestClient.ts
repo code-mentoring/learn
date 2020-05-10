@@ -117,8 +117,8 @@ export abstract class TestClient {
     return this._request('getFriendRequestsToMe', queries.getFriendRequestsToMe);
   }
 
-  static getMyFriends(): Promise< [Friends] > {
-    return this._request('getMyFriends', queries.getMyFriends);
+  static getUserFriends(userId: String): Promise< [User] > {
+    return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 
   static friends(): Promise< [Friends] > {

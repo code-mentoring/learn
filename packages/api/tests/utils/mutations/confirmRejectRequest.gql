@@ -1,0 +1,4 @@
+mutation ($input: ConfirmRejectInput!) {
+  confirmRejectRequest( confirmRejectRequest : $input) {
+  }
+}

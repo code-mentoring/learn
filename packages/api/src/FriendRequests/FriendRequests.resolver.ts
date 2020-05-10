@@ -3,42 +3,34 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { CurrentUser } from '../User/CurrentUser.decorator';
-import { User } from '../User/User.entity';
-import { FriendRequestsInput, FriendRequests } from './FriendRequests.entity';
+import { FriendRequestsInput, FriendRequests, ConfirmRejectInput } from './FriendRequests.entity';
 import { FriendRequestsService } from './FriendRequests.service';
 
 @Resolver('FriendRequests')
 export class FriendRequestsResolver {
   constructor(private readonly friendRequestsService: FriendRequestsService) {}
 
-  // no use case to dump all the friend_request table
   @UseGuards(GQLAuthGuard)
   @Query(() => [FriendRequests])
-  friendRequests() {
-    return this.friendRequestsService.findAll();
+  getFriendRequestsFromMe(@CurrentUser() useId: string) {
+    return this.friendRequestsService.findByFrom(useId);
   }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [FriendRequests])
-  getFriendRequestsFromMe(@CurrentUser() user: User) {
-    return this.friendRequestsService.findByFrom(user.id);
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Query(() => [FriendRequests])
-  getFriendRequestsToMe(@CurrentUser() user: User) {
-    return this.friendRequestsService.findByTo(user.id);
+  getFriendRequestsToMe(@CurrentUser() useId: string) {
+    return this.friendRequestsService.findByTo(useId);
   }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => FriendRequests)
-  createFriendRequest(@Args('createFriendRequest') friendRequestsInput: FriendRequestsInput) {
-    return this.friendRequestsService.create(friendRequestsInput);
+  createFriendRequest(@Args('createInput') createInput: FriendRequestsInput) {
+    return this.friendRequestsService.create(createInput);
   }
 
   @UseGuards(GQLAuthGuard)
-  @Mutation(() => FriendRequests)
-  updateFriendRequest(@Args('updateFriendRequest') friendRequestsInput: FriendRequestsInput) {
-    return this.friendRequestsService.updateFriendRequest(friendRequestsInput);
+  @Mutation(() => Boolean)
+  confirmRejectRequest(@Args('input') input: ConfirmRejectInput) {
+    return this.friendRequestsService.confirmRejectRequest(input);
   }
 }

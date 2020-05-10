@@ -4,8 +4,8 @@ import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGenerated
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
-import { Friends } from '../Friends/Friends.entity';
-import { FriendRequests } from '../FriendRequests/FriendRequests.entity';
+// import { Friends } from '../Friends/Friends.entity';
+// import { FriendRequests } from '../FriendRequests/FriendRequests.entity';
 
 @ObjectType()
 export class User {
@@ -60,19 +60,6 @@ export class UserWithPassword extends CMBaseEntity {
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
-
-  @OneToMany(() => Friends, user1 => user1.user1, { nullable: true })
-  user1: Friends[];
-
-  @OneToMany(() => Friends, user2 => user2.user2, { nullable: true })
-  user2: Friends[];
-
-  @OneToMany(() => FriendRequests, friendRequestsTo => friendRequestsTo.toUser, { nullable: true })
-  friendRequestsTo: FriendRequests[];
-
-  @OneToMany(() => FriendRequests,
-    friendRequestsFrom => friendRequestsFrom.fromUser, { nullable: true })
-  friendRequestsFrom: FriendRequests[];
 }
 
 @InputType()
