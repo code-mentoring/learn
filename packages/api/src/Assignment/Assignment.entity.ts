@@ -20,7 +20,7 @@ export class Assignment extends CMBaseEntity {
   @OneToMany(() => AssignmentFile, assignmentFile => assignmentFile.assignment)
   assignmentFile: AssignmentFile[];
 
-
+  // TODO: Uncomment once Module module is available.
   // @ManyToOne(() => Module, module =>  module.assignment)
   // module: Module;
 }

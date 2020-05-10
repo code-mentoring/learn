@@ -26,6 +26,8 @@ describe('Assignment entity', () => {
       expect(assignment.id).toBeDefined();
       expect(assignment.description).toEqual(assignmentInput.description);
       // Not sure if I somehow need to test reference to assignmentFile?
+
+      // TODO: Add test here for module?
     });
   });
 });
