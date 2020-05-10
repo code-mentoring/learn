@@ -68,6 +68,155 @@ describe('User entity', () => {
     });
   });
 
+  describe('Query: search', () => {
+    beforeEach(setup);
+    it('should return user by firstname', async () => {
+      expect.assertions(4);
+
+      const newUser = {
+        firstName: 'Sam',
+        lastName: 'Johnson',
+        email: 'samjohnson@gmail.com',
+        password: 'secret1',
+      };
+
+      //insert newUser
+      await TestClient.createUser(newUser);
+
+      //query newUser
+      const users = await TestClient.search(newUser.firstName);
+
+      //assertions
+      expect(users).toBeArrayOfSize(1);
+      expect(users[0].firstName).toEqual(newUser.firstName);
+      expect(users[0].lastName).toEqual(newUser.lastName);
+      expect(users[0].email).toEqual(newUser.email);
+    });
+
+    it('should return user by lastname', async () => {
+      expect.assertions(4);
+
+      const newUser = {
+        firstName: 'Rick',
+        lastName: 'Sanchez',
+        email: 'RickSanchez@gmail.com',
+        password: 'secret2',
+      };
+
+      //insert newUser
+      await TestClient.createUser(newUser);
+
+      //query newUser
+      const users = await TestClient.search(newUser.lastName);
+
+      //assertions
+      expect(users).toBeArrayOfSize(1);
+      expect(users[0].firstName).toEqual(newUser.firstName);
+      expect(users[0].lastName).toEqual(newUser.lastName);
+      expect(users[0].email).toEqual(newUser.email);
+    });
+
+    it('should return user by email', async () => {
+      expect.assertions(4);
+
+      const newUser = {
+        firstName: 'Morty',
+        lastName: 'Smith',
+        email: 'MortySmith@gmail.com',
+        password: 'secret3',
+      };
+
+      //insert newUser
+      await TestClient.createUser(newUser);
+
+      //query newUser
+      const users = await TestClient.search(newUser.email);
+
+      //assertions
+      expect(users).toBeArrayOfSize(1);
+      expect(users[0].firstName).toEqual(newUser.firstName);
+      expect(users[0].lastName).toEqual(newUser.lastName);
+      expect(users[0].email).toEqual(newUser.email);
+    });
+
+    it('should return an array of users with matching firstnames', async () => {
+      expect.assertions(3);
+
+      const newUser1 = {
+        firstName: 'Rick',
+        lastName: 'Sanchez',
+        email: 'rickSanchez@gmail.com',
+        password: 'secret1',
+      };
+
+      const newUser2 = {
+        firstName: 'Morty',
+        lastName: 'Smith',
+        email: 'mortySmith@gmail.com',
+        password: 'secret2',
+      };
+
+      const newUser3 = {
+        firstName: 'Rick',
+        lastName: 'Summerset',
+        email: 'rickSummerset@gmail.com',
+        password: 'secret3',
+      };
+
+      //insert newUsers
+      await TestClient.createUser(newUser1);
+      await TestClient.createUser(newUser2);
+      await TestClient.createUser(newUser3);
+
+      //query newUser
+      const users = await TestClient.search('Rick');
+
+      //assertions
+      expect(users).toBeArrayOfSize(2);
+      expect(users[0].firstName).toEqual(newUser1.firstName);
+      expect(users[1].firstName).toEqual(newUser3.firstName);
+    });
+
+    it('should return an array of users with matching lastnames', async () => {
+      expect.assertions(4);
+
+      const newUser1 = {
+        firstName: 'Kyle',
+        lastName: 'Sanchez',
+        email: 'rickSanchez@gmail.com',
+        password: 'secret1',
+      };
+
+      const newUser2 = {
+        firstName: 'Morty',
+        lastName: 'Sanchez',
+        email: 'mortySmith@gmail.com',
+        password: 'secret2',
+      };
+
+      const newUser3 = {
+        firstName: 'Rick',
+        lastName: 'Sanchez',
+        email: 'rickSummerset@gmail.com',
+        password: 'secret3',
+      };
+
+      //insert newUsers
+      await TestClient.createUser(newUser1);
+      await TestClient.createUser(newUser2);
+      await TestClient.createUser(newUser3);
+
+      //query newUser
+      const users = await TestClient.search('Sanchez');
+
+      //assertions
+      expect(users).toBeArrayOfSize(3);
+      expect(users[0].lastName).toEqual(newUser1.lastName);
+      expect(users[1].lastName).toEqual(newUser2.lastName);
+      expect(users[2].lastName).toEqual(newUser3.lastName);
+    });
+  });
+
   describe('Mutation: updatePreferences', () => {
     const preferences: UserPreferencesInput = {
       why: 'why',
@@ -89,7 +238,7 @@ describe('User entity', () => {
       expect(mePost.userPreferences).not.toBeNull();
     });
 
-    it.only('should validate before create/update preferences', async () => {
+    it('should validate before create/update preferences', async () => {
       expect.assertions(3);
 
       preferences.codingAbility = 11;
@@ -101,20 +250,6 @@ describe('User entity', () => {
         expect(e.message).toContain(`, value: ${preferences.codingAbility}`);
         expect(e.message).toContain(`, value: ${preferences.practiceGoal}`);
       }
-    });
-  });
-
-  describe('Query: searchUsers', () => {
-    beforeEach(setup);
-    it('should return a list of users matching the specified parameters', async () => {
-      expect.assertions(6);
-      //const users = await TestClient;
-      // expect(user.id).toBeDefined();
-      // expect(user.email).toBeDefined();
-      // expect(user.firstName).toBeDefined();
-      // expect(user.lastName).toBeDefined();
-      // expect(user.userPreferences).toBeNull();
-      // expect(user.createdAt).toBeDefined();
     });
   });
 });

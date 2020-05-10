@@ -1,0 +1,17 @@
+query search($param: String!) {
+  search(param: $param) {
+    id
+    firstName
+    lastName
+    email
+    profileImage
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
+    createdAt
+  }
+}

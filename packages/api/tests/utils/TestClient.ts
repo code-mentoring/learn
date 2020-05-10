@@ -107,9 +107,9 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
-  // static searchUsers(param: string): Promise<UserWithPassword[]> {
-  //   return this._request('searchUsers', queries.searchUsers, {param})
-  // }
+  static search(param: string): Promise<UserWithPassword[]> {
+    return this._request('search', queries.search, { param });
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
