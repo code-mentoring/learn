@@ -1,10 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, Unique} from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Concept } from '../Concepts/Concept.entity';
+import { CMBaseEntity } from '../lib/Base.entity';
 
 @ObjectType()
 @Entity()
-export class UserConcept {
+@Unique(['userId', 'conceptId'])
+export class UserConcept extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')
     @Field()
     id: string;
@@ -23,6 +25,5 @@ export class UserConcept {
 
     @ManyToOne(() => Concept, concept => concept.userConcept)
     concept: Concept;
-
 
 }

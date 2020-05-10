@@ -37,12 +37,21 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+}
+
 type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  getConcepts: [Concept!]!
+  getConceptByName(name: String!): Concept!
 }
 
 type Mutation {
@@ -51,6 +60,7 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  createConcept(concept: ConceptInput!): Concept!
 }
 
 input UserInput {
@@ -67,6 +77,12 @@ input UserPreferencesInput {
 }
 
 input PathInput {
+  name: String!
+  icon: String!
+  description: String!
+}
+
+input ConceptInput {
   name: String!
   icon: String!
   description: String!
