@@ -1,9 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
-
 
 export enum ModuleType {
   assignment = 'assignment',
@@ -30,9 +29,15 @@ export class Module extends CMBaseEntity {
   @Field()
   type: ModuleType;
 
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  previousId?: string;
+
+  @Column()
+  @Field()
+  pathId: string;
 
   @ManyToOne(() => Module, { nullable: true })
-  @JoinColumn({ name: 'previous' })
   @Field(() => Module, { nullable: true })
   previous?: Module;
 
@@ -55,10 +60,10 @@ export class ModuleInput {
   type: ModuleType;
 
   @Field({ nullable: true })
-  previous?: string;
+  previousId?: string;
 
   @Field()
-  path: string;
+  pathId: string;
 }
 
 @InputType()
@@ -77,8 +82,8 @@ export class UpdateModuleInput {
   type?: ModuleType;
 
   @Field({ nullable: true })
-  previous?: string;
+  previousId?: string;
 
   @Field({ nullable: true })
-  path?: string;
+  pathId?: string;
 }

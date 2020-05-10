@@ -25,60 +25,19 @@ export class ModuleService {
   async create(
     moduleInput: ModuleInput
   ): Promise<Module> {
-
-    const newModule = new Module();
-    newModule.name = moduleInput.name;
-    newModule.icon = moduleInput.icon;
-    newModule.type = moduleInput.type;
-
-    const path = await Path.findOne({ id: moduleInput.path });
-    if (!path) throw new NotFoundException();
-    newModule.path = path;
-
-    let previous: Module | undefined;
-    if (moduleInput.previous) {
-      previous = await Module.findOne({ id: moduleInput.previous });
-      if (!previous) throw new NotFoundException();
-      newModule.previous = previous;
-    }
-
-    return newModule.save();
+    return this.moduleRepository.create(moduleInput).save();
   }
 
   async update(
     updateInput: UpdateModuleInput
-  ): Promise<Module> {
-
-    const { path, previous } = updateInput;
-    const module = await this.moduleRepository.findOne(updateInput.id, { relations: ['path', 'previous'] });
-    if (!module) throw new NotFoundException('Module not found');
-    Object.assign(module, updateInput);
-
-    if (path) {
-      const newPath = await this.pathRepository.findOne(path);
-      if (!newPath) throw new NotFoundException('Path not found');
-      module.path = newPath;
-    }
-    if (previous) {
-      const newPrevious = await this.moduleRepository.findOne(previous);
-      if (!newPrevious) throw new NotFoundException('Previous module not found');
-      module.previous = newPrevious;
-    }
-    return this.moduleRepository.save(module);
-
+  ): Promise<Module | undefined> {
+    await this.moduleRepository.update({ id: updateInput.id }, updateInput);
+    return this.moduleRepository.findOne({ id: updateInput.id }, { relations: ['previous', 'path'] });
   }
 
   async delete(
     moduleId: string
   ): Promise<Boolean> {
-    const module = await this.moduleRepository.findOne(moduleId);
-    if (!module) throw new NotFoundException('Module not found');
-    try {
-      await this.moduleRepository.delete(module);
-      return true;
-    } catch (e) {
-      return false;
-    }
+    return Boolean(await this.moduleRepository.delete({ id: moduleId }));
   }
-
 }

@@ -7,6 +7,8 @@ type Module {
   name: String!
   icon: String!
   type: String!
+  previousId: String
+  pathId: String!
   previous: Module
   path: Path!
 }
@@ -90,8 +92,8 @@ input ModuleInput {
   name: String!
   icon: String!
   type: String!
-  previous: String
-  path: String!
+  previousId: String
+  pathId: String!
 }
 
 input UpdateModuleInput {
@@ -99,6 +101,6 @@ input UpdateModuleInput {
   name: String
   icon: String
   type: String
-  previous: String
-  path: String
+  previousId: String
+  pathId: String
 }
