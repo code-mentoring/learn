@@ -65,7 +65,7 @@ export class SeederService {
     ];
     return Promise.all(paths.map(async (path, i) => {
       const newPath = await this.pathService.create(
-        randomPath({ name: path.name, icon: path.icon })
+        randomPath({ name: path.name, icon: path.icon }, path.name)
       );
       if (i === 0) {
         await this.pathService.addUserToPath(newPath.id, users[0].id);

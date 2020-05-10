@@ -18,8 +18,8 @@ export const randomUserPreferenceInput = (): UserPreferencesInput => ({
   codingAbility: Math.floor(Math.random() * 10) + 1
 });
 
-export const randomPath = (input: Partial<PathInput> = {}): PathInput => ({
-  name: faker.lorem.word(),
+export const randomPath = (input: Partial<PathInput> = {}, name: string): PathInput => ({
+  name,
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),
   ...input
