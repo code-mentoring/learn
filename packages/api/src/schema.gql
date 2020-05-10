@@ -23,21 +23,6 @@ type UserPreferences {
   codingAbility: Float!
 }
 
-type Friends {
-  id: String!
-  user1Id: String!
-  user2Id: String!
-  since: DateTime!
-}
-
-type FriendRequests {
-  id: String!
-  from: String!
-  to: String!
-  accepted: Boolean
-  requested: DateTime!
-}
-
 type User {
   id: ID!
   firstName: String!
@@ -48,8 +33,36 @@ type User {
   createdAt: DateTime!
 }
 
+type FriendRequests {
+  id: String!
+  fromId: String!
+  toId: String!
+  accepted: Boolean
+  requested: DateTime!
+}
+
+type Friends {
+  id: String!
+  user1Id: String!
+  user2Id: String!
+  since: DateTime!
+  user1: User!
+  user2: User!
+}
+
 type LoginOutput {
   accessToken: String!
+}
+
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  path: Path!
 }
 
 type Query {
@@ -58,12 +71,9 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
-  friendRequests: [FriendRequests!]!
   getFriendRequestsFromMe: [FriendRequests!]!
   getFriendRequestsToMe: [FriendRequests!]!
-  getMyFriends: [Friends!]!
-  friends: [Friends!]!
-  getMyFridendsById(userId: String!): [Friends!]!
+  getUserFriends(userId: String!): [User!]!
 }
 
 type Mutation {
@@ -72,8 +82,8 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
-  createFriendRequest(createFriendRequest: FriendRequestsInput!): FriendRequests!
-  updateFriendRequest(updateFriendRequest: FriendRequestsInput!): FriendRequests!
+  createFriendRequest(createInput: FriendRequestsInput!): FriendRequests!
+  confirmRejectRequest(input: ConfirmRejectInput!): Boolean!
   addFriend(friend: FriendsInput!): Friends!
 }
 
@@ -97,9 +107,16 @@ input PathInput {
 }
 
 input FriendRequestsInput {
-  from: String!
-  to: String!
+  fromId: String!
+  toId: String!
   accepted: Boolean
+}
+
+input ConfirmRejectInput {
+  fromId: String!
+  toId: String!
+  accepted: Boolean!
+  id: String!
 }
 
 input FriendsInput {

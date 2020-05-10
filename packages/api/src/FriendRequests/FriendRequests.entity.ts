@@ -6,7 +6,7 @@ import { UserWithPassword } from '../User/User.entity';
 
 @ObjectType()
 @Entity('friend_requests')
-@Unique('fromto', ['from', 'to'])
+@Unique('fromto', ['fromId', 'toId'])
 export class FriendRequests extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
@@ -14,11 +14,11 @@ export class FriendRequests extends CMBaseEntity {
 
   @Column()
   @Field()
-  from: string;
+  fromId: string;
 
   @Column()
   @Field()
-  to: string;
+  toId: string;
 
   @Column({ nullable: true })
   @Field({ nullable: true })
@@ -28,21 +28,31 @@ export class FriendRequests extends CMBaseEntity {
   @Field()
   requested: Date;
 
-  @ManyToOne(() => UserWithPassword, fromUser => fromUser.friendRequestsTo)
-  fromUser: UserWithPassword;
+  @ManyToOne(() => UserWithPassword)
+  from: UserWithPassword;
 
-  @ManyToOne(() => UserWithPassword, toUser => toUser.friendRequestsFrom)
-  toUser: UserWithPassword;
+  @ManyToOne(() => UserWithPassword)
+  to: UserWithPassword;
 }
 
 @InputType()
 export class FriendRequestsInput {
   @Field()
-  from: string;
+  fromId: string;
 
   @Field()
-  to: string;
+  toId: string;
 
   @Field({ nullable: true })
+  accepted?: boolean;
+}
+
+@InputType()
+export class ConfirmRejectInput extends FriendRequestsInput {
+
+  @Field()
+  id: string;
+
+  @Field()
   accepted: boolean;
 }
