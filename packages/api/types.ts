@@ -166,5 +166,5 @@ export type FriendRequests = {
 export type FriendRequestsInput = {
   from: Scalars['String'];
   to: Scalars['String'];
-  accepted: Scalars['String'];
+  accepted?: Scalars['String'];
 };
