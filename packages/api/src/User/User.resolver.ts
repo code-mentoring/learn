@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
+
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { User, UserInput } from './User.entity';
 import { UserService } from './User.service';
@@ -9,6 +10,7 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
 
 @Resolver(() => User)
 export class UserResolver {
+
   constructor(
     private readonly userService: UserService,
     private readonly userPreferencesService: UserPreferencesService
