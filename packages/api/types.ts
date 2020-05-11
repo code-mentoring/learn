@@ -52,22 +52,25 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
+export type LoginOutput = {
+   __typename?: 'LoginOutput';
+  accessToken: Scalars['String'];
+};
 
 export type Assignment = {
+   __typename?: 'Assignment';
   id: Scalars['String'];
   description: Scalars['String'];
 };
 
 export type AssignmentFile = {
+   __typename?: 'AssignmentFile';
   id: Scalars['String'];
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
-};
-
-export type LoginOutput = {
-   __typename?: 'LoginOutput';
-  accessToken: Scalars['String'];
+  assignmentId: Scalars['String'];
+  authorId: Scalars['String'];
 };
 
 export type Query = {
@@ -77,6 +80,8 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
+  assignments: Array<Assignment>;
+  assignmentFiles: Array<AssignmentFile>;
   modules: Array<Module>;
   pathModules: Array<Module>;
 };
@@ -103,6 +108,8 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  createAssignment: Assignment;
+  createAssignmentFile: AssignmentFile;
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
@@ -132,6 +139,16 @@ export type MutationCreatePathArgs = {
 
 export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type MutationCreateAssignmentArgs = {
+  assignment: AssignmentInput;
+};
+
+
+export type MutationCreateAssignmentFileArgs = {
+  assignmentFile: AssignmentFileInput;
 };
 
 
@@ -176,4 +193,28 @@ export type AssignmentFileInput = {
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
+  authorId: Scalars['String'];
+  assignmentId: Scalars['String'];
 };
+
+export type ModuleInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+};
+
+export type UpdateModuleInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  type?: Maybe<ModuleType>;
+  previousId?: Maybe<Scalars['String']>;
+  pathId?: Maybe<Scalars['String']>;
+};
+
+export enum ModuleType {
+  Assignment = 'assignment',
+  Lesson = 'lesson'
+}

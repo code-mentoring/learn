@@ -26,18 +26,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Assignment {
-  id: String!
-  description: String!
-}
-
-type AssignmentFile {
-  id: String!
-  name: String!
-  type: String!
-  content: String!
-}
-
 type UserPreferences {
   id: String!
   userId: String!
@@ -58,6 +46,22 @@ type User {
 
 type LoginOutput {
   accessToken: String!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+}
+
+type AssignmentFile {
+  id: String!
+  name: String!
+  type: String!
+  content: String!
+  assignmentId: String!
+  assignment: Assignment!
+  authorId: String!
+  author: User!
 }
 
 type Query {
@@ -112,6 +116,8 @@ input AssignmentFileInput {
   name: String!
   type: String!
   content: String!
+  authorId: String!
+  assignmentId: String!
 }
 
 input ModuleInput {
