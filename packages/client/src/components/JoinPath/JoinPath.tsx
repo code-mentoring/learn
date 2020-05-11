@@ -12,17 +12,24 @@ interface JoinPath {
 
 // Click add path button in progress widget to open modal
 
+//TEAM NOTE:
+//  - Modal closes when clicked anywhere.  Changed to only close on (x).
+//  - Refractor CSS to its own individual file.
+
+// CSS can be found @     ui/css/modal-join-path.css
+// Figma Design:          https://www.figma.com/file/eyk5tQgLhIpyiORYfWxeUh/Learning-App?node-id=197%3A0
+
 export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
   const paths = [
     {
       id: 1,
-      name: 'CSS3',
-      icon: 'css' as 'css'
+      name: 'HTML5',
+      icon: 'html' as 'html'
     },
     {
       id: 2,
-      name: 'HTML5',
-      icon: 'html' as 'html'
+      name: 'CSS3',
+      icon: 'css' as 'css'
     },
     {
       id: 3,
@@ -43,19 +50,24 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
   return (
     <Modal setShow={setShow}>
-      <div className="w-2/5 bg-white text-center py-6 px-12 relative rounded">
+      <div className="join-path-card">
         <Icon
           icon="x"
           size="small"
-          className="absolute top-6 right-12 text-grey-300 hover:text-primary-400 cursor-pointer"
-          onClick={() => setShow(false)}
+          className="btn-close-icon"
+          onClick={( ) => setShow( )}
         />
-        <h3 className="mb-3 font-medium">Join a Path</h3>
-        <p className="text-sm leading-4 text-grey-800 mb-12" style={{ letterSpacing: '0.75px' }}>Select a path below to begin your journey...</p>
+        
+        <h1 className="mb-3 font-semibold">Join a Path</h1>
+        
+        <p className="text-sm leading-4 text-grey-800 mb-12" style={{ letterSpacing: '0.75px' }}>
+          Select a path below to begin your journey...
+        </p>
+
         <div className="grid grid-cols-5 items-center" style={{ justifyItems: 'center' }}>
           {paths && paths.map(path => (
             <div key={path.id}>
-              <div className="p-6 border-2 rounded border-grey-100">
+              <div className="path-icon-container">
                 <PathIcon
                   icon={path.icon}
                   className="m-auto"

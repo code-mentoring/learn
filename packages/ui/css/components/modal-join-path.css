@@ -1,0 +1,31 @@
+.modal-container {
+    background-color:#8F9FF0CC;
+
+    @apply absolute w-full h-full top-0 left-0 flex justify-center items-center;
+}
+
+
+.join-path-card {
+    min-width:581.15px;
+    
+    @apply bg-white text-center py-6 px-12 relative rounded;
+}
+
+
+.btn-close-icon {
+    height:24px;
+    right:24px;
+
+    @apply absolute text-grey-300 cursor-pointer;
+}
+.btn-close-icon:hover { 
+    @apply text-primary-400;
+}
+
+
+.path-icon-container {
+    width:75px;
+    height:75px;
+
+    @apply flex border-2 rounded border-grey-200 m-auto;
+}
