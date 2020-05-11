@@ -167,7 +167,6 @@ export type PathInput = {
   icon: Scalars['String'];
   description: Scalars['String'];
 };
-<<<<<<< HEAD
 
 export type AssignmentInput = {
   description: Scalars['String'];
@@ -178,28 +177,3 @@ export type AssignmentFileInput = {
   type: Scalars['String'];
   content: Scalars['String'];
 };
-||||||| 6baa7c6
-=======
-
-export type ModuleInput = {
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  type: Scalars['String'];
-  previousId?: Maybe<Scalars['String']>;
-  pathId: Scalars['String'];
-};
-
-export type UpdateModuleInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-  type?: Maybe<ModuleType>;
-  previousId?: Maybe<Scalars['String']>;
-  pathId?: Maybe<Scalars['String']>;
-};
-
-export enum ModuleType {
-  Assignment = 'assignment',
-  Lesson = 'lesson'
-}
->>>>>>> feature/backend
