@@ -26,56 +26,56 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   const location = useLocation();
   const { wizardState } = Wizard.useContainer();
 
-  return <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
-
-    <h4 className="mr-32 w-20">
+  return <>
+    <h4 className="absolute bottom-0 mb-6 mx-auto inset-x-0 h-12 w-20 flex items-center">
       <Link to={backLink}>Go back</Link>
     </h4>
-
-    <div className="flex items-center">
+    <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
       <div className="flex items-center">
+        <div className="flex items-center">
 
-        {Object.keys(wizardState as unknown as WizardSteps).map((key, i) => {
-          let isFilled: boolean = false;
-          const state = wizardState[key as keyof typeof wizardState];
+          {Object.keys(wizardState as unknown as WizardSteps).map((key, i) => {
+            let isFilled: boolean = false;
+            const state = wizardState[key as keyof typeof wizardState];
 
-          let redirect: string;
-          if (key === WizardSteps.codingAbility) {
-            redirect = routes.onboardingWorkflowCodingAbility();
-          }
-          if (key === WizardSteps.why) redirect = routes.onboardingWorkflowWhy();
-          if (key === WizardSteps.paths) redirect = routes.onboardingWorkflowPaths();
-          if (key === WizardSteps.practiceGoal) redirect = routes.onboardingWorkflowPracticeGoal();
+            let redirect: string;
+            if (key === WizardSteps.codingAbility) {
+              redirect = routes.onboardingWorkflowCodingAbility();
+            }
+            if (key === WizardSteps.why) redirect = routes.onboardingWorkflowWhy();
+            if (key === WizardSteps.paths) redirect = routes.onboardingWorkflowPaths();
+            if (key === WizardSteps.practiceGoal) redirect = routes.onboardingWorkflowPracticeGoal();
 
-          if (Array.isArray(state)) {
-            if ((state as SelectedPath[]).length > 0) isFilled = true;
-          } else if (state) isFilled = true;
+            if (Array.isArray(state)) {
+              if ((state as SelectedPath[]).length > 0) isFilled = true;
+            } else if (state) isFilled = true;
 
-          return <span
-            key={key}
-            className={classnames('w-4 h-4 rounded-circle', {
-              'ml-4': i !== 0,
-              'bg-grey-200 pointer-events-none': !isFilled,
-              'bg-green-400 border-0': isFilled,
-              'border-2 border-primary-500 border-solid': location.pathname.includes(`/${key}`)
-            })}
-            onClick={() => history.push(redirect)}
-            onKeyDown={() => history.push(redirect)}
-            role="button"
-            tabIndex={0}
-            aria-label="steps"
-          />;
-        })}
+            return <span
+              key={key}
+              className={classnames('w-4 h-4 rounded-circle', {
+                'ml-4': i !== 0,
+                'bg-grey-200 pointer-events-none': !isFilled,
+                'bg-green-400 border-0': isFilled,
+                'border-2 border-primary-500 border-solid': location.pathname.includes(`/${key}`)
+              })}
+              onClick={() => history.push(redirect)}
+              onKeyDown={() => history.push(redirect)}
+              role="button"
+              tabIndex={0}
+              aria-label="steps"
+            />;
+          })}
+        </div>
+
+        <Button
+          className="ml-8"
+          size="large"
+          color="green"
+          disabled={Boolean()}
+          onClick={() => (submit ? submit() : history.push(nextLink!))}
+        > Next </Button>
+
       </div>
-
-      <Button
-        className="ml-8"
-        size="large"
-        color="green"
-        disabled={Boolean()}
-        onClick={() => (submit ? submit() : history.push(nextLink!))}
-      > Next </Button>
-
     </div>
-  </div>;
+  </>;
 };
