@@ -1,4 +1,5 @@
 import React from 'react';
+import { Twemoji } from 'react-emoji-render';
 
 import { routes } from '../../router/routes';
 import { OnboardingStepProps } from './OnboardingStep';
@@ -9,6 +10,7 @@ import { PathsIcon } from './Wizard/FooterIcons/Paths';
 import { CompletedLeftIcon } from './Wizard/FooterIcons/CompletedLeft';
 import { CompletedMiddleIcon } from './Wizard/FooterIcons/CompletedMiddle';
 import { CompletedRightIcon } from './Wizard/FooterIcons/CompletedRight';
+import { PracticeGoalIcon } from './Wizard/FooterIcons/PracticeGoal';
 
 export enum WizardSteps {
   welcome = 'welcome',
@@ -23,16 +25,18 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
   {
     path: routes.onboardingWorkflow(),
     intro: {
-      title: 'Welcome to Code Mentoring!',
-      text: "We are excited you're with us. Really! To get you started, help us understand a little bit about you."
+      title: <>Welcome to Code Mentoring ! <Twemoji svg text="🎉" onlyEmojiClassName="absolute w-6 text-3xl" /></>,
+      text: <>We’re excited you’re with us. Really! To get you started, <br />
+        help us understand a little bit about you.</>
     },
     graphic: <WelcomeIcon />
   },
   {
     path: routes.onboardingWorkflowCodingAbility(),
     intro: {
-      title: 'How would you rate your coding codingAbility?',
-      text: "Don't worry, there is no wrong answer! We only ask so we can help you get to where you want to go"
+      title: 'How would you rate your coding skills?',
+      text: <>Don’t worry, there’s no wrong answer! We only ask so <br />
+        we can help you get to where you want to go.</>
     },
     graphic: <CodingAbilityIcon />,
     footerSteps: {
@@ -44,8 +48,9 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
   {
     path: routes.onboardingWorkflowWhy(),
     intro: {
-      title: 'Great! So... Why are you here?',
-      text: 'Looking for a career change? Always been interested in coding? We will put this on your profile so others can get to know you better.'
+      title: <>Great! So... Why are you here? <Twemoji svg text="😀" onlyEmojiClassName="absolute w-6 text-3xl" /></>,
+      text: <>Looking for a career change? Always been interested in coding? <br />
+        We will put this on your profile so others can get to know you better.</>
     },
     graphic: <WhyIcon />,
     footerSteps: {
@@ -58,7 +63,8 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
     path: routes.onboardingWorkflowPaths(),
     intro: {
       title: 'What are you interested in learning?',
-      text: "Choose some of the base paths to get you started. You'll unlock more as you go, but these are here to get you started."
+      text: <>Choose some of the base <span className="text-tertiary-500 border-tertiary-300 border-b-2 border-dashed">paths</span> to get you started. You’ll unlock <br />
+        more as you go, but these are here to get you started.</>
     },
     graphic: <PathsIcon />,
     footerSteps: {
@@ -71,9 +77,9 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
     path: routes.onboardingWorkflowPracticeGoal(),
     intro: {
       title: 'Nice! How often do you want to practice?',
-      text: 'We recommend building a daily habit for any skill you want to learn. We can help you stick to your goal.'
+      text: <>We recommend building a daily habit for any skill you want to learn. <br /> We can help you stick to your goal.</>
     },
-    graphic: <WelcomeIcon />,
+    graphic: <PracticeGoalIcon />,
     footerSteps: {
       step: WizardSteps.practiceGoal,
       backLink: routes.onboardingWorkflowPaths(),
@@ -83,8 +89,8 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
   {
     path: routes.onboardingWorkflowCompleted(),
     intro: {
-      title: 'You are good to go!',
-      text: "Thanks for introducing yourself. Let's start learning some code!"
+      title: 'You’re good to go!',
+      text: 'Thanks for introducing yourself. Let’s start learning some code!'
     },
     graphic: <>
       <CompletedLeftIcon />

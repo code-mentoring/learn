@@ -9,6 +9,7 @@ import { Wizard } from '../../containers/Wizard.container';
 import { routes } from '../../router/routes';
 import { OnboardingStep } from './OnboardingStep';
 import { steps } from './steps';
+import { SliderText } from './Wizard/Typography/SliderText';
 
 export interface WizardFormValues {
   codingAbility: number;
@@ -56,10 +57,12 @@ export const OnboardingPage = () => {
 
       {/* 2. Coding ability */}
       <OnboardingStep {...steps[1]}>
-        <SliderField
-          value={codingAbility}
-          onChange={(value: number) => setCodingAbility(value)}
-        />
+        <SliderText value={codingAbility}>
+          <SliderField
+            value={codingAbility}
+            onChange={(value: number) => setCodingAbility(value)}
+          />
+        </SliderText>
       </OnboardingStep>
 
 
