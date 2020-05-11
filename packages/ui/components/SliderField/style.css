@@ -1,5 +1,21 @@
-.rc-slider-dot:first-child,
-.rc-slider-dot:last-child {
-  border: none;
-  background-color: inherit;
+.rc-slider-dot:first-child:before {
+  content: '';
+  width: 1.5em;
+  border: 4px solid #23DDB8;
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 4px;
+  border-radius: 4px;
+}
+
+.rc-slider-dot:last-child:after {
+  content: '';
+  width: 1.5em;
+  border: 4px solid #EAE7F6;
+  position: absolute;
+  z-index: -1;
+  right: left;
+  top: 4px;
+  border-radius: 4px;
 }

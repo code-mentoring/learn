@@ -35,7 +35,9 @@ export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
         width: '2px',
         height: '18px',
         bottom: '-8px',
-        borderRadius: '0'
+        borderRadius: '0',
+        borderColor: '#DCD8F0',
+        backgroundColor: 'inherit'
       }}
       handleStyle={{
         width: '24px',
@@ -44,11 +46,12 @@ export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
         border: '4px solid #0DD2AB'
       }}
       activeDotStyle={{
-        borderColor: '#23DDB8'
+        borderColor: '#0BB996'
       }}
       trackStyle={{
         height: '8px',
-        backgroundColor: '#23DDB8'
+        backgroundColor: '#23DDB8',
+        borderRadius: '0px'
       }}
       marks={marks}
       step={null}
