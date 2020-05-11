@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  path: Path!
+}
+
 type Path {
   id: String!
   name: String!
@@ -55,8 +66,14 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+<<<<<<< HEAD
   assignments: [Assignment!]!
   assignmentFiles: [AssignmentFile!]!
+||||||| 6baa7c6
+=======
+  modules: [Module!]!
+  pathModules(pathId: String!): [Module!]!
+>>>>>>> feature/backend
 }
 
 type Mutation {
@@ -65,8 +82,15 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+<<<<<<< HEAD
   createAssignment(assignment: AssignmentInput!): Assignment!
   createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
+||||||| 6baa7c6
+=======
+  createModule(module: ModuleInput!): Module!
+  updateModule(update: UpdateModuleInput!): Module!
+  deleteModule(moduleId: String!): Boolean!
+>>>>>>> feature/backend
 }
 
 input UserInput {
@@ -87,6 +111,7 @@ input PathInput {
   icon: String!
   description: String!
 }
+<<<<<<< HEAD
 
 input AssignmentInput {
   description: String!
@@ -97,3 +122,28 @@ input AssignmentFileInput {
   type: String!
   content: String!
 }
+||||||| 6baa7c6
+=======
+
+input ModuleInput {
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+}
+
+input UpdateModuleInput {
+  id: String!
+  name: String
+  icon: String
+  type: ModuleType
+  previousId: String
+  pathId: String
+}
+
+enum ModuleType {
+  assignment
+  lesson
+}
+>>>>>>> feature/backend
