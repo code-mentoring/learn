@@ -70,119 +70,12 @@ describe('User entity', () => {
 
   describe('Query: search', () => {
     beforeEach(setup);
-    it('should return user by firstname', async () => {
-      expect.assertions(4);
-
-      const newUser = {
-        firstName: 'Sam',
-        lastName: 'Johnson',
-        email: 'samjohnson@gmail.com',
-        password: 'secret1',
-      };
-
-      //insert newUser
-      await TestClient.createUser(newUser);
-
-      //query newUser
-      const users = await TestClient.search(newUser.firstName);
-
-      //assertions
-      expect(users).toBeArrayOfSize(1);
-      expect(users[0].firstName).toEqual(newUser.firstName);
-      expect(users[0].lastName).toEqual(newUser.lastName);
-      expect(users[0].email).toEqual(newUser.email);
-    });
-
-    it('should return user by lastname', async () => {
-      expect.assertions(4);
-
-      const newUser = {
-        firstName: 'Rick',
-        lastName: 'Sanchez',
-        email: 'RickSanchez@gmail.com',
-        password: 'secret2',
-      };
-
-      //insert newUser
-      await TestClient.createUser(newUser);
-
-      //query newUser
-      const users = await TestClient.search(newUser.lastName);
-
-      //assertions
-      expect(users).toBeArrayOfSize(1);
-      expect(users[0].firstName).toEqual(newUser.firstName);
-      expect(users[0].lastName).toEqual(newUser.lastName);
-      expect(users[0].email).toEqual(newUser.email);
-    });
-
-    it('should return user by email', async () => {
-      expect.assertions(4);
-
-      const newUser = {
-        firstName: 'Morty',
-        lastName: 'Smith',
-        email: 'MortySmith@gmail.com',
-        password: 'secret3',
-      };
-
-      //insert newUser
-      await TestClient.createUser(newUser);
-
-      //query newUser
-      const users = await TestClient.search(newUser.email);
-
-      //assertions
-      expect(users).toBeArrayOfSize(1);
-      expect(users[0].firstName).toEqual(newUser.firstName);
-      expect(users[0].lastName).toEqual(newUser.lastName);
-      expect(users[0].email).toEqual(newUser.email);
-    });
-
-    it('should return an array of users with matching firstnames', async () => {
-      expect.assertions(3);
+    it('should successfully return a list of user(s)', async () => {
+      expect.assertions(8);
 
       const newUser1 = {
-        firstName: 'Rick',
-        lastName: 'Sanchez',
-        email: 'rickSanchez@gmail.com',
-        password: 'secret1',
-      };
-
-      const newUser2 = {
-        firstName: 'Morty',
-        lastName: 'Smith',
-        email: 'mortySmith@gmail.com',
-        password: 'secret2',
-      };
-
-      const newUser3 = {
         firstName: 'Rick',
         lastName: 'Summerset',
-        email: 'rickSummerset@gmail.com',
-        password: 'secret3',
-      };
-
-      //insert newUsers
-      await TestClient.createUser(newUser1);
-      await TestClient.createUser(newUser2);
-      await TestClient.createUser(newUser3);
-
-      //query newUser
-      const users = await TestClient.search('Rick');
-
-      //assertions
-      expect(users).toBeArrayOfSize(2);
-      expect(users[0].firstName).toEqual(newUser1.firstName);
-      expect(users[1].firstName).toEqual(newUser3.firstName);
-    });
-
-    it('should return an array of users with matching lastnames', async () => {
-      expect.assertions(4);
-
-      const newUser1 = {
-        firstName: 'Kyle',
-        lastName: 'Sanchez',
         email: 'rickSanchez@gmail.com',
         password: 'secret1',
       };
@@ -206,14 +99,27 @@ describe('User entity', () => {
       await TestClient.createUser(newUser2);
       await TestClient.createUser(newUser3);
 
-      //query newUser
-      const users = await TestClient.search('Sanchez');
+      //return a list of users with matching last names
+      const matchingLastNames = await TestClient.search('Sanchez');
 
       //assertions
-      expect(users).toBeArrayOfSize(3);
-      expect(users[0].lastName).toEqual(newUser1.lastName);
-      expect(users[1].lastName).toEqual(newUser2.lastName);
-      expect(users[2].lastName).toEqual(newUser3.lastName);
+      expect(matchingLastNames).toBeArrayOfSize(2);
+      expect(matchingLastNames[0].lastName).toEqual(newUser2.lastName);
+      expect(matchingLastNames[1].lastName).toEqual(newUser3.lastName);
+
+      //return a list of users with matching first names
+      const matchingFirstNames = await TestClient.search('Rick');
+
+      //assertions
+      expect(matchingFirstNames).toBeArrayOfSize(2);
+      expect(matchingFirstNames[0].firstName).toEqual(newUser1.firstName);
+      expect(matchingFirstNames[1].firstName).toEqual(newUser3.firstName);
+
+      const newUsers = await TestClient.search('Lee');
+
+      //assert undefined
+      expect(newUsers).toBeEmpty();
+      expect(newUsers[0]).toBeUndefined();
     });
   });
 
