@@ -7,7 +7,7 @@ import { JoinPath } from '../../components/JoinPath/JoinPath';
 export const DashboardPage = () => {
 
   const [showModal, setShowModal] = useState(false);
-  const showModalHandler = ( ) => setShowModal( !showModal );
+  const showModalHandler = () => setShowModal(!showModal);
 
   return (
     <Page title="Dashboard" type="dashboard" className="bg-white">

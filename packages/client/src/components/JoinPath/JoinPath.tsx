@@ -12,9 +12,9 @@ interface JoinPath {
 
 // Click add path button in progress widget to open modal
 
-//TEAM NOTE:
-//  - Modal closes when clicked anywhere.  Changed to only close on (x).
-//  - Refractor CSS to its own individual file.
+// TEAM NOTE:
+// - Modal closes when clicked anywhere.  Changed to only close on (x).
+// - Refractor CSS to its own individual file.
 
 // CSS can be found @     ui/css/modal-join-path.css
 // Figma Design:          https://www.figma.com/file/eyk5tQgLhIpyiORYfWxeUh/Learning-App?node-id=197%3A0
@@ -55,11 +55,9 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
           icon="x"
           size="small"
           className="btn-close-icon"
-          onClick={( ) => setShow( )}
+          onClick={() => setShow()}
         />
-        
         <h1 className="mb-3 font-semibold">Join a Path</h1>
-        
         <p className="text-sm leading-4 text-grey-800 mb-12" style={{ letterSpacing: '0.75px' }}>
           Select a path below to begin your journey...
         </p>
