@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AssignmentFile {
-  id: String!
-  name: String!
-  type: String!
-  content: String!
-}
-
 type Assignment {
   id: String!
   description: String!
@@ -60,11 +53,6 @@ type LoginOutput {
   accessToken: String!
 }
 
-type Assignment {
-  id: String!
-  description: String!
-}
-
 type AssignmentFile {
   id: String!
   name: String!
@@ -72,7 +60,6 @@ type AssignmentFile {
   content: String!
   assignmentId: String!
   assignment: Assignment!
-  authorId: String!
   author: User!
 }
 
@@ -129,7 +116,6 @@ input AssignmentFileInput {
   name: String!
   type: String!
   content: String!
-  authorId: String!
   assignmentId: String!
 }
 
