@@ -50,6 +50,12 @@ type Friends {
   user2: User!
 }
 
+type UserFriendOutput {
+  id: String!
+  since: DateTime!
+  userFriend: User!
+}
+
 type LoginOutput {
   accessToken: String!
 }
@@ -62,7 +68,7 @@ type Query {
   getPathByName(name: String!): Path!
   getFriendRequestsFromMe: [FriendRequests!]!
   getFriendRequestsToMe: [FriendRequests!]!
-  getUserFriends(userId: String!): [User!]!
+  getUserFriends(userId: String!): [UserFriendOutput!]!
 }
 
 type Mutation {

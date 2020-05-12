@@ -59,6 +59,13 @@ export type Friends = {
   user2: User;
 };
 
+export type UserFriendOutput = {
+   __typename?: 'UserFriendOutput';
+  id: Scalars['String'];
+  since: Scalars['DateTime'];
+  userFriend: User;
+};
+
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
@@ -73,7 +80,7 @@ export type Query = {
   getPathByName: Path;
   getFriendRequestsFromMe: Array<FriendRequests>;
   getFriendRequestsToMe: Array<FriendRequests>;
-  getUserFriends: Array<User>;
+  getUserFriends: Array<UserFriendOutput>;
 };
 
 

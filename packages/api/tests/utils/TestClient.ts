@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestsInput, FriendRequests, FriendsInput, Friends, ConfirmRejectInput } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestsInput, FriendRequests, FriendsInput, Friends, ConfirmRejectInput, UserFriendOutput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -120,7 +120,7 @@ export abstract class TestClient {
     return this._request('getFriendRequestsToMe', queries.getFriendRequestsToMe);
   }
 
-  static getUserFriends(userId: String): Promise< [User] > {
+  static getUserFriends(userId: String): Promise< [UserFriendOutput] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 

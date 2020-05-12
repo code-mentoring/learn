@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Friends, FriendsInput } from './Friends.entity';
-import { UserWithPassword } from '../User/User.entity';
+import { Friends, FriendsInput, UserFriendOutput } from './Friends.entity';
 
 @Injectable()
 export class FriendsService {
@@ -11,13 +10,20 @@ export class FriendsService {
     @InjectRepository(Friends) private readonly friendsRepository: Repository<Friends>
   ) {}
 
-  async findUserFriendsById(userId: string): Promise<UserWithPassword[]> {
+  async findUserFriendsById(userId: string): Promise<UserFriendOutput[]> {
     const friends = await this.friendsRepository.find({
       where: [{ user1Id: userId }, { user2Id: userId }],
       relations: ['user1', 'user2']
     });
-    const friendsResult = friends.map(friend =>
-      (friend.user1Id === userId ? friend.user2 : friend.user1));
+
+    const friendsResult = friends.map(friend => {
+      const userFriend = new UserFriendOutput();
+      userFriend.id = friend.id;
+      userFriend.since = friend.since;
+      userFriend.userFriend = (friend.user1Id === userId ? friend.user2 : friend.user1);
+      return userFriend;
+    });
+
     return friendsResult;
   }
 

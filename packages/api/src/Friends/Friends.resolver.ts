@@ -2,9 +2,8 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { User } from '../User/User.entity';
 import { FriendsService } from './Friends.service';
-import { Friends, FriendsInput } from './Friends.entity';
+import { Friends, FriendsInput, UserFriendOutput } from './Friends.entity';
 
 @Resolver('Friends')
 export class FriendsResolver {
@@ -13,7 +12,7 @@ export class FriendsResolver {
   ) {}
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => [User])
+  @Query(() => [UserFriendOutput])
   getUserFriends(@Args('userId') userId: string) {
     return this.friendsService.findUserFriendsById(userId);
   }

@@ -43,3 +43,16 @@ export class FriendsInput {
     @Field()
     user2Id: string;
 }
+
+@ObjectType()
+export class UserFriendOutput {
+    @Field()
+    id: string;
+
+    @CreateDateColumn()
+    @Field()
+    since: Date;
+
+    @Field()
+    userFriend: User;
+}

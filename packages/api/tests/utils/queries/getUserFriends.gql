@@ -1,18 +1,21 @@
 query ($userId: String!)  {
   getUserFriends (userId : $userId){    
     id
-    firstName
-    lastName
-    email
-    profileImage
-    userPreferences{
+    since
+    userFriend{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
       id
       userId
       practiceGoal
       why
       codingAbility
+      }
+      createdAt
     }
-    createdAt
-    
   }
 }
