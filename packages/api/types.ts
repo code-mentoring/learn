@@ -40,6 +40,25 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
+export type FriendRequests = {
+   __typename?: 'FriendRequests';
+  id: Scalars['String'];
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
+  accepted?: Maybe<Scalars['Boolean']>;
+  requested: Scalars['DateTime'];
+};
+
+export type Friends = {
+   __typename?: 'Friends';
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  since: Scalars['DateTime'];
+  user1: User;
+  user2: User;
+};
+
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
@@ -52,10 +71,9 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
-  friendRequests: Array<FriendRequests>;
   getFriendRequestsFromMe: Array<FriendRequests>;
   getFriendRequestsToMe: Array<FriendRequests>;
-  getUserFriends: Array<User>; 
+  getUserFriends: Array<User>;
 };
 
 
@@ -68,7 +86,8 @@ export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
 };
 
-export type QueryGetUserFriends = {
+
+export type QueryGetUserFriendsArgs = {
   userId: Scalars['String'];
 };
 
@@ -80,8 +99,9 @@ export type Mutation = {
   createPath: Path;
   joinPath: Scalars['Boolean'];
   createFriendRequest: FriendRequests;
-  updateFriendRequest: FriendRequests;
+  confirmRejectRequest: Scalars['Boolean'];
   addFriend: Friends;
+  deleteFriend: Scalars['Boolean'];
 };
 
 
@@ -91,7 +111,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdatePreferencesArgs = {
-  input: UserPreferencesInput;
+  preferences: UserPreferencesInput;
 };
 
 
@@ -110,15 +130,23 @@ export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
 };
 
+
 export type MutationCreateFriendRequestArgs = {
-  createFriendRequest: FriendRequestsInput;
+  createInput: FriendRequestsInput;
 };
 
-export type MutationUpdateFriendRequestRequestArgs = {
-  updateFriendRequest: FriendRequestsInput;
+
+export type MutationConfirmRejectRequestArgs = {
+  input: ConfirmRejectInput;
 };
 
-export type MutationAddFriendRequestArgs = {
+
+export type MutationAddFriendArgs = {
+  friend: FriendsInput;
+};
+
+
+export type MutationDeleteFriendArgs = {
   friend: FriendsInput;
 };
 
@@ -130,39 +158,30 @@ export type UserInput = {
 };
 
 export type UserPreferencesInput = {
-  practiceGoal: Scalars['Float'];
-  why: Scalars['String'];
-  codingAbility: Scalars['Float'];
+  practiceGoal?: Maybe<Scalars['Float']>;
+  why?: Maybe<Scalars['String']>;
+  codingAbility?: Maybe<Scalars['Float']>;
 };
 
-  export type PathInput = {
-    name: Scalars['String'];
-    icon: Scalars['String'];
-    description: Scalars['String'];
-  };
-  
-  export type Friends = {
+export type PathInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  description: Scalars['String'];
+};
+
+export type FriendRequestsInput = {
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
+};
+
+export type ConfirmRejectInput = {
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
   id: Scalars['String'];
-  user1Id: Scalars['String'];
-  user2Id: Scalars['String'];
-  since: Scalars['DateTime'];
+  accepted: Scalars['Boolean'];
 };
 
 export type FriendsInput = {
   user1Id: Scalars['String'];
   user2Id: Scalars['String'];
-};
-
-export type FriendRequests = {
-  id: Scalars['String'];
-  from: Scalars['String'];
-  to: Scalars['String'];
-  accepted: Scalars['Boolean'];
-  requested: Scalars['DateTime'];
-};
-
-export type FriendRequestsInput = {
-  from: Scalars['String'];
-  to: Scalars['String'];
-  accepted?: Scalars['String'];
 };

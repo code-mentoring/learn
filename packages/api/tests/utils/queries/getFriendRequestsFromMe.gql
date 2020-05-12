@@ -1,8 +1,8 @@
 query  {
   getFriendRequestsFromMe {
     id
-    from
-    to
+    fromId
+    toId
     accepted
     requested
   }

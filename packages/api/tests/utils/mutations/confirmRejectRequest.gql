@@ -1,4 +1,3 @@
 mutation ($input: ConfirmRejectInput!) {
-  confirmRejectRequest( confirmRejectRequest : $input) {
-  }
+  confirmRejectRequest( input : $input) 
 }

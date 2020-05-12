@@ -22,16 +22,24 @@ export class FriendsService {
   }
 
   async create(friendsInput: FriendsInput): Promise<Friends> {
+    if (friendsInput.user1Id > friendsInput.user2Id) {
+      const swapInput : FriendsInput = {
+        user1Id: friendsInput.user2Id,
+        user2Id: friendsInput.user1Id
+      };
+      return this.friendsRepository.create(swapInput).save();
+    }
     return this.friendsRepository.create(friendsInput).save();
   }
 
   async delete(friendsInput: FriendsInput): Promise<Boolean> {
-    const a = Boolean(await this.friendsRepository.delete(
+    if (friendsInput.user1Id > friendsInput.user2Id) {
+      return (Boolean)((await this.friendsRepository.delete(
+        { user1Id: friendsInput.user2Id, user2Id: friendsInput.user1Id }
+      )).affected);
+    }
+    return (Boolean)((await this.friendsRepository.delete(
       { user1Id: friendsInput.user1Id, user2Id: friendsInput.user2Id }
-    ));
-    const b = Boolean(await this.friendsRepository.delete(
-      { user1Id: friendsInput.user2Id, user2Id: friendsInput.user1Id }
-    ));
-    return a || b;
+    )).affected);
   }
 }

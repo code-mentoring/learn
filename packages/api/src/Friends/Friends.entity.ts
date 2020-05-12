@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn, Unique, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, CreateDateColumn, ManyToOne, Check } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { UserWithPassword, User } from '../User/User.entity';
@@ -7,6 +7,7 @@ import { UserWithPassword, User } from '../User/User.entity';
 @ObjectType()
 @Entity()
 @Unique('friendship', ['user1Id', 'user2Id'])
+@Check(`"user1Id" < "user2Id"`)
 export class Friends extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')
     @Field()

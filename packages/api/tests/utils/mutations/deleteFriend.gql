@@ -1,8 +1,3 @@
 mutation ($friend: FriendsInput!) {
-  deleteFriend( friend : $friend) {
-    id
-    user1Id
-    user2Id
-    since
-  }
+  deleteFriend( friend : $friend) 
 }

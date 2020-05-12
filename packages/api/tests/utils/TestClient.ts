@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestsInput, FriendRequests, FriendsInput, Friends } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestsInput, FriendRequests, FriendsInput, Friends, ConfirmRejectInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -87,14 +87,17 @@ export abstract class TestClient {
     return this._request('createFriendRequest', mutations.createFriendRequest, {friendRequest});
   }
 
-  static updateFriendRequest(friendRequest: FriendRequestsInput): Promise<FriendRequests> {
-    return this._request('updateFriendRequest', mutations.updateFriendRequest, { friendRequest });
+  static confirmRejectRequest(input: ConfirmRejectInput): Promise<Boolean> {
+    return this._request('confirmRejectRequest', mutations.confirmRejectRequest, { input });
   }
   
   static addFriend(friend: FriendsInput): Promise<Friends> {
     return this._request('addFriend', mutations.addFriend, { friend });
   }
 
+  static deleteFriend(friend: FriendsInput): Promise<Boolean> {
+    return this._request('deleteFriend', mutations.deleteFriend, { friend });
+  }
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -120,15 +123,6 @@ export abstract class TestClient {
   static getUserFriends(userId: String): Promise< [User] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
-
-  static friends(): Promise< [Friends] > {
-    return this._request('friends', queries.friends);
-  }
-
-  static getMyFridendsById(id: String): Promise< [Friends] > {
-    return this._request('getMyFridendsById', queries.getMyFridendsById, { id });
-  }
-
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {

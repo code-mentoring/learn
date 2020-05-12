@@ -1,5 +1,5 @@
 mutation ($friendRequest: FriendRequestsInput!) {
-  createFriendRequest( createFriendRequest : $friendRequest) {
+  createFriendRequest( createInput : $friendRequest) {
     id
     fromId
     toId
