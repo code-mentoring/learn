@@ -60,6 +60,22 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Assignment {
+  id: String!
+  description: String!
+}
+
+type AssignmentFile {
+  id: String!
+  name: String!
+  type: String!
+  content: String!
+  assignmentId: String!
+  assignment: Assignment!
+  authorId: String!
+  author: User!
+}
+
 type Query {
   users: [User!]!
   me: User!
@@ -113,6 +129,8 @@ input AssignmentFileInput {
   name: String!
   type: String!
   content: String!
+  authorId: String!
+  assignmentId: String!
 }
 
 input UpdateModuleInput {
