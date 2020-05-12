@@ -34,7 +34,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
     <CenterWrapper>
       <div className={classnames('flex flex-col items-center', intro.className)}>
         <h3 className="mb-3 font-sans whitespace-pre-wrap">{intro.title}</h3>
-        <p className="text-center text-primary-500 text-sm mb-8">{intro.text}</p>
+        <p className="text-center text-grey-700 text-lg mb-8">{intro.text}</p>
       </div>
       {children}
     </CenterWrapper>
