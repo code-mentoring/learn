@@ -5,7 +5,7 @@ import {
   Query,
   Resolver,
   ResolveField,
-  Parent,
+  Parent
 } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
@@ -14,7 +14,7 @@ import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 import {
   UserPreferences,
-  UserPreferencesInput,
+  UserPreferencesInput
 } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
 
@@ -53,7 +53,7 @@ export class UserResolver {
   updatePreferences(
     @CurrentUser() user: User,
     @Args('preferences', { type: () => UserPreferencesInput })
-    preferences: UserPreferencesInput
+      preferences: UserPreferencesInput
   ) {
     return this.userPreferencesService.update(user.id, preferences);
   }

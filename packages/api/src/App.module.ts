@@ -22,14 +22,14 @@ export const appImports = [
   GraphQLModule.forRoot({
     installSubscriptionHandlers: true,
     autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
-    context: ({ req }) => ({ req }),
-  }),
+    context: ({ req }) => ({ req })
+  })
 ];
 
 /**
  * Main App module for NestJS
  */
 @Module({
-  imports: appImports,
+  imports: appImports
 })
 export class AppModule {}
