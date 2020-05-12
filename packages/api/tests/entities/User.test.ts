@@ -76,6 +76,7 @@ describe('User entity', () => {
         expect.assertions(4);
         const newUser = await TestClient.createUser();
         const users = await TestClient.search(newUser[key]);
+       
         expect(users).toBeArrayOfSize(1);
         expect(users[0].firstName).toEqual(newUser.firstName);
         expect(users[0].lastName).toEqual(newUser.lastName);
@@ -100,7 +101,7 @@ describe('User entity', () => {
           email: 'rickSanchez12@gmail.com',
           password: 'secret1'
         }
-
+        
         const newUser = await TestClient.createUser(user1);
         const newUser2 = await TestClient.createUser(user2);
         const newUser3 = await TestClient.createUser();

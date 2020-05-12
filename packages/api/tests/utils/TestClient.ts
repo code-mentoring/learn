@@ -108,7 +108,7 @@ export abstract class TestClient {
   }
 
   static search(param: string): Promise<UserWithPassword[]> {
-    return this._request('search', queries.search, { param });
+    return this._request('searchUsers', queries.searchUsers, { param });
   }
 
   // ----------------------------------------------------------------- Workflows

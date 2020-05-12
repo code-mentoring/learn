@@ -6,5 +6,5 @@ export default {
     .readFileSync(path.join(__dirname, './getPathByName.gql'))
     .toString(),
   me: fs.readFileSync(path.join(__dirname, './me.gql')).toString(),
-  search: fs.readFileSync(path.join(__dirname, './search.gql')).toString(),
+  searchUsers: fs.readFileSync(path.join(__dirname, './search.gql')).toString(),
 };

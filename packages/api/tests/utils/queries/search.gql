@@ -1,5 +1,5 @@
-query search($param: String!) {
-  search(param: $param) {
+query searchUsers($param: String!) {
+  searchUsers(param: $param) {
     id
     firstName
     lastName
