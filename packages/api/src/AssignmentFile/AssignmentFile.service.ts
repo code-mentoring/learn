@@ -35,9 +35,9 @@ export class AssignmentFileService {
     return this.assignmentFileRepository.findOne({ id: updateInput.id }, { relations: ['assignment', 'author'] });
   }
 
-  async delete(
-    assignmentFileId: string
-  ): Promise<Boolean> {
-    return Boolean(await this.assignmentFileRepository.delete({ id: assignmentFileId }));
+  async delete(assignmentFileId: string): Promise<boolean> {
+    const { affected } = await this.assignmentFileRepository.delete({ id: assignmentFileId });
+    if (affected && affected > 0) return true;
+    return false;
   }
 }

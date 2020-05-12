@@ -10,22 +10,10 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type AssignmentFile = {
-   __typename?: 'AssignmentFile';
-  assignment: Assignment;
-  assignmentId: Scalars['String'];
-  author: User;
-  authorId: Scalars['String'];
-  content: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
-  type: Scalars['String'];
-};
-
 export type Assignment = {
    __typename?: 'Assignment';
-  description: Scalars['String'];
   id: Scalars['String'];
+  description: Scalars['String'];
 };
 
 export type Module = {
@@ -73,6 +61,17 @@ export type User = {
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
+};
+
+export type AssignmentFile = {
+   __typename?: 'AssignmentFile';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  content: Scalars['String'];
+  assignmentId: Scalars['String'];
+  assignment: Assignment;
+  author: User;
 };
 
 export type Query = {
@@ -201,7 +200,6 @@ export type AssignmentFileInput = {
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
-  authorId: Scalars['String'];
   assignmentId: Scalars['String'];
 };
 

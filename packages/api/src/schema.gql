@@ -59,8 +59,18 @@ type AssignmentFile {
   type: String!
   content: String!
   assignmentId: String!
+  authorId: String!
   assignment: Assignment!
   author: User!
+}
+
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
 }
 
 type Query {
@@ -116,6 +126,7 @@ input AssignmentFileInput {
   name: String!
   type: String!
   content: String!
+  authorId: String!
   assignmentId: String!
 }
 
