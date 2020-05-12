@@ -6,11 +6,9 @@ interface ModalProps {
   setShow: any;
 }
 
-//CSS can be found @ ui/css/modal-join-path.css
-export const Modal:React.FC<ModalProps> = ( {children} ) => {
-  return (
-    <aside className="modal-container">
-      {children}
-    </aside>
-  );
-};
+// CSS can be found @ ui/css/modal-join-path.css
+export const Modal:React.FC<ModalProps> = ({ children }) => (
+  <aside className="modal-container">
+    {children}
+  </aside>
+);
