@@ -1,13 +1,12 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
-// import { Module } from '../Module/Module.entity';
+import { Module } from '../Module/Module.entity';
 import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 
 @ObjectType()
 @Entity('assignment')
-// @Unique(['moduleId'])
 export class Assignment extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
@@ -20,13 +19,12 @@ export class Assignment extends CMBaseEntity {
   @OneToMany(() => AssignmentFile, assignmentFile => assignmentFile.assignment)
   assignmentFile: AssignmentFile[];
 
-  // TODO: Uncomment once Module module is available.
-  // @ManyToOne(() => Module, module =>  module.assignment)
-  // module: Module;
+  @ManyToOne(() => Module, module => module.assignment)
+  module: Module;
 }
 
 @InputType()
 export class AssignmentInput {
   @Field()
-  description: string
+  description: string;
 }

@@ -42,4 +42,29 @@ export class AssignmentFileInput {
 
   @Field()
   content: string;
+
+  @Field()
+  assignmentId: string;
+
+  @Field(() => UserWithPassword)
+  author: UserWithPassword;
+}
+
+@InputType()
+export class UpdateAssignmentFileInput {
+
+  @Field()
+  id: string;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  type?: string;
+
+  @Field({ nullable: true })
+  content?: string;
+
+  @Field({ nullable: true })
+  assignmentId?: string;
 }

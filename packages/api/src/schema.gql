@@ -2,6 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AssignmentFile {
+  id: String!
+  name: String!
+  type: String!
+  content: String!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+}
+
 type Module {
   id: String!
   name: String!
@@ -25,18 +37,6 @@ type Path {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-type Assignment {
-  id: String!
-  description: String!
-}
-
-type AssignmentFile {
-  id: String!
-  name: String!
-  type: String!
-  content: String!
-}
 
 type UserPreferences {
   id: String!
@@ -80,8 +80,9 @@ type Mutation {
   joinPath(pathId: String!): Boolean!
   createAssignment(assignment: AssignmentInput!): Assignment!
   createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
-  createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
+  deleteAssignmentFile(assignmentFileId: String!): Boolean!
+  createModule(module: ModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
 }
 
@@ -114,14 +115,6 @@ input AssignmentFileInput {
   content: String!
 }
 
-input ModuleInput {
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
-}
-
 input UpdateModuleInput {
   id: String!
   name: String
@@ -134,4 +127,12 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
+}
+
+input ModuleInput {
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
 }

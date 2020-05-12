@@ -4,5 +4,7 @@ mutation ($assignmentFile:AssignmentFileInput!) {
     name
     type
     content
+    assignmentId
+    author
   }
 }
