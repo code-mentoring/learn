@@ -34,6 +34,8 @@ export class ModuleService {
   async delete(
     moduleId: string
   ): Promise<Boolean> {
-    return Boolean(await this.moduleRepository.delete({ id: moduleId }));
+    const { affected } = await this.moduleRepository.delete({ id: moduleId });
+    if (affected && affected > 0) return true;
+    return false;
   }
 }

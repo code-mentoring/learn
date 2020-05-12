@@ -53,6 +53,8 @@ type Concept {
   name: String!
   description: String!
   icon: String!
+  taughtInId: String!
+  taughtIn: Module!
 }
 
 type Query {
@@ -77,8 +79,9 @@ type Mutation {
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
   createConcept(concept: ConceptInput!): Concept!
-  updateConcept(update: ConceptInput!): Concept!
-  deleteConcept(delete: ConceptInput!): Concept!
+  updateConcept(update: UpdateConceptInput!): Concept!
+  deleteConcept(conceptId: String!): Boolean!
+  learnConcept(conceptId: String!): Boolean!
 }
 
 input UserInput {
@@ -120,8 +123,19 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
+}
+
 input ConceptInput {
   name: String!
   icon: String!
   description: String!
+  taughtInId: String!
+}
+
+input UpdateConceptInput {
+  id: String!
+  name: String
+  icon: String
+  description: String
+  taughtInId: String
 }

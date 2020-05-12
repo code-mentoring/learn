@@ -57,6 +57,16 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Concept = {
+   __typename?: 'Concept';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  icon: Scalars['String'];
+  taughtInId: Scalars['String'];
+  taughtIn: Module;
+};
+
 export type Query = {
    __typename?: 'Query';
   users: Array<User>;
@@ -66,6 +76,8 @@ export type Query = {
   getPathByName: Path;
   modules: Array<Module>;
   pathModules: Array<Module>;
+  getConcepts: Array<Concept>;
+  getConceptByName: Concept;
 };
 
 
@@ -83,6 +95,11 @@ export type QueryPathModulesArgs = {
   pathId: Scalars['String'];
 };
 
+
+export type QueryGetConceptByNameArgs = {
+  name: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
   createUser: User;
@@ -93,6 +110,9 @@ export type Mutation = {
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
+  createConcept: Concept;
+  updateConcept: Concept;
+  deleteConcept: Concept;
 };
 
 
@@ -136,6 +156,21 @@ export type MutationDeleteModuleArgs = {
   moduleId: Scalars['String'];
 };
 
+
+export type MutationCreateConceptArgs = {
+  concept: ConceptInput;
+};
+
+
+export type MutationUpdateConceptArgs = {
+  update: ConceptInput;
+};
+
+
+export type MutationDeleteConceptArgs = {
+  delete: ConceptInput;
+};
+
 export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -176,3 +211,10 @@ export enum ModuleType {
   Assignment = 'assignment',
   Lesson = 'lesson'
 }
+
+export type ConceptInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+};
