@@ -1,4 +1,4 @@
-mutation ($friend: FriendsInput!) {
+mutation ($friend: FriendInput!) {
   addFriend( friend : $friend) {
     id
     user1Id

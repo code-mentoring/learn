@@ -1,5 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, Check } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { UserWithPassword, User } from '../User/User.entity';
@@ -7,8 +7,8 @@ import { UserWithPassword, User } from '../User/User.entity';
 @ObjectType()
 @Entity('friend_requests')
 @Unique('fromto', ['fromId', 'toId'])
-@Check(`"fromId" <> "toId"`)
-export class FriendRequests extends CMBaseEntity {
+@Unique('fromto2', ['toId', 'fromId'])
+export class FriendRequest extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -29,19 +29,17 @@ export class FriendRequests extends CMBaseEntity {
   @Field()
   requested: Date;
 
-  // nullable is for Query result
   @ManyToOne(() => UserWithPassword)
-  @Field(() => User, { nullable: true })
+  @Field(() => User)
   from: UserWithPassword;
 
-  // nullable is for Query result
   @ManyToOne(() => UserWithPassword)
-  @Field(() => User, { nullable: true })
+  @Field(() => User)
   to: UserWithPassword;
 }
 
 @InputType()
-export class FriendRequestsInput {
+export class FriendRequestInput {
   @Field()
   fromId: string;
 
@@ -50,7 +48,7 @@ export class FriendRequestsInput {
 }
 
 @InputType()
-export class ConfirmRejectInput extends FriendRequestsInput {
+export class ConfirmRejectInput extends FriendRequestInput {
 
   @Field()
   id: string;

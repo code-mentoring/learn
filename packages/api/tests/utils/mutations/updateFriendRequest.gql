@@ -1,4 +1,4 @@
-mutation ($friendRequest: FriendRequestsInput!) {
+mutation ($friendRequest: FriendRequestInput!) {
   updateFriendRequest( updateFriendRequest : $friendRequest) {
     id
     fromId
