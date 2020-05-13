@@ -91,7 +91,7 @@ import { Friends, User } from '../../types';
       try {
           await TestClient.addFriend(input);
         } catch (e) {
-          expect(e.message).toContain('CHK_97b38570af597bded30944e809');
+          expect(e.message).toContain('CHECK constraint failed');
         }
     });
   

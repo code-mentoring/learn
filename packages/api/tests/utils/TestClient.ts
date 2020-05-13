@@ -108,19 +108,15 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
-  static friendRequests(): Promise< [FriendRequests] > {
-    return this._request('friendRequests', queries.friendRequests);
-  }
-
-  static getFriendRequestsFromMe(): Promise< [FriendRequests] > {
+  static getFriendRequestsFromMe(): Promise< FriendRequests[] > {
     return this._request('getFriendRequestsFromMe', queries.getFriendRequestsFromMe);
   }
 
-  static getFriendRequestsToMe(): Promise< [FriendRequests] > {
+  static getFriendRequestsToMe(): Promise< FriendRequests[] > {
     return this._request('getFriendRequestsToMe', queries.getFriendRequestsToMe);
   }
 
-  static getUserFriends(userId: String): Promise< [UserFriendOutput] > {
+  static getUserFriends(userId: String): Promise< UserFriendOutput[] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 

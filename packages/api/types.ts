@@ -47,6 +47,8 @@ export type FriendRequests = {
   toId: Scalars['String'];
   accepted?: Maybe<Scalars['Boolean']>;
   requested: Scalars['DateTime'];
+  from?: Maybe<User>;
+  to?: Maybe<User>;
 };
 
 export type Friends = {

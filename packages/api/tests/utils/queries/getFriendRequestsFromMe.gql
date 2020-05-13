@@ -5,5 +5,35 @@ query  {
     toId
     accepted
     requested
+    from{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+        id
+        userId
+        practiceGoal
+        why
+        codingAbility
+      }
+      createdAt
+    }
+    to{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+        id
+        userId
+        practiceGoal
+        why
+        codingAbility
+      }
+      createdAt
+    }
+   }
   }
-}

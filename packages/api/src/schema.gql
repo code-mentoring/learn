@@ -39,6 +39,8 @@ type FriendRequests {
   toId: String!
   accepted: Boolean
   requested: DateTime!
+  from: User
+  to: User
 }
 
 type Friends {

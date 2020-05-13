@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, Check } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
-import { UserWithPassword } from '../User/User.entity';
+import { UserWithPassword, User } from '../User/User.entity';
 
 @ObjectType()
 @Entity('friend_requests')
@@ -29,10 +29,14 @@ export class FriendRequests extends CMBaseEntity {
   @Field()
   requested: Date;
 
+  // nullable is for Query result
   @ManyToOne(() => UserWithPassword)
+  @Field(() => User, { nullable: true })
   from: UserWithPassword;
 
+  // nullable is for Query result
   @ManyToOne(() => UserWithPassword)
+  @Field(() => User, { nullable: true })
   to: UserWithPassword;
 }
 
