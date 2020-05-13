@@ -23,7 +23,7 @@ export class AssignmentFileResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
-  updateModule(
+  updateAssignmentFile(
     @Args('update') update: UpdateAssignmentFileInput
   ) {
     return this.assignmentFileService.update(update);
