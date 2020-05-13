@@ -18,11 +18,15 @@ export class AssignmentService {
     return this.assignmentRepository.create(assignmentInput).save();
   }
 
+  async findByModule(moduleId: string): Promise<Assignment[]> {
+    return this.assignmentRepository.find({ where: { moduleId }, relations: ['module'] });
+  }
+
   async update(
     updateInput: UpdateAssignmentInput
   ): Promise<Assignment | undefined> {
     await this.assignmentRepository.update({ id: updateInput.id }, updateInput);
-    return this.assignmentRepository.findOne({ id: updateInput.id }, { relations: ['assignmentFile', 'module'] });
+    return this.assignmentRepository.findOne({ id: updateInput.id }, { relations: ['module'] });
   }
 
   async delete(assignmentId: string): Promise<boolean> {

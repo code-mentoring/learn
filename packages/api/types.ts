@@ -15,6 +15,7 @@ export type Assignment = {
   id: Scalars['String'];
   description: Scalars['String'];
   moduleId: Scalars['String'];
+  module: Module;
 };
 
 export type Module = {

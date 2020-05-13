@@ -6,6 +6,7 @@ type Assignment {
   id: String!
   description: String!
   moduleId: String!
+  module: Module!
 }
 
 type Module {
