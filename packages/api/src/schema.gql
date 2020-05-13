@@ -64,15 +64,6 @@ type AssignmentFile {
   author: User!
 }
 
-type Concept {
-  id: String!
-  name: String!
-  description: String!
-  icon: String!
-  taughtInId: String!
-  taughtIn: Module!
-}
-
 type Query {
   users: [User!]!
   me: User!
@@ -93,9 +84,10 @@ type Mutation {
   joinPath(pathId: String!): Boolean!
   createAssignment(assignment: AssignmentInput!): Assignment!
   createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
-  updateModule(update: UpdateModuleInput!): Module!
+  updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
+  updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
 }
 
@@ -120,6 +112,7 @@ input PathInput {
 
 input AssignmentInput {
   description: String!
+  moduleId: String!
 }
 
 input AssignmentFileInput {
@@ -128,6 +121,23 @@ input AssignmentFileInput {
   content: String!
   authorId: String!
   assignmentId: String!
+}
+
+input UpdateAssignmentFileInput {
+  id: String!
+  name: String
+  type: String
+  content: String
+  authorId: String
+  assignmentId: String
+}
+
+input ModuleInput {
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
 }
 
 input UpdateModuleInput {
@@ -142,12 +152,4 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
-}
-
-input ModuleInput {
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
 }

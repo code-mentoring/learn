@@ -23,4 +23,19 @@ export class Assignment extends CMBaseEntity {
 export class AssignmentInput {
   @Field()
   description: string;
+
+  @Field()
+  moduleId: string;
+}
+
+@InputType()
+export class UpdateAssignmentInput {
+  @Field()
+  id: string;
+
+  @Field({ nullable: true })
+  description?: string;
+
+  @Field({ nullable: true })
+  moduleId?: string;
 }
