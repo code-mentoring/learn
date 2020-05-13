@@ -23,17 +23,13 @@ export class AssignmentFileResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
-  updateAssignmentFile(
-    @Args('update') update: UpdateAssignmentFileInput
-  ) {
+  updateAssignmentFile(@Args('update') update: UpdateAssignmentFileInput) {
     return this.assignmentFileService.update(update);
   }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)
-  deleteAssignmentFile(
-    @Args('assignmentFileId') assignmentFileId: string
-  ) {
+  deleteAssignmentFile(@Args('assignmentFileId') assignmentFileId: string) {
     return this.assignmentFileService.delete(assignmentFileId);
   }
 }

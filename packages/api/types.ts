@@ -14,6 +14,7 @@ export type Assignment = {
    __typename?: 'Assignment';
   id: Scalars['String'];
   description: Scalars['String'];
+  moduleId: Scalars['String'];
 };
 
 export type Module = {
@@ -70,6 +71,7 @@ export type AssignmentFile = {
   type: Scalars['String'];
   content: Scalars['String'];
   assignmentId: Scalars['String'];
+  authorId: Scalars['String'];
   assignment: Assignment;
   author: User;
 };
@@ -110,10 +112,13 @@ export type Mutation = {
   createPath: Path;
   joinPath: Scalars['Boolean'];
   createAssignment: Assignment;
+  updateAssignment: Assignment;
+  deleteAssignment: Scalars['Boolean'];
   createAssignmentFile: AssignmentFile;
-  updateModule: Module;
+  updateAssignmentFile: AssignmentFile;
   deleteAssignmentFile: Scalars['Boolean'];
   createModule: Module;
+  updateModule: Module;
   deleteModule: Scalars['Boolean'];
 };
 
@@ -149,13 +154,23 @@ export type MutationCreateAssignmentArgs = {
 };
 
 
+export type MutationUpdateAssignmentArgs = {
+  update: UpdateAssignmentInput;
+};
+
+
+export type MutationDeleteAssignmentArgs = {
+  assignmentId: Scalars['String'];
+};
+
+
 export type MutationCreateAssignmentFileArgs = {
   assignmentFile: AssignmentFileInput;
 };
 
 
-export type MutationUpdateModuleArgs = {
-  update: UpdateModuleInput;
+export type MutationUpdateAssignmentFileArgs = {
+  update: UpdateAssignmentFileInput;
 };
 
 
@@ -166,6 +181,11 @@ export type MutationDeleteAssignmentFileArgs = {
 
 export type MutationCreateModuleArgs = {
   module: ModuleInput;
+};
+
+
+export type MutationUpdateModuleArgs = {
+  update: UpdateModuleInput;
 };
 
 
@@ -194,13 +214,38 @@ export type PathInput = {
 
 export type AssignmentInput = {
   description: Scalars['String'];
+  moduleId: Scalars['String'];
+};
+
+export type UpdateAssignmentInput = {
+  id: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  moduleId?: Maybe<Scalars['String']>;
 };
 
 export type AssignmentFileInput = {
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
+  authorId: Scalars['String'];
   assignmentId: Scalars['String'];
+};
+
+export type UpdateAssignmentFileInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  authorId?: Maybe<Scalars['String']>;
+  assignmentId?: Maybe<Scalars['String']>;
+};
+
+export type ModuleInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
 };
 
 export type UpdateModuleInput = {
@@ -216,11 +261,3 @@ export enum ModuleType {
   Assignment = 'assignment',
   Lesson = 'lesson'
 }
-
-export type ModuleInput = {
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  type: Scalars['String'];
-  previousId?: Maybe<Scalars['String']>;
-  pathId: Scalars['String'];
-};

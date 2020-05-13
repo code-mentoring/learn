@@ -5,6 +5,7 @@
 type Assignment {
   id: String!
   description: String!
+  moduleId: String!
 }
 
 type Module {
@@ -83,6 +84,8 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createAssignment(assignment: AssignmentInput!): Assignment!
+  updateAssignment(update: UpdateAssignmentInput!): Assignment!
+  deleteAssignment(assignmentId: String!): Boolean!
   createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
   updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
@@ -113,6 +116,12 @@ input PathInput {
 input AssignmentInput {
   description: String!
   moduleId: String!
+}
+
+input UpdateAssignmentInput {
+  id: String!
+  description: String
+  moduleId: String
 }
 
 input AssignmentFileInput {
