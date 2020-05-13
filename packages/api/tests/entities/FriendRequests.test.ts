@@ -11,15 +11,31 @@ describe('FriendRequest entity', () => {
   let user3: User;
   let user4: User;
 
-  const setup = async () => {
-    await TestClient.resetDatabase();
+  const prepareData = async () => {
     const userInput : UserInput = TestClient.seeder.randomUserInput();
     me = await TestClient.createUser(userInput);
-    await TestClient.login(me.email, userInput.password);
-
     user2 = await TestClient.createUser(TestClient.seeder.randomUserInput());
     user3 = await TestClient.createUser(TestClient.seeder.randomUserInput());
     user4 = await TestClient.createUser(TestClient.seeder.randomUserInput());
+  }
+  const setup = async () => {
+    await TestClient.resetDatabase();
+    await prepareData();
+    await TestClient.login(me.email, 'secret');
+
+    // const userInput : UserInput = TestClient.seeder.randomUserInput();
+    // me = await TestClient.createUser(userInput);
+    // await TestClient.login(me.email, userInput.password);
+
+    // user2 = await TestClient.createUser(TestClient.seeder.randomUserInput());
+    // user3 = await TestClient.createUser(TestClient.seeder.randomUserInput());
+    // user4 = await TestClient.createUser(TestClient.seeder.randomUserInput());
+  };
+
+  const setupFromOther = async () => {
+    await TestClient.resetDatabase();
+    await prepareData();
+    await TestClient.login(user2.email, 'secret');
   };
 
   describe('Mutation: create FriendRequest', () => {
@@ -31,7 +47,7 @@ describe('FriendRequest entity', () => {
         toId: user2.id
       };
 
-      const friendRequest = await TestClient.createFriendRequest(input);
+      const friendRequest = await TestClient.requestFriendship(user2.id);
 
       expect(friendRequest.id).toBeDefined();
       expect(friendRequest.fromId).toEqual(me.id);
@@ -47,34 +63,35 @@ describe('FriendRequest entity', () => {
         toId: user2.id
       };
 
-      await TestClient.createFriendRequest(input);
+      await TestClient.requestFriendship(user2.id);
 
       try {
-        await TestClient.createFriendRequest(input);
+        await TestClient.requestFriendship(user2.id);
       } catch (e) {
-        expect(e.message).toContain('UNIQUE constraint failed');
+        expect(e.message).toContain('already requested');
       }
     });
 
+    // can not test, because need login with other user to add me.
     it('should throw error if to --> from exist', async () => {
-      expect.assertions(1); // Expect there to be an error
-      const input1 = {
-        fromId: me.id,
-        toId: user2.id
-      };
+      // expect.assertions(1); // Expect there to be an error
+      // const input1 = {
+      //   fromId: me.id,
+      //   toId: user2.id
+      // };
 
-      const input2 = {
-        fromId: user2.id,
-        toId: me.id
-      };
+      // const input2 = {
+      //   fromId: user2.id,
+      //   toId: me.id
+      // };
 
-      await TestClient.createFriendRequest(input1);
+      // await TestClient.requestFriendship(user2.id);
 
-      try {
-        await TestClient.createFriendRequest(input2);
-      } catch (e) {
-        expect(e.message).toContain('duplicate key value violates unique constraint ');
-      }
+      // try {
+      //   await TestClient.requestFriendship(input2);
+      // } catch (e) {
+      //   expect(e.message).toContain('duplicate key value violates unique constraint ');
+      // }
     });
 
     it('should throw error if fromId === toId', async () => {
@@ -85,63 +102,21 @@ describe('FriendRequest entity', () => {
       };
 
       try {
-        await TestClient.createFriendRequest(input);
+        await TestClient.requestFriendship(me.id);
       } catch (e) {
         expect(e.message).toContain('CHECK constraint failed');
       }
     });
 
-    it('should throw error if fromId is not an exist user', async () => {
-      expect.assertions(1); // Expect there to be an error
-      const input = {
-        fromId: '6ce7bb54-b57c-4304-9c1d-0c4c7d4b6666',
-        toId: me.id
-      };
-
-      try {
-        await TestClient.createFriendRequest(input);
-      } catch (e) {
-        expect(e.message).toContain('FOREIGN KEY constraint failed');
-      }
-    });
-
     it('should throw error if toId is not an exist user', async () => {
       expect.assertions(1); // Expect there to be an error
-      const input = {
-        fromId: me.id,
-        toId: '6ce7bb54-b57c-4304-9c1d-0c4c7d4b6666'
-      };
+
+      const toId = '6ce7bb54-b57c-4304-9c1d-0c4c7d4b6666'
 
       try {
-        await TestClient.createFriendRequest(input);
+        await TestClient.requestFriendship(toId);
       } catch (e) {
         expect(e.message).toContain('FOREIGN KEY constraint failed');
-      }
-    });
-
-    it('should throw error if from missing', async () => {
-      expect.assertions(1); // Expect there to be an error
-      try {
-        const input = {
-          toId: user2.id
-        };
-        // @ts-ignore Deliberately missing "from" to test error
-        await TestClient.createFriendRequest(input);
-      } catch (e) {
-        expect(e.message).toContain('Field "fromId" of required type "String!" was not provided');
-      }
-    });
-
-    it('should throw error if to missing', async () => {
-      expect.assertions(1); // Expect there to be an error
-      try {
-        const input = {
-          fromId: me.id
-        };
-        // @ts-ignore Deliberately missing "to" to test error
-        await TestClient.createFriendRequest(input);
-      } catch (e) {
-        expect(e.message).toContain('Field "toId" of required type "String!" was not provided');
       }
     });
   });
@@ -240,15 +215,12 @@ describe('FriendRequest entity', () => {
   //   });
   });
 
+
   describe('Query: getMyFriendRequstsFromMe', () => {
     beforeEach(setup);
+ 
     it('should return null since no friend request', async () => {
-      const input = {
-        fromId: user2.id,
-        toId: me.id
-      };
-      await TestClient.createFriendRequest(input);
-      const friendRequests = await TestClient.getFriendRequestFromMe();
+      const friendRequests = await TestClient.getFriendsRequestFromMe();
       expect(friendRequests.length).toEqual(0);
     });
 
@@ -257,9 +229,9 @@ describe('FriendRequest entity', () => {
         fromId: me.id,
         toId: user2.id
       };
-      await TestClient.createFriendRequest(input);
+      await TestClient.requestFriendship(user2.id);
 
-      const friendRequests = await TestClient.getFriendRequestFromMe();
+      const friendRequests = await TestClient.getFriendsRequestFromMe();
 
       expect(friendRequests.length).toEqual(1);
       expect(friendRequests[0].id).toBeDefined();
@@ -281,15 +253,9 @@ describe('FriendRequest entity', () => {
         toId: user3.id
       };
 
-      const input3 = {
-        fromId: user4.id,
-        toId: user3.id
-      };
-
-      await TestClient.createFriendRequest(input1);
-      await TestClient.createFriendRequest(input2);
-      await TestClient.createFriendRequest(input3);
-      const friendRequests : FriendRequest[] = await TestClient.getFriendRequestFromMe();
+      await TestClient.requestFriendship(user2.id);
+      await TestClient.requestFriendship(user3.id);
+      const friendRequests : FriendRequest[] = await TestClient.getFriendsRequestFromMe();
 
       expect(friendRequests.length).toEqual(2);
 
@@ -310,26 +276,23 @@ describe('FriendRequest entity', () => {
   });
 
   describe('Query: getMyFriendRequstsToMe', () => {
-    beforeEach(setup);
+    beforeEach(setupFromOther);
+
     it('should return null since no friend request', async () => {
-      const input = {
-        fromId: me.id,
-        toId: user2.id
-      };
-      await TestClient.createFriendRequest(input);
-      const friendRequests = await TestClient.getFriendRequestToMe();
+      await TestClient.login(me.email, 'secret');
+
+      const friendRequests = await TestClient.getFriendsRequestToMe();
+
       expect(friendRequests.length).toEqual(0);
     });
 
     it('should return one friend request', async () => {
-      const input = {
-        fromId: user2.id,
-        toId: me.id
-      };
 
-      await TestClient.createFriendRequest(input);
+      await TestClient.requestFriendship(me.id);
 
-      const friendRequests = await TestClient.getFriendRequestToMe();
+      await TestClient.login(me.email, 'secret');
+
+      const friendRequests = await TestClient.getFriendsRequestToMe();
 
       expect(friendRequests.length).toEqual(1);
       expect(friendRequests[0].id).toBeDefined();
@@ -338,40 +301,6 @@ describe('FriendRequest entity', () => {
       expect(friendRequests[0].accepted).toBeNull;
       expect(friendRequests[0].requested).toBeDefined();
       expect(friendRequests[0].from).toEqual(user2);
-    });
-
-    it('should return two friend request', async () => {
-      const input1 = {
-        fromId: user2.id,
-        toId: me.id
-      };
-
-      const input2 = {
-        fromId: user3.id,
-        toId: me.id
-      };
-
-      const input3 = {
-        fromId: user4.id,
-        toId: user3.id
-      };
-
-      await TestClient.createFriendRequest(input1);
-      await TestClient.createFriendRequest(input2);
-      await TestClient.createFriendRequest(input3);
-      const friendRequests : FriendRequest[] = await TestClient.getFriendRequestToMe();
-
-      expect(friendRequests.length).toEqual(2);
-
-      expect(friendRequests[0].fromId).toEqual(user2.id);
-      expect(friendRequests[0].toId).toEqual(me.id);
-      expect(friendRequests[0].accepted).toBeNull;
-      expect(friendRequests[0].requested).toBeDefined();
-
-      expect(friendRequests[1].fromId).toEqual(user3.id);
-      expect(friendRequests[1].toId).toEqual(me.id);
-      expect(friendRequests[1].accepted).toBeNull;
-      expect(friendRequests[1].requested).toBeDefined();
     });
   });
 });

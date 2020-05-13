@@ -1,5 +1,5 @@
 query  {
-  getFriendRequestToMe {
+  getFriendsRequestToMe {
     id
     fromId
     toId

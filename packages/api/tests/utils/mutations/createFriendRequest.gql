@@ -1,9 +1,0 @@
-mutation ($friendRequest: FriendRequestInput!) {
-  createFriendRequest( createInput : $friendRequest) {
-    id
-    fromId
-    toId
-    accepted
-    requested
-  }
-}

@@ -47,8 +47,8 @@ export type FriendRequest = {
   toId: Scalars['String'];
   accepted?: Maybe<Scalars['Boolean']>;
   requested: Scalars['DateTime'];
-  from?: Maybe<User>;
-  to?: Maybe<User>;
+  from: User;
+  to: User;
 };
 
 export type Friend = {
@@ -80,9 +80,9 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
-  getFriendRequestFromMe: Array<FriendRequest>;
-  getFriendRequestToMe: Array<FriendRequest>;
-  getUserFriend: Array<UserFriendOutput>;
+  getFriendsRequestFromMe: Array<FriendRequest>;
+  getFriendsRequestToMe: Array<FriendRequest>;
+  getUserFriends: Array<UserFriendOutput>;
 };
 
 
@@ -96,7 +96,7 @@ export type QueryGetPathByNameArgs = {
 };
 
 
-export type QueryGetUserFriendArgs = {
+export type QueryGetUserFriendsArgs = {
   userId: Scalars['String'];
 };
 
@@ -107,7 +107,7 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
-  createFriendRequest: FriendRequest;
+  requestFriendship: FriendRequest;
   confirmRejectRequest: Scalars['Boolean'];
   addFriend: Friend;
   deleteFriend: Scalars['Boolean'];
@@ -140,8 +140,8 @@ export type MutationJoinPathArgs = {
 };
 
 
-export type MutationCreateFriendRequestArgs = {
-  createInput: FriendRequestInput;
+export type MutationRequestFriendshipArgs = {
+  toId: Scalars['String'];
 };
 
 
@@ -151,12 +151,12 @@ export type MutationConfirmRejectRequestArgs = {
 
 
 export type MutationAddFriendArgs = {
-  friend: FriendInput;
+  friendInput: FriendInput;
 };
 
 
 export type MutationDeleteFriendArgs = {
-  friend: FriendInput;
+  friendId: Scalars['String'];
 };
 
 export type UserInput = {
@@ -176,11 +176,6 @@ export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
-};
-
-export type FriendRequestInput = {
-  fromId: Scalars['String'];
-  toId: Scalars['String'];
 };
 
 export type ConfirmRejectInput = {

@@ -8,7 +8,7 @@ export default {
   createPath: fs.readFileSync(path.join(__dirname, './createPath.gql')).toString(),
   joinPath: fs.readFileSync(path.join(__dirname, './joinPath.gql')).toString(),
   updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString(),
-  createFriendRequest: fs.readFileSync(path.join(__dirname, './createFriendRequest.gql')).toString(),
+  requestFriendship: fs.readFileSync(path.join(__dirname, './requestFriendship.gql')).toString(),
   confirmRejectRequest: fs.readFileSync(path.join(__dirname, './confirmRejectRequest.gql')).toString(),
   addFriend: fs.readFileSync(path.join(__dirname, './addFriend.gql')).toString(),
   deleteFriend: fs.readFileSync(path.join(__dirname, './deleteFriend.gql')).toString(),

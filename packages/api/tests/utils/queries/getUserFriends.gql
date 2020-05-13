@@ -1,5 +1,5 @@
 query ($userId: String!)  {
-  getUserFriend (userId : $userId){    
+  getUserFriends (userId : $userId){    
     id
     since
     userFriend{

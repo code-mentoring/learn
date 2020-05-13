@@ -54,7 +54,7 @@ describe('Friend entity', () => {
       try {
         await TestClient.addFriend(input);
       } catch (e) {
-        expect(e.message).toContain('UNIQUE constraint');
+        expect(e.message).toContain('already friends');
       }
     });
 
@@ -76,7 +76,7 @@ describe('Friend entity', () => {
       try {
         await TestClient.addFriend(input2);
       } catch (e) {
-        expect(e.message).toContain('UNIQUE constraint');
+        expect(e.message).toContain('already friends');
       }
     });
 
@@ -125,7 +125,7 @@ describe('Friend entity', () => {
   describe('Query: getUserFriend', () => {
     beforeEach(setup);
     it('should return null since no friends', async () => {
-      const friends = await TestClient.getUserFriend(me.id);
+      const friends = await TestClient.getUserFriends(me.id);
       expect(friends.length).toEqual(0);
     });
 
@@ -135,7 +135,7 @@ describe('Friend entity', () => {
         user2Id: user2.id
       };
       const addFriend = await TestClient.addFriend(input);
-      const friends = await TestClient.getUserFriend(me.id);
+      const friends = await TestClient.getUserFriends(me.id);
 
       expect(friends.length).toEqual(1);
       expect(friends[0].id).toEqual(addFriend.id);
@@ -159,7 +159,7 @@ describe('Friend entity', () => {
 
       const addFriend1 = await TestClient.addFriend(input1);
       const addFriend2 = await TestClient.addFriend(input2);
-      const friends = await TestClient.getUserFriend(me.id);
+      const friends = await TestClient.getUserFriends(me.id);
 
       expect(friends.length).toEqual(2);
 
@@ -198,7 +198,7 @@ describe('Friend entity', () => {
       const addFriend2 = await TestClient.addFriend(input2);
       const addFriend3 = await TestClient.addFriend(input3);
 
-      const friends = await TestClient.getUserFriend(me.id);
+      const friends = await TestClient.getUserFriends(me.id);
 
       expect(friends.length).toEqual(2);
 
@@ -221,17 +221,17 @@ describe('Friend entity', () => {
   describe('Mutation: deleteFriend', () => {
     beforeEach(setup);
 
-    it('should delete success by user1 user2', async () => {
+    it('should delete success by user2', async () => {
       const input = {
         user1Id: me.id,
         user2Id: user2.id
       };
       await TestClient.addFriend(input);
-      const query1 = await TestClient.getUserFriend(input.user1Id);
+      const query1 = await TestClient.getUserFriends(input.user1Id);
 
 
-      const result = await TestClient.deleteFriend(input);
-      const query2 = await TestClient.getUserFriend(input.user1Id);
+      const result = await TestClient.deleteFriend(user2.id);
+      const query2 = await TestClient.getUserFriends(input.user1Id);
 
       // since sqlite doesn't reture affected property as Postgres does, the result actually return false, alternatively to check the result by query.
       // expect(result).toEqual(true);
@@ -239,22 +239,17 @@ describe('Friend entity', () => {
       expect(query2.length).toEqual(0);
     });
 
-    it('should delete success by user2 user1', async () => {
+    it('should delete success by user1', async () => {
       const addInput = {
-        user1Id: me.id,
-        user2Id: user2.id
-      };
-
-      const deleteInput = {
         user1Id: user2.id,
         user2Id: me.id
       };
 
       await TestClient.addFriend(addInput);
-      const query1 = await TestClient.getUserFriend(addInput.user1Id);
+      const query1 = await TestClient.getUserFriends(me.id);
 
-      const result = await TestClient.deleteFriend(deleteInput);
-      const query2 = await TestClient.getUserFriend(addInput.user1Id);
+      const result = await TestClient.deleteFriend(user2.id);
+      const query2 = await TestClient.getUserFriends(me.id);
 
       // since sqlite doesn't reture affected property as Postgres does, the result actually return false, alternatively to check the result by query.
       // expect(result).toEqual(true);
@@ -263,12 +258,7 @@ describe('Friend entity', () => {
     });
 
     it('should throw error since the friend doest not exist', async () => {
-      const input = {
-        user1Id: me.id,
-        user2Id: user2.id
-      };
-
-      const result = await TestClient.deleteFriend(input);
+      const result = await TestClient.deleteFriend(user2.id);
       expect(result).toEqual(false);
     });
   });

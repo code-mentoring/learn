@@ -1,5 +1,5 @@
 mutation ($friend: FriendInput!) {
-  addFriend( friend : $friend) {
+  addFriend( friendInput : $friend) {
     id
     user1Id
     user2Id

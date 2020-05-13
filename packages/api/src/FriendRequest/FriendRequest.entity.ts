@@ -30,11 +30,11 @@ export class FriendRequest extends CMBaseEntity {
   requested: Date;
 
   @ManyToOne(() => UserWithPassword)
-  @Field(() => User)
+  @Field(() => User, { nullable: true })
   from: UserWithPassword;
 
   @ManyToOne(() => UserWithPassword)
-  @Field(() => User)
+  @Field(() => User, { nullable: true })
   to: UserWithPassword;
 }
 

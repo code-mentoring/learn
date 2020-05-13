@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, FriendRequestInput, FriendRequest, FriendInput, Friend, ConfirmRejectInput, UserFriendOutput } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, FriendRequest, FriendInput, Friend, ConfirmRejectInput, UserFriendOutput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -83,8 +83,8 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static createFriendRequest(friendRequest: FriendRequestInput): Promise<FriendRequest> {
-    return this._request('createFriendRequest', mutations.createFriendRequest, { friendRequest });
+  static requestFriendship(toId: string): Promise<FriendRequest> {
+    return this._request('requestFriendship', mutations.requestFriendship, { toId });
   }
 
   static confirmRejectRequest(input: ConfirmRejectInput): Promise<Boolean> {
@@ -95,8 +95,8 @@ export abstract class TestClient {
     return this._request('addFriend', mutations.addFriend, { friend });
   }
 
-  static deleteFriend(friend: FriendInput): Promise<Boolean> {
-    return this._request('deleteFriend', mutations.deleteFriend, { friend });
+  static deleteFriend(friendId: string): Promise<Boolean> {
+    return this._request('deleteFriend', mutations.deleteFriend, { friendId });
   }
   // ------------------------------------------------------------------- Queries
 
@@ -108,16 +108,16 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
-  static getFriendRequestFromMe(): Promise< FriendRequest[] > {
-    return this._request('getFriendRequestFromMe', queries.getFriendRequestFromMe);
+  static getFriendsRequestFromMe(): Promise< FriendRequest[] > {
+    return this._request('getFriendsRequestFromMe', queries.getFriendsRequestFromMe);
   }
 
-  static getFriendRequestToMe(): Promise< FriendRequest[] > {
-    return this._request('getFriendRequestToMe', queries.getFriendRequestToMe);
+  static getFriendsRequestToMe(): Promise< FriendRequest[] > {
+    return this._request('getFriendsRequestToMe', queries.getFriendsRequestToMe);
   }
 
-  static getUserFriend(userId: String): Promise< UserFriendOutput[] > {
-    return this._request('getUserFriend', queries.getUserFriend, { userId });
+  static getUserFriends(userId: String): Promise< UserFriendOutput[] > {
+    return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 
   // ----------------------------------------------------------------- Workflows
