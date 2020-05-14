@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -15,11 +15,8 @@ export class AssignmentFileService {
     return this.assignmentFileRepository.find();
   }
 
-  async findByName(name: string): Promise<AssignmentFile> {
-    const assignmentFile = await this.assignmentFileRepository
-      .findOne({ where: { name } });
-    if (!assignmentFile) throw new NotFoundException('Assignment File not found');
-    return assignmentFile;
+  async findByAssignment(assignmentId: string): Promise<AssignmentFile[]> {
+    return this.assignmentFileRepository.find({ where: { assignmentId }, relations: ['assignment'] });
   }
 
   async create(
