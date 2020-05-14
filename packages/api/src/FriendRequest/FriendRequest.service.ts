@@ -10,8 +10,6 @@ export class FriendRequestService {
   constructor(
     @InjectRepository(FriendRequest)
       private readonly friendRequestsRepository: Repository<FriendRequest>,
-      @InjectRepository(Friend)
-      private readonly friendRepository: Repository<Friend>,
       private readonly connection: Connection
   ) {}
 
@@ -30,26 +28,13 @@ export class FriendRequestService {
   }
 
   async create(fromId: string, toId: string): Promise<FriendRequest> {
-    // check if they are already friends
-    const existingFriendship = await this.friendRepository.findOne({
-      where: [
-        { user1Id: fromId, user2Id: toId },
-        { user1Id: toId, user2Id: fromId }
-      ]
-    });
-    if (existingFriendship) throw new Error('already friends');
+    let input = { fromId, toId };
 
-    // check if there has been a request between them
-    const existingRequest = await this.friendRequestsRepository.findOne(
-      {
-        where: [
-          { fromId, toId },
-          { fromId: toId, toId: fromId }
-        ]
-      }
-    );
-    if (existingRequest) throw new Error('already requested');
-    return this.friendRequestsRepository.create({ fromId, toId }).save();
+    // We place the lower id in fromId
+    if (toId > fromId) {
+      input = { fromId: toId, toId: fromId };
+    }
+    return this.friendRequestsRepository.create(input).save();
   }
 
   async confirmRejectRequest(input: ConfirmRejectInput): Promise<boolean> {

@@ -7,7 +7,6 @@ import { UserWithPassword, User } from '../User/User.entity';
 @ObjectType()
 @Entity('friend_requests')
 @Unique('fromto', ['fromId', 'toId'])
-@Unique('fromto2', ['toId', 'fromId'])
 export class FriendRequest extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()

@@ -29,15 +29,13 @@ export class FriendService {
 
   async create(friendsInput: FriendInput): Promise<Friend> {
     const { user1Id, user2Id } = friendsInput;
-    // check if they are already friends
-    const existingFriendship = await this.friendRepository.findOne({
-      where: [
-        { user1Id, user2Id },
-        { user1Id: user2Id, user2Id: user1Id }
-      ]
-    });
-    if (existingFriendship) throw new Error('already friends');
-    return this.friendRepository.create(friendsInput).save();
+    let input = { user1Id, user2Id };
+
+    // We place the lower id in user1Id
+    if (user2Id > user1Id) {
+      input = { user1Id: user2Id, user2Id: user1Id };
+    }
+    return this.friendRepository.create(input).save();
   }
 
   async delete(user1Id: string, user2Id: string): Promise<Boolean> {
