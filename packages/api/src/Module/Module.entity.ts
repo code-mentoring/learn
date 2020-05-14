@@ -49,7 +49,7 @@ export class Module extends CMBaseEntity {
   path: Path;
 
   @OneToMany(() => UserModule, userModule => userModule.module)
-  userModule = UserModule[];
+  userModules: UserModule[];
 }
 
 @InputType()
