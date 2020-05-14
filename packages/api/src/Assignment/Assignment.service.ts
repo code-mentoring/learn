@@ -11,7 +11,7 @@ export class AssignmentService {
   ) {}
 
   async findAll(): Promise<Assignment[]> {
-    return this.assignmentRepository.find();
+    return this.assignmentRepository.find({ relations: ['module'] });
   }
 
   async create(assignmentInput: AssignmentInput): Promise<Assignment> {
