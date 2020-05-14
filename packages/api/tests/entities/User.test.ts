@@ -85,7 +85,7 @@ describe('User entity', () => {
       expect(mePost.userPreferences).not.toBeNull();
     });
 
-    it.only('should validate before create/update preferences', async () => {
+    it('should validate before create/update preferences', async () => {
       expect.assertions(3);
 
       preferences.codingAbility = 11;
