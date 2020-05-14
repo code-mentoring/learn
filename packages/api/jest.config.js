@@ -7,5 +7,10 @@ module.exports = {
       tsConfig: './tsconfig.json',
       diagnostics: false
     }
-  }
+  },
+
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/Database/seeders/*'
+  ]
 };

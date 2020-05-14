@@ -1,7 +1,7 @@
 import { PathInput } from '../../types';
 import { TestClient } from '../utils/TestClient';
 
-const pathInput: PathInput = {
+export const pathInput: PathInput = {
   name: 'Path name',
   icon: 'icon',
   description: 'Description text'

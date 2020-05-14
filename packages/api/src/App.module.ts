@@ -8,6 +8,7 @@ import { UserModule } from './User';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { FriendModule } from './Friend';
+import { ModuleModule } from './Module';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -18,6 +19,7 @@ export const appImports = [
   PathModule,
   PathUserModule,
   FriendModule,
+  ModuleModule,
 
   DatabaseModule,
 

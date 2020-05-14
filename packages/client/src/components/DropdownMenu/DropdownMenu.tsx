@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardProps } from '@code-mentoring/ui/components/Card/Card';
+import { Card, CardProps } from '@codement/ui/components/Card/Card';
 import { Link } from 'react-router-dom';
 
 // TODO: Change the Link's addresses

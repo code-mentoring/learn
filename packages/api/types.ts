@@ -10,6 +10,18 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Module = {
+   __typename?: 'Module';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+  previous?: Maybe<Module>;
+  path: Path;
+};
+
 export type Path = {
    __typename?: 'Path';
   id: Scalars['String'];
@@ -77,6 +89,8 @@ export type Query = {
   paths: Array<Path>;
   getPathByName: Path;
   getUserFriends: Array<Friend>;
+  modules: Array<Module>;
+  pathModules: Array<Module>;
 };
 
 
@@ -94,6 +108,11 @@ export type QueryGetUserFriendsArgs = {
   userId: Scalars['String'];
 };
 
+
+export type QueryPathModulesArgs = {
+  pathId: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
   createUser: User;
@@ -104,6 +123,9 @@ export type Mutation = {
   createFriend: FriendOutput;
   confirmRejectRequest: Friend;
   deleteFriend: Scalars['Boolean'];
+  createModule: Module;
+  updateModule: Module;
+  deleteModule: Scalars['Boolean'];
 };
 
 
@@ -148,6 +170,21 @@ export type MutationDeleteFriendArgs = {
   friendId: Scalars['String'];
 };
 
+
+export type MutationCreateModuleArgs = {
+  module: ModuleInput;
+};
+
+
+export type MutationUpdateModuleArgs = {
+  update: UpdateModuleInput;
+};
+
+
+export type MutationDeleteModuleArgs = {
+  moduleId: Scalars['String'];
+};
+
 export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -171,3 +208,25 @@ export type CreateFriendInput = {
   fromId: Scalars['String'];
   toId: Scalars['String'];
 };
+
+export type ModuleInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+};
+
+export type UpdateModuleInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  type?: Maybe<ModuleType>;
+  previousId?: Maybe<Scalars['String']>;
+  pathId?: Maybe<Scalars['String']>;
+};
+
+export enum ModuleType {
+  Assignment = 'assignment',
+  Lesson = 'lesson'
+}

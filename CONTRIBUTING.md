@@ -42,7 +42,8 @@ This is a running list of those who are actively contributing to this project.
 | Kevin Gilbert       | Back-end                  | `@Kevin`            | [@NoSoEpicCoder](https://github.com/NoSoEpicCoder)     | 5-10 hours          | Apr 2020 |
 | Rayser Castrillo    | Back-end                  | `@rayser`           | [@raysercast1](https://github.com/raysercast1)         | 5 - 10 hours        | Apr 2020 |
 | Lan Phan            | Testing & Front-end       | `@Lan Phan`         | [@lanphantastic](https://github.com/lanphantastic)     | 3 - 6 hours         | Apr 2020 |
-| Dwane Pennant            | Back-end       | `@Dwane`         | [@pennandw](https://github.com/pennandw)     | 2 - 5 hours         | Apr 2020 |
+| Dwane Pennant       | Back-end                  | `@Dwane`            | [@pennandw](https://github.com/pennandw)               | 2 - 5 hours         | Apr 2020 |
+| Jeff Norman         | Front-end & Design        | `@Jeff`             | [@crizzpy](https://github.com/crizzpy)                 | 10 hours            | May 2020 |
 
 ## 🔧 What can I work on?
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, PathIcon } from '@code-mentoring/ui';
+import { Icon, PathIcon } from '@codement/ui';
 import LogoMark from '../../images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
 import { Me } from '../../containers/Me.container';

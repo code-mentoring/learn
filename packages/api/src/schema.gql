@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  path: Path!
+}
+
 type Path {
   id: String!
   name: String!
@@ -66,6 +77,8 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   getUserFriends(userId: String!): [Friend!]!
+  modules: [Module!]!
+  pathModules(pathId: String!): [Module!]!
 }
 
 type Mutation {
@@ -77,6 +90,9 @@ type Mutation {
   createFriend(friendInput: CreateFriendInput!): FriendOutput!
   confirmRejectRequest(response: String!, id: String!): Friend!
   deleteFriend(friendId: String!): Boolean!
+  createModule(module: ModuleInput!): Module!
+  updateModule(update: UpdateModuleInput!): Module!
+  deleteModule(moduleId: String!): Boolean!
 }
 
 input UserInput {
@@ -101,4 +117,26 @@ input PathInput {
 input CreateFriendInput {
   fromId: String!
   toId: String!
+}
+
+input ModuleInput {
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+}
+
+input UpdateModuleInput {
+  id: String!
+  name: String
+  icon: String
+  type: ModuleType
+  previousId: String
+  pathId: String
+}
+
+enum ModuleType {
+  assignment
+  lesson
 }

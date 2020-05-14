@@ -10,5 +10,8 @@ export default {
   updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString(),
   confirmRejectRequest: fs.readFileSync(path.join(__dirname, './confirmRejectRequest.gql')).toString(),
   createFriend: fs.readFileSync(path.join(__dirname, './createFriend.gql')).toString(),
-  deleteFriend: fs.readFileSync(path.join(__dirname, './deleteFriend.gql')).toString()
+  deleteFriend: fs.readFileSync(path.join(__dirname, './deleteFriend.gql')).toString(),
+  createModule: fs.readFileSync(path.join(__dirname, './createModule.gql')).toString(),
+  updateModule: fs.readFileSync(path.join(__dirname, './updateModule.gql')).toString(),
+  deleteModule: fs.readFileSync(path.join(__dirname, './deleteModule.gql')).toString()
 };
