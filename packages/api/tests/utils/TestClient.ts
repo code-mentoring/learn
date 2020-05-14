@@ -11,7 +11,7 @@ import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import {
   UserPreferencesInput,
-  UserPreferences,
+  UserPreferences
 } from '../../src/UserPreferences/UserPreferences.entity';
 import { UserWithPassword } from '../../src/User/User.entity';
 
@@ -42,7 +42,7 @@ export abstract class TestClient {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: appImports,
       providers: [TestLogger],
-      exports: [TestLogger],
+      exports: [TestLogger]
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
@@ -75,7 +75,7 @@ export abstract class TestClient {
   ): Promise<LoginOutput> {
     const res = await this._request<LoginOutput>('login', mutations.login, {
       email,
-      password,
+      password
     });
     if (storeToken) this.token = res.accessToken;
     return res;
@@ -93,7 +93,7 @@ export abstract class TestClient {
     preferences: UserPreferencesInput
   ): Promise<UserPreferences> {
     return this._request('updatePreferences', mutations.updatePreferences, {
-      preferences,
+      preferences
     });
   }
 

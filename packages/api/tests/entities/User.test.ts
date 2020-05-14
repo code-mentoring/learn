@@ -20,7 +20,7 @@ describe('User entity', () => {
         email: 'fake@user.com',
         firstName: 'Bob',
         lastName: 'Brown',
-        password: 'secret',
+        password: 'secret'
       };
 
       const user = await TestClient.createUser(input);
