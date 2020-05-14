@@ -16,6 +16,12 @@ export class AssignmentResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => [Assignment])
+  moduleAssignments(@Args('moduleId') moduleId: string) {
+    return this.assignmentService.findByModule(moduleId);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => Assignment)
   createAssignment(@Args('assignment') assignment: AssignmentInput) {
     return this.assignmentService.create(assignment);
