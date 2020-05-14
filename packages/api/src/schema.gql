@@ -33,33 +33,30 @@ type User {
   createdAt: DateTime!
 }
 
-type FriendRequest {
-  id: String!
-  fromId: String!
-  toId: String!
-  accepted: Boolean
-  requested: DateTime!
-  from: User
-  to: User
+type LoginOutput {
+  accessToken: String!
 }
 
-type Friend {
+type Friendship {
   id: String!
   user1Id: String!
   user2Id: String!
-  since: DateTime!
+  requested: DateTime!
+  initiator: String!
+  status: Float!
+  since: DateTime
   user1: User!
   user2: User!
 }
 
-type UserFriendOutput {
+type UserFriendshipOutput {
   id: String!
+  userId: String!
   since: DateTime!
+  status: Float!
+  requested: DateTime!
+  initiator: String!
   userFriend: User!
-}
-
-type LoginOutput {
-  accessToken: String!
 }
 
 type Query {
@@ -68,9 +65,7 @@ type Query {
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
-  getFriendsRequestFromMe: [FriendRequest!]!
-  getFriendsRequestToMe: [FriendRequest!]!
-  getUserFriends(userId: String!): [UserFriendOutput!]!
+  getUserFriends(userId: String!): [UserFriendshipOutput!]!
 }
 
 type Mutation {
@@ -79,9 +74,8 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
-  requestFriendship(toId: String!): FriendRequest!
+  requestFriendship(toId: String!): Friendship!
   confirmRejectRequest(input: ConfirmRejectInput!): Boolean!
-  addFriend(friendInput: FriendInput!): Friend!
   deleteFriend(friendId: String!): Boolean!
 }
 
@@ -105,13 +99,6 @@ input PathInput {
 }
 
 input ConfirmRejectInput {
-  fromId: String!
-  toId: String!
   id: String!
   accepted: Boolean!
-}
-
-input FriendInput {
-  user1Id: String!
-  user2Id: String!
 }
