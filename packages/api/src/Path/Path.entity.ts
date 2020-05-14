@@ -4,6 +4,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Un
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { ECharacter } from '../Module/Character/Character.entity';
+import { Module } from '../Module/Module.entity';
 
 @ObjectType()
 @Entity('path')
@@ -34,6 +35,9 @@ export class Path extends CMBaseEntity {
 
   @OneToMany(() => ECharacter, character => character.path)
   character: ECharacter[];
+
+  @OneToMany(() => Module, module => module.path)
+  module: Module[];
 }
 
 @InputType()
