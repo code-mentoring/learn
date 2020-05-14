@@ -1,0 +1,3 @@
+mutation deleteAssignmentFile($assignmentFileId: String!) {
+  deleteAssignmentFile(assignmentFileId: $assignmentFileId)
+}

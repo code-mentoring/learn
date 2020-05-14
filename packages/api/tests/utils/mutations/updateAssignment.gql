@@ -1,0 +1,7 @@
+mutation updateAssignment($update: UpdateAssignmentInput!) {
+  updateAssignment(update: $update) {
+    id
+    description
+    moduleId
+  }
+}
