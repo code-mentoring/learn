@@ -1,3 +1,41 @@
-mutation ($input: ConfirmRejectInput!) {
-  confirmRejectRequest( input : $input) 
+mutation ($response: String!, $id: String!) {
+  confirmRejectRequest( response : $response, id: $id)  {
+    id
+    user1Id
+    user2Id
+    requested
+    initiator
+    status
+    since
+    user1{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }
+    user2{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }
+  }
 }

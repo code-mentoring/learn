@@ -40,15 +40,9 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
-export type FriendRequest = {
-   __typename?: 'FriendRequest';
-  id: Scalars['String'];
-  fromId: Scalars['String'];
-  toId: Scalars['String'];
-  accepted?: Maybe<Scalars['Boolean']>;
-  requested: Scalars['DateTime'];
-  from: User;
-  to: User;
+export type LoginOutput = {
+   __typename?: 'LoginOutput';
+  accessToken: Scalars['String'];
 };
 
 export type Friend = {
@@ -56,21 +50,23 @@ export type Friend = {
   id: Scalars['String'];
   user1Id: Scalars['String'];
   user2Id: Scalars['String'];
-  since: Scalars['DateTime'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
   user1: User;
   user2: User;
 };
 
-export type UserFriendOutput = {
-   __typename?: 'UserFriendOutput';
+export type FriendOutput = {
+   __typename?: 'FriendOutput';
   id: Scalars['String'];
-  since: Scalars['DateTime'];
-  userFriend: User;
-};
-
-export type LoginOutput = {
-   __typename?: 'LoginOutput';
-  accessToken: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
 };
 
 export type Query = {
@@ -80,9 +76,7 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
-  getFriendsRequestFromMe: Array<FriendRequest>;
-  getFriendsRequestToMe: Array<FriendRequest>;
-  getUserFriends: Array<UserFriendOutput>;
+  getUserFriends: Array<Friend>;
 };
 
 
@@ -107,9 +101,8 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
-  requestFriendship: FriendRequest;
-  confirmRejectRequest: Scalars['Boolean'];
-  addFriend: Friend;
+  createFriend: FriendOutput;
+  confirmRejectRequest: Friend;
   deleteFriend: Scalars['Boolean'];
 };
 
@@ -140,18 +133,14 @@ export type MutationJoinPathArgs = {
 };
 
 
-export type MutationRequestFriendshipArgs = {
-  toId: Scalars['String'];
+export type MutationCreateFriendArgs = {
+  friendInput: CreateFriendInput;
 };
 
 
 export type MutationConfirmRejectRequestArgs = {
-  input: ConfirmRejectInput;
-};
-
-
-export type MutationAddFriendArgs = {
-  friendInput: FriendInput;
+  response: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -178,14 +167,7 @@ export type PathInput = {
   description: Scalars['String'];
 };
 
-export type ConfirmRejectInput = {
+export type CreateFriendInput = {
   fromId: Scalars['String'];
   toId: Scalars['String'];
-  id: Scalars['String'];
-  accepted: Scalars['Boolean'];
-};
-
-export type FriendInput = {
-  user1Id: Scalars['String'];
-  user2Id: Scalars['String'];
 };

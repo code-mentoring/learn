@@ -88,3 +88,27 @@ export class UpdateFriendInput {
   @Field({ nullable: true })
   since?: Date;
 }
+
+@ObjectType()
+export class FriendOutput {
+  @Field()
+  id: string;
+
+  @Field()
+  user1Id: string;
+
+  @Field()
+  user2Id: string;
+
+  @Field()
+  requested: Date;
+
+  @Field()
+  status: FriendStatus;
+
+  @Field()
+  initiator: string;
+
+  @Field({ nullable: true })
+  since: Date;
+}

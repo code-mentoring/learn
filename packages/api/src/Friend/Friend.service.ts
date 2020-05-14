@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Friend, CreateFriendInput, UpdateFriendInput } from './Friend.entity';
+import { Friend, CreateFriendInput, UpdateFriendInput, FriendOutput } from './Friend.entity';
 
 @Injectable()
 export class FriendService {
@@ -19,7 +19,7 @@ export class FriendService {
 
   }
 
-  async create(friendInput: CreateFriendInput): Promise<Friend> {
+  async create(friendInput: CreateFriendInput): Promise<FriendOutput> {
     const { fromId, toId } = friendInput;
     let input = { user1Id: fromId, user2Id: toId };
     // We place the lower id in user1Id

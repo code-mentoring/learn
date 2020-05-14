@@ -83,16 +83,12 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static requestFriendship(toId: string): Promise<FriendRequest> {
-    return this._request('requestFriendship', mutations.requestFriendship, { toId });
+  static createFriend(friendInput: CreateFriendInput): Promise<FriendOutput> {
+    return this._request('createFriend', mutations.createFriend, { friendInput });
   }
 
-  static confirmRejectRequest(input: ConfirmRejectInput): Promise<Boolean> {
-    return this._request('confirmRejectRequest', mutations.confirmRejectRequest, { input });
-  }
-
-  static addFriend(friend: FriendInput): Promise<Friend> {
-    return this._request('addFriend', mutations.addFriend, { friend });
+  static confirmRejectRequest(response: string, id: string): Promise<Friend> {
+    return this._request('confirmRejectRequest', mutations.confirmRejectRequest, { response, id });
   }
 
   static deleteFriend(friendId: string): Promise<Boolean> {
@@ -108,15 +104,7 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
-  static getFriendsRequestFromMe(): Promise< FriendRequest[] > {
-    return this._request('getFriendsRequestFromMe', queries.getFriendsRequestFromMe);
-  }
-
-  static getFriendsRequestToMe(): Promise< FriendRequest[] > {
-    return this._request('getFriendsRequestToMe', queries.getFriendsRequestToMe);
-  }
-
-  static getUserFriends(userId: String): Promise< UserFriendOutput[] > {
+  static getUserFriends(userId: string): Promise< Friend[] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 

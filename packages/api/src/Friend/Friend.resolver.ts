@@ -5,7 +5,7 @@ import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { FriendService } from './Friend.service';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
-import { Friend, CreateFriendInput, FriendStatus } from './Friend.entity';
+import { Friend, CreateFriendInput, FriendStatus, FriendOutput } from './Friend.entity';
 
 @Resolver('Friend')
 export class FriendResolver {
@@ -20,7 +20,7 @@ export class FriendResolver {
   }
 
   @UseGuards(GQLAuthGuard)
-  @Mutation(() => Friend)
+  @Mutation(() => FriendOutput)
   createFriend(@Args('friendInput') friendInput: CreateFriendInput) {
     return this.friendService.create(friendInput);
   }

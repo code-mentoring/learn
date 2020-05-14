@@ -1,8 +1,0 @@
-mutation ($friend: FriendInput!) {
-  addFriend( friendInput : $friend) {
-    id
-    user1Id
-    user2Id
-    since
-  }
-}
