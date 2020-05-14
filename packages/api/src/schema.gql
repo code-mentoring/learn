@@ -73,7 +73,10 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   assignments: [Assignment!]!
+  moduleAssignments(moduleId: String!): [Assignment!]!
   assignmentFiles: [AssignmentFile!]!
+  assignmentAssignmentFiles(assignmentId: String!): [AssignmentFile!]!
+  userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
 }

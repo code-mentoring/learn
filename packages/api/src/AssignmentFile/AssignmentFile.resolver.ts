@@ -22,6 +22,18 @@ export class AssignmentFileResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => [AssignmentFile])
+  assignmentAssignmentFiles(@Args('assignmentId') assignmentId: string) {
+    return this.assignmentFileService.findByAssignment(assignmentId);
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Query(() => [AssignmentFile])
+  userAssignmentFiles(@Args('authorId') authorId: string) {
+    return this.assignmentFileService.findByUser(authorId);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
   updateAssignmentFile(@Args('update') update: UpdateAssignmentFileInput) {
     return this.assignmentFileService.update(update);

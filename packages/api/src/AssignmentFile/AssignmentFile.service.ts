@@ -12,11 +12,15 @@ export class AssignmentFileService {
   ) {}
 
   async findAll(): Promise<AssignmentFile[]> {
-    return this.assignmentFileRepository.find();
+    return this.assignmentFileRepository.find({ relations: ['assignment', 'author'] });
   }
 
   async findByAssignment(assignmentId: string): Promise<AssignmentFile[]> {
-    return this.assignmentFileRepository.find({ where: { assignmentId }, relations: ['assignment'] });
+    return this.assignmentFileRepository.find({ where: { assignmentId }, relations: ['assignment', 'author'] });
+  }
+
+  async findByUser(authorId: string): Promise<AssignmentFile[]> {
+    return this.assignmentFileRepository.find({ where: { authorId }, relations: ['assignment', 'author'] });
   }
 
   async create(
