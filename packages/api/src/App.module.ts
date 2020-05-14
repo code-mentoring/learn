@@ -7,7 +7,7 @@ import { DatabaseModule } from './Database';
 import { UserModule } from './User';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
-import { FriendshipModule } from './Friendship';
+import { FriendModule } from './Friend';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -17,7 +17,7 @@ export const appImports = [
   UserModule,
   PathModule,
   PathUserModule,
-  FriendshipModule,
+  FriendModule,
 
   DatabaseModule,
 
