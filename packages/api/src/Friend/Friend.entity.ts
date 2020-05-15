@@ -77,7 +77,7 @@ export class UpdateFriendInput {
   requested?: Date;
 
   @Field({ nullable: true })
-  status: FriendStatus;
+  status?: FriendStatus;
 
   @Field({ nullable: true })
   initiator?: string;
