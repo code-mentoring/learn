@@ -34,13 +34,7 @@ export class CreateAssignmentInput {
 }
 
 @InputType()
-export class UpdateAssignmentInput {
+export class UpdateAssignmentInput extends CreateAssignmentInput {
   @Field()
   id: string;
-
-  @Field({ nullable: true })
-  description?: string;
-
-  @Field({ nullable: true })
-  moduleId?: string;
 }
