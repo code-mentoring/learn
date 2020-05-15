@@ -107,6 +107,10 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  static modules(): Promise<Module[]> {
+    return this._request('modules', queries.modules);
+  }
+
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
