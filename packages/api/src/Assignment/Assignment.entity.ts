@@ -19,7 +19,7 @@ export class Assignment extends CMBaseEntity {
   @Field()
   moduleId: string;
 
-  @ManyToOne(() => Module, module => module.assignment)
+  @ManyToOne(() => Module)
   @Field(() => Module)
   module: Module;
 }

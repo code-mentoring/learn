@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
 import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';

@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  id: String!
-  description: String!
-  moduleId: String!
-  module: Module!
-}
-
 type Module {
   id: String!
   name: String!
@@ -53,6 +46,13 @@ type User {
 
 type LoginOutput {
   accessToken: String!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: Module!
 }
 
 type AssignmentFile {
