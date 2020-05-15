@@ -15,14 +15,14 @@ export class CharacterResolver {
     return this.characterService.findAll();
   }
 
-  // Character is created when create Path, so we do not need create resolver
-  // @UseGuards(GQLAuthGuard)
-  // @Mutation(() => Character)
-  // createCharacter(
-  //   @Args('character') character: CharacterInput
-  // ) {
-  //   return this.characterService.create(character);
-  // }
+  // Character is created when create Path, so we may not need create resolver, but it will be used in test script
+  @UseGuards(GQLAuthGuard)
+  @Mutation(() => Character)
+  createCharacter(
+    @Args('character') character: CharacterInput
+  ) {
+    return this.characterService.create(character);
+  }
 
   // the entry point is through Path, so the update will be through characterId
   @UseGuards(GQLAuthGuard)
@@ -40,18 +40,4 @@ export class CharacterResolver {
     }
     throw new Error('please input one index');
   }
-  // no need delete character, since there is no need to delete path
-  // @UseGuards(GQLAuthGuard)
-  // @Mutation(() => Boolean)
-  // deleteCharacter(
-  //   @Args('index') index: CharacterIndex
-  // ) {
-  //   if (index.id)
-  //     return this.characterService.deleteById(index.id);
-  //   else if (index.name)
-  //     return this.characterService.deleteByName(index.name);
-  //   else if (index.displayName)
-  //     return this.characterService.deleteByDisplayName(index.displayName);
-  //   throw new Error('please input one index');
-  // }
 }

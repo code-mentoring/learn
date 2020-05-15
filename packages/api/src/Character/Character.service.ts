@@ -33,22 +33,4 @@ export class CharacterService {
     await this.characterRepository.update({ displayName }, updateInput);
     return this.characterRepository.findOne({ displayName });
   }
-
-  // async deleteById(id: string): Promise< Boolean > {
-  //   const { affected } = await this.characterRepository.delete({ id });
-  //   if ( affected && affected > 0 ) return true;
-  //   else return false;
-  // }
-
-  // async deleteByName(name: string): Promise< Boolean > {
-  //   const { affected } = await this.characterRepository.delete({ name });
-  //   if ( affected && affected > 0 ) return true;
-  //   else return false;
-  // }
-
-  // async deleteByDisplayName(displayName: string): Promise< Boolean > {
-  //   const { affected } = await this.characterRepository.delete({ displayName });
-  //   if ( affected && affected > 0 ) return true;
-  //   else return false;
-  // }
 }

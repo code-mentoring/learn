@@ -32,7 +32,7 @@ export class CharacterInput {
 
 @InputType()
 export class CharacterIndex {
-  // fields for search condition. at least and at most one of them
+  // fields as query index. at least and at most one of them
   @Field({ nullable: true })
   id?: string;
 

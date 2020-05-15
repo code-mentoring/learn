@@ -76,6 +76,7 @@ type Mutation {
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
+  createCharacter(character: CharacterInput!): Character!
   updateCharacter(update: CharacterInput!, index: CharacterIndex!): Character!
 }
 
