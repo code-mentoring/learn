@@ -24,15 +24,20 @@ export class AssignmentFileService {
   }
 
   async create(
+    authorId: string,
     assignmentFileInput: CreateAssignmentFileInput
   ): Promise<AssignmentFile> {
-    return this.assignmentFileRepository.create(assignmentFileInput).save();
+    return this.assignmentFileRepository.create({ ...assignmentFileInput, authorId }).save();
   }
 
   async update(
+    authorId: string,
     updateInput: UpdateAssignmentFileInput
   ): Promise<AssignmentFile | undefined> {
-    await this.assignmentFileRepository.update({ id: updateInput.id }, updateInput);
+    await this.assignmentFileRepository.update(
+      { id: updateInput.id },
+      { ...updateInput, authorId }
+    );
     return this.assignmentFileRepository.findOne({ id: updateInput.id }, { relations: ['assignment', 'author'] });
   }
 

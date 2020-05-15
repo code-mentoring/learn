@@ -54,14 +54,12 @@ export const randomAssignment = (
 });
 
 export const randomAssignmentFile = (
-  authorId: string,
   assignmentId: string,
   input: Partial<CreateAssignmentFileInput> = {}
 ): CreateAssignmentFileInput => ({
   name: faker.lorem.words(2),
   type: faker.lorem.word(),
   content: faker.lorem.words(10),
-  authorId,
   assignmentId,
   ...input
 });

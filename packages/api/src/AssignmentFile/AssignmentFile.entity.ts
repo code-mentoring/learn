@@ -54,9 +54,6 @@ export class CreateAssignmentFileInput {
   content: string;
 
   @Field()
-  authorId: string;
-
-  @Field()
   assignmentId: string;
 }
 
@@ -74,9 +71,6 @@ export class UpdateAssignmentFileInput {
 
   @Field({ nullable: true })
   content?: string;
-
-  @Field({ nullable: true })
-  authorId?: string;
 
   @Field({ nullable: true })
   assignmentId?: string;

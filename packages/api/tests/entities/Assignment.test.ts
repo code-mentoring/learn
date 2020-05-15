@@ -22,11 +22,10 @@ describe('Assignment entity', () => {
       expect.assertions(2);
 
       const assignmentInput = randomAssignment(moduleId);
-
       const assignment = await TestClient.createAssignment(assignmentInput);
 
       expect(assignment.id).toBeDefined();
-      expect(assignment.description).toEqual(assignmentInput.description);
+      expect(assignment).toMatchObject(assignmentInput);
     });
   });
 });

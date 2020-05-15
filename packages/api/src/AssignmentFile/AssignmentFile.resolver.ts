@@ -4,26 +4,25 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { AssignmentFile, CreateAssignmentFileInput, UpdateAssignmentFileInput } from './AssignmentFile.entity';
 import { AssignmentFileService } from './AssignmentFile.service';
+import { CurrentUser } from '../User/CurrentUser.decorator';
+import { User } from '../User/User.entity';
 
 @Resolver('AssignmentFile')
 export class AssignmentFileResolver {
   constructor(private readonly assignmentFileService: AssignmentFileService) {}
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => [AssignmentFile])
-  assignmentFiles() {
-    return this.assignmentFileService.findAll();
-  }
-
-  @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
-  createAssignmentFile(@Args('assignmentFile') assignmentFile: CreateAssignmentFileInput) {
-    return this.assignmentFileService.create(assignmentFile);
+  createAssignmentFile(
+    @CurrentUser() user: User,
+    @Args('assignmentFile') assignmentFile: CreateAssignmentFileInput
+  ) {
+    return this.assignmentFileService.create(user.id, assignmentFile);
   }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [AssignmentFile])
-  assignmentAssignmentFiles(@Args('assignmentId') assignmentId: string) {
+  assignmentFiles(@Args('assignmentId') assignmentId: string) {
     return this.assignmentFileService.findByAssignment(assignmentId);
   }
 
@@ -35,8 +34,11 @@ export class AssignmentFileResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
-  updateAssignmentFile(@Args('update') update: UpdateAssignmentFileInput) {
-    return this.assignmentFileService.update(update);
+  updateAssignmentFile(
+    @CurrentUser() user: User,
+    @Args('update') update: UpdateAssignmentFileInput
+  ) {
+    return this.assignmentFileService.update(user.id, update);
   }
 
   @UseGuards(GQLAuthGuard)

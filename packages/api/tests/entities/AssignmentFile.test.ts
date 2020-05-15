@@ -5,15 +5,13 @@ beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
 
 let assignmentId: string;
-let authorId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
-  const { user } = await TestClient.workflowSignup();
+  await TestClient.workflowSignup();
   const { id } = await TestClient.createPath(randomPath(undefined, 'path name'));
   const { id: moduleId } = await TestClient.createModule(randomModule('name', id));
   const { id: assgnmtId } = await TestClient.createAssignment(randomAssignment(moduleId));
   assignmentId = assgnmtId;
-  authorId = user.id;
 };
 
 describe('AssignmentFile entity', () => {
@@ -22,19 +20,13 @@ describe('AssignmentFile entity', () => {
     beforeEach(setup);
 
     it('should create an assignment file successfully', async () => {
-      expect.assertions(4);
+      expect.assertions(1);
 
-      const assignmentFileInput = randomAssignmentFile(authorId, assignmentId);
-
+      const assignmentFileInput = randomAssignmentFile(assignmentId);
       const assignmentFile = await TestClient.createAssignmentFile(assignmentFileInput);
 
-      expect(assignmentFile.id).toBeDefined();
-      expect(assignmentFile.name).toEqual(assignmentFileInput.name);
-      expect(assignmentFile.type).toEqual(assignmentFileInput.type);
-      expect(assignmentFile.content).toEqual(assignmentFileInput.content);
+      expect(assignmentFile).toMatchObject(assignmentFileInput);
 
-      // TODO: I'm unsure if I need to add more tests, and I also don't know
-      // how to test the reference to module and user...
     });
   });
 });

@@ -74,8 +74,7 @@ type Query {
   getPathByName(name: String!): Path!
   assignments: [Assignment!]!
   moduleAssignments(moduleId: String!): [Assignment!]!
-  assignmentFiles: [AssignmentFile!]!
-  assignmentAssignmentFiles(assignmentId: String!): [AssignmentFile!]!
+  assignmentFiles(assignmentId: String!): [AssignmentFile!]!
   userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
@@ -132,7 +131,6 @@ input CreateAssignmentFileInput {
   name: String!
   type: String!
   content: String!
-  authorId: String!
   assignmentId: String!
 }
 
@@ -141,7 +139,6 @@ input UpdateAssignmentFileInput {
   name: String
   type: String
   content: String
-  authorId: String
   assignmentId: String
 }
 

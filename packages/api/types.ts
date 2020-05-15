@@ -10,14 +10,6 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type Assignment = {
-   __typename?: 'Assignment';
-  id: Scalars['String'];
-  description: Scalars['String'];
-  moduleId: Scalars['String'];
-  module: Module;
-};
-
 export type Module = {
    __typename?: 'Module';
   id: Scalars['String'];
@@ -65,6 +57,14 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Assignment = {
+   __typename?: 'Assignment';
+  id: Scalars['String'];
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+  module: Module;
+};
+
 export type AssignmentFile = {
    __typename?: 'AssignmentFile';
   id: Scalars['String'];
@@ -87,7 +87,6 @@ export type Query = {
   assignments: Array<Assignment>;
   moduleAssignments: Array<Assignment>;
   assignmentFiles: Array<AssignmentFile>;
-  assignmentAssignmentFiles: Array<AssignmentFile>;
   userAssignmentFiles: Array<AssignmentFile>;
   modules: Array<Module>;
   pathModules: Array<Module>;
@@ -109,7 +108,7 @@ export type QueryModuleAssignmentsArgs = {
 };
 
 
-export type QueryAssignmentAssignmentFilesArgs = {
+export type QueryAssignmentFilesArgs = {
   assignmentId: Scalars['String'];
 };
 
@@ -246,7 +245,6 @@ export type CreateAssignmentFileInput = {
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
-  authorId: Scalars['String'];
   assignmentId: Scalars['String'];
 };
 
@@ -255,7 +253,6 @@ export type UpdateAssignmentFileInput = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
-  authorId?: Maybe<Scalars['String']>;
   assignmentId?: Maybe<Scalars['String']>;
 };
 
