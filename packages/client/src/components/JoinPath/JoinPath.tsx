@@ -33,6 +33,10 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
   const { data } = useQuery<{paths: Path[]}>(allPathsQuery);
 
+  const beginHandler = ( ) => {
+    console.log( "Clicked Begin in Join a Path" );
+  }
+
   return (
     <Modal setShow={setShow}>
       <div className="join-path-card">
@@ -43,13 +47,13 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
           onClick={() => setShow()}
         />
 
-        <h1 className="mb-3 font-semibold">Join a Path</h1>
+        <h1 className="modal-heading">Join a Path</h1>
 
-        <p className="text-sm leading-4 text-grey-800 mb-12" style={{ letterSpacing: '0.75px' }}>
+        <p className="modal-instruction">
           Select a path below to begin your journey...
         </p>
 
-        <div className="grid grid-cols-5 items-center" style={{ justifyItems: 'center' }}>
+        <div className="join-path-gridLayout">
           {data?.paths.map(path => (
             <div key={path.id}>
               <div className="path-icon-container">
@@ -58,7 +62,7 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
                   className="m-auto"
                 />
               </div>
-              <p className="font-semibold text-sm leading-4 mt-2 text-grey-600" style={{ letterSpacing: '0.875px' }}>{path.name.toUpperCase()}</p>
+              <p className="path-icon-title">{path.name.toUpperCase()}</p>
             </div>
           ))}
         </div>
@@ -66,6 +70,7 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
           <Button
             color="success"
             className="mt-8"
+            onClick={beginHandler}
           >
             Begin
           </Button>
