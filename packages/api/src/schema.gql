@@ -48,12 +48,35 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Friend {
+  id: String!
+  user1Id: String!
+  user2Id: String!
+  requested: DateTime!
+  status: String!
+  initiator: String!
+  since: DateTime
+  user1: User!
+  user2: User!
+}
+
+type FriendOutput {
+  id: String!
+  user1Id: String!
+  user2Id: String!
+  requested: DateTime!
+  status: String!
+  initiator: String!
+  since: DateTime
+}
+
 type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
 }
@@ -64,6 +87,9 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  createFriendship(friendInput: CreateFriendInput!): FriendOutput!
+  respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
+  deleteFriendship(friendId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
@@ -86,6 +112,11 @@ input PathInput {
   name: String!
   icon: String!
   description: String!
+}
+
+input CreateFriendInput {
+  fromId: String!
+  toId: String!
 }
 
 input ModuleInput {

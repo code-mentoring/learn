@@ -5,13 +5,13 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, ModuleInput, Module } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
 import { randomUserInput } from '../../src/Database/seeders/random';
+import { UserInput, User, LoginOutput, Path, PathInput, CreateFriendInput, FriendOutput, Friend, Module, ModuleInput } from '../../types';
 
 /**
  * A helper class to test the API
@@ -85,6 +85,18 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
+  static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
+    return this._request('createFriendship', mutations.createFriendship, { friendInput });
+  }
+
+  static respondToFriendRequest(user1Id: string, user2Id: string, response: string): Promise<Friend> {
+    return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { user1Id, user2Id, response });
+  }
+
+  static deleteFriendship(friendId: string): Promise<Boolean> {
+    return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
+  }
+
   static createModule(module: ModuleInput): Promise<Module> {
     return this._request('createModule', mutations.createModule, { module });
   }
@@ -107,6 +119,9 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  static getUserFriends(userId: string): Promise< Friend[] > {
+    return this._request('getUserFriends', queries.getUserFriends, { userId });
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
