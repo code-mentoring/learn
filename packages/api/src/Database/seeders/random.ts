@@ -3,6 +3,7 @@ import faker from 'faker';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { PathInput } from '../../Path/Path.entity';
+import { CharacterInput } from '../../Character/Character.entity';
 
 export const randomUserInput = (input: Partial<UserInput> = {}): UserInput => ({
   firstName: faker.name.firstName(),
@@ -16,6 +17,11 @@ export const randomUserPreferenceInput = (): UserPreferencesInput => ({
   practiceGoal: Math.floor(Math.random() * 4) + 1,
   why: faker.lorem.sentence(),
   codingAbility: Math.floor(Math.random() * 10) + 1
+});
+
+export const randomCharacterInput = (): CharacterInput => ({
+  name: faker.name.firstName(),
+  displayName: faker.name.lastName()
 });
 
 export const randomPath = (input: Partial<PathInput> = {}, name: string): PathInput => ({

@@ -6,6 +6,7 @@ import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { PathInput, Path } from './Path.entity';
 import { PathService } from './Path.service';
+import { CharacterInput } from '../Character/Character.entity';
 
 @Resolver('Path')
 export class PathResolver {
@@ -25,8 +26,11 @@ export class PathResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Path)
-  createPath(@Args('path') path: PathInput) {
-    return this.pathService.create(path);
+  createPath(
+    @Args('path') path: PathInput,
+    @Args('character') character: CharacterInput
+  ) {
+    return this.pathService.create(path, character);
   }
 
   @UseGuards(GQLAuthGuard)

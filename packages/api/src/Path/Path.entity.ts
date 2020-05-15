@@ -1,9 +1,10 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Module } from '../Module/Module.entity';
+import { Character } from '../Character/Character.entity';
 
 @ObjectType()
 @Entity('path')
@@ -34,6 +35,15 @@ export class Path extends CMBaseEntity {
 
   @OneToMany(() => Module, module => module.path)
   module: Module[];
+
+  @OneToOne(() => Character)
+  @JoinColumn()
+  @Field(() => Character)
+  character: Character;
+
+  @Column()
+  @Field()
+  characterId: string;
 }
 
 @InputType()

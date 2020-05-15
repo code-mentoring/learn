@@ -13,12 +13,20 @@ type Module {
   path: Path!
 }
 
+type Character {
+  id: String!
+  name: String!
+  displayName: String!
+}
+
 type Path {
   id: String!
   name: String!
   icon: String!
   description: String!
   createdAt: DateTime!
+  character: Character!
+  characterId: String!
 }
 
 """
@@ -56,17 +64,19 @@ type Query {
   getPathByName(name: String!): Path!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
+  characters: [Character!]!
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
-  createPath(path: PathInput!): Path!
+  createPath(character: CharacterInput!, path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
+  updateCharacter(update: CharacterInput!, index: CharacterIndex!): Character!
 }
 
 input UserInput {
@@ -80,6 +90,11 @@ input UserPreferencesInput {
   practiceGoal: Float
   why: String
   codingAbility: Float
+}
+
+input CharacterInput {
+  name: String!
+  displayName: String!
 }
 
 input PathInput {
@@ -108,4 +123,10 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
+}
+
+input CharacterIndex {
+  id: String
+  name: String
+  displayName: String
 }

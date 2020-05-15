@@ -4,26 +4,29 @@ import { Repository } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Path, PathInput } from './Path.entity';
+import { Character, CharacterInput } from '../Character/Character.entity';
 
 @Injectable()
 export class PathService {
   constructor(
     @InjectRepository(Path) private readonly pathRepository: Repository<Path>,
-    @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>
+    @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>,
+    @InjectRepository(Character) private readonly characterRepository: Repository<Character>
   ) {}
 
   async findAll(): Promise<Path[]> {
-    return this.pathRepository.find();
+    return this.pathRepository.find({ relations: ['character'] });
   }
 
   async findByName(name: string): Promise<Path> {
-    const path = await this.pathRepository.findOne({ where: { name } });
+    const path = await this.pathRepository.findOne({ where: { name }, relations: ['character'] });
     if (!path) throw new NotFoundException('Path not found');
     return path;
   }
 
-  async create(pathInput: PathInput): Promise<Path> {
-    return this.pathRepository.create(pathInput).save();
+  async create(pathInput: PathInput, characterInput: CharacterInput): Promise<Path> {
+    const character = await this.characterRepository.create(characterInput).save();
+    return this.pathRepository.create({ ...pathInput, character }).save();
   }
 
   async addUserToPath(pathId: string, userId: string) {
