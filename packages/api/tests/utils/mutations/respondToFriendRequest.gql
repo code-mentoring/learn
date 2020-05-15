@@ -1,5 +1,5 @@
-mutation ($response: String!, $id: String!) {
-  respondToFriendRequest( response : $response, id: $id)  {
+mutation ($user1Id: String!, $user2Id: String!, $response: String!) {
+  respondToFriendRequest( user1Id: $user1Id, user2Id: $user2Id, response : $response)  {
     id
     user1Id
     user2Id

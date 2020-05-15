@@ -162,7 +162,8 @@ export type MutationCreateFriendshipArgs = {
 
 export type MutationRespondToFriendRequestArgs = {
   response: Scalars['String'];
-  id: Scalars['String'];
+  user2Id: Scalars['String'];
+  user1Id: Scalars['String'];
 };
 
 

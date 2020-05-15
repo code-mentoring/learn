@@ -28,10 +28,11 @@ export class FriendResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Friend)
   respondToFriendRequest(
-    @Args('id') id: string,
+    @Args('user1Id') user1Id: string,
+    @Args('user2Id') user2Id: string,
     @Args('response') response: FriendStatus
   ) {
-    return this.friendService.update({ id, status: response, since: new Date() });
+    return this.friendService.update({ user1Id, user2Id, status: response, since: new Date() });
   }
 
   @UseGuards(GQLAuthGuard)

@@ -29,8 +29,18 @@ export class FriendService {
   }
 
   async update(updateInput: UpdateFriendInput): Promise<Friend | undefined> {
-    await this.friendRepository.update({ id: updateInput.id }, updateInput);
-    return this.friendRepository.findOne({ id: updateInput.id }, { relations: ['user1', 'user2'] });
+    // swap to make user1Id < user2Id
+    let adjustInput = updateInput;
+    if (updateInput.user1Id > updateInput.user2Id) {
+      adjustInput = { ...updateInput, user1Id: updateInput.user2Id, user2Id: updateInput.user1Id };
+    }
+
+    await this.friendRepository.update(
+      { user1Id: adjustInput.user1Id, user2Id: adjustInput.user2Id }, adjustInput
+    );
+    return this.friendRepository.findOne(
+      { user1Id: adjustInput.user1Id, user2Id: adjustInput.user2Id }, { relations: ['user1', 'user2'] }
+    );
   }
 
   async delete(user1Id: string, user2Id: string): Promise<Boolean> {

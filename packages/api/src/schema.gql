@@ -88,7 +88,7 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createFriendship(friendInput: CreateFriendInput!): FriendOutput!
-  respondToFriendRequest(response: String!, id: String!): Friend!
+  respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!

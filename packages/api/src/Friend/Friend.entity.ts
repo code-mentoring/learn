@@ -68,19 +68,16 @@ export class CreateFriendInput {
 export class UpdateFriendInput {
 
   @Field()
-  id: string;
+  user1Id: string;
 
-  @Field({ nullable: true })
-  user1Id?: string;
-
-  @Field({ nullable: true })
-  user2Id?: string;
+  @Field()
+  user2Id: string;
 
   @Field({ nullable: true })
   requested?: Date;
 
   @Field({ nullable: true })
-  status?: FriendStatus;
+  status: FriendStatus;
 
   @Field({ nullable: true })
   initiator?: string;

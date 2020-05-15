@@ -186,10 +186,10 @@ describe('Friend entity', () => {
     });
   });
 
-  describe('Mutation: confirmRejectRequest', () => {
+  describe('Mutation: respondToFriendRequest', () => {
     beforeEach(setup);
 
-    it('should confirm friend request successfully', async () => {
+    it('should confirm friend request successfully. case 1: user1Id < user2Id', async () => {
       const input = {
         fromId: me.id,
         toId: user2.id
@@ -199,12 +199,30 @@ describe('Friend entity', () => {
 
       const request = await TestClient.createFriendship(input);
 
-      const result = await TestClient.respondToFriendRequest(response, request.id);
+      const result = await TestClient.respondToFriendRequest(request.user1Id, request.user2Id, response);
 
       expect(result.status).toEqual(response);
       expect(result.since).toBeDefined();
-      expect(result.user1.id).toBeDefined();
-      expect(result.user2.id).toBeDefined();
+      expect(result.user1.id).toEqual(request.user1Id);
+      expect(result.user2.id).toEqual(request.user2Id);
+    });
+
+    it('should confirm friend request successfully. case 2: user1Id > user2Id', async () => {
+      const input = {
+        fromId: me.id,
+        toId: user2.id
+      };
+
+      const response = 'accepted';
+
+      const request = await TestClient.createFriendship(input);
+
+      const result = await TestClient.respondToFriendRequest(request.user2Id, request.user1Id, response);
+
+      expect(result.status).toEqual(response);
+      expect(result.since).toBeDefined();
+      expect(result.user1.id).toEqual(request.user1Id);
+      expect(result.user2.id).toEqual(request.user2Id);
     });
 
     it('should reject friend request successfully', async () => {
@@ -217,21 +235,22 @@ describe('Friend entity', () => {
 
       const request = await TestClient.createFriendship(input);
 
-      const result = await TestClient.respondToFriendRequest(response, request.id);
+      const result = await TestClient.respondToFriendRequest(request.user2Id, request.user1Id, response);
 
       expect(result.status).toEqual(response);
       expect(result.since).toBeDefined();
-      expect(result.user1.id).toBeDefined();
-      expect(result.user2.id).toBeDefined();
+      expect(result.user1.id).toEqual(request.user1Id);
+      expect(result.user2.id).toEqual(request.user2Id);
     });
 
     it('should throw an error if no friend exist', async () => {
       expect.assertions(1); // Expect there to be an error
-      const id = '1b7b2c98-9fbe-4424-ad9e-d50d56e1f0bc';
+      const user1Id = '9ba63166-5a19-4a4f-a33a-0192469dd378';
+      const user2Id = me.id;
       const response = 'accepted';
 
       try {
-        await TestClient.respondToFriendRequest(response, id);
+        await TestClient.respondToFriendRequest(user1Id, user2Id, response);
       } catch (e) {
         expect(e.message).toContain('Cannot return null for non-nullable field Mutation.respondToFriendRequest.');
       }
@@ -248,7 +267,7 @@ describe('Friend entity', () => {
       const response = 'hmmmm';
 
       try {
-        await TestClient.respondToFriendRequest(response, request.id);
+        await TestClient.respondToFriendRequest(request.user2Id, request.user1Id, response);
       } catch (e) {
         expect(e.message).toContain('CHECK constraint failed');
       }
