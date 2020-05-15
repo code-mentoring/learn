@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { AssignmentFile, AssignmentFileInput, UpdateAssignmentFileInput } from './AssignmentFile.entity';
+import { AssignmentFile, CreateAssignmentFileInput, UpdateAssignmentFileInput } from './AssignmentFile.entity';
 import { AssignmentFileService } from './AssignmentFile.service';
 
 @Resolver('AssignmentFile')
@@ -17,7 +17,7 @@ export class AssignmentFileResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => AssignmentFile)
-  createAssignmentFile(@Args('assignmentFile') assignmentFile: AssignmentFileInput) {
+  createAssignmentFile(@Args('assignmentFile') assignmentFile: CreateAssignmentFileInput) {
     return this.assignmentFileService.create(assignmentFile);
   }
 

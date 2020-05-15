@@ -7,7 +7,7 @@ import { UserWithPassword, User } from '../User/User.entity';
 
 @ObjectType()
 @Entity('assignmentFile')
-@Unique(['assignmentId', 'authorId'])
+@Unique('assignment_author', ['assignmentId', 'authorId'])
 export class AssignmentFile extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
@@ -43,7 +43,7 @@ export class AssignmentFile extends CMBaseEntity {
 }
 
 @InputType()
-export class AssignmentFileInput {
+export class CreateAssignmentFileInput {
   @Field()
   name: string;
 

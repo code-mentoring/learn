@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, Assignment, AssignmentInput, AssignmentFile, AssignmentFileInput, ModuleInput, Module } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, Assignment, AssignmentFile, CreateModuleInput, Module, CreateAssignmentInput, CreateAssignmentFileInput } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -85,15 +85,15 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static createAssignment(assignment: AssignmentInput): Promise<Assignment> {
+  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
     return this._request('createAssignment', mutations.createAssignment, { assignment });
   }
 
-  static createAssignmentFile(assignmentFile: AssignmentFileInput): Promise<AssignmentFile> {
+  static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
-  static createModule(module: ModuleInput): Promise<Module> {
+  static createModule(module: CreateModuleInput): Promise<Module> {
     return this._request('createModule', mutations.createModule, { module });
   }
 

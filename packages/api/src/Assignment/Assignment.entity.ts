@@ -25,7 +25,7 @@ export class Assignment extends CMBaseEntity {
 }
 
 @InputType()
-export class AssignmentInput {
+export class CreateAssignmentInput {
   @Field()
   description: string;
 

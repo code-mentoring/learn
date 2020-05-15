@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { Assignment, AssignmentInput, UpdateAssignmentInput } from './Assignment.entity';
+import { Assignment, CreateAssignmentInput, UpdateAssignmentInput } from './Assignment.entity';
 import { AssignmentService } from './Assignment.service';
 
 @Resolver('Assignment')
@@ -23,7 +23,7 @@ export class AssignmentResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Assignment)
-  createAssignment(@Args('assignment') assignment: AssignmentInput) {
+  createAssignment(@Args('assignment') assignment: CreateAssignmentInput) {
     return this.assignmentService.create(assignment);
   }
 

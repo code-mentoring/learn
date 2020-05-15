@@ -54,7 +54,7 @@ export class Module extends CMBaseEntity {
 }
 
 @InputType()
-export class ModuleInput {
+export class CreateModuleInput {
 
   @Field()
   name: string;

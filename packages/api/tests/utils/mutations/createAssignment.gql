@@ -1,4 +1,4 @@
-mutation ($assignment:AssignmentInput!) {
+mutation ($assignment: CreateAssignmentInput!) {
   createAssignment(assignment:$assignment) {
     id
     description

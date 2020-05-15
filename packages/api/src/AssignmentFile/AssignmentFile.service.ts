@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { AssignmentFile, AssignmentFileInput, UpdateAssignmentFileInput } from './AssignmentFile.entity';
+import { AssignmentFile, CreateAssignmentFileInput, UpdateAssignmentFileInput } from './AssignmentFile.entity';
 
 @Injectable()
 export class AssignmentFileService {
@@ -24,7 +24,7 @@ export class AssignmentFileService {
   }
 
   async create(
-    assignmentFileInput: AssignmentFileInput
+    assignmentFileInput: CreateAssignmentFileInput
   ): Promise<AssignmentFile> {
     return this.assignmentFileRepository.create(assignmentFileInput).save();
   }

@@ -87,13 +87,13 @@ type Mutation {
   login(password: String!, email: String!): LoginOutput!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
-  createAssignment(assignment: AssignmentInput!): Assignment!
+  createAssignment(assignment: CreateAssignmentInput!): Assignment!
   updateAssignment(update: UpdateAssignmentInput!): Assignment!
   deleteAssignment(assignmentId: String!): Boolean!
-  createAssignmentFile(assignmentFile: AssignmentFileInput!): AssignmentFile!
+  createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
   updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
-  createModule(module: ModuleInput!): Module!
+  createModule(module: CreateModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
 }
@@ -117,7 +117,7 @@ input PathInput {
   description: String!
 }
 
-input AssignmentInput {
+input CreateAssignmentInput {
   description: String!
   moduleId: String!
 }
@@ -128,7 +128,7 @@ input UpdateAssignmentInput {
   moduleId: String
 }
 
-input AssignmentFileInput {
+input CreateAssignmentFileInput {
   name: String!
   type: String!
   content: String!
@@ -145,7 +145,7 @@ input UpdateAssignmentFileInput {
   assignmentId: String
 }
 
-input ModuleInput {
+input CreateModuleInput {
   name: String!
   icon: String!
   type: String!

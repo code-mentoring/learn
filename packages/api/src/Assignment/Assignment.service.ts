@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Assignment, AssignmentInput, UpdateAssignmentInput } from './Assignment.entity';
+import { Assignment, CreateAssignmentInput, UpdateAssignmentInput } from './Assignment.entity';
 
 @Injectable()
 export class AssignmentService {
@@ -14,7 +14,7 @@ export class AssignmentService {
     return this.assignmentRepository.find({ relations: ['module'] });
   }
 
-  async create(assignmentInput: AssignmentInput): Promise<Assignment> {
+  async create(assignmentInput: CreateAssignmentInput): Promise<Assignment> {
     return this.assignmentRepository.create(assignmentInput).save();
   }
 

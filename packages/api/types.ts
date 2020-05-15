@@ -85,7 +85,10 @@ export type Query = {
   paths: Array<Path>;
   getPathByName: Path;
   assignments: Array<Assignment>;
+  moduleAssignments: Array<Assignment>;
   assignmentFiles: Array<AssignmentFile>;
+  assignmentAssignmentFiles: Array<AssignmentFile>;
+  userAssignmentFiles: Array<AssignmentFile>;
   modules: Array<Module>;
   pathModules: Array<Module>;
 };
@@ -98,6 +101,21 @@ export type QueryVerifyTokenArgs = {
 
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryModuleAssignmentsArgs = {
+  moduleId: Scalars['String'];
+};
+
+
+export type QueryAssignmentAssignmentFilesArgs = {
+  assignmentId: Scalars['String'];
+};
+
+
+export type QueryUserAssignmentFilesArgs = {
+  authorId: Scalars['String'];
 };
 
 
@@ -151,7 +169,7 @@ export type MutationJoinPathArgs = {
 
 
 export type MutationCreateAssignmentArgs = {
-  assignment: AssignmentInput;
+  assignment: CreateAssignmentInput;
 };
 
 
@@ -166,7 +184,7 @@ export type MutationDeleteAssignmentArgs = {
 
 
 export type MutationCreateAssignmentFileArgs = {
-  assignmentFile: AssignmentFileInput;
+  assignmentFile: CreateAssignmentFileInput;
 };
 
 
@@ -181,7 +199,7 @@ export type MutationDeleteAssignmentFileArgs = {
 
 
 export type MutationCreateModuleArgs = {
-  module: ModuleInput;
+  module: CreateModuleInput;
 };
 
 
@@ -213,7 +231,7 @@ export type PathInput = {
   description: Scalars['String'];
 };
 
-export type AssignmentInput = {
+export type CreateAssignmentInput = {
   description: Scalars['String'];
   moduleId: Scalars['String'];
 };
@@ -224,7 +242,7 @@ export type UpdateAssignmentInput = {
   moduleId?: Maybe<Scalars['String']>;
 };
 
-export type AssignmentFileInput = {
+export type CreateAssignmentFileInput = {
   name: Scalars['String'];
   type: Scalars['String'];
   content: Scalars['String'];
@@ -241,7 +259,7 @@ export type UpdateAssignmentFileInput = {
   assignmentId?: Maybe<Scalars['String']>;
 };
 
-export type ModuleInput = {
+export type CreateModuleInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   type: Scalars['String'];
