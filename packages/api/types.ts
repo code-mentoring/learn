@@ -236,9 +236,9 @@ export type CreateAssignmentInput = {
 };
 
 export type UpdateAssignmentInput = {
-  description: Scalars['String'];
-  moduleId: Scalars['String'];
   id: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  moduleId?: Maybe<Scalars['String']>;
 };
 
 export type CreateAssignmentFileInput = {

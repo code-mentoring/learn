@@ -122,9 +122,9 @@ input CreateAssignmentInput {
 }
 
 input UpdateAssignmentInput {
-  description: String!
-  moduleId: String!
   id: String!
+  description: String
+  moduleId: String
 }
 
 input CreateAssignmentFileInput {
