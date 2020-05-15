@@ -21,5 +21,4 @@ export class CharacterResolver {
   ) {
     return this.characterService.create(character);
   }
-
 }
