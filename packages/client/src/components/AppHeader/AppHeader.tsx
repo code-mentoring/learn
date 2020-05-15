@@ -28,7 +28,7 @@ export const AppHeader: React.FC = () => {
 
       <div className="inline text-grey-700 font-bold text-sm uppercase">
         <Link to="/friends" className="mx-3">
-          Friend
+          Friends
         </Link>
       </div>
 

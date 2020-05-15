@@ -16,18 +16,18 @@ export class FriendResolver {
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friend])
   getUserFriends(@Args('userId') userId: string) {
-    return this.friendService.findUserFriendsById(userId);
+    return this.friendService.findByUser(userId);
   }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => FriendOutput)
-  createFriend(@Args('friendInput') friendInput: CreateFriendInput) {
+  createFriendship(@Args('friendInput') friendInput: CreateFriendInput) {
     return this.friendService.create(friendInput);
   }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Friend)
-  confirmRejectRequest(
+  respondToFriendRequest(
     @Args('id') id: string,
     @Args('response') response: FriendStatus
   ) {
@@ -36,7 +36,7 @@ export class FriendResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)
-  async deleteFriend(
+  async deleteFriendship(
     @CurrentUser() user: User,
     @Args('friendId') friendId: string
   ) {

@@ -120,9 +120,9 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
-  createFriend: FriendOutput;
-  confirmRejectRequest: Friend;
-  deleteFriend: Scalars['Boolean'];
+  createFriendship: FriendOutput;
+  respondToFriendRequest: Friend;
+  deleteFriendship: Scalars['Boolean'];
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
@@ -155,18 +155,18 @@ export type MutationJoinPathArgs = {
 };
 
 
-export type MutationCreateFriendArgs = {
+export type MutationCreateFriendshipArgs = {
   friendInput: CreateFriendInput;
 };
 
 
-export type MutationConfirmRejectRequestArgs = {
+export type MutationRespondToFriendRequestArgs = {
   response: Scalars['String'];
   id: Scalars['String'];
 };
 
 
-export type MutationDeleteFriendArgs = {
+export type MutationDeleteFriendshipArgs = {
   friendId: Scalars['String'];
 };
 

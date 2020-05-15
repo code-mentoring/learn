@@ -1,9 +1,0 @@
-mutation ($toId: String!) {
-  requestFriendship( toId : $toId) {
-    id
-    fromId
-    toId
-    accepted
-    requested
-  }
-}

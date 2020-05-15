@@ -1,5 +1,5 @@
 mutation ($response: String!, $id: String!) {
-  confirmRejectRequest( response : $response, id: $id)  {
+  respondToFriendRequest( response : $response, id: $id)  {
     id
     user1Id
     user2Id

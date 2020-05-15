@@ -85,16 +85,16 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static createFriend(friendInput: CreateFriendInput): Promise<FriendOutput> {
-    return this._request('createFriend', mutations.createFriend, { friendInput });
+  static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
+    return this._request('createFriendship', mutations.createFriendship, { friendInput });
   }
 
-  static confirmRejectRequest(response: string, id: string): Promise<Friend> {
-    return this._request('confirmRejectRequest', mutations.confirmRejectRequest, { response, id });
+  static respondToFriendRequest(response: string, id: string): Promise<Friend> {
+    return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { response, id });
   }
 
-  static deleteFriend(friendId: string): Promise<Boolean> {
-    return this._request('deleteFriend', mutations.deleteFriend, { friendId });
+  static deleteFriendship(friendId: string): Promise<Boolean> {
+    return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
   }
 
   static createModule(module: ModuleInput): Promise<Module> {

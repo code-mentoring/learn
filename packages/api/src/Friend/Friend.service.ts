@@ -10,7 +10,7 @@ export class FriendService {
     @InjectRepository(Friend) private readonly friendRepository: Repository<Friend>
   ) {}
 
-  async findUserFriendsById(userId: string): Promise<Friend[]> {
+  async findByUser(userId: string): Promise<Friend[]> {
     const friends = await this.friendRepository.find({
       where: [{ user1Id: userId }, { user2Id: userId }],
       relations: ['user1', 'user2']
@@ -23,7 +23,7 @@ export class FriendService {
     const { fromId, toId } = friendInput;
     let input = { user1Id: fromId, user2Id: toId };
     // We place the lower id in user1Id
-    if (toId > fromId) input = { user1Id: toId, user2Id: fromId };
+    if (toId < fromId) input = { user1Id: toId, user2Id: fromId };
 
     return this.friendRepository.create({ ...input, initiator: fromId }).save();
   }
@@ -36,7 +36,7 @@ export class FriendService {
   async delete(user1Id: string, user2Id: string): Promise<Boolean> {
 
     let input = { user1Id, user2Id };
-    if (user2Id > user1Id) input = { user1Id: user2Id, user2Id: user1Id };
+    if (user2Id < user1Id) input = { user1Id: user2Id, user2Id: user1Id };
 
     const { affected } = await this.friendRepository.createQueryBuilder()
       .delete()
