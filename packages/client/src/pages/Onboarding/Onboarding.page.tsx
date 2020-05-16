@@ -1,5 +1,5 @@
 import { Button, Options, RadioList, SliderField, TextField } from '@codement/ui';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, useHistory } from 'react-router';
 
 import { AppHeader } from '../../components/AppHeader/AppHeader';
@@ -10,11 +10,12 @@ import { routes } from '../../router/routes';
 import { OnboardingStep } from './OnboardingStep';
 import { steps } from './steps';
 import { SliderText } from './Wizard/Typography/SliderText';
+import { LocalStorage } from '../../lib/localStorage';
 
 export interface WizardFormValues {
   codingAbility: number;
   why: string;
-  paths: string[],
+  paths: SelectedPath[],
   practiceGoal: number
 }
 
@@ -40,6 +41,24 @@ export const OnboardingPage = () => {
     { label: 'Serious', value: 3, subLabel: '3 lessons / day' },
     { label: 'Hardcore', value: 4, subLabel: '4 lessons / day' }
   ];
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (LocalStorage.preferences) {
+      setCodingAbility(
+        Number(((LocalStorage.preferences as unknown) as WizardFormValues).codingAbility || 0)
+      );
+      setWhy(((LocalStorage.preferences as unknown) as WizardFormValues).why || '');
+      setPaths(((LocalStorage.preferences as unknown) as WizardFormValues).paths || []);
+      setPracticeGoal(
+        Number(((LocalStorage.preferences as unknown) as WizardFormValues).practiceGoal || 0)
+      );
+    }
+    setLoading(false);
+  }, []);
+
+  if (loading) return <></>;
 
   return <div className="relative h-screen overflow-hidden bg-white">
     <AppHeader minimal />
@@ -102,7 +121,7 @@ export const OnboardingPage = () => {
       <OnboardingStep {...steps[5]}>
         <Button
           size="large"
-          color="green"
+          color="success"
           onClick={async () => {
             // TODO: Update in Wizard after submission
             await refetch(); // Update the user preferences

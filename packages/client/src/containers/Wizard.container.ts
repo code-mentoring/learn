@@ -1,5 +1,5 @@
 import { createContainer } from 'unstated-next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 
 import { UserPreferences } from '@codement/api';
@@ -7,17 +7,18 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router';
 import { routes } from '../router/routes';
 import { SelectedPath } from '../components/PathsList/PathsList';
+import { LocalStorage } from '../lib/localStorage';
 
 
 const updatePreferencesMutation = gql`
-mutation updatePreferences($preferences: UserPreferencesInput!) {
-  updatePreferences(preferences: $preferences) {
-    id
-    why
-    practiceGoal
-    codingAbility
-  }
-}`;
+  mutation updatePreferences($preferences: UserPreferencesInput!) {
+    updatePreferences(preferences: $preferences) {
+      id
+      why
+      practiceGoal
+      codingAbility
+    }
+  }`;
 
 const joinPaths = gql`mutation
 joinPaths($paths: [String!]!) {
@@ -39,6 +40,9 @@ const useWizard = () => {
 
   const [joinPathsMut] = useMutation<{ joinPaths: boolean }>(joinPaths);
 
+  useEffect(() => {
+    LocalStorage.preferences = JSON.stringify(wizardState);
+  }, [wizardState]);
 
   const submit = async () => {
     try {
