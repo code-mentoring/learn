@@ -97,7 +97,7 @@ describe('Module entity', () => {
     });
   });
 
-  describe.only('Mutation: deleteModule', () => {
+  describe('Mutation: deleteModule', () => {
     beforeEach(async () => {
       await setup();
       path = await TestClient.createPath(pathInput);
