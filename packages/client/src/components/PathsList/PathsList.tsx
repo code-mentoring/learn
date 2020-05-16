@@ -29,7 +29,7 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
 }) => {
 
   const [selectedPaths, setSelectedPaths] = useState<SelectedPath[]>(selected);
-  const { data } = useQuery<{paths: Path[]}>(getPaths);
+  const { data } = useQuery<{ paths: Path[] }>(getPaths);
   const path = data?.paths;
 
   useEffect(() => {
@@ -42,13 +42,13 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
   };
 
 
-  return <div className="flex">
+  return <div className="flex overflow-auto whitespace-no-wrap container">
     {path?.map(({ id, name, icon }) => {
       const isSelected = selectedPaths.includes(id as unknown as SelectedPath);
       return <div
         key={name}
         className="flex flex-col items-center relative mr-2 cursor-pointer"
-        onKeyDown={(e:React.KeyboardEvent<HTMLDivElement>) => {
+        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
           if (e.key === 'Enter') {
             handleSelectPaths(id as unknown as SelectedPath);
           }
