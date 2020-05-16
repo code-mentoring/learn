@@ -30,7 +30,7 @@ export const SliderField: React.FunctionComponent<SliderFieldProps> = ({
       min={min}
       max={max}
       value={sliderValue}
-      railStyle={{ height: '8px' }}
+      railStyle={{ height: '8px', borderRadius: '0px' }}
       dotStyle={{
         width: '2px',
         height: '18px',

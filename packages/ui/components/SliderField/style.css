@@ -1,21 +1,24 @@
 .rc-slider-dot:first-child:before {
   content: '';
-  width: 1.5em;
-  border: 4px solid #23DDB8;
-  position: absolute;
   z-index: -1;
-  right: 0;
-  top: 4px;
-  border-radius: 4px;
+  @apply w-6;
+  @apply border-4;
+  @apply border-solid;
+  @apply border-green-400;
+  @apply absolute;
+  @apply mt-1;
+  @apply right-0;
+  @apply rounded;
 }
 
 .rc-slider-dot:last-child:after {
   content: '';
-  width: 1.5em;
-  border: 4px solid #EAE7F6;
-  position: absolute;
   z-index: -1;
-  right: left;
-  top: 4px;
-  border-radius: 4px;
+  @apply w-6;
+  @apply border-4;
+  @apply border-solid;
+  @apply border-grey-200;
+  @apply absolute;
+  @apply mt-1;
+  @apply rounded;
 }
