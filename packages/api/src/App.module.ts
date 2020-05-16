@@ -7,6 +7,7 @@ import { DatabaseModule } from './Database';
 import { UserModule } from './User';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
+import { FriendModule } from './Friend';
 import { ModuleModule } from './Module';
 import { CharacterModule } from './Character';
 
@@ -18,6 +19,7 @@ export const appImports = [
   UserModule,
   PathModule,
   PathUserModule,
+  FriendModule,
   ModuleModule,
   CharacterModule,
 

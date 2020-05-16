@@ -66,6 +66,30 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Friend = {
+   __typename?: 'Friend';
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
+  user1: User;
+  user2: User;
+};
+
+export type FriendOutput = {
+   __typename?: 'FriendOutput';
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
+};
+
 export type Query = {
    __typename?: 'Query';
   users: Array<User>;
@@ -73,6 +97,7 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
+  getUserFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
   characters: Array<Character>;
@@ -87,6 +112,11 @@ export type QueryVerifyTokenArgs = {
 
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryGetUserFriendsArgs = {
+  userId: Scalars['String'];
 };
 
 
@@ -112,6 +142,9 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  createFriendship: FriendOutput;
+  respondToFriendRequest: Friend;
+  deleteFriendship: Scalars['Boolean'];
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
@@ -144,6 +177,23 @@ export type MutationCreatePathArgs = {
 
 export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type MutationCreateFriendshipArgs = {
+  friendInput: CreateFriendInput;
+};
+
+
+export type MutationRespondToFriendRequestArgs = {
+  response: Scalars['String'];
+  user2Id: Scalars['String'];
+  user1Id: Scalars['String'];
+};
+
+
+export type MutationDeleteFriendshipArgs = {
+  friendId: Scalars['String'];
 };
 
 
@@ -194,6 +244,11 @@ export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
+};
+
+export type CreateFriendInput = {
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
 };
 
 export type ModuleInput = {
