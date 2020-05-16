@@ -22,5 +22,13 @@ export const routes = {
 
   // Authed
   home: linkParams('/'),
-  users: linkParams('/users')
+  users: linkParams('/users'),
+
+  // Onboarding workflow
+  onboardingWorkflow: linkParams('/welcome'),
+  onboardingWorkflowCodingAbility: linkParams('/welcome/codingAbility'),
+  onboardingWorkflowWhy: linkParams('/welcome/why'),
+  onboardingWorkflowPaths: linkParams('/welcome/paths'),
+  onboardingWorkflowPracticeGoal: linkParams('/welcome/practiceGoal'),
+  onboardingWorkflowCompleted: linkParams('/welcome/completed')
 };
