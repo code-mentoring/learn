@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Concept, ConceptInput, UpdateConceptInput } from './Concept.entity';
+import { Concept, CreateConceptInput, UpdateConceptInput } from './Concept.entity';
 import { UserConcept } from '../UserConcepts/UserConcept.entity';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class ConceptService {
     return concept;
   }
 
-  async create(conceptInput: ConceptInput): Promise<Concept> {
+  async create(conceptInput: CreateConceptInput): Promise<Concept> {
     return this.conceptRepository.create(conceptInput).save();
   }
 

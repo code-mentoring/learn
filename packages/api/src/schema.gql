@@ -57,6 +57,22 @@ type Concept {
   taughtIn: Module!
 }
 
+type UserConcept {
+  id: String!
+  userId: String!
+  conceptId: String!
+  learned: DateTime!
+  concept: Concept!
+  user: User!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: Module!
+}
+
 type Query {
   users: [User!]!
   me: User!
@@ -67,6 +83,7 @@ type Query {
   pathModules(pathId: String!): [Module!]!
   getConcepts: [Concept!]!
   getConceptByName(name: String!): Concept!
+  userLearnedConcepts: [UserConcept!]!
 }
 
 type Mutation {
@@ -78,7 +95,7 @@ type Mutation {
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
-  createConcept(concept: ConceptInput!): Concept!
+  createConcept(concept: CreateConceptInput!): Concept!
   updateConcept(update: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
   learnConcept(conceptId: String!): Boolean!
@@ -125,7 +142,7 @@ enum ModuleType {
   lesson
 }
 
-input ConceptInput {
+input CreateConceptInput {
   name: String!
   icon: String!
   description: String!

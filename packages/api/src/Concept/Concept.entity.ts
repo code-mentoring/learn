@@ -33,7 +33,7 @@ export class Concept extends CMBaseEntity {
 }
 
 @InputType()
-export class ConceptInput {
+export class CreateConceptInput {
   @Field()
   name: string;
 

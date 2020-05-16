@@ -2,14 +2,19 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { ConceptService } from './Concept.service';
-import { Concept, ConceptInput, UpdateConceptInput } from './Concept.entity';
+import { Concept, CreateConceptInput, UpdateConceptInput } from './Concept.entity';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
+import { UserConceptService } from '../UserConcepts/UserConcept.service';
+import { UserConcept } from '../UserConcepts/UserConcept.entity';
 
 @Resolver('concept')
 export class ConceptResolver {
-  constructor(private readonly conceptService: ConceptService) { }
+  constructor(
+    private readonly conceptService: ConceptService,
+    private readonly userConceptService: UserConceptService
+  ) { }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Concept])
@@ -24,8 +29,14 @@ export class ConceptResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => [UserConcept])
+  async userLearnedConcepts(@CurrentUser() user: User) {
+    return this.userConceptService.findByUser(user.id);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => Concept)
-  createConcept(@Args('concept') concept: ConceptInput) {
+  createConcept(@Args('concept') concept: CreateConceptInput) {
     return this.conceptService.create(concept);
   }
 
@@ -43,8 +54,10 @@ export class ConceptResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)
-  async learnConcept(@Args('conceptId') conceptId: string,
-  @CurrentUser() user: User) {
+  async learnConcept(
+  @Args('conceptId') conceptId: string,
+  @CurrentUser() user: User
+  ) {
     return Boolean(await this.conceptService.addUserConcept(conceptId, user.id));
   }
 }
