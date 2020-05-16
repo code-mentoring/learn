@@ -57,6 +57,30 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Friend = {
+   __typename?: 'Friend';
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
+  user1: User;
+  user2: User;
+};
+
+export type FriendOutput = {
+   __typename?: 'FriendOutput';
+  id: Scalars['String'];
+  user1Id: Scalars['String'];
+  user2Id: Scalars['String'];
+  requested: Scalars['DateTime'];
+  status: Scalars['String'];
+  initiator: Scalars['String'];
+  since?: Maybe<Scalars['DateTime']>;
+};
+
 export type Concept = {
    __typename?: 'Concept';
   id: Scalars['String'];
@@ -67,6 +91,16 @@ export type Concept = {
   taughtIn: Module;
 };
 
+export type UserConcept = {
+   __typename?: 'UserConcept';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  conceptId: Scalars['String'];
+  learned: Scalars['DateTime'];
+  concept: Concept;
+  user: User;
+};
+
 export type Query = {
    __typename?: 'Query';
   users: Array<User>;
@@ -74,10 +108,12 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
+  getUserFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
   getConcepts: Array<Concept>;
   getConceptByName: Concept;
+  userLearnedConcepts: Array<UserConcept>;
 };
 
 
@@ -88,6 +124,11 @@ export type QueryVerifyTokenArgs = {
 
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryGetUserFriendsArgs = {
+  userId: Scalars['String'];
 };
 
 
@@ -107,12 +148,16 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  createFriendship: FriendOutput;
+  respondToFriendRequest: Friend;
+  deleteFriendship: Scalars['Boolean'];
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
   createConcept: Concept;
   updateConcept: Concept;
-  deleteConcept: Concept;
+  deleteConcept: Scalars['Boolean'];
+  learnConcept: Scalars['Boolean'];
 };
 
 
@@ -142,6 +187,23 @@ export type MutationJoinPathArgs = {
 };
 
 
+export type MutationCreateFriendshipArgs = {
+  friendInput: CreateFriendInput;
+};
+
+
+export type MutationRespondToFriendRequestArgs = {
+  response: Scalars['String'];
+  user2Id: Scalars['String'];
+  user1Id: Scalars['String'];
+};
+
+
+export type MutationDeleteFriendshipArgs = {
+  friendId: Scalars['String'];
+};
+
+
 export type MutationCreateModuleArgs = {
   module: ModuleInput;
 };
@@ -158,17 +220,22 @@ export type MutationDeleteModuleArgs = {
 
 
 export type MutationCreateConceptArgs = {
-  concept: ConceptInput;
+  concept: CreateConceptInput;
 };
 
 
 export type MutationUpdateConceptArgs = {
-  update: ConceptInput;
+  update: UpdateConceptInput;
 };
 
 
 export type MutationDeleteConceptArgs = {
-  delete: ConceptInput;
+  conceptId: Scalars['String'];
+};
+
+
+export type MutationLearnConceptArgs = {
+  conceptId: Scalars['String'];
 };
 
 export type UserInput = {
@@ -188,6 +255,11 @@ export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
+};
+
+export type CreateFriendInput = {
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
 };
 
 export type ModuleInput = {
@@ -212,9 +284,17 @@ export enum ModuleType {
   Lesson = 'lesson'
 }
 
-export type ConceptInput = {
+export type CreateConceptInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
-  moduleId: Scalars['String'];
+  taughtInId: Scalars['String'];
+};
+
+export type UpdateConceptInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  taughtInId?: Maybe<Scalars['String']>;
 };
