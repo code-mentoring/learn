@@ -3,11 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Module, ModuleInput, UpdateModuleInput } from './Module.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 @Injectable()
 export class ModuleService {
   constructor(
-    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>
+    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>,
+    @InjectRepository(UserModule) private readonly userModuleRepository: Repository<UserModule>
   ) {}
 
   async findAll(): Promise<Module[]> {
@@ -22,6 +24,13 @@ export class ModuleService {
     moduleInput: ModuleInput
   ): Promise<Module> {
     return this.moduleRepository.create(moduleInput).save();
+  }
+
+  async addUserToModule(
+    userId: string,
+    moduleId: string
+  ): Promise<UserModule> {
+    return this.userModuleRepository.create({ userId, moduleId }).save();
   }
 
   async update(
