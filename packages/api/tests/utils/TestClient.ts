@@ -5,7 +5,7 @@ import request from 'supertest';
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput, ModuleInput, Module } from '../../types';
+import { LoginOutput, Path, PathInput, User, UserInput, ModuleInput, Module, CharacterCreateInput, CharacterUpdateInput, Character, CharacterIndex } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
@@ -73,8 +73,8 @@ export abstract class TestClient {
     return res;
   }
 
-  static createPath(path: PathInput): Promise<Path> {
-    return this._request('createPath', mutations.createPath, { path });
+  static createPath(path: PathInput, character: CharacterCreateInput): Promise<Path> {
+    return this._request('createPath', mutations.createPath, { path, character });
   }
 
   static joinPath(pathId: string): Promise<Boolean> {
@@ -97,6 +97,13 @@ export abstract class TestClient {
     return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
+  static createCharacter(character: CharacterCreateInput): Promise<Character> {
+    return this._request('createCharacter', mutations.createCharacter, { character });
+  }
+
+  static updateCharacter(index: CharacterIndex, update: CharacterUpdateInput): Promise<Boolean> {
+    return this._request('updateCharacter', mutations.updateCharacter, { index, update });
+  }
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -107,6 +114,13 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  static characters(): Promise<Character[]> {
+    return this._request('characters', queries.characters);
+  }
+
+  static getCharacter(index: CharacterIndex): Promise<Character> {
+    return this._request('getCharacter', queries.getCharacter, { index });
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {

@@ -1,6 +1,6 @@
 import { Path } from '../../types';
 import { TestClient } from '../utils/TestClient';
-import { pathInput } from './Path.test';
+import { pathInput, characterInput } from './Path.test';
 import { ModuleType } from '../../src/Module/Module.entity';
 
 export const moduleInput = {
@@ -25,7 +25,7 @@ describe('Module entity', () => {
   describe('Mutation: createModule', () => {
     beforeEach(async () => {
       await setup();
-      path = await TestClient.createPath(pathInput);
+      path = await TestClient.createPath(pathInput, characterInput);
     });
 
     it('should create a module successfully', async () => {
@@ -69,14 +69,14 @@ describe('Module entity', () => {
   describe('Mutation: updateModule', () => {
     beforeEach(async () => {
       await setup();
-      path = await TestClient.createPath(pathInput);
+      path = await TestClient.createPath(pathInput, characterInput);
     });
 
     it('should update a module successfully', async () => {
       expect.assertions(6);
       const modulePrev = await TestClient.createModule({ ...moduleInput, name: 'previous', pathId: path.id });
       const module = await TestClient.createModule({ ...moduleInput, pathId: path.id });
-      const path2 = await TestClient.createPath({ ...pathInput, name: 'path 2' });
+      const path2 = await TestClient.createPath({ ...pathInput, name: 'path 2' }, {name: 'name 2', displayName: 'display name 2'});
       const update = {
         id: module.id,
         name: 'New name',
@@ -100,7 +100,7 @@ describe('Module entity', () => {
   describe('Mutation: deleteModule', () => {
     beforeEach(async () => {
       await setup();
-      path = await TestClient.createPath(pathInput);
+      path = await TestClient.createPath(pathInput, characterInput);
     });
 
     it('should delete a module successfully', async () => {

@@ -1,0 +1,3 @@
+mutation ($index: CharacterIndex!, $update: CharacterUpdateInput!) {
+  updateCharacter( index: $index, update : $update) 
+}

@@ -65,19 +65,26 @@ type Query {
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   characters: [Character!]!
+  getCharacter(index: CharacterIndex!): Character!
+}
+
+input CharacterIndex {
+  id: String
+  name: String
+  displayName: String
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
-  createPath(character: CharacterInput!, path: PathInput!): Path!
+  createPath(character: CharacterCreateInput!, path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
-  createCharacter(character: CharacterInput!): Character!
-  updateCharacter(update: CharacterInput!, index: CharacterIndex!): Character!
+  createCharacter(character: CharacterCreateInput!): Character!
+  updateCharacter(update: CharacterUpdateInput!, index: CharacterIndex!): Boolean!
 }
 
 input UserInput {
@@ -93,7 +100,7 @@ input UserPreferencesInput {
   codingAbility: Float
 }
 
-input CharacterInput {
+input CharacterCreateInput {
   name: String!
   displayName: String!
 }
@@ -126,8 +133,7 @@ enum ModuleType {
   lesson
 }
 
-input CharacterIndex {
-  id: String
+input CharacterUpdateInput {
   name: String
   displayName: String
 }

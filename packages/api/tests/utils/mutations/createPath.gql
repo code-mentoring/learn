@@ -1,9 +1,14 @@
-mutation createPath($path: PathInput!) {
-  createPath(path: $path) {
+mutation createPath($path: PathInput!, $character: CharacterCreateInput!) {
+  createPath(path: $path, character: $character) {
     id
     name
     icon
     description
     createdAt
+    character{
+      id
+      name
+      displayName
+    }
   }
 }

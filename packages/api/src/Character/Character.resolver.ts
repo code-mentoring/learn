@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { Character, CharacterInput, CharacterIndex } from './Character.entity';
+import { Character, CharacterUpdateInput, CharacterIndex, CharacterCreateInput } from './Character.entity';
 import { CharacterService } from './Character.service';
 
 @Resolver(() => Character)
@@ -15,21 +15,37 @@ export class CharacterResolver {
     return this.characterService.findAll();
   }
 
-  // Character is created when create Path, so we may not need create resolver, but it will be used in test script
+  @UseGuards(GQLAuthGuard)
+  @Query(() => Character)
+  getCharacter(@Args('index') index: CharacterIndex) {
+    if (index.id) {
+      return this.characterService.findById(index.id);
+    }
+    if (index.name) {
+      return this.characterService.findByName(index.name);
+    }
+    if (index.displayName) {
+      return this.characterService.findByDisplayName(index.displayName);
+    }
+    throw new Error('please input one index');
+  }
+
+  // Character is created when create Path
+  // createCharacter may not needed, but it will be used in test script
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Character)
   createCharacter(
-    @Args('character') character: CharacterInput
+    @Args('character') character: CharacterCreateInput
   ) {
     return this.characterService.create(character);
   }
 
   // the entry point is through Path, so the update will be through characterId
   @UseGuards(GQLAuthGuard)
-  @Mutation(() => Character)
+  @Mutation(() => Boolean)
   updateCharacter(
     @Args('index') index: CharacterIndex,
-    @Args('update') update: CharacterInput
+    @Args('update') update: CharacterUpdateInput
   ) {
     if (index.id) {
       return this.characterService.updateById(index.id, update);

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Path, PathInput } from './Path.entity';
-import { Character, CharacterInput } from '../Character/Character.entity';
+import { Character, CharacterCreateInput } from '../Character/Character.entity';
 
 @Injectable()
 export class PathService {
@@ -24,7 +24,7 @@ export class PathService {
     return path;
   }
 
-  async create(pathInput: PathInput, characterInput: CharacterInput): Promise<Path> {
+  async create(pathInput: PathInput, characterInput: CharacterCreateInput): Promise<Path> {
     const character = await this.characterRepository.create(characterInput).save();
     return this.pathRepository.create({ ...pathInput, character }).save();
   }

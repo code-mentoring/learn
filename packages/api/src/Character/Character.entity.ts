@@ -22,12 +22,21 @@ export class Character extends CMBaseEntity {
 }
 
 @InputType()
-export class CharacterInput {
+export class CharacterCreateInput {
   @Field()
   name: string;
 
   @Field()
   displayName: string;
+}
+
+@InputType()
+export class CharacterUpdateInput {
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  displayName?: string;
 }
 
 @InputType()
