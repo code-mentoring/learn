@@ -40,6 +40,12 @@
     height:75px;
 
     @apply flex border-2 rounded border-grey-200 m-auto;
+
+    &:hover { @apply border-primary-400 bg-primary-100; }
+}
+
+.path-icon-selected {
+    @apply border-primary-400 bg-primary-100;
 }
 
 .path-icon-title {

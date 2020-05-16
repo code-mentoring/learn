@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
 import { Modal } from '@codement/ui/components/Modal/Modal';
 import { Icon, PathIcon, Button } from '@codement/ui';
 import gql from 'graphql-tag';
@@ -25,16 +27,22 @@ interface JoinPath {
 //  - Added the fetch paths feature.(create the paths in graphql playground to enable functionality)
 //  - Overtiding icon type in PathIcon component using 'as'
 //  - I think we should probably make separate css files for the each component rather than 1 in UI
+//  - Added the selectPath hook to handle selection of the different paths
+//  - I have disabled the begin button until a path is selected
+//  - Added hover state for hovering over the paths
 
 // CSS can be found @     ui/css/modal-join-path.css
 // Figma Design:          https://www.figma.com/file/eyk5tQgLhIpyiORYfWxeUh/Learning-App?node-id=197%3A0
 
 export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
+  const [selectedPath, setSelectedPath] = useState('');
+
   const { data } = useQuery<{paths: Path[]}>(allPathsQuery);
 
-  const beginHandler = ( ) => {
-    console.log( "Clicked Begin in Join a Path" );
+
+  const beginHandler = () => {
+    alert('Clicked Begin in Join a Path');
   }
 
   return (
@@ -55,8 +63,8 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
         <div className="join-path-gridLayout">
           {data?.paths.map(path => (
-            <div key={path.id}>
-              <div className="path-icon-container">
+            <div key={path.id} onClick={() => setSelectedPath(path.name)}>
+              <div className={selectedPath === path.name ? 'path-icon-container path-icon-selected' : 'path-icon-container'}>
                 <PathIcon
                   icon={path.icon as keyof typeof icons}
                   className="m-auto"
@@ -68,8 +76,8 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
         </div>
         <div className="flex justify-end">
           <Button
-            color="success"
-            className="mt-8"
+            color={selectedPath === '' ? 'disabled' : 'success'}
+            className={selectedPath === '' ? 'mt-8 cursor-not-allowed' : 'mt-8'}
             onClick={beginHandler}
           >
             Begin

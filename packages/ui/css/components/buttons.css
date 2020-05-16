@@ -30,3 +30,8 @@
   &:hover { @apply bg-tertiary-400; }
   &:focus { @apply bg-tertiary-600; }
 }
+
+.btn-disabled {
+  @apply bg-grey-300;
+  &:hover { @apply bg-grey-300; }
+}
