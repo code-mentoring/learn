@@ -1,6 +1,6 @@
 import { Button } from '@codement/ui';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -25,11 +25,12 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   const history = useHistory();
   const location = useLocation();
   const { wizardState } = Wizard.useContainer();
+  const [disable, setDisable] = useState(true);
 
   return <>
-    <h4 className="absolute bottom-0 mb-6 mx-auto inset-x-0 h-12 w-20 flex items-center">
-      <Link to={backLink}>Go back</Link>
-    </h4>
+    <Button className="absolute bottom-0 mb-6 mx-auto inset-x-0" color="transparent" text size="large">
+      <Link className="text-grey-500" to={backLink}>Go back</Link>
+    </Button>
     <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
       <div className="flex items-center">
         <div className="flex items-center">
@@ -41,14 +42,32 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
             let redirect: string;
             if (key === WizardSteps.codingAbility) {
               redirect = routes.onboardingWorkflowCodingAbility();
+              isFilled = true;
             }
             if (key === WizardSteps.why) redirect = routes.onboardingWorkflowWhy();
             if (key === WizardSteps.paths) redirect = routes.onboardingWorkflowPaths();
-            if (key === WizardSteps.practiceGoal) redirect = routes.onboardingWorkflowPracticeGoal();
-
+            if (key === WizardSteps.practiceGoal) {
+              redirect = routes.onboardingWorkflowPracticeGoal();
+            }
             if (Array.isArray(state)) {
               if ((state as SelectedPath[]).length > 0) isFilled = true;
             } else if (state) isFilled = true;
+
+            useEffect(() => {
+              if (location.pathname.includes('codingAbility')) {
+                setDisable(false);
+              }
+              if (location.pathname.includes('why')) {
+                setDisable(!wizardState.why);
+              }
+              if (location.pathname.includes('paths')) {
+                setDisable(!(wizardState.paths.length > 0));
+              }
+              if (location.pathname.includes('practiceGoal')) {
+                setDisable(!(wizardState.practiceGoal && wizardState.why
+                  && wizardState.paths.length > 0));
+              }
+            }, [location.pathname, wizardState]);
 
             return <span
               key={key}
@@ -70,8 +89,8 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
         <Button
           className="ml-8"
           size="large"
-          color="green"
-          disabled={Boolean()}
+          color="success"
+          disabled={Boolean(disable)}
           onClick={() => (submit ? submit() : history.push(nextLink!))}
         > Next </Button>
 
