@@ -25,6 +25,7 @@ jobs:
 
     - name: Restore Lerna node modules
       uses: actions/cache@master
+      if: matrix.os != 'windows-latest' # Only run coverage on ubuntu
       with:
         path: |
           node_modules

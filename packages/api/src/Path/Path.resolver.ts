@@ -30,6 +30,12 @@ export class PathResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => [Path])
+  myPaths(@CurrentUser() user: User) {
+    return this.pathService.findByUser(user.id);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)
   async joinPath(
     @Args('pathId') pathId: string,
