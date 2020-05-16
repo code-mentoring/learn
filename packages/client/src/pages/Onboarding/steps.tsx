@@ -1,5 +1,4 @@
 import React from 'react';
-import { Twemoji } from 'react-emoji-render';
 
 import { routes } from '../../router/routes';
 import { OnboardingStepProps } from './OnboardingStep';
@@ -11,6 +10,7 @@ import { CompletedLeftIcon } from './Wizard/FooterIcons/CompletedLeft';
 import { CompletedMiddleIcon } from './Wizard/FooterIcons/CompletedMiddle';
 import { CompletedRightIcon } from './Wizard/FooterIcons/CompletedRight';
 import { PracticeGoalIcon } from './Wizard/FooterIcons/PracticeGoal';
+import { Emoji } from './Wizard/Typography/Emoji';
 
 export enum WizardSteps {
   welcome = 'welcome',
@@ -25,7 +25,7 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
   {
     path: routes.onboardingWorkflow(),
     intro: {
-      title: <>Welcome to Code Mentoring ! <Twemoji svg text="🎉" onlyEmojiClassName="absolute w-6 text-3xl" /></>,
+      title: <Emoji text="Welcome to Code Mentoring ! 🎉" />,
       text: <>We’re excited you’re with us. Really! To get you started,
         help us understand a little bit about you.</>
     },
@@ -48,7 +48,7 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
   {
     path: routes.onboardingWorkflowWhy(),
     intro: {
-      title: <>Great! So... Why are you here? <Twemoji svg text="😀" onlyEmojiClassName="absolute w-6 text-3xl" /></>,
+      title: <Emoji text="Great! So... Why are you here? 😀" />,
       text: <>Looking for a career change? Always been interested in coding?
         We will put this on your profile so others can get to know you better.</>
     },
@@ -77,7 +77,8 @@ export const steps: (OnboardingStepProps & { path: string })[] = [
     path: routes.onboardingWorkflowPracticeGoal(),
     intro: {
       title: 'Nice! How often do you want to practice?',
-      text: <>We recommend building a daily habit for any skill you want to learn.  We can help you stick to your goal.</>
+      text: <>We recommend building a daily habit for any skill you want to learn.
+        We can help you stick to your goal.</>
     },
     graphic: <PracticeGoalIcon />,
     footerSteps: {
