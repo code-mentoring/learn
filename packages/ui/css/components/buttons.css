@@ -34,4 +34,10 @@
 .btn-disabled {
   @apply bg-grey-300;
   &:hover { @apply bg-grey-300; }
+
+.btn-transparent {
+  @apply bg-transparent;
+  &:hover, &:focus{
+    @apply bg-transparent;
+  }
 }

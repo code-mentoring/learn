@@ -1,6 +1,6 @@
 {
   "name": "@codement/learn-client",
-  "version": "0.0.1-feature-ci-publish.5",
+  "version": "0.0.2",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p"
@@ -14,6 +14,7 @@
     "@types/html-webpack-plugin": "^3.2.2",
     "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/node": "^13.13.0",
+    "@types/rc-slider": "^8.6.5",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-router": "^5.1.5",
@@ -43,8 +44,10 @@
     "postcss-loader": "^3.0.0",
     "postcss-mixins": "^6.2.3",
     "postcss-nested": "^4.2.1",
+    "rc-slider": "^9.2.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-emoji-render": "1.2.2",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-svg-loader": "^3.0.3",
@@ -64,8 +67,8 @@
     "yup": "^0.28.3"
   },
   "dependencies": {
-    "@codement/api": "^0.0.1-feature-ci-publish.5",
-    "@codement/ui": "^0.0.1-feature-ci-publish.5"
+    "@codement/api": "^0.0.2",
+    "@codement/ui": "^0.0.2"
   },
   "publishConfig": {
     "access": "public"

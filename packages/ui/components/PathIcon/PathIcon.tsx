@@ -4,9 +4,11 @@ import classnames from 'classnames';
 import { IconProps, sizeMap } from '../Icon/Icon';
 import icons from './path-icons/icons';
 
+export type PathIcon = keyof typeof icons;
 
 export interface PathIconProps extends Omit<IconProps, 'color' | 'type'> {
-  icon: keyof typeof icons;
+  icon: PathIcon;
+  className?: string;
 }
 
 export const PathIcon: React.FunctionComponent<PathIconProps> = ({
