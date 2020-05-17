@@ -42,8 +42,8 @@ export class ConceptResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Concept)
-  updateConcept(@Args('update') update: UpdateConceptInput) {
-    return this.conceptService.update(update);
+  updateConcept(@Args('concept') concept: UpdateConceptInput) {
+    return this.conceptService.update(concept);
   }
 
   @UseGuards(GQLAuthGuard)
@@ -52,11 +52,12 @@ export class ConceptResolver {
     return this.conceptService.delete(conceptId);
   }
 
+  // TODO: Make this more locked down
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Boolean)
   async learnConcept(
-  @Args('conceptId') conceptId: string,
-  @CurrentUser() user: User
+    @Args('conceptId') conceptId: string,
+    @CurrentUser() user: User
   ) {
     return Boolean(await this.conceptService.addUserConcept(conceptId, user.id));
   }

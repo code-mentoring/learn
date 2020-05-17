@@ -126,23 +126,23 @@ type Query {
 
 type Mutation {
   createAssignment(assignment: CreateAssignmentInput!): Assignment!
-  updateAssignment(update: UpdateAssignmentInput!): Assignment!
+  updateAssignment(assignment: UpdateAssignmentInput!): Assignment!
   deleteAssignment(assignmentId: String!): Boolean!
   createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
-  updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
+  updateAssignmentFile(file: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
   createConcept(concept: CreateConceptInput!): Concept!
-  updateConcept(update: UpdateConceptInput!): Concept!
+  updateConcept(concept: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
   learnConcept(conceptId: String!): Boolean!
   createFriendship(friendInput: CreateFriendInput!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: CreateModuleInput!): Module!
-  updateModule(update: UpdateModuleInput!): Module!
+  updateModule(module: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!

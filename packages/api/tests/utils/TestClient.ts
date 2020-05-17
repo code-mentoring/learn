@@ -130,8 +130,8 @@ export abstract class TestClient {
     return this._request('createModule', mutations.createModule, { module });
   }
 
-  static updateModule(update: UpdateModuleInput): Promise<Module> {
-    return this._request('updateModule', mutations.updateModule, { update });
+  static updateModule(module: UpdateModuleInput): Promise<Module> {
+    return this._request('updateModule', mutations.updateModule, { module });
   }
 
   static deleteModule(moduleId: string): Promise<Module> {

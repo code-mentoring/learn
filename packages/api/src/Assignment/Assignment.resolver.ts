@@ -29,8 +29,8 @@ export class AssignmentResolver {
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Assignment)
-  updateAssignment(@Args('update') update: UpdateAssignmentInput) {
-    return this.assignmentService.update(update);
+  updateAssignment(@Args('assignment') assignment: UpdateAssignmentInput) {
+    return this.assignmentService.update(assignment);
   }
 
   @UseGuards(GQLAuthGuard)
