@@ -1,21 +1,14 @@
 /* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import { Button, Icon } from '@codement/ui';
 import { Modal } from '@codement/ui/components/Modal/Modal';
-import { Icon, PathIcon, Button } from '@codement/ui';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
+
 import { Path } from '@codement/api';
-import icons from '@codement/ui/components/PathIcon/path-icons/icons';
+import { PathsList } from '../../components/PathsList/PathsList';
 import styles from './JoinPath.module.css';
 
-// TODO: Handle selection of paths
-// TODO: Disable begin button until path selected
-
-const allPathsQuery = gql`query {
-  paths { id name icon }
-}`;
 
 interface JoinPath {
   setShow: any;
@@ -38,9 +31,7 @@ interface JoinPath {
 
 export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
-  const [selectedPath, setSelectedPath] = useState('');
-
-  const { data } = useQuery<{paths: Path[]}>(allPathsQuery);
+  const [selectedPaths, setSelectedPaths] = useState<Path[]>([]);
 
 
   const beginHandler = () => {
@@ -63,23 +54,13 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
           Select a path below to begin your journey...
         </p>
 
-        <div className={styles.joinPathGridLayout}>
-          {data?.paths.map(path => (
-            <div key={path.id} onClick={() => setSelectedPath(path.name)}>
-              <div className={selectedPath === path.name ? `${styles.pathIconContainer} ${styles.pathIconSelected}` : `${styles.pathIconContainer}`}>
-                <PathIcon
-                  icon={path.icon as keyof typeof icons}
-                  className="m-auto"
-                />
-              </div>
-              <p className={styles.pathIconTitle}>{path.name.toUpperCase()}</p>
-            </div>
-          ))}
-        </div>
+        <PathsList onChange={setSelectedPaths} />
+
+
         <div className="flex justify-end">
           <Button
-            color={selectedPath === '' ? 'disabled' : 'success'}
-            className={selectedPath === '' ? 'mt-8 cursor-not-allowed' : 'mt-8'}
+            color={selectedPaths.length ? 'disabled' : 'success'}
+            className="mt-8"
             onClick={beginHandler}
           >
             Begin

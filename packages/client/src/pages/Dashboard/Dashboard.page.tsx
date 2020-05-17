@@ -6,7 +6,7 @@ import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoar
 import { ProgressWidget } from '../../components/ProgressWidget/ProgressWidget';
 import { routes } from '../../router/routes';
 import { Me } from '../../containers/Me.container';
-import { JoinPath } from '../../components/JoinPath/JoinPath';
+import { JoinPath } from '../../modals/JoinPath/JoinPath';
 
 export const DashboardPage = () => {
 

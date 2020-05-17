@@ -8,26 +8,21 @@
 }
 
 .closeIcon {
-    height:24px;
-    right:24px;
-
-    @apply absolute text-grey-300 cursor-pointer;
-}
-
-.closeIcon:hover { 
-    @apply text-primary-400;
+    right: 1.5rem;
+    @apply h-6 absolute text-grey-300 cursor-pointer;
+    &:hover {
+        @apply text-primary-400;
+    }
 }
 
 
 .joinPathCard {
-    min-width:581.15px;
-    
+    min-width: 36rem;
     @apply bg-white text-center py-6 px-12 relative rounded;
 }
 
 .joinPathGridLayout {
-    justify-items: center;
-    @apply grid grid-cols-5 items-center;
+    @apply grid grid-cols-5 items-center justify-center;
 }
 
 .pathIconContainer {
