@@ -19,7 +19,7 @@ export const DashboardPage = () => {
   if (!me?.userPreferences) history.push(routes.onboardingWorkflow());
   return <Page title="Dashboard" type="dashboard" className="bg-white">
     <h1>Dashboard</h1>
-    <ProgressWidget className="w-64 my-6 bg-white" />
+    <ProgressWidget setShow={setShowModal} className="w-64 my-6 bg-white" />
     <LeaderboardWidget className="w-64" />
     {showModal ? <JoinPath setShow={showModalHandler} /> : null}
   </Page>;
