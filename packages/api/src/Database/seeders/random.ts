@@ -3,7 +3,7 @@ import faker from 'faker';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { PathInput } from '../../Path/Path.entity';
-import { CharacterCreateInput } from '../../Character/Character.entity';
+import { CreateCharacterInput } from '../../Character/Character.entity';
 
 export const randomUserInput = (input: Partial<UserInput> = {}): UserInput => ({
   firstName: faker.name.firstName(),
@@ -19,7 +19,7 @@ export const randomUserPreferenceInput = (): UserPreferencesInput => ({
   codingAbility: Math.floor(Math.random() * 10) + 1
 });
 
-export const randomCharacterInput = (): CharacterCreateInput => ({
+export const randomCharacterInput = (): CreateCharacterInput => ({
   name: faker.name.firstName(),
   displayName: faker.name.lastName()
 });

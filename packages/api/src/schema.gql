@@ -87,21 +87,13 @@ type Query {
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
-  characters: [Character!]!
-  getCharacter(index: CharacterIndex!): Character!
-}
-
-input CharacterIndex {
-  id: String
-  name: String
-  displayName: String
 }
 
 type Mutation {
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
-  createPath(character: CharacterCreateInput!, path: PathInput!): Path!
+  createPath(character: CreateCharacterInput!, path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   createFriendship(friendInput: CreateFriendInput!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
@@ -109,8 +101,6 @@ type Mutation {
   createModule(module: ModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
-  createCharacter(character: CharacterCreateInput!): Character!
-  updateCharacter(update: CharacterUpdateInput!, index: CharacterIndex!): Boolean!
 }
 
 input UserInput {
@@ -126,7 +116,7 @@ input UserPreferencesInput {
   codingAbility: Float
 }
 
-input CharacterCreateInput {
+input CreateCharacterInput {
   name: String!
   displayName: String!
 }
@@ -162,9 +152,4 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
-}
-
-input CharacterUpdateInput {
-  name: String
-  displayName: String
 }

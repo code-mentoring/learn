@@ -6,7 +6,7 @@ import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { PathInput, Path } from './Path.entity';
 import { PathService } from './Path.service';
-import { CharacterCreateInput } from '../Character/Character.entity';
+import { CreateCharacterInput } from '../Character/Character.entity';
 
 @Resolver('Path')
 export class PathResolver {
@@ -28,7 +28,7 @@ export class PathResolver {
   @Mutation(() => Path)
   createPath(
     @Args('path') path: PathInput,
-    @Args('character') character: CharacterCreateInput
+    @Args('character') character: CreateCharacterInput
   ) {
     return this.pathService.create(path, character);
   }

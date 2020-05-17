@@ -1,6 +1,5 @@
 import { TestClient } from '../utils/TestClient';
-import { CharacterCreateInput, CharacterUpdateInput } from '../../types';
-import { Controller } from '@nestjs/common';
+import { CharacterCreateInput } from '../../types';
 
 export const characterInput1: CharacterCreateInput = {
   name: 'Murphy',
@@ -15,128 +14,127 @@ export const characterInput2: CharacterCreateInput = {
 beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
 
-const setup = async () => {
-  await TestClient.resetDatabase();
-  await TestClient.workflowSignup();
-};
+// TODO: do tests when character enitity is reviewed
 
-describe('Character entity', () => {
+// const setup = async () => {
+//   await TestClient.resetDatabase();
+//   await TestClient.workflowSignup();
+// };
 
-  describe('Mutation: createCharacter', () => {
-    beforeEach(setup);
+// describe('Character entity', () => {
 
-    it('should create a character successfully', async () => {
-      const character = await TestClient.createCharacter(characterInput1);
+//   describe('Mutation: createCharacter', () => {
+//     beforeEach(setup);
 
-      expect(character.id).toBeDefined();
-      expect(character.name).toEqual(characterInput1.name);
-      expect(character.displayName).toEqual(characterInput1.displayName);
-    });
+//     it('should create a character successfully', async () => {
+//       expect.assertions(1);
+//       const character = await TestClient.createCharacter(characterInput1);
+//       expect(character).toMatchObject(characterInput1);
+//     });
 
-    it('should throw error if character name exists', async () => {
-      expect.assertions(1);
-      
-      try {
-        await TestClient.createCharacter(characterInput1);
-        await TestClient.createCharacter({...characterInput1, displayName: 'new'});
+//     it('should throw error if character name exists', async () => {
+//       expect.assertions(1);
 
-      } catch (e) {
-        expect(e.message).toMatch(/unique constraint/i);
-      }
-    });
+//       try {
+//         await TestClient.createCharacter(characterInput1);
+//         await TestClient.createCharacter({ ...characterInput1, displayName: 'new' });
 
-    it('should throw error if character displayName exists', async () => {
-      expect.assertions(1);
-      try {
-        await TestClient.createCharacter(characterInput1);
-        await TestClient.createCharacter({...characterInput1, name: 'new'});
-      } catch (e) {
-        expect(e.message).toMatch(/unique constraint/i);
-      }
-    });
-  });
+//       } catch (e) {
+//         expect(e.message).toMatch(/unique constraint/i);
+//       }
+//     });
 
-  describe('Mutation: updateCharacter', () => {
-    beforeEach(setup);
+//     it('should throw error if character displayName exists', async () => {
+//       expect.assertions(1);
+//       try {
+//         await TestClient.createCharacter(characterInput1);
+//         await TestClient.createCharacter({ ...characterInput1, name: 'new' });
+//       } catch (e) {
+//         expect(e.message).toMatch(/unique constraint/i);
+//       }
+//     });
+//   });
 
-    it('update a character name by Id successfully', async () => {
-      const updateInput: CharacterUpdateInput = { name: 'Tom'};
-      const character = await TestClient.createCharacter(characterInput1);
+//   describe('Mutation: updateCharacter', () => {
+//     beforeEach(setup);
 
-      const result = await TestClient.updateCharacter({id: character.id}, updateInput);
+//     it('update a character name by Id successfully', async () => {
+//       expect.assertions(2);
+//       const updateInput: CharacterUpdateInput = { name: 'Tom' };
+//       const character = await TestClient.createCharacter(characterInput1);
 
-      const query = await TestClient.getCharacter({id: character.id});
-      
-      // sqlite always return false due to no {affected} return. so validate by query.
-      // expect(result).toEqual(true);
-      expect(query.name).toEqual(updateInput.name);
-      expect(query.displayName).toEqual(character.displayName);
-    });
+//       await TestClient.updateCharacter({ id: character.id }, updateInput);
+//       const { name, displayName } = await TestClient.getCharacter({ id: character.id });
 
-    it('update a character by name successfully', async () => {
-      const updateInput = { name: 'Tom', displayName: 'TomTom'};
-      const character = await TestClient.createCharacter(characterInput1);
+//       expect(name).toEqual(updateInput.name);
+//       expect(displayName).toEqual(character.displayName);
+//     });
 
-      const updatedCharacter = await TestClient.updateCharacter({name: characterInput1.name}, updateInput);
-      const query = await TestClient.getCharacter({id: character.id});
+//     it('update a character by name successfully', async () => {
+//       expect.assertions(2);
+//       const updateInput = { name: 'Tom', displayName: 'TomTom' };
+//       const character = await TestClient.createCharacter(characterInput1);
 
-      expect(query.name).toEqual(updateInput.name);
-      expect(query.displayName).toEqual(updateInput.displayName);
-    });
-  
-    it('update a character by displayName successfully', async () => {
-      const updateInput = { name: 'Tom', displayName: 'TomTom'};
-      const character = await TestClient.createCharacter(characterInput1);
+//       await TestClient.updateCharacter({ name: characterInput1.name }, updateInput);
+//       const { name, displayName } = await TestClient.getCharacter({ id: character.id });
 
-      const updatedCharacter = await TestClient.updateCharacter({displayName: characterInput1.displayName}, updateInput);
-      const query = await TestClient.getCharacter({id: character.id});
+//       expect(name).toEqual(updateInput.name);
+//       expect(displayName).toEqual(updateInput.displayName);
+//     });
 
-      expect(query.name).toEqual(updateInput.name);
-      expect(query.displayName).toEqual(updateInput.displayName);
-    });
+//     it('update a character by displayName successfully', async () => {
+//       expect.assertions(2);
+//       const updateInput = { name: 'Tom', displayName: 'TomTom' };
+//       const character = await TestClient.createCharacter(characterInput1);
 
-    it('throw an error if update not exist character', async () => {
-      const updateInput = { name: 'Tom'};
-      const id = '7f25705f-b0d3-42c7-aede-47390cbfb415';
-      try{
-        const updatedCharacter = await TestClient.updateCharacter({id: id}, updateInput);
-      }catch (e) {
-        expect(e.message).toMatch('Cannot return null for non-nullable field Mutation.updateCharacter');
-      };
-    });
-  });
+//       await TestClient.updateCharacter({ displayName: characterInput1.displayName }, updateInput);
+//       const { name, displayName } = await TestClient.getCharacter({ id: character.id });
 
-  describe('Query: Character', () => {
-    beforeEach(setup);
+//       expect(name).toEqual(updateInput.name);
+//       expect(displayName).toEqual(updateInput.displayName);
+//     });
 
-    it('should query a character successfully', async () => {
-      const character = await TestClient.createCharacter(characterInput1);
-      const query = await TestClient.characters();
+//     it('throw an error if update not exist character', async () => {
+//       expect.assertions(1);
+//       const updateInput = { name: 'Tom' };
+//       const id = v4();
+//       try {
+//         const d = await TestClient.updateCharacter({ id }, updateInput);
+//         console.log('UPDA', d);
+//       } catch (e) {
+//         console.log('ERROR');
+//         expect(e.message).toMatch('Cannot return null for non-nullable field Mutation.updateCharacter');
+//       }
+//     });
+//   });
 
-      expect(query.length).toEqual(1);
-      expect(query[0].id).toBeDefined();
-      expect(query[0].name).toEqual(characterInput1.name);
-      expect(query[0].displayName).toEqual(characterInput1.displayName);
-    });
+//   describe('Query: Character', () => {
+//     beforeEach(setup);
 
-    it('should query two charcter successfully', async () => {
-      const character1 = await TestClient.createCharacter(characterInput1);
-      const character2 = await TestClient.createCharacter(characterInput2);
-      const query = await TestClient.characters();
+//     it('should query a character successfully', async () => {
+//       expect.assertions(2);
+//       await TestClient.createCharacter(characterInput1);
+//       const characters = await TestClient.characters();
 
-      expect(query.length).toEqual(2);
-      expect(query[0].id).toBeDefined();
-      expect(query[0].name).toEqual(character1.name);
-      expect(query[0].displayName).toEqual(character1.displayName);
+//       expect(characters.length).toEqual(1);
+//       expect(characters[0]).toMatchObject(characterInput1);
+//     });
 
-      expect(query[1].id).toBeDefined();
-      expect(query[1].name).toEqual(character2.name);
-      expect(query[1].displayName).toEqual(character2.displayName);
-    });
+//     it('should query two charcter successfully', async () => {
+//       expect.assertions(3);
+//       await TestClient.createCharacter(characterInput1);
+//       await TestClient.createCharacter(characterInput2);
+//       const characters = await TestClient.characters();
 
-    it('should return null if there is no characters', async () => {
-      const query = await TestClient.characters();
-      expect(query.length).toEqual(0);
-    });
-  });
-});
+//       expect(characters.length).toEqual(2);
+//       expect(characters[0]).toMatchObject(characterInput1);
+//       expect(characters[1]).toMatchObject(characterInput2);
+//     });
+
+//     it('should return an empty array if there is no characters', async () => {
+//       expect.assertions(1);
+//       const characters = await TestClient.characters();
+//       expect(characters.length).toEqual(0);
+//     });
+//   });
+// });

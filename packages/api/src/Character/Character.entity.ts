@@ -1,28 +1,27 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+/* eslint react/static-property-placement: 0 */
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 
 @ObjectType()
 @Entity('character')
-@Unique(['name'])
-@Unique(['displayName'])
 export class Character extends CMBaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field()
   displayName: string;
 }
 
 @InputType()
-export class CharacterCreateInput {
+export class CreateCharacterInput {
   @Field()
   name: string;
 
@@ -31,20 +30,7 @@ export class CharacterCreateInput {
 }
 
 @InputType()
-export class CharacterUpdateInput {
-  @Field({ nullable: true })
-  name?: string;
-
-  @Field({ nullable: true })
-  displayName?: string;
-}
-
-@InputType()
-export class CharacterIndex {
-  // fields as query index. at least and at most one of them
-  @Field({ nullable: true })
-  id?: string;
-
+export class UpdateCharacterInput {
   @Field({ nullable: true })
   name?: string;
 
