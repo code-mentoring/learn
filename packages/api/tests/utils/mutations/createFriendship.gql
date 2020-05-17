@@ -1,0 +1,11 @@
+mutation ($friendInput: CreateFriendInput!) {
+  createFriendship( friendInput : $friendInput) {
+    id
+    user1Id
+    user2Id
+    requested
+    initiator
+    status
+    since
+  }
+}

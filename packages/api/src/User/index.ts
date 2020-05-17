@@ -7,7 +7,6 @@ import { UserService } from './User.service';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([
     UserWithPassword,

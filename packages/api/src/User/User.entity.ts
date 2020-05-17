@@ -59,7 +59,6 @@ export class UserWithPassword extends CMBaseEntity {
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
-
 }
 
 @InputType()
