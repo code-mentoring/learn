@@ -11,8 +11,8 @@ import { TestLogger } from './TestLogger.service';
 import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
 import { randomUserInput } from '../../src/Database/seeders/random';
-import { UserInput, User, LoginOutput, Path, PathInput, CreateFriendInput, FriendOutput, Friend, Module, ModuleInput } from '../../types';
-import { CharacterCreateInput, CharacterUpdateInput, Character, CharacterIndex } from '../../types';
+import { UserInput, User, LoginOutput, Path, PathInput, CreateFriendInput, FriendOutput, Friend, Module, ModuleInput, CharacterCreateInput, CharacterUpdateInput, Character, CharacterIndex } from '../../types';
+
 
 /**
  * A helper class to test the API
@@ -90,7 +90,11 @@ export abstract class TestClient {
     return this._request('createFriendship', mutations.createFriendship, { friendInput });
   }
 
-  static respondToFriendRequest(user1Id: string, user2Id: string, response: string): Promise<Friend> {
+  static respondToFriendRequest(
+    user1Id: string,
+    user2Id: string,
+    response: string
+  ): Promise<Friend> {
     return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { user1Id, user2Id, response });
   }
 
@@ -130,7 +134,7 @@ export abstract class TestClient {
   static getUserFriends(userId: string): Promise< Friend[] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
-  
+
   static characters(): Promise<Character[]> {
     return this._request('characters', queries.characters);
   }
@@ -138,6 +142,7 @@ export abstract class TestClient {
   static getCharacter(index: CharacterIndex): Promise<Character> {
     return this._request('getCharacter', queries.getCharacter, { index });
   }
+
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
     const userInput = randomUserInput();
