@@ -6,33 +6,8 @@ type Character {
   id: String!
   name: String!
   displayName: String!
-}
-
-type Module {
-  id: String!
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
-  previous: Module
   path: Path!
 }
-
-type Path {
-  id: String!
-  name: String!
-  icon: String!
-  description: String!
-  createdAt: DateTime!
-  character: Character!
-  characterId: String!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type UserPreferences {
   id: String!
@@ -50,6 +25,50 @@ type User {
   profileImage: String!
   userPreferences: UserPreferences
   createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Path {
+  id: String!
+  name: String!
+  icon: String!
+  description: String!
+  createdAt: DateTime!
+  character: Character!
+  characterId: String!
+}
+
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  path: Path!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: Module!
+}
+
+type AssignmentFile {
+  id: String!
+  name: String!
+  type: String!
+  content: String!
+  assignmentId: String!
+  authorId: String!
+  assignment: Assignment!
+  author: User!
 }
 
 type LoginOutput {
@@ -79,28 +98,64 @@ type FriendOutput {
 }
 
 type Query {
+  assignments: [Assignment!]!
+  moduleAssignments(moduleId: String!): [Assignment!]!
+  assignmentFiles(assignmentId: String!): [AssignmentFile!]!
+  userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
-  paths: [Path!]!
-  getPathByName(name: String!): Path!
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
+  paths: [Path!]!
+  getPathByName(name: String!): Path!
 }
 
 type Mutation {
+  createAssignment(assignment: CreateAssignmentInput!): Assignment!
+  updateAssignment(update: UpdateAssignmentInput!): Assignment!
+  deleteAssignment(assignmentId: String!): Boolean!
+  createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
+  updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
+  deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
-  createPath(character: CreateCharacterInput!, path: PathInput!): Path!
-  joinPath(pathId: String!): Boolean!
   createFriendship(friendInput: CreateFriendInput!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
-  createModule(module: ModuleInput!): Module!
+  createModule(module: CreateModuleInput!): Module!
   updateModule(update: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
+  createPath(character: CreateCharacterInput!, path: PathInput!): Path!
+  joinPath(pathId: String!): Boolean!
+}
+
+input CreateAssignmentInput {
+  description: String!
+  moduleId: String!
+}
+
+input UpdateAssignmentInput {
+  id: String!
+  description: String
+  moduleId: String
+}
+
+input CreateAssignmentFileInput {
+  name: String!
+  type: String!
+  content: String!
+  assignmentId: String!
+}
+
+input UpdateAssignmentFileInput {
+  id: String!
+  name: String
+  type: String
+  content: String
+  assignmentId: String
 }
 
 input UserInput {
@@ -116,23 +171,12 @@ input UserPreferencesInput {
   codingAbility: Float
 }
 
-input CreateCharacterInput {
-  name: String!
-  displayName: String!
-}
-
-input PathInput {
-  name: String!
-  icon: String!
-  description: String!
-}
-
 input CreateFriendInput {
   fromId: String!
   toId: String!
 }
 
-input ModuleInput {
+input CreateModuleInput {
   name: String!
   icon: String!
   type: String!
@@ -152,4 +196,15 @@ input UpdateModuleInput {
 enum ModuleType {
   assignment
   lesson
+}
+
+input CreateCharacterInput {
+  name: String!
+  displayName: String!
+}
+
+input PathInput {
+  name: String!
+  icon: String!
+  description: String!
 }

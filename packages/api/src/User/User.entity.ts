@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGenerated
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
+// import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
 
 @ObjectType()

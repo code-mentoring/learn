@@ -1,0 +1,10 @@
+mutation updateAssignmentFile($update: UpdateAssignmentFileInput!) {
+  updateAssignmentFile(update: $update) {
+    id
+    name
+    type
+    content
+    authorId
+    assignmentId
+  }
+}

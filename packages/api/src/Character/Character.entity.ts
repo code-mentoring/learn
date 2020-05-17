@@ -21,7 +21,7 @@ export class Character extends CMBaseEntity {
   displayName: string;
 
   @OneToOne(() => Path)
-  @Field()
+  @Field(() => Path)
   path: Path
 }
 

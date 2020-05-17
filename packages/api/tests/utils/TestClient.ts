@@ -1,17 +1,35 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import 'jest-extended';
+
+import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
+import { randomUserInput } from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
+import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
+import {
+  Assignment,
+  AssignmentFile,
+  Character,
+  CreateAssignmentFileInput,
+  CreateAssignmentInput,
+  CreateFriendInput,
+  CreateModuleInput,
+  Friend,
+  FriendOutput,
+  LoginOutput,
+  Module,
+  Path,
+  PathInput,
+  User,
+  UserInput
+} from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
-import { UpdateModuleInput } from '../../src/Module/Module.entity';
-import { randomUserInput } from '../../src/Database/seeders/random';
-import { UserInput, User, LoginOutput, Path, PathInput, CreateFriendInput, FriendOutput, Friend, Module, ModuleInput, CharacterCreateInput, CharacterUpdateInput, Character, CharacterIndex } from '../../types';
+import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
 
 
 /**
@@ -74,7 +92,7 @@ export abstract class TestClient {
     return res;
   }
 
-  static createPath(path: PathInput, character: CharacterCreateInput): Promise<Path> {
+  static createPath(path: PathInput, character: CreateCharacterInput): Promise<Path> {
     return this._request('createPath', mutations.createPath, { path, character });
   }
 
@@ -84,6 +102,14 @@ export abstract class TestClient {
 
   static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
+  }
+
+  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
+    return this._request('createAssignment', mutations.createAssignment, { assignment });
+  }
+
+  static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
+    return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
   static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
@@ -102,7 +128,7 @@ export abstract class TestClient {
     return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
   }
 
-  static createModule(module: ModuleInput): Promise<Module> {
+  static createModule(module: CreateModuleInput): Promise<Module> {
     return this._request('createModule', mutations.createModule, { module });
   }
 
@@ -114,11 +140,11 @@ export abstract class TestClient {
     return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
-  static createCharacter(character: CharacterCreateInput): Promise<Character> {
+  static createCharacter(character: CreateCharacterInput): Promise<Character> {
     return this._request('createCharacter', mutations.createCharacter, { character });
   }
 
-  static updateCharacter(index: CharacterIndex, update: CharacterUpdateInput): Promise<Boolean> {
+  static updateCharacter(index: CharacterIndex, update: UpdateCharacterInput): Promise<Boolean> {
     return this._request('updateCharacter', mutations.updateCharacter, { index, update });
   }
   // ------------------------------------------------------------------- Queries
