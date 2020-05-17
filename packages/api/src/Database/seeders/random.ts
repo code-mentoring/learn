@@ -3,6 +3,9 @@ import faker from 'faker';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { PathInput } from '../../Path/Path.entity';
+import { ModuleType, CreateModuleInput } from '../../Module/Module.entity';
+import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
+import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
 
 export const randomUserInput = (input: Partial<UserInput> = {}): UserInput => ({
   firstName: faker.name.firstName(),
@@ -22,5 +25,41 @@ export const randomPath = (input: Partial<PathInput> = {}, name: string): PathIn
   name,
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),
+  ...input
+});
+
+const moduleTypeArr = Object.keys(ModuleType);
+
+export const randomModule = (
+  name: string,
+  pathId: string,
+  input: Partial<CreateModuleInput> = {}
+): CreateModuleInput => ({
+  name,
+  icon: faker.lorem.word(),
+  type: (moduleTypeArr as ModuleType[])[Math.floor(
+    Math.random() * (moduleTypeArr as ModuleType[]).length
+  )],
+  pathId,
+  ...input
+});
+
+export const randomAssignment = (
+  moduleId: string,
+  input: Partial<CreateAssignmentInput> = {}
+): CreateAssignmentInput => ({
+  description: faker.lorem.words(10),
+  moduleId,
+  ...input
+});
+
+export const randomAssignmentFile = (
+  assignmentId: string,
+  input: Partial<CreateAssignmentFileInput> = {}
+): CreateAssignmentFileInput => ({
+  name: faker.lorem.words(2),
+  type: faker.lorem.word(),
+  content: faker.lorem.words(10),
+  assignmentId,
   ...input
 });

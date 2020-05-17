@@ -10,28 +10,6 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type Module = {
-   __typename?: 'Module';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  type: Scalars['String'];
-  previousId?: Maybe<Scalars['String']>;
-  pathId: Scalars['String'];
-  previous?: Maybe<Module>;
-  path: Path;
-};
-
-export type Path = {
-   __typename?: 'Path';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  description: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-};
-
-
 export type UserPreferences = {
    __typename?: 'UserPreferences';
   id: Scalars['String'];
@@ -50,6 +28,48 @@ export type User = {
   profileImage: Scalars['String'];
   userPreferences?: Maybe<UserPreferences>;
   createdAt: Scalars['DateTime'];
+};
+
+
+export type Path = {
+   __typename?: 'Path';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  description: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+};
+
+export type Module = {
+   __typename?: 'Module';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+  previous?: Maybe<Module>;
+  path: Path;
+};
+
+export type Assignment = {
+   __typename?: 'Assignment';
+  id: Scalars['String'];
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+  module: Module;
+};
+
+export type AssignmentFile = {
+   __typename?: 'AssignmentFile';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  content: Scalars['String'];
+  assignmentId: Scalars['String'];
+  authorId: Scalars['String'];
+  assignment: Assignment;
+  author: User;
 };
 
 export type LoginOutput = {
@@ -83,24 +103,38 @@ export type FriendOutput = {
 
 export type Query = {
    __typename?: 'Query';
+  assignments: Array<Assignment>;
+  moduleAssignments: Array<Assignment>;
+  assignmentFiles: Array<AssignmentFile>;
+  userAssignmentFiles: Array<AssignmentFile>;
   users: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
-  paths: Array<Path>;
-  getPathByName: Path;
   getUserFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
+  paths: Array<Path>;
+  getPathByName: Path;
+};
+
+
+export type QueryModuleAssignmentsArgs = {
+  moduleId: Scalars['String'];
+};
+
+
+export type QueryAssignmentFilesArgs = {
+  assignmentId: Scalars['String'];
+};
+
+
+export type QueryUserAssignmentFilesArgs = {
+  authorId: Scalars['String'];
 };
 
 
 export type QueryVerifyTokenArgs = {
   accessToken: Scalars['String'];
-};
-
-
-export type QueryGetPathByNameArgs = {
-  name: Scalars['String'];
 };
 
 
@@ -113,19 +147,60 @@ export type QueryPathModulesArgs = {
   pathId: Scalars['String'];
 };
 
+
+export type QueryGetPathByNameArgs = {
+  name: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
+  createAssignment: Assignment;
+  updateAssignment: Assignment;
+  deleteAssignment: Scalars['Boolean'];
+  createAssignmentFile: AssignmentFile;
+  updateAssignmentFile: AssignmentFile;
+  deleteAssignmentFile: Scalars['Boolean'];
   createUser: User;
   updatePreferences: UserPreferences;
   login: LoginOutput;
-  createPath: Path;
-  joinPath: Scalars['Boolean'];
   createFriendship: FriendOutput;
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
   createModule: Module;
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
+  createPath: Path;
+  joinPath: Scalars['Boolean'];
+};
+
+
+export type MutationCreateAssignmentArgs = {
+  assignment: CreateAssignmentInput;
+};
+
+
+export type MutationUpdateAssignmentArgs = {
+  update: UpdateAssignmentInput;
+};
+
+
+export type MutationDeleteAssignmentArgs = {
+  assignmentId: Scalars['String'];
+};
+
+
+export type MutationCreateAssignmentFileArgs = {
+  assignmentFile: CreateAssignmentFileInput;
+};
+
+
+export type MutationUpdateAssignmentFileArgs = {
+  update: UpdateAssignmentFileInput;
+};
+
+
+export type MutationDeleteAssignmentFileArgs = {
+  assignmentFileId: Scalars['String'];
 };
 
 
@@ -142,16 +217,6 @@ export type MutationUpdatePreferencesArgs = {
 export type MutationLoginArgs = {
   password: Scalars['String'];
   email: Scalars['String'];
-};
-
-
-export type MutationCreatePathArgs = {
-  path: PathInput;
-};
-
-
-export type MutationJoinPathArgs = {
-  pathId: Scalars['String'];
 };
 
 
@@ -173,7 +238,7 @@ export type MutationDeleteFriendshipArgs = {
 
 
 export type MutationCreateModuleArgs = {
-  module: ModuleInput;
+  module: CreateModuleInput;
 };
 
 
@@ -184,6 +249,42 @@ export type MutationUpdateModuleArgs = {
 
 export type MutationDeleteModuleArgs = {
   moduleId: Scalars['String'];
+};
+
+
+export type MutationCreatePathArgs = {
+  path: PathInput;
+};
+
+
+export type MutationJoinPathArgs = {
+  pathId: Scalars['String'];
+};
+
+export type CreateAssignmentInput = {
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+};
+
+export type UpdateAssignmentInput = {
+  id: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  moduleId?: Maybe<Scalars['String']>;
+};
+
+export type CreateAssignmentFileInput = {
+  name: Scalars['String'];
+  type: Scalars['String'];
+  content: Scalars['String'];
+  assignmentId: Scalars['String'];
+};
+
+export type UpdateAssignmentFileInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  assignmentId?: Maybe<Scalars['String']>;
 };
 
 export type UserInput = {
@@ -199,18 +300,12 @@ export type UserPreferencesInput = {
   codingAbility?: Maybe<Scalars['Float']>;
 };
 
-export type PathInput = {
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  description: Scalars['String'];
-};
-
 export type CreateFriendInput = {
   fromId: Scalars['String'];
   toId: Scalars['String'];
 };
 
-export type ModuleInput = {
+export type CreateModuleInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   type: Scalars['String'];
@@ -231,3 +326,9 @@ export enum ModuleType {
   Assignment = 'assignment',
   Lesson = 'lesson'
 }
+
+export type PathInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  description: Scalars['String'];
+};
