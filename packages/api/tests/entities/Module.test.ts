@@ -106,8 +106,9 @@ describe('Module entity', () => {
     it('should delete a module successfully', async () => {
       expect.assertions(1);
       const module = await TestClient.createModule({ ...moduleInput, pathId: path.id });
-      const deleted = await TestClient.deleteModule(module.id);
-      expect(deleted).toBe(true);
+      await TestClient.deleteModule(module.id);
+      const modules = await TestClient.modules();
+      expect(modules.length).toBe(0);
 
     });
   });

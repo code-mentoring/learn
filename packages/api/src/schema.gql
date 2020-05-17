@@ -66,6 +66,24 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+}
+
+type UserConcept {
+  id: String!
+  userId: String!
+  conceptId: String!
+  learned: DateTime!
+  concept: Concept!
+  user: User!
+}
+
 type Friend {
   id: String!
   user1Id: String!
@@ -96,6 +114,9 @@ type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  getConcepts: [Concept!]!
+  getConceptByName(name: String!): Concept!
+  userLearnedConcepts: [UserConcept!]!
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
@@ -113,6 +134,10 @@ type Mutation {
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
+  createConcept(concept: CreateConceptInput!): Concept!
+  updateConcept(update: UpdateConceptInput!): Concept!
+  deleteConcept(conceptId: String!): Boolean!
+  learnConcept(conceptId: String!): Boolean!
   createFriendship(friendInput: CreateFriendInput!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
@@ -160,6 +185,21 @@ input UserPreferencesInput {
   practiceGoal: Float
   why: String
   codingAbility: Float
+}
+
+input CreateConceptInput {
+  name: String!
+  icon: String!
+  description: String!
+  taughtInId: String!
+}
+
+input UpdateConceptInput {
+  id: String!
+  name: String
+  icon: String
+  description: String
+  taughtInId: String
 }
 
 input CreateFriendInput {

@@ -114,7 +114,11 @@ export abstract class TestClient {
     return this._request('createFriendship', mutations.createFriendship, { friendInput });
   }
 
-  static respondToFriendRequest(user1Id: string, user2Id: string, response: string): Promise<Friend> {
+  static respondToFriendRequest(
+    user1Id: string,
+    user2Id: string,
+    response: string
+  ): Promise<Friend> {
     return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { user1Id, user2Id, response });
   }
 
@@ -142,6 +146,10 @@ export abstract class TestClient {
 
   static me(): Promise<User> {
     return this._request('me', queries.me);
+  }
+
+  static modules(): Promise<Module[]> {
+    return this._request('modules', queries.modules);
   }
 
   static getUserFriends(userId: string): Promise< Friend[] > {

@@ -77,6 +77,26 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Concept = {
+   __typename?: 'Concept';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  icon: Scalars['String'];
+  taughtInId: Scalars['String'];
+  taughtIn: Module;
+};
+
+export type UserConcept = {
+   __typename?: 'UserConcept';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  conceptId: Scalars['String'];
+  learned: Scalars['DateTime'];
+  concept: Concept;
+  user: User;
+};
+
 export type Friend = {
    __typename?: 'Friend';
   id: Scalars['String'];
@@ -110,6 +130,9 @@ export type Query = {
   users: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
+  getConcepts: Array<Concept>;
+  getConceptByName: Concept;
+  userLearnedConcepts: Array<UserConcept>;
   getUserFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
@@ -138,6 +161,11 @@ export type QueryVerifyTokenArgs = {
 };
 
 
+export type QueryGetConceptByNameArgs = {
+  name: Scalars['String'];
+};
+
+
 export type QueryGetUserFriendsArgs = {
   userId: Scalars['String'];
 };
@@ -163,6 +191,10 @@ export type Mutation = {
   createUser: User;
   updatePreferences: UserPreferences;
   login: LoginOutput;
+  createConcept: Concept;
+  updateConcept: Concept;
+  deleteConcept: Scalars['Boolean'];
+  learnConcept: Scalars['Boolean'];
   createFriendship: FriendOutput;
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
@@ -217,6 +249,26 @@ export type MutationUpdatePreferencesArgs = {
 export type MutationLoginArgs = {
   password: Scalars['String'];
   email: Scalars['String'];
+};
+
+
+export type MutationCreateConceptArgs = {
+  concept: CreateConceptInput;
+};
+
+
+export type MutationUpdateConceptArgs = {
+  update: UpdateConceptInput;
+};
+
+
+export type MutationDeleteConceptArgs = {
+  conceptId: Scalars['String'];
+};
+
+
+export type MutationLearnConceptArgs = {
+  conceptId: Scalars['String'];
 };
 
 
@@ -298,6 +350,21 @@ export type UserPreferencesInput = {
   practiceGoal?: Maybe<Scalars['Float']>;
   why?: Maybe<Scalars['String']>;
   codingAbility?: Maybe<Scalars['Float']>;
+};
+
+export type CreateConceptInput = {
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  description: Scalars['String'];
+  taughtInId: Scalars['String'];
+};
+
+export type UpdateConceptInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  taughtInId?: Maybe<Scalars['String']>;
 };
 
 export type CreateFriendInput = {
