@@ -42,8 +42,9 @@ This is a running list of those who are actively contributing to this project.
 | Kevin Gilbert       | Back-end                  | `@Kevin`            | [@NoSoEpicCoder](https://github.com/NoSoEpicCoder)     | 5-10 hours          | Apr 2020 |
 | Rayser Castrillo    | Back-end                  | `@rayser`           | [@raysercast1](https://github.com/raysercast1)         | 5 - 10 hours        | Apr 2020 |
 | Lan Phan            | Testing & Front-end       | `@Lan Phan`         | [@lanphantastic](https://github.com/lanphantastic)     | 3 - 6 hours         | Apr 2020 |
-| Dwane Pennant       | Back-end                  | `@Dwane`            | [@pennandw](https://github.com/pennandw)               | 2 - 5 hours         | Apr 2020 |
 | Jeff Norman         | Front-end & Design        | `@Jeff`             | [@crizzpy](https://github.com/crizzpy)                 | 10 hours            | May 2020 |
+| Marc Tessier        | Design                    | `@Marc Tessier`     | [@mtess88](https://github.com/mtess88)                 | 15 hours            | May 2020 |
+| Andrea Morreale     | Design                    | `@Andre M`          | [@akimdesign](https://github.com.akimdesign)           | 20 hours            | May 2020 |
 
 ## 🔧 What can I work on?
 
@@ -107,8 +108,8 @@ The type is contained within the title and can be one of these types:
 - **chore**: updating build tasks, package manager configs, etc; no production code change
 
 ### The Scope
-The scope describes the category of your change and the commonly used are of the following: 
-- build, 
+The scope describes the category of your change and the commonly used are of the following:
+- build,
 - chore,
 - ci,
 - docs,
@@ -120,7 +121,7 @@ The scope describes the category of your change and the commonly used are of the
 - style,
 - test
 
-NOTE: These strict type and scope can be found in **commitlint.config.js** 
+NOTE: These strict type and scope can be found in **commitlint.config.js**
 
 ### The Subject
 
@@ -173,7 +174,7 @@ If necessary, add some screenshots or a GIF or video of you using the feature.
 When a PR is ready, please make sure to request a review from a 🧢 maintainer.
 Once the maintainer has approved your PR, it will be merged for you into `develop`.
 
-## Offering feedback ## 
+## Offering feedback ##
 
 - Familiarize yourself with the context of the issue, and reasons why this Pull Request exists.
 - If you disagree strongly, consider giving it a few minutes before responding; think before you react.
