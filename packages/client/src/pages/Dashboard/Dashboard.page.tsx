@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Page } from '../../components/Page/Page';
@@ -9,7 +9,7 @@ import { Me } from '../../containers/Me.container';
 import { JoinPath } from '../../components/JoinPath/JoinPath';
 
 export const DashboardPage = () => {
-  
+
   const [showModal, setShowModal] = useState(false);
   const showModalHandler = () => setShowModal(!showModal);
   const history = useHistory();
