@@ -1,17 +1,34 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import 'jest-extended';
+
+import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
+import { randomUserInput } from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
+import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
+import {
+  Assignment,
+  AssignmentFile,
+  CreateAssignmentFileInput,
+  CreateAssignmentInput,
+  CreateFriendInput,
+  CreateModuleInput,
+  Friend,
+  FriendOutput,
+  LoginOutput,
+  Module,
+  Path,
+  PathInput,
+  User,
+  UserInput
+} from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import { UserPreferencesInput, UserPreferences } from '../../src/UserPreferences/UserPreferences.entity';
-import { UpdateModuleInput } from '../../src/Module/Module.entity';
-import { randomUserInput } from '../../src/Database/seeders/random';
-import { UserInput, User, LoginOutput, Path, PathInput, CreateFriendInput, FriendOutput, Friend, Module, ModuleInput } from '../../types';
+
 
 /**
  * A helper class to test the API
@@ -85,6 +102,14 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
+  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
+    return this._request('createAssignment', mutations.createAssignment, { assignment });
+  }
+
+  static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
+    return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
+  }
+
   static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
     return this._request('createFriendship', mutations.createFriendship, { friendInput });
   }
@@ -101,7 +126,7 @@ export abstract class TestClient {
     return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
   }
 
-  static createModule(module: ModuleInput): Promise<Module> {
+  static createModule(module: CreateModuleInput): Promise<Module> {
     return this._request('createModule', mutations.createModule, { module });
   }
 

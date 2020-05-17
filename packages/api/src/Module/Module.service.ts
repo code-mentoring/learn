@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Module, ModuleInput, UpdateModuleInput } from './Module.entity';
+import { Module, CreateModuleInput, UpdateModuleInput } from './Module.entity';
 
 @Injectable()
 export class ModuleService {
@@ -19,7 +19,7 @@ export class ModuleService {
   }
 
   async create(
-    moduleInput: ModuleInput
+    moduleInput: CreateModuleInput
   ): Promise<Module> {
     return this.moduleRepository.create(moduleInput).save();
   }

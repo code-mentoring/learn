@@ -1,6 +1,6 @@
-
 import fs from 'fs';
 import path from 'path';
+
 
 export default {
   createUser: fs.readFileSync(path.join(__dirname, './createUser.gql')).toString(),
@@ -8,6 +8,8 @@ export default {
   createPath: fs.readFileSync(path.join(__dirname, './createPath.gql')).toString(),
   joinPath: fs.readFileSync(path.join(__dirname, './joinPath.gql')).toString(),
   updatePreferences: fs.readFileSync(path.join(__dirname, './updatePreferences.gql')).toString(),
+  createAssignment: fs.readFileSync(path.join(__dirname, './createAssignment.gql')).toString(),
+  createAssignmentFile: fs.readFileSync(path.join(__dirname, './createAssignmentFile.gql')).toString(),
   respondToFriendRequest: fs.readFileSync(path.join(__dirname, './respondToFriendRequest.gql')).toString(),
   createFriendship: fs.readFileSync(path.join(__dirname, './createFriendship.gql')).toString(),
   deleteFriendship: fs.readFileSync(path.join(__dirname, './deleteFriendship.gql')).toString(),

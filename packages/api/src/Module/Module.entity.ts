@@ -46,11 +46,10 @@ export class Module extends CMBaseEntity {
   @ManyToOne(() => Path, path => path.module, { nullable: false })
   @Field(() => Path)
   path: Path;
-
 }
 
 @InputType()
-export class ModuleInput {
+export class CreateModuleInput {
 
   @Field()
   name: string;
