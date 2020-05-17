@@ -1,0 +1,5 @@
+.modalContainer {
+  background-color:#8F9FF0CC;
+
+  @apply absolute w-full h-full top-0 left-0 flex justify-center items-center;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
@@ -7,6 +8,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { Path } from '@codement/api';
 import icons from '@codement/ui/components/PathIcon/path-icons/icons';
+import styles from './JoinPath.module.css';
 
 // TODO: Handle selection of paths
 // TODO: Disable begin button until path selected
@@ -43,34 +45,34 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
   const beginHandler = () => {
     alert('Clicked Begin in Join a Path');
-  }
+  };
 
   return (
     <Modal setShow={setShow}>
-      <div className="join-path-card">
+      <div className={styles.joinPathCard}>
         <Icon
           icon="x"
           size="small"
-          className="btn-close-icon"
+          className={styles.closeIcon}
           onClick={() => setShow()}
         />
 
-        <h1 className="modal-heading">Join a Path</h1>
+        <h1 className={styles.modalHeading}>Join a Path</h1>
 
-        <p className="modal-instruction">
+        <p className={styles.modalInstruction}>
           Select a path below to begin your journey...
         </p>
 
-        <div className="join-path-gridLayout">
+        <div className={styles.joinPathGridLayout}>
           {data?.paths.map(path => (
             <div key={path.id} onClick={() => setSelectedPath(path.name)}>
-              <div className={selectedPath === path.name ? 'path-icon-container path-icon-selected' : 'path-icon-container'}>
+              <div className={selectedPath === path.name ? `${styles.pathIconContainer} ${styles.pathIconSelected}` : `${styles.pathIconContainer}`}>
                 <PathIcon
                   icon={path.icon as keyof typeof icons}
                   className="m-auto"
                 />
               </div>
-              <p className="path-icon-title">{path.name.toUpperCase()}</p>
+              <p className={styles.pathIconTitle}>{path.name.toUpperCase()}</p>
             </div>
           ))}
         </div>

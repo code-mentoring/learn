@@ -1,54 +1,49 @@
-.modal-container {
-    background-color:#8F9FF0CC;
-
-    @apply absolute w-full h-full top-0 left-0 flex justify-center items-center;
-}
-
-.modal-heading {
+.modalHeading {
     @apply mb-3 font-semibold;
 }
 
-.modal-instruction {
+.modalInstruction {
     letter-spacing:0.75px;
     @apply text-sm leading-4 text-grey-800 mb-12;
 }
 
-.btn-close-icon {
+.closeIcon {
     height:24px;
     right:24px;
 
     @apply absolute text-grey-300 cursor-pointer;
 }
-.btn-close-icon:hover { 
+
+.closeIcon:hover { 
     @apply text-primary-400;
 }
 
 
-.join-path-card {
+.joinPathCard {
     min-width:581.15px;
     
     @apply bg-white text-center py-6 px-12 relative rounded;
 }
 
-.join-path-gridLayout {
+.joinPathGridLayout {
     justify-items: center;
     @apply grid grid-cols-5 items-center;
 }
 
-.path-icon-container {
+.pathIconContainer {
     width:75px;
     height:75px;
 
     @apply flex border-2 rounded border-grey-200 m-auto;
 
-    &:hover { @apply border-primary-400 bg-primary-100; }
+    &:hover { @apply border-primary-400 bg-primary-100 cursor-pointer; }
 }
 
-.path-icon-selected {
+.pathIconSelected {
     @apply border-primary-400 bg-primary-100;
 }
 
-.path-icon-title {
+.pathIconTitle {
     letter-spacing:0.875px;
     @apply font-semibold text-sm leading-4 mt-2 text-grey-600;
 }
