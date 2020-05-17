@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Character {
+  id: String!
+  name: String!
+  displayName: String!
+}
+
 type Module {
   id: String!
   name: String!
@@ -11,12 +17,6 @@ type Module {
   pathId: String!
   previous: Module
   path: Path!
-}
-
-type Character {
-  id: String!
-  name: String!
-  displayName: String!
 }
 
 type Path {

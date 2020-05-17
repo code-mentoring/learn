@@ -1,8 +1,9 @@
 /* eslint react/static-property-placement: 0 */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
+import { Path } from '../Path/Path.entity';
 
 @ObjectType()
 @Entity('character')
@@ -18,6 +19,10 @@ export class Character extends CMBaseEntity {
   @Column({ unique: true })
   @Field()
   displayName: string;
+
+  @OneToOne(() => Path)
+  @Field()
+  path: Path
 }
 
 @InputType()
