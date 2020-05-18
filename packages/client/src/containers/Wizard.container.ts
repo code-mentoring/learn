@@ -2,11 +2,10 @@ import { createContainer } from 'unstated-next';
 import { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 
-import { UserPreferences } from '@codement/api';
+import { UserPreferences, Path } from '@codement/api';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router';
 import { routes } from '../router/routes';
-import { SelectedPath } from '../components/PathsList/PathsList';
 import { LocalStorage } from '../lib/localStorage';
 
 
@@ -30,7 +29,7 @@ const useWizard = () => {
   const history = useHistory();
   const [codingAbility, setCodingAbility] = useState(0);
   const [why, setWhy] = useState('');
-  const [paths, setPaths] = useState<SelectedPath[]>([]);
+  const [paths, setPaths] = useState<Path[]>([]);
   const [practiceGoal, setPracticeGoal] = useState(0);
   const wizardState = { codingAbility, why, paths, practiceGoal };
 

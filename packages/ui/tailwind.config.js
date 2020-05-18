@@ -74,6 +74,12 @@ module.exports = {
     borderRadius: {
       default: '8px',
       circle: '50%'
+    },
+    extend: {
+      inset: {
+        '6': '1.5rem',
+        '12': '3rem'
+      }
     }
   },
   corePlugins: {},

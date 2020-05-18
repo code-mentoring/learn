@@ -1,0 +1,44 @@
+.modalHeading {
+    @apply mb-3 font-semibold;
+}
+
+.modalInstruction {
+    letter-spacing:0.75px;
+    @apply text-sm leading-4 text-grey-800 mb-12;
+}
+
+.closeIcon {
+    right: 1.5rem;
+    @apply h-6 absolute text-grey-300 cursor-pointer;
+    &:hover {
+        @apply text-primary-400;
+    }
+}
+
+
+.joinPathCard {
+    min-width: 36rem;
+    @apply bg-white text-center py-6 px-12 relative rounded;
+}
+
+.joinPathGridLayout {
+    @apply grid grid-cols-5 items-center justify-center;
+}
+
+.pathIconContainer {
+    width:75px;
+    height:75px;
+
+    @apply flex border-2 rounded border-grey-200 m-auto;
+
+    &:hover { @apply border-primary-400 bg-primary-100 cursor-pointer; }
+}
+
+.pathIconSelected {
+    @apply border-primary-400 bg-primary-100;
+}
+
+.pathIconTitle {
+    letter-spacing:0.875px;
+    @apply font-semibold text-sm leading-4 mt-2 text-grey-600;
+}
