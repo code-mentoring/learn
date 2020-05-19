@@ -10,9 +10,7 @@ export const moduleInput = {
 };
 
 
-beforeAll(async () => {
-  await TestClient.start();
-});
+beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
 
 const setup = async () => {

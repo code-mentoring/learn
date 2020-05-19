@@ -1,6 +1,5 @@
-import { TestClient } from '../utils/TestClient';
 import { User } from '../../types';
-import * as random from '../../src/Database/seeders/random';
+import { TestClient } from '../utils/TestClient';
 
 let me: User;
 let user2: User;
@@ -8,12 +7,9 @@ let user3: User;
 
 const setup = async () => {
   await TestClient.resetDatabase();
-  const userInput = random.userInput();
-  me = await TestClient.createUser(userInput);
-  await TestClient.login(me.email, userInput.password);
-
-  user2 = await TestClient.createUser(random.userInput());
-  user3 = await TestClient.createUser(random.userInput());
+  ({ user: me } = await TestClient.workflowSignup());
+  user2 = await TestClient.createUser();
+  user3 = await TestClient.createUser();
 };
 
 describe('Friend entity', () => {

@@ -8,7 +8,7 @@ let assignmentId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  const { id } = await TestClient.createPath(random.pathInput());
+  const { id } = await TestClient.createPath();
   const { id: moduleId } = await TestClient.createModule(random.moduleInput('name', id));
   const { id: assgnmtId } = await TestClient.createAssignment(random.assignmentInput(moduleId));
   assignmentId = assgnmtId;

@@ -90,7 +90,7 @@ export abstract class TestClient {
     return res;
   }
 
-  static createPath(path: PathInput): Promise<Path> {
+  static createPath(path: PathInput = random.pathInput()): Promise<Path> {
     return this._request('createPath', mutations.createPath, { path });
   }
 

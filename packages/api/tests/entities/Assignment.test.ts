@@ -8,7 +8,7 @@ let moduleId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  const { id } = await TestClient.createPath(random.pathInput({ name: 'path name' }));
+  const { id } = await TestClient.createPath();
   const { id: modId } = await TestClient.createModule(random.moduleInput('name', id));
   moduleId = modId;
 };
