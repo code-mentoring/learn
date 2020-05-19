@@ -33,7 +33,7 @@ export class UserResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
-  searchUsers(@Args('param') query: string) {
+  searchUsers(@Args('query') query: string) {
     return this.userService.search(query);
   }
 
