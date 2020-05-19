@@ -10,9 +10,11 @@ import { UserWithPassword } from '../../User/User.entity';
 import { PathService } from '../../Path/Path.service';
 import { CharacterService } from '../../Character/Character.service';
 import { Path } from '../../Path/Path.entity';
+import { Character } from '../../Character/Character.entity';
 
 interface CTX {
   users: UserWithPassword[];
+  characters: Character[];
 }
 
 @Injectable()
@@ -60,7 +62,14 @@ export class SeederService {
     }));
   }
 
-  async seedPaths(users: UserWithPassword[]) {
+  async seedCharacters(num: number = 3): Promise<Character[]> {
+    return Promise.all(Array(num).fill(undefined).map(async () => this.characterService.create(
+      random.characterInput()
+    )));
+  }
+
+
+  async seedPaths(users: UserWithPassword[], characters: Character[]) {
     const paths = [
       { name: 'javascript', icon: 'js' },
       { name: 'css', icon: 'css' },
@@ -69,11 +78,10 @@ export class SeederService {
 
     return Promise.all(paths.map(async (path, i) => {
       let newPath = new Path();
-      const character = await this.characterService.create(random.characterInput());
 
-      if (i % 2 === 0) {
+      if ((i % 2 === 0) && (i < characters.length)) {
         newPath = await this.pathService.create(
-          random.pathInput({ name: path.name, icon: path.icon, characterId: character.id })
+          random.pathInput({ name: path.name, icon: path.icon, characterId: characters[i].id })
         );
       } else {
         newPath = await this.pathService.create(
@@ -105,9 +113,15 @@ export class SeederService {
         }
       },
       {
+        title: 'Create characters',
+        task: async (ctx: CTX) => {
+          ctx.characters = await this.seedCharacters();
+        }
+      },
+      {
         title: 'Create paths',
         task: async (ctx: CTX) => {
-          await this.seedPaths(ctx.users);
+          await this.seedPaths(ctx.users, ctx.characters);
         }
       }
     ]).run();

@@ -23,7 +23,7 @@ export class CharacterResolver {
   }
 
   @UseGuards(GQLAuthGuard)
-  @Mutation(() => Character || undefined)
+  @Mutation(() => Character)
   async updateCharacter(@Args('character') character: UpdateCharacterInput) {
     return this.characterService.update(character);
   }
