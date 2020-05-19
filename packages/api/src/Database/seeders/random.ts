@@ -6,6 +6,7 @@ import { CreateModuleInput, ModuleType } from '../../Module/Module.entity';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { PathInput } from '../../Path/Path.entity';
+import { CreateCharacterInput } from '../../Character/Character.entity';
 
 
 export const userInput = (
@@ -68,4 +69,9 @@ export const assignmentFileInput = (
   content: faker.lorem.words(10),
   assignmentId,
   ...input
+});
+
+export const characterInput = (): CreateCharacterInput => ({
+  name: faker.name.lastName(),
+  displayName: faker.name.firstName()
 });

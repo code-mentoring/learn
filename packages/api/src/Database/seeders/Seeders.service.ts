@@ -7,8 +7,9 @@ import { DatabaseService } from '../Database.service';
 import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
 import * as random from './random';
 import { UserWithPassword } from '../../User/User.entity';
-import { CharacterService } from '../../Character/Character.service';
 import { PathService } from '../../Path/Path.service';
+import { CharacterService } from '../../Character/Character.service';
+import { Path } from '../../Path/Path.entity';
 
 interface CTX {
   users: UserWithPassword[];
@@ -65,12 +66,22 @@ export class SeederService {
       { name: 'css', icon: 'css' },
       { name: 'html  ', icon: 'html' }
     ];
+
     return Promise.all(paths.map(async (path, i) => {
-      const newPath = await this.pathService.create(
-        random.pathInput({ name: path.name, icon: path.icon })
-      );
+      let newPath = new Path();
+      const character = await this.characterService.create(random.characterInput());
+
+      if (i % 2 === 0) {
+        newPath = await this.pathService.create(
+          random.pathInput({ name: path.name, icon: path.icon, characterId: character.id })
+        );
+      } else {
+        newPath = await this.pathService.create(
+          random.pathInput({ name: path.name, icon: path.icon })
+        );
+      }
       if (i === 0) {
-        await this.pathService.addUserToPath(newPath.id, users[0].id);
+        await this.pathService.addUserToPath(users[0].id, newPath.id);
       }
       return newPath;
     }));
