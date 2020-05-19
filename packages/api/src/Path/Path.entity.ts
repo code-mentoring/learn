@@ -33,7 +33,7 @@ export class Path extends CMBaseEntity {
   pathUser: PathUser[];
 
   @OneToMany(() => Module, module => module.path)
-  module: Module[];
+  modules: Module[];
 }
 
 @InputType()
