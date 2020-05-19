@@ -35,21 +35,16 @@ export class Path extends CMBaseEntity {
   pathUser: PathUser[];
 
   @OneToMany(() => Module, module => module.path)
-  module: Module[];
-
-  @Column()
-  @Field()
   modules: Module[];
 
-  @OneToOne(() => Character)
+  @OneToOne(() => Character, { nullable: true })
   @JoinColumn()
-  @Field(() => Character)
+  @Field(() => Character, { nullable: true })
   character: Character;
 
-  @Column()
-  @Field()
-  characterId: string;
-
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  characterId?: string;
 }
 
 @InputType()
@@ -62,4 +57,25 @@ export class PathInput {
 
   @Field()
   description: string;
+
+  @Field({ nullable: true })
+  characterId?: string;
+}
+
+@InputType()
+export class UpdatePathInput {
+  @Field()
+  id: string;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  icon?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+
+  @Field({ nullable: true })
+  characterId?: string;
 }

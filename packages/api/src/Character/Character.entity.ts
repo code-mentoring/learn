@@ -20,9 +20,9 @@ export class Character extends CMBaseEntity {
   @Field()
   displayName: string;
 
-  @OneToOne(() => Path)
-  @Field(() => Path)
-  path: Path
+  @OneToOne(() => Path, path => path.character)
+  @Field(() => Path, { nullable: true })
+  path?: Path
 }
 
 @InputType()
@@ -36,6 +36,9 @@ export class CreateCharacterInput {
 
 @InputType()
 export class UpdateCharacterInput {
+  @Field()
+  id: string;
+
   @Field({ nullable: true })
   name?: string;
 

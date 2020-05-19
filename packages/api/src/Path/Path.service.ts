@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
-import { Path, PathInput } from './Path.entity';
+import { Path, PathInput, UpdatePathInput } from './Path.entity';
 
 @Injectable()
 export class PathService {
@@ -43,5 +43,11 @@ export class PathService {
     }
     return this.pathUserRepository.create({ userId, pathId: paths }).save();
 
+  }
+
+  async update(pathInput: UpdatePathInput): Promise<Path | undefined> {
+    const { affected } = await this.pathRepository.update({ id: pathInput.id }, pathInput);
+    if (affected && (affected === 1)) return this.pathRepository.findOne(pathInput.id);
+    throw new NotFoundException('Path not found');
   }
 }
