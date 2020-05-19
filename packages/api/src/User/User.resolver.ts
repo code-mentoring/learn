@@ -33,8 +33,8 @@ export class UserResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
-  searchUsers(@Args('param') param: string) {
-    return this.userService.search(param);
+  searchUsers(@Args('param') query: string) {
+    return this.userService.search(query);
   }
 
   @UseGuards(GQLAuthGuard)
@@ -64,9 +64,8 @@ export class UserResolver {
 
   @ResolveField(() => UserPreferences)
   async userPreferences(@Parent() user: User) {
-    const userPreferences = await this.userPreferencesService.findByUser(
+    return this.userPreferencesService.findByUser(
       user.id
     );
-    return userPreferences;
   }
 }
