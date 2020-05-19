@@ -1,4 +1,7 @@
 # Project CM - Code Mentoring's Learning platform (The Duolingo of Coding)
+
+## To learn more about the project, please check the [wiki](https://github.com/code-mentoring/learn/wiki)
+
 ### 🔗 [learn.codementoring.co](https://learn.codementoring.co)
 > Welcome to Project CM 👋, we're glad you're here! This project was born from our
 community over at [codementoring.co](https://codementoring.co). The goal of this
@@ -7,16 +10,9 @@ project is to bring free, fun education to anyone who wants to learn how to code
 - [Project CM - Code Mentoring's Learning platform (The Duolingo of Coding)](#project-cm---code-mentorings-learning-platform-the-duolingo-of-coding)
     - [🔗 learn.codementoring.co](#%f0%9f%94%97-learncodementoringco)
   - [❓Why this project exists](#%e2%9d%93why-this-project-exists)
-  - [💻 What this project uses for technology](#%f0%9f%92%bb-what-this-project-uses-for-technology)
   - [🙋‍♀️ How you can get involved](#%f0%9f%99%8b%e2%80%8d%e2%99%80%ef%b8%8f-how-you-can-get-involved)
     - [💬 Communication](#%f0%9f%92%ac-communication)
     - [📞 Weekly standup](#%f0%9f%93%9e-weekly-standup)
-  - [📦 Installation and Setup](#%f0%9f%93%a6-installation-and-setup)
-  - [🗺 Getting around / project structure](#%f0%9f%97%ba-getting-around--project-structure)
-  - [🏃🏿‍♂️ Running the project](#%f0%9f%8f%83%f0%9f%8f%bf%e2%80%8d%e2%99%82%ef%b8%8f-running-the-project)
-    - [API:](#api)
-    - [Client:](#client)
-  - [🎨 Design files](#%f0%9f%8e%a8-design-files)
   - [👏 Credits](#%f0%9f%91%8f-credits)
 
 
@@ -26,27 +22,6 @@ storytelling. For us, stories are the bedrock of society and are how we've been
 learning as humans since the dawn of time. In this project, all education, features,
 new ideas and roadmaps have a focus on the story they tell. This is what makes
 Code Mentoring, and this platform special. We think you'll like it too 😊.
-
-
-## 💻 What this project uses for technology
-- **[Lerna](https://github.com/lerna/lerna):** Project CM uses Lerna to manage
-all the packages in the repo. Lerna is a great way of handling multiple code
-bases in a single git repository.
-- **[Typescript](https://www.typescriptlang.org/):** We love TS here at Code Mentoring.
-We feel it provides the flexibility of JS with extra safety and control.
-Perfect for large projects like this
-- **[React](https://reactjs.org/):** A popular framework for building UIs that
-needs no introduction. We use React for all our front-end projects.
-- **[NestJS](https://nestjs.com/):** Nest is a Node.js/GraphQL platform for building
-great APIs. It has great support for typescript too. We use this for all our APIs/backends.
-- **[GraphQL](https://graphql.org/):** GQL is a very innovative alternative to the
-standard REST API you might be used to. We use GQL as the communication layer between
-our front-end and back-end. (NestJS for API, and Apollo for React)
-- **[Apollo](https://www.apollographql.com/):** Apollo is a great framework that
-NestJS uses to communicate with the front-end. We use [Apollo Client](https://www.apollographql.com/docs/react/) in React to
-talk to the API.
-- **[Postgres Database](https://www.postgresql.org/):** A very powerful, open source
-database used by the industry for projects of all sizes.
 
 
 ## 🙋‍♀️ How you can get involved
@@ -69,50 +44,6 @@ maintainers for access to slack or to get a meeting invite.
 
 ---
 
-## 📦 Installation and Setup
-1. **Install Node.js.** Check the website for information on how to install
-2. **Install [Yarn](https://yarnpkg.com/)** Check the website for information on how to install
-3. **Clone the project.** Git clone the project to somewhere you want to work on
-your local machine
-4. **Install docker.** This will be needed to run the database locally
-5. **Install dependencies**: Inside the *__root__* of the project, run `yarn` and wait for install
-6. Setup is complete 🎉!
-
-## 🗺 Getting around / project structure
-Project CM is divided into 3 (currently) main packages.
-- [**`api`**](packages/api/README.md): The NestJS API package that powers all our data ([api.codementoring.co](https://api.codementoring.co))
-- [**`client`**](packages/client/README.md): The React package that provides the UI/front-end for the project ([learn.codementoring.co](https://learn.codementoring.co))
-- [**`ui`**](packages/client/README.md): A React project for all the UI components to live. (Will eventually be reused in the **[WWW/marketing site](https://github.com/code-mentoring/www)**)
-
-
-## 🏃🏿‍♂️ Running the project
-
-### API:
-```
-cd packages/api;
-yarn dev
-```
-You can then open [http://localhost:4000/graphql](https://localhost:4000/graphql)
-to test the API
-
-### Client:
-```
-cd packages/client;
-yarn dev
-```
-Once the API is running, open [http://localhost:8080](https://localhost:8080) to
-load the front-end.
-
-
----
-
-## 🎨 Design files
-We use Figma for this project.
-- [All UI elements can be found here](https://www.figma.com/file/MfOc0a8Ac9Zoh9RppoEuiD/CM-UI?node-id=0%3A1&viewport=657%2C444%2C1.0679636001586914)
-- [All mockups can be found here](
-https://www.figma.com/file/Fd2OguMlOscLwHQfA74YF7/app?node-id=0%3A1&viewport=-4927%2C1603%2C0.633924663066864)
-
----
 
 ## 👏 Credits
 This project is built and maintained by the community of [Code Mentoring](https://codementoring.co).

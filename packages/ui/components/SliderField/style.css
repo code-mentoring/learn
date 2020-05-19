@@ -1,0 +1,11 @@
+.rc-slider-dot:first-child:before {
+  content: '';
+  z-index: -1;
+  @apply w-6 border-4 border-solid border-green-400 absolute mt-1 right-0 rounded
+}
+
+.rc-slider-dot:last-child:after {
+  content: '';
+  z-index: -1;
+  @apply w-6 border-4 border-solid border-grey-200 absolute mt-1 rounded
+}

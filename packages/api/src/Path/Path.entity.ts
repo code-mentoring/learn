@@ -3,8 +3,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, Prim
 
 import { Character } from '../Character/Character.entity';
 import { CMBaseEntity } from '../lib/Base.entity';
-import { Module } from '../Module/Module.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
+import { Module } from '../Module/Module.entity';
 
 
 @ObjectType()
@@ -37,6 +37,10 @@ export class Path extends CMBaseEntity {
   @OneToMany(() => Module, module => module.path)
   module: Module[];
 
+  @Column()
+  @Field()
+  modules: Module[];
+
   @OneToOne(() => Character)
   @JoinColumn()
   @Field(() => Character)
@@ -45,6 +49,7 @@ export class Path extends CMBaseEntity {
   @Column()
   @Field()
   characterId: string;
+
 }
 
 @InputType()

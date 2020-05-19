@@ -1,5 +1,5 @@
-mutation ($friendInput: CreateFriendInput!) {
-  createFriendship( friendInput : $friendInput) {
+mutation ($toId: String!) {
+  createFriendship( toId : $toId) {
     id
     user1Id
     user2Id

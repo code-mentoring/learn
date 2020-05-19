@@ -43,7 +43,7 @@ export class Module extends CMBaseEntity {
   @Field(() => Module, { nullable: true })
   previous?: Module;
 
-  @ManyToOne(() => Path, path => path.module, { nullable: false })
+  @ManyToOne(() => Path, path => path.modules, { nullable: false })
   @Field(() => Path)
   path: Path;
 }

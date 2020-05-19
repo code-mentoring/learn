@@ -5,7 +5,7 @@ import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
-import { randomUserInput } from '../../src/Database/seeders/random';
+import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
 import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
@@ -15,7 +15,6 @@ import {
   Character,
   CreateAssignmentFileInput,
   CreateAssignmentInput,
-  CreateFriendInput,
   CreateModuleInput,
   Friend,
   FriendOutput,
@@ -82,7 +81,7 @@ export abstract class TestClient {
 
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput = randomUserInput()): Promise<User> {
+  static createUser(user: UserInput = random.userInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
@@ -92,8 +91,8 @@ export abstract class TestClient {
     return res;
   }
 
-  static createPath(path: PathInput, character: CreateCharacterInput): Promise<Path> {
-    return this._request('createPath', mutations.createPath, { path, character });
+  static createPath(path: PathInput = random.pathInput()): Promise<Path> {
+    return this._request('createPath', mutations.createPath, { path });
   }
 
   static joinPath(pathId: string): Promise<Boolean> {
@@ -112,8 +111,8 @@ export abstract class TestClient {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
-  static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
-    return this._request('createFriendship', mutations.createFriendship, { friendInput });
+  static createFriendship(toId: String): Promise<FriendOutput> {
+    return this._request('createFriendship', mutations.createFriendship, { toId });
   }
 
   static respondToFriendRequest(
@@ -132,8 +131,8 @@ export abstract class TestClient {
     return this._request('createModule', mutations.createModule, { module });
   }
 
-  static updateModule(update: UpdateModuleInput): Promise<Module> {
-    return this._request('updateModule', mutations.updateModule, { update });
+  static updateModule(module: UpdateModuleInput): Promise<Module> {
+    return this._request('updateModule', mutations.updateModule, { module });
   }
 
   static deleteModule(moduleId: string): Promise<Module> {
@@ -157,6 +156,10 @@ export abstract class TestClient {
     return this._request('me', queries.me);
   }
 
+  static modules(): Promise<Module[]> {
+    return this._request('modules', queries.modules);
+  }
+
   static getUserFriends(userId: string): Promise< Friend[] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
@@ -171,7 +174,7 @@ export abstract class TestClient {
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = randomUserInput();
+    const userInput = random.userInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };

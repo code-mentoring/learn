@@ -30,7 +30,7 @@ export class UserPreferences extends CMBaseEntity {
     @Column()
     @Field()
     @IsInt()
-    @Min(1)
+    @Min(0)
     @Max(10)
     codingAbility: number;
 }

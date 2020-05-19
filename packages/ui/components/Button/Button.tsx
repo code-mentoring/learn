@@ -1,30 +1,34 @@
 import classnames from 'classnames';
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import { Size, WithColor } from '../../lib/classes';
-
 
 
 export type ButtonProps = WithColor & {
   text?: boolean;
-  size?: Size
+  size?: Size;
 };
 
-export const Button: React.FunctionComponent<ButtonProps & Omit<HTMLProps<HTMLButtonElement>, 'size'>> = ({
+export const Button: React.FunctionComponent<ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'>> = ({
   children,
-  type,
   className,
   text,
   color,
   size,
+  type = 'submit',
   ...props
 }) => {
   const classes: any = {};
   if (color) classes[`btn-${color}`] = true;
   if (size) classes[`btn-${size}`] = true;
-  if (text) classes[`btn-text`] = true;
+  if (text) classes['btn-text'] = true;
 
+  // TODO: disabled styles
+
+  // eslint-disable-next-line react/button-has-type
   return <button
-    className={classnames("btn", classes, className)}
+    type={type}
+    className={classnames('btn', classes, className)}
     {...props}
-  >{children}</button>;
+  >{children}
+  </button>;
 };

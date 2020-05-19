@@ -56,15 +56,6 @@ export class Friend extends CMBaseEntity {
 }
 
 @InputType()
-export class CreateFriendInput {
-  @Field()
-  fromId: string;
-
-  @Field()
-  toId: string;
-}
-
-@InputType()
 export class UpdateFriendInput {
 
   @Field()

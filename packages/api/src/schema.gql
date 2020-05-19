@@ -75,6 +75,24 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+}
+
+type UserConcept {
+  id: String!
+  userId: String!
+  conceptId: String!
+  learned: DateTime!
+  concept: Concept!
+  user: User!
+}
+
 type Friend {
   id: String!
   user1Id: String!
@@ -105,31 +123,40 @@ type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  getConcepts: [Concept!]!
+  getConceptByName(name: String!): Concept!
+  userLearnedConcepts: [UserConcept!]!
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   paths: [Path!]!
   getPathByName(name: String!): Path!
+  myPaths: [Path!]!
 }
 
 type Mutation {
   createAssignment(assignment: CreateAssignmentInput!): Assignment!
-  updateAssignment(update: UpdateAssignmentInput!): Assignment!
+  updateAssignment(assignment: UpdateAssignmentInput!): Assignment!
   deleteAssignment(assignmentId: String!): Boolean!
   createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
-  updateAssignmentFile(update: UpdateAssignmentFileInput!): AssignmentFile!
+  updateAssignmentFile(file: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
-  createFriendship(friendInput: CreateFriendInput!): FriendOutput!
+  createConcept(concept: CreateConceptInput!): Concept!
+  updateConcept(concept: UpdateConceptInput!): Concept!
+  deleteConcept(conceptId: String!): Boolean!
+  learnConcept(conceptId: String!): Boolean!
+  createFriendship(toId: String!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: CreateModuleInput!): Module!
-  updateModule(update: UpdateModuleInput!): Module!
+  updateModule(module: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
   createPath(character: CreateCharacterInput!, path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
+  joinPaths(paths: [String!]!): Boolean!
 }
 
 input CreateAssignmentInput {
@@ -171,9 +198,19 @@ input UserPreferencesInput {
   codingAbility: Float
 }
 
-input CreateFriendInput {
-  fromId: String!
-  toId: String!
+input CreateConceptInput {
+  name: String!
+  icon: String!
+  description: String!
+  taughtInId: String!
+}
+
+input UpdateConceptInput {
+  id: String!
+  name: String
+  icon: String
+  description: String
+  taughtInId: String
 }
 
 input CreateModuleInput {

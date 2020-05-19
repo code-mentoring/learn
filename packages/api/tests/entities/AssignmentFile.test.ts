@@ -1,5 +1,5 @@
+import * as random from '../../src/Database/seeders/random';
 import { TestClient } from '../utils/TestClient';
-import { randomPath, randomModule, randomAssignmentFile, randomAssignment } from '../../src/Database/seeders/random';
 
 beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
@@ -8,9 +8,9 @@ let assignmentId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  const { id } = await TestClient.createPath(randomPath(undefined, 'path name'));
-  const { id: moduleId } = await TestClient.createModule(randomModule('name', id));
-  const { id: assgnmtId } = await TestClient.createAssignment(randomAssignment(moduleId));
+  const { id } = await TestClient.createPath();
+  const { id: moduleId } = await TestClient.createModule(random.moduleInput('name', id));
+  const { id: assgnmtId } = await TestClient.createAssignment(random.assignmentInput(moduleId));
   assignmentId = assgnmtId;
 };
 
@@ -22,7 +22,7 @@ describe('AssignmentFile entity', () => {
     it('should create an assignment file successfully', async () => {
       expect.assertions(1);
 
-      const assignmentFileInput = randomAssignmentFile(assignmentId);
+      const assignmentFileInput = random.assignmentFileInput(assignmentId);
       const assignmentFile = await TestClient.createAssignmentFile(assignmentFileInput);
 
       expect(assignmentFile).toMatchObject(assignmentFileInput);

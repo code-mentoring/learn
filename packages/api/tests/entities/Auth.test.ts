@@ -1,4 +1,5 @@
 import { TestClient } from '../utils/TestClient';
+import * as random from '../../src/Database/seeders/random';
 
 describe('Auth entity', () => {
 
@@ -8,12 +9,7 @@ describe('Auth entity', () => {
   describe('Mutation: login', () => {
 
     it('should successfully log in user', async () => {
-      const input = {
-        email: 'loginMutation@user.com',
-        firstName: 'Bob',
-        lastName: 'Brown',
-        password: 'secret'
-      };
+      const input = random.userInput();
       // 1. Create user
       const user = await TestClient.createUser(input);
       // 2. Check user was created successfully
@@ -25,12 +21,7 @@ describe('Auth entity', () => {
     });
 
     it('should throw error if email missing', async () => {
-      const input = {
-        email: 'loginMutationFail@user.com',
-        firstName: 'Bob',
-        lastName: 'Brown',
-        password: 'secret'
-      };
+      const input = random.userInput();
 
       await TestClient.createUser(input);
 

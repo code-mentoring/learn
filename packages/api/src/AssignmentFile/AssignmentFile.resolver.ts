@@ -36,9 +36,9 @@ export class AssignmentFileResolver {
   @Mutation(() => AssignmentFile)
   updateAssignmentFile(
     @CurrentUser() user: User,
-    @Args('update') update: UpdateAssignmentFileInput
+    @Args('file') file: UpdateAssignmentFileInput
   ) {
-    return this.assignmentFileService.update(user.id, update);
+    return this.assignmentFileService.update(user.id, file);
   }
 
   @UseGuards(GQLAuthGuard)

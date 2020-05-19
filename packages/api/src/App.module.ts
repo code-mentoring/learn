@@ -6,12 +6,14 @@ import { AssignmentModule } from './Assignment';
 import { AssignmentFileModule } from './AssignmentFile';
 import { AuthModule } from './Auth';
 import { CharacterModule } from './Character';
+import { ConceptModule } from './Concept';
 import { DatabaseModule } from './Database';
 import { FriendModule } from './Friend';
 import { ModuleModule } from './Module';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { UserModule } from './User';
+import { UserConceptModule } from './UserConcepts';
 
 
 /**
@@ -27,6 +29,8 @@ export const appImports = [
   FriendModule,
   ModuleModule,
   CharacterModule,
+  ConceptModule,
+  UserConceptModule,
 
   DatabaseModule,
 
