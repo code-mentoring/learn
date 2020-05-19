@@ -6,7 +6,7 @@ import { UserService } from '../../User/User.service';
 import { DatabaseService } from '../Database.service';
 import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
 import { PathService } from '../../Path/Path.service';
-import { randomUserInput, randomUserPreferenceInput, randomPath } from './random';
+import * as random from './random';
 import { UserWithPassword } from '../../User/User.entity';
 
 interface CTX {
@@ -44,13 +44,13 @@ export class SeederService {
   async seedUsers(num: number = 3): Promise<UserWithPassword[]> {
     return Promise.all(Array(num).fill(undefined).map(async (_, i) => {
       const user = await this.userService.create(
-        randomUserInput({ email: `user${i}@test.com` })
+        random.userInput({ email: `user${i}@test.com` })
       );
 
       if (i % 2 === 0) {
         await this.userPreferencesService.update(
           user.id,
-          randomUserPreferenceInput()
+          random.userPreferenceInput()
         );
       }
       return user;
@@ -65,7 +65,7 @@ export class SeederService {
     ];
     return Promise.all(paths.map(async (path, i) => {
       const newPath = await this.pathService.create(
-        randomPath({ name: path.name, icon: path.icon }, path.name)
+        random.pathInput({ name: path.name, icon: path.icon })
       );
       if (i === 0) {
         await this.pathService.addUserToPath(newPath.id, users[0].id);

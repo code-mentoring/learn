@@ -7,7 +7,9 @@ import { ModuleType, CreateModuleInput } from '../../Module/Module.entity';
 import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
 import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
 
-export const randomUserInput = (input: Partial<UserInput> = {}): UserInput => ({
+export const userInput = (
+  input: Partial<UserInput> = {}
+): UserInput => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
@@ -15,36 +17,39 @@ export const randomUserInput = (input: Partial<UserInput> = {}): UserInput => ({
   ...input
 });
 
-export const randomUserPreferenceInput = (): UserPreferencesInput => ({
+export const userPreferenceInput = (
+  input: Partial<UserPreferencesInput> = {}
+): UserPreferencesInput => ({
   practiceGoal: Math.floor(Math.random() * 4) + 1,
   why: faker.lorem.sentence(),
-  codingAbility: Math.floor(Math.random() * 10) + 1
+  codingAbility: Math.floor(Math.random() * 10) + 1,
+  ...input
 });
 
-export const randomPath = (input: Partial<PathInput> = {}, name: string): PathInput => ({
-  name,
+export const pathInput = (
+  input: Partial<PathInput> = {}
+): PathInput => ({
+  name: faker.random.word(),
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),
   ...input
 });
 
-const moduleTypeArr = Object.keys(ModuleType);
+export const moduleTypeArr = Object.keys(ModuleType) as ModuleType[];
 
-export const randomModule = (
+export const moduleInput = (
   name: string,
   pathId: string,
   input: Partial<CreateModuleInput> = {}
 ): CreateModuleInput => ({
   name,
   icon: faker.lorem.word(),
-  type: (moduleTypeArr as ModuleType[])[Math.floor(
-    Math.random() * (moduleTypeArr as ModuleType[]).length
-  )],
+  type: moduleTypeArr[Math.floor(Math.random() * moduleTypeArr.length)],
   pathId,
   ...input
 });
 
-export const randomAssignment = (
+export const assignmentInput = (
   moduleId: string,
   input: Partial<CreateAssignmentInput> = {}
 ): CreateAssignmentInput => ({
@@ -53,7 +58,7 @@ export const randomAssignment = (
   ...input
 });
 
-export const randomAssignmentFile = (
+export const assignmentFileInput = (
   assignmentId: string,
   input: Partial<CreateAssignmentFileInput> = {}
 ): CreateAssignmentFileInput => ({

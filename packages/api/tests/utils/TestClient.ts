@@ -5,7 +5,7 @@ import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
-import { randomUserInput } from '../../src/Database/seeders/random';
+import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
 import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
@@ -80,7 +80,7 @@ export abstract class TestClient {
 
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(user: UserInput = randomUserInput()): Promise<User> {
+  static createUser(user: UserInput = random.userInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
@@ -158,7 +158,7 @@ export abstract class TestClient {
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = randomUserInput();
+    const userInput = random.userInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };

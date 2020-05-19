@@ -1,6 +1,6 @@
 import { TestClient } from '../utils/TestClient';
 import { User } from '../../types';
-import { randomUserInput } from '../../src/Database/seeders/random';
+import * as random from '../../src/Database/seeders/random';
 
 let me: User;
 let user2: User;
@@ -8,12 +8,12 @@ let user3: User;
 
 const setup = async () => {
   await TestClient.resetDatabase();
-  const userInput = randomUserInput();
+  const userInput = random.userInput();
   me = await TestClient.createUser(userInput);
   await TestClient.login(me.email, userInput.password);
 
-  user2 = await TestClient.createUser(randomUserInput());
-  user3 = await TestClient.createUser(randomUserInput());
+  user2 = await TestClient.createUser(random.userInput());
+  user3 = await TestClient.createUser(random.userInput());
 };
 
 describe('Friend entity', () => {

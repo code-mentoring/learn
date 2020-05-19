@@ -1,5 +1,5 @@
 import { TestClient } from '../utils/TestClient';
-import { randomPath, randomModule, randomAssignment } from '../../src/Database/seeders/random';
+import * as random from '../../src/Database/seeders/random';
 
 beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
@@ -8,8 +8,8 @@ let moduleId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  const { id } = await TestClient.createPath(randomPath(undefined, 'path name'));
-  const { id: modId } = await TestClient.createModule(randomModule('name', id));
+  const { id } = await TestClient.createPath(random.pathInput({ name: 'path name' }));
+  const { id: modId } = await TestClient.createModule(random.moduleInput('name', id));
   moduleId = modId;
 };
 
@@ -21,7 +21,7 @@ describe('Assignment entity', () => {
     it('should create an assignment successfully', async () => {
       expect.assertions(2);
 
-      const assignmentInput = randomAssignment(moduleId);
+      const assignmentInput = random.assignmentInput(moduleId);
       const assignment = await TestClient.createAssignment(assignmentInput);
 
       expect(assignment.id).toBeDefined();
