@@ -17,5 +17,6 @@ export const TypeORMModule = TypeOrmModule.forRoot({
   synchronize: true,
   // @ts-ignore
   useNewUrlParser: true,
-  logging: false
+  logging: false,
+  keepConnectionAlive: true
 });

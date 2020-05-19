@@ -1,0 +1,41 @@
+mutation ($user1Id: String!, $user2Id: String!, $response: String!) {
+  respondToFriendRequest( user1Id: $user1Id, user2Id: $user2Id, response : $response)  {
+    id
+    user1Id
+    user2Id
+    requested
+    initiator
+    status
+    since
+    user1{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }
+    user2{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }
+  }
+}

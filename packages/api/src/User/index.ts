@@ -10,7 +10,6 @@ import { PathService } from '../Path/Path.service';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Path } from '../Path/Path.entity';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([
     UserWithPassword,

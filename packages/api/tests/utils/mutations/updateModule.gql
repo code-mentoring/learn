@@ -1,0 +1,18 @@
+mutation updateModule($module: UpdateModuleInput!) {
+  updateModule(module: $module) {
+    id
+    name
+    icon
+    type
+    previousId
+    previous {
+      id
+      name
+    }
+    pathId
+    path {
+      id
+      name
+    }
+  }
+}
