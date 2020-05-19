@@ -138,6 +138,7 @@ export type Query = {
   pathModules: Array<Module>;
   paths: Array<Path>;
   getPathByName: Path;
+  myPaths: Array<Path>;
 };
 
 
@@ -203,6 +204,7 @@ export type Mutation = {
   deleteModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  joinPaths: Scalars['Boolean'];
 };
 
 
@@ -212,7 +214,7 @@ export type MutationCreateAssignmentArgs = {
 
 
 export type MutationUpdateAssignmentArgs = {
-  update: UpdateAssignmentInput;
+  assignment: UpdateAssignmentInput;
 };
 
 
@@ -227,7 +229,7 @@ export type MutationCreateAssignmentFileArgs = {
 
 
 export type MutationUpdateAssignmentFileArgs = {
-  update: UpdateAssignmentFileInput;
+  file: UpdateAssignmentFileInput;
 };
 
 
@@ -258,7 +260,7 @@ export type MutationCreateConceptArgs = {
 
 
 export type MutationUpdateConceptArgs = {
-  update: UpdateConceptInput;
+  concept: UpdateConceptInput;
 };
 
 
@@ -273,7 +275,7 @@ export type MutationLearnConceptArgs = {
 
 
 export type MutationCreateFriendshipArgs = {
-  friendInput: CreateFriendInput;
+  toId: Scalars['String'];
 };
 
 
@@ -295,7 +297,7 @@ export type MutationCreateModuleArgs = {
 
 
 export type MutationUpdateModuleArgs = {
-  update: UpdateModuleInput;
+  module: UpdateModuleInput;
 };
 
 
@@ -311,6 +313,11 @@ export type MutationCreatePathArgs = {
 
 export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type MutationJoinPathsArgs = {
+  paths: Array<Scalars['String']>;
 };
 
 export type CreateAssignmentInput = {
@@ -365,11 +372,6 @@ export type UpdateConceptInput = {
   icon?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   taughtInId?: Maybe<Scalars['String']>;
-};
-
-export type CreateFriendInput = {
-  fromId: Scalars['String'];
-  toId: Scalars['String'];
 };
 
 export type CreateModuleInput = {

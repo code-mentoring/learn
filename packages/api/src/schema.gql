@@ -139,7 +139,7 @@ type Mutation {
   updateConcept(concept: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
   learnConcept(conceptId: String!): Boolean!
-  createFriendship(friendInput: CreateFriendInput!): FriendOutput!
+  createFriendship(toId: String!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: CreateModuleInput!): Module!
@@ -202,11 +202,6 @@ input UpdateConceptInput {
   icon: String
   description: String
   taughtInId: String
-}
-
-input CreateFriendInput {
-  fromId: String!
-  toId: String!
 }
 
 input CreateModuleInput {

@@ -14,7 +14,6 @@ import {
   AssignmentFile,
   CreateAssignmentFileInput,
   CreateAssignmentInput,
-  CreateFriendInput,
   CreateModuleInput,
   Friend,
   FriendOutput,
@@ -110,8 +109,8 @@ export abstract class TestClient {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
-  static createFriendship(friendInput: CreateFriendInput): Promise<FriendOutput> {
-    return this._request('createFriendship', mutations.createFriendship, { friendInput });
+  static createFriendship(toId: String): Promise<FriendOutput> {
+    return this._request('createFriendship', mutations.createFriendship, { toId });
   }
 
   static respondToFriendRequest(
