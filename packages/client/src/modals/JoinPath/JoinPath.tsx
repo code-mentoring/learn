@@ -4,38 +4,37 @@
 import { Button, Icon } from '@codement/ui';
 import { Modal } from '@codement/ui/components/Modal/Modal';
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import { Path } from '@codement/api';
 import { PathsList } from '../../components/PathsList/PathsList';
 import styles from './JoinPath.module.css';
 
+const joinSelectedPaths = gql`
+  mutation joinPaths($paths: [String!]!) {
+    joinPaths(paths: $paths)
+  }
+`;
 
 interface JoinPath {
   setShow: any;
 }
 
-// Click add path button in progress widget to open modal
-
-// TEAM NOTE:
-//  - Modal closes when clicked anywhere.  Changed to only close on (x).
-//  - Refractor CSS to its own individual file.
-//  - Added the fetch paths feature.(create the paths in graphql playground to enable functionality)
-//  - Overtiding icon type in PathIcon component using 'as'
-//  - I think we should probably make separate css files for the each component rather than 1 in UI
-//  - Added the selectPath hook to handle selection of the different paths
-//  - I have disabled the begin button until a path is selected
-//  - Added hover state for hovering over the paths
-
-// CSS can be found @     ui/css/modal-join-path.css
-// Figma Design:          https://www.figma.com/file/eyk5tQgLhIpyiORYfWxeUh/Learning-App?node-id=197%3A0
+// Team Note
+// There seems to be no need for the joinPath mutation since selectedPaths
+// always returns an array
 
 export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
   const [selectedPaths, setSelectedPaths] = useState<Path[]>([]);
+  const [joinPaths] = useMutation(joinSelectedPaths);
 
 
-  const beginHandler = () => {
-    alert('Clicked Begin in Join a Path');
+  const joinPathHandler = () => {
+    joinPaths({ variables: { paths: selectedPaths } });
+    setShow();
+    window.location.reload(false);
   };
 
   return (
@@ -59,9 +58,9 @@ export const JoinPath: React.FC<JoinPath> = ({ setShow }) => {
 
         <div className="flex justify-end">
           <Button
-            color={selectedPaths.length ? 'disabled' : 'success'}
+            color={selectedPaths.length ? 'success' : 'disabled'}
             className="mt-8"
-            onClick={beginHandler}
+            onClick={joinPathHandler}
           >
             Begin
           </Button>
