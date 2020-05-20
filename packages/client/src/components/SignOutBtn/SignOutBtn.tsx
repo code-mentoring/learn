@@ -6,15 +6,15 @@ import classes from './SignOutBtn.module.css';
 export const SignOutBtn = () => {
   const { signOut } = Auth.useContainer();
   return (
-      <button
-          className = {classes.Btn}
-          type = "button"
-          onClick = {() => {
-              signOut();
-              console.log('You have signed out');
-          }}
-      >
-          Sign out
-      </button>
+    <button
+        className={classes.Btn}
+        type="button"
+        onClick={() => {
+            signOut();
+            console.log('You have signed out');
+        }}
+    >
+        Sign out
+    </button>
   );
 };
