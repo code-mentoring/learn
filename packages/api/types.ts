@@ -15,7 +15,7 @@ export type Character = {
   id: Scalars['String'];
   name: Scalars['String'];
   displayName: Scalars['String'];
-  path: Path;
+  path?: Maybe<Path>;
 };
 
 export type UserPreferences = {
@@ -46,8 +46,8 @@ export type Path = {
   icon: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  character: Character;
-  characterId: Scalars['String'];
+  character?: Maybe<Character>;
+  characterId?: Maybe<Scalars['String']>;
 };
 
 export type Module = {
@@ -140,6 +140,7 @@ export type Query = {
   users: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
+  getCharacters: Array<Character>;
   getConcepts: Array<Concept>;
   getConceptByName: Concept;
   userLearnedConcepts: Array<UserConcept>;
@@ -202,6 +203,9 @@ export type Mutation = {
   createUser: User;
   updatePreferences: UserPreferences;
   login: LoginOutput;
+  createCharacter: Character;
+  updateCharacter: Character;
+  deleteCharacter: Scalars['Boolean'];
   createConcept: Concept;
   updateConcept: Concept;
   deleteConcept: Scalars['Boolean'];
@@ -215,6 +219,7 @@ export type Mutation = {
   createPath: Path;
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
+  updatePath: Path;
 };
 
 
@@ -261,6 +266,21 @@ export type MutationUpdatePreferencesArgs = {
 export type MutationLoginArgs = {
   password: Scalars['String'];
   email: Scalars['String'];
+};
+
+
+export type MutationCreateCharacterArgs = {
+  character: CreateCharacterInput;
+};
+
+
+export type MutationUpdateCharacterArgs = {
+  character: UpdateCharacterInput;
+};
+
+
+export type MutationDeleteCharacterArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -317,7 +337,6 @@ export type MutationDeleteModuleArgs = {
 
 
 export type MutationCreatePathArgs = {
-  character: CreateCharacterInput;
   path: PathInput;
 };
 
@@ -329,6 +348,11 @@ export type MutationJoinPathArgs = {
 
 export type MutationJoinPathsArgs = {
   paths: Array<Scalars['String']>;
+};
+
+
+export type MutationUpdatePathArgs = {
+  path: UpdatePathInput;
 };
 
 export type CreateAssignmentInput = {
@@ -370,6 +394,17 @@ export type UserPreferencesInput = {
   codingAbility?: Maybe<Scalars['Float']>;
 };
 
+export type CreateCharacterInput = {
+  name: Scalars['String'];
+  displayName: Scalars['String'];
+};
+
+export type UpdateCharacterInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+};
+
 export type CreateConceptInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
@@ -407,13 +442,17 @@ export enum ModuleType {
   Lesson = 'lesson'
 }
 
-export type CreateCharacterInput = {
-  name: Scalars['String'];
-  displayName: Scalars['String'];
-};
-
 export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
+  characterId?: Maybe<Scalars['String']>;
+};
+
+export type UpdatePathInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  characterId?: Maybe<Scalars['String']>;
 };

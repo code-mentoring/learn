@@ -5,7 +5,8 @@ const files = [
   'getPathByName',
   'me',
   'modules',
-  'getUserFriends'
+  'getUserFriends',
+  'getCharacters'
 ];
 
 export default files.reduce((obj, file) => {

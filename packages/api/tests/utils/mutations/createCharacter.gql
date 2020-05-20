@@ -1,4 +1,4 @@
-mutation ($character: CharacterCreateInput!) {
+mutation ($character: CreateCharacterInput!) {
   createCharacter( character : $character) {
     id
     name

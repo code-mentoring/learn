@@ -1,5 +1,5 @@
-mutation ($character: UpdateCharacterInput!) {
-  updateCharacter( character : $character) {
+query getCharacters {
+  getCharacters {
     id
     name
     displayName

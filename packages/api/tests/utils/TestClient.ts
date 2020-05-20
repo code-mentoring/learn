@@ -29,6 +29,7 @@ import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
+import { UpdatePathInput } from '../../src/Path/Path.entity';
 
 
 /**
@@ -99,6 +100,10 @@ export abstract class TestClient {
     return this._request('joinPath', mutations.joinPath, { pathId });
   }
 
+  static updatePath(path: UpdatePathInput): Promise<Path> {
+    return this._request('updatePath', mutations.updatePath, { path });
+  }
+
   static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
@@ -143,8 +148,12 @@ export abstract class TestClient {
     return this._request('createCharacter', mutations.createCharacter, { character });
   }
 
-  static updateCharacter(index: CharacterIndex, update: UpdateCharacterInput): Promise<Boolean> {
-    return this._request('updateCharacter', mutations.updateCharacter, { index, update });
+  static updateCharacter(character: UpdateCharacterInput): Promise<Character> {
+    return this._request('updateCharacter', mutations.updateCharacter, { character });
+  }
+
+  static deleteCharacter(id: string): Promise<Boolean> {
+    return this._request('deleteCharacter', mutations.deleteCharacter, { id });
   }
   // ------------------------------------------------------------------- Queries
 
@@ -164,12 +173,8 @@ export abstract class TestClient {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 
-  static characters(): Promise<Character[]> {
-    return this._request('characters', queries.characters);
-  }
-
-  static getCharacter(index: CharacterIndex): Promise<Character> {
-    return this._request('getCharacter', queries.getCharacter, { index });
+  static getCharacters(): Promise<Character[]> {
+    return this._request('getCharacters', queries.getCharacters);
   }
 
   // ----------------------------------------------------------------- Workflows

@@ -1,15 +1,11 @@
-import { PathInput, CharacterCreateInput } from '../../types';
+import { PathInput } from '../../types';
 import { TestClient } from '../utils/TestClient';
+import * as random from '../../src/Database/seeders/random'
 
 export const pathInput: PathInput = {
   name: 'Path name',
   icon: 'icon',
   description: 'Description text'
-};
-
-export const characterInput: CharacterCreateInput = {
-  name: 'Tom',
-  displayName: 'TomTom'
 };
 
 beforeAll(async () => { await TestClient.start(); });
@@ -26,17 +22,27 @@ describe('Path entity', () => {
   describe('Mutation: createPath', () => {
     beforeEach(setup);
 
-    it('should create a path successfully', async () => {
-      const path = await TestClient.createPath(pathInput, characterInput);
+    it('should create a path successfully without characterId', async () => {
+      const path = await TestClient.createPath(pathInput);
 
       expect(path.id).toBeDefined();
       expect(path.name).toEqual(pathInput.name);
       expect(path.icon).toEqual(pathInput.icon);
       expect(path.description).toEqual(pathInput.description);
       expect(path.createdAt).toBeDefined();
-      expect(path.character.id).toBeDefined();
-      expect(path.character.name).toEqual(characterInput.name);
-      expect(path.character.displayName).toEqual(characterInput.displayName);
+      expect(path.characterId).toBe(null);
+    });
+  
+    it('should create a path successfully with characterId', async () => {
+      const character = await TestClient.createCharacter(random.characterInput());
+      const path = await TestClient.createPath({...pathInput, characterId: character.id});
+
+      expect(path.id).toBeDefined();
+      expect(path.name).toEqual(pathInput.name);
+      expect(path.icon).toEqual(pathInput.icon);
+      expect(path.description).toEqual(pathInput.description);
+      expect(path.createdAt).toBeDefined();
+      expect(path.characterId).toEqual(character.id);
     });
 
     it('should throw error if path name exists', async () => {
@@ -48,30 +54,8 @@ describe('Path entity', () => {
           description: 'Description text'
         }));
 
-        const characterInput2: CharacterInput = {
-          name: 'Tom',
-          displayName: 'JerryJerry'
-        }
-
-        await TestClient.createPath(path1, characterInput);
-        await TestClient.createPath(path2, characterInput2);
-
-      } catch (e) {
-        expect(e.message).toMatch(/unique constraint/i);
-      }
-    });
-
-    it('should throw error if character name exists', async () => {
-      expect.assertions(1);
-      try {
-        const pathInput2: PathInput = {
-          name: 'Path name 2',
-          icon: 'icon 2',
-          description: 'Description text 2'
-        };
-
-        await TestClient.createPath(pathInput, characterInput);
-        await TestClient.createPath(pathInput2, characterInput);
+        await TestClient.createPath(path1);
+        await TestClient.createPath(path2);
 
       } catch (e) {
         expect(e.message).toMatch(/unique constraint/i);
@@ -83,7 +67,7 @@ describe('Path entity', () => {
     beforeEach(setup);
 
     it('join a path successfully', async () => {
-      await TestClient.createPath(pathInput, characterInput);
+      await TestClient.createPath(pathInput);
       // Find path
       const { id } = await TestClient.getPathByName(pathInput.name);
       // Join path
@@ -93,7 +77,7 @@ describe('Path entity', () => {
 
     it('should not allow to join a path twice', async () => {
       expect.assertions(1);
-      await TestClient.createPath(pathInput, characterInput);
+      await TestClient.createPath(pathInput);
       // Find path
       const { id } = await TestClient.getPathByName(pathInput.name);
       // Join path
@@ -107,5 +91,19 @@ describe('Path entity', () => {
       }
     });
   });
+  
+  // Character update service will based on updateResult.affected to determin query or throw an error
+  // Because sqlite donot return affected param for updateResult, so it will always throw an error. 
+  // It can not be tested
+  describe.skip('Mutation: updatePath', () => {
+    beforeEach(setup);
 
+    it('should update a path successfully', async () => {
+      const path = await TestClient.createPath(pathInput);
+      const character = await TestClient.createCharacter(random.characterInput());
+      const updatePath = await TestClient.updatePath({id: path.id, characterId: character.id});
+
+      expect(updatePath.characterId).toEqual(character.id);
+    });
+  });
 });

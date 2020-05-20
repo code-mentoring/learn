@@ -1,8 +1,0 @@
-query ($index: CharacterIndex!)  {
-  getCharacter (index : $index)
-  {
-    id
-    name
-    displayName
-  }
-}
