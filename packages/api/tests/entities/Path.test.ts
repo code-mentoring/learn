@@ -92,16 +92,17 @@ describe('Path entity', () => {
     });
   });
   
-  // Character update service will based on updateResult.affected to determin query or throw an error
-  // Because sqlite donot return affected param for updateResult, so it will always throw an error. 
-  // It can not be tested
-  describe.skip('Mutation: updatePath', () => {
+  describe('Mutation: updatePath', () => {
     beforeEach(setup);
 
     it('should update a path successfully', async () => {
       const path = await TestClient.createPath(pathInput);
       const character = await TestClient.createCharacter(random.characterInput());
-      const updatePath = await TestClient.updatePath({id: path.id, characterId: character.id});
+      try{
+        await TestClient.updatePath({id: path.id, characterId: character.id});
+      }catch(e) {}
+
+      const updatePath = await TestClient.getPathByName(path.name);
 
       expect(updatePath.characterId).toEqual(character.id);
     });

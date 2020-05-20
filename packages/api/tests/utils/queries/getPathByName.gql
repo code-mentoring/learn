@@ -1,5 +1,5 @@
-query getPathByName($name: String!) {
-  getPathByName(name: $name) {
+query ($name: String!) {
+  getPathByName( name : $name) {
     id
     name
     icon
@@ -10,5 +10,6 @@ query getPathByName($name: String!) {
       name
       displayName
     }
+    characterId
   }
 }

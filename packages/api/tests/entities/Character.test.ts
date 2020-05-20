@@ -77,9 +77,6 @@ describe('Character entity', () => {
     });
   });
 
-  // Character delete service will based on deleteResult.affected to determin success or not.
-  // Because sqlite donot return affected param for deleteResult, so it will always fail. 
-  // so the test script use alternative query to validate delete success or not.
   describe('Mutation: deleteCharacters', () => {
     beforeEach(setup);
 
@@ -95,30 +92,35 @@ describe('Character entity', () => {
     });
   });
 
-  // Character update service will based on updateResult.affected to determin query or throw an error
-  // Because sqlite donot return affected param for updateResult, so it will always throw an error. 
-  // It can not be tested
-  describe.skip('Mutation: updateCharacter', () => {
+  describe('Mutation: updateCharacter', () => {
     beforeEach(setup);
 
     it('update character name successfully', async () => {
       expect.assertions(2);
       const updateInput = { name: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      const updateResult = await TestClient.updateCharacter({ id: character.id, ...updateInput });
+      try{
+        await TestClient.updateCharacter({ id: character.id, ...updateInput });
+      }catch(e) {};
 
-      expect(updateResult.name).toEqual(updateInput.name);
-      expect(updateResult.displayName).toEqual(characterInput1.displayName);
+      const updateResult = await TestClient.getCharacters();
+
+      expect(updateResult[0].name).toEqual(updateInput.name);
+      expect(updateResult[0].displayName).toEqual(characterInput1.displayName);
     });
 
     it('update character displayName successfully', async () => {
       expect.assertions(2);
       const updateInput = { displayName: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      const updateResult = await TestClient.updateCharacter({ id: character.id, ...updateInput });
+      try{
+        await TestClient.updateCharacter({ id: character.id, ...updateInput });
+      }catch(e) {};
 
-      expect(updateResult.name).toEqual(characterInput1.name);
-      expect(updateResult.displayName).toEqual(updateInput.displayName);
+      const updateResult = await TestClient.getCharacters();
+
+      expect(updateResult[0].name).toEqual(characterInput1.name);
+      expect(updateResult[0].displayName).toEqual(updateInput.displayName);
     });
 
     it('throw an error if update not exist character', async () => {
@@ -128,7 +130,7 @@ describe('Character entity', () => {
       try {
         const d = await TestClient.updateCharacter({ id: id, ...updateInput});
       } catch (e) {
-        expect(e.message).toMatch('Cannot return null for non-nullable field Mutation.updateCharacter');
+        expect(e.message).toMatch('not found');
       }
     });
   });  
