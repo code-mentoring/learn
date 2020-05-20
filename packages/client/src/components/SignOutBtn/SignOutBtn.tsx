@@ -10,8 +10,8 @@ export const SignOutBtn = () => {
       className={classes.Btn}
       type="button"
       onClick={() => {
-          signOut();
-          console.log('You have signed out');
+        signOut();
+        console.log('You have signed out');
       }}
     >
       Sign out
