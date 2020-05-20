@@ -7,14 +7,14 @@ export const SignOutBtn = () => {
   const { signOut } = Auth.useContainer();
   return (
     <button
-        className={classes.Btn}
-        type="button"
-        onClick={() => {
-            signOut();
-            console.log('You have signed out');
-        }}
+      className={classes.Btn}
+      type="button"
+      onClick={() => {
+          signOut();
+          console.log('You have signed out');
+      }}
     >
-        Sign out
+      Sign out
     </button>
   );
 };
