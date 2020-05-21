@@ -11,7 +11,7 @@ const mockModule = {
   completed: true,
   previous: {
     id: 1,
-    completed: false
+    completed: true
   }
 };
 
@@ -24,7 +24,7 @@ export const PathModule : React.FunctionComponent = () => {
   return <div className="relative w-24 flex flex-col items-center">
     <Hexagon classname={statusClass} />
     {mockModule.completed
-        && <CheckMark classname={`absolute ${styles.checkmark}`} />}
+        && <CheckMark classname={`${styles.checkmark}`} />}
     <div className={classnames('name', statusClass)}>
       {mockModule.name}
     </div>
