@@ -11,6 +11,18 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
 import { PathService } from '../Path/Path.service';
 import { Path } from '../Path/Path.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
+import { Module as CMModule } from '../Module/Module.entity';
+import { ModuleService } from '../Module/Module.service';
+import { Assignment } from '../Assignment/Assignment.entity';
+import { AssignmentService } from '../Assignment/Assignment.service';
+import { Concept } from '../Concept/Concept.entity';
+import { ConceptService } from '../Concept/Concept.service';
+import { UserConcept } from '../UserConcepts/UserConcept.entity';
+import { UserConceptService } from '../UserConcepts/UserConcept.service';
+import { Friend } from '../Friend/Friend.entity';
+import { FriendService } from '../Friend/Friend.service';
+import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
+import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service';
 
 
 /**
@@ -23,7 +35,13 @@ import { PathUser } from '../PathUser/PathUser.entity';
       UserWithPassword,
       UserPreferences,
       Path,
-      PathUser
+      PathUser,
+      CMModule,
+      Assignment,
+      AssignmentFile,
+      Concept,
+      UserConcept,
+      Friend
     ])
   ],
   providers: [
@@ -31,7 +49,13 @@ import { PathUser } from '../PathUser/PathUser.entity';
     SeederService,
     UserService,
     UserPreferencesService,
-    PathService
+    PathService,
+    ModuleService,
+    AssignmentService,
+    AssignmentFileService,
+    ConceptService,
+    UserConceptService,
+    FriendService
   ],
   exports: [DatabaseService, SeederService]
 })

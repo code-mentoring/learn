@@ -6,6 +6,7 @@ import { PathInput } from '../../Path/Path.entity';
 import { ModuleType, CreateModuleInput } from '../../Module/Module.entity';
 import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
 import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
+import { CreateConceptInput } from '../../Concept/Concept.entity';
 
 export const userInput = (
   input: Partial<UserInput> = {}
@@ -66,5 +67,16 @@ export const assignmentFileInput = (
   type: faker.lorem.word(),
   content: faker.lorem.words(10),
   assignmentId,
+  ...input
+});
+
+export const conceptInput = (
+  taughtInId: string,
+  input: Partial<CreateConceptInput> = {}
+): CreateConceptInput => ({
+  name: faker.lorem.words(2),
+  icon: faker.lorem.word(),
+  description: faker.lorem.words(10),
+  taughtInId,
   ...input
 });
