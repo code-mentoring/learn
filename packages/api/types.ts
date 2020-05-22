@@ -10,6 +10,14 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type Character = {
+   __typename?: 'Character';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  displayName: Scalars['String'];
+  path?: Maybe<Path>;
+};
+
 export type UserPreferences = {
    __typename?: 'UserPreferences';
   id: Scalars['String'];
@@ -38,6 +46,8 @@ export type Path = {
   icon: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  character?: Maybe<Character>;
+  characterId?: Maybe<Scalars['String']>;
 };
 
 export type Module = {
@@ -130,6 +140,7 @@ export type Query = {
   users: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
+  getCharacters: Array<Character>;
   getConcepts: Array<Concept>;
   getConceptByName: Concept;
   userLearnedConcepts: Array<UserConcept>;
@@ -138,6 +149,7 @@ export type Query = {
   pathModules: Array<Module>;
   paths: Array<Path>;
   getPathByName: Path;
+  myPaths: Array<Path>;
 };
 
 
@@ -191,6 +203,9 @@ export type Mutation = {
   createUser: User;
   updatePreferences: UserPreferences;
   login: LoginOutput;
+  createCharacter: Character;
+  updateCharacter: Character;
+  deleteCharacter: Scalars['Boolean'];
   createConcept: Concept;
   updateConcept: Concept;
   deleteConcept: Scalars['Boolean'];
@@ -203,6 +218,8 @@ export type Mutation = {
   deleteModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  joinPaths: Scalars['Boolean'];
+  updatePath: Path;
 };
 
 
@@ -212,7 +229,7 @@ export type MutationCreateAssignmentArgs = {
 
 
 export type MutationUpdateAssignmentArgs = {
-  update: UpdateAssignmentInput;
+  assignment: UpdateAssignmentInput;
 };
 
 
@@ -227,7 +244,7 @@ export type MutationCreateAssignmentFileArgs = {
 
 
 export type MutationUpdateAssignmentFileArgs = {
-  update: UpdateAssignmentFileInput;
+  file: UpdateAssignmentFileInput;
 };
 
 
@@ -252,13 +269,28 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationCreateCharacterArgs = {
+  character: CreateCharacterInput;
+};
+
+
+export type MutationUpdateCharacterArgs = {
+  character: UpdateCharacterInput;
+};
+
+
+export type MutationDeleteCharacterArgs = {
+  id: Scalars['String'];
+};
+
+
 export type MutationCreateConceptArgs = {
   concept: CreateConceptInput;
 };
 
 
 export type MutationUpdateConceptArgs = {
-  update: UpdateConceptInput;
+  concept: UpdateConceptInput;
 };
 
 
@@ -273,7 +305,7 @@ export type MutationLearnConceptArgs = {
 
 
 export type MutationCreateFriendshipArgs = {
-  friendInput: CreateFriendInput;
+  toId: Scalars['String'];
 };
 
 
@@ -295,7 +327,7 @@ export type MutationCreateModuleArgs = {
 
 
 export type MutationUpdateModuleArgs = {
-  update: UpdateModuleInput;
+  module: UpdateModuleInput;
 };
 
 
@@ -311,6 +343,16 @@ export type MutationCreatePathArgs = {
 
 export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type MutationJoinPathsArgs = {
+  paths: Array<Scalars['String']>;
+};
+
+
+export type MutationUpdatePathArgs = {
+  path: UpdatePathInput;
 };
 
 export type CreateAssignmentInput = {
@@ -352,6 +394,17 @@ export type UserPreferencesInput = {
   codingAbility?: Maybe<Scalars['Float']>;
 };
 
+export type CreateCharacterInput = {
+  name: Scalars['String'];
+  displayName: Scalars['String'];
+};
+
+export type UpdateCharacterInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+};
+
 export type CreateConceptInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
@@ -365,11 +418,6 @@ export type UpdateConceptInput = {
   icon?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   taughtInId?: Maybe<Scalars['String']>;
-};
-
-export type CreateFriendInput = {
-  fromId: Scalars['String'];
-  toId: Scalars['String'];
 };
 
 export type CreateModuleInput = {
@@ -398,4 +446,13 @@ export type PathInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
+  characterId?: Maybe<Scalars['String']>;
+};
+
+export type UpdatePathInput = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  characterId?: Maybe<Scalars['String']>;
 };

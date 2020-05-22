@@ -1,0 +1,14 @@
+query getCharacters {
+  getCharacters {
+    id
+    name
+    displayName
+    path{
+      id
+      name
+      icon
+      description
+      createdAt
+    }
+  }
+}

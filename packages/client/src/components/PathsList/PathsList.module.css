@@ -1,0 +1,27 @@
+.selectedLayer::before,
+.selectedLayer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.selectedLayer::before {
+  border-width: 1.5em;
+  border-right-color: #0DD2AB;
+  border-top-color: #0DD2AB;
+}
+
+.selectedLayer::after {
+  border-radius: 0.4em;
+  border-width: 1.35em;
+  border-right-color: #0DD2AB;
+  border-top-color: #0DD2AB;
+}
+
+.checkIcon {
+  top: 7px;
+  right: 4px;
+}
