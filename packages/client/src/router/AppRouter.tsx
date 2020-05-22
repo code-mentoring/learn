@@ -10,7 +10,7 @@ import {
   RouteComponentProps
 } from 'react-router-dom';
 
-import { StorySectionPage } from '../pages/StorySection/StorySection.page';
+import { StorySectionPage } from '../pages/Lesson/StorySection/StorySection.page';
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { Auth } from '../containers/Auth.container';

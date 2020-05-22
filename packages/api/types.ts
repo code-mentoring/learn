@@ -45,6 +45,36 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type Module = {
+   __typename?: 'Module';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+  previous?: Maybe<Module>;
+  path: Path;
+};
+
+export type Assignment = {
+   __typename?: 'Assignment';
+  id: Scalars['String'];
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+  module: Module;
+};
+
+export type Concept = {
+   __typename?: 'Concept';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  icon: Scalars['String'];
+  taughtInId: Scalars['String'];
+  taughtIn: Module;
+};
+
 export type Query = {
    __typename?: 'Query';
   users: Array<User>;
@@ -52,6 +82,7 @@ export type Query = {
   verifyToken: Scalars['Boolean'];
   paths: Array<Path>;
   getPathByName: Path;
+  myPaths: Array<Path>;
 };
 
 
@@ -71,6 +102,7 @@ export type Mutation = {
   login: LoginOutput;
   createPath: Path;
   joinPath: Scalars['Boolean'];
+  joinPaths: Scalars['Boolean'];
 };
 
 
@@ -80,7 +112,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdatePreferencesArgs = {
-  input: UserPreferencesInput;
+  preferences: UserPreferencesInput;
 };
 
 
@@ -99,6 +131,11 @@ export type MutationJoinPathArgs = {
   pathId: Scalars['String'];
 };
 
+
+export type MutationJoinPathsArgs = {
+  paths: Array<Scalars['String']>;
+};
+
 export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -107,9 +144,9 @@ export type UserInput = {
 };
 
 export type UserPreferencesInput = {
-  practiceGoal: Scalars['Float'];
-  why: Scalars['String'];
-  codingAbility: Scalars['Float'];
+  practiceGoal?: Maybe<Scalars['Float']>;
+  why?: Maybe<Scalars['String']>;
+  codingAbility?: Maybe<Scalars['Float']>;
 };
 
 export type PathInput = {

@@ -3,11 +3,11 @@ import { Switch, Route, RouteComponentProps } from 'react-router';
 
 import { Button } from '@codement/ui';
 import { Link } from 'react-router-dom';
-import { Character } from '../../components/Character/Character';
-import { AppHeader } from '../../components/AppHeader/AppHeader';
-import { routes } from '../../router/routes';
-import { CenterWrapper } from '../Onboarding/Wizard/CenterWrapper';
-import { LearnedConcepts } from './Components/LearnedConcepts';
+import { Character } from '../../../components/Character/Character';
+import { routes } from '../../../router/routes';
+import { CenterWrapper } from '../../Onboarding/Wizard/CenterWrapper';
+import { LearnedConcepts } from '../LearnedConcepts';
+import { LessonHeader } from '../LessonHeader';
 
 export interface StoryStepsProps {
   id: number;
@@ -26,9 +26,9 @@ const mockStorySteps = [
 
 export const StorySectionPage: React.FC<RouteComponentProps> = props =>
 
-  <div className="relative h-screen overflow-hidden bg-white">
-    {/** TODO:  HEADER */}
-    <AppHeader minimal />
+  {console.log('PROPS', props)
+  return <div className="relative h-screen overflow-hidden bg-white">
+    <LessonHeader pathName="Intro to HTML" />
     <Switch>
 
       {/* 1. Sections */}
@@ -54,17 +54,13 @@ export const StorySectionPage: React.FC<RouteComponentProps> = props =>
 
 
       {/* 2. Recap */}
-      {/* <OnboardingStep {...steps[1]}>
-        <SliderText value={codingAbility}>
-          <SliderField
-            value={codingAbility}
-            onChange={(value: number) => setCodingAbility(value)}
-          />
-        </SliderText>
-      </OnboardingStep> */}
+      {/* <Route path={routes.lessonStoryRecap()}>
+        <h2>So, to recap...</h2>
+        {mockStorySteps.map({})}
+      </Route> */}
 
     </Switch>
-  </div>;
+  </div>;}
 
 export const CharacterGraphic: React.FC = ({ children }) => <div className="absolute bottom-0 left-0 z-0">
   {children}
