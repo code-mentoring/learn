@@ -1,0 +1,14 @@
+mutation ($character: UpdateCharacterInput!) {
+  updateCharacter( character : $character) {
+    id
+    name
+    displayName
+    path{
+      id
+      name
+      icon
+      description
+      createdAt
+    }
+  }
+}

@@ -11,6 +11,8 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
 import { PathService } from '../Path/Path.service';
 import { Path } from '../Path/Path.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
+import { CharacterService } from '../Character/Character.service';
+import { Character } from '../Character/Character.entity';
 
 
 /**
@@ -23,7 +25,8 @@ import { PathUser } from '../PathUser/PathUser.entity';
       UserWithPassword,
       UserPreferences,
       Path,
-      PathUser
+      PathUser,
+      Character
     ])
   ],
   providers: [
@@ -31,7 +34,8 @@ import { PathUser } from '../PathUser/PathUser.entity';
     SeederService,
     UserService,
     UserPreferencesService,
-    PathService
+    PathService,
+    CharacterService
   ],
   exports: [DatabaseService, SeederService]
 })

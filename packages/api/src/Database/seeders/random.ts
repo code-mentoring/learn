@@ -1,11 +1,13 @@
 import faker from 'faker';
 
+import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
+import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
+import { CreateModuleInput, ModuleType } from '../../Module/Module.entity';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 import { PathInput } from '../../Path/Path.entity';
-import { ModuleType, CreateModuleInput } from '../../Module/Module.entity';
-import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
-import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
+import { CreateCharacterInput } from '../../Character/Character.entity';
+
 
 export const userInput = (
   input: Partial<UserInput> = {}
@@ -67,4 +69,9 @@ export const assignmentFileInput = (
   content: faker.lorem.words(10),
   assignmentId,
   ...input
+});
+
+export const characterInput = (): CreateCharacterInput => ({
+  name: faker.name.lastName(),
+  displayName: faker.name.firstName()
 });

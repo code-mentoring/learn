@@ -12,6 +12,7 @@ import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences
 import {
   Assignment,
   AssignmentFile,
+  Character,
   CreateAssignmentFileInput,
   CreateAssignmentInput,
   CreateModuleInput,
@@ -27,6 +28,8 @@ import {
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
+import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
+import { UpdatePathInput } from '../../src/Path/Path.entity';
 
 
 /**
@@ -97,6 +100,10 @@ export abstract class TestClient {
     return this._request('joinPath', mutations.joinPath, { pathId });
   }
 
+  static updatePath(path: UpdatePathInput): Promise<Path> {
+    return this._request('updatePath', mutations.updatePath, { path });
+  }
+
   static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
@@ -137,6 +144,17 @@ export abstract class TestClient {
     return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
+  static createCharacter(character: CreateCharacterInput): Promise<Character> {
+    return this._request('createCharacter', mutations.createCharacter, { character });
+  }
+
+  static updateCharacter(character: UpdateCharacterInput): Promise<Character> {
+    return this._request('updateCharacter', mutations.updateCharacter, { character });
+  }
+
+  static deleteCharacter(id: string): Promise<Boolean> {
+    return this._request('deleteCharacter', mutations.deleteCharacter, { id });
+  }
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -153,6 +171,10 @@ export abstract class TestClient {
 
   static getUserFriends(userId: string): Promise< Friend[] > {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
+  }
+
+  static getCharacters(): Promise<Character[]> {
+    return this._request('getCharacters', queries.getCharacters);
   }
 
   // ----------------------------------------------------------------- Workflows
