@@ -30,5 +30,9 @@ export const routes = {
   onboardingWorkflowWhy: linkParams('/welcome/why'),
   onboardingWorkflowPaths: linkParams('/welcome/paths'),
   onboardingWorkflowPracticeGoal: linkParams('/welcome/practiceGoal'),
-  onboardingWorkflowCompleted: linkParams('/welcome/completed')
+  onboardingWorkflowCompleted: linkParams('/welcome/completed'),
+
+  // Lesson Story Section
+  lessonStory: linkParams<{lessonId: number, order: number}>('/lesson/:lessonId/story/:order'),
+  lessonStoryRecap: linkParams<{lessonId: number}>('/lesson/:lessonId/story/recap')
 };

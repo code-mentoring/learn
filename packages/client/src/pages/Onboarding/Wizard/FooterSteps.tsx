@@ -31,7 +31,7 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
     <Button className="absolute bottom-0 mb-6 mx-auto inset-x-0" color="transparent" text size="large">
       <Link className="text-grey-500" to={backLink}>Go back</Link>
     </Button>
-    <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
+    <div className={`absolute flex items-center ${styles.footerSteps}`}>
       <div className="flex items-center">
         <div className="flex items-center">
 

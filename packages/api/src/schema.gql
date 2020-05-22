@@ -37,6 +37,33 @@ type LoginOutput {
   accessToken: String!
 }
 
+type Module {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  path: Path!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: Module!
+}
+
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+}
+
 type Query {
   users: [User!]!
   me: User!

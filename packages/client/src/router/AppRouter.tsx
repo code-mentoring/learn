@@ -1,14 +1,20 @@
 import { Loader } from '@codement/ui';
 import React from 'react';
 import {
-  Redirect, Route, RouteProps, Router, Switch, useHistory
-} from 'react-router';
+  BrowserRouter as Router,
+  Route,
+  RouteProps,
+  Switch,
+  Redirect,
+  useHistory,
+  RouteComponentProps
+} from 'react-router-dom';
 
+import { StorySectionPage } from '../pages/StorySection/StorySection.page';
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { Auth } from '../containers/Auth.container';
 import { Me } from '../containers/Me.container';
-import { history as History } from '../lib/history';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
@@ -42,11 +48,12 @@ const UnAuthRoute: React.FunctionComponent<RouteProps> = props => {
 };
 
 export const AppRouter = () => (
-  <Router history={History}>
+  <Router>
     <Switch>
       <UnAuthRoute path={routes.login(false)} component={LoginPage} />
 
       <AuthRoute path="*">
+
         <Switch>
           <Route exact path={routes.home(false)} component={DashboardPage} />
           <Route exact path={routes.logout(false)} component={LogoutPage} />
@@ -55,10 +62,16 @@ export const AppRouter = () => (
               <OnboardingPage />
             </Wizard.Provider>
           </Route>
+          <Route
+            path={routes.lessonStory(false)}
+            component={(props: RouteComponentProps) => <StorySectionPage {...props} />
+           }
+          />
 
           <Redirect to={routes.home(false)} />
         </Switch>
       </AuthRoute>
+
     </Switch>
   </Router>
 );
