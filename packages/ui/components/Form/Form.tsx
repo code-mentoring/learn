@@ -62,7 +62,9 @@ export const Form: React.FunctionComponent<FormProps<any>> = ({
   return <BrixFormContext.Provider value={ctx}>
     <FormikProvider value={form}>
       {error && <ErrorMessage error={error} /> }
-      <FormikForm children={children} className={classnames(className, { 'with-submit': canSubmit })} style={style} />
+      <FormikForm className={classnames(className, { 'with-submit': canSubmit })} style={style}>
+        {children}
+      </FormikForm>
     </FormikProvider>
   </BrixFormContext.Provider>;
 };

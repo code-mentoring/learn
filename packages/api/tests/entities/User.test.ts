@@ -1,7 +1,8 @@
+import * as random from '../../src/Database/seeders/random';
 import { TestClient } from '../utils/TestClient';
 import { UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 
-describe('User entity', () => {
+describe.only('User entity', () => {
   beforeAll(async () => {
     await TestClient.start();
   });
@@ -16,13 +17,7 @@ describe('User entity', () => {
 
   describe('Mutation: createUser', () => {
     it('should create a user successfully', async () => {
-      const input = {
-        email: 'fake@user.com',
-        firstName: 'Bob',
-        lastName: 'Brown',
-        password: 'secret'
-      };
-
+      const input = random.userInput();
       const user = await TestClient.createUser(input);
 
       expect(user.id).toBeDefined();
@@ -39,12 +34,9 @@ describe('User entity', () => {
     it('should throw error if email missing', async () => {
       expect.assertions(1); // Expect there to be an error
       try {
-        const input = {
-          firstName: 'Bob',
-          lastName: 'Brown',
-          password: 'secret',
-        };
-        // @ts-ignore Deliberately missing email to test error
+        const input = random.userInput();
+        // @Deliberately missing email to test error
+        delete input.email;
         await TestClient.createUser(input);
       } catch (e) {
         expect(e.message).toContain(
@@ -71,12 +63,12 @@ describe('User entity', () => {
   describe('Query: search', () => {
     beforeEach(setup);
 
-    ['firstName', 'lastName', 'email'].forEach((key) => {
+    ['firstName', 'lastName', 'email'].forEach(key => {
       it(`should return user by ${key}`, async () => {
         expect.assertions(4);
         const newUser = await TestClient.createUser();
         const users = await TestClient.search(newUser[key]);
-       
+
         expect(users).toBeArrayOfSize(1);
         expect(users[0].firstName).toEqual(newUser.firstName);
         expect(users[0].lastName).toEqual(newUser.lastName);
@@ -100,52 +92,53 @@ describe('User entity', () => {
           lastName: 'Sanchez',
           email: 'rickSanchez12@gmail.com',
           password: 'secret1'
-        }
-        
-        const newUser = await TestClient.createUser(user1);
-        const newUser2 = await TestClient.createUser(user2);
-        const newUser3 = await TestClient.createUser();
+        };
+
+        await TestClient.createUser(user1);
+        await TestClient.createUser(user2);
+        await TestClient.createUser();
         const users = await TestClient.search(user1[key]);
-        
+
         expect(users).toBeArrayOfSize(2);
         expect(users[0][key]).toEqual(user1[key]);
         expect(users[1][key]).toEqual(user1[key]);
-      })
-  });
-
-  describe('Mutation: updatePreferences', () => {
-    const preferences: UserPreferencesInput = {
-      why: 'why',
-      codingAbility: 5,
-      practiceGoal: 4,
-    };
-    beforeEach(setup);
-    it('should update user preferences', async () => {
-      expect.assertions(5);
-
-      const userPreferences = await TestClient.updatePreferences(preferences);
-      expect(userPreferences.id).toBeDefined();
-      expect(userPreferences.why).toEqual(preferences.why);
-      expect(userPreferences.practiceGoal).toEqual(preferences.practiceGoal);
-      expect(userPreferences.codingAbility).toEqual(preferences.codingAbility);
-
-      // Check that after updating preferences me returns user preferences filled
-      const mePost = await TestClient.me();
-      expect(mePost.userPreferences).not.toBeNull();
+      });
     });
 
-    it('should validate before create/update preferences', async () => {
-      expect.assertions(3);
+    describe('Mutation: updatePreferences', () => {
+      const preferences: UserPreferencesInput = {
+        why: 'why',
+        codingAbility: 5,
+        practiceGoal: 4
+      };
+      beforeEach(setup);
+      it('should update user preferences', async () => {
+        expect.assertions(5);
 
-      preferences.codingAbility = 11;
-      preferences.practiceGoal = 6;
-      try {
-        await TestClient.updatePreferences(preferences);
-      } catch (e) {
-        expect(e.message).toContain('Unexpected error value:');
-        expect(e.message).toContain(`, value: ${preferences.codingAbility}`);
-        expect(e.message).toContain(`, value: ${preferences.practiceGoal}`);
-      }
+        const userPreferences = await TestClient.updatePreferences(preferences);
+        expect(userPreferences.id).toBeDefined();
+        expect(userPreferences.why).toEqual(preferences.why);
+        expect(userPreferences.practiceGoal).toEqual(preferences.practiceGoal);
+        expect(userPreferences.codingAbility).toEqual(preferences.codingAbility);
+
+        // Check that after updating preferences me returns user preferences filled
+        const mePost = await TestClient.me();
+        expect(mePost.userPreferences).not.toBeNull();
+      });
+
+      it('should validate before create/update preferences', async () => {
+        expect.assertions(3);
+
+        preferences.codingAbility = 11;
+        preferences.practiceGoal = 6;
+        try {
+          await TestClient.updatePreferences(preferences);
+        } catch (e) {
+          expect(e.message).toContain('Unexpected error value:');
+          expect(e.message).toContain(`, value: ${preferences.codingAbility}`);
+          expect(e.message).toContain(`, value: ${preferences.practiceGoal}`);
+        }
+      });
     });
   });
 });

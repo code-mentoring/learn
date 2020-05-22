@@ -6,7 +6,7 @@ import { Path } from '../Path/Path.entity';
 import { UserWithPassword } from '../User/User.entity';
 
 @ObjectType()
-@Entity()
+@Entity('pathUser')
 @Unique(['userId', 'pathId'])
 export class PathUser extends CMBaseEntity {
     @PrimaryGeneratedColumn('uuid')

@@ -1,10 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
-export default {
-  getPathByName: fs
-    .readFileSync(path.join(__dirname, './getPathByName.gql'))
-    .toString(),
-  me: fs.readFileSync(path.join(__dirname, './me.gql')).toString(),
-  searchUsers: fs.readFileSync(path.join(__dirname, './search.gql')).toString(),
-};
+const files = [
+  'getPathByName',
+  'me',
+  'modules',
+  'getUserFriends',
+  'searchUsers'
+];
+
+export default files.reduce((obj, file) => {
+  // eslint-disable-next-line no-param-reassign
+  obj[file] = fs.readFileSync(path.join(__dirname, `./${file}.gql`)).toString();
+  return obj;
+}, {} as {[key: string]: string});

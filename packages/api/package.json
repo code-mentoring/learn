@@ -1,6 +1,6 @@
 {
   "name": "@codement/api",
-  "version": "0.0.1-feature-ci-publish.5",
+  "version": "0.0.2",
   "scripts": {
     "dev": "rimraf dist && nest start --watch",
     "build": "rimraf dist && nest build",
@@ -23,7 +23,7 @@
     "apollo-server-express": "^2.12.0",
     "bcrypt": "^4.0.1",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.11.1",
+    "class-validator": "^0.12.2",
     "config": "^3.3.1",
     "graphql": "^15.0.0",
     "graphql-tools": "^5.0.0",
@@ -51,7 +51,6 @@
     "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.8",
     "@types/uuid": "^7.0.2",
-    "class-validator": "^0.12.2",
     "faker": "^4.1.0",
     "jwt-decode": "^2.2.0",
     "listr": "^0.14.3",

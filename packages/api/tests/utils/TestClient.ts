@@ -1,18 +1,32 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import 'jest-extended';
+
+import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
 import { DatabaseService } from '../../src/Database/Database.service';
+import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { LoginOutput, Path, PathInput, User, UserInput } from '../../types';
+import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
+import {
+  Assignment,
+  AssignmentFile,
+  CreateAssignmentFileInput,
+  CreateAssignmentInput,
+  CreateModuleInput,
+  Friend,
+  FriendOutput,
+  LoginOutput,
+  Module,
+  Path,
+  PathInput,
+  User,
+  UserInput
+} from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import {
-  UserPreferencesInput,
-  UserPreferences
-} from '../../src/UserPreferences/UserPreferences.entity';
 import { UserWithPassword } from '../../src/User/User.entity';
 
 /**
@@ -62,9 +76,7 @@ export abstract class TestClient {
   }
 
   // ----------------------------------------------------------------- Mutations
-  static createUser(
-    user: UserInput = this.seeder.randomUserInput()
-  ): Promise<User> {
+  static createUser(user: UserInput = random.userInput()): Promise<User> {
     return this._request('createUser', mutations.createUser, { user });
   }
 
@@ -81,7 +93,7 @@ export abstract class TestClient {
     return res;
   }
 
-  static createPath(path: PathInput): Promise<Path> {
+  static createPath(path: PathInput = random.pathInput()): Promise<Path> {
     return this._request('createPath', mutations.createPath, { path });
   }
 
@@ -95,6 +107,42 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, {
       preferences
     });
+  }
+
+  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
+    return this._request('createAssignment', mutations.createAssignment, { assignment });
+  }
+
+  static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
+    return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
+  }
+
+  static createFriendship(toId: String): Promise<FriendOutput> {
+    return this._request('createFriendship', mutations.createFriendship, { toId });
+  }
+
+  static respondToFriendRequest(
+    user1Id: string,
+    user2Id: string,
+    response: string
+  ): Promise<Friend> {
+    return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { user1Id, user2Id, response });
+  }
+
+  static deleteFriendship(friendId: string): Promise<Boolean> {
+    return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
+  }
+
+  static createModule(module: CreateModuleInput): Promise<Module> {
+    return this._request('createModule', mutations.createModule, { module });
+  }
+
+  static updateModule(module: UpdateModuleInput): Promise<Module> {
+    return this._request('updateModule', mutations.updateModule, { module });
+  }
+
+  static deleteModule(moduleId: string): Promise<Module> {
+    return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
   // ------------------------------------------------------------------- Queries
@@ -111,9 +159,17 @@ export abstract class TestClient {
     return this._request('searchUsers', queries.searchUsers, { query });
   }
 
+  static modules(): Promise<Module[]> {
+    return this._request('modules', queries.modules);
+  }
+
+  static getUserFriends(userId: string): Promise< Friend[] > {
+    return this._request('getUserFriends', queries.getUserFriends, { userId });
+  }
+
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
-    const userInput = this.seeder.randomUserInput();
+    const userInput = random.userInput();
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };
