@@ -112,15 +112,9 @@ export class SeederService {
   }
 
   async seedAssignment(modules: Module[]) {
-    const assignments: Assignment[] = [];
-    modules.map(async (_, i) => {
-      if (modules[i].type === ModuleType.assignment) {
-        assignments.push(await this.assignmentService.create(
-          random.assignmentInput(modules[i].id)
-        ));
-      }
-    });
-    return assignments;
+    return Promise.all(modules
+      .filter(m => m.type === ModuleType.assignment)
+      .map((_, i) => this.assignmentService.create(random.assignmentInput(modules[i].id))));
   }
 
   async seedAssignmentFile(assignments: Assignment[], users: UserWithPassword[]) {
