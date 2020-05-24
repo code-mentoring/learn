@@ -14,6 +14,8 @@ import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { UserModule } from './User';
 import { UserConceptModule } from './UserConcepts';
+import { LessonModule } from './Lesson';
+import { StorySectionModule } from './StorySection';
 
 
 /**
@@ -31,6 +33,8 @@ export const appImports = [
   CharacterModule,
   ConceptModule,
   UserConceptModule,
+  LessonModule,
+  StorySectionModule,
 
   DatabaseModule,
 

@@ -42,6 +42,31 @@ type Path {
   characterId: String
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+}
+
+type StorySection {
+  id: String!
+  order: Float!
+  content: String!
+  lessonId: String!
+  teachesId: String!
+  teaches: Concept!
+  lesson: Lesson!
+}
+
+type Lesson {
+  id: String!
+  moduleId: String!
+  module: Module!
+}
+
 type Module {
   id: String!
   name: String!
@@ -73,15 +98,6 @@ type AssignmentFile {
 
 type LoginOutput {
   accessToken: String!
-}
-
-type Concept {
-  id: String!
-  name: String!
-  description: String!
-  icon: String!
-  taughtInId: String!
-  taughtIn: Module!
 }
 
 type UserConcept {
@@ -133,6 +149,8 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   myPaths: [Path!]!
+  moduleLessons(moduleId: String!): [Lesson!]!
+  lessonStorySections(lessonId: String!): [StorySection!]!
 }
 
 type Mutation {
@@ -162,6 +180,8 @@ type Mutation {
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
+  createLesson(moduleId: String!): Lesson!
+  createStorySection(storySectionInput: CreateStorySectionInput!): StorySection!
 }
 
 input CreateAssignmentInput {
@@ -264,4 +284,11 @@ input UpdatePathInput {
   icon: String
   description: String
   characterId: String
+}
+
+input CreateStorySectionInput {
+  order: Float!
+  content: String!
+  lessonId: String!
+  teachesId: String!
 }
