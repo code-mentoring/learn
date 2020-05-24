@@ -19,12 +19,6 @@ const meQuery = gql`{
       codingAbility
     }
     profileImage
-    userPreferences {
-      id
-      why
-      practiceGoal
-      codingAbility
-    }
   }
 }`;
 
