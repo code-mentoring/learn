@@ -6,11 +6,9 @@ import {
   RouteProps,
   Switch,
   Redirect,
-  useHistory,
-  RouteComponentProps
+  useHistory
 } from 'react-router-dom';
 
-import { StorySectionPage } from '../pages/Lesson/StorySection/StorySection.page';
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { Auth } from '../containers/Auth.container';
@@ -19,6 +17,7 @@ import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
 import { routes } from './routes';
+import { LessonRouter } from '../pages/Lesson/LessonRouter';
 
 
 // if (location.state?.referrer) {
@@ -63,9 +62,8 @@ export const AppRouter = () => (
             </Wizard.Provider>
           </Route>
           <Route
-            path={routes.lessonStory(false)}
-            component={(props: RouteComponentProps) => <StorySectionPage {...props} />
-           }
+            path={routes.lesson(false)}
+            component={LessonRouter}
           />
 
           <Redirect to={routes.home(false)} />
