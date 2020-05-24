@@ -1,7 +1,8 @@
 import { PathInput } from '../../types';
 import { TestClient } from '../utils/TestClient';
+import * as random from '../../src/Database/seeders/random'
 
-const pathInput: PathInput = {
+export const pathInput: PathInput = {
   name: 'Path name',
   icon: 'icon',
   description: 'Description text'
@@ -21,9 +22,7 @@ describe('Path entity', () => {
   describe('Mutation: createPath', () => {
     beforeEach(setup);
 
-    it('should create a path successfully', async () => {
-      expect.assertions(5);
-
+    it('should create a path successfully without characterId', async () => {
       const path = await TestClient.createPath(pathInput);
 
       expect(path.id).toBeDefined();
@@ -31,6 +30,19 @@ describe('Path entity', () => {
       expect(path.icon).toEqual(pathInput.icon);
       expect(path.description).toEqual(pathInput.description);
       expect(path.createdAt).toBeDefined();
+      expect(path.characterId).toBe(null);
+    });
+  
+    it('should create a path successfully with characterId', async () => {
+      const character = await TestClient.createCharacter(random.characterInput());
+      const path = await TestClient.createPath({...pathInput, characterId: character.id});
+
+      expect(path.id).toBeDefined();
+      expect(path.name).toEqual(pathInput.name);
+      expect(path.icon).toEqual(pathInput.icon);
+      expect(path.description).toEqual(pathInput.description);
+      expect(path.createdAt).toBeDefined();
+      expect(path.characterId).toEqual(character.id);
     });
 
     it('should throw error if path name exists', async () => {
@@ -79,5 +91,20 @@ describe('Path entity', () => {
       }
     });
   });
+  
+  describe('Mutation: updatePath', () => {
+    beforeEach(setup);
 
+    it('should update a path successfully', async () => {
+      const path = await TestClient.createPath(pathInput);
+      const character = await TestClient.createCharacter(random.characterInput());
+      try{
+        await TestClient.updatePath({id: path.id, characterId: character.id});
+      }catch(e) {}
+
+      const updatePath = await TestClient.getPathByName(path.name);
+
+      expect(updatePath.characterId).toEqual(character.id);
+    });
+  });
 });

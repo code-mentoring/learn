@@ -8,6 +8,11 @@ import { UserService } from '../User/User.service';
 import { UserWithPassword } from '../User/User.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
+import { PathService } from '../Path/Path.service';
+import { Path } from '../Path/Path.entity';
+import { PathUser } from '../PathUser/PathUser.entity';
+import { CharacterService } from '../Character/Character.service';
+import { Character } from '../Character/Character.entity';
 
 
 /**
@@ -18,10 +23,20 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
     TypeORMModule,
     TypeOrmModule.forFeature([
       UserWithPassword,
-      UserPreferences
+      UserPreferences,
+      Path,
+      PathUser,
+      Character
     ])
   ],
-  providers: [DatabaseService, SeederService, UserService, UserPreferencesService],
+  providers: [
+    DatabaseService,
+    SeederService,
+    UserService,
+    UserPreferencesService,
+    PathService,
+    CharacterService
+  ],
   exports: [DatabaseService, SeederService]
 })
 export class DatabaseModule { }

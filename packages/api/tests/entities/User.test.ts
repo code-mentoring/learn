@@ -1,3 +1,4 @@
+import * as random from '../../src/Database/seeders/random';
 import { TestClient } from '../utils/TestClient';
 import { UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 
@@ -14,13 +15,7 @@ describe('User entity', () => {
 
   describe('Mutation: createUser', () => {
     it('should create a user successfully', async () => {
-      const input = {
-        email: 'fake@user.com',
-        firstName: 'Bob',
-        lastName: 'Brown',
-        password: 'secret'
-      };
-
+      const input = random.userInput();
       const user = await TestClient.createUser(input);
 
       expect(user.id).toBeDefined();
@@ -37,12 +32,9 @@ describe('User entity', () => {
     it('should throw error if email missing', async () => {
       expect.assertions(1); // Expect there to be an error
       try {
-        const input = {
-          firstName: 'Bob',
-          lastName: 'Brown',
-          password: 'secret'
-        };
-        // @ts-ignore Deliberately missing email to test error
+        const input = random.userInput();
+        // @Deliberately missing email to test error
+        delete input.email;
         await TestClient.createUser(input);
       } catch (e) {
         expect(e.message).toContain('Field "email" of required type "String!" was not provided');
