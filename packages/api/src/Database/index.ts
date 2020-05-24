@@ -23,6 +23,8 @@ import { Friend } from '../Friend/Friend.entity';
 import { FriendService } from '../Friend/Friend.service';
 import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service';
+import { CharacterService } from '../Character/Character.service';
+import { Character } from '../Character/Character.entity';
 
 
 /**
@@ -41,7 +43,8 @@ import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service'
       AssignmentFile,
       Concept,
       UserConcept,
-      Friend
+      Friend,
+      Character
     ])
   ],
   providers: [
@@ -55,7 +58,8 @@ import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service'
     AssignmentFileService,
     ConceptService,
     UserConceptService,
-    FriendService
+    FriendService,
+    CharacterService
   ],
   exports: [DatabaseService, SeederService]
 })

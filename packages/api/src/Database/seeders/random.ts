@@ -7,6 +7,8 @@ import { ModuleType, CreateModuleInput } from '../../Module/Module.entity';
 import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
 import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
 import { CreateConceptInput } from '../../Concept/Concept.entity';
+import { CreateCharacterInput } from '../../Character/Character.entity';
+
 
 export const userInput = (
   input: Partial<UserInput> = {}
@@ -79,4 +81,9 @@ export const conceptInput = (
   description: faker.lorem.words(10),
   taughtInId,
   ...input
+});
+
+export const characterInput = (): CreateCharacterInput => ({
+  name: faker.name.lastName(),
+  displayName: faker.name.firstName()
 });

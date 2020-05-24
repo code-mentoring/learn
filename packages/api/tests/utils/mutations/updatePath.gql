@@ -1,5 +1,5 @@
-mutation ($path: PathInput!) {
-  createPath( path : $path) {
+mutation ($path: UpdatePathInput!) {
+  updatePath( path : $path) {
     id
     name
     icon
