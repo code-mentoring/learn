@@ -100,16 +100,18 @@ export class SeederService {
       { name: 'Functions', type: ModuleType.lesson },
       { name: 'Basic Maths', type: ModuleType.assignment }
     ];
-
-    const res = await this.moduleService.create(random.moduleInput(modules[0].name,
-      paths[0].id, { type: modules[0].type }));
-    const res1 = await this.moduleService.create(random.moduleInput(modules[1].name, paths[0].id,
-      { type: modules[1].type, previousId: res.id }));
-    const res2 = await this.moduleService.create(random.moduleInput(modules[2].name, paths[0].id,
-      { type: modules[2].type, previousId: res1.id }));
-    const res3 = await this.moduleService.create(random.moduleInput(modules[3].name, paths[0].id,
-      { type: modules[3].type, previousId: res2.id }));
-    return Promise.all([res, res1, res2, res3]);
+    const newModules: Module[] = [];
+    let previousId: string | undefined;
+    /* eslint-disable no-restricted-syntax, no-await-in-loop  */
+    for (const module of modules) {
+      const newModule = await this.moduleService.create(
+        random.moduleInput(module.name, paths[0].id,
+          { type: module.type, previousId })
+      );
+      previousId = newModule.id;
+      newModules.push(newModule);
+    }
+    return newModules;
   }
 
   async seedAssignment(modules: Module[]) {
