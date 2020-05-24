@@ -10,7 +10,7 @@ export interface LessonHeaderProps {
 
 export const LessonHeader: React.FC<LessonHeaderProps> = ({ pathName }) =>
   <nav className="flex justify-between items-center p-2 sm:p-4">
-    <Link to="/dashboard">
+    <Link to="/">
       <LogoMark className="logo h-10 sm:ml-10" />
     </Link>
     <h4>{pathName}</h4>
