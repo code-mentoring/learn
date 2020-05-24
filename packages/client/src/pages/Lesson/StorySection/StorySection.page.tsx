@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Icon } from '@codement/ui';
+import { Lesson } from '@codement/api';
 
 import { Character } from '../../../components/Character/Character';
 import { CenterWrapper } from '../../Onboarding/Wizard/CenterWrapper';
 import { LearnedConcepts } from '../LearnedConcepts';
+
+export interface StorySectionPageProps {
+  lesson: Lesson;
+}
 
 export interface StoryStepsProps {
   id: number;
@@ -30,7 +35,7 @@ export const CharacterGraphic: React.FC = ({ children }) => <div className="abso
   {children}
 </div>;
 
-export const StorySectionPage: React.FC = () => {
+export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) => {
 
   const [learnedConcepts] = useState(mockLearnedConcepts);
   const [currentStorySection, setCurrentStorySection] = useState(mockStorySections[0]);

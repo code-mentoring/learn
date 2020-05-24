@@ -38,6 +38,7 @@ type Path {
   icon: String!
   description: String!
   createdAt: DateTime!
+  modules: [Module!]!
   character: Character
   characterId: String
 }
@@ -65,6 +66,7 @@ type Lesson {
   id: String!
   moduleId: String!
   module: Module!
+  storySection: [StorySection!]!
 }
 
 type Module {
@@ -76,6 +78,7 @@ type Module {
   pathId: String!
   previous: Module
   path: Path!
+  lessons: [Lesson!]!
 }
 
 type Assignment {
@@ -149,6 +152,7 @@ type Query {
   paths: [Path!]!
   getPathByName(name: String!): Path!
   myPaths: [Path!]!
+  lesson(id: String!): Lesson!
   moduleLessons(moduleId: String!): [Lesson!]!
   lessonStorySections(lessonId: String!): [StorySection!]!
 }

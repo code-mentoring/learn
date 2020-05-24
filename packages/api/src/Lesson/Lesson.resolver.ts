@@ -10,6 +10,12 @@ export class LessonResolver {
   constructor(private readonly lessonService: LessonService) {}
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => Lesson)
+  lesson(@Args('id') id: string) {
+    return this.lessonService.findById(id);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Query(() => [Lesson])
   moduleLessons(@Args('moduleId') moduleId: string) {
     return this.lessonService.findByModule(moduleId);

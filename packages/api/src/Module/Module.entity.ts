@@ -50,7 +50,8 @@ export class Module extends CMBaseEntity {
   path: Path;
 
   @OneToMany(() => Lesson, lesson => lesson.module)
-  lesson: Lesson;
+  @Field(() => [Lesson])
+  lessons: Lesson[];
 }
 
 @InputType()

@@ -16,10 +16,11 @@ export class Lesson extends CMBaseEntity {
   @Field()
   moduleId: string;
 
-  @ManyToOne(() => Module, module => module.lesson)
+  @ManyToOne(() => Module, module => module.lessons)
   @Field(() => Module)
   module: Module;
 
   @OneToMany(() => StorySection, storySection => storySection.lesson)
-  storySection: StorySection;
+  @Field(() => [StorySection])
+  storySection: StorySection[];
 }

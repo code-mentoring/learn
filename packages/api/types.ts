@@ -46,8 +46,37 @@ export type Path = {
   icon: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  modules: Array<Module>;
   character?: Maybe<Character>;
   characterId?: Maybe<Scalars['String']>;
+};
+
+export type Concept = {
+   __typename?: 'Concept';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  icon: Scalars['String'];
+  taughtInId: Scalars['String'];
+  taughtIn: Module;
+};
+
+export type StorySection = {
+   __typename?: 'StorySection';
+  id: Scalars['String'];
+  order: Scalars['Float'];
+  content: Scalars['String'];
+  lessonId: Scalars['String'];
+  teachesId: Scalars['String'];
+  teaches: Concept;
+  lesson: Lesson;
+};
+
+export type Lesson = {
+   __typename?: 'Lesson';
+  id: Scalars['String'];
+  moduleId: Scalars['String'];
+  module: Module;
 };
 
 export type Module = {
@@ -85,16 +114,6 @@ export type AssignmentFile = {
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
-};
-
-export type Concept = {
-   __typename?: 'Concept';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  description: Scalars['String'];
-  icon: Scalars['String'];
-  taughtInId: Scalars['String'];
-  taughtIn: Module;
 };
 
 export type UserConcept = {
@@ -150,6 +169,9 @@ export type Query = {
   paths: Array<Path>;
   getPathByName: Path;
   myPaths: Array<Path>;
+  lesson: Lesson;
+  moduleLessons: Array<Lesson>;
+  lessonStorySections: Array<StorySection>;
 };
 
 
@@ -192,6 +214,21 @@ export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
 };
 
+
+export type QueryLessonArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryModuleLessonsArgs = {
+  moduleId: Scalars['String'];
+};
+
+
+export type QueryLessonStorySectionsArgs = {
+  lessonId: Scalars['String'];
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
   createAssignment: Assignment;
@@ -220,6 +257,8 @@ export type Mutation = {
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
+  createLesson: Lesson;
+  createStorySection: StorySection;
 };
 
 
@@ -355,6 +394,16 @@ export type MutationUpdatePathArgs = {
   path: UpdatePathInput;
 };
 
+
+export type MutationCreateLessonArgs = {
+  moduleId: Scalars['String'];
+};
+
+
+export type MutationCreateStorySectionArgs = {
+  storySectionInput: CreateStorySectionInput;
+};
+
 export type CreateAssignmentInput = {
   description: Scalars['String'];
   moduleId: Scalars['String'];
@@ -455,4 +504,11 @@ export type UpdatePathInput = {
   icon?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   characterId?: Maybe<Scalars['String']>;
+};
+
+export type CreateStorySectionInput = {
+  order: Scalars['Float'];
+  content: Scalars['String'];
+  lessonId: Scalars['String'];
+  teachesId: Scalars['String'];
 };

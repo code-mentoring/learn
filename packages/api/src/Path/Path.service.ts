@@ -13,7 +13,7 @@ export class PathService {
   ) {}
 
   async findAll(): Promise<Path[]> {
-    return this.pathRepository.find({ relations: ['character'] });
+    return this.pathRepository.find({ relations: ['character', 'modules', 'modules.lessons'] });
   }
 
   async findByName(name: string): Promise<Path> {
