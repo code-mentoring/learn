@@ -101,14 +101,15 @@ export class SeederService {
       { name: 'Basic Maths', type: ModuleType.assignment }
     ];
 
-    let previousId : string;
-    return Promise.all(modules.map(async (_, i) => {
-      const newModule = await this.moduleService.create(
-        random.moduleInput(modules[i].name, paths[0].id, { type: modules[i].type, previousId })
-      );
-      previousId = newModule.id;
-      return newModule;
-    }));
+    const res = await this.moduleService.create(random.moduleInput(modules[0].name,
+      paths[0].id, { type: modules[0].type }));
+    const res1 = await this.moduleService.create(random.moduleInput(modules[1].name, paths[0].id,
+      { type: modules[1].type, previousId: res.id }));
+    const res2 = await this.moduleService.create(random.moduleInput(modules[2].name, paths[0].id,
+      { type: modules[2].type, previousId: res1.id }));
+    const res3 = await this.moduleService.create(random.moduleInput(modules[3].name, paths[0].id,
+      { type: modules[3].type, previousId: res2.id }));
+    return Promise.all([res, res1, res2, res3]);
   }
 
   async seedAssignment(modules: Module[]) {
