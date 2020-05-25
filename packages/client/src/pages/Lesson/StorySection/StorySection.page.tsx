@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Icon, Loader } from '@codement/ui';
-import { Lesson, UserConcept } from '@codement/api';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { Button, Icon } from '@codement/ui';
+import { Lesson } from '@codement/api';
+// import { useMutation } from '@apollo/react-hooks';
+// import gql from 'graphql-tag';
 
+import { Prompt } from 'react-router';
 import { Character } from '../../../components/Character/Character';
 import { CenterWrapper } from '../../Onboarding/Wizard/CenterWrapper';
 import { LearnedConcepts } from '../LearnedConcepts';
@@ -12,68 +13,47 @@ export interface StorySectionPageProps {
   lesson: Lesson;
 }
 
-export interface StoryStepsProps {
-  id: number;
-  lessonId: number;
-  order: number;
-  content: string;
-}
+// const learnedConcept = gql`
+// mutation learnConcept($conceptId: String!) {
+//   learnConcept(conceptId: $conceptId)
+// }`;
 
-const getLearnedConcept = gql`
-query {
-  userLearnedConcepts {
-    id
-    conceptId
-    learned
-    concept {
-      id
-      name
-      icon
-      taughtInId
-      taughtIn{
-        id
-        pathId
-      }
-    }
-  }
-}`;
-
-const learnedConcept = gql`
-mutation learnConcept($conceptId: String!) {
-  learnConcept(conceptId: $conceptId)
-}`;
 export const CharacterGraphic: React.FC = ({ children }) => <div className="absolute bottom-0 left-0 z-0">
   {children}
 </div>;
 
 export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) => {
 
-  const { data, loading } = useQuery<{userLearnedConcepts: UserConcept[]}>(getLearnedConcept);
-  const learnedConcepts = data?.userLearnedConcepts.map(lc => lc.concept) || [];
-
-  const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection[0]);
-  const [currentLearnedConcepts, setLearnedConcept] = useState(learnedConcepts);
-  const concepts = lesson.storySection.map(c => c.teaches).filter(c => c);
-  const isLast = lesson.storySection.length - 1 === currentStorySection.order;
   const [recap, setRecap] = useState(false);
+  const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection.find(st => st.order === 1)!);
+  const [learnedConcepts, setLearnedConcepts] = useState<string[]>([]);
+  const concepts = lesson.storySection.map(c => c.teaches).filter(c => c);
+  const isLast = lesson.storySection.length === currentStorySection.order;
 
-  if (loading) return <Loader />;
+  // const [learnConcept] = useMutation(learnedConcept);
 
   const handleNextButton = async () => {
     if (isLast) {
       setRecap(true);
+      try {
+        // await learnConcept({ variables: { conceptId: currentStorySection.teachesId } });
+      } catch (e) {
+        // TODO: show a notfification
+      }
     } else {
-      setCurrentStorySection(lesson.storySection[currentStorySection.order + 1]);
-      currentLearnedConcepts.push(currentStorySection.teaches);
-      setLearnedConcept(currentLearnedConcepts);
-      useMutation<{conceptId: string}>(
-        learnedConcept,
-        { variables: { conceptId: currentStorySection.teachesId } }
+      setLearnedConcepts(learnedConcepts.concat([currentStorySection.teachesId]));
+      setCurrentStorySection(
+        lesson.storySection
+          .find(s => s.order === currentStorySection.order + 1)!
       );
     }
   };
 
   return <>
+    <Prompt
+      when={!recap}
+      message="Are you sure you want to leave?"
+    />
     <CenterWrapper>
       <h1>{recap ? 'So, to recap...' : currentStorySection.teaches.name}</h1>
       <div className="flex">
@@ -84,12 +64,11 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
             <div>{c?.description}</div>
           </div>)
           : currentStorySection.teaches?.description || currentStorySection.content }
-   
       </div>
       {recap && <Button>Begin lesson</Button>}
     </CenterWrapper>
     {!recap && <>
-      <LearnedConcepts concepts={concepts} learnedConcepts={currentLearnedConcepts} />
+      <LearnedConcepts concepts={concepts} learnedConcepts={learnedConcepts} />
       <CharacterGraphic>
         <Character character={lesson.module?.path?.character?.name as 'ellie'} />
       </CharacterGraphic>
@@ -106,6 +85,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
           tabIndex={0}
         >Next</div>
       </Button>
+      {/** TODO: Redirect to first lesson */}
       <Button className="absolute bottom-0 mb-6 mr-6 right-0" color="transparent" text size="large">
         <div className="text-grey-500">Skip</div>
       </Button>

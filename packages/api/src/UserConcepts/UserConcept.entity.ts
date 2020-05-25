@@ -25,7 +25,7 @@ export class UserConcept extends CMBaseEntity {
     @Field()
     learned: Date;
 
-    @ManyToOne(() => Concept)
+    @ManyToOne(() => Concept, concept => concept.userConcepts)
     @Field(() => Concept)
     concept: Concept;
 

@@ -51,6 +51,16 @@ export type Path = {
   characterId?: Maybe<Scalars['String']>;
 };
 
+export type UserConcept = {
+   __typename?: 'UserConcept';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  conceptId: Scalars['String'];
+  learned: Scalars['DateTime'];
+  concept: Concept;
+  user: User;
+};
+
 export type Concept = {
    __typename?: 'Concept';
   id: Scalars['String'];
@@ -59,6 +69,7 @@ export type Concept = {
   icon: Scalars['String'];
   taughtInId: Scalars['String'];
   taughtIn: Module;
+  userConcepts: Array<UserConcept>;
 };
 
 export type StorySection = {
@@ -116,16 +127,6 @@ export type AssignmentFile = {
 export type LoginOutput = {
    __typename?: 'LoginOutput';
   accessToken: Scalars['String'];
-};
-
-export type UserConcept = {
-   __typename?: 'UserConcept';
-  id: Scalars['String'];
-  userId: Scalars['String'];
-  conceptId: Scalars['String'];
-  learned: Scalars['DateTime'];
-  concept: Concept;
-  user: User;
 };
 
 export type Friend = {

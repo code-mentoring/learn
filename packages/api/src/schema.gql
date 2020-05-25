@@ -43,6 +43,15 @@ type Path {
   characterId: String
 }
 
+type UserConcept {
+  id: String!
+  userId: String!
+  conceptId: String!
+  learned: DateTime!
+  concept: Concept!
+  user: User!
+}
+
 type Concept {
   id: String!
   name: String!
@@ -50,6 +59,7 @@ type Concept {
   icon: String!
   taughtInId: String!
   taughtIn: Module!
+  userConcepts: [UserConcept!]!
 }
 
 type StorySection {
@@ -101,15 +111,6 @@ type AssignmentFile {
 
 type LoginOutput {
   accessToken: String!
-}
-
-type UserConcept {
-  id: String!
-  userId: String!
-  conceptId: String!
-  learned: DateTime!
-  concept: Concept!
-  user: User!
 }
 
 type Friend {

@@ -11,16 +11,17 @@ export class LessonService {
   ) {}
 
   async findById(id: string): Promise<Lesson> {
-    const lesson = await this.lessonRepository.createQueryBuilder('lesson')
-      .leftJoinAndSelect('lesson.module', 'module')
-      .leftJoinAndSelect('module.path', 'path')
-      .leftJoinAndSelect('path.character', 'character')
-      .leftJoinAndSelect('module.previous', 'previous')
-      .leftJoinAndSelect('lesson.storySection', 'storySection')
-      .leftJoinAndSelect('storySection.teaches', 'teaches')
-      .where('lesson.id = :id', { id })
-      .orderBy('storySection.order', 'ASC')
-      .getOne();
+    const lesson = await this.lessonRepository.findOne({
+      where: { id },
+      relations: [
+        'module',
+        'module.path',
+        'module.path.character',
+        'module.previous',
+        'storySection',
+        'storySection.teaches'
+      ]
+    });
 
     if (!lesson) throw new NotFoundException('Lesson not found');
     return lesson;

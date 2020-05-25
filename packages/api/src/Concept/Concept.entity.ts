@@ -1,8 +1,9 @@
 import { ObjectType, Field, InputType } from '@nestjs/graphql';
-import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, OneToOne, OneToMany } from 'typeorm';
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Module } from '../Module/Module.entity';
 import { StorySection } from '../StorySection/StorySection.entity';
+import { UserConcept } from '../UserConcepts/UserConcept.entity';
 
 @ObjectType()
 @Entity('concept')
@@ -34,6 +35,10 @@ export class Concept extends CMBaseEntity {
 
   @OneToOne(() => StorySection, storySection => storySection.teaches)
   storySection: StorySection;
+
+  @OneToMany(() => UserConcept, userConcept => userConcept.concept)
+  @Field(() => [UserConcept])
+  userConcepts: UserConcept[];
 }
 
 @InputType()
