@@ -23,7 +23,9 @@ import {
   Path,
   PathInput,
   User,
-  UserInput
+  UserInput,
+  Concept,
+  CreateConceptInput
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
@@ -154,6 +156,10 @@ export abstract class TestClient {
 
   static deleteCharacter(id: string): Promise<Boolean> {
     return this._request('deleteCharacter', mutations.deleteCharacter, { id });
+  }
+
+  static createConcept(concept: CreateConceptInput): Promise<Concept> {
+    return this._request('createConcept', mutations.createConcept, { concept });
   }
   // ------------------------------------------------------------------- Queries
 
