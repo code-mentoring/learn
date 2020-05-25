@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Icon, Loader } from '@codement/ui';
 import { Lesson, UserConcept } from '@codement/api';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import { Character } from '../../../components/Character/Character';
@@ -38,6 +38,10 @@ query {
   }
 }`;
 
+const learnedConcept = gql`
+mutation learnConcept($conceptId: String!) {
+  learnConcept(conceptId: $conceptId)
+}`;
 export const CharacterGraphic: React.FC = ({ children }) => <div className="absolute bottom-0 left-0 z-0">
   {children}
 </div>;
@@ -48,17 +52,24 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
   const learnedConcepts = data?.userLearnedConcepts.map(lc => lc.concept) || [];
 
   const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection[0]);
+  const [currentLearnedConcepts, setLearnedConcept] = useState(learnedConcepts);
   const concepts = lesson.storySection.map(c => c.teaches).filter(c => c);
   const isLast = lesson.storySection.length - 1 === currentStorySection.order;
   const [recap, setRecap] = useState(false);
 
   if (loading) return <Loader />;
 
-  const handleNextButton = () => {
+  const handleNextButton = async () => {
     if (isLast) {
       setRecap(true);
     } else {
       setCurrentStorySection(lesson.storySection[currentStorySection.order + 1]);
+      currentLearnedConcepts.push(currentStorySection.teaches);
+      setLearnedConcept(currentLearnedConcepts);
+      useMutation<{conceptId: string}>(
+        learnedConcept,
+        { variables: { conceptId: currentStorySection.teachesId } }
+      );
     }
   };
 
@@ -72,12 +83,13 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
             <div>{c?.name}</div>
             <div>{c?.description}</div>
           </div>)
-          : currentStorySection.teaches?.description || currentStorySection.content}
+          : currentStorySection.teaches?.description || currentStorySection.content }
+   
       </div>
       {recap && <Button>Begin lesson</Button>}
     </CenterWrapper>
     {!recap && <>
-      <LearnedConcepts concepts={concepts} learnedConcepts={learnedConcepts} />
+      <LearnedConcepts concepts={concepts} learnedConcepts={currentLearnedConcepts} />
       <CharacterGraphic>
         <Character character={lesson.module?.path?.character?.name as 'ellie'} />
       </CharacterGraphic>
