@@ -10,20 +10,36 @@ import { routes } from '../../router/routes';
 import { StorySectionPage } from './StorySection/StorySection.page';
 
 const getLesson = gql`
-  query lesson($id: String!) {
-    lesson(id: $id) {
+query lesson($id: String!) {
+  lesson(id: $id) {
+    id
+    moduleId
+    module{
       id
-      moduleId
-      module {
-        id
-        path {
+      name
+      path{
+        character{
           id
           name
-          icon
+          displayName
         }
       }
     }
-  }`;
+    storySection{
+      id
+      order
+      content
+      lessonId
+      teachesId
+      teaches{
+        id
+        name
+        description
+        icon
+      }
+    }
+  }
+}`;
 
 
 export const LessonRouter: React.FC = () => {
@@ -38,10 +54,10 @@ export const LessonRouter: React.FC = () => {
   return <div className="relative h-screen overflow-hidden bg-white">
     <LessonHeader pathName={pathName || ''} />
     <Switch>
-      <Route
-        path={routes.lesson({ lessonId: parseInt(lessonId!) })}
+      {lesson && <Route
+        path={routes.lesson({ lessonId: lessonId! })}
         component={() => <StorySectionPage lesson={lesson} />}
-      />
+      />}
     </Switch>
   </div>;
 };

@@ -39,7 +39,7 @@ export const DashboardPage = () => {
     <h1>Dashboard</h1>
     <ProgressWidget className="w-64 my-6 bg-white" />
     <LeaderboardWidget className="w-64" />
-    <Button type="button" onClick={() => history.push(routes.lesson({ lessonId: lesson.id }))}>Go to lesson</Button>
+    {lesson && <Button type="button" onClick={() => history.push(routes.lesson({ lessonId: lesson.id }))}>Go to lesson</Button>}
   </Page>;
 
 };

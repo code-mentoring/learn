@@ -33,5 +33,5 @@ export const routes = {
   onboardingWorkflowCompleted: linkParams('/welcome/completed'),
 
   // Lesson
-  lesson: linkParams<{lessonId: number}>('/lesson/:lessonId')
+  lesson: linkParams<{lessonId: string}>('/lesson/:lessonId')
 };

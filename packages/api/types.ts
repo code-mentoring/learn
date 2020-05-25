@@ -77,6 +77,7 @@ export type Lesson = {
   id: Scalars['String'];
   moduleId: Scalars['String'];
   module: Module;
+  storySection: Array<StorySection>;
 };
 
 export type Module = {
@@ -89,6 +90,7 @@ export type Module = {
   pathId: Scalars['String'];
   previous?: Maybe<Module>;
   path: Path;
+  lessons: Array<Lesson>;
 };
 
 export type Assignment = {
