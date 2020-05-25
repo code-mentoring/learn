@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Switch, Route } from 'react-router-dom';
+import { useParams, Switch, Route, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -18,6 +18,8 @@ query lesson($id: String!) {
       id
       name
       path{
+        id
+        name
         character{
           id
           name
@@ -46,18 +48,18 @@ export const LessonRouter: React.FC = () => {
   const { lessonId } = useParams();
   const { data, loading } = useQuery<{lesson: Lesson}>(getLesson, { variables: { id: lessonId } });
   const lesson = data?.lesson;
-  const pathName = data?.lesson.module.path.name;
-  console.log(data, lessonId);
+  const moduleName = data?.lesson.module.name;
 
   if (loading) return <Loader />;
+  if (!lessonId || !lesson) return <Redirect to={routes.home()} />;
 
   return <div className="relative h-screen overflow-hidden bg-white">
-    <LessonHeader pathName={pathName || ''} />
+    <LessonHeader moduleName={moduleName || ''} />
     <Switch>
-      {lesson && <Route
-        path={routes.lesson({ lessonId: lessonId! })}
+      <Route
+        path={routes.lesson({ lessonId })}
         component={() => <StorySectionPage lesson={lesson} />}
-      />}
+      />
     </Switch>
   </div>;
 };
