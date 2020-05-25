@@ -18,9 +18,13 @@ import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
+import { IconArrowBottom } from './icons/solid/cis-arrow-bottom';
+import { IconArrowRight } from './icons/solid/cis-arrow-right';
 
 
 export const icons = {
+  arrowBottom: IconArrowBottom,
+  arrowRight: IconArrowRight,
   check: IconCheck,
   chevronDown: IconChevronBottomAlt,
   chevronUp: IconChevronTopAlt,

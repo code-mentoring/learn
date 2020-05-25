@@ -24,9 +24,8 @@ const mockStorySteps = [
   { id: 5, lessonId: 1, lesson: { character: { name: 'ellie' } }, order: 5, content: 'Content 5' }
 ];
 
-export const StorySectionPage: React.FC<RouteComponentProps> = props =>
-
-  {console.log('PROPS', props)
+export const StorySectionPage: React.FC<RouteComponentProps> = props => {
+  console.log('PROPS', props);
   return <div className="relative h-screen overflow-hidden bg-white">
     <LessonHeader pathName="Intro to HTML" />
     <Switch>
@@ -44,11 +43,29 @@ export const StorySectionPage: React.FC<RouteComponentProps> = props =>
         <CharacterGraphic>
           <Character character={lesson.character.name as 'ellie'} />
         </CharacterGraphic>
-        <Button className="absolute bottom-0 mb-6 mx-auto inset-x-0" color="transparent" text size="large">
-          <Link className="text-grey-500" to="/">Next</Link>
+        <Button
+          className="absolute bottom-0 mb-6 mx-auto inset-x-0"
+          icon="arrowBottom"
+          color="transparent"
+          iconColor="blue-500"
+          iconSize={6}
+
+          size="large"
+        >
+          <Link className="text-blue-500" to="/">Next</Link>
         </Button>
-        <Button className="absolute bottom-0 mb-6 mr-6 right-0" color="transparent" text size="large">
-          <Link className="text-grey-500" to="/">Skip</Link>
+        <Button
+          className="absolute bottom-0 mb-6 mr-6 right-0"
+          icon="arrowRight"
+          iconColor="grey-500"
+          color="transparent"
+          text
+          size="large"
+          iconSize={6}
+
+
+        >
+          <Link className="text-grey-500 ml-4 " to="/">Skip</Link>
         </Button>
       </Route>)}
 
@@ -60,7 +77,8 @@ export const StorySectionPage: React.FC<RouteComponentProps> = props =>
       </Route> */}
 
     </Switch>
-  </div>;}
+  </div>;
+};
 
 export const CharacterGraphic: React.FC = ({ children }) => <div className="absolute bottom-0 left-0 z-0">
   {children}
