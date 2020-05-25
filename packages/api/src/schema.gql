@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Character {
+  id: String!
+  name: String!
+  displayName: String!
+  path: Path
+}
+
 type UserPreferences {
   id: String!
   userId: String!
@@ -31,6 +38,8 @@ type Path {
   icon: String!
   description: String!
   createdAt: DateTime!
+  character: Character
+  characterId: String
 }
 
 type Module {
@@ -114,6 +123,7 @@ type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  getCharacters: [Character!]!
   getConcepts: [Concept!]!
   getConceptByName(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!
@@ -135,6 +145,9 @@ type Mutation {
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
   login(password: String!, email: String!): LoginOutput!
+  createCharacter(character: CreateCharacterInput!): Character!
+  updateCharacter(character: UpdateCharacterInput!): Character!
+  deleteCharacter(id: String!): Boolean!
   createConcept(concept: CreateConceptInput!): Concept!
   updateConcept(concept: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
@@ -148,6 +161,7 @@ type Mutation {
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
+  updatePath(path: UpdatePathInput!): Path!
 }
 
 input CreateAssignmentInput {
@@ -187,6 +201,17 @@ input UserPreferencesInput {
   practiceGoal: Float
   why: String
   codingAbility: Float
+}
+
+input CreateCharacterInput {
+  name: String!
+  displayName: String!
+}
+
+input UpdateCharacterInput {
+  id: String!
+  name: String
+  displayName: String
 }
 
 input CreateConceptInput {
@@ -230,4 +255,13 @@ input PathInput {
   name: String!
   icon: String!
   description: String!
+  characterId: String
+}
+
+input UpdatePathInput {
+  id: String!
+  name: String
+  icon: String
+  description: String
+  characterId: String
 }

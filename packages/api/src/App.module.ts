@@ -5,6 +5,7 @@ import path from 'path';
 import { AssignmentModule } from './Assignment';
 import { AssignmentFileModule } from './AssignmentFile';
 import { AuthModule } from './Auth';
+import { CharacterModule } from './Character';
 import { ConceptModule } from './Concept';
 import { DatabaseModule } from './Database';
 import { FriendModule } from './Friend';
@@ -27,6 +28,7 @@ export const appImports = [
   AssignmentFileModule,
   FriendModule,
   ModuleModule,
+  CharacterModule,
   ConceptModule,
   UserConceptModule,
 
