@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogoMark from '../../images/logo-mark.svg';
+import LogoMark from '@codement/ui/images/logo-mark.svg';
 
 // TODO: Replace user profile picture when #27 is completed.
 // TODO: Replace the class icon with the actual class the student is

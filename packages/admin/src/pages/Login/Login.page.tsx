@@ -1,11 +1,11 @@
 import { Button, Card, Form, FormField } from '@codement/ui';
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
+import { getGQLError } from '@codement/ui//lib/apollo';
+import Logo from '@codement/ui/images/logo.svg';
 import React from 'react';
 import * as yup from 'yup';
 
 import { Page } from '../../components/Page/Page';
-import { Auth } from '../../containers/Auth.container';
-import Logo from '../../images/logo.svg';
-import { getGQLError } from '../../lib/apollo';
 
 
 const loginValidation = yup.object().shape({

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Auth } from './Auth.container';
-import { Me } from './Me.container';
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
+import { Me } from '@codement/ui/lib/containers/Me.container';
 
 
 export const ContainerWrapper: React.FC = ({ children }) => (

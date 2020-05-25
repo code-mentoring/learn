@@ -10,4 +10,10 @@ export abstract class LocalStorage {
     else window.localStorage.setItem(LSKeys.token, v);
   }
 
+  static get preferences() { return JSON.parse(window.localStorage.getItem(LSKeys.preferences) || '{}'); }
+
+  static set preferences(v: string | null) {
+    if (!v) window.localStorage.removeItem(LSKeys.preferences);
+    else window.localStorage.setItem(LSKeys.preferences, v);
+  }
 }

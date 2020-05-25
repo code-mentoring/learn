@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { getClient } from './lib/apollo';
+import { getClient } from '@codement/ui/lib/apollo';
 import { AppRouter } from './router/AppRouter';
 import { ContainerWrapper } from './containers/Wrapper';
 
