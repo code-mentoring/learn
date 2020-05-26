@@ -28,21 +28,28 @@ describe('User entity', () => {
       expect(user.createdAt).toBeDefined();
     });
 
-    it('should throw error if email missing', async () => {
-      expect.assertions(1); // Expect there to be an error
-      try {
-        const input = random.userInput();
-        console.log(input);
-        // @Deliberately missing email to test error
-        delete input.email;
-        delete input.firstName;
-        await TestClient.createUser(input);
-      } catch (e) {
-        console.log(e.message);
-        expect(e.message).toContain('Field "email" of required type "String!" was not provided');
-      }
+    ['firstName', 'lastName', 'email', 'password'].forEach(key => {
+      const input = random.userInput();
+      
+      it(`should throw error if ${key} is missing`, async () => {
+        expect.assertions(1);
+        try {
+          if (key === 'firstName') {
+            delete input.firstName;
+          } else if (key === 'lastName') {
+            delete input.lastName;
+          } else if (key === 'email') {
+            delete input.email;
+          } else if (key === 'password') {
+            delete input.password;
+          }
+
+          await TestClient.createUser(input);
+        } catch (error) {
+          expect(error.message).toContain(`Field "${key}" of required type "String!" was not provided`);
+        }
+      });
     });
-  });
 
   describe('Query: me', () => {
     beforeEach(setup);
