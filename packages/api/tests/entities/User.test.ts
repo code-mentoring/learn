@@ -67,7 +67,7 @@ describe('User entity', () => {
     });
   });
 
-  describe.only('Query: users', () => {
+  describe('Query: users', () => {
     beforeEach(setup);
     it('should return all users', async () => {
       expect.assertions(1);
