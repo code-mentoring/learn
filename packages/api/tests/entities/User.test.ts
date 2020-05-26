@@ -30,7 +30,7 @@ describe('User entity', () => {
 
     ['firstName', 'lastName', 'email', 'password'].forEach(key => {
       const input = random.userInput();
-      
+
       it(`should throw error if ${key} is missing`, async () => {
         expect.assertions(1);
         try {
@@ -50,6 +50,8 @@ describe('User entity', () => {
         }
       });
     });
+  });
+
 
   describe('Query: me', () => {
     beforeEach(setup);
@@ -64,6 +66,20 @@ describe('User entity', () => {
       expect(user.createdAt).toBeDefined();
     });
   });
+
+  describe.only('Query: users', () => {
+    beforeEach(setup);
+    it('should return all users', async () => {
+      expect.assertions(1);
+      await TestClient.createUser(random.userInput());
+      await TestClient.createUser(random.userInput());
+      const users = await TestClient.users();
+
+      // should return 3 for the above two and the already logged-in user
+      expect(users).toBeArrayOfSize(3);
+    });
+  });
+
 
   describe('Mutation: updatePreferences', () => {
     const preferences: UserPreferencesInput = {
