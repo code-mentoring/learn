@@ -23,9 +23,11 @@ export const CharacterGraphic: React.FC = ({ children }) => <div className="abso
 </div>;
 
 export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) => {
+  lesson.storySection.sort((a, b) => a.order - b.order);
 
   const [recap, setRecap] = useState(false);
-  const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection.find(st => st.order === 1)!);
+  const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection[0]);
+
   const [learnedConcepts, setLearnedConcepts] = useState<string[]>([]);
   const concepts = lesson.storySection.map(c => c.teaches).filter(c => c);
   const isLast = lesson.storySection.length === currentStorySection.order;
