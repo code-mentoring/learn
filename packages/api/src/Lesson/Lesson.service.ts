@@ -19,7 +19,7 @@ export class LessonService {
         'module.path.character',
         'module.previous',
         'storySection',
-        'storySection.teaches'
+        'storySection.concept'
       ]
     });
 

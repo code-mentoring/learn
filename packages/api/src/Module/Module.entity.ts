@@ -4,6 +4,7 @@ import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql'
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
 import { Lesson } from '../Lesson/Lesson.entity';
+import { Concept } from '../Concept/Concept.entity';
 
 
 export enum ModuleType {
@@ -52,6 +53,10 @@ export class Module extends CMBaseEntity {
   @OneToMany(() => Lesson, lesson => lesson.module)
   @Field(() => [Lesson])
   lessons: Lesson[];
+
+  @OneToMany(() => Concept, concept => concept.module)
+  @Field(() => [Concept])
+  concepts: Concept[];
 }
 
 @InputType()

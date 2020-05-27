@@ -46,7 +46,7 @@ Table Concept {
   name varchar [not null, unique]
   description text [not null]
   icon varchar [not null]
-  taughtIn uuid [ref: - M.id, not null]
+  moduleId uuid [ref: - M.id, not null]
 }
 
 Table UserConcepts {
@@ -104,7 +104,7 @@ Table StorySection as SS {
   lessonId uuid [ref: > L.id, not null]
   order int [not null]
   content text [not null, note: "Markdown content"]
-  teaches uuid [ref: - Concept.id]
+  conceptId uuid [ref: - Concept.id]
 }
 
 

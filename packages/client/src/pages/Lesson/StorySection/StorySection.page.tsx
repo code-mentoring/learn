@@ -5,9 +5,9 @@ import { Lesson } from '@codement/api';
 // import gql from 'graphql-tag';
 
 import { Prompt } from 'react-router';
-import { Character } from '../../../components/Character/Character';
 import { CenterWrapper } from '../../Onboarding/Wizard/CenterWrapper';
 import { LearnedConcepts } from '../LearnedConcepts';
+import { Character } from '../../../components/Character/Character';
 
 export interface StorySectionPageProps {
   lesson: Lesson;

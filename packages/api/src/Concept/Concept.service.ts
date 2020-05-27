@@ -13,11 +13,11 @@ export class ConceptService {
   ) {}
 
   async findConcepts(): Promise<Concept[]> {
-    return this.conceptRepository.find({ relations: ['taughtIn'] });
+    return this.conceptRepository.find({ relations: ['module'] });
   }
 
   async findByName(name: string): Promise<Concept> {
-    const concept = await this.conceptRepository.findOne({ where: { name }, relations: ['taughtIn'] });
+    const concept = await this.conceptRepository.findOne({ where: { name }, relations: ['module'] });
     if (!concept) throw new NotFoundException('Concept not found');
     return concept;
   }
@@ -32,7 +32,7 @@ export class ConceptService {
 
   async update(updateInput: UpdateConceptInput): Promise<Concept | undefined> {
     await this.conceptRepository.update({ id: updateInput.id }, updateInput);
-    return this.conceptRepository.findOne({ id: updateInput.id }, { relations: ['taughtIn'] });
+    return this.conceptRepository.findOne({ id: updateInput.id }, { relations: ['module'] });
   }
 
   async delete(conceptId: string): Promise<boolean> {

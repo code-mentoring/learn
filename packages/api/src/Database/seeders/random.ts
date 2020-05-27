@@ -33,7 +33,7 @@ export const userPreferenceInput = (
 export const pathInput = (
   input: Partial<PathInput> = {}
 ): PathInput => ({
-  name: faker.random.word(),
+  name: `Path ${faker.random.word()}`,
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),
   ...input
@@ -42,11 +42,10 @@ export const pathInput = (
 export const moduleTypeArr = Object.keys(ModuleType) as ModuleType[];
 
 export const moduleInput = (
-  name: string,
   pathId: string,
   input: Partial<CreateModuleInput> = {}
 ): CreateModuleInput => ({
-  name,
+  name: `Module ${faker.random.word()}`,
   icon: faker.lorem.word(),
   type: moduleTypeArr[Math.floor(Math.random() * moduleTypeArr.length)],
   pathId,
@@ -74,13 +73,13 @@ export const assignmentFileInput = (
 });
 
 export const conceptInput = (
-  taughtInId: string,
+  moduleId: string,
   input: Partial<CreateConceptInput> = {}
 ): CreateConceptInput => ({
   name: faker.lorem.words(2),
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),
-  taughtInId,
+  moduleId,
   ...input
 });
 
@@ -92,12 +91,12 @@ export const characterInput = (): CreateCharacterInput => ({
 export const storySectionInput = (
   order: number,
   lessonId: string,
-  teachesId: string,
+  conceptId: string,
   input: Partial<CreateStorySectionInput> = {}
 ): CreateStorySectionInput => ({
   content: faker.lorem.sentence(),
   order,
   lessonId,
-  teachesId,
+  conceptId,
   ...input
 });

@@ -11,7 +11,7 @@ export class UserConceptService {
   ) {}
 
   async findByUser(userId: string): Promise<UserConcept[]> {
-    return this.userConceptRepository.find({ where: { userId }, relations: ['user', 'concept', 'concept.taughtIn'] });
+    return this.userConceptRepository.find({ where: { userId }, relations: ['user', 'concept', 'concept.module'] });
   }
 
 }

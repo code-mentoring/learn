@@ -26,12 +26,12 @@ export class StorySection extends CMBaseEntity {
 
   @Column()
   @Field()
-  teachesId?: string;
+  conceptId?: string;
 
   @OneToOne(() => Concept, concept => concept.storySection)
   @JoinColumn()
   @Field(() => Concept)
-  teaches: Concept;
+  concept: Concept;
 
   @ManyToOne(() => Lesson, lesson => lesson.storySection)
   @Field(() => Lesson)
@@ -52,6 +52,6 @@ export class CreateStorySectionInput {
   lessonId?: string;
 
   @Field()
-  teachesId: string;
+  conceptId: string;
 
 }

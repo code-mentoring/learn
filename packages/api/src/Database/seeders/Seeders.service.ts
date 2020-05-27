@@ -87,79 +87,79 @@ export class SeederService {
     }));
   }
 
-  async seedCharacters(num: number = 3): Promise<Character[]> {
-    return Promise.all(Array(num).fill(undefined).map(async () => this.characterService.create(
-      random.characterInput()
+  async seedCharacters(): Promise<Character[]> {
+    return Promise.all(['Ellie', 'Folke'].map(async name => this.characterService.create(
+      { name: name.toLowerCase(), displayName: name }
     )));
   }
 
+  // Seed as many paths as characters we have
+  // Each user joins to first path
   async seedPaths(users: UserWithPassword[], characters: Character[]) {
-    const paths = [
-      { name: 'javascript', icon: 'js' },
-      { name: 'css', icon: 'css' },
-      { name: 'html  ', icon: 'html' }
-    ];
+    let pathIcons = ['html', 'js', 'css', 'react', 'nodejs'];
+    pathIcons = pathIcons.slice(0, characters.length);
 
-    return Promise.all(paths.map(async (path, i) => {
-      let newPath = new Path();
+    return Promise.all(pathIcons.map(async (pathIcon, i) => {
+      const newPath = await this.pathService.create(
+        random.pathInput({
+          name: `Path ${pathIcon}`,
+          icon: pathIcon,
+          characterId: characters[i].id
+        })
+      );
 
-      if ((i % 2 === 0) && (i < characters.length)) {
-        newPath = await this.pathService.create(
-          random.pathInput({ name: path.name, icon: path.icon, characterId: characters[i].id })
-        );
-      } else {
-        newPath = await this.pathService.create(
-          random.pathInput({ name: path.name, icon: path.icon })
-        );
-      }
       if (i === 0) {
-        await this.pathService.addUserToPath(users[0].id, newPath.id);
+        users.map(async user => this.pathService.addUserToPath(user.id, newPath.id));
       }
+
       return newPath;
     }));
   }
 
-  // seed modules onto path[0]
+  // Seed 4 modules for each path
   async seedModules(paths: Path[]) {
-    const modules = [
-      { name: 'Intro to JS', type: ModuleType.lesson },
-      { name: 'Variables', type: ModuleType.assignment },
-      { name: 'Functions', type: ModuleType.lesson },
-      { name: 'Basic Maths', type: ModuleType.assignment }
-    ];
-    const newModules: Module[] = [];
-    let previousId: string | undefined;
-    /* eslint-disable no-restricted-syntax, no-await-in-loop  */
-    for (const module of modules) {
-      const newModule = await this.moduleService.create(
-        random.moduleInput(module.name, paths[0].id,
-          { type: module.type, previousId })
-      );
-      previousId = newModule.id;
-      newModules.push(newModule);
-    }
-    return newModules;
+    const res = await Promise.all(paths.map(async path => {
+      const modulesType = [
+        ModuleType.assignment, ModuleType.lesson, ModuleType.assignment, ModuleType.lesson
+      ];
+      const newModules: Module[] = [];
+      let previousId: string | undefined;
+      /* eslint-disable no-restricted-syntax, no-await-in-loop  */
+      for (const type of modulesType) {
+        const newModule = await this.moduleService.create(
+          random.moduleInput(path.id,
+            { previousId, icon: path.icon, type })
+        );
+        previousId = newModule.id;
+        newModules.push(newModule);
+      }
+      return newModules;
+    }));
+
+    return res.flat();
+
   }
 
   async seedAssignment(modules: Module[]) {
     return Promise.all(modules
       .filter(m => m.type === ModuleType.assignment)
-      .map((_, i) => this.assignmentService.create(random.assignmentInput(modules[i].id))));
+      .map(async module => this.assignmentService.create(random.assignmentInput(module.id))));
   }
 
+  // For each assignment first user has 1 assignment file
   async seedAssignmentFile(assignments: Assignment[], users: UserWithPassword[]) {
-    await this.assignmentFileService.create(
+    return Promise.all(assignments.map(assignment => this.assignmentFileService.create(
       users[0].id,
-      random.assignmentFileInput(assignments[0].id)
-    );
+      random.assignmentFileInput(assignment.id)
+    )));
   }
 
   // seed number of concepte evently on number of modules.
   async seedConcept(
-    numConcept: number,
-    numModule: number,
     modules: Module[],
-    users: UserWithPassword[]
+    users: UserWithPassword[],
+    numConcept: number = 6,
+    numModule: number = 2
   ) : Promise<Concept[]> {
     const numMod = (numModule < modules.length) ? numModule : modules.length;
     return Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
@@ -199,16 +199,14 @@ export class SeederService {
 
   // seed number of lesson evently on number of modules.
   async seedLessons(
-    numLesson: number,
-    numModule: number,
-    modules: Module[]
+    modules: Module[],
+    numLesson: number = 6,
+    numModule: number = 1
   ): Promise<Lesson[]> {
     const numMod = (numModule < modules.length) ? numModule : modules.length;
-
-    return Promise.all(Array(numLesson).fill(undefined).map(async (_, i) => {
-      const lesson = await this.lessonService.create((modules[i % numMod].id));
-      return lesson;
-    }));
+    return Promise.all(Array(numLesson)
+      .fill(undefined)
+      .map((_, i) => this.lessonService.create((modules[i % numMod].id))));
   }
 
   // per concept per storySection
@@ -279,13 +277,13 @@ export class SeederService {
       {
         title: 'Create concept',
         task: async (ctx: CTX) => {
-          ctx.concepts = await this.seedConcept(6, 2, ctx.modules, ctx.users);
+          ctx.concepts = await this.seedConcept(ctx.modules, ctx.users);
         }
       },
       {
         title: 'Create lesson',
         task: async (ctx: CTX) => {
-          ctx.lessons = await this.seedLessons(6, 2, ctx.modules);
+          ctx.lessons = await this.seedLessons(ctx.modules);
         }
       },
       {

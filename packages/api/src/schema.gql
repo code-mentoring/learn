@@ -57,8 +57,8 @@ type Concept {
   name: String!
   description: String!
   icon: String!
-  taughtInId: String!
-  taughtIn: Module!
+  moduleId: String!
+  module: Module!
   userConcepts: [UserConcept!]!
 }
 
@@ -67,8 +67,8 @@ type StorySection {
   order: Float!
   content: String!
   lessonId: String!
-  teachesId: String!
-  teaches: Concept!
+  conceptId: String!
+  concept: Concept!
   lesson: Lesson!
 }
 
@@ -89,6 +89,7 @@ type Module {
   previous: Module
   path: Path!
   lessons: [Lesson!]!
+  concepts: [Concept!]!
 }
 
 type Assignment {
@@ -243,7 +244,7 @@ input CreateConceptInput {
   name: String!
   icon: String!
   description: String!
-  taughtInId: String!
+  moduleId: String!
 }
 
 input UpdateConceptInput {
@@ -251,7 +252,7 @@ input UpdateConceptInput {
   name: String
   icon: String
   description: String
-  taughtInId: String
+  moduleId: String
 }
 
 input CreateModuleInput {
@@ -295,5 +296,5 @@ input CreateStorySectionInput {
   order: Float!
   content: String!
   lessonId: String!
-  teachesId: String!
+  conceptId: String!
 }

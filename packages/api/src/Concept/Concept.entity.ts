@@ -27,13 +27,13 @@ export class Concept extends CMBaseEntity {
 
   @Column()
   @Field()
-  taughtInId: string;
+  moduleId: string;
 
-  @ManyToOne(() => Module)
+  @ManyToOne(() => Module, module => module.concepts)
   @Field(() => Module)
-  taughtIn: Module
+  module: Module
 
-  @OneToOne(() => StorySection, storySection => storySection.teaches)
+  @OneToOne(() => StorySection, storySection => storySection.concept)
   storySection: StorySection;
 
   @OneToMany(() => UserConcept, userConcept => userConcept.concept)
@@ -53,7 +53,7 @@ export class CreateConceptInput {
   description: string;
 
   @Field()
-  taughtInId: string;
+  moduleId: string;
 }
 
 @InputType()
@@ -71,5 +71,5 @@ export class UpdateConceptInput {
   description?: string;
 
   @Field({ nullable: true })
-  taughtInId?: string;
+  moduleId?: string;
 }

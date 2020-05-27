@@ -12,7 +12,7 @@ export class StorySectionService {
   ) {}
 
   async findByLesson(lessonId: string): Promise<StorySection[]> {
-    return this.storySectionRepository.find({ where: { lessonId }, relations: ['lesson', 'teaches'] });
+    return this.storySectionRepository.find({ where: { lessonId }, relations: ['lesson', 'concept'] });
   }
 
   async create(storySectionInput: CreateStorySectionInput): Promise<StorySection> {
