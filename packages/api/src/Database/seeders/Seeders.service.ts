@@ -19,6 +19,8 @@ import { AssignmentFileService } from '../../AssignmentFile/AssignmentFile.servi
 import { ConceptService } from '../../Concept/Concept.service';
 import { FriendService } from '../../Friend/Friend.service';
 import { FriendStatus } from '../../Friend/Friend.entity';
+import { LessonService } from '../../Lesson/Lesson.service';
+import { Lesson } from '../../Lesson/Lesson.entity';
 
 
 interface CTX {
@@ -27,6 +29,7 @@ interface CTX {
   characters: Character[];
   modules: Module[];
   assignments: Assignment[];
+  lessons: Lesson[];
 }
 
 @Injectable()
@@ -46,7 +49,8 @@ export class SeederService {
     public assignmentFileService: AssignmentFileService,
     public conceptService: ConceptService,
     public friendService: FriendService,
-    public characterService: CharacterService
+    public characterService: CharacterService,
+    public lessonService: LessonService
   ) { }
 
   db = new DatabaseService(this.connection);
@@ -188,6 +192,14 @@ export class SeederService {
     }
   }
 
+  async seedLessons(moduleId: string) {
+    return await this.lessonService.create(moduleId);
+  }
+
+  async seedStorySections(: string) {
+    await this.lessonService.create(moduleId);
+  }
+
   /**
    * Seeds all entities in the database
    */
@@ -221,6 +233,18 @@ export class SeederService {
         title: 'Create module',
         task: async (ctx: CTX) => {
           ctx.modules = await this.seedModules(ctx.paths);
+        }
+      },
+      {
+        title: 'Create lesson',
+        task: async (ctx: CTX) => {
+          ctx.lessons = await this.seedLessons(ctx.modules[0].id);
+        }
+      },
+      {
+        title: 'Create story sections',
+        task: async (ctx: CTX) => {
+          await this.seedStorySections(ctx.modules[0].id);
         }
       },
       {

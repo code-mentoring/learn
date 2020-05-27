@@ -25,6 +25,8 @@ import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service';
 import { CharacterService } from '../Character/Character.service';
 import { Character } from '../Character/Character.entity';
+import { LessonService } from '../Lesson/Lesson.service';
+import { Lesson } from '../Lesson/Lesson.entity';
 
 
 /**
@@ -44,7 +46,8 @@ import { Character } from '../Character/Character.entity';
       Concept,
       UserConcept,
       Friend,
-      Character
+      Character,
+      Lesson
     ])
   ],
   providers: [
@@ -59,7 +62,8 @@ import { Character } from '../Character/Character.entity';
     ConceptService,
     UserConceptService,
     FriendService,
-    CharacterService
+    CharacterService,
+    LessonService
   ],
   exports: [DatabaseService, SeederService]
 })
