@@ -7,7 +7,7 @@ module.exports = {
     'footer-max-line-length': [2, 'always', 100],
     'header-max-length': [2, 'always', 100],
     'scope-case': [2, 'always', 'lower-case'],
-    'scope-enum': [2, 'always', ['api', 'ui', 'client']],
+    'scope-enum': [2, 'always', ['api', 'ui', 'client', 'admin']],
     'subject-case': [
       2,
       'never',

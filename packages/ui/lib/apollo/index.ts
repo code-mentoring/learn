@@ -8,8 +8,8 @@ import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import axios from 'axios';
 
-import { CONFIG } from '../config';
-import { LocalStorage } from './localStorage';
+import { CONFIG } from './config';
+import { LocalStorage } from '../localStorage';
 
 
 const { buildAxiosFetch } = require('@lifeomic/axios-fetch');

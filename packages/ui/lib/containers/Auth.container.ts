@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
 
 import { LoginOutput, MutationLoginArgs } from '@codement/api';
-import { history } from '../lib/history';
-import { LocalStorage } from '../lib/localStorage';
+import { history } from '../history';
+import { LocalStorage } from '../localStorage';
 
 type AuthStatus = 'signingIn' | 'signedIn' | 'signedOut' | 'verifying';
 

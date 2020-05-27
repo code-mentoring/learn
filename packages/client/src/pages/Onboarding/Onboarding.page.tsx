@@ -2,15 +2,16 @@ import { Button, Options, RadioList, SliderField, TextField } from '@codement/ui
 import React, { useEffect, useState } from 'react';
 import { Switch, useHistory } from 'react-router';
 
+import { Me } from '@codement/ui/lib/containers/Me.container';
+import { LocalStorage } from '@codement/ui/lib/localStorage';
 import { AppHeader } from '../../components/AppHeader/AppHeader';
 import { PathsList, SelectedPath } from '../../components/PathsList/PathsList';
-import { Me } from '../../containers/Me.container';
 import { Wizard } from '../../containers/Wizard.container';
 import { routes } from '../../router/routes';
 import { OnboardingStep } from './OnboardingStep';
 import { steps } from './steps';
 import { SliderText } from './Wizard/Typography/SliderText';
-import { LocalStorage } from '../../lib/localStorage';
+
 
 export interface WizardFormValues {
   codingAbility: number;

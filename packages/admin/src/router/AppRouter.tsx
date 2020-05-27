@@ -7,8 +7,6 @@ import {
 import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import { history as History } from '@codement/ui/lib/history';
-import { Wizard } from '../containers/Wizard.container';
-import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
@@ -45,17 +43,10 @@ export const AppRouter = () => (
   <Router history={History}>
     <Switch>
       <UnAuthRoute path={routes.login(false)} component={LoginPage} />
-
       <AuthRoute path="*">
         <Switch>
           <Route exact path={routes.home(false)} component={DashboardPage} />
           <Route exact path={routes.logout(false)} component={LogoutPage} />
-          <Route path={routes.onboardingWorkflow(false)}>
-            <Wizard.Provider>
-              <OnboardingPage />
-            </Wizard.Provider>
-          </Route>
-
           <Redirect to={routes.home(false)} />
         </Switch>
       </AuthRoute>

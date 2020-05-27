@@ -1,10 +1,10 @@
 import { Button, Card, Form, FormField } from '@codement/ui';
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
+import { getGQLError } from '@codement/ui//lib/apollo';
+import Logo from '@codement/ui/images/logo.svg';
 import React from 'react';
 import * as yup from 'yup';
 
-import { Auth } from '@codement/ui/lib/containers/Auth.container';
-import { getGQLError } from '@codement/ui/lib/apollo';
-import Logo from '@codement/ui/images/logo.svg';
 import { Page } from '../../components/Page/Page';
 
 
