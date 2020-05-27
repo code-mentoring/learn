@@ -6,12 +6,15 @@ import { ModuleType } from '../../src/Module/Module.entity';
 export const moduleInput = {
   name: 'module name',
   icon: 'icon',
-  type: ModuleType.lesson
+  type: ModuleType.lesson,
 };
 
-
-beforeAll(async () => { await TestClient.start(); });
-afterAll(async () => { await TestClient.stop(); });
+beforeAll(async () => {
+  await TestClient.start();
+});
+afterAll(async () => {
+  await TestClient.stop();
+});
 
 const setup = async () => {
   await TestClient.resetDatabase();
@@ -29,7 +32,10 @@ describe('Module entity', () => {
     it('should create a module successfully', async () => {
       expect.assertions(5);
 
-      const module = await TestClient.createModule({ ...moduleInput, pathId: path.id });
+      const module = await TestClient.createModule({
+        ...moduleInput,
+        pathId: path.id,
+      });
 
       expect(module.id).toBeDefined();
       expect(module.name).toEqual(moduleInput.name);
@@ -40,24 +46,24 @@ describe('Module entity', () => {
         ...moduleInput,
         name: 'moduleWithPrevious name',
         pathId: path.id,
-        previousId: module.id
+        previousId: module.id,
       });
 
       expect(moduleWithPrevious.previousId).toBeDefined();
-
     });
 
     it('should throw error if module name exists', async () => {
       expect.assertions(1);
       try {
-        const [module1, module2] = Array(2).fill(undefined).map(() => ({
-          ...moduleInput,
-          pathId: path.id
-        }));
+        const [module1, module2] = Array(2)
+          .fill(undefined)
+          .map(() => ({
+            ...moduleInput,
+            pathId: path.id,
+          }));
 
         await TestClient.createModule(module1);
         await TestClient.createModule(module2);
-
       } catch (e) {
         expect(e.message).toMatch(/unique constraint/i);
       }
@@ -72,16 +78,26 @@ describe('Module entity', () => {
 
     it('should update a module successfully', async () => {
       expect.assertions(6);
-      const modulePrev = await TestClient.createModule({ ...moduleInput, name: 'previous', pathId: path.id });
-      const module = await TestClient.createModule({ ...moduleInput, pathId: path.id });
-      const path2 = await TestClient.createPath({ ...pathInput, name: 'path 2' }, {name: 'name 2', displayName: 'display name 2'});
+      const modulePrev = await TestClient.createModule({
+        ...moduleInput,
+        name: 'previous',
+        pathId: path.id,
+      });
+      const module = await TestClient.createModule({
+        ...moduleInput,
+        pathId: path.id,
+      });
+      const path2 = await TestClient.createPath(
+        { ...pathInput, name: 'path 2' },
+        { name: 'name 2', displayName: 'display name 2' }
+      );
       const update = {
         id: module.id,
         name: 'New name',
         icon: 'new icon',
         type: ModuleType.assignment,
         previousId: modulePrev.id,
-        pathId: path2.id
+        pathId: path2.id,
       };
       const updated = await TestClient.updateModule(update);
 
@@ -91,7 +107,6 @@ describe('Module entity', () => {
       expect(updated.type).toEqual(update.type);
       expect(updated.pathId).toEqual(path2.id);
       expect(updated.previousId).toEqual(modulePrev.id);
-
     });
   });
 
@@ -103,11 +118,13 @@ describe('Module entity', () => {
 
     it('should delete a module successfully', async () => {
       expect.assertions(1);
-      const module = await TestClient.createModule({ ...moduleInput, pathId: path.id });
+      const module = await TestClient.createModule({
+        ...moduleInput,
+        pathId: path.id,
+      });
       await TestClient.deleteModule(module.id);
       const modules = await TestClient.modules();
       expect(modules.length).toBe(0);
-
     });
   });
 });
