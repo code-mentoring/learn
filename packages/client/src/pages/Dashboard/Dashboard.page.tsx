@@ -1,11 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
+import { Me } from '@codement/ui/lib/containers/Me.container';
 import { Page } from '../../components/Page/Page';
 import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoardWidget';
 import { ProgressWidget } from '../../components/ProgressWidget/ProgressWidget';
 import { routes } from '../../router/routes';
-import { Me } from '../../containers/Me.container';
+
 
 export const DashboardPage = () => {
   const history = useHistory();

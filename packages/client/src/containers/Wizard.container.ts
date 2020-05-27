@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 
 import { UserPreferences } from '@codement/api';
+import { LocalStorage } from '@codement/ui/lib/localStorage';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router';
 import { routes } from '../router/routes';
 import { SelectedPath } from '../components/PathsList/PathsList';
-import { LocalStorage } from '../lib/localStorage';
 
 
 const updatePreferencesMutation = gql`

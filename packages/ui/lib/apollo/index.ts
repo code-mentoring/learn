@@ -1,6 +1,5 @@
 /* eslint-disable no-console, no-underscore-dangle */
 import fragments from '@codement/api/fragments.json';
-import { LocalStorage } from '@codement/ui/lib/localStorage';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { ApolloClient, ApolloError } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
@@ -10,6 +9,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import axios from 'axios';
 
 import { CONFIG } from './config';
+import { LocalStorage } from '../localStorage';
 
 
 const { buildAxiosFetch } = require('@lifeomic/axios-fetch');
