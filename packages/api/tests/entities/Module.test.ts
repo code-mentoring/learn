@@ -23,6 +23,7 @@ const setup = async () => {
 
 describe('Module entity', () => {
   let path: Path;
+
   describe('Mutation: createModule', () => {
     beforeEach(async () => {
       await setup();
@@ -37,6 +38,8 @@ describe('Module entity', () => {
         pathId: path.id,
       });
 
+      console.log(module);
+
       expect(module.id).toBeDefined();
       expect(module.name).toEqual(moduleInput.name);
       expect(module.icon).toEqual(moduleInput.icon);
@@ -49,6 +52,7 @@ describe('Module entity', () => {
         previousId: module.id,
       });
 
+      console.log(moduleWithPrevious);
       expect(moduleWithPrevious.previousId).toBeDefined();
     });
 
