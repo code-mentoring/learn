@@ -27,6 +27,8 @@ import { CharacterService } from '../Character/Character.service';
 import { Character } from '../Character/Character.entity';
 import { LessonService } from '../Lesson/Lesson.service';
 import { Lesson } from '../Lesson/Lesson.entity';
+import { StorySectionService } from '../StorySection/StorySection.service';
+import { StorySection } from '../StorySection/StorySection.entity';
 
 
 /**
@@ -47,7 +49,8 @@ import { Lesson } from '../Lesson/Lesson.entity';
       UserConcept,
       Friend,
       Character,
-      Lesson
+      Lesson,
+      StorySection
     ])
   ],
   providers: [
@@ -63,7 +66,8 @@ import { Lesson } from '../Lesson/Lesson.entity';
     UserConceptService,
     FriendService,
     CharacterService,
-    LessonService
+    LessonService,
+    StorySectionService
   ],
   exports: [DatabaseService, SeederService]
 })

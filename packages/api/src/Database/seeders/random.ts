@@ -8,6 +8,7 @@ import { CreateAssignmentInput } from '../../Assignment/Assignment.entity';
 import { CreateAssignmentFileInput } from '../../AssignmentFile/AssignmentFile.entity';
 import { CreateConceptInput } from '../../Concept/Concept.entity';
 import { CreateCharacterInput } from '../../Character/Character.entity';
+import { CreateStorySectionInput } from '../../StorySection/StorySection.entity';
 
 
 export const userInput = (
@@ -86,4 +87,17 @@ export const conceptInput = (
 export const characterInput = (): CreateCharacterInput => ({
   name: faker.name.lastName(),
   displayName: faker.name.firstName()
+});
+
+export const storySectionInput = (
+  order: number,
+  lessonId: string,
+  teachesId: string,
+  input: Partial<CreateStorySectionInput> = {}
+): CreateStorySectionInput => ({
+  content: faker.lorem.sentence(),
+  order,
+  lessonId,
+  teachesId,
+  ...input
 });

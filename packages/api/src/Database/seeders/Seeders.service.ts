@@ -16,11 +16,13 @@ import { Module, ModuleType } from '../../Module/Module.entity';
 import { Assignment } from '../../Assignment/Assignment.entity';
 import { AssignmentService } from '../../Assignment/Assignment.service';
 import { AssignmentFileService } from '../../AssignmentFile/AssignmentFile.service';
+import { Concept } from '../../Concept/Concept.entity';
 import { ConceptService } from '../../Concept/Concept.service';
 import { FriendService } from '../../Friend/Friend.service';
 import { FriendStatus } from '../../Friend/Friend.entity';
 import { LessonService } from '../../Lesson/Lesson.service';
 import { Lesson } from '../../Lesson/Lesson.entity';
+import { StorySectionService } from '../../StorySection/StorySection.service';
 
 
 interface CTX {
@@ -29,6 +31,7 @@ interface CTX {
   characters: Character[];
   modules: Module[];
   assignments: Assignment[];
+  concepts: Concept[];
   lessons: Lesson[];
 }
 
@@ -50,7 +53,8 @@ export class SeederService {
     public conceptService: ConceptService,
     public friendService: FriendService,
     public characterService: CharacterService,
-    public lessonService: LessonService
+    public lessonService: LessonService,
+    public storySectionService: StorySectionService
   ) { }
 
   db = new DatabaseService(this.connection);
@@ -88,7 +92,6 @@ export class SeederService {
       random.characterInput()
     )));
   }
-
 
   async seedPaths(users: UserWithPassword[], characters: Character[]) {
     const paths = [
@@ -151,12 +154,13 @@ export class SeederService {
     );
   }
 
+  // seed number of concepte evently on number of modules.
   async seedConcept(
-    numConcept: number = 3,
-    numModule: number = 2,
+    numConcept: number,
+    numModule: number,
     modules: Module[],
     users: UserWithPassword[]
-  ) {
+  ) : Promise<Concept[]> {
     const numMod = (numModule < modules.length) ? numModule : modules.length;
     return Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
       const concept = await this.conceptService.create(
@@ -166,6 +170,7 @@ export class SeederService {
       if (i === 0) {
         await this.conceptService.addUserConcept(concept.id, users[0].id);
       }
+      return concept;
     }));
   }
 
@@ -192,12 +197,35 @@ export class SeederService {
     }
   }
 
-  async seedLessons(moduleId: string) {
-    return await this.lessonService.create(moduleId);
+  // seed number of lesson evently on number of modules.
+  async seedLessons(
+    numLesson: number,
+    numModule: number,
+    modules: Module[]
+  ): Promise<Lesson[]> {
+    const numMod = (numModule < modules.length) ? numModule : modules.length;
+
+    return Promise.all(Array(numLesson).fill(undefined).map(async (_, i) => {
+      const lesson = await this.lessonService.create((modules[i % numMod].id));
+      return lesson;
+    }));
   }
 
-  async seedStorySections(: string) {
-    await this.lessonService.create(moduleId);
+  // per concept per storySection
+  // for now: add all concept to lesson[0], target to evently linked to each lesson.
+  async seedStorySections(
+    concept: Concept[],
+    lesson: Lesson[]
+  ) {
+    return Promise.all(Array(concept.length).fill(undefined).map(async (_, i) => {
+      await this.storySectionService.create(
+        random.storySectionInput(
+          i + 1,
+          lesson[0].id,
+          concept[i].id
+        )
+      );
+    }));
   }
 
   /**
@@ -235,18 +263,7 @@ export class SeederService {
           ctx.modules = await this.seedModules(ctx.paths);
         }
       },
-      {
-        title: 'Create lesson',
-        task: async (ctx: CTX) => {
-          ctx.lessons = await this.seedLessons(ctx.modules[0].id);
-        }
-      },
-      {
-        title: 'Create story sections',
-        task: async (ctx: CTX) => {
-          await this.seedStorySections(ctx.modules[0].id);
-        }
-      },
+
       {
         title: 'Create assignment',
         task: async (ctx: CTX) => {
@@ -262,7 +279,19 @@ export class SeederService {
       {
         title: 'Create concept',
         task: async (ctx: CTX) => {
-          await this.seedConcept(3, 2, ctx.modules, ctx.users);
+          ctx.concepts = await this.seedConcept(6, 2, ctx.modules, ctx.users);
+        }
+      },
+      {
+        title: 'Create lesson',
+        task: async (ctx: CTX) => {
+          ctx.lessons = await this.seedLessons(6, 2, ctx.modules);
+        }
+      },
+      {
+        title: 'Create story sections',
+        task: async (ctx: CTX) => {
+          await this.seedStorySections(ctx.concepts, ctx.lessons);
         }
       },
       {
