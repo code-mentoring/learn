@@ -1,8 +1,7 @@
 import React from 'react';
 import { Icon } from '@codement/ui';
 import { Link } from 'react-router-dom';
-
-import LogoMark from '../../images/logo-mark.svg';
+import LogoMark from '@codement/ui/images/logo-mark.svg';
 
 export interface LessonHeaderProps {
   moduleName: string;
