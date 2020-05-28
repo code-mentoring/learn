@@ -40,21 +40,5 @@ describe('Auth entity', () => {
         }
       });
     });
-
-    it.only('should throw an error both email and password are invalid', async () => {
-      expect.assertions(1);
-
-      const email = 123456;
-      const password = 126464;
-
-      try {
-        await TestClient.login(email, password);
-      } catch (error) {
-        console.log(error.message);
-        expect(error.message).toEqual(
-          `Variable "$email" got invalid value ${email}; String cannot represent a non string value: ${email}`
-        );
-      }
-    });
   });
 });
