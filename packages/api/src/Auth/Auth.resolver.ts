@@ -2,7 +2,7 @@ import {
   Args, Mutation, Query, Resolver
 } from '@nestjs/graphql';
 
-import { LoginOutput } from './Auth.entity';
+import { LoginOutput, LogoutOutput } from './Auth.entity';
 import { AuthService } from './Auth.service';
 
 
@@ -30,5 +30,10 @@ export class AuthResolver {
     } catch (e) {
       return false;
     }
+  }
+
+  @Query(() => LogoutOutput)
+  async logout() {
+    return this.authService.signOut();
   }
 }

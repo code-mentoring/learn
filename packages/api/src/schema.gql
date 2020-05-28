@@ -37,10 +37,15 @@ type LoginOutput {
   accessToken: String!
 }
 
+type LogoutOutput {
+  isSignOut: Boolean!
+}
+
 type Query {
   users: [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
+  logout: LogoutOutput!
   paths: [Path!]!
   getPathByName(name: String!): Path!
 }

@@ -14,3 +14,9 @@ export class LoginOutput {
   @Field()
   accessToken: string;
 }
+
+@ObjectType()
+export class LogoutOutput {
+  @Field()
+  isSignOut: boolean;
+}

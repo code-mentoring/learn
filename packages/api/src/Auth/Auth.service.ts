@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import bcrypt from 'bcrypt';
 import { User } from '../User/User.entity';
 import { UserService } from '../User/User.service';
-import { LoginOutput } from './Auth.entity';
+import { LoginOutput, LogoutOutput } from './Auth.entity';
 
 @Injectable()
 export class AuthService {
@@ -41,5 +41,11 @@ export class AuthService {
 
   verify(token: string) {
     return this.jwtService.verify(token);
+  }
+
+  signOut(): LogoutOutput {
+    return {
+      isSignOut: true
+    };
   }
 }
