@@ -29,7 +29,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
   const [currentStorySection, setCurrentStorySection] = useState(lesson.storySection[0]);
 
   const [learnedConcepts, setLearnedConcepts] = useState<string[]>([]);
-  const concepts = lesson.storySection.map(c => c.teaches).filter(c => c);
+  const concepts = lesson.storySection.map(c => c.concept).filter(c => c);
   const isLast = lesson.storySection.length === currentStorySection.order;
 
   // const [learnConcept] = useMutation(learnedConcept);
@@ -43,7 +43,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
         // TODO: show a notfification
       }
     } else {
-      setLearnedConcepts(learnedConcepts.concat([currentStorySection.teachesId]));
+      setLearnedConcepts(learnedConcepts.concat([currentStorySection.conceptId]));
       setCurrentStorySection(
         lesson.storySection
           .find(s => s.order === currentStorySection.order + 1)!
@@ -57,7 +57,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
       message="Are you sure you want to leave?"
     />
     <CenterWrapper>
-      <h1>{recap ? 'So, to recap...' : currentStorySection.teaches.name}</h1>
+      <h1>{recap ? 'So, to recap...' : currentStorySection.concept.name}</h1>
       <div className="flex">
         {recap
           ? concepts.map(c => <div key={c?.id} className="flex flex-col items-center">
@@ -65,7 +65,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
             <div>{c?.name}</div>
             <div>{c?.description}</div>
           </div>)
-          : currentStorySection.teaches?.description || currentStorySection.content }
+          : currentStorySection.concept?.description || currentStorySection.content }
       </div>
       {recap && <Button>Begin lesson</Button>}
     </CenterWrapper>

@@ -95,7 +95,7 @@ export class SeederService {
 
   // Seed as many paths as characters we have
   // Each user joins to first path
-  async seedPaths(users: UserWithPassword[], characters: Character[]) {
+  async seedPaths(characters: Character[]) {
     let pathIcons = ['html', 'js', 'css', 'react', 'nodejs'];
     pathIcons = pathIcons.slice(0, characters.length);
 
@@ -108,10 +108,9 @@ export class SeederService {
         })
       );
 
-      if (i === 0) {
-        users.map(async user => this.pathService.addUserToPath(user.id, newPath.id));
-      }
-
+      // if (i === 0) {
+      //   users.map(async user => this.pathService.addUserToPath(user.id, newPath.id));
+      // }
       return newPath;
     }));
   }
@@ -137,9 +136,9 @@ export class SeederService {
     }));
 
     return res.flat();
-
   }
 
+  // seed assignment to each module with type as assignment
   async seedAssignment(modules: Module[]) {
     return Promise.all(modules
       .filter(m => m.type === ModuleType.assignment)
@@ -154,24 +153,36 @@ export class SeederService {
     )));
   }
 
-  // seed number of concepte evently on number of modules.
+  // seed number of concepts on each modules (define the number of module).
+  // *** make sure number of concept per module is n times of number of lesson per module.
+  // otherwise some concepts will not seed with storySection.
+  // the first concept of each mdoule set as learned concept
   async seedConcept(
     modules: Module[],
     users: UserWithPassword[],
-    numConcept: number = 6,
+    numConcept: number = 9,
     numModule: number = 2
   ) : Promise<Concept[]> {
     const numMod = (numModule < modules.length) ? numModule : modules.length;
-    return Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
-      const concept = await this.conceptService.create(
-        random.conceptInput(modules[i % numMod].id)
-      );
+    const seedModules = modules.slice(0, numMod);
+    const seedConcepts: Concept[] = [];
+    // How to import ui/icons ? list some of the icon here
+    const icons = ['check', 'minus', 'plus', 'x', 'lock'];
 
-      if (i === 0) {
-        await this.conceptService.addUserConcept(concept.id, users[0].id);
-      }
-      return concept;
+    await Promise.all(seedModules.map(async module => {
+      await Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
+        const concept = await this.conceptService.create(
+          random.conceptInput(module.id, { icon: icons[Math.floor(Math.random() * icons.length)] })
+        );
+        seedConcepts.push(concept);
+
+        if (i === 0) {
+          await this.conceptService.addUserConcept(concept.id, users[0].id);
+        }
+      }));
     }));
+
+    return seedConcepts;
   }
 
   async seedFriend(users: UserWithPassword[]) {
@@ -197,32 +208,70 @@ export class SeederService {
     }
   }
 
-  // seed number of lesson evently on number of modules.
+  // seed number of lesson on each modules (define the number of module).
   async seedLessons(
     modules: Module[],
-    numLesson: number = 6,
-    numModule: number = 1
+    numLesson: number = 3,
+    numModule: number = 2
   ): Promise<Lesson[]> {
     const numMod = (numModule < modules.length) ? numModule : modules.length;
-    return Promise.all(Array(numLesson)
-      .fill(undefined)
-      .map((_, i) => this.lessonService.create((modules[i % numMod].id))));
+    const seedModules = modules.slice(0, numMod);
+    const seedLessons: Lesson[] = [];
+
+    await Promise.all(seedModules.map(async module => {
+      await Promise.all(Array(numLesson).fill(undefined).map(async () => {
+        const lesson = await this.lessonService.create(module.id);
+        seedLessons.push(lesson);
+      }));
+    }));
+    return seedLessons;
   }
 
   // per concept per storySection
-  // for now: add all concept to lesson[0], target to evently linked to each lesson.
   async seedStorySections(
-    concept: Concept[],
-    lesson: Lesson[]
+    concepts: Concept[],
+    lessons: Lesson[]
   ) {
-    return Promise.all(Array(concept.length).fill(undefined).map(async (_, i) => {
-      await this.storySectionService.create(
-        random.storySectionInput(
-          i + 1,
-          lesson[0].id,
-          concept[i].id
-        )
-      );
+    // group concepts by moduleId
+    type ModuleConcepts = {
+      moduleId: String,
+      concepts: Concept[]
+    };
+    const moduleConcepts: ModuleConcepts[] = [];
+    concepts.map(concept => {
+      const mc = moduleConcepts.find(c => c.moduleId === concept.moduleId);
+      return mc ? mc.concepts.push(concept)
+        : moduleConcepts.push({ moduleId: concept.moduleId, concepts: [concept] });
+    });
+
+    // group lessons by moduleId
+    type ModuleLessons = {
+      moduleId: String,
+      lessons: Lesson[]
+    };
+    const moduleLessons: ModuleLessons[] = [];
+    lessons.map(lesson => {
+      const mlesson = moduleLessons.find(l => l.moduleId === lesson.moduleId);
+      return mlesson ? mlesson.lessons.push(lesson)
+        : moduleLessons.push({ moduleId: lesson.moduleId, lessons: [lesson] });
+    });
+
+    await Promise.all(moduleConcepts.map(async mc => {
+      const ml = moduleLessons.find(l => l.moduleId === mc.moduleId);
+      if (ml !== undefined) {
+        const numSotryPerLesson = Math.floor(mc.concepts.length / ml.lessons.length);
+        await Promise.all(ml.lessons.map(async (lesson, i) => {
+          for (let x = 0; x < numSotryPerLesson; x += 1) {
+            await this.storySectionService.create(
+              random.storySectionInput(
+                x + 1,
+                lesson.id,
+                mc.concepts[numSotryPerLesson * i + x].id
+              )
+            );
+          }
+        }));
+      }
     }));
   }
 
@@ -252,7 +301,7 @@ export class SeederService {
       {
         title: 'Create paths',
         task: async (ctx: CTX) => {
-          ctx.paths = await this.seedPaths(ctx.users, ctx.characters);
+          ctx.paths = await this.seedPaths(ctx.characters);
         }
       },
       {

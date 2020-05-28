@@ -67,8 +67,8 @@ export type Concept = {
   name: Scalars['String'];
   description: Scalars['String'];
   icon: Scalars['String'];
-  taughtInId: Scalars['String'];
-  taughtIn: Module;
+  moduleId: Scalars['String'];
+  module: Module;
   userConcepts: Array<UserConcept>;
 };
 
@@ -78,8 +78,8 @@ export type StorySection = {
   order: Scalars['Float'];
   content: Scalars['String'];
   lessonId: Scalars['String'];
-  teachesId: Scalars['String'];
-  teaches: Concept;
+  conceptId: Scalars['String'];
+  concept: Concept;
   lesson: Lesson;
 };
 
@@ -102,6 +102,7 @@ export type Module = {
   previous?: Maybe<Module>;
   path: Path;
   lessons: Array<Lesson>;
+  concepts: Array<Concept>;
 };
 
 export type Assignment = {
@@ -461,7 +462,7 @@ export type CreateConceptInput = {
   name: Scalars['String'];
   icon: Scalars['String'];
   description: Scalars['String'];
-  taughtInId: Scalars['String'];
+  moduleId: Scalars['String'];
 };
 
 export type UpdateConceptInput = {
@@ -469,7 +470,7 @@ export type UpdateConceptInput = {
   name?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  taughtInId?: Maybe<Scalars['String']>;
+  moduleId?: Maybe<Scalars['String']>;
 };
 
 export type CreateModuleInput = {
@@ -513,5 +514,5 @@ export type CreateStorySectionInput = {
   order: Scalars['Float'];
   content: Scalars['String'];
   lessonId: Scalars['String'];
-  teachesId: Scalars['String'];
+  conceptId: Scalars['String'];
 };

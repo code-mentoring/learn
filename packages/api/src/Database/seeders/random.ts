@@ -10,7 +10,6 @@ import { CreateConceptInput } from '../../Concept/Concept.entity';
 import { CreateCharacterInput } from '../../Character/Character.entity';
 import { CreateStorySectionInput } from '../../StorySection/StorySection.entity';
 
-
 export const userInput = (
   input: Partial<UserInput> = {}
 ): UserInput => ({
@@ -76,9 +75,9 @@ export const conceptInput = (
   moduleId: string,
   input: Partial<CreateConceptInput> = {}
 ): CreateConceptInput => ({
-  name: faker.lorem.words(2),
+  name: `Concept ${faker.lorem.words(2)}`,
   icon: faker.lorem.word(),
-  description: faker.lorem.words(10),
+  description: `Concept ${faker.lorem.words(10)}`,
   moduleId,
   ...input
 });
@@ -94,7 +93,7 @@ export const storySectionInput = (
   conceptId: string,
   input: Partial<CreateStorySectionInput> = {}
 ): CreateStorySectionInput => ({
-  content: faker.lorem.sentence(),
+  content: `Stoty ${faker.lorem.sentence()}`,
   order,
   lessonId,
   conceptId,

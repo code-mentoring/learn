@@ -32,8 +32,8 @@ query lesson($id: String!) {
       order
       content
       lessonId
-      teachesId
-      teaches{
+      conceptId
+      concept{
         id
         name
         description
