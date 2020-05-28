@@ -1,0 +1,36 @@
+/* figma design is fill: #D7FAF3, but there is no such color in tailwind. 
+   so choose the similar one .200 #D5F7ED*/
+   .completed {
+    fill:  theme('colors.green.200');
+    stroke: theme('colors.green.500');
+    stroke-width: 2;
+    stroke-linecap: square;
+    @apply text-green-500;
+}
+
+/* figma design is fill: #EEEBF6, but there is no such color in tailwind. 
+   so choose the similar one .200 #D5DEFF*/
+.open {
+    fill:  theme('colors.blue.200');
+    stroke: theme('colors.blue.500');
+    stroke-width: 2;
+    stroke-linecap: square;
+    @apply text-blue-500;
+}
+
+/* figma design is stroke and color as #C4BEE0, but there is no such color in tailwind. 
+   so choose the similar one .500 #C0B9E5*/
+.locked {
+    fill:  theme('colors.white');
+    stroke: theme('colors.grey.500');
+    stroke-width: 2;
+    stroke-linecap: square;
+    @apply text-grey-500;
+}
+
+.checkmark {
+    right: 16px;
+    @apply top-0;
+    @apply absolute;
+    fill: theme('colors.green.500');
+}
