@@ -6,13 +6,15 @@
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
     "graphql-tag": "^2.10.3",
+    "rc-slider": "^9.2.4",
     "react-table": "^7.0.4",
-    "rc-slider": "^9.2.4"
+    "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/rc-slider": "^8.6.5",
     "@types/react-table": "^7.0.16",
-    "@types/rc-slider": "^8.6.5"
+    "@types/react-transition-group": "^4.4.0"
   },
   "publishConfig": {
     "access": "public"
