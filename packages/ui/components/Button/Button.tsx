@@ -22,8 +22,6 @@ export const Button: React.FunctionComponent<ButtonProps & Omit<React.ButtonHTML
   if (size) classes[`btn-${size}`] = true;
   if (text) classes['btn-text'] = true;
 
-  // TODO: disabled styles
-
   // eslint-disable-next-line react/button-has-type
   return <button
     type={type}

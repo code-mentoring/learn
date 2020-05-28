@@ -37,3 +37,10 @@
     @apply bg-transparent;
   }
 }
+
+button:disabled,
+.btn-disabled {
+  @apply bg-grey-300 cursor-not-allowed;
+
+  &:hover { @apply bg-grey-300; }
+}
