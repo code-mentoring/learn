@@ -12,6 +12,7 @@ export const moduleInput = {
 beforeAll(async () => {
   await TestClient.start();
 });
+
 afterAll(async () => {
   await TestClient.stop();
 });
@@ -95,8 +96,6 @@ describe('Module entity', () => {
         ...pathInput,
         name: 'path 2',
       });
-
-      console.log(path2);
 
       const update = {
         id: module.id,
