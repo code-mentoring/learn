@@ -29,7 +29,7 @@ export const Page: React.FunctionComponent<PageProps> = ({
       // TODO: to be repaced by AdminSiderBar
       {sider && <AppHeader />}
       {/* {sider && <AdminLeftSideBar />} */}
-      <div className="flex border border-grey-300 rounded bg-grey-100 m-5">
+      <div className="flex border border-grey-300 rounded bg-grey-100 m-5 h-full">
         {children}
       </div>
     </main>
