@@ -22,5 +22,7 @@ export const routes = {
 
   // Authed
   home: linkParams('/'),
-  users: linkParams('/users')
+  paths: linkParams('/paths'),
+  questions: linkParams('/questions'),
+  settings: linkParams('/settings')
 };
