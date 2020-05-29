@@ -34,27 +34,28 @@ export const AdminsPage = () => {
   if (loading) return <Loader />;
 
   return <>
-    <Page title="Admin" className="bg-grey-200">
-      <PageContent>
-        <table className="table-fixed text-14px m-5 w-full text-left">
-          <thead className="uppercase text-grey-500">
-            <tr>
-              <th className="w-1/12 py-2">type</th>
-              <th className="w-3/12 py-2">name</th>
-              <th className="w-7/12 py-2">email</th>
-              <th className="w-1/12 py-2 text-right">actions</th>
-            </tr>
-          </thead>
-          <tbody className="body-2">
-            { adminList.map(admin =>
-              <tr className="border-b border-grey-500" key={admin.email}>
+    <Page title="Admin" className="bg-grey-200" styles={{ display: 'grid', gridTemplateColumns: '180px auto', gridTemplateRows: '80px auto' }}>
+      <PageContent styles={{ position: 'relative', margin: '0 2rem 2rem' }}>
+        <div>Content</div>
+        {/* <table className="table-fixed text-14px m-5 w-full text-left">
+            <thead className="uppercase text-grey-500">
+              <tr>
                 <th className="w-1/12 py-2">type</th>
-                <th className="w-3/12 py-2"> { admin.firstName } { admin.lastName }</th>
-                <th className="w-7/12 py-2">{ admin.email }</th>
-                <th className="w-1/12 py-2 content-end"><Icon icon="check" size="small" /></th>
-              </tr>) }
-          </tbody>
-        </table>
+                <th className="w-3/12 py-2">name</th>
+                <th className="w-7/12 py-2">email</th>
+                <th className="w-1/12 py-2 text-right">actions</th>
+              </tr>
+            </thead>
+            <tbody className="body-2">
+              { adminList.map(admin =>
+                <tr className="border-b border-grey-500" key={admin.email}>
+                  <th className="w-1/12 py-2">type</th>
+                  <th className="w-3/12 py-2"> { admin.firstName } { admin.lastName }</th>
+                  <th className="w-7/12 py-2">{ admin.email }</th>
+                  <th className="w-1/12 py-2 content-end"><Icon icon="check" size="small" /></th>
+                </tr>) }
+            </tbody>
+          </table> */}
       </PageContent>
     </Page>
   </>;

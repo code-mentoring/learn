@@ -8,6 +8,7 @@ export interface PageProps {
   header?: boolean;
   className?:string;
   sideBar?: boolean;
+  styles?: React.CSSProperties;
 }
 
 export const Page: React.FunctionComponent<PageProps> = ({
@@ -16,14 +17,15 @@ export const Page: React.FunctionComponent<PageProps> = ({
   header = true,
   sideBar = true,
   children,
-  className
+  className,
+  styles
 }) => {
   useEffect(() => { document.title = title; }, [title]);
 
   return (
     <main
       className={classnames('absolute t-0 l-0 w-full h-full', type, className)}
-      style={{ display: 'grid', gridTemplateColumns: '180px auto', gridTemplateRows: '80px auto' }}
+      style={styles}
     >
       {header && <AppHeader className="col-span-2" />}
       {sideBar && <div className="w-48">Side bar</div>}
@@ -33,6 +35,15 @@ export const Page: React.FunctionComponent<PageProps> = ({
 };
 
 
-export const PageContent: React.FunctionComponent = ({ children }) => (
-  <div className="page-content border-2 border-solid border-grey-500 bg-white rounded">{children}</div>
+export const PageContent: React.FunctionComponent<{styles: React.CSSProperties}> = ({
+  children, styles
+}) => (
+  <div className="page-content" style={styles}>
+    <div
+      className=" border-2 border-solid border-grey-500 bg-white rounded"
+      style={{ padding: '2rem', position: 'absolute', width: '100%', height: '100%', overflow: 'auto' }}
+    >
+      {children}
+    </div>
+  </div>
 );

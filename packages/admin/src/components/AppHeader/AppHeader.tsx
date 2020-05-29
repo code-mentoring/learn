@@ -5,7 +5,7 @@ import LogoMark from '@codement/ui/images/logo-mark.svg';
 import { routes } from '../../router/routes';
 
 
-export const AppHeader: React.FC<{className: string}> = ({ className }) => (
+export const AppHeader: React.FC<{className?: string}> = ({ className }) => (
   <nav className={classnames('p-2 sm:p-4', className)}>
     <Link to="/dashboard">
       <LogoMark className="logo h-10 inline ml-1 sm:ml-20" />
