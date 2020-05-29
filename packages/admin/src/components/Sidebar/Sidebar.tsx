@@ -5,10 +5,7 @@ import { Icon } from '@codement/ui';
 import LogoMark from '@codement/ui/images/logo-mark.svg';
 import { DropdownMenu } from '../../../../client/src/components/DropdownMenu/DropdownMenu';
 
-
-export interface SidebarProps {
-
-}
+export interface SidebarProps { }
 
 export const Sidebar: React.FC<SidebarProps> = () => {
   const { me } = Me.useContainer();
