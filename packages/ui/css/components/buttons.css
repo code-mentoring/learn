@@ -30,3 +30,17 @@
   &:hover { @apply bg-tertiary-400; }
   &:focus { @apply bg-tertiary-600; }
 }
+
+.btn-transparent {
+  @apply bg-transparent;
+  &:hover, &:focus{
+    @apply bg-transparent;
+  }
+}
+
+button:disabled,
+.btn-disabled {
+  @apply bg-grey-300 cursor-not-allowed;
+
+  &:hover { @apply bg-grey-300; }
+}

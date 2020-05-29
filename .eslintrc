@@ -33,30 +33,34 @@
       "args": "after-used",
       "ignoreRestSiblings": true
     }],
+
     "@typescript-eslint/no-unused-vars": ["error"],
-    "react/jsx-filename-extension": 0,
-    "react/jsx-props-no-spreading": 0,
-    "react/prop-types": 0, // Typescript handles this
-    "consistent-return": 0,
-    "no-useless-constructor": 0, // Needed by NestJS dep injection
-    "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
-    "max-classes-per-file": 0, // Leads to too many files
+    "array-bracket-spacing": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
     "class-methods-use-this": 0,
     "comma-dangle": ["error", "never"],
-    "object-curly-spacing": ["error", "always"],
-    "array-bracket-spacing": ["error", "never"],
     "computed-property-spacing": ["error", "never"],
-    "object-curly-newline": 0,
-    "react/jsx-wrap-multilines": [0, "never"],
-    "react/jsx-one-expression-per-line": 0,
-    "react/jsx-closing-tag-location": 0,
-    "arrow-parens": ["error", "as-needed"],
-    "react/jsx-curly-newline": 0,
+    "consistent-return": 0,
     "implicit-arrow-linebreak": 0,
-    "no-underscore-dangle": 0,
-    "padded-blocks": 0,
-    "linebreak-style": 0,
     "import/no-cycle": 0,
-    "jsx-a11y/label-has-associated-control": 0
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "linebreak-style": 0,
+    "max-classes-per-file": 0, // Leads to too many files
+    "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
+    "no-underscore-dangle": 0,
+    "no-useless-constructor": 0, // Needed by NestJS dep injection
+    "object-curly-newline": 0,
+    "object-curly-spacing": ["error", "always"],
+    "padded-blocks": 0,
+    "react/jsx-closing-tag-location": 0,
+    "react/jsx-curly-newline": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-wrap-multilines": [0, "never"],
+    "react/prop-types": 0, // Typescript handles this,
+    "react/static-property-placement": 0
   }
 }

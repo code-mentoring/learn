@@ -1,0 +1,41 @@
+query ($userId: String!)  {
+  getUserFriends (userId : $userId){    
+    id
+    user1Id
+    user2Id
+    since
+    status
+    requested
+    initiator
+    user1{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }
+    user2{
+      id
+      firstName
+      lastName
+      email
+      profileImage
+      userPreferences{
+      id
+      userId
+      practiceGoal
+      why
+      codingAbility
+      }
+      createdAt
+    }    
+  }
+}

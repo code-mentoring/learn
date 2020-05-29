@@ -1,0 +1,18 @@
+query {
+  modules {
+    id
+    name
+    icon
+    type
+    previousId
+    previous {
+      id
+      name
+    }
+    pathId
+    path {
+      id
+      name
+    }
+  }
+}

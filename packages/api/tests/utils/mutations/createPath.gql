@@ -1,9 +1,10 @@
-mutation createPath($path: PathInput!) {
-  createPath(path: $path) {
+mutation ($path: PathInput!) {
+  createPath( path : $path) {
     id
     name
     icon
     description
     createdAt
+    characterId
   }
 }

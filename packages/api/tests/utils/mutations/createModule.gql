@@ -1,4 +1,4 @@
-mutation createModule($module: ModuleInput!) {
+mutation createModule($module: CreateModuleInput!) {
   createModule(module: $module) {
     id
     name

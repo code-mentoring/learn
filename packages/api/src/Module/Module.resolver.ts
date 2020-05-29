@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { Module, ModuleInput, UpdateModuleInput } from './Module.entity';
+import { Module, CreateModuleInput, UpdateModuleInput } from './Module.entity';
 import { ModuleService } from './Module.service';
 import { User } from '../User/User.entity';
 import { CurrentUser } from '../User/CurrentUser.decorator';
@@ -26,7 +26,7 @@ export class ModuleResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Module)
   createModule(
-    @Args('module') module: ModuleInput
+    @Args('module') module: CreateModuleInput
   ) {
     return this.moduleService.create(module);
   }
@@ -43,9 +43,9 @@ export class ModuleResolver {
   @UseGuards(GQLAuthGuard)
   @Mutation(() => Module)
   updateModule(
-    @Args('update') update: UpdateModuleInput
+    @Args('module') module: UpdateModuleInput
   ) {
-    return this.moduleService.update(update);
+    return this.moduleService.update(module);
   }
 
   @UseGuards(GQLAuthGuard)

@@ -3,13 +3,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "./helpers";
 @import "./components/buttons";
 @import "./components/text";
 @import "./components/input";
 @import "./components/icon";
 @import "./components/form";
 @import "./components/error-message";
-@import "./components/radio-list.css";
+@import "./components/radio-list";
 
 *, *:focus {
   outline: none !important;

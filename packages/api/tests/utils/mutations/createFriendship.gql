@@ -1,0 +1,11 @@
+mutation ($toId: String!) {
+  createFriendship( toId : $toId) {
+    id
+    user1Id
+    user2Id
+    requested
+    initiator
+    status
+    since
+  }
+}

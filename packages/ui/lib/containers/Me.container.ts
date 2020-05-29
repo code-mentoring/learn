@@ -12,13 +12,25 @@ const meQuery = gql`{
     lastName
     id
     email
+    userPreferences {
+      id
+      why
+      practiceGoal
+      codingAbility
+    }
     profileImage
   }
 }`;
 
 const useAuth = () => {
   const { status } = Auth.useContainer();
-  const [getMe, { data, error, loading, called }] = useLazyQuery<{ me: User }>(meQuery, {});
+  const [getMe, {
+    data,
+    error,
+    loading,
+    called,
+    refetch
+  }] = useLazyQuery<{ me: User }>(meQuery, {});
 
   useEffect(() => {
     if (status === 'signedIn') getMe();
@@ -28,7 +40,8 @@ const useAuth = () => {
     me: data ? data.me : undefined,
     loading,
     called,
-    error
+    error,
+    refetch
   };
 };
 
