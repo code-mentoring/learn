@@ -36,11 +36,12 @@ export const AdminsPage = () => {
         </div>
         { adminList.map(admin =>
           <div className="grid grid-cols-12 text-grey-800 text-sm py-2 border-b border-grey-200">
-            <div className="col-start-1 col-end-2">type</div>
+            {/* TODO: icon to be determined by admin type */}
+            <div className="col-start-1 col-end-2"><Icon icon="shieldAlt" size="small" color="pink-500" /></div>
             <div className="col-start-2 col-end-5"> { admin.firstName } { admin.lastName }</div>
             <div className="col-start-5 col-end-12">{ admin.email }</div>
             {/* TODO: action to be complete after design */}
-            <div className="col-start-12 col-end-12 content-end"><Icon icon="check" size="small" /></div>
+            <div className="col-start-12 col-end-12 content-end"><Icon icon="user" size="small" color="secondary-500" /></div>
           </div>)}
       </PageContent>
     </Page>

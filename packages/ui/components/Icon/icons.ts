@@ -18,7 +18,7 @@ import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
-
+import { IconShieldAlt } from './icons/solid/cis-shield-alt';
 
 export const icons = {
   check: IconCheck,
@@ -41,5 +41,6 @@ export const icons = {
   uploadDuotone: IconCloudUploadDuotone,
   user: IconUser,
   userLine: IconUserLine,
-  x: IconX
+  x: IconX,
+  shieldAlt: IconShieldAlt
 };
