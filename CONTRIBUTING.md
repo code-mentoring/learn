@@ -46,6 +46,7 @@ This is a running list of those who are actively contributing to this project.
 | Marc Tessier        | Design                    | `@Marc Tessier`     | [@mtess88](https://github.com/mtess88)                 | 15 hours            | May 2020 |
 | Andrea Morreale     | Design                    | `@Andre M`          | [@akimdesign](https://github.com.akimdesign)           | 20 hours            | May 2020 |
 | Balkirat Singh      | Full Stack                | `@Balkirat Singh`   | [@Balkirat](https://github.com/Balkirat)               | 10+ hours           |
+| Waqas Daimee        | Full Stack                | `@Waqas Daimee`     | [@wdaimee](https://github.com/wdaimee)                 | 10 hours            | May 2020 |
 
 ## 🔧 What can I work on?
 
