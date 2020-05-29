@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useHistory } from 'react-router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -7,7 +6,7 @@ import { Loader, Icon } from '@codement/ui';
 import { User } from '@codement/api';
 import { Page, PageContent } from '../../components/Page/Page';
 
-// TODO: To be replaced with admin query API after
+// TODO: To be replaced with admin query API
 const getAdmins = gql`
   query users {
     users {
@@ -20,43 +19,31 @@ const getAdmins = gql`
   }`;
 
 export const AdminsPage = () => {
+
   const { data, loading } = useQuery(getAdmins);
 
   if (loading) return <Loader />;
   const adminList: User[] = data?.users;
 
-  // const Action = [
-  //   { label: 'Activate', icon: "check" },
-  //   { label: 'Deactivate', icon: 'lock' },
-  //   { label: 'Remove', icon: 'trash' }
-  // ];
-
-  if (loading) return <Loader />;
-
   return <>
-    <Page title="Admin" className="bg-grey-200" styles={{ display: 'grid', gridTemplateColumns: '180px auto', gridTemplateRows: '80px auto' }}>
+    <Page title="Admin" className="bg-grey-100" styles={{ display: 'grid', gridTemplateColumns: '180px auto', gridTemplateRows: '80px auto' }}>
       <PageContent styles={{ position: 'relative', margin: '0 2rem 2rem' }}>
-        <div>Content</div>
-        {/* <table className="table-fixed text-14px m-5 w-full text-left">
-            <thead className="uppercase text-grey-500">
-              <tr>
-                <th className="w-1/12 py-2">type</th>
-                <th className="w-3/12 py-2">name</th>
-                <th className="w-7/12 py-2">email</th>
-                <th className="w-1/12 py-2 text-right">actions</th>
-              </tr>
-            </thead>
-            <tbody className="body-2">
-              { adminList.map(admin =>
-                <tr className="border-b border-grey-500" key={admin.email}>
-                  <th className="w-1/12 py-2">type</th>
-                  <th className="w-3/12 py-2"> { admin.firstName } { admin.lastName }</th>
-                  <th className="w-7/12 py-2">{ admin.email }</th>
-                  <th className="w-1/12 py-2 content-end"><Icon icon="check" size="small" /></th>
-                </tr>) }
-            </tbody>
-          </table> */}
+        <div className=" grid grid-cols-12 uppercase text-grey-500 text-xs font-extrabold tracking-wider pb-2 border-b border-grey-200">
+          <div className="col-start-1 col-end-2">type</div>
+          <div className="col-start-2 col-end-5">name</div>
+          <div className="col-start-5 col-end-12">email</div>
+          <div className="col-start-12 col-end-12 text-right">actions</div>
+        </div>
+        { adminList.map(admin =>
+          <div className="grid grid-cols-12 text-grey-800 text-sm py-2 border-b border-grey-200">
+            <div className="col-start-1 col-end-2">type</div>
+            <div className="col-start-2 col-end-5"> { admin.firstName } { admin.lastName }</div>
+            <div className="col-start-5 col-end-12">{ admin.email }</div>
+            {/* TODO: action to be complete after design */}
+            <div className="col-start-12 col-end-12 content-end"><Icon icon="check" size="small" /></div>
+          </div>)}
       </PageContent>
     </Page>
+    
   </>;
 };

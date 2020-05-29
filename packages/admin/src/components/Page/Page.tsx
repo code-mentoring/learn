@@ -40,7 +40,7 @@ export const PageContent: React.FunctionComponent<{styles: React.CSSProperties}>
 }) => (
   <div className="page-content" style={styles}>
     <div
-      className=" border-2 border-solid border-grey-500 bg-white rounded"
+      className=" border-4 border-solid border-grey-200 bg-white rounded"
       style={{ padding: '2rem', position: 'absolute', width: '100%', height: '100%', overflow: 'auto' }}
     >
       {children}
