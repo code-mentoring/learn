@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, OneToMany } from 'typeorm';
 import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 export enum ModuleType {
   assignment = 'assignment',
@@ -46,6 +47,9 @@ export class Module extends CMBaseEntity {
   @ManyToOne(() => Path, path => path.modules, { nullable: false })
   @Field(() => Path)
   path: Path;
+
+  @OneToMany(() => UserModule, userModules => userModules.module)
+  userModules: UserModule[];
 }
 
 @InputType()
