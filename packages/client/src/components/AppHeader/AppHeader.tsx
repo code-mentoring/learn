@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Me } from '@codement/ui/lib/containers/Me.container';
 import { Link } from 'react-router-dom';
 import { Icon, PathIcon } from '@codement/ui';
-import LogoMark from '../../images/logo-mark.svg';
+import LogoMark from '@codement/ui/images/logo-mark.svg';
 import { DropdownMenu } from '../DropdownMenu/DropdownMenu';
-import { Me } from '../../containers/Me.container';
 import styles from './AppHeader.module.css';
 
 // TODO: Replace user profile picture when #27 is completed.

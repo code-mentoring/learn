@@ -10,18 +10,22 @@
 
 .selectedLayer::before {
   border-width: 1.5em;
-  border-right-color: #0DD2AB;
-  border-top-color: #0DD2AB;
+  border-right-color: theme('colors.green.500');
+  border-top-color: theme('colors.green.500');
 }
 
 .selectedLayer::after {
   border-radius: 0.4em;
   border-width: 1.35em;
-  border-right-color: #0DD2AB;
-  border-top-color: #0DD2AB;
+  border-right-color: theme('colors.green.500');
+  border-top-color: theme('colors.green.500');
 }
 
 .checkIcon {
   top: 7px;
   right: 4px;
+}
+
+.name {
+  @apply uppercase text-sm font-bold text-grey-500;
 }

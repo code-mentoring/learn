@@ -4,9 +4,9 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { getClient } from './lib/apollo';
+import { ContainerWrapper } from '@codement/ui/lib/containers/Wrapper';
+import { getClient } from '@codement/ui/lib/apollo';
 import { AppRouter } from './router/AppRouter';
-import { ContainerWrapper } from './containers/Wrapper';
 
 (async () => {
   ReactDOM.render(

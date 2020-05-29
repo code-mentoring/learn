@@ -1,21 +1,23 @@
 import { Button, Options, RadioList, SliderField, TextField } from '@codement/ui';
+import { Me } from '@codement/ui/lib/containers/Me.container';
+import { LocalStorage } from '@codement/ui/lib/localStorage';
 import React, { useEffect, useState } from 'react';
 import { Switch, useHistory } from 'react-router';
 
+import { Path } from '@codement/api';
 import { AppHeader } from '../../components/AppHeader/AppHeader';
-import { PathsList, SelectedPath } from '../../components/PathsList/PathsList';
-import { Me } from '../../containers/Me.container';
+import { PathsList } from '../../components/PathsList/PathsList';
 import { Wizard } from '../../containers/Wizard.container';
 import { routes } from '../../router/routes';
 import { OnboardingStep } from './OnboardingStep';
 import { steps } from './steps';
 import { SliderText } from './Wizard/Typography/SliderText';
-import { LocalStorage } from '../../lib/localStorage';
+
 
 export interface WizardFormValues {
   codingAbility: number;
   why: string;
-  paths: SelectedPath[],
+  paths: Path[],
   practiceGoal: number
 }
 
@@ -101,7 +103,7 @@ export const OnboardingPage = () => {
       <OnboardingStep {...steps[3]}>
         <PathsList
           selectedPaths={paths}
-          onChange={(selectedPaths: SelectedPath[]) => setPaths(selectedPaths)}
+          onChange={(selectedPaths: Path[]) => setPaths(selectedPaths)}
         />
       </OnboardingStep>
 

@@ -156,6 +156,7 @@ type Mutation {
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: CreateModuleInput!): Module!
+  joinModule(moduleId: String!): Boolean!
   updateModule(module: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!
