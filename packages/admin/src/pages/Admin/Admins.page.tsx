@@ -44,6 +44,5 @@ export const AdminsPage = () => {
           </div>)}
       </PageContent>
     </Page>
-    
   </>;
 };
