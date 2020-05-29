@@ -23,9 +23,9 @@ export class UserModule extends CMBaseEntity {
     @CreateDateColumn()
     completedAt: Date;
 
-    @ManyToOne(() => UserWithPassword)
+    @ManyToOne(() => UserWithPassword, user => user.userModules)
     user: UserWithPassword;
 
-    @ManyToOne(() => Module)
+    @ManyToOne(() => Module, module => module.userModules)
     module: Module;
 }
