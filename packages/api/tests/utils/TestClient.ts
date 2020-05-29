@@ -177,6 +177,10 @@ export abstract class TestClient {
     return this._request('getCharacters', queries.getCharacters);
   }
 
+  static users(): Promise<User[]> {
+    return this._request('users', queries.users);
+  }
+
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
     const userInput = random.userInput();

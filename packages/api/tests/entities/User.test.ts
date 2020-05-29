@@ -2,7 +2,6 @@ import * as random from '../../src/Database/seeders/random';
 import { TestClient } from '../utils/TestClient';
 import { UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 
-
 describe('User entity', () => {
 
   beforeAll(async () => { await TestClient.start(); });
@@ -29,18 +28,30 @@ describe('User entity', () => {
       expect(user.createdAt).toBeDefined();
     });
 
-    it('should throw error if email missing', async () => {
-      expect.assertions(1); // Expect there to be an error
-      try {
-        const input = random.userInput();
-        // @Deliberately missing email to test error
-        delete input.email;
-        await TestClient.createUser(input);
-      } catch (e) {
-        expect(e.message).toContain('Field "email" of required type "String!" was not provided');
-      }
+    ['firstName', 'lastName', 'email', 'password'].forEach(key => {
+      const input = random.userInput();
+
+      it(`should throw error if ${key} is missing`, async () => {
+        expect.assertions(1);
+        try {
+          if (key === 'firstName') {
+            delete input.firstName;
+          } else if (key === 'lastName') {
+            delete input.lastName;
+          } else if (key === 'email') {
+            delete input.email;
+          } else if (key === 'password') {
+            delete input.password;
+          }
+
+          await TestClient.createUser(input);
+        } catch (error) {
+          expect(error.message).toContain(`Field "${key}" of required type "String!" was not provided`);
+        }
+      });
     });
   });
+
 
   describe('Query: me', () => {
     beforeEach(setup);
@@ -56,17 +67,34 @@ describe('User entity', () => {
     });
   });
 
+  describe('Query: users', () => {
+    beforeEach(setup);
+    it('should return all users', async () => {
+      expect.assertions(1);
+      await TestClient.createUser(random.userInput());
+      await TestClient.createUser(random.userInput());
+      const users = await TestClient.users();
+
+      // should return 3 for the above two and the already logged-in user
+      expect(users).toBeArrayOfSize(3);
+    });
+  });
+
+
   describe('Mutation: updatePreferences', () => {
     const preferences: UserPreferencesInput = {
       why: 'why',
       codingAbility: 5,
       practiceGoal: 4
     };
+
     beforeEach(setup);
+
     it('should update user preferences', async () => {
       expect.assertions(5);
 
       const userPreferences = await TestClient.updatePreferences(preferences);
+
       expect(userPreferences.id).toBeDefined();
       expect(userPreferences.why).toEqual(preferences.why);
       expect(userPreferences.practiceGoal).toEqual(preferences.practiceGoal);
@@ -74,6 +102,7 @@ describe('User entity', () => {
 
       // Check that after updating preferences me returns user preferences filled
       const mePost = await TestClient.me();
+
       expect(mePost.userPreferences).not.toBeNull();
     });
 
@@ -82,6 +111,7 @@ describe('User entity', () => {
 
       preferences.codingAbility = 11;
       preferences.practiceGoal = 6;
+
       try {
         await TestClient.updatePreferences(preferences);
       } catch (e) {
@@ -91,5 +121,4 @@ describe('User entity', () => {
       }
     });
   });
-
 });

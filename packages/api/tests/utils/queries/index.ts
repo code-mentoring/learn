@@ -5,6 +5,7 @@ const files = [
   'getPathByName',
   'me',
   'modules',
+  'users',
   'getUserFriends',
   'getCharacters'
 ];
