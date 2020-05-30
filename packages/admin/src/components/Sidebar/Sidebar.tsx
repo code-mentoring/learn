@@ -18,6 +18,8 @@ export const Sidebar: React.FC<SidebarProps> = () => {
     { path: 'settings', icon: 'settings' }
   ];
 
+  // TODO: Update styling to match selected link.
+
   return (
     <nav className="flex flex-col justify-center h-full w-48 pl-4 text-left text-lg font-semibold text-primary-500">
       <Link to="/dashboard">
