@@ -19,6 +19,7 @@ import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
 import { IconPath } from './icons/solid/cis-path';
+import { IconSettings } from './icons/solid/cis-settings';
 
 
 export const icons = {
@@ -43,5 +44,6 @@ export const icons = {
   user: IconUser,
   userLine: IconUserLine,
   x: IconX,
-  path: IconPath
+  path: IconPath,
+  settings: IconSettings
 };
