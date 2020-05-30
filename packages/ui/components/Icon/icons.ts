@@ -21,7 +21,7 @@ import { IconX } from './icons/solid/cis-x';
 import { IconPath } from './icons/solid/cis-path';
 import { IconSettings } from './icons/solid/cis-settings';
 import { IconQuestion } from './icons/solid/cis-question';
-
+import { IconShield } from './icons/solid/cis-shield';
 
 
 export const icons = {
@@ -48,5 +48,6 @@ export const icons = {
   x: IconX,
   path: IconPath,
   settings: IconSettings,
-  question: IconQuestion
+  question: IconQuestion,
+  shield: IconShield
 };
