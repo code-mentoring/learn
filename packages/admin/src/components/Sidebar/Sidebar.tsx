@@ -19,6 +19,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   ];
 
   // TODO: Update styling to match selected link.
+  // TODO: Fix styling on footer button
 
   return (
     <nav className="flex flex-col justify-center h-full w-48 pl-4 text-left text-lg font-semibold text-primary-500">
