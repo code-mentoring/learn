@@ -11,16 +11,21 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   const { me } = Me.useContainer();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const menuList = ['admins', 'paths', 'puestions', 'settings'];
+  const menuList = [
+    { path: 'admins', icon: 'shield' },
+    { path: 'paths', icon: 'path' },
+    { path: 'questions', icon: 'question' },
+    { path: 'settings', icon: 'settings' }
+  ];
 
   return (
     <nav className="flex flex-col justify-center h-full w-48 pl-4 text-left text-lg font-semibold text-primary-500">
       <Link to="/dashboard">
         <LogoMark className="logo h-10 absolute top-0 mt-4" />
       </Link>
-      {menuList.map(item => (
-        <Link to={`/${item}`} className="text-lg font-semibold text-primary-500">
-          <Icon icon="plus" size={8} className="inline mb-1" />{item.charAt(0).toUpperCase() + item.slice(1)}
+      {menuList.map(({ path, icon }) => (
+        <Link to={`/${path}`} className="text-lg font-semibold text-primary-500">
+          <Icon icon={icon} size={6} className="inline mb-1 mr-2" />{path.charAt(0).toUpperCase() + path.slice(1)}
         </Link>
       ))}
 
