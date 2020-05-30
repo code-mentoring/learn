@@ -25,18 +25,16 @@ let path: Path;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  //const { id } = await TestClient.createPath(random.pathInput());
-  //const { id: modId } = await TestClient.createModule(random.moduleInput('name', id));
-  //moduleId = modId;
 
   path = await TestClient.createPath(pathInput);
 
+  console.log(path);
+
   const { id: modId } = await TestClient.createModule({ ...moduleInput, pathId: path.id });
 
-  console.log(modId);
+  //console.log(modId);
 
   assignment1 = random.assignmentInput(modId);
-
 };
 
 describe('Assignment entity', () => {
