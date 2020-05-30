@@ -1,0 +1,17 @@
+query getAssignments {
+  assignments {
+    id
+    description
+    moduleId
+    module{
+        id
+        name
+        icon
+        type
+        pathId
+        path{
+        id
+        }
+    }
+    }
+}

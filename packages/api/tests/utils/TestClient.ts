@@ -112,6 +112,14 @@ export abstract class TestClient {
     return this._request('createAssignment', mutations.createAssignment, { assignment });
   }
 
+  static updateAssignment(assignment: UpdateAssignmentInput): Promise<Assignment> {
+    return this._request('updateAssignment', mutations.updateAssignment, { assignment });
+  }
+
+  static deleteAssignment(assignment: DeleteAssignmentInput): Promise<Assignment> {
+    return this._request('deleteAssignment', mutations.deleteAssignment, { assignment });
+  }
+
   static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
@@ -176,6 +184,10 @@ export abstract class TestClient {
   static getCharacters(): Promise<Character[]> {
     return this._request('getCharacters', queries.getCharacters);
   }
+
+  static getAssignments(): Promise<Assignment[]> {
+      return this._request('getAssignments', queries.getAssignments);
+    }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
