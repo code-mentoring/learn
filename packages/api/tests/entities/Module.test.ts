@@ -129,4 +129,44 @@ describe('Module entity', () => {
       expect(modules.length).toBe(0);
     });
   });
+
+  describe.only('Mutation: Join Module', () => {
+    beforeEach(async () => {
+      await setup();
+      path = await TestClient.createPath(pathInput);
+    });
+
+    it('join a module successfully', async () => {
+      const module = await TestClient.createModule({
+        ...moduleInput,
+        pathId: path.id
+      });
+
+      console.log(module);
+
+      const user = await TestClient.createUser();
+
+      console.log(user);
+
+      const res = await TestClient.joinModule(user.id, module.id);
+
+      console.log(`res: ${res}`);
+    });
+
+    it('should not allow to join a module twice', async () => {
+      // expect.assertions(1);
+      // await TestClient.createPath(pathInput);
+      // // Find path
+      // const { id } = await TestClient.getPathByName(pathInput.name);
+      // // Join path
+      // await TestClient.joinPath(id);
+
+      // try {
+      //   // Join same path again
+      //   await TestClient.joinPath(id);
+      // } catch (e) {
+      //   expect(e.message).toMatch(/unique constraint/i);
+      // }
+    });
+  });
 });

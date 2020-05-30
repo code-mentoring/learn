@@ -16,6 +16,7 @@ const files = [
   'createModule',
   'updateModule',
   'deleteModule',
+  'joinModule',
   'createCharacter',
   'updateCharacter',
   'deleteCharacter'

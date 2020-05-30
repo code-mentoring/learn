@@ -144,8 +144,8 @@ export abstract class TestClient {
     return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
-  static joinModule(moduleId: string): Promise<Boolean> {
-    return this._request('joinPath', mutations.joinModule, { moduleId });
+  static joinModule(userId: string, moduleId: string): Promise<Boolean> {
+    return this._request('joinPath', mutations.joinModule, { userId, moduleId });
   }
 
   static createCharacter(character: CreateCharacterInput): Promise<Character> {
