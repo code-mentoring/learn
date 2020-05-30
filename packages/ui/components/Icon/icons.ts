@@ -20,6 +20,8 @@ import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
 import { IconPath } from './icons/solid/cis-path';
 import { IconSettings } from './icons/solid/cis-settings';
+import { IconQuestion } from './icons/solid/cis-question';
+
 
 
 export const icons = {
@@ -45,5 +47,6 @@ export const icons = {
   userLine: IconUserLine,
   x: IconX,
   path: IconPath,
-  settings: IconSettings
+  settings: IconSettings,
+  question: IconQuestion
 };
