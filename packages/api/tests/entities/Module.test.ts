@@ -6,7 +6,7 @@ import { ModuleType } from '../../src/Module/Module.entity';
 export const moduleInput = {
   name: 'module name',
   icon: 'icon',
-  type: ModuleType.lesson,
+  type: ModuleType.lesson
 };
 
 beforeAll(async () => {
@@ -36,7 +36,7 @@ describe('Module entity', () => {
 
       const module = await TestClient.createModule({
         ...moduleInput,
-        pathId: path.id,
+        pathId: path.id
       });
 
       expect(module).toMatchObject(moduleInput);
@@ -47,7 +47,7 @@ describe('Module entity', () => {
         ...moduleInput,
         name: 'moduleWithPrevious name',
         pathId: path.id,
-        previousId: module.id,
+        previousId: module.id
       });
 
       expect(moduleWithPrevious.previousId).toBeDefined();
@@ -60,7 +60,7 @@ describe('Module entity', () => {
           .fill(undefined)
           .map(() => ({
             ...moduleInput,
-            pathId: path.id,
+            pathId: path.id
           }));
 
         await TestClient.createModule(module1);
@@ -83,17 +83,17 @@ describe('Module entity', () => {
       const modulePrev = await TestClient.createModule({
         ...moduleInput,
         name: 'previous',
-        pathId: path.id,
+        pathId: path.id
       });
 
       const module = await TestClient.createModule({
         ...moduleInput,
-        pathId: path.id,
+        pathId: path.id
       });
 
       const path2 = await TestClient.createPath({
         ...pathInput,
-        name: 'path 2',
+        name: 'path 2'
       });
 
       const update = {
@@ -102,7 +102,7 @@ describe('Module entity', () => {
         icon: 'new icon',
         type: ModuleType.assignment,
         previousId: modulePrev.id,
-        pathId: path2.id,
+        pathId: path2.id
       };
 
       const updated = await TestClient.updateModule(update);
@@ -122,7 +122,7 @@ describe('Module entity', () => {
       expect.assertions(1);
       const module = await TestClient.createModule({
         ...moduleInput,
-        pathId: path.id,
+        pathId: path.id
       });
       await TestClient.deleteModule(module.id);
       const modules = await TestClient.modules();
