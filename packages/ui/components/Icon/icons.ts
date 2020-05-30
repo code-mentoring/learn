@@ -18,6 +18,7 @@ import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
+import { IconPath } from './icons/solid/cis-path';
 
 
 export const icons = {
@@ -41,5 +42,6 @@ export const icons = {
   uploadDuotone: IconCloudUploadDuotone,
   user: IconUser,
   userLine: IconUserLine,
-  x: IconX
+  x: IconX,
+  path: IconPath
 };
