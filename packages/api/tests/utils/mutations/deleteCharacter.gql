@@ -1,0 +1,3 @@
+mutation ($id: String!) {
+  deleteCharacter( id : $id) 
+}

@@ -2,12 +2,14 @@ import { TestClient } from '../utils/TestClient';
 import * as random from '../../src/Database/seeders/random';
 
 describe('Auth entity', () => {
-
-  beforeAll(async () => { await TestClient.start(); });
-  afterAll(async () => { await TestClient.stop(); });
+  beforeAll(async () => {
+    await TestClient.start();
+  });
+  afterAll(async () => {
+    await TestClient.stop();
+  });
 
   describe('Mutation: login', () => {
-
     it('should successfully log in user', async () => {
       const input = random.userInput();
       // 1. Create user
@@ -20,18 +22,23 @@ describe('Auth entity', () => {
       expect(login.accessToken).not.toBeNull();
     });
 
-    it('should throw error if email missing', async () => {
-      const input = random.userInput();
+    ['email', 'password'].forEach((key) => {
+      it(`should throw an error if ${key} is invalid`, async () => {
+        const input = random.userInput();
+        await TestClient.createUser(input);
 
-      await TestClient.createUser(input);
+        expect.assertions(1);
 
-      expect.assertions(1); // Expect there to be an error
-      try {
-        await TestClient.login(input.email, 'wrong-password');
-      } catch (e) {
-        expect(e.message).toEqual('Invalid login credentials');
-      }
+        try {
+          if (key === 'email') {
+            await TestClient.login('wrong-email', input.password);
+          } else if (key === 'password') {
+            await TestClient.login(input.email, 'wrong-password');
+          }
+        } catch (error) {
+          expect(error.message).toEqual('Invalid login credentials');
+        }
+      });
     });
   });
-
 });

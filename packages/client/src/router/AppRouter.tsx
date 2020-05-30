@@ -4,11 +4,11 @@ import {
   Redirect, Route, RouteProps, Router, Switch, useHistory
 } from 'react-router';
 
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
+import { Me } from '@codement/ui/lib/containers/Me.container';
+import { history as History } from '@codement/ui/lib/history';
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
-import { Auth } from '../containers/Auth.container';
-import { Me } from '../containers/Me.container';
-import { history as History } from '../lib/history';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
