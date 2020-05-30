@@ -11,33 +11,29 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   const { me } = Me.useContainer();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
+  const menuList = ['admins', 'paths', 'puestions', 'settings'];
+
   return (
-    <nav className="flex flex-col justify-center border-2 h-full text-left w-48 pl-4">
+    <nav className="flex flex-col justify-center h-full w-48 pl-4 text-left text-lg font-semibold text-primary-500">
       <Link to="/dashboard">
         <LogoMark className="logo h-10 absolute top-0 mt-4" />
       </Link>
-      <Link to="/admins" className="text-lg font-semibold text-primary-500">
-        <Icon icon="plus" size={8} className="inline mb-1" />Admins
-      </Link>
-      <Link to="/paths" className="text-lg font-semibold text-grey-500">
-        <Icon icon="plus" size={8} className="inline mb-1" />Paths
-      </Link>
-      <Link to="/questions" className="text-lg font-semibold text-grey-500">
-        <Icon icon="plus" size={8} className="inline mb-1" />Questions
-      </Link>
-      <Link to="/settings" className="text-lg font-semibold text-grey-500">
-        <Icon icon="plus" size={8} className="inline mb-1" />Settings
-      </Link>
-      <footer className="absolute bottom-0 px-4 mb-2 border-2 border-grey-200 rounded">
+      {menuList.map(item => (
+        <Link to={`/${item}`} className="text-lg font-semibold text-primary-500">
+          <Icon icon="plus" size={8} className="inline mb-1" />{item.charAt(0).toUpperCase() + item.slice(1)}
+        </Link>
+      ))}
+
+      <footer className="absolute bottom-0 px-4 mb-2 border-2 border-grey-200 rounded h-10">
         <button
           type="button"
-          className="my-2 font-semibold text-primary-500 text-xs"
+          className="font-semibold text-primary-500 text-xs"
           onMouseEnter={() => setShowProfileMenu(true)}
           onMouseLeave={() => setShowProfileMenu(false)}
           onClick={() => setShowProfileMenu(!showProfileMenu)}
         >
           <img
-            className="rounded-circle cursor-pointer h-8 inline "
+            className="rounded-circle cursor-pointer h-8 inline"
             src={me?.profileImage}
             alt="User profile pic"
           />{me?.firstName}
