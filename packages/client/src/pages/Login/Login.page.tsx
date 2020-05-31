@@ -25,7 +25,7 @@ export const LoginPage = () => {
       <p className="body-2 mt-2 mb-4">Lets get coding <span role="img" aria-label="smile-emoji">😊</span></p>
       <Form className="max-w-xs mx-auto" onSubmit={submit} error={getGQLError(loginError)} validationSchema={loginValidation}>
         <FormField className="mb-2" name="email" type="text" placeholder="Email" />
-        <FormField className="mb-4" name="password" placeholder="Password" type="password" icon="passwordEye"/>
+        <FormField className="mb-4" name="password" placeholder="Password" type="password" icon="passwordEye" />
         <div className="flex justify-between">
           <div className="flex">
             <Checkbox className="h-4 w-4" />
