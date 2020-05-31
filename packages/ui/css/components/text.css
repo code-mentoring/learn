@@ -37,3 +37,7 @@ p {
 .body-2 {
   @apply font-sans text-sm text-grey-700;
 }
+
+.body-3 {
+  @apply font-sans text-xs text-grey-700;
+}
