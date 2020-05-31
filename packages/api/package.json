@@ -34,9 +34,12 @@
     "pg": "^8.0.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.24",
-    "uuid": "^7.0.3"
-  },
-  "devDependencies": {
+    "uuid": "^7.0.3",
+    "faker": "^4.1.0",
+    "jwt-decode": "^2.2.0",
+    "listr": "^0.14.3",
+    "mongodb": "^3.5.6",
+    "sqlite3": "^4.1.1",
     "@graphql-codegen/cli": "^1.13.2",
     "@graphql-codegen/fragment-matcher": "^1.13.2",
     "@graphql-codegen/typescript": "^1.13.2",
@@ -51,11 +54,6 @@
     "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.8",
     "@types/uuid": "^7.0.2",
-    "faker": "^4.1.0",
-    "jwt-decode": "^2.2.0",
-    "listr": "^0.14.3",
-    "mongodb": "^3.5.6",
-    "sqlite3": "^4.1.1",
     "supertest": "^4.0.2",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
