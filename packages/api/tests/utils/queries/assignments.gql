@@ -1,4 +1,4 @@
-query getAssignments {
+query assignments {
   assignments {
     id
     description
@@ -9,9 +9,6 @@ query getAssignments {
         icon
         type
         pathId
-        path{
-        id
-        }
     }
     }
 }

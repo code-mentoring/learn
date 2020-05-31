@@ -28,11 +28,7 @@ const setup = async () => {
 
   path = await TestClient.createPath(pathInput);
 
-  console.log(path);
-
   const { id: modId } = await TestClient.createModule({ ...moduleInput, pathId: path.id });
-
-  //console.log(modId);
 
   assignment1 = random.assignmentInput(modId);
 };
@@ -79,17 +75,16 @@ describe('Assignment entity', () => {
 
       it('should update the existing assignment', async () => {
 
-          await TestClient.createAssignment(assignment1);
-          const updateInput = {description: 'New'};
+          const startAssignment = await TestClient.createAssignment(assignment1);
+          const update = {
+          id: startAssignment.id,
+          description: 'New'
+          };
 
-          try{
-              await TestClient.updateAssignment({id: assignment1.id, updateInput});
-          } catch(e) {};
+          const result = await TestClient.updateAssignment(update);
 
-          const updateResult = await TestClient.getAssignments();
-
-          expect(updateResult[0].description).toEqual(updateInput.description);
-          expect(updateResult[0].id).toEqual(assignment1.id);
+          expect(result.description).toEqual(update.description);
+          expect(result.id).toEqual(update.id);
       });
   });
 
@@ -98,24 +93,11 @@ describe('Assignment entity', () => {
 
       it('should delete the existing assignment', async () => {
 
-          await TestClient.createAssignment(assignment1);
-          const assignmentArray1 = await TestClient.getAssignments();
-          await TestClient.deleteAssignment(assignmentArray1[0].id);
-          const assignmentArray2 = await TestClient.getAssignments();
+          const assignment = await TestClient.createAssignment(assignment1);
+          await TestClient.deleteAssignment(assignment.id);
+          const assignments = await TestClient.getAssignments();
 
-          expect(assignmentArray1).toBeArrayOfSize(1);
-          expect(assignmentArray2).toBeArrayOfSize(0);
+          expect(assignments).toBeArrayOfSize(0);
       });
-
-//       it('should delete a module successfully', async () => {
-//             const module = await TestClient.createModule({
-//               ...moduleInput,
-//               pathId: path.id,
-//             });
-//             await TestClient.deleteModule(module.id);
-//             const modules = await TestClient.modules();
-//             expect(modules.length).toBe(0);
-//
-//           });
   });
 });
