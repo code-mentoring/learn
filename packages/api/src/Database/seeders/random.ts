@@ -87,5 +87,3 @@ export const characterInput = (): CreateCharacterInput => ({
   name: faker.name.lastName(),
   displayName: faker.name.firstName()
 });
-
-
