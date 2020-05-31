@@ -148,6 +148,7 @@ export type Query = {
   modules: Array<Module>;
   pathModules: Array<Module>;
   paths: Array<Path>;
+  path: Path;
   getPathByName: Path;
   myPaths: Array<Path>;
 };
@@ -188,6 +189,11 @@ export type QueryPathModulesArgs = {
 };
 
 
+export type QueryPathArgs = {
+  id: Scalars['String'];
+};
+
+
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
 };
@@ -214,6 +220,7 @@ export type Mutation = {
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
   createModule: Module;
+  joinModule: Scalars['Boolean'];
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
   createPath: Path;
@@ -323,6 +330,11 @@ export type MutationDeleteFriendshipArgs = {
 
 export type MutationCreateModuleArgs = {
   module: CreateModuleInput;
+};
+
+
+export type MutationJoinModuleArgs = {
+  moduleId: Scalars['String'];
 };
 
 
