@@ -186,7 +186,7 @@ export abstract class TestClient {
   }
 
   static getAssignments(): Promise<Assignment[]> {
-      return this._request('getAssignments', queries.getAssignments);
+      return this._request('assignments', queries.assignments);
     }
 
   // ----------------------------------------------------------------- Workflows
