@@ -93,9 +93,11 @@ export class SeederService {
     )));
   }
 
-  // Seed as many paths as characters we have
-  // Each user joins to first path
-  async seedPaths(characters: Character[]) {
+  /**
+   * Seeds as many paths as characters we have
+   * and each user joins to first path
+   */
+  async seedPaths(users: UserWithPassword[], characters: Character[]) {
     let pathIcons = ['html', 'js', 'css', 'react', 'nodejs'];
     pathIcons = pathIcons.slice(0, characters.length);
 
@@ -108,14 +110,16 @@ export class SeederService {
         })
       );
 
-      // if (i === 0) {
-      //   users.map(async user => this.pathService.addUserToPath(user.id, newPath.id));
-      // }
+      if (i === 0) {
+        users.map(async user => this.pathService.addUserToPath(user.id, newPath.id));
+      }
       return newPath;
     }));
   }
 
-  // Seed 4 modules for each path
+  /**
+   * Seeds 4 modules for each path (2 assignments and 2 lessons)
+   */
   async seedModules(paths: Path[]) {
     const res = await Promise.all(paths.map(async path => {
       const modulesType = [
@@ -138,14 +142,19 @@ export class SeederService {
     return res.flat();
   }
 
-  // seed assignment to each module with type as assignment
+
+  /**
+   * Seeds assignment to each module with type as assignment
+   */
   async seedAssignment(modules: Module[]) {
     return Promise.all(modules
       .filter(m => m.type === ModuleType.assignment)
       .map(async module => this.assignmentService.create(random.assignmentInput(module.id))));
   }
 
-  // For each assignment first user has 1 assignment file
+  /**
+   * For each assignment first user has 1 assignment file
+   */
   async seedAssignmentFile(assignments: Assignment[], users: UserWithPassword[]) {
     return Promise.all(assignments.map(assignment => this.assignmentFileService.create(
       users[0].id,
@@ -153,36 +162,30 @@ export class SeederService {
     )));
   }
 
-  // seed number of concepts on each modules (define the number of module).
-  // *** make sure number of concept per module is n times of number of lesson per module.
-  // otherwise some concepts will not seed with storySection.
-  // the first concept of each mdoule set as learned concept
+  /**
+   * Seeds 4 concepts for each module
+   * Adds userConcept of first concept of each module to first user
+   */
   async seedConcept(
     modules: Module[],
     users: UserWithPassword[],
-    numConcept: number = 9,
-    numModule: number = 2
+    num: number = 4
   ) : Promise<Concept[]> {
-    const numMod = (numModule < modules.length) ? numModule : modules.length;
-    const seedModules = modules.slice(0, numMod);
-    const seedConcepts: Concept[] = [];
-    // How to import ui/icons ? list some of the icon here
+
+    // TODO: add concept icons
     const icons = ['check', 'minus', 'plus', 'x', 'lock'];
 
-    await Promise.all(seedModules.map(async module => {
-      await Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
+    const concepts = await Promise.all(modules.map(async (m, i) =>
+      Promise.all(Array(num).fill(undefined).map(async () => {
         const concept = await this.conceptService.create(
-          random.conceptInput(module.id, { icon: icons[Math.floor(Math.random() * icons.length)] })
+          random.conceptInput(m.id, { icon: icons[Math.floor(Math.random() * icons.length)] })
         );
-        seedConcepts.push(concept);
-
         if (i === 0) {
           await this.conceptService.addUserConcept(concept.id, users[0].id);
         }
-      }));
-    }));
-
-    return seedConcepts;
+        return concept;
+      }))));
+    return concepts.flat();
   }
 
   async seedFriend(users: UserWithPassword[]) {
@@ -208,23 +211,24 @@ export class SeederService {
     }
   }
 
-  // seed number of lesson on each modules (define the number of module).
+  /**
+   * Seeds 4 lessons for each module
+   * @param numLesson Number of lessons you want to create per module
+   * @param numModule Number of modules you want to add lessons
+   */
   async seedLessons(
-    modules: Module[],
-    numLesson: number = 3,
-    numModule: number = 2
+    modls: Module[],
+    numLesson: number = 4,
+    numModule: number = 4
   ): Promise<Lesson[]> {
-    const numMod = (numModule < modules.length) ? numModule : modules.length;
-    const seedModules = modules.slice(0, numMod);
-    const seedLessons: Lesson[] = [];
+    const numMod = (numModule < modls.length) ? numModule : modls.length;
+    const modules = modls.slice(0, numMod);
 
-    await Promise.all(seedModules.map(async module => {
-      await Promise.all(Array(numLesson).fill(undefined).map(async () => {
-        const lesson = await this.lessonService.create(module.id);
-        seedLessons.push(lesson);
-      }));
-    }));
-    return seedLessons;
+    const lessons = await Promise.all(modules.map(async module =>
+      Promise.all(Array(numLesson)
+        .fill(undefined)
+        .map(async () => this.lessonService.create(module.id)))));
+    return lessons.flat();
   }
 
   // per concept per storySection
@@ -301,7 +305,7 @@ export class SeederService {
       {
         title: 'Create paths',
         task: async (ctx: CTX) => {
-          ctx.paths = await this.seedPaths(ctx.characters);
+          ctx.paths = await this.seedPaths(ctx.users, ctx.characters);
         }
       },
       {

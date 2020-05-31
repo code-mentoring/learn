@@ -15,6 +15,7 @@ type UserPreferences {
   practiceGoal: Float!
   why: String!
   codingAbility: Float!
+  user: User!
 }
 
 type User {
