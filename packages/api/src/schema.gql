@@ -131,6 +131,7 @@ type Query {
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   paths: [Path!]!
+  path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [Path!]!
 }
