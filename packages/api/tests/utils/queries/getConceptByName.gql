@@ -1,0 +1,14 @@
+query ($name: String!) {
+  getConceptByName( name : $name) {
+    id
+    name
+    description
+    icon    
+    taughtInId
+    taughtIn{
+      id
+      name
+      icon
+    }    
+  }
+}

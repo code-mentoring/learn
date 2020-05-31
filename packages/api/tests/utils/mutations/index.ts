@@ -19,7 +19,9 @@ const files = [
   'createCharacter',
   'updateCharacter',
   'deleteCharacter',
-  'createConcept'
+  'createConcept',
+  'learnConcept',
+  'updateConcept'
 ];
 
 export default files.reduce((obj, file) => {
