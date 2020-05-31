@@ -10,6 +10,7 @@ const files = [
   'updatePreferences',
   'createAssignment',
   'updateAssignment',
+  'deleteAssignment',
   'createAssignmentFile',
   'respondToFriendRequest',
   'createFriendship',

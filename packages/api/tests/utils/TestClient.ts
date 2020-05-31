@@ -116,8 +116,8 @@ export abstract class TestClient {
     return this._request('updateAssignment', mutations.updateAssignment, { assignment });
   }
 
-  static deleteAssignment(assignment: DeleteAssignmentInput): Promise<Assignment> {
-    return this._request('deleteAssignment', mutations.deleteAssignment, { assignment });
+  static deleteAssignment(assignmentId: string): Promise<Assignment> {
+    return this._request('deleteAssignment', mutations.deleteAssignment, { assignmentId });
   }
 
   static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {

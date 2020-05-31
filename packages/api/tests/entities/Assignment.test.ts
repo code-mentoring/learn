@@ -93,24 +93,11 @@ describe('Assignment entity', () => {
 
       it('should delete the existing assignment', async () => {
 
-          await TestClient.createAssignment(assignment1);
-          const assignmentArray1 = await TestClient.getAssignments();
-          await TestClient.deleteAssignment(assignmentArray1.id);
-          const assignmentArray2 = await TestClient.getAssignments();
+          const assignment = await TestClient.createAssignment(assignment1);
+          await TestClient.deleteAssignment(assignment.id);
+          const assignments = await TestClient.getAssignments();
 
-          expect(assignmentArray1).toBeArrayOfSize(1);
-          expect(assignmentArray2).toBeArrayOfSize(0);
+          expect(assignments).toBeArrayOfSize(0);
       });
-
-//       it('should delete a module successfully', async () => {
-//             const module = await TestClient.createModule({
-//               ...moduleInput,
-//               pathId: path.id,
-//             });
-//             await TestClient.deleteModule(module.id);
-//             const modules = await TestClient.modules();
-//             expect(modules.length).toBe(0);
-//
-//           });
   });
 });
