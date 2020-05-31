@@ -7,7 +7,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "yarn build",
     "build": "lerna run build",
     "start": "lerna run start --stream --scope @codement/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
