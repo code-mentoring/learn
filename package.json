@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build --scope @codement/learn-client --scope @codement/api",
     "start": "lerna run start --stream --scope @codement/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
