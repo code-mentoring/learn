@@ -7,7 +7,8 @@ const files = [
   'modules',
   'users',
   'getUserFriends',
-  'getCharacters'
+  'getCharacters',
+  'getAssignments'
 ];
 
 export default files.reduce((obj, file) => {
