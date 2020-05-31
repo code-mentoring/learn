@@ -1,0 +1,10 @@
+mutation ($path: UpdatePathInput!) {
+  updatePath( path : $path) {
+    id
+    name
+    icon
+    description
+    createdAt
+    characterId
+  }
+}

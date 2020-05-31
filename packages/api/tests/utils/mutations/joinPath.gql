@@ -1,0 +1,3 @@
+mutation joinPath($pathId: String!) {
+  joinPath(pathId: $pathId) 
+}

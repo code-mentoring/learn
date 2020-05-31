@@ -1,0 +1,17 @@
+mutation($user: UserInput!){
+  createUser(user: $user) {
+    id
+    firstName
+    lastName
+    email
+    profileImage
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
+    createdAt
+  }
+}

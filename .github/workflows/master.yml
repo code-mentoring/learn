@@ -1,0 +1,106 @@
+name: Master
+
+on:
+  push:
+    branches:
+    - master
+
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [13]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node_version }}
+
+    - name: Restore Lerna node modules
+      uses: actions/cache@master
+      if: matrix.os != 'windows-latest' # Only run coverage on ubuntu
+      with:
+        path: |
+          node_modules
+          */*/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Install Packages
+      run: yarn install --frozen-lock-file
+
+    - name: Lint
+      run: yarn lint
+
+    - name: Test
+      run: yarn coverage
+
+    - name: Coverage
+      if: matrix.os == 'ubuntu-latest' # Only run coverage on ubuntu
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./packages/api/coverage/lcov.info # optional
+        flags: unittests # optional
+        fail_ci_if_error: true # optional (default = false)
+
+
+  publish:
+    name: Publish - minor v
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v2
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: checkout
+        uses: actions/checkout@v2
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+
+      - name: Configure CI Git User
+        run: |
+          git config --global user.name '@tristanMatthias'
+          git config --global user.email 'tristanMatthias@users.noreply.github.com'
+          git remote set-url origin https://$GITHUB_ACTOR:$ACCESS_TOKEN@github.com/code-mentoring/learn
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: restore lerna
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Packages
+        run: yarn install --frozen-lock-file
+
+      - name: Authenticate with Registry
+        run: |
+          yarn logout
+          echo "registry=http://registry.npmjs.org/" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish packages
+        run: yarn publish:ci master
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Needed for semantic release
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+

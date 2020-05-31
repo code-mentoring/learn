@@ -1,0 +1,15 @@
+query ($name: String!) {
+  getPathByName( name : $name) {
+    id
+    name
+    icon
+    description
+    createdAt
+    character{
+      id
+      name
+      displayName
+    }
+    characterId
+  }
+}

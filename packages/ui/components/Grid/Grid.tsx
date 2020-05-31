@@ -12,6 +12,7 @@ export const Grid: React.FunctionComponent<GridProps> = ({
   className,
   children,
   ...props
+  
 }) =>
   <Box
     className={classnames('grid', className)}

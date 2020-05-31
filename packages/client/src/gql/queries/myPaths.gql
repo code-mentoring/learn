@@ -1,0 +1,3 @@
+query {
+  myPaths { id name icon }
+}

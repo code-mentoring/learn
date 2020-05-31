@@ -4,15 +4,18 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { getClient } from './lib/apollo';
+import { ContainerWrapper } from '@codement/ui/lib/containers/Wrapper';
+import { getClient } from '@codement/ui/lib/apollo';
 import { AppRouter } from './router/AppRouter';
-import { ContainerWrapper } from './containers/Wrapper';
+import { ClientContainerWrapper } from './ClientContainerWrapper';
 
-(async() => {
+(async () => {
   ReactDOM.render(
     <ApolloProvider client={await getClient()}>
       <ContainerWrapper>
-        <AppRouter />
+        <ClientContainerWrapper>
+          <AppRouter />
+        </ClientContainerWrapper>
       </ContainerWrapper>
     </ApolloProvider>,
     document.getElementById('app')

@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: codementoring
+      POSTGRES_PASSWORD: codementoring
+      POSTGRES_DB: code_mentoring_learning
+      PGDATA: /tmp
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      # <Port exposed> : <Postgres Port running inside container>
+      - '5555:5432'
+    expose:
+      # Opens port 5555 on the container
+      - '5555'
+# Save to file system
+volumes:
+  database:

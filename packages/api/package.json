@@ -1,11 +1,14 @@
 {
-  "name": "@code-mentoring/api",
-  "version": "0.0.0",
+  "name": "@codement/api",
+  "version": "0.0.2",
   "scripts": {
-    "dev": "nest start --watch",
-    "build": "nest build",
+    "dev": "rimraf dist && nest start --watch",
+    "build": "rimraf dist && nest build",
     "start": "node dist/main.js",
-    "types": "graphql-codegen"
+    "types": "graphql-codegen",
+    "test": "jest",
+    "coverage": "yarn test --coverage",
+    "seed": "ts-node src/Database/seeders"
   },
   "types": "types.ts",
   "dependencies": {
@@ -20,10 +23,11 @@
     "apollo-server-express": "^2.12.0",
     "bcrypt": "^4.0.1",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.11.1",
+    "class-validator": "^0.12.2",
     "config": "^3.3.1",
     "graphql": "^15.0.0",
     "graphql-tools": "^5.0.0",
+    "md5": "^2.2.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -36,10 +40,28 @@
     "@graphql-codegen/cli": "^1.13.2",
     "@graphql-codegen/fragment-matcher": "^1.13.2",
     "@graphql-codegen/typescript": "^1.13.2",
+    "@nestjs/testing": "^7.0.8",
     "@types/bcrypt": "^3.0.0",
     "@types/config": "^0.0.36",
+    "@types/faker": "^4.1.11",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/listr": "^0.14.2",
+    "@types/md5": "^2.2.0",
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
-    "@types/uuid": "^7.0.2"
-  }
+    "@types/supertest": "^2.0.8",
+    "@types/uuid": "^7.0.2",
+    "faker": "^4.1.0",
+    "jwt-decode": "^2.2.0",
+    "listr": "^0.14.3",
+    "mongodb": "^3.5.6",
+    "sqlite3": "^4.1.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
 }
