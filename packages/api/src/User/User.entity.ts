@@ -57,7 +57,7 @@ export class UserWithPassword extends CMBaseEntity {
   @OneToMany(() => PathUser, pathUser => pathUser.user)
   pathUser: PathUser[];
 
-  @OneToOne(() => UserPreferences)
+  @OneToOne(() => UserPreferences, userPreferences => userPreferences.user)
   userPreferences: UserPreferences;
 }
 

@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { User, UserInput } from './User.entity';
@@ -40,15 +40,5 @@ export class UserResolver {
     @Args('preferences', { type: () => UserPreferencesInput }) preferences: UserPreferencesInput
   ) {
     return this.userPreferencesService.update(user.id, preferences);
-  }
-
-  // ---------------------------------------------------------------------------
-  // -------------------------------------------------------------------- Fields
-  // ---------------------------------------------------------------------------
-
-  @ResolveField(() => UserPreferences)
-  async userPreferences(@Parent() user: User) {
-    const userPreferences = await this.userPreferencesService.findByUser(user.id);
-    return userPreferences;
   }
 }

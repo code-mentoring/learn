@@ -14,11 +14,11 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<UserWithPassword[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['userPreferences'] });
   }
 
   async findByEmail(email: string) {
-    return this.userRepository.findOne({ where: { email } });
+    return this.userRepository.findOne({ where: { email }, relations: ['userPreferences'] });
   }
 
   async create(input: UserInput): Promise<UserWithPassword> {

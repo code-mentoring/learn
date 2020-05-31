@@ -1,8 +1,9 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsInt, Max, Min } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
+import { UserWithPassword, User } from '../User/User.entity';
 
 @ObjectType()
 @Entity()
@@ -33,6 +34,11 @@ export class UserPreferences extends CMBaseEntity {
     @Min(0)
     @Max(10)
     codingAbility: number;
+
+    @OneToOne(() => UserWithPassword, user => user.userPreferences)
+    @JoinColumn()
+    @Field(() => User)
+    user: UserWithPassword;
 }
 
 @InputType()
