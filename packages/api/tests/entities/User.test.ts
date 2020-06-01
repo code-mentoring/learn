@@ -67,6 +67,23 @@ describe('User entity', () => {
     });
   });
 
+  describe('Query: search', () => {
+    beforeEach(setup);
+
+    ['firstName', 'lastName', 'email'].forEach(key => {
+      it(`should return user by ${key}`, async () => {
+        expect.assertions(4);
+        const newUser = await TestClient.createUser();
+        const users = await TestClient.search(newUser[key]);
+
+        expect(users).toBeArrayOfSize(1);
+        expect(users[0].firstName).toEqual(newUser.firstName);
+        expect(users[0].lastName).toEqual(newUser.lastName);
+        expect(users[0].email).toEqual(newUser.email);
+      });
+    });
+  });
+
   describe('Query: users', () => {
     beforeEach(setup);
     it('should return all users', async () => {
@@ -106,19 +123,21 @@ describe('User entity', () => {
       expect(mePost.userPreferences).not.toBeNull();
     });
 
-    it('should validate before create/update preferences', async () => {
-      expect.assertions(3);
+    ['firstName', 'lastName'].forEach(key => {
+      it(`should return users by ${key}`, async () => {
+        expect.assertions(3);
 
-      preferences.codingAbility = 11;
-      preferences.practiceGoal = 6;
+        preferences.codingAbility = 11;
+        preferences.practiceGoal = 6;
 
-      try {
-        await TestClient.updatePreferences(preferences);
-      } catch (e) {
-        expect(e.message).toContain('Unexpected error value:');
-        expect(e.message).toContain(`, value: ${preferences.codingAbility}`);
-        expect(e.message).toContain(`, value: ${preferences.practiceGoal}`);
-      }
+        try {
+          await TestClient.updatePreferences(preferences);
+        } catch (e) {
+          expect(e.message).toContain('Unexpected error value:');
+          expect(e.message).toContain(`, value: ${preferences.codingAbility}`);
+          expect(e.message).toContain(`, value: ${preferences.practiceGoal}`);
+        }
+      });
     });
   });
 });
