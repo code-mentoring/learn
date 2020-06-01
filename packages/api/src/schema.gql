@@ -115,6 +115,23 @@ type FriendOutput {
   since: DateTime
 }
 
+type StorySection {
+  id: String!
+  order: Float!
+  content: String!
+  lessonId: String!
+  conceptId: String!
+  concept: Concept!
+  lesson: Lesson!
+}
+
+type Lesson {
+  id: String!
+  moduleId: String!
+  module: Module!
+  storySection: [StorySection!]!
+}
+
 type Query {
   assignments: [Assignment!]!
   moduleAssignments(moduleId: String!): [Assignment!]!
