@@ -23,7 +23,11 @@ import {
   Path,
   PathInput,
   User,
-  UserInput
+  UserInput,
+  Concept,
+  CreateConceptInput,
+  UserConcept,
+  UpdateConceptInput
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
@@ -160,6 +164,18 @@ export abstract class TestClient {
   static deleteCharacter(id: string): Promise<Boolean> {
     return this._request('deleteCharacter', mutations.deleteCharacter, { id });
   }
+
+  static createConcept(concept: CreateConceptInput): Promise<Concept> {
+    return this._request('createConcept', mutations.createConcept, { concept });
+  }
+
+  static learnConcept(conceptId: string): Promise<Boolean> {
+    return this._request('learnConcept', mutations.learnConcept, { conceptId })
+  }
+
+  static updateConcept(concept: UpdateConceptInput): Promise<Concept> {
+    return this._request('updateConcept', mutations.updateConcept, { concept });
+  }
   // ------------------------------------------------------------------- Queries
 
   static getPathByName(name: string): Promise<Path> {
@@ -186,6 +202,10 @@ export abstract class TestClient {
     return this._request('getCharacters', queries.getCharacters);
   }
 
+  static getConceptByName(name: string): Promise<Concept> {
+    return this._request('getConceptByName', queries.getConceptByName, { name });
+  }
+  
   static users(): Promise<User[]> {
     return this._request('users', queries.users);
   }
