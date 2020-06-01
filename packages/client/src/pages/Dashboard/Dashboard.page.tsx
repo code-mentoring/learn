@@ -1,11 +1,13 @@
+import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { useHistory } from 'react-router';
+import styles from './Dashboard.module.css';
+import { ModuleTree } from '../../components/ModuleTree/ModuleTree';
 
-import { Page } from '../../components/Page/Page';
 import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoardWidget';
+import { Page } from '../../components/Page/Page';
 import { ProgressWidget } from '../../components/ProgressWidget/ProgressWidget';
 import { routes } from '../../router/routes';
-import { Me } from '../../containers/Me.container';
 
 export const DashboardPage = () => {
   const history = useHistory();
@@ -14,9 +16,10 @@ export const DashboardPage = () => {
 
   if (!me?.userPreferences) history.push(routes.onboardingWorkflow());
   return <Page title="Dashboard" type="dashboard" className="bg-white">
-    <h1>Dashboard</h1>
-    <ProgressWidget className="w-64 my-6 bg-white" />
-    <LeaderboardWidget className="w-64" />
+    <div className={styles.dashboard}>
+      <ModuleTree />
+      <ProgressWidget className="w-64 my-6 bg-white" />
+      <LeaderboardWidget className="w-64" />
+    </div>
   </Page>;
-
 };

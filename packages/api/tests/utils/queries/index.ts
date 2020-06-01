@@ -6,6 +6,9 @@ const files = [
   'me',
   'modules',
   'getUserFriends',
+  'search',
+  'users',
+  'getUserFriends',
   'getCharacters',
   'getConceptByName'
 ];

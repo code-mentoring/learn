@@ -16,6 +16,12 @@ export class PathService {
     return this.pathRepository.find({ relations: ['character'] });
   }
 
+  async findById(id: string): Promise<Path> {
+    const path = await this.pathRepository.findOne({ where: { id }, relations: ['character'] });
+    if (!path) throw new NotFoundException('Path not found');
+    return path;
+  }
+
   async findByName(name: string): Promise<Path> {
     const path = await this.pathRepository.findOne({ where: { name }, relations: ['character'] });
     if (!path) throw new NotFoundException('Path not found');

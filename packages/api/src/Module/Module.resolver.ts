@@ -4,6 +4,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { Module, CreateModuleInput, UpdateModuleInput } from './Module.entity';
 import { ModuleService } from './Module.service';
+import { User } from '../User/User.entity';
+import { CurrentUser } from '../User/CurrentUser.decorator';
 
 @Resolver(() => Module)
 export class ModuleResolver {
@@ -27,6 +29,15 @@ export class ModuleResolver {
     @Args('module') module: CreateModuleInput
   ) {
     return this.moduleService.create(module);
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Mutation(() => Boolean)
+  async joinModule(
+    @CurrentUser() user: User,
+    @Args('moduleId') moduleId: string
+  ) {
+    return Boolean(await this.moduleService.addUserToModule(user.id, moduleId));
   }
 
   @UseGuards(GQLAuthGuard)

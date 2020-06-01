@@ -1,12 +1,12 @@
+import { Path } from '@codement/api';
 import { Button } from '@codement/ui';
 import classnames from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import { routes } from '../../../router/routes';
-import { SelectedPath } from '../../../components/PathsList/PathsList';
 import { Wizard } from '../../../containers/Wizard.container';
+import { routes } from '../../../router/routes';
 import { WizardSteps } from '../steps';
 import styles from './wizard.module.css';
 
@@ -50,7 +50,7 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
               redirect = routes.onboardingWorkflowPracticeGoal();
             }
             if (Array.isArray(state)) {
-              if ((state as SelectedPath[]).length > 0) isFilled = true;
+              if ((state as Path[]).length > 0) isFilled = true;
             } else if (state) isFilled = true;
 
             useEffect(() => {

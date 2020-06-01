@@ -25,6 +25,7 @@ import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service';
 import { CharacterService } from '../Character/Character.service';
 import { Character } from '../Character/Character.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 
 /**
@@ -44,7 +45,8 @@ import { Character } from '../Character/Character.entity';
       Concept,
       UserConcept,
       Friend,
-      Character
+      Character,
+      UserModule
     ])
   ],
   providers: [

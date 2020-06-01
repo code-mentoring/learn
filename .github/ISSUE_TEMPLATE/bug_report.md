@@ -7,7 +7,8 @@ labels: type:bug, help wanted
 ## The bug relates to:
 - [ ] `api` - An issue with the API
 - [ ] `ui` - An issue with a UI component
-- [ ] `client` - An issue with the React project
+- [ ] `client` - An issue with the Client project
+- [ ] `admin` - An issue with the Admin project
 
 **Describe the bug**
 A clear and concise description of what the bug is.

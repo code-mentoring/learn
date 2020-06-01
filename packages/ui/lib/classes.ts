@@ -2,6 +2,7 @@ export type Color =
   | 'error'
   | 'success'
   | 'transparent'
+  | 'disabled'
   | 'grey-100'
   | 'grey-200'
   | 'grey-300'

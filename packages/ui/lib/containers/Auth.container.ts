@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
 
 import { LoginOutput, MutationLoginArgs } from '@codement/api';
-import { history } from '../lib/history';
-import { LocalStorage } from '../lib/localStorage';
+import { history } from '../history';
+import { LocalStorage } from '../localStorage';
 
 type AuthStatus = 'signingIn' | 'signedIn' | 'signedOut' | 'verifying';
 
@@ -38,8 +38,17 @@ const useAuth = () => {
     setStatus('signedOut');
   };
 
-  const login = (email: string, password: string, _redirect?: string) => {
+  const login = (
+    email: string,
+    password: string,
+    rememberMe: boolean = false,
+    _redirect?: string
+  ) => {
     if (_redirect) setRedirect(_redirect);
+
+    if (rememberMe) LocalStorage.email = email;
+    else LocalStorage.email = null;
+
     loginFunc({ variables: { email, password } });
   };
 

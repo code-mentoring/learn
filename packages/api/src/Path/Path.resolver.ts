@@ -19,6 +19,12 @@ export class PathResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => Path)
+  path(@Args('id') id: string) {
+    return this.pathService.findById(id);
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Query(() => Path)
   getPathByName(@Args('name') name: string) {
     return this.pathService.findByName(name);
   }
