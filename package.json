@@ -7,8 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "yarn build",
-    "build": "lerna run build",
+    "build": "lerna run build --scope @codement/learn-client --scope @codement/api",
     "start": "lerna run start --stream --scope @codement/api",
     "lint": "eslint \"packages/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "yarn lint --fix",
@@ -16,7 +15,8 @@
     "test": "lerna run test",
     "kill-api": "kill-port 4000",
     "coverage": "lerna run coverage",
-    "publish:ci": "ts-node lib/publish"
+    "publish:ci": "ts-node lib/publish",
+    "start-api": "cd packages/api; yarn start"
   },
   "dependencies": {
     "codecov": "^3.6.5",
