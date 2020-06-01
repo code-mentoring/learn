@@ -40,7 +40,7 @@ const useWizard = () => {
   const [joinPathsMut] = useMutation<{ joinPaths: boolean }>(joinPaths);
 
   useEffect(() => {
-    LocalStorage.preferences = JSON.stringify(wizardState);
+    LocalStorage.onbordingPreferences = wizardState;
   }, [wizardState]);
 
   const submit = async () => {

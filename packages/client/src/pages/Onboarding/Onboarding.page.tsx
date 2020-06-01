@@ -47,14 +47,14 @@ export const OnboardingPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (LocalStorage.preferences) {
+    if (LocalStorage.onbordingPreferences) {
       setCodingAbility(
-        Number(((LocalStorage.preferences as unknown) as WizardFormValues).codingAbility || 0)
+        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).codingAbility || 0)
       );
-      setWhy(((LocalStorage.preferences as unknown) as WizardFormValues).why || '');
-      setPaths(((LocalStorage.preferences as unknown) as WizardFormValues).paths || []);
+      setWhy(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).why || '');
+      setPaths(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).paths || []);
       setPracticeGoal(
-        Number(((LocalStorage.preferences as unknown) as WizardFormValues).practiceGoal || 0)
+        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).practiceGoal || 0)
       );
     }
     setLoading(false);
@@ -127,6 +127,7 @@ export const OnboardingPage = () => {
           onClick={async () => {
             // TODO: Update in Wizard after submission
             await refetch(); // Update the user preferences
+            LocalStorage.onbordingPreferences = null;
             history.push(routes.home());
           }}
         >Start learning!</Button>

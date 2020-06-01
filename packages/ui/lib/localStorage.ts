@@ -1,6 +1,6 @@
 enum LSKeys {
   token ='token',
-  preferences ='preferences',
+  onbordingPreferences ='onbordingPreferences',
   email ='email'
 }
 export abstract class LocalStorage {
@@ -20,10 +20,10 @@ export abstract class LocalStorage {
   }
 
 
-  static get preferences() { return JSON.parse(window.localStorage.getItem(LSKeys.preferences) || '{}'); }
+  static get onbordingPreferences() { return JSON.parse(window.localStorage.getItem(LSKeys.onbordingPreferences) || '{}'); }
 
-  static set preferences(v: string | null) {
-    if (!v) window.localStorage.removeItem(LSKeys.preferences);
-    else window.localStorage.setItem(LSKeys.preferences, v);
+  static set onbordingPreferences(v: object | null) {
+    if (!v) window.localStorage.removeItem(LSKeys.onbordingPreferences);
+    else window.localStorage.setItem(LSKeys.onbordingPreferences, JSON.stringify(v));
   }
 }
