@@ -143,6 +143,7 @@ type Query {
   assignmentFiles(assignmentId: String!): [AssignmentFile!]!
   userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   users: [User!]!
+  searchUsers(query: String!): [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   getCharacters: [Character!]!
@@ -153,6 +154,7 @@ type Query {
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   paths: [Path!]!
+  path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [Path!]!
   lesson(id: String!): Lesson!
@@ -181,6 +183,7 @@ type Mutation {
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createModule(module: CreateModuleInput!): Module!
+  joinModule(moduleId: String!): Boolean!
   updateModule(module: UpdateModuleInput!): Module!
   deleteModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!

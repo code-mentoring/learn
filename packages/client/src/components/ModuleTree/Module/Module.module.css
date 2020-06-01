@@ -1,0 +1,16 @@
+.module {
+  @apply text-center mb-6 text-primary-500;
+
+  & > div {
+    @apply relative h-12 w-12 mx-auto;
+    svg {
+      @apply absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .icon {
+      @apply w-8;
+    }
+  }
+}

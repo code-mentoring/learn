@@ -161,6 +161,7 @@ export type Query = {
   assignmentFiles: Array<AssignmentFile>;
   userAssignmentFiles: Array<AssignmentFile>;
   users: Array<User>;
+  searchUsers: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
   getCharacters: Array<Character>;
@@ -171,6 +172,7 @@ export type Query = {
   modules: Array<Module>;
   pathModules: Array<Module>;
   paths: Array<Path>;
+  path: Path;
   getPathByName: Path;
   myPaths: Array<Path>;
   lesson: Lesson;
@@ -194,6 +196,11 @@ export type QueryUserAssignmentFilesArgs = {
 };
 
 
+export type QuerySearchUsersArgs = {
+  query: Scalars['String'];
+};
+
+
 export type QueryVerifyTokenArgs = {
   accessToken: Scalars['String'];
 };
@@ -211,6 +218,11 @@ export type QueryGetUserFriendsArgs = {
 
 export type QueryPathModulesArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type QueryPathArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -255,6 +267,7 @@ export type Mutation = {
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
   createModule: Module;
+  joinModule: Scalars['Boolean'];
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
   createPath: Path;
@@ -366,6 +379,11 @@ export type MutationDeleteFriendshipArgs = {
 
 export type MutationCreateModuleArgs = {
   module: CreateModuleInput;
+};
+
+
+export type MutationJoinModuleArgs = {
+  moduleId: Scalars['String'];
 };
 
 

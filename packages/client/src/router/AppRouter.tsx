@@ -1,15 +1,11 @@
-import { Loader } from '@codement/ui';
+import { AuthRoute, UnAuthRoute } from '@codement/ui';
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  RouteProps,
-  Switch,
   Redirect,
-  useHistory
+  Route,
+  BrowserRouter as Router,
+  Switch
 } from 'react-router-dom';
-import { Auth } from '@codement/ui/lib/containers/Auth.container';
-import { Me } from '@codement/ui/lib/containers/Me.container';
 
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
@@ -20,39 +16,12 @@ import { routes } from './routes';
 import { LessonRouter } from '../pages/Lesson/LessonRouter';
 
 
-// if (location.state?.referrer) {
-//   return location.state?.referrer;
-// }
-const getLoginRedirect = () => routes.home();
-
-const AuthRoute: React.FunctionComponent<RouteProps> = props => {
-  const { status } = Auth.useContainer();
-  const history = useHistory();
-  const { loading, called } = Me.useContainer();
-
-  if (status === 'signedOut') history.push(routes.login());
-  if ((status === 'signingIn' || status === 'verifying') || !called || loading) return <Loader />;
-
-  return <Route {...props} />;
-};
-
-
-const UnAuthRoute: React.FunctionComponent<RouteProps> = props => {
-  const { status } = Auth.useContainer();
-  const history = useHistory();
-
-  if (status === 'verifying') return <Loader />;
-  if (status === 'signedIn') history.push(getLoginRedirect());
-  return <Route {...props} />;
-};
-
 export const AppRouter = () => (
   <Router>
     <Switch>
-      <UnAuthRoute path={routes.login(false)} component={LoginPage} />
+      <UnAuthRoute routes={routes} path={routes.login(false)} component={LoginPage} />
 
-      <AuthRoute path="*">
-
+      <AuthRoute routes={routes} path="*">
         <Switch>
           <Route exact path={routes.home(false)} component={DashboardPage} />
           <Route exact path={routes.logout(false)} component={LogoutPage} />

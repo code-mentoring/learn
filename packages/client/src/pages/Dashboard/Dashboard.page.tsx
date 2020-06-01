@@ -1,46 +1,24 @@
+import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { useHistory } from 'react-router';
-import gql from 'graphql-tag';
-import { Path } from '@codement/api';
-import { useQuery } from '@apollo/react-hooks';
-import { Button } from '@codement/ui';
-import { Me } from '@codement/ui/lib/containers/Me.container';
+import styles from './Dashboard.module.css';
+import { ModuleTree } from '../../components/ModuleTree/ModuleTree';
 
-import { Page } from '../../components/Page/Page';
 import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoardWidget';
+import { Page } from '../../components/Page/Page';
 import { ProgressWidget } from '../../components/ProgressWidget/ProgressWidget';
 import { routes } from '../../router/routes';
-
-
-const getPaths = gql`
-query paths {
-  paths {
-    id
-    name
-    icon
-    description
-    modules {
-      id
-      name
-      lessons {
-        id
-      }
-    }
-  }
-}`;
 
 export const DashboardPage = () => {
   const history = useHistory();
   const { me } = Me.useContainer();
-  const { data } = useQuery<{paths: Path[]}>(getPaths);
-  const lesson = data?.paths[0].modules[0].lessons[0];
 
   if (!me?.userPreferences) history.push(routes.onboardingWorkflow());
   return <Page title="Dashboard" type="dashboard" className="bg-white">
-    <h1>Dashboard</h1>
-    <ProgressWidget className="w-64 my-6 bg-white" />
-    <LeaderboardWidget className="w-64" />
-    {lesson && <Button type="button" onClick={() => history.push(routes.lesson({ lessonId: lesson.id }))}>Go to lesson</Button>}
+    <div className={styles.dashboard}>
+      <ModuleTree />
+      <ProgressWidget className="w-64 my-6 bg-white" />
+      <LeaderboardWidget className="w-64" />
+    </div>
   </Page>;
-
 };

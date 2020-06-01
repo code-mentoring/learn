@@ -1,0 +1,39 @@
+
+.modalContainer {
+  --transition-time: 0.3s;
+
+  &, & > span {
+    @apply absolute w-full h-full top-0 left-0 flex justify-center items-center;
+  }
+
+  & > span {
+    background-color: #8F9FF0CC;
+    content: '';
+  }
+
+  & > span, &>div {
+    transition: all var(--transition-time);
+  }
+  &>div {
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+.transitionEnter,
+.transitionExitActive {
+  & > span { opacity: 0; }
+  & > div { opacity: 0; transform: scale(0.5) }
+}
+
+.transitionEnterActive, .transitionExit {
+  & > span { opacity: 1; }
+  & > div { opacity: 1; transform: scale(1); }
+}
+
+.transitionExitActive {
+  & > span { opacity: 0; }
+  & > div {
+    opacity: 0; transform: scale(0.5);
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+}

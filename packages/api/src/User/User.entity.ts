@@ -3,8 +3,8 @@ import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGenerated
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
-// import { AssignmentFile } from '../AssignmentFile/AssignmentFile.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 @ObjectType()
 export class User {
@@ -56,6 +56,9 @@ export class UserWithPassword extends CMBaseEntity {
 
   @OneToMany(() => PathUser, pathUser => pathUser.user)
   pathUser: PathUser[];
+
+  @OneToMany(() => UserModule, userModules => userModules.user)
+  userModules: UserModule[];
 
   @OneToOne(() => UserPreferences, userPreferences => userPreferences.user)
   userPreferences: UserPreferences;

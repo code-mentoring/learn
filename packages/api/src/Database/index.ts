@@ -29,6 +29,7 @@ import { LessonService } from '../Lesson/Lesson.service';
 import { Lesson } from '../Lesson/Lesson.entity';
 import { StorySectionService } from '../StorySection/StorySection.service';
 import { StorySection } from '../StorySection/StorySection.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 
 /**
@@ -50,7 +51,8 @@ import { StorySection } from '../StorySection/StorySection.entity';
       Friend,
       Character,
       Lesson,
-      StorySection
+      StorySection,
+      UserModule
     ])
   ],
   providers: [

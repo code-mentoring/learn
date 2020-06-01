@@ -43,7 +43,9 @@
     "consistent-return": 0,
     "implicit-arrow-linebreak": 0,
     "import/no-cycle": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
     "linebreak-style": 0,
     "max-classes-per-file": 0, // Leads to too many files
     "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
@@ -59,7 +61,7 @@
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-props-no-spreading": 0,
     "react/jsx-wrap-multilines": [0, "never"],
-    "react/static-property-placement": 0,
-    "react/prop-types": 0 // Typescript handles this
+    "react/prop-types": 0, // Typescript handles this,
+    "react/static-property-placement": 0
   }
 }

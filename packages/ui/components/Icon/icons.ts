@@ -13,12 +13,13 @@ import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
 import { IconChevronTopAlt } from './icons/solid/cis-chevron-top-alt';
 import { IconCloudUpload } from './icons/solid/cis-cloud-upload';
 import { IconExclamation } from './icons/solid/cis-exclamation';
+import { IconEyeSlash} from './icons/solid/cis-eye-slash';
 import { IconFire } from './icons/solid/cis-fire';
 import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
-
+import { IconShieldAlt } from './icons/solid/cis-shield-alt';
 
 export const icons = {
   check: IconCheck,
@@ -35,11 +36,13 @@ export const icons = {
   note: IconNote,
   page: IconPage,
   password: IconLockMinus,
+  passwordEye: IconEyeSlash,
   plus: IconPlus,
   trash: IconTrash,
   upload: IconCloudUpload,
   uploadDuotone: IconCloudUploadDuotone,
   user: IconUser,
   userLine: IconUserLine,
-  x: IconX
+  x: IconX,
+  shieldAlt: IconShieldAlt
 };

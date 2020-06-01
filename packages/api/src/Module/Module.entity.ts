@@ -5,7 +5,7 @@ import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
 import { Lesson } from '../Lesson/Lesson.entity';
 import { Concept } from '../Concept/Concept.entity';
-
+import { UserModule } from '../UserModule/UserModule.entity';
 
 export enum ModuleType {
   assignment = 'assignment',
@@ -57,6 +57,9 @@ export class Module extends CMBaseEntity {
   @OneToMany(() => Concept, concept => concept.module)
   @Field(() => [Concept])
   concepts: Concept[];
+
+  @OneToMany(() => UserModule, userModules => userModules.module)
+  userModules: UserModule[];
 }
 
 @InputType()

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Emoji } from '@codement/ui';
 import { routes } from '../../router/routes';
 import { OnboardingStepProps } from './OnboardingStep';
 import { CodingAbilityIcon } from './Wizard/FooterIcons/CodingAbility';
@@ -10,7 +11,6 @@ import { CompletedLeftIcon } from './Wizard/FooterIcons/CompletedLeft';
 import { CompletedMiddleIcon } from './Wizard/FooterIcons/CompletedMiddle';
 import { CompletedRightIcon } from './Wizard/FooterIcons/CompletedRight';
 import { PracticeGoalIcon } from './Wizard/FooterIcons/PracticeGoal';
-import { Emoji } from './Wizard/Typography/Emoji';
 
 export enum WizardSteps {
   welcome = 'welcome',

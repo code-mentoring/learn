@@ -38,8 +38,17 @@ const useAuth = () => {
     setStatus('signedOut');
   };
 
-  const login = (email: string, password: string, _redirect?: string) => {
+  const login = (
+    email: string,
+    password: string,
+    rememberMe: boolean = false,
+    _redirect?: string
+  ) => {
     if (_redirect) setRedirect(_redirect);
+
+    if (rememberMe) LocalStorage.email = email;
+    else LocalStorage.email = null;
+
     loginFunc({ variables: { email, password } });
   };
 

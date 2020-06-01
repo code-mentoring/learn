@@ -3,5 +3,5 @@ export const CONFIG = {
   localStorageEmailKey: 'email',
   apiHost: '%%API_HOST%%',
   apiUrl: '/graphql',
-  prefix: ''
+  prefix: '/a'
 };
