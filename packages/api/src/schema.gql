@@ -32,6 +32,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type PathUser {
+  id: String!
+  pathId: String!
+  userId: String!
+  completed: Boolean!
+  path: Path!
+}
+
 type Path {
   id: String!
   name: String!
@@ -115,23 +123,6 @@ type FriendOutput {
   since: DateTime
 }
 
-type StorySection {
-  id: String!
-  order: Float!
-  content: String!
-  lessonId: String!
-  conceptId: String!
-  concept: Concept!
-  lesson: Lesson!
-}
-
-type Lesson {
-  id: String!
-  moduleId: String!
-  module: Module!
-  storySection: [StorySection!]!
-}
-
 type Query {
   assignments: [Assignment!]!
   moduleAssignments(moduleId: String!): [Assignment!]!
@@ -151,7 +142,7 @@ type Query {
   paths: [Path!]!
   path(id: String!): Path!
   getPathByName(name: String!): Path!
-  myPaths: [Path!]!
+  myPaths: [PathUser!]!
 }
 
 type Mutation {

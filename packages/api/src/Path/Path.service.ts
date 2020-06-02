@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Path, PathInput, UpdatePathInput } from './Path.entity';
+import { UserModule } from '../UserModule/UserModule.entity';
 
 @Injectable()
 export class PathService {
   constructor(
     @InjectRepository(Path) private readonly pathRepository: Repository<Path>,
-    @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>
+    @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>,
+    @InjectRepository(UserModule) private readonly userModuleRepository: Repository<UserModule>
   ) {}
 
   async findAll(): Promise<Path[]> {
@@ -28,12 +30,29 @@ export class PathService {
     return path;
   }
 
-  async findByUser(userId: string): Promise<Path[]> {
+  async findByUser(userId: string): Promise<PathUser[]> {
     const userPaths = await this.pathUserRepository.find({
-      relations: ['path'],
-      where: { userId }
+      where: { userId },
+      relations: ['path', 'path.modules']
     });
-    return userPaths.map(up => up.path);
+
+    const userModules = await this.userModuleRepository.find({
+      where: { userId },
+      relations: ['modules']
+    });
+
+    return userPaths.map(up => {
+      const newUp = up;
+
+      if (newUp.completed === true) newUp.progress = 1;
+      else {
+        newUp.progress = userModules.filter(
+          um => um.module.pathId === newUp.pathId
+        ).length / newUp.path.modules.length;
+      }
+
+      return newUp;
+    });
   }
 
   async create(pathInput: PathInput): Promise<Path> {
