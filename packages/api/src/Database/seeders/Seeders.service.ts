@@ -163,13 +163,13 @@ export class SeederService {
   }
 
   /**
-   * Seeds 4 concepts for each module
+   * Seeds 16 concepts for each module.
    * Adds userConcept of first concept of each module to first user
    */
   async seedConcept(
     modules: Module[],
     users: UserWithPassword[],
-    num: number = 4
+    num: number = 16
   ) : Promise<Concept[]> {
 
     // TODO: add concept icons
@@ -231,7 +231,10 @@ export class SeederService {
     return lessons.flat();
   }
 
-  // per concept per storySection
+  /**
+   * per concept per storySection
+   * number of storySection per Lesson = number of cocept / number of lesson
+   */
   async seedStorySections(
     concepts: Concept[],
     lessons: Lesson[]
