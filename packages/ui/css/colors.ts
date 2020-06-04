@@ -1,4 +1,6 @@
-export const primary = {
+import { Colors } from '../types/styled';
+
+export const primary: Colors = {
   100: '#F6F8FF',
   200: '#D5DEFF',
   300: '#8F9FF0',
@@ -10,7 +12,7 @@ export const primary = {
   900: '#11006C'
 };
 
-export const secondary = {
+export const secondary: Colors = {
   100: '#F3FAF8',
   200: '#D5F7ED',
   300: '#99F4DA',
@@ -22,7 +24,7 @@ export const secondary = {
   900: '#156555'
 };
 
-export const tertiary = {
+export const tertiary: Colors = {
   100: '#FFF8FC',
   200: '#FFEEF8',
   300: '#FFD6ED',
@@ -34,7 +36,7 @@ export const tertiary = {
   900: '#962465'
 };
 
-export const grey = {
+export const grey: Colors = {
   100: '#F8F7FC',
   200: '#EAE7F6',
   300: '#DCD8F0',
