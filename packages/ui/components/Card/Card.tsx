@@ -6,6 +6,6 @@ import { BoxProps, Box } from '../Box/Box';
 export interface CardProps extends BoxProps { }
 
 export const Card = styled(props => <Box {...props} />)`
-border: 2px solid #C0B9E5;
+border: ${props => `2px solid ${props.theme.grey['500']}`};
 border-radius: 8px
 `;
