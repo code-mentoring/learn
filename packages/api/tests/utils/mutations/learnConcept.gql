@@ -1,0 +1,3 @@
+mutation ($conceptId: String!) {
+  learnConcept(conceptId: $conceptId) 
+}

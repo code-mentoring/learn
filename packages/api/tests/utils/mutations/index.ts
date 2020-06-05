@@ -20,7 +20,10 @@ const files = [
   'deleteModule',
   'createCharacter',
   'updateCharacter',
-  'deleteCharacter'
+  'deleteCharacter',
+  'createConcept',
+  'learnConcept',
+  'updateConcept'
 ];
 
 export default files.reduce((obj, file) => {

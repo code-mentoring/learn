@@ -5,10 +5,13 @@ const files = [
   'getPathByName',
   'me',
   'modules',
+  'getUserFriends',
+  'search',
   'users',
   'getUserFriends',
   'getCharacters',
-  'assignments'
+  'assignments',
+  'getConceptByName'
 ];
 
 export default files.reduce((obj, file) => {

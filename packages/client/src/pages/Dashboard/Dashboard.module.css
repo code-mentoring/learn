@@ -1,0 +1,4 @@
+.dashboard {
+  @apply bg-white grid;
+  grid-template-columns: 1fr 20rem;
+}

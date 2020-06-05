@@ -32,7 +32,7 @@ export const LoginPage = () => {
         error={getGQLError(loginError)}
         validationSchema={loginValidation}
         initialValues={{
-          email: LocalStorage.email
+          email: LocalStorage.email || undefined
         }}
       >
         <FormField className="mb-2" name="email" type="text" placeholder="Email" />

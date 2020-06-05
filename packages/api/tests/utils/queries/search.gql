@@ -1,0 +1,17 @@
+query searchUsers($query: String!) {
+  searchUsers(query: $query) {
+    id
+    firstName
+    lastName
+    email
+    profileImage
+    userPreferences {
+      id
+      why
+      userId
+      codingAbility
+      practiceGoal
+    }
+    createdAt
+  }
+}
