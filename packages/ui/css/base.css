@@ -21,5 +21,5 @@ body, #app {
   min-height: 100vh;
   /* fallback */
   font-size: 10px;
-  font-size: 62.5%;
+  /* font-size: 62.5%;  TODO: uncomment when transition to styled components is finished */ 
 }
