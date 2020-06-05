@@ -24,7 +24,7 @@ export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
 
   if (loading) return <Card><Loader /></Card>;
 
-  return <Card padding={4} {...props}>
+  return <Card {...props}>
     <h4 className="text-center mb-4">Leaderboard</h4>
     {error
       ? <ErrorMessage error={error.message} />
