@@ -5,6 +5,7 @@ import {
 } from 'react-router';
 import { history as History } from '@codement/ui/lib/history';
 
+import { ClientContainerWrapper } from '../ClientContainerWrapper';
 import { Wizard } from '../containers/Wizard.container';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
@@ -18,19 +19,21 @@ export const AppRouter = () => (
     <Switch>
       <UnAuthRoute routes={routes} path={routes.login(false)} component={LoginPage} />
 
-      <AuthRoute routes={routes} path="*">
-        <Switch>
-          <Route exact path={routes.home(false)} component={DashboardPage} />
-          <Route exact path={routes.logout(false)} component={LogoutPage} />
-          <Route path={routes.onboardingWorkflow(false)}>
-            <Wizard.Provider>
-              <OnboardingPage />
-            </Wizard.Provider>
-          </Route>
+      <ClientContainerWrapper>
+        <AuthRoute routes={routes} path="*">
+          <Switch>
+            <Route exact path={routes.home(false)} component={DashboardPage} />
+            <Route exact path={routes.logout(false)} component={LogoutPage} />
+            <Route path={routes.onboardingWorkflow(false)}>
+              <Wizard.Provider>
+                <OnboardingPage />
+              </Wizard.Provider>
+            </Route>
 
-          <Redirect to={routes.home(false)} />
-        </Switch>
-      </AuthRoute>
+            <Redirect to={routes.home(false)} />
+          </Switch>
+        </AuthRoute>
+      </ClientContainerWrapper>
     </Switch>
   </Router>
 );
