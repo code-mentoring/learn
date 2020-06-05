@@ -60,9 +60,9 @@ describe('Assignment entity', () => {
 
     it('should update the existing assignment', async () => {
 
-      const startAssignment = await TestClient.createAssignment(assignmentInput);
+      const { id } = await TestClient.createAssignment(assignmentInput);
       const update = {
-        id: startAssignment.id,
+        id,
         description: 'New'
       };
 
