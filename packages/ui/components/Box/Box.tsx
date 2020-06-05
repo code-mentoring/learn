@@ -9,20 +9,14 @@ export interface BoxProps extends HTMLAttributes<any> {
   className?: string;
 }
 
-export const Box: React.FunctionComponent<BoxProps> = ({
-  padding,
-  margin,
-  shadow,
+export const CBox: React.FunctionComponent<BoxProps> = ({
   className,
   children,
   ...props
-}) => {
+}) => <div className={classnames(className)} {...props}>{children}</div>;
 
-  const BoxDiv = styled.div`
-    padding: ${padding}rem;
-    margin: ${margin}rem;
-    box-shadow: ${shadow}rem;
-  `;
-
-  return <BoxDiv className={classnames(className)} {...props}>{children}</BoxDiv>;
-};
+export const Box = styled(CBox)`
+padding:  ${({ padding }) => (padding ? `${padding}rem` : '2rem')};
+margin: ${({ margin }) => (margin ? `${margin}rem` : undefined)};
+box-shadow: ${({ shadow }) => (shadow ? `${shadow}rem` : '2rem')};
+`;

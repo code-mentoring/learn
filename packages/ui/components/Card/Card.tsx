@@ -1,15 +1,11 @@
-import classnames from 'classnames';
 import React from 'react';
+import styled from 'styled-components';
 
-import { Box, BoxProps } from '../Box/Box';
-
+import { BoxProps, Box } from '../Box/Box';
 
 export interface CardProps extends BoxProps { }
 
-export const Card: React.FC<CardProps> = ({ className, ...props }) =>
-  <Box
-    padding={2}
-    shadow={2}
-    className={classnames('card rounded border-2 border-grey-500', className)}
-    {...props}
-  />;
+export const Card = styled(props => <Box {...props} />)`
+border: ${props => `2px solid ${props.theme.colors.grey['500']}`};
+border-radius: 8px
+`;

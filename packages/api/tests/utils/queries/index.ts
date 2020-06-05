@@ -10,6 +10,7 @@ const files = [
   'users',
   'getUserFriends',
   'getCharacters',
+  'assignments',
   'getConceptByName'
 ];
 
