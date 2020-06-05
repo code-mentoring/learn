@@ -1,36 +1,21 @@
 import { TestClient } from '../utils/TestClient';
-import { PathInput } from '../../types';
-import { ModuleType } from '../../src/Module/Module.entity';
+import { CreateAssignmentInput } from '../../types';
 import * as random from '../../src/Database/seeders/random';
 
 beforeAll(async () => { await TestClient.start(); });
 afterAll(async () => { await TestClient.stop(); });
 
-export const assignment1 = "";
-
-export const moduleInput = {
-  name: 'module name',
-  icon: 'icon',
-  type: ModuleType.lesson,
-};
-
-export const pathInput: PathInput = {
-  name: 'Path name',
-  icon: 'icon',
-  description: 'Description text'
-};
-
 let moduleId: string;
-let path: Path;
+let assignmentInput: CreateAssignmentInput;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
 
-  path = await TestClient.createPath(pathInput);
+  const path = await TestClient.createPath(random.pathInput());
+  const { id } = await TestClient.createModule(random.moduleInput('module name', path.id));
+  moduleId = id;
+  assignmentInput = random.assignmentInput(moduleId);
 
-  const { id: modId } = await TestClient.createModule({ ...moduleInput, pathId: path.id });
-
-  assignment1 = random.assignmentInput(modId);
 };
 
 describe('Assignment entity', () => {
@@ -40,64 +25,64 @@ describe('Assignment entity', () => {
 
     it('should create an assignment successfully', async () => {
 
-      const assignment = await TestClient.createAssignment(assignment1);
+      const assignment = await TestClient.createAssignment(assignmentInput);
 
       expect(assignment.id).toBeDefined();
-      expect(assignment).toMatchObject(assignment1);
+      expect(assignment).toMatchObject(assignmentInput);
     });
 
     it('should throw error if assignment already exist', async () => {
 
-        try {
-            const assignment = await TestClient.createAssignment(assignment1);
-        } catch(e) {
-            expect(e.message).toMatch(/unique constraint/i);
-        }
+      try {
+        await TestClient.createAssignment(random.assignmentInput(moduleId));
+      } catch (e) {
+        expect(e.message).toMatch(/unique constraint/i);
+      }
     });
   });
 
   describe('Query: getAssignments', () => {
-      beforeEach(setup);
+    beforeEach(setup);
 
-      it('should return the existing assignment', async () => {
+    it('should return the existing assignment', async () => {
 
-           await TestClient.createAssignment(assignment1);
-           const assignments = await TestClient.getAssignments(path.id);
+      await TestClient.createAssignment(assignmentInput);
+      const assignments = await TestClient.getAssignments();
 
-           expect(assignments).toBeArrayOfSize(1);
-           expect(assignments[0]).toMatchObject(assignment1);
+      expect(assignments).toBeArrayOfSize(1);
+      expect(assignments[0]).toMatchObject(assignmentInput);
 
-      });
+    });
   });
 
   describe('Mutation: updateAssignment', () => {
-      beforeEach(setup);
+    beforeEach(setup);
 
-      it('should update the existing assignment', async () => {
+    it('should update the existing assignment', async () => {
 
-          const startAssignment = await TestClient.createAssignment(assignment1);
-          const update = {
-          id: startAssignment.id,
-          description: 'New'
-          };
+      const startAssignment = await TestClient.createAssignment(assignmentInput);
+      const update = {
+        id: startAssignment.id,
+        description: 'New'
+      };
 
-          const result = await TestClient.updateAssignment(update);
+      const result = await TestClient.updateAssignment(update);
 
-          expect(result.description).toEqual(update.description);
-          expect(result.id).toEqual(update.id);
-      });
+      expect(result.description).toEqual(update.description);
+      expect(result.id).toEqual(update.id);
+    });
   });
 
   describe('Mutation: deleteAssignment', () => {
-      beforeEach(setup);
+    beforeEach(setup);
 
-      it('should delete the existing assignment', async () => {
+    it('should delete the existing assignment', async () => {
 
-          const assignment = await TestClient.createAssignment(assignment1);
-          await TestClient.deleteAssignment(assignment.id);
-          const assignments = await TestClient.getAssignments();
+      const assignment = await TestClient.createAssignment(assignmentInput);
+      await TestClient.deleteAssignment(assignment.id);
+      const assignments = await TestClient.getAssignments();
 
-          expect(assignments).toBeArrayOfSize(0);
-      });
+      expect(assignments).toBeArrayOfSize(0);
+    });
   });
 });
