@@ -10,13 +10,12 @@ import pathQuery from '../gql/queries/pathWithModules.gql';
 const LS_PATH = 'path';
 const initialPath = localStorage.getItem(LS_PATH);
 
-
 export const Path = createContainer(() => {
   const [currentPathId, setCurrentPathId] = useState<string | null>(initialPath);
-  const { data: myPaths } = useQuery<{ myPaths: Query['myPaths'] }>(myPathsQuery);
+  const { data: myPaths, loading: loadingMyPaths } = useQuery<{ myPaths: Query['myPaths'] }>(myPathsQuery);
 
   // Fetch BOTH the path AND it's modules
-  const [fetchPathWithModules, { data: pathData }] = useLazyQuery<{
+  const [fetchPathWithModules, { data: pathData, loading: loadingWithModules }] = useLazyQuery<{
     path: Query['path'],
     pathModules: Query['pathModules']
   }, QueryPathArgs>(pathQuery);
@@ -43,6 +42,7 @@ export const Path = createContainer(() => {
   return {
     currentPathId,
     setCurrentPathId,
+    loading: loadingMyPaths || loadingWithModules,
     currentPath: pathData?.path,
     currentModules: pathData?.pathModules,
     myPaths: myPaths?.myPaths
