@@ -27,7 +27,7 @@ export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
     <h4 className="text-center mb-4">Leaderboard</h4>
     {error
       ? <ErrorMessage error={error.message} />
-      : data!.users.map(u => <div className="text-primary-500 font-semibold mb-2">
+      : data!.users.map(u => <div key={u.id} className="text-primary-500 font-semibold mb-2">
         <img
           className="rounded-circle inline-block mr-3"
           src={u.profileImage}

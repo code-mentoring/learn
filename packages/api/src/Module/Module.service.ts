@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -17,7 +17,13 @@ export class ModuleService {
   }
 
   async findByPath(pathId: string): Promise<Module[]> {
-    return this.moduleRepository.find({ where: { pathId }, relations: ['previous', 'path'] });
+    return this.moduleRepository.find({ where: { pathId }, relations: ['previous', 'path', 'lessons'] });
+  }
+
+  async findById(id: string): Promise<Module> {
+    const module = await this.moduleRepository.findOne({ where: { id }, relations: ['previous', 'path', 'lessons', 'concepts'] });
+    if (!module) throw new NotFoundException('Not found');
+    return module;
   }
 
   async create(

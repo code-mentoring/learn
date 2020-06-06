@@ -15,6 +15,7 @@ import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
 import { routes } from './routes';
 import { LessonRouter } from '../pages/Lesson/LessonRouter';
+import { ModulePage } from '../pages/Module/Module.page';
 
 
 export const AppRouter = () => (
@@ -36,7 +37,7 @@ export const AppRouter = () => (
               path={routes.lesson(false)}
               component={LessonRouter}
             />
-
+            <Route path={routes.module(false)} component={ModulePage} />
             <Redirect to={routes.home(false)} />
           </Switch>
         </AuthRoute>

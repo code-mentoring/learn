@@ -18,6 +18,12 @@ export class ModuleResolver {
   }
 
   @UseGuards(GQLAuthGuard)
+  @Query(() => Module)
+  module(@Args('id') id: string) {
+    return this.moduleService.findById(id);
+  }
+
+  @UseGuards(GQLAuthGuard)
   @Query(() => [Module])
   pathModules(@Args('pathId') pathId: string) {
     return this.moduleService.findByPath(pathId);

@@ -152,6 +152,7 @@ type Query {
   userLearnedConcepts: [UserConcept!]!
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
+  module(id: String!): Module!
   pathModules(pathId: String!): [Module!]!
   paths: [Path!]!
   path(id: String!): Path!

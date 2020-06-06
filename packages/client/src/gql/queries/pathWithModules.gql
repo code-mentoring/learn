@@ -14,5 +14,6 @@ query ($id: String!) {
     icon
     type
     previous { id }
+    lessons { id }
   }
 }

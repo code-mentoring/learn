@@ -11,5 +11,4 @@ export const Emoji = styled<React.FC<EmojiProps>>(
 )`
   margin: 0;
   display: inline-block
-  
 `;
