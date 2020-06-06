@@ -36,6 +36,12 @@ export class PathService {
     return userPaths;
   }
 
+  async findUnjoined(userId: string): Promise<Path[]> {
+    const paths = await this.findAll();
+    const joined = await this.findByUser(userId);
+    return paths.filter(p => !joined.map(e => e.id).includes(p.id));
+  }
+
   async create(pathInput: PathInput): Promise<Path> {
     return this.pathRepository.create(pathInput).save();
   }
