@@ -63,4 +63,12 @@ export const Button = styled.button<ButtonProps>`
     background-color: ${props => props.theme.colors.tertiary['600']};
     }
   `}
+
+  ${({ disabled }) => disabled && css`
+    cursor: not-allowed;
+    background-color: ${props => props.theme.colors.grey['300']};
+    &:hover {
+      background-color: ${props => props.theme.colors.grey['300']};
+    }
+  `}
 `;
