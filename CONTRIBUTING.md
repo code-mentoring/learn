@@ -27,7 +27,7 @@ This is a running list of those who are actively contributing to this project.
 | Name                | Role                      | Slack handle        | Github                                                 | Weekly Availability | Joined   |
 | ------------------- | ------------------------- | ------------------- | ------------------------------------------------------ | ------------------- | -------- |
 | 🧢 Tristan Matthias | Project Lead              | `@Tristan Matthias` | [@tristanMatthias](https://github.com/tristanMatthias) | 20 hours            | Apr 2020 |
-| 🧢 Shane Sheridan   | Scrum Master              | `@Shane Sheridan`   | [@shane215](https://github.com/shane215)               | 6 hours             | Apr 2020 |
+| 🧢 Shane Sheridan   | Scrum Master/Full-stack              | `@Shane Sheridan`   | [@shane215](https://github.com/shane215)               | 5-10 hours             | Apr 2020 |
 | 🧢 Quim Granados    | Full-stack                | `@Quim Granados`    | [@quimgv](https://github.com/quimgv)                   | 10-20 hours         | Apr 2020 |
 | 🧢 Rajat Bansal     | WWW Lead                  | `@Rajat Bansal`     | [@rjtbansal](https://github.com/rjtbansal)             | 15-20 hours         | Apr 2020 |
 | Frank Kim           | Documentation / Front-end | `@Frank Kim`        | [@heyfranksmile](https://github.com/heyfranksmile)     | 10 hours            | Apr 2020 |
