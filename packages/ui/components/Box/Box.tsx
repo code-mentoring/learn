@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export interface BoxProps extends HTMLAttributes<any> {
+export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   padding?: number;
   margin?: number;
   shadow?: number;
