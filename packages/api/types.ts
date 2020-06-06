@@ -45,11 +45,17 @@ export type LoginOutput = {
   accessToken: Scalars['String'];
 };
 
+export type LogoutOutput = {
+   __typename?: 'LogoutOutput';
+  isSignOut: Scalars['Boolean'];
+};
+
 export type Query = {
    __typename?: 'Query';
   users: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
+  logout: LogoutOutput;
   paths: Array<Path>;
   getPathByName: Path;
 };
@@ -80,7 +86,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdatePreferencesArgs = {
-  input: UserPreferencesInput;
+  preferences: UserPreferencesInput;
 };
 
 
@@ -107,9 +113,9 @@ export type UserInput = {
 };
 
 export type UserPreferencesInput = {
-  practiceGoal: Scalars['Float'];
-  why: Scalars['String'];
-  codingAbility: Scalars['Float'];
+  practiceGoal?: Maybe<Scalars['Float']>;
+  why?: Maybe<Scalars['String']>;
+  codingAbility?: Maybe<Scalars['Float']>;
 };
 
 export type PathInput = {
