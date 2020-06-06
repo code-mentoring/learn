@@ -11,7 +11,7 @@ export type ButtonProps = {
   success?: string;
   btnType?: 'primary' | 'secondary' | 'tertiary'
   disabled?: boolean;
-  size?: 'large';
+  size?: string;
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -36,7 +36,7 @@ export const Button = styled.button<ButtonProps>`
     background-color: ${props => props.theme.colors.primary['600']};
   }
 
-  ${({ size }) => size && css`
+  ${({ size }) => size === 'large' && css`
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     height: 3rem;
