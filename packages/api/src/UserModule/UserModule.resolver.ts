@@ -1,5 +1,5 @@
-import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { UseGuards, NotFoundException } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { User } from '../User/User.entity';
@@ -14,6 +14,17 @@ export class UserModuleResolver {
     private readonly userModuleService: UserModuleService,
     private readonly pathUserService: PathUserService
   ) {}
+
+  @UseGuards(GQLAuthGuard)
+  @Query(() => [UserModule])
+  async myPathModules(
+    @CurrentUser() user: User,
+    @Args('pathId') pathId: string
+  ) {
+    const userModules = await this.userModuleService.findByUser(user.id);
+    if (!userModules) throw new NotFoundException('UserModule not found');
+    return Promise.all(userModules.filter(um => um.module.pathId === pathId));
+  }
 
   @UseGuards(GQLAuthGuard)
   @Mutation(() => UserModule)

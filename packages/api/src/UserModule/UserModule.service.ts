@@ -10,7 +10,7 @@ export class UserModuleService {
     @InjectRepository(UserModule) private readonly userModuleRepository: Repository<UserModule>
   ) {}
 
-  async findByUser(userId: string): Promise<UserModule[] | undefined> {
+  async findByUser(userId: string): Promise<UserModule[]> {
     const userModules = await this.userModuleRepository.find({
       where: { userId },
       relations: ['module']
