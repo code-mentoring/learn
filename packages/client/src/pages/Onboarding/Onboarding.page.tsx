@@ -49,12 +49,14 @@ export const OnboardingPage = () => {
   useEffect(() => {
     if (LocalStorage.onbordingPreferences) {
       setCodingAbility(
-        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).codingAbility || 0)
+        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).codingAbility
+          || 0)
       );
       setWhy(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).why || '');
       setPaths(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).paths || []);
       setPracticeGoal(
-        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).practiceGoal || 0)
+        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).practiceGoal
+          || 0)
       );
     }
     setLoading(false);
