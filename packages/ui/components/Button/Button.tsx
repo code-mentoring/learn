@@ -3,13 +3,14 @@ import styled, { css } from 'styled-components';
 enum BtnType {
   primary = 'primary',
   secondary = 'secondary',
-  tertiary = 'tertiary'
+  tertiary = 'tertiary',
+  transparent = 'transparent'
 }
 
 export type ButtonProps = {
   text?: boolean;
   success?: string;
-  btnType?: 'primary' | 'secondary' | 'tertiary'
+  btnType?: 'primary' | 'secondary' | 'tertiary' | 'transparent'
   disabled?: boolean;
   size?: string;
 };
@@ -61,6 +62,16 @@ export const Button = styled.button<ButtonProps>`
     }
     &:focus {
     background-color: ${props => props.theme.colors.tertiary['600']};
+    }
+  `}
+
+  ${({ btnType }) => btnType === BtnType.transparent && css`
+    background-color: ${props => props.theme.colors.transparent};
+    &:hover {
+      background-color: ${props => props.theme.colors.transparent};
+    }
+    &:focus {
+    background-color: ${props => props.theme.colors.transparent};
     }
   `}
 
