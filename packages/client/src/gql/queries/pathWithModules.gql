@@ -6,6 +6,10 @@ query ($id: String!) {
     icon
     description
     createdAt
+    character {
+      id
+      name
+    }
   }
 
   pathModules(pathId: $id) {
@@ -14,6 +18,20 @@ query ($id: String!) {
     icon
     type
     previous { id }
-    lessons { id }
+    lessons { 
+      id
+      storySection {
+        id
+        order
+        content
+        conceptId 
+        concept {
+          id
+          name
+          description
+          icon 
+        }
+      }
+       }
   }
 }

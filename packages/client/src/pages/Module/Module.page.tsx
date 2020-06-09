@@ -13,6 +13,6 @@ export const ModulePage: React.FC<{moduleId: string}> = () => {
   if (!module) return <Redirect to={routes.home()} />;
 
   return <>
-    {module.lessons.map((l, i) => <Link key={l.id} to={routes.lesson({ lessonId: l.id })}>{`Lesson ${i}`}</Link>)}
+    {module.lessons.map((l, i) => <Link key={l.id} to={{ pathname: routes.lesson({ lessonId: l.id }), state: { moduleId: module.id } }}>{`Lesson ${i}`}</Link>)}
   </>;
 };

@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { Button, Icon } from '@codement/ui';
 import { Lesson } from '@codement/api';
-// import { useMutation } from '@apollo/react-hooks';
-// import gql from 'graphql-tag';
-
 import { Prompt } from 'react-router';
+
 import { CenterWrapper } from '../../Onboarding/Wizard/CenterWrapper';
 import { LearnedConcepts } from '../LearnedConcepts';
 import { Character } from '../../../components/Character/Character';
+import { Path } from '../../../containers/Path.container';
 
 export interface StorySectionPageProps {
   lesson: Lesson;
+  setSkipped: Dispatch<SetStateAction<boolean>>;
 }
-
-// const learnedConcept = gql`
-// mutation learnConcept($conceptId: String!) {
-//   learnConcept(conceptId: $conceptId)
-// }`;
 
 export const CharacterGraphic: React.FC = ({ children }) => <div className="absolute bottom-0 left-0 z-0">
   {children}
 </div>;
 
-export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) => {
+export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson, setSkipped }) => {
+  const { currentPath } = Path.useContainer();
   lesson.storySection.sort((a, b) => a.order - b.order);
 
   const [recap, setRecap] = useState(false);
@@ -31,8 +27,6 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
   const [learnedConcepts, setLearnedConcepts] = useState<string[]>([]);
   const concepts = lesson.storySection.map(c => c.concept).filter(c => c);
   const isLast = lesson.storySection.length === currentStorySection.order;
-
-  // const [learnConcept] = useMutation(learnedConcept);
 
   const handleNextButton = async () => {
     if (isLast) {
@@ -72,7 +66,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
     {!recap && <>
       <LearnedConcepts concepts={concepts} learnedConcepts={learnedConcepts} />
       <CharacterGraphic>
-        <Character character={lesson.module?.path?.character?.name as 'ellie'} />
+        <Character character={currentPath?.character?.name as 'ellie'} />
       </CharacterGraphic>
       <Button className="absolute bottom-0 mb-6 mx-auto inset-x-0" color="transparent" text size="large">
         <div
@@ -87,8 +81,7 @@ export const StorySectionPage: React.FC<StorySectionPageProps> = ({ lesson }) =>
           tabIndex={0}
         >Next</div>
       </Button>
-      {/** TODO: Redirect to first lesson */}
-      <Button className="absolute bottom-0 mb-6 mr-6 right-0" color="transparent" text size="large">
+      <Button onClick={() => setSkipped(true)} className="absolute bottom-0 mb-6 mr-6 right-0" color="transparent" text size="large">
         <div className="text-grey-500">Skip</div>
       </Button>
     </>}

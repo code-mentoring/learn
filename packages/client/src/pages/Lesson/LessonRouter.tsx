@@ -1,64 +1,33 @@
-import React from 'react';
-import { useParams, Switch, Route, Redirect } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
+import React, { useState } from 'react';
+import { useParams, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { Loader } from '@codement/ui';
-import { Lesson } from '@codement/api';
+
+import { Path } from '../../containers/Path.container';
 import { LessonHeader } from './LessonHeader';
 import { routes } from '../../router/routes';
 import { StorySectionPage } from './StorySection/StorySection.page';
-
-const getLesson = gql`
-query lesson($id: String!) {
-  lesson(id: $id) {
-    id
-    moduleId
-    module{
-      id
-      name
-      path{
-        id
-        name
-        character{
-          id
-          name
-          displayName
-        }
-      }
-    }
-    storySection{
-      id
-      order
-      content
-      lessonId
-      conceptId
-      concept{
-        id
-        name
-        description
-        icon
-      }
-    }
-  }
-}`;
-
+import { LessonPage } from './Lesson.page';
 
 export const LessonRouter: React.FC = () => {
   const { lessonId } = useParams();
-  const { data, loading } = useQuery<{lesson: Lesson}>(getLesson, { variables: { id: lessonId } });
-  const lesson = data?.lesson;
-  const moduleName = data?.lesson.module.name;
+  const [skipped, setSkipped] = useState(false);
+  const { state } = useLocation<{moduleId: string}>();
+  const { currentModules, loading } = Path.useContainer();
+  const currentModule = currentModules?.find(cm => cm.id === state.moduleId);
+  const currentLesson = currentModule?.lessons.find(l => l.id === lessonId);
+  const moduleName = currentModule?.name;
 
   if (loading) return <Loader />;
-  if (!lessonId || !lesson) return <Redirect to={routes.home()} />;
+  if (!lessonId || !currentLesson) return <Redirect to={routes.home()} />;
 
   return <div className="relative h-screen overflow-hidden bg-white">
     <LessonHeader moduleName={moduleName || ''} />
     <Switch>
       <Route
         path={routes.lesson({ lessonId })}
-        component={() => <StorySectionPage lesson={lesson} />}
+        component={() => (skipped
+          ? <LessonPage lesson={currentLesson} />
+          : <StorySectionPage lesson={currentLesson} setSkipped={setSkipped} />)}
       />
     </Switch>
   </div>;

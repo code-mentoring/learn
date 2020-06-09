@@ -17,7 +17,15 @@ export class ModuleService {
   }
 
   async findByPath(pathId: string): Promise<Module[]> {
-    return this.moduleRepository.find({ where: { pathId }, relations: ['previous', 'path', 'lessons'] });
+    return this.moduleRepository.find({ where: { pathId },
+      relations: [
+        'previous',
+        'path',
+        'lessons',
+        'lessons.storySection',
+        'lessons.storySection.concept'
+      ]
+    });
   }
 
   async findById(id: string): Promise<Module> {
