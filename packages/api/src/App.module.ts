@@ -14,6 +14,7 @@ import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { UserModule } from './User';
 import { UserConceptModule } from './UserConcepts';
+import { UserModuleModule } from './UserModule';
 
 
 /**
@@ -31,6 +32,7 @@ export const appImports = [
   CharacterModule,
   ConceptModule,
   UserConceptModule,
+  UserModuleModule,
 
   DatabaseModule,
 

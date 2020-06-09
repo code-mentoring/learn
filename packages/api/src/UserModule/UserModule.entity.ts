@@ -20,7 +20,8 @@ export class UserModule extends CMBaseEntity {
     @Field()
     moduleId: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ nullable: true })
+    @Field({ nullable: true })
     completedAt: Date;
 
     @ManyToOne(() => UserWithPassword, user => user.userModules)

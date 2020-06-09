@@ -27,6 +27,15 @@ export type UserPreferences = {
   codingAbility: Scalars['Float'];
 };
 
+export type UserModule = {
+   __typename?: 'UserModule';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  moduleId: Scalars['String'];
+  completedAt: Scalars['DateTime'];
+};
+
+
 export type User = {
    __typename?: 'User';
   id: Scalars['ID'];
@@ -37,7 +46,6 @@ export type User = {
   userPreferences?: Maybe<UserPreferences>;
   createdAt: Scalars['DateTime'];
 };
-
 
 export type Path = {
    __typename?: 'Path';
@@ -152,6 +160,7 @@ export type Query = {
   path: Path;
   getPathByName: Path;
   myPaths: Array<Path>;
+  myPathModules: Array<UserModule>;
 };
 
 
@@ -202,6 +211,11 @@ export type QueryPathArgs = {
 
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryMyPathModulesArgs = {
+  pathId: Scalars['String'];
 };
 
 export type Mutation = {
