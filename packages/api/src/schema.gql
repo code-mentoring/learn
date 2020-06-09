@@ -22,7 +22,6 @@ type UserModule {
   userId: String!
   moduleId: String!
   completedAt: DateTime
-  module: Module!
 }
 
 """
@@ -153,7 +152,6 @@ type Query {
   path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [PathUser!]!
-  myPathModules(pathId: String!): [UserModule!]!
 }
 
 type Mutation {

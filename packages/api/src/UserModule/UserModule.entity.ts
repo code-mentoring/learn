@@ -28,6 +28,5 @@ export class UserModule extends CMBaseEntity {
     user: UserWithPassword;
 
     @ManyToOne(() => Module, module => module.userModules)
-    @Field(() => Module)
     module: Module;
 }

@@ -33,7 +33,6 @@ export type UserModule = {
   userId: Scalars['String'];
   moduleId: Scalars['String'];
   completedAt?: Maybe<Scalars['DateTime']>;
-  module: Module;
 };
 
 
@@ -172,7 +171,6 @@ export type Query = {
   path: Path;
   getPathByName: Path;
   myPaths: Array<PathUser>;
-  myPathModules: Array<UserModule>;
 };
 
 
@@ -223,11 +221,6 @@ export type QueryPathArgs = {
 
 export type QueryGetPathByNameArgs = {
   name: Scalars['String'];
-};
-
-
-export type QueryMyPathModulesArgs = {
-  pathId: Scalars['String'];
 };
 
 export type Mutation = {
