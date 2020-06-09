@@ -17,7 +17,7 @@ export type ButtonProps = {
 
 export const Button = styled.button<ButtonProps>`
   display: inline-block;
-  font-weight: 700;
+  font-weight: 800;
   height: 2.25rem;
   line-height: 2.25rem;
   padding-left: 0.75rem;
@@ -66,12 +66,14 @@ export const Button = styled.button<ButtonProps>`
   `}
 
   ${({ btnType }) => btnType === BtnType.transparent && css`
+    color: ${props => props.theme.colors.primary['500']};
     background-color: ${props => props.theme.colors.transparent};
     &:hover {
       background-color: ${props => props.theme.colors.transparent};
     }
     &:focus {
     background-color: ${props => props.theme.colors.transparent};
+    color: ${props => props.theme.colors.grey['500']};
     }
   `}
 
