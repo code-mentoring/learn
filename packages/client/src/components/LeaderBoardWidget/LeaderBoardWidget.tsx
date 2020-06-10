@@ -6,12 +6,11 @@ import { Loader } from '@codement/ui';
 import { User } from '@codement/api';
 import { ErrorMessage } from '@codement/ui/components/ErrorMessage/ErrorMessage';
 
-// TODO: Replace user profile picture when #27 is completed
-
 const usersQuery = gql`query {
   users {
     firstName
     lastName
+    profileImage
     id
   }
 }`;
@@ -24,12 +23,18 @@ export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
 
   if (loading) return <Card><Loader /></Card>;
 
-  return <Card padding={4} {...props}>
+  return <Card {...props}>
     <h4 className="text-center mb-4">Leaderboard</h4>
     {error
       ? <ErrorMessage error={error.message} />
       : data!.users.map(u => <div className="text-primary-500 font-semibold mb-2">
-        <img className="rounded-circle inline-block mr-3" src="http://placehold.it/30x30" alt="User profile pic" />
+        <img
+          className="rounded-circle inline-block mr-3"
+          src={u.profileImage}
+          height="30px"
+          width="30px"
+          alt="User profile pic"
+        />
         <span>{u.firstName} {u.lastName}</span>
       </div>)
     }

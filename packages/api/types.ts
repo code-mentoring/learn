@@ -138,6 +138,7 @@ export type Query = {
   assignmentFiles: Array<AssignmentFile>;
   userAssignmentFiles: Array<AssignmentFile>;
   users: Array<User>;
+  searchUsers: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
   getCharacters: Array<Character>;
@@ -166,6 +167,11 @@ export type QueryAssignmentFilesArgs = {
 
 export type QueryUserAssignmentFilesArgs = {
   authorId: Scalars['String'];
+};
+
+
+export type QuerySearchUsersArgs = {
+  query: Scalars['String'];
 };
 
 

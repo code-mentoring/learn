@@ -1,0 +1,9 @@
+mutation ($concept: CreateConceptInput!) {
+  createConcept(concept:$concept) {
+    id
+    name
+    icon
+    description
+    taughtInId
+  }
+}

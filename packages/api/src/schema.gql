@@ -121,6 +121,7 @@ type Query {
   assignmentFiles(assignmentId: String!): [AssignmentFile!]!
   userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   users: [User!]!
+  searchUsers(query: String!): [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
   getCharacters: [Character!]!
