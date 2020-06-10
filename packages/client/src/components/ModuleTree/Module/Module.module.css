@@ -1,5 +1,7 @@
 .module {
-  @apply text-center mb-6 text-primary-500;
+  @apply text-center;
+  @apply mb-6;
+  @apply text-primary-500;
 
   & > div {
     @apply relative h-12 w-12 mx-auto;
@@ -12,5 +14,65 @@
     .icon {
       @apply w-8;
     }
+    .circle {
+      left: 85%;
+      top:20%;
+      @apply absolute;
+    }
+    .check {
+      left: 85%;
+      top:20%;
+      @apply absolute;
+    }
+    .number {
+      left: 80%;
+      top:7%;
+      @apply absolute;
+      font-size: .5rem;
+      color: white;
+    }
   }
+}
+
+/* figma design is fill: #D7FAF3, but there is no such color in tailwind. 
+   so choose the similar one .200 #D5F7ED*/
+.completed {
+  fill:  theme('colors.secondary.500');
+  stroke-linecap: square;
+}
+
+.icon {
+  fill: white;
+}
+
+.circle {
+  stroke: white;
+  stroke-width: 2;
+}
+
+/* figma design is fill: #EEEBF6, but there is no such color in tailwind. 
+   so choose the similar one .200 #D5DEFF*/
+.open {
+    fill:  theme('colors.primary.400');
+    stroke-linecap: square;
+}
+
+/* stroke color in figma design is #BEBEBE, but there is no such color in tailwind. 
+   so choose the similar one grey.500 #C0B9E5*/
+.locked[class *= "agon"] {
+    fill:  theme('colors.white');
+    stroke: theme('colors.grey.500');
+    stroke-width: 2;
+    stroke-linecap: square;
+}
+
+/* fill color in figma design is #BEBEBE, but there is no such color in tailwind. 
+   so choose the similar one grey.500 #C0B9E5*/
+.locked[class ~= "circle"] {
+  fill:  theme('colors.grey.500');
+  stroke-linecap: square;
+}
+
+.locked.icon {
+  fill:  theme('colors.grey.500');
 }

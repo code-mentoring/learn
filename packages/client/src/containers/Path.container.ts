@@ -6,7 +6,6 @@ import { createContainer } from 'unstated-next';
 import myPathsQuery from '../gql/queries/myPaths.gql';
 import pathQuery from '../gql/queries/pathWithModules.gql';
 
-
 const LS_PATH = 'path';
 const initialPath = localStorage.getItem(LS_PATH);
 
@@ -17,9 +16,10 @@ export const Path = createContainer(() => {
   // Fetch BOTH the path AND it's modules
   const [fetchPathWithModules, { data: pathData, loading: loadingWithModules }] = useLazyQuery<{
     path: Query['path'],
-    pathModules: Query['pathModules']
+    pathModules: Query['pathModules'],
+    myPathModules: Query['myPathModules'],
+    myPathConcepts: Query['myPathConcepts']
   }, QueryPathArgs>(pathQuery);
-
 
   // First run, load paths if no initial path
   useEffect(() => {
@@ -45,6 +45,8 @@ export const Path = createContainer(() => {
     loading: loadingMyPaths || loadingWithModules,
     currentPath: pathData?.path,
     currentModules: pathData?.pathModules,
-    myPaths: myPaths?.myPaths
+    myPaths: myPaths?.myPaths,
+    currentMyModules: pathData?.myPathModules,
+    currentMyPathConcepts: pathData?.myPathConcepts
   };
 });

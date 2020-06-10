@@ -9,7 +9,11 @@ export interface ModuleTreeProps { }
 
 export const ModuleTree: React.FC<ModuleTreeProps> = () => {
 
-  const { currentPath, currentModules } = Path.useContainer();
+  const {
+    currentPath,
+    currentModules,
+    currentMyModules,
+    currentMyPathConcepts } = Path.useContainer();
 
   if (!currentPath) return null;
 
@@ -17,8 +21,11 @@ export const ModuleTree: React.FC<ModuleTreeProps> = () => {
     <h1 className="my-5">{currentPath.name}</h1>
 
     <div className="modules">
-      {currentModules?.map(m => <Module module={m} />)}
+      {currentModules?.map(m => <Module
+        module={m}
+        myModule={currentMyModules?.find(cmm => cmm.moduleId === m.id)}
+        myConcepts={currentMyPathConcepts?.filter(mc => mc.concept.taughtInId === m.id)}
+      />)}
     </div>
-
   </div>;
 };

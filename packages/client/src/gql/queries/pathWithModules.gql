@@ -15,4 +15,20 @@ query ($id: String!) {
     type
     previous { id }
   }
+
+  myPathModules (pathId : $id){
+    id
+    moduleId
+    completedAt
+  }
+
+  myPathConcepts(pathId: $id) {
+    id
+    conceptId
+    learned
+    concept{
+      name
+      taughtInId
+    }
+  }
 }
