@@ -128,8 +128,10 @@ export const OnboardingPage = () => {
           color="success"
           onClick={async () => {
             // TODO: Update in Wizard after submission
-            await refetch(); // Update the user preferences
-            LocalStorage.onbordingPreferences = null;
+            const res = await refetch(); // Update the user preferences
+            if (res.data) {
+              LocalStorage.onbordingPreferences = null;
+            }
             history.push(routes.home());
           }}
         >Start learning!</Button>
