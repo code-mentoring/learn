@@ -32,7 +32,7 @@ export type UserModule = {
   id: Scalars['String'];
   userId: Scalars['String'];
   moduleId: Scalars['String'];
-  completedAt: Scalars['DateTime'];
+  completedAt?: Maybe<Scalars['DateTime']>;
 };
 
 
@@ -153,6 +153,7 @@ export type Query = {
   getConcepts: Array<Concept>;
   getConceptByName: Concept;
   userLearnedConcepts: Array<UserConcept>;
+  myPathConcepts: Array<UserConcept>;
   getUserFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
@@ -191,6 +192,11 @@ export type QueryVerifyTokenArgs = {
 
 export type QueryGetConceptByNameArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryMyPathConceptsArgs = {
+  pathId: Scalars['String'];
 };
 
 

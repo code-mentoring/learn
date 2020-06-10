@@ -135,6 +135,7 @@ type Query {
   getConcepts: [Concept!]!
   getConceptByName(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!
+  myPathConcepts(pathId: String!): [UserConcept!]!
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!

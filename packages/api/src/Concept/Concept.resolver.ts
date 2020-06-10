@@ -1,5 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, NotFoundException } from '@nestjs/common';
 
 import { ConceptService } from './Concept.service';
 import { Concept, CreateConceptInput, UpdateConceptInput } from './Concept.entity';
@@ -32,6 +32,17 @@ export class ConceptResolver {
   @Query(() => [UserConcept])
   async userLearnedConcepts(@CurrentUser() user: User) {
     return this.userConceptService.findByUser(user.id);
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Query(() => [UserConcept])
+  async myPathConcepts(
+    @CurrentUser() user: User,
+    @Args('pathId') pathId: string
+  ) {
+    const userConcepts = await this.userConceptService.findByUser(user.id);
+    if (!userConcepts) throw new NotFoundException('UserConcept not found');
+    return Promise.all(userConcepts.filter(uc => uc.concept.taughtIn.pathId === pathId));
   }
 
   @UseGuards(GQLAuthGuard)
