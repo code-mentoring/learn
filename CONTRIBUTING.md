@@ -29,6 +29,8 @@ This is a running list of those who are actively contributing to this project.
 | 🧢 Tristan Matthias | Project Lead              | `@Tristan Matthias` | [@tristanMatthias](https://github.com/tristanMatthias) | 20 hours            | Apr 2020 |
 | 🧢 Shane Sheridan   | Scrum Master/Full-stack   | `@Shane Sheridan`   | [@shane215](https://github.com/shane215)               | 5-10 hours          | Apr 2020 |
 | 🧢 Quim Granados    | Full-stack                | `@Quim Granados`    | [@quimgv](https://github.com/quimgv)                   | 10-20 hours         | Apr 2020 |
+| 🧢 Suzy Nakayama       | Full-stack                | `@Suzy Nakayama`    | [@suzynakayama](https://github.com/suzynakayama)    | 10 hours            | Apr 2020 |
+| 🧢 Marc Tessier        | Design                    | `@Marc Tessier`     | [@mtess88](https://github.com/mtess88)              | 15 hours            | May 2020 |
 | 🧢 Rajat Bansal     | WWW Lead                  | `@Rajat Bansal`     | [@rjtbansal](https://github.com/rjtbansal)             | 15-20 hours         | Apr 2020 |
 | Frank Kim          | Documentation / Front-end | `@Frank Kim`        | [@heyfranksmile](https://github.com/heyfranksmile)     | 10 hours            | Apr 2020 |
 | Frankie Law        | Full stack                | `@Frankie`          | [@FrankieLaw](https://github.com/FrankieLaw)           | 5-10 hours          | Apr 2020 |
@@ -48,7 +50,8 @@ This is a running list of those who are actively contributing to this project.
 | Balkirat Singh     | Full Stack                | `@Balkirat Singh`   | [@Balkirat](https://github.com/Balkirat)               | 10+ hours           |
 | Waqas Daimee       | Full Stack                | `@Waqas Daimee`     | [@wdaimee](https://github.com/wdaimee)                 | 10 hours            | May 2020 |
 | Yago Mackay        | Front End                 | `@Yago Mackay`      | [@YagoMackay](https://github.com/YagoMackay)           | 8 hours             | May 2020 |
-| Roso Peñaranda     | Full Stack                | `@Roso Peñaranda`   | [@RosoPenaranda](https://github.com/RosoPenaranda)     | 10 - 12 hours       |          |
+| Roso Peñaranda     | Full Stack                | `@Roso Peñaranda`   | [@RosoPenaranda](https://github.com/RosoPenaranda)     | 10 - 12 hours       | Jun 2020 |
+
 
 ## 🔧 What can I work on?
 
