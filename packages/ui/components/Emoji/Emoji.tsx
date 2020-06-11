@@ -9,7 +9,9 @@ interface EmojiProps {
 export const Emoji = styled<React.FC<EmojiProps>>(
   ({ text, className }) => <Twemoji svg text={text} className={className} />
 )`
-  margin: 0;
+img{
+  margin: 0 !important;
   display: inline-block
+}
   
 `;
