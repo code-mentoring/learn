@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Circle: React.FunctionComponent<{className?: string}> = ({ className, ...props }) => (
-  <svg {...props} className={`circle ${className}`} width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Circle: React.FunctionComponent<{className?: string}> = ({ className }) => (
+  <svg className={`circle ${className}`} width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"

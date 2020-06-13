@@ -42,15 +42,6 @@ export const sizeMap = {
 
 export const ModuleIcon = styled(({
   icon,
-  position,
-  left,
-  top,
-  height,
-  width,
-  fill,
-  stroke,
-  color,
-  transform,
   ...props
 }:IconProps) => {
   const Ikon = icons[icon];
