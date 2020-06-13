@@ -40,19 +40,9 @@ export const sizeMap = {
   large: '5'
 };
 
-// TODO: there is lint error for all the props: xxx is defined but never used. 
+// TODO: there is lint error for all the props: xxx is defined but never used.
 export const Icon: React.FunctionComponent<IconProps> = ({
   icon,
-  color,
-  size,
-  position,
-  left,
-  top,
-  height,
-  width,
-  fill,
-  stroke,
-  transform,
   ...props
 }) => {
   const Ikon = icons[icon];
