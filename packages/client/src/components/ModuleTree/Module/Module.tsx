@@ -21,16 +21,6 @@ export const Module: React.FC<ModuleProps> = ({
   const isOpen = myModule && !myModule.completedAt;
   const isLocked = !myModule;
 
-  let polygonColor : string;
-  if (isCompleted) polygonColor = theme.colors.secondary['500'];
-  else if (isOpen) polygonColor = theme.colors.primary['400'];
-  else polygonColor = theme.colors.white;
-
-  let cirlceColor : string;
-  if (isCompleted) cirlceColor = theme.colors.secondary['500'];
-  else if (isOpen) cirlceColor = theme.colors.primary['400'];
-  else cirlceColor = theme.colors.grey['500'];
-
   return <div style={{
     textAlign: 'center',
     marginBottom: '1.5rem',
@@ -50,7 +40,8 @@ export const Module: React.FC<ModuleProps> = ({
         icon={module.type === 'lesson' ? 'hexagon' : 'octagon'}
         position="absolute"
         size={3}
-        fill={polygonColor}
+        // eslint-disable-next-line no-nested-ternary
+        fill={isCompleted ? theme.colors.secondary['500'] : isOpen ? theme.colors.primary['400'] : theme.colors.white}
         stroke={isLocked ? theme.colors.grey['500'] : undefined}
         left="50%"
         top="50%"
@@ -62,7 +53,8 @@ export const Module: React.FC<ModuleProps> = ({
         icon="circle"
         position="absolute"
         size="small"
-        fill={cirlceColor}
+        // eslint-disable-next-line no-nested-ternary
+        fill={isCompleted ? theme.colors.secondary['500'] : isOpen ? theme.colors.primary['400'] : theme.colors.grey['500']}
         stroke={isLocked ? undefined : theme.colors.white}
         left="85%"
         top="20%"
