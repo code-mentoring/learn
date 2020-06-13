@@ -40,8 +40,7 @@ export const sizeMap = {
   large: '5'
 };
 
-// TODO: there is lint error for all the props: xxx is defined but never used.
-export const Icon: React.FunctionComponent<IconProps> = ({
+export const ModuleIcon = styled(({
   icon,
   position,
   left,
@@ -53,12 +52,10 @@ export const Icon: React.FunctionComponent<IconProps> = ({
   color,
   transform,
   ...props
-}) => {
+}:IconProps) => {
   const Ikon = icons[icon];
   return <Ikon {...props} />;
-};
-
-export const ModuleIcon = styled(Icon)<IconProps>`
+})`
   position:${({ position }) => position};
   left:${({ left }) => left};
   top:${({ top }) => top};

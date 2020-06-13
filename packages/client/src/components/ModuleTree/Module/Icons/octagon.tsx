@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Octagon: React.FunctionComponent<{className?: string}> = ({ className, ...props }) => (
-  <svg {...props} className={`octagon ${className}`} width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Octagon: React.FunctionComponent<{className?: string}> = ({ className }) => (
+  <svg className={`octagon ${className}`} width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
