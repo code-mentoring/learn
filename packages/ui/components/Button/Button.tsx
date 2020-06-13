@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import { icons } from '/icons';
+import { Icon } from '@codement/ui';
 
 enum BtnType {
   primary = 'primary',
@@ -11,17 +11,26 @@ enum BtnType {
 
 export interface ButtonProps extends HTMLAttributes<any> {
   text?: boolean;
-  success?: string;
   btnType?: 'primary' | 'secondary' | 'tertiary' | 'transparent'
   disabled?: boolean;
   size?: string;
   icon?: boolean;
   iconName?: string;
-};
+}
 
-export const CButton: React.FunctionComponent<ButtonProps> = ({
-  children
-}) => <button>{children}</button>;
+export const Button: React.FC<ButtonProps> = ({
+  icon,
+  iconName,
+  children,
+  ...props
+}) => (
+  <StyledButton
+    {...props}
+  >
+    { icon && <Icon className="inline-block" icon={iconName} />}
+    { children }
+  </StyledButton>
+);
 
 export const StyledButton = styled.button<ButtonProps>`
   display: inline-block;
@@ -93,7 +102,6 @@ export const StyledButton = styled.button<ButtonProps>`
     }
   `}
 `;
-
 
 // import React from 'react';
 // import classnames from 'classnames';
