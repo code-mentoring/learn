@@ -1,15 +1,12 @@
 import React, { PropsWithRef } from 'react';
 import styled from 'styled-components';
 
+import { IconFire } from '@codement/ui/components/Icon/icons/solid/cis-fire';
+import { IconCheck } from '@codement/ui/components/Icon/icons/solid/cis-check';
+
 import { Circle } from './circle';
 import { Hexagon } from './hexagon';
 import { Octagon } from './octagon';
-
-/* TODO: IconFire and IconCheck is temperary copy from ui/icon.
- * If the way to move to style-component method is approved, we can move these to ui/icon.
-*/
-import { IconFire } from './cis-fire';
-import { IconCheck } from './cis-check';
 
 /* TODO: icon.tsx is modified based on ui/icon.
 * If the way to move to style-component method is approved, we can move these to ui/icon.
@@ -43,6 +40,7 @@ export const sizeMap = {
   large: '5'
 };
 
+// TODO: there is lint error for all the props: xxx is defined but never used. 
 export const Icon: React.FunctionComponent<IconProps> = ({
   icon,
   color,

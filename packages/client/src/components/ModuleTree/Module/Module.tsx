@@ -4,7 +4,7 @@ import React from 'react';
 import { Module as EModule, UserModule, UserConcept } from '@codement/api';
 import { theme } from '@codement/ui';
 
-import { ModuleIcon } from './Icon';
+import { ModuleIcon } from './Icons/Icon';
 
 export interface ModuleProps {
   module: EModule,
@@ -40,6 +40,7 @@ export const Module: React.FC<ModuleProps> = ({
         icon={module.type === 'lesson' ? 'hexagon' : 'octagon'}
         position="absolute"
         size={3}
+        // TODO: there is lint error: Do not nest ternary expressions  no-nested-ternary
         fill={isCompleted ? theme.colors.secondary['500'] : isOpen ? theme.colors.primary['400'] : theme.colors.white}
         stroke={isLocked ? theme.colors.grey['500'] : undefined}
         left="50%"
@@ -52,6 +53,7 @@ export const Module: React.FC<ModuleProps> = ({
         icon="circle"
         position="absolute"
         size="small"
+        // TODO: there is lint error: Do not nest ternary expressions  no-nested-ternary
         fill={isCompleted ? theme.colors.secondary['500'] : isOpen ? theme.colors.primary['400'] : theme.colors.grey['500']}
         stroke={isLocked ? undefined : theme.colors.white}
         left="85%"
