@@ -28,12 +28,12 @@ export class PathService {
     return path;
   }
 
-  async findByUser(userId: string): Promise<Path[]> {
+  async findByUser(userId: string): Promise<PathUser[]> {
     const userPaths = await this.pathUserRepository.find({
       relations: ['path'],
       where: { userId }
     });
-    return userPaths.map(up => up.path);
+    return userPaths;
   }
 
   async create(pathInput: PathInput): Promise<Path> {

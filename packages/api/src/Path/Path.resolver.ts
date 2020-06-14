@@ -6,6 +6,7 @@ import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { PathInput, Path, UpdatePathInput } from './Path.entity';
 import { PathService } from './Path.service';
+import { PathUser } from '../PathUser/PathUser.entity';
 
 @Resolver('Path')
 export class PathResolver {
@@ -36,7 +37,7 @@ export class PathResolver {
   }
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => [Path])
+  @Query(() => [PathUser])
   myPaths(@CurrentUser() user: User) {
     return this.pathService.findByUser(user.id);
   }

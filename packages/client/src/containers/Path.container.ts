@@ -23,7 +23,7 @@ export const Path = createContainer(() => {
 
   // First run, load paths if no initial path
   useEffect(() => {
-    if (!currentPathId && myPaths?.myPaths?.length) setCurrentPathId(myPaths.myPaths[0].id);
+    if (!currentPathId && myPaths?.myPaths?.length) setCurrentPathId(myPaths.myPaths[0].pathId);
   }, [myPaths]);
 
 

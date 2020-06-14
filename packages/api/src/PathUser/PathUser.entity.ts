@@ -25,10 +25,15 @@ export class PathUser extends CMBaseEntity {
     @Field()
     completed: boolean;
 
+    @Column({ default: 0 })
+    @Field()
+    progress: number;
+
     @CreateDateColumn()
     joined: Date;
 
     @ManyToOne(() => Path, path => path.pathUser)
+    @Field(() => Path)
     path: Path;
 
     @ManyToOne(() => UserWithPassword, user => user.pathUser)

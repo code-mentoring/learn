@@ -14,7 +14,7 @@ import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { UserModule } from './User';
 import { UserConceptModule } from './UserConcepts';
-
+import { UserModuleModule } from './UserModule';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -31,6 +31,7 @@ export const appImports = [
   CharacterModule,
   ConceptModule,
   UserConceptModule,
+  UserModuleModule,
 
   DatabaseModule,
 
