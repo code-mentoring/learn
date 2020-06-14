@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
           className={`absolute right-0 top-0 mt-${padding} mr-${padding} cursor-pointer`}
           icon="x"
           color="grey-300"
-          size={6}
+          size={1.5}
           onClick={() => setShow(false)}
         />
       </header>

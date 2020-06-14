@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { Loader, Icon } from '@codement/ui';
+import { Loader, Icon, theme } from '@codement/ui';
 import { User } from '@codement/api';
 import { Page, PageContent } from '../../components/Page/Page';
 
@@ -44,11 +44,11 @@ export const AdminsPage = () => {
             style={{ display: 'grid', gridTemplateColumns: '1fr 3fr 6fr 1fr' }}
           >
             {/* TODO: icon to be determined by admin type */}
-            <div><Icon icon="shieldAlt" size="small" color="pink-500" /></div>
+            <div><Icon icon="shieldAlt" size="small" color={theme.colors.tertiary[500]} /></div>
             <div> { admin.firstName } { admin.lastName }</div>
             <div>{ admin.email }</div>
             {/* TODO: action to be complete after design */}
-            <div className="content-end"><Icon icon="user" size="small" color="secondary-500" /></div>
+            <div className="content-end"><Icon icon="user" size="small" color={theme.colors.secondary[500]} /></div>
           </div>) }
       </PageContent>
     </Page>
