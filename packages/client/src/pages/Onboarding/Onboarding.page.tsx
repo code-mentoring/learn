@@ -35,7 +35,9 @@ export const OnboardingPage = () => {
     practiceGoal,
     setPracticeGoal
   } = Wizard.useContainer();
-  const { refetch } = Me.useContainer();
+  const { refetch, me } = Me.useContainer();
+
+  if (me?.userPreferences) history.push(routes.home());
 
   const radioOptions: Options[] = [
     { label: 'Casual', value: 1, subLabel: '1 lesson / day' },
