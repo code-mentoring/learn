@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import styled from 'styled-components';
 
 import { IconProps, sizeMap } from '../Icon/Icon';
 import icons from './path-icons/icons';
@@ -11,16 +12,18 @@ export interface PathIconProps extends Omit<IconProps, 'color' | 'type'> {
   className?: string;
 }
 
-export const PathIcon: React.FunctionComponent<PathIconProps> = ({
+export const PathIcon = styled<React.FC<PathIconProps>> (({
   icon,
   className,
   size = 'medium',
+  height,
   ...props
-}) => {
-  const sizeClass = `h-${typeof size === 'number' ? size : sizeMap[size as keyof typeof sizeMap]}`;
-
-  const klass = classnames('path-icon', className, sizeClass);
+}:PathIconProps) => {
+  const klass = classnames('path-icon', className);
   const Ikon = icons[icon];
   if (!Ikon) return null;
   return <Ikon {...props} className={klass} />;
-};
+})`
+height:${({ size }) =>`${!size ? sizeMap['medium'] : typeof size === 'number' ? size : sizeMap[size as keyof typeof sizeMap]}rem`};
+
+`;
