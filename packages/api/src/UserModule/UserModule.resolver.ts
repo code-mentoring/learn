@@ -1,4 +1,4 @@
-import { UseGuards, NotFoundException } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
@@ -19,8 +19,6 @@ export class UserModuleResolver {
     @CurrentUser() user: User,
     @Args('pathId') pathId: string
   ) {
-    const userModules = await this.userModuleService.findByUser(user.id);
-    if (!userModules) throw new NotFoundException('UserModule not found');
-    return Promise.all(userModules.filter(um => um.module.pathId === pathId));
+    return this.userModuleService.findByUserByPath(user.id, pathId);
   }
 }

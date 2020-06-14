@@ -13,7 +13,7 @@ export const Path = createContainer(() => {
   const [currentPathId, setCurrentPathId] = useState<string | null>(initialPath);
   const { data: myPaths, loading: loadingMyPaths } = useQuery<{ myPaths: Query['myPaths'] }>(myPathsQuery);
 
-  // Fetch BOTH the path AND it's modules
+  // Fetch BOTH the path AND it's modules. AND myPathModules and myPathConcepts
   const [fetchPathWithModules, { data: pathData, loading: loadingWithModules }] = useLazyQuery<{
     path: Query['path'],
     pathModules: Query['pathModules'],
