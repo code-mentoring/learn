@@ -3,7 +3,8 @@ import { FormikHandlers, getIn, useField, useFormikContext } from 'formik';
 import React, { FunctionComponent, useMemo } from 'react';
 
 import { firstUpper } from '../../lib/text';
-import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { CheckboxProps } from '../Checkbox/Checkbox.styles';
 import { useBrixFormContext } from '../Form/Form';
 import { Select } from '../Select/Select';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
@@ -93,10 +94,10 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
 
   useMemo(() => {
     if (
-      brixForm &&
-      brixForm.onChange &&
-      form.touched[name] &&
-      !changeOnBlur
+      brixForm
+      && brixForm.onChange
+      && form.touched[name]
+      && !changeOnBlur
     ) brixForm.onChange(form.values, form);
   }, [value]);
 
@@ -120,7 +121,7 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
 
   let Comp;
   if ('type' in compProps) {
-    const type = compProps.type;
+    const { type } = compProps;
 
     switch (type) {
       case 'hidden':
@@ -141,76 +142,76 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
         extraProps.textarea = true;
         break;
 
-      // case 'color':
-      //   Comp = ColorField;
-      //   break;
+        // case 'color':
+        //   Comp = ColorField;
+        //   break;
 
-      // case 'time':
-      //   Comp = TimeField;
-      //   extraProps.onChange = (e: React.ChangeEvent<HTMLInputElement | any>) => {
-      //     form.setFieldTouched(e.target.name);
-      //     form.setFieldValue(e.target.name,
-      //       e.target.value === ''
-      //         ? undefined
-      //         : e.target.name.includes('ampm')
-      //           ? e.target.value
-      //           : parseInt(e.target.value));
-      //   };
-      //   break;
+        // case 'time':
+        //   Comp = TimeField;
+        //   extraProps.onChange = (e: React.ChangeEvent<HTMLInputElement | any>) => {
+        //     form.setFieldTouched(e.target.name);
+        //     form.setFieldValue(e.target.name,
+        //       e.target.value === ''
+        //         ? undefined
+        //         : e.target.name.includes('ampm')
+        //           ? e.target.value
+        //           : parseInt(e.target.value));
+        //   };
+        //   break;
 
-      // case 'date':
-      //   Comp = DateField;
-      //   extraProps.onChange = (e: any) => {
-      //     form.setFieldValue(e.target.name, e.target.value);
-      //   };
-      //   break;
+        // case 'date':
+        //   Comp = DateField;
+        //   extraProps.onChange = (e: any) => {
+        //     form.setFieldValue(e.target.name, e.target.value);
+        //   };
+        //   break;
 
       case 'checkbox':
         Comp = Checkbox;
         extraProps.defaultChecked = Boolean(fieldFormik!.value);
         break;
 
-      // case 'switch':
-      //   Comp = Switch;
-      //   extraProps.form = form;
-      //   // @ts-ignore
-      //   if (compProps.label2) {
-      //     extraProps.label = label;
-      //     label = undefined;
-      //   }
-      //   break;
+        // case 'switch':
+        //   Comp = Switch;
+        //   extraProps.form = form;
+        //   // @ts-ignore
+        //   if (compProps.label2) {
+        //     extraProps.label = label;
+        //     label = undefined;
+        //   }
+        //   break;
 
       case 'select':
         Comp = Select;
         break;
 
-      // case 'multiselect':
-      //   Comp = MultiSelect;
-      //   extraProps.onChange = (opts: OptionProps<{ value: number | string }>[]) => {
-      //     form.setFieldTouched(name);
-      //     form.setFieldValue(name, opts);
-      //   };
-      //   break;
+        // case 'multiselect':
+        //   Comp = MultiSelect;
+        //   extraProps.onChange = (opts: OptionProps<{ value: number | string }>[]) => {
+        //     form.setFieldTouched(name);
+        //     form.setFieldValue(name, opts);
+        //   };
+        //   break;
 
-      // case 'image':
-      //   Comp = ImageField;
-      //   extraProps.form = form;
-      //   break;
+        // case 'image':
+        //   Comp = ImageField;
+        //   extraProps.form = form;
+        //   break;
 
-      // case 'entity-image':
-      //   Comp = EntityImageField;
-      //   extraProps.form = form;
-      //   break;
+        // case 'entity-image':
+        //   Comp = EntityImageField;
+        //   extraProps.form = form;
+        //   break;
 
-      // case 'radio-tab':
-      //   Comp = RadioTab;
-      //   extraProps.form = form;
-      //   break;
+        // case 'radio-tab':
+        //   Comp = RadioTab;
+        //   extraProps.form = form;
+        //   break;
 
-      // case 'radio':
-      //   Comp = Radio;
-      //   extraProps.form = form;
-      //   break;
+        // case 'radio':
+        //   Comp = Radio;
+        //   extraProps.form = form;
+        //   break;
 
       default:
         const noComp = new Error(`Could not find field type for '${type}'`);
@@ -232,10 +233,11 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
 
   return <div className={classnames('form-field', className, {
     [`col-span-${colSpan}`]: colSpan !== 2,
-    'pt-2': !Boolean(label)
-  })}>
-    {label &&
-      (LC ? <LC htmlFor={name}>{label}</LC> : <label htmlFor={name}>{firstUpper(label)}</label>)
+    'pt-2': !label
+  })}
+  >
+    {label
+      && (LC ? <LC htmlFor={name}>{label}</LC> : <label htmlFor={name}>{firstUpper(label)}</label>)
     }
     {Comp ? <Comp
       id={name}
@@ -247,4 +249,3 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
     {typeof error === 'string' && <ErrorMessage error={error} className="text-right" />}
   </div>;
 };
-
