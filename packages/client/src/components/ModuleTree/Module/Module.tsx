@@ -1,9 +1,7 @@
 import React from 'react';
-// import classnames from 'classnames';
 
-import { Module as EModule, UserModule, UserConcept } from '@codement/api';
+import { Module as EModule, UserModule, UserConcept, ModuleType } from '@codement/api/types';
 import { theme } from '@codement/ui';
-
 import { ModuleIcon } from './Icons/Icon';
 
 export interface ModuleProps {
@@ -37,7 +35,7 @@ export const Module: React.FC<ModuleProps> = ({
     >
 
       <ModuleIcon
-        icon={module.type === 'lesson' ? 'hexagon' : 'octagon'}
+        icon={module.type === ModuleType.Lesson ? 'hexagon' : 'octagon'}
         position="absolute"
         size={3}
         // eslint-disable-next-line no-nested-ternary
@@ -48,7 +46,7 @@ export const Module: React.FC<ModuleProps> = ({
         transform="translate(-50%, -50%)"
       />
 
-      { module.type !== 'assignment'
+      { module.type !== ModuleType.Assignment
       && <ModuleIcon
         icon="circle"
         position="absolute"
@@ -62,7 +60,7 @@ export const Module: React.FC<ModuleProps> = ({
       /> }
 
       {/* completed status with check mark in the circle. */}
-      { module.type !== 'assignment'
+      { module.type !== ModuleType.Assignment
       && isCompleted
       && <ModuleIcon
         icon="check"
@@ -76,7 +74,7 @@ export const Module: React.FC<ModuleProps> = ({
       />}
 
       {/* open status with number of completed concepts in the circle. */}
-      { module.type !== 'assignment'
+      { module.type !== ModuleType.Assignment
       && isOpen
       && <span style={{
         left: '80%',
