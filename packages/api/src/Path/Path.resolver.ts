@@ -44,8 +44,8 @@ export class PathResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Path])
-  unjoinedPaths(@CurrentUser() user: User) {
-    return this.pathService.findUnjoined(user.id);
+  getMyUnjoinedPaths(@CurrentUser() user: User) {
+    return this.pathService.findUnjoinedByUser(user.id);
   }
 
   @UseGuards(GQLAuthGuard)
