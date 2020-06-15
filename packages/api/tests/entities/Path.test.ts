@@ -1,10 +1,22 @@
 import { PathInput } from '../../types';
 import { TestClient } from '../utils/TestClient';
-import * as random from '../../src/Database/seeders/random'
+import * as random from '../../src/Database/seeders/random';
 
 export const pathInput: PathInput = {
   name: 'Path name',
   icon: 'icon',
+  description: 'Description text'
+};
+
+export const pathInput2: PathInput = {
+  name: 'Path 2',
+  icon: 'icon2',
+  description: 'Description text'
+};
+
+export const pathInput3: PathInput = {
+  name: 'Path 3',
+  icon: 'icon3',
   description: 'Description text'
 };
 
@@ -105,6 +117,26 @@ describe('Path entity', () => {
       const updatePath = await TestClient.getPathByName(path.name);
 
       expect(updatePath.characterId).toEqual(character.id);
+    });
+  });
+
+  describe('Query: getMyUnjoinedPaths', () => {
+    beforeEach(setup);
+
+    it('should return path3', async () => {
+      const path1 = await TestClient.createPath(pathInput);
+      const path2 = await TestClient.createPath(pathInput2);
+      const path3 = await TestClient.createPath(pathInput3);
+
+      const joinPath1 = await TestClient.joinPath(path1.id);
+      const joinPath2 = await TestClient.joinPath(path2.id);
+
+      await expect(joinPath1).toBe(true);
+      await expect(joinPath2).toBe(true);
+
+      const unjoinedPaths = await TestClient.getMyUnjoinedPaths();
+
+      await expect(unjoinedPaths[0]).toStrictEqual(path3);
     });
   });
 });

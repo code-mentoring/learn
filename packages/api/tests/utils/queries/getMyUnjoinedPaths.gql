@@ -1,0 +1,10 @@
+query getMyUnjoinedPaths {
+  getMyUnjoinedPaths {
+    id
+    name
+    icon
+    description
+    characterId
+    createdAt
+  }
+}

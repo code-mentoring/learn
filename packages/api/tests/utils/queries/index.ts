@@ -11,7 +11,9 @@ const files = [
   'getUserFriends',
   'getCharacters',
   'assignments',
-  'getConceptByName'
+  'getConceptByName',
+  'getCharacters',
+  'getMyUnjoinedPaths'
 ];
 
 export default files.reduce((obj, file) => {

@@ -8,7 +8,10 @@ import { DatabaseService } from '../../src/Database/Database.service';
 import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
-import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
+import {
+  UserPreferences,
+  UserPreferencesInput,
+} from '../../src/UserPreferences/UserPreferences.entity';
 import {
   Assignment,
   AssignmentFile,
@@ -27,15 +30,17 @@ import {
   Concept,
   CreateConceptInput,
   UserConcept,
-  UpdateConceptInput
+  UpdateConceptInput,
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
 import { UserWithPassword } from '../../src/User/User.entity';
-import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
+import {
+  CreateCharacterInput,
+  UpdateCharacterInput,
+} from '../../src/Character/Character.entity';
 import { UpdatePathInput } from '../../src/Path/Path.entity';
-
 
 /**
  * A helper class to test the API
@@ -64,7 +69,7 @@ export abstract class TestClient {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: appImports,
       providers: [TestLogger],
-      exports: [TestLogger]
+      exports: [TestLogger],
     }).compile();
 
     this.db = await moduleFixture.resolve(DatabaseService);
@@ -95,7 +100,7 @@ export abstract class TestClient {
   ): Promise<LoginOutput> {
     const res = await this._request<LoginOutput>('login', mutations.login, {
       email,
-      password
+      password,
     });
     if (storeToken) this.token = res.accessToken;
     return res;
@@ -113,28 +118,50 @@ export abstract class TestClient {
     return this._request('updatePath', mutations.updatePath, { path });
   }
 
-  static updatePreferences(preferences: UserPreferencesInput): Promise<UserPreferences> {
-    return this._request('updatePreferences', mutations.updatePreferences, { preferences });
+  static updatePreferences(
+    preferences: UserPreferencesInput
+  ): Promise<UserPreferences> {
+    return this._request('updatePreferences', mutations.updatePreferences, {
+      preferences,
+    });
   }
 
-  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
-    return this._request('createAssignment', mutations.createAssignment, { assignment });
+  static createAssignment(
+    assignment: CreateAssignmentInput
+  ): Promise<Assignment> {
+    return this._request('createAssignment', mutations.createAssignment, {
+      assignment,
+    });
   }
 
-  static updateAssignment(assignment: UpdateAssignmentInput): Promise<Assignment> {
-    return this._request('updateAssignment', mutations.updateAssignment, { assignment });
+  static updateAssignment(
+    assignment: UpdateAssignmentInput
+  ): Promise<Assignment> {
+    return this._request('updateAssignment', mutations.updateAssignment, {
+      assignment,
+    });
   }
 
   static deleteAssignment(assignmentId: string): Promise<Assignment> {
-    return this._request('deleteAssignment', mutations.deleteAssignment, { assignmentId });
+    return this._request('deleteAssignment', mutations.deleteAssignment, {
+      assignmentId,
+    });
   }
 
-  static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
-    return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
+  static createAssignmentFile(
+    assignmentFile: CreateAssignmentFileInput
+  ): Promise<AssignmentFile> {
+    return this._request(
+      'createAssignmentFile',
+      mutations.createAssignmentFile,
+      { assignmentFile }
+    );
   }
 
   static createFriendship(toId: String): Promise<FriendOutput> {
-    return this._request('createFriendship', mutations.createFriendship, { toId });
+    return this._request('createFriendship', mutations.createFriendship, {
+      toId,
+    });
   }
 
   static respondToFriendRequest(
@@ -142,11 +169,17 @@ export abstract class TestClient {
     user2Id: string,
     response: string
   ): Promise<Friend> {
-    return this._request('respondToFriendRequest', mutations.respondToFriendRequest, { user1Id, user2Id, response });
+    return this._request(
+      'respondToFriendRequest',
+      mutations.respondToFriendRequest,
+      { user1Id, user2Id, response }
+    );
   }
 
   static deleteFriendship(friendId: string): Promise<Boolean> {
-    return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
+    return this._request('deleteFriendship', mutations.deleteFriendship, {
+      friendId,
+    });
   }
 
   static createModule(module: CreateModuleInput): Promise<Module> {
@@ -162,11 +195,15 @@ export abstract class TestClient {
   }
 
   static createCharacter(character: CreateCharacterInput): Promise<Character> {
-    return this._request('createCharacter', mutations.createCharacter, { character });
+    return this._request('createCharacter', mutations.createCharacter, {
+      character,
+    });
   }
 
   static updateCharacter(character: UpdateCharacterInput): Promise<Character> {
-    return this._request('updateCharacter', mutations.updateCharacter, { character });
+    return this._request('updateCharacter', mutations.updateCharacter, {
+      character,
+    });
   }
 
   static deleteCharacter(id: string): Promise<Boolean> {
@@ -178,7 +215,7 @@ export abstract class TestClient {
   }
 
   static learnConcept(conceptId: string): Promise<Boolean> {
-    return this._request('learnConcept', mutations.learnConcept, { conceptId })
+    return this._request('learnConcept', mutations.learnConcept, { conceptId });
   }
 
   static updateConcept(concept: UpdateConceptInput): Promise<Concept> {
@@ -202,7 +239,7 @@ export abstract class TestClient {
     return this._request('modules', queries.modules);
   }
 
-  static getUserFriends(userId: string): Promise< Friend[] > {
+  static getUserFriends(userId: string): Promise<Friend[]> {
     return this._request('getUserFriends', queries.getUserFriends, { userId });
   }
 
@@ -211,16 +248,22 @@ export abstract class TestClient {
   }
 
   static getConceptByName(name: string): Promise<Concept> {
-    return this._request('getConceptByName', queries.getConceptByName, { name });
+    return this._request('getConceptByName', queries.getConceptByName, {
+      name,
+    });
   }
-  
+
   static users(): Promise<User[]> {
     return this._request('users', queries.users);
   }
 
   static getAssignments(): Promise<Assignment[]> {
-      return this._request('assignments', queries.assignments);
-    }
+    return this._request('assignments', queries.assignments);
+  }
+
+  static getMyUnjoinedPaths(): Promise<Path[]> {
+    return this._request('getMyUnjoinedPaths', queries.getMyUnjoinedPaths);
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {
