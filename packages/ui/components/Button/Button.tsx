@@ -14,27 +14,31 @@ export interface ButtonProps extends HTMLAttributes<any> {
   btnType?: 'primary' | 'secondary' | 'tertiary' | 'transparent'
   disabled?: boolean;
   size?: string;
-  iconName?: string;
+  icon?: string;
   iconPosition?: 'left' | 'right'
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  iconName,
-  iconPosition,
+  icon,
+  iconPosition = 'left',
   children,
   ...props
 }) => (
-  // TODO: Fix Icon styling once Icon component is migrated to styled components.
+
   <StyledButton
     {...props}
   >
-    { iconPosition === 'left' && <Icon className="inline-block" icon={iconName} />}
+    { icon && iconPosition === 'left' && <ButtonIcon size="medium" icon={icon} />}
     { children }
-    { iconPosition === 'right' && <Icon className="inline-block" icon={iconName} />}
+    { icon && iconPosition === 'right' && <ButtonIcon icon={icon} />}
   </StyledButton>
 );
 
-export const StyledButton = styled.button<ButtonProps>`
+const ButtonIcon = styled(Icon)`
+display:inline-block;
+`;
+
+const StyledButton = styled.button<ButtonProps>`
   display: inline-block;
   font-weight: 800;
   height: 2.25rem;
