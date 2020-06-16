@@ -31,15 +31,12 @@ html {
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.25;
-    text-align: center;
   }
   
   h3 {
     font-size: 1.5rem;
     font-weight: 900;
     line-height: 1.25;
-    white-space: pre-wrap;
-    margin-bottom: 0.75rem;
   }
   
   h4 {
@@ -48,8 +45,6 @@ html {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: ${props => props.theme.colors.grey[700]};
-    margin-bottom: 1rem;
-    text-align: center;
   }
   
   p {

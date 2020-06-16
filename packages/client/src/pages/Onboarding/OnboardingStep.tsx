@@ -27,6 +27,11 @@ text-align: center;
 margin-bottom: 2rem;
 `;
 
+const Title = styled.h3`
+white-space: pre-wrap;
+margin-bottom: 0.75rem;
+`;
+
 export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   path,
   intro,
@@ -40,7 +45,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   return <Route exact={exact} path={path}>
     <CenterWrapper>
       <div className={classnames('flex flex-col items-center', intro.className)}>
-        <h3>{intro.title}</h3>
+        <Title>{intro.title}</Title>
         <Styledp>{intro.text}</Styledp>
       </div>
       {children}

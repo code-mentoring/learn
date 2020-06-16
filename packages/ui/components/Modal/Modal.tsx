@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 import classnames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
+import styled from 'styled-components';
 import { Card } from '../Card/Card';
 import { Icon } from '../Icon/Icon';
 import styles from './Modal.module.css';
@@ -15,6 +16,9 @@ export interface ModalProps extends React.HTMLProps<HTMLElement> {
   onClose?: () => void;
 }
 
+const Heading = styled.h2`
+text-align: center;
+`;
 
 export const Modal: React.FC<ModalProps> = ({
   children,
@@ -43,7 +47,7 @@ export const Modal: React.FC<ModalProps> = ({
   }, [show]);
 
 
-  const Title = (typeof heading === 'string') ? <h2 className="text-center">{heading}</h2> : heading;
+  const Title = (typeof heading === 'string') ? <Heading>{heading}</Heading> : heading;
 
 
   const content = <aside className={styles.modalContainer}>
