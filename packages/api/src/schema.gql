@@ -151,7 +151,7 @@ type Query {
   paths: [Path!]!
   path(id: String!): Path!
   getPathByName(name: String!): Path!
-  myPaths: [Path!]!
+  myPaths: [PathUser!]!
   getMyUnjoinedPaths: [Path!]!
 }
 

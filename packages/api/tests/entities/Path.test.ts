@@ -131,12 +131,12 @@ describe('Path entity', () => {
       const joinPath1 = await TestClient.joinPath(path1.id);
       const joinPath2 = await TestClient.joinPath(path2.id);
 
-      await expect(joinPath1).toBe(true);
-      await expect(joinPath2).toBe(true);
+      expect(joinPath1).toBe(true);
+      expect(joinPath2).toBe(true);
 
       const unjoinedPaths = await TestClient.getMyUnjoinedPaths();
 
-      await expect(unjoinedPaths[0]).toStrictEqual(path3);
+      expect(unjoinedPaths[0]).toStrictEqual(path3);
     });
   });
 });
