@@ -4,9 +4,13 @@ import { Button } from '@codement/ui';
 import { Modal, ModalProps } from '@codement/ui/components/Modal/Modal';
 import gql from 'graphql-tag';
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import { PathsList } from '../../components/PathsList/PathsList';
 
+const Styledp = styled.p`
+margin-bottom: 1rem;
+`;
 
 const joinSelectedPaths = gql`
   mutation joinPaths($paths: [String!]!) {
@@ -33,9 +37,9 @@ export const ModalJoinPath: React.FC<ModalJoinPathProps> = ({
   };
 
   return <Modal {...modalProps} show={show} heading="Join a path">
-    <p className="mb-4">
+    <Styledp>
       Select a path below to begin your journey...
-    </p>
+    </Styledp>
 
     <PathsList onChange={setSelectedPaths} />
 

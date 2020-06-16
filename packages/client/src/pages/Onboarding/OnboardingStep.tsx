@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 
 import classnames from 'classnames';
+import styled from 'styled-components';
 import { Wizard } from '../../containers/Wizard.container';
 import { CenterWrapper } from './Wizard/CenterWrapper';
 import { FooterSteps, FooterStepsProps } from './Wizard/FooterSteps';
@@ -20,6 +21,12 @@ export interface OnboardingStepProps {
   exact?: boolean;
 }
 
+const Styledp = styled.p`
+font-size: 1.125rem;
+text-align: center;
+margin-bottom: 2rem;
+`;
+
 export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   path,
   intro,
@@ -34,7 +41,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
     <CenterWrapper>
       <div className={classnames('flex flex-col items-center', intro.className)}>
         <h3 className="mb-3 font-sans whitespace-pre-wrap">{intro.title}</h3>
-        <p className="text-center text-grey-700 text-lg mb-8">{intro.text}</p>
+        <Styledp>{intro.text}</Styledp>
       </div>
       {children}
     </CenterWrapper>
