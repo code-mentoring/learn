@@ -14,7 +14,7 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
   const [showModal, setShowModal] = useState(false);
 
   return <Card {...cardProps}>
-    <h4 className="text-center mb-4">Progress</h4>
+    <h4>Progress</h4>
     <div className="grid grid-cols-3">
       {myPaths?.map(path =>
         <ProgressPath

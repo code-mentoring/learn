@@ -45,6 +45,8 @@ html {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: ${props => props.theme.colors.grey[700]};
+    margin-bottom: 1rem;
+    text-align: center;
   }
   
   p {
