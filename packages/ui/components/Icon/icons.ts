@@ -20,6 +20,7 @@ import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
 import { IconShieldAlt } from './icons/solid/cis-shield-alt';
+import { IconArrowDown } from './icons/solid/cis-arrow-down';
 
 export const icons = {
   check: IconCheck,
@@ -44,5 +45,6 @@ export const icons = {
   user: IconUser,
   userLine: IconUserLine,
   x: IconX,
-  shieldAlt: IconShieldAlt
+  shieldAlt: IconShieldAlt,
+  arrowDown: IconArrowDown
 };
