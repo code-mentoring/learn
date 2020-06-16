@@ -28,14 +28,14 @@ export const Button: React.FC<ButtonProps> = ({
   <StyledButton
     {...props}
   >
-    { icon && iconPosition === 'left' && <ButtonIcon size="medium" icon={icon} />}
+    { icon && iconPosition === 'left' && <ButtonIcon icon={icon} />}
     { children }
     { icon && iconPosition === 'right' && <ButtonIcon icon={icon} />}
   </StyledButton>
 );
 
-const ButtonIcon = styled(Icon)`
-display:inline-block;
+const ButtonIcon = styled(props => <Icon {...props} />)`
+  display: inline-block;
 `;
 
 const StyledButton = styled.button<ButtonProps>`
