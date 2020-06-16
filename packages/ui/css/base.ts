@@ -31,6 +31,7 @@ html {
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.25;
+    text-align: center;
   }
   
   h3 {
