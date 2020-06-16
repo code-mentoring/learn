@@ -40,7 +40,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   return <Route exact={exact} path={path}>
     <CenterWrapper>
       <div className={classnames('flex flex-col items-center', intro.className)}>
-        <h3 className="mb-3 font-sans whitespace-pre-wrap">{intro.title}</h3>
+        <h3>{intro.title}</h3>
         <Styledp>{intro.text}</Styledp>
       </div>
       {children}

@@ -37,6 +37,8 @@ html {
     font-size: 1.5rem;
     font-weight: 900;
     line-height: 1.25;
+    white-space: pre-wrap;
+    margin-bottom: 0.75rem;
   }
   
   h4 {
