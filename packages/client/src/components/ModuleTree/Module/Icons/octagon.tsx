@@ -1,11 +1,10 @@
 import React from 'react';
 
-export const Octagon: React.FunctionComponent<{className?: string}> = ({ className }) => (
-  <svg className={`octagon ${className}`} width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const IconOctagon: React.FC<{className?: string}> = props =>
+  <svg {...props} width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
       d="M99.4149 47.1732C100.43 49.6234 100.43 52.3766 99.4149 54.8268L87.9405 82.5285C86.9255 84.9788 84.9788 86.9255 82.5285 87.9405L54.8268 99.4149C52.3766 100.43 49.6234 100.43 47.1732 99.4149L19.4715 87.9405C17.0212 86.9255 15.0745 84.9788 14.0595 82.5285L2.58513 54.8268C1.57019 52.3766 1.57019 49.6234 2.58513 47.1732L14.0595 19.4715C15.0745 17.0212 17.0212 15.0745 19.4715 14.0595L47.1732 2.58513C49.6234 1.57019 52.3766 1.57019 54.8268 2.58513L82.5285 14.0595C84.9788 15.0745 86.9255 17.0212 87.9405 19.4715L99.4149 47.1732Z"
     />
-  </svg>
-);
+  </svg>;
