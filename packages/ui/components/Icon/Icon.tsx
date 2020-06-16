@@ -36,11 +36,11 @@ export const Icon = styled<React.FC<IconProps>>(({
   if (!Ikon) return null;
   return <Ikon {...props} className={klass} />;
 })`
-height:${({ size }) =>`${!size ? sizeMap['medium'] : typeof size === 'number' ? size : sizeMap[size]}rem`};
+height:${({ size }) => `${!size ? sizeMap.medium : typeof size === 'number' ? size : sizeMap[size]}rem`};
 width:auto;
 color:${({ color }) => color};
 fill:${({ color }) => color};
 stroke:${({ stroke }) => stroke};
-stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth? strokeWidth : 2)};
+stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth || 2)};
 
 `;
