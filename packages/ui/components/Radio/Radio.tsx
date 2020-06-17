@@ -1,13 +1,18 @@
-import React, { HTMLProps } from 'react';
-import classnames from 'classnames';
+import React, { HTMLProps, FormEvent } from 'react';
+import { RadioDiv, RadioInput, RadioSpan } from './Radio.styles';
 
-export interface RadioProps extends HTMLProps<HTMLInputElement> {}
 
+export interface RadioProps extends HTMLProps<HTMLInputElement> {
+  name: string;
+  value: any;
+  onChange: (e: FormEvent<HTMLInputElement>) => void;
+}
 
 export const Radio: React.FC<RadioProps> = ({
-  className,
-  ...props
-}) => <div className={classnames('radio', className)}>
-  <input {...props} type="radio" />
-  <span />
-</div>;
+  name,
+  value,
+  onChange
+}) => (<RadioDiv>
+  <RadioInput type="radio" name={name} value={value} onChange={onChange} />
+  <RadioSpan />
+</RadioDiv>);
