@@ -46,6 +46,11 @@ html {
     letter-spacing: 0.05em;
     color: ${props => props.theme.colors.grey[700]};
   }
+
+  h4.titleCentred {
+  margin-bottom: 1rem;
+  text-align: center;
+  }
   
   p {
     font-weight: 400;

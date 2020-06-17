@@ -1,7 +1,6 @@
 import { Card, CardProps, Icon } from '@codement/ui';
 import React, { useState } from 'react';
 
-import styled from 'styled-components';
 import { Path } from '../../containers/Path.container';
 import { ModalJoinPath } from '../../modals/JoinPath/JoinPath.modal';
 import { ProgressPath } from './ProgressPath';
@@ -9,18 +8,13 @@ import { ProgressPath } from './ProgressPath';
 
 export interface ProgressWidgetProps extends CardProps { }
 
-export const ProgressHeader = styled.h4`
-margin-bottom: 1rem;
-text-align: center;
-`;
-
 export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
 
   const { myPaths } = Path.useContainer();
   const [showModal, setShowModal] = useState(false);
 
   return <Card {...cardProps}>
-    <ProgressHeader>Progress</ProgressHeader>
+    <h4 className="titleCentred">Progress</h4>
     <div className="grid grid-cols-3">
       {myPaths?.map(path =>
         <ProgressPath

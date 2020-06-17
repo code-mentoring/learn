@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { Loader } from '@codement/ui';
 import { User } from '@codement/api';
 import { ErrorMessage } from '@codement/ui/components/ErrorMessage/ErrorMessage';
-import styled from 'styled-components';
 
 const usersQuery = gql`query {
   users {
@@ -18,18 +17,13 @@ const usersQuery = gql`query {
 
 export interface LeaderboardWidgetProps extends CardProps { }
 
-export const LeaderboardTitle = styled.h4`
-margin-bottom: 1rem;
-text-align: center;
-`;
-
 export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
   const { data, loading, error } = useQuery<{ users: User[] }>(usersQuery);
 
   if (loading) return <Card><Loader /></Card>;
 
   return <Card {...props}>
-    <LeaderboardTitle>Leaderboard</LeaderboardTitle>
+    <h4 className="titleCentred">Leaderboard</h4>
     {error
       ? <ErrorMessage error={error.message} />
       : data!.users.map(u => <div className="text-primary-500 font-semibold mb-2">
