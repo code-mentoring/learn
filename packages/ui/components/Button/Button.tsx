@@ -16,6 +16,7 @@ export interface ButtonProps extends HTMLAttributes<any> {
   size?: string;
   icon?: string;
   iconPosition?: 'left' | 'right'
+  className?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -28,29 +29,31 @@ export const Button: React.FC<ButtonProps> = ({
   <StyledButton
     {...props}
   >
-    { icon && iconPosition === 'left' && <ButtonIcon icon={icon} />}
+    { icon && iconPosition === 'left' && <ButtonIconLeft size={8} icon={icon} />}
     { children }
-    { icon && iconPosition === 'right' && <ButtonIcon icon={icon} />}
+    { icon && iconPosition === 'right' && <ButtonIconRight size={8} icon={icon} />}
   </StyledButton>
 );
 
-const ButtonIcon = styled(props => <Icon {...props} />)`
-  display: inline-block;
-  margin: 5;
+const ButtonIconLeft = styled(props => <Icon {...props} />)`
+  margin-right: 14px;
+  display: inline;
+`;
+
+const ButtonIconRight = styled(props => <Icon {...props} />)`
+  margin-left: 14px;
+  display: inline;
 `;
 
 const StyledButton = styled.button<ButtonProps>`
   font-weight: 800;
-  font-size: 14px;
-  height: 36px;
-  line-height: 36px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border-radius: 8px;
-  letter-spacing: 0.75px;
-  display: block;
-  align-items: center;
-  text-align: center;
+  font-size: 1.4rem;
+  height: 3.6rem;
+  line-height: 3.6rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  border-radius: 0.8rem;
+  letter-spacing: 0.075rem;
   text-transform: uppercase;
   
   color: ${props => props.theme.colors.white};
@@ -66,9 +69,9 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   ${({ size }) => size === 'large' && css`
-    height: 3rem;
-    line-height: 3rem;
-    font-size: 1rem;
+    height: 4.8rem;
+    line-height: 4.8rem;
+    font-size: 1.6rem;
   `}
 
   ${({ btnType }) => btnType === BtnType.secondary && css`
