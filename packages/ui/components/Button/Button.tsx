@@ -36,20 +36,25 @@ export const Button: React.FC<ButtonProps> = ({
 
 const ButtonIcon = styled(props => <Icon {...props} />)`
   display: inline-block;
+  margin: 5;
 `;
 
 const StyledButton = styled.button<ButtonProps>`
-  display: inline-block;
   font-weight: 800;
-  height: 2.25rem;
-  line-height: 2.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  border-radius: 0.5rem;
-  letter-spacing: 0.05em;
-  font-size: 0.875rem;
-  color: ${props => props.theme.colors.white};
+  font-size: 14px;
+  height: 36px;
+  line-height: 36px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 8px;
+  letter-spacing: 0.75px;
+  display: block;
+  align-items: center;
+  text-align: center;
   text-transform: uppercase;
+  
+  color: ${props => props.theme.colors.white};
+  
   background-color: ${props => props.theme.colors.primary['500']};
 
   &:hover {
@@ -61,8 +66,6 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   ${({ size }) => size === 'large' && css`
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
     height: 3rem;
     line-height: 3rem;
     font-size: 1rem;
