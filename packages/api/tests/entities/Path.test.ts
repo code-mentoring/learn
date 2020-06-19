@@ -120,7 +120,7 @@ describe('Path entity', () => {
     });
   });
 
-  describe('Query: getMyUnjoinedPaths', () => {
+  describe('Query: myUnjoinedPaths', () => {
     beforeEach(setup);
 
     it('should return path3', async () => {
@@ -134,7 +134,7 @@ describe('Path entity', () => {
       expect(joinPath1).toBe(true);
       expect(joinPath2).toBe(true);
 
-      const unjoinedPaths = await TestClient.getMyUnjoinedPaths();
+      const unjoinedPaths = await TestClient.myUnjoinedPaths();
 
       expect(unjoinedPaths[0]).toStrictEqual(path3);
     });

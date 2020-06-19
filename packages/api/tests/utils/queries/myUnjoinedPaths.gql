@@ -1,5 +1,5 @@
-query getMyUnjoinedPaths {
-  getMyUnjoinedPaths {
+query myUnjoinedPaths {
+  myUnjoinedPaths {
     id
     name
     icon

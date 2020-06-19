@@ -261,8 +261,8 @@ export abstract class TestClient {
     return this._request('assignments', queries.assignments);
   }
 
-  static getMyUnjoinedPaths(): Promise<Path[]> {
-    return this._request('getMyUnjoinedPaths', queries.getMyUnjoinedPaths);
+  static myUnjoinedPaths(): Promise<Path[]> {
+    return this._request('myUnjoinedPaths', queries.myUnjoinedPaths);
   }
 
   // ----------------------------------------------------------------- Workflows

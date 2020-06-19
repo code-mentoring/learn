@@ -13,7 +13,7 @@ const files = [
   'assignments',
   'getConceptByName',
   'getCharacters',
-  'getMyUnjoinedPaths'
+  'myUnjoinedPaths'
 ];
 
 export default files.reduce((obj, file) => {
