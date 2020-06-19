@@ -12,18 +12,31 @@ const initialPath = localStorage.getItem(LS_PATH);
 
 export const Path = createContainer(() => {
   const [currentPathId, setCurrentPathId] = useState<string | null>(initialPath);
-  const { data: myPaths, loading: loadingMyPaths } = useQuery<{ myPaths: Query['myPaths'] }>(myPathsQuery);
+  const { data: myPaths, loading: loadingMyPaths } = useQuery<{ myPaths: Query['myPaths'] }>(myPathsQuery, {
+    fetchPolicy: 'no-cache'
+  });
 
   // Fetch BOTH the path AND it's modules
   const [fetchPathWithModules, { data: pathData, loading: loadingWithModules }] = useLazyQuery<{
     path: Query['path'],
     pathModules: Query['pathModules']
-  }, QueryPathArgs>(pathQuery);
-
+  }, QueryPathArgs>(pathQuery, {
+    fetchPolicy: 'no-cache'
+  });
 
   // First run, load paths if no initial path
   useEffect(() => {
-    if (!currentPathId && myPaths?.myPaths?.length) setCurrentPathId(myPaths.myPaths[0].pathId);
+    if (!currentPathId && myPaths?.myPaths?.length) {
+      setCurrentPathId(myPaths.myPaths[0].pathId);
+      // Check if currentPathId is valid
+    } else if (currentPathId && myPaths?.myPaths?.length) {
+      if (!myPaths.myPaths.some(path => path.pathId === currentPathId)) {
+        setCurrentPathId(myPaths.myPaths[0].pathId);
+      }
+      // If currentPathId is set but no myPaths, remove path from local storage
+    } else if (currentPathId && myPaths?.myPaths?.length === 0) {
+      setCurrentPathId(null);
+    }
   }, [myPaths]);
 
 
