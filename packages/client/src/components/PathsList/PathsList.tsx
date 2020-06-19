@@ -29,7 +29,7 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
 }) => {
 
   const [selectedPaths, setSelectedPaths] = useState<Path[]>(selected);
-  const { data } = useQuery<{ unjoinedPaths: Path[] }>(getPaths);
+  const { data } = useQuery<{ getMyUnjoinedPaths: Path[] }>(getPaths);
   const path = data?.getMyUnjoinedPaths;
 
   useEffect(() => {
