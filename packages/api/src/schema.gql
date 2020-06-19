@@ -152,7 +152,7 @@ type Query {
   path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [PathUser!]!
-  getMyUnjoinedPaths: [Path!]!
+  myUnjoinedPaths: [Path!]!
 }
 
 type Mutation {
