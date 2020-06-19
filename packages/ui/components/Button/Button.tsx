@@ -46,28 +46,6 @@ const ButtonIconRight = styled(props => <Icon {...props} />)`
 `;
 
 const StyledButton = styled.button<ButtonProps>`
-  font-weight: 800;
-  font-size: 1.4rem;
-  height: 3.6rem;
-  line-height: 3.6rem;
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
-  border-radius: 0.8rem;
-  letter-spacing: 0.075rem;
-  text-transform: uppercase;
-  
-  color: ${props => props.theme.colors.white};
-  
-  background-color: ${props => props.theme.colors.primary['500']};
-
-  &:hover {
-    background-color: ${props => props.theme.colors.primary['400']};
-  }
-
-  &:focus {
-    background-color: ${props => props.theme.colors.primary['600']};
-  }
-
   ${({ size }) => size === 'large' && css`
     height: 4.8rem;
     line-height: 4.8rem;
