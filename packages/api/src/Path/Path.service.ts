@@ -36,6 +36,7 @@ export class PathService {
     return userPaths;
   }
 
+  // redo this path query
   async findUnjoinedByUser(userId: string): Promise<Path[]> {
     const paths = await this.findAll();
     const joined = await this.findByUser(userId);

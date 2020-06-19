@@ -10,7 +10,7 @@ import styles from './PathsList.module.css';
 export type SelectedPath = Pick<Path, 'id'>;
 
 const getPaths = gql`{
-  unjoinedPaths {
+  getMyUnjoinedPaths {
     id
     name
     icon
@@ -30,7 +30,7 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
 
   const [selectedPaths, setSelectedPaths] = useState<Path[]>(selected);
   const { data } = useQuery<{ unjoinedPaths: Path[] }>(getPaths);
-  const path = data?.unjoinedPaths;
+  const path = data?.getMyUnjoinedPaths;
 
   useEffect(() => {
     if (onChange) onChange(selectedPaths);
