@@ -36,12 +36,12 @@ export const Button: React.FC<ButtonProps> = ({
 );
 
 const ButtonIconLeft = styled(props => <Icon {...props} />)`
-  margin-right: 14px;
+  margin-right: 1.4rem;
   display: inline;
 `;
 
 const ButtonIconRight = styled(props => <Icon {...props} />)`
-  margin-left: 14px;
+  margin-left: 1.4rem;
   display: inline;
 `;
 
