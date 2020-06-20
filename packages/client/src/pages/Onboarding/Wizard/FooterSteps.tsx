@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { Wizard } from '../../../containers/Wizard.container';
 import { routes } from '../../../router/routes';
@@ -17,6 +18,14 @@ export interface FooterStepsProps {
   submit?: () => void;
 }
 
+const BackButton = styled(Button)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto 24px auto;
+`;
+
 export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   nextLink,
   backLink,
@@ -28,9 +37,9 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   const [disable, setDisable] = useState(true);
 
   return <>
-    <Button className="absolute bottom-0 mb-6 mx-auto inset-x-0" color="transparent" text size="large">
+    <BackButton btnType="transparent" size="large">
       <Link className="text-grey-500" to={backLink}>Go back</Link>
-    </Button>
+    </BackButton>
     <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
       <div className="flex items-center">
         <div className="flex items-center">
