@@ -1,7 +1,7 @@
 import React from 'react';
 import { Module as EModule } from '@codement/api';
 import classnames from 'classnames';
-import { Icon } from '@codement/ui';
+import { Icon, theme } from '@codement/ui';
 import Hex from './hex.svg';
 import styles from './Module.module.css';
 
@@ -19,7 +19,7 @@ export const Module: React.FC<ModuleProps> = ({
         completed: false
       })}
     />
-    <Icon icon="fire" size={4} />
+    <Icon icon="fire" size="medium" color={theme.colors.primary['500']} />
   </div>
   <span className="text-xs">{module.name}</span>
 </div>;

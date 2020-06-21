@@ -1,4 +1,4 @@
-import { Button, Form, FormField, Emoji } from '@codement/ui';
+import { Button, Form, FormField, Emoji, Icon, theme } from '@codement/ui';
 import React from 'react';
 import * as yup from 'yup';
 import { Auth } from '@codement/ui/lib/containers/Auth.container';
@@ -35,7 +35,7 @@ export const LoginPage = () => {
           email: LocalStorage.email || undefined
         }}
       >
-        <FormField className="mb-2" name="email" type="text" placeholder="Email" />
+        <FormField className="mb-2" name="email" type="text" placeholder="Email" icon="plus" iconColor={theme.colors.primary['500']} />
         <FormField name="password" placeholder="Password" type="password" />
         <FormField className="mb-2" type="checkbox" name="rememberMe" text="Remember me" />
         <Button color="success">Login</Button>
