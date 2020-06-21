@@ -71,7 +71,7 @@ export const OnboardingPage = () => {
       {/* 1. Welcome page */}
       <OnboardingStep {...steps[0]} exact>
         <Button
-          color="success"
+          btnType="secondary"
           size="large"
           onClick={() => history.push(routes.onboardingWorkflowCodingAbility())}
         > Get started! </Button>
@@ -125,7 +125,7 @@ export const OnboardingPage = () => {
       <OnboardingStep {...steps[5]}>
         <Button
           size="large"
-          color="success"
+          btnType="secondary"
           onClick={async () => {
             // TODO: Update in Wizard after submission
             const res = await refetch(); // Update the user preferences
