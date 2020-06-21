@@ -1,4 +1,4 @@
-import { Button, Form, FormField, Emoji, Icon, theme } from '@codement/ui';
+import { Button, Form, FormField, Emoji, theme } from '@codement/ui';
 import React from 'react';
 import * as yup from 'yup';
 import { Auth } from '@codement/ui/lib/containers/Auth.container';

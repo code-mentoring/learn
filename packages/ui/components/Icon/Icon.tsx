@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import { icons } from './icons';
@@ -11,10 +11,12 @@ export enum IconSize {
 }
 export type IconColors = 'primary' | 'secondary' | 'tertiary';
 
-export interface IconProps {
+export interface IconProps extends PropsWithRef<any> {
   icon: IconType;
-  size?: 'large' | 'small' | 'medium' | number;
+  size?: IconSize;
   color?: IconColors | string;
+  stroke: string;
+  strokeWidth: string;
 }
 
 export const Icon = styled<React.FC<IconProps>>(({
@@ -28,6 +30,8 @@ export const Icon = styled<React.FC<IconProps>>(({
   height:${({ size }) => (size === IconSize.small ? '15px' : size === IconSize.large ? '45px' : '30px')};
   width: auto;
   color: ${({ color }) => color};
+  stroke:${({ stroke }) => stroke};
+  stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth || '2px')};
 
   ${({ color }) => color && css`
   path, polygon {
