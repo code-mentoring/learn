@@ -47,6 +47,7 @@ This is a running list of those who are actively contributing to this project.
 | Balkirat Singh      | Full Stack                | `@Balkirat Singh`   | [@Balkirat](https://github.com/Balkirat)               | 10+ hours           |
 | Waqas Daimee        | Full Stack                | `@Waqas Daimee`     | [@wdaimee](https://github.com/wdaimee)                 | 10 hours            | May 2020 |
 | Yago Mackay        | Front End                | `@Yago Mackay`     | [@YagoMackay](https://github.com/YagoMackay)                 | 8 hours            | May 2020 |
+| Mayura Wijeyaratne  | Front End                 | `@Mayura Wijeyaratne`  | [@podiman](https://github.com/podiman)               | 5 - 10 hours      | May 2020 |
 
 ## 🔧 What can I work on?
 
