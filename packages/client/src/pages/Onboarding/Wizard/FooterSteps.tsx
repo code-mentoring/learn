@@ -26,6 +26,10 @@ const BackButton = styled(Button)`
   margin: 0 auto 24px auto;
 `;
 
+const NextButton = styled(Button)`
+  margin-left: 32px;
+`;
+
 export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   nextLink,
   backLink,
@@ -94,15 +98,14 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
             />;
           })}
         </div>
-
-        <Button
-          className="ml-8"
+        <NextButton
           size="large"
-          color="success"
+          btnType="secondary"
           disabled={Boolean(disable)}
           onClick={() => (submit ? submit() : history.push(nextLink!))}
-        > Next </Button>
-
+        >
+          Next
+        </NextButton>
       </div>
     </div>
   </>;
