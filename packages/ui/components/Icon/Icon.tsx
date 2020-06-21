@@ -1,46 +1,37 @@
-import classnames from 'classnames';
-import React, { PropsWithRef } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 import { icons } from './icons';
 
 export type IconType = keyof typeof icons;
-
-export interface IconProps extends PropsWithRef<any> {
-  icon: IconType;
-  className: string;
-  size: 'large' | 'small' | 'medium' | number;
-  color: string;
-  stroke: string;
-  strokeWidth: number;
+export enum IconSize {
+  small = 'small',
+  medium = 'medium',
+  large = 'large'
 }
+export type IconColors = 'primary' | 'secondary' | 'tertiary';
 
-// in rem
-export const sizeMap = {
-  small: '1',
-  medium: '2.5',
-  large: '5'
-};
+export interface IconProps {
+  icon: IconType;
+  size?: 'large' | 'small' | 'medium' | number;
+  color?: IconColors | string;
+}
 
 export const Icon = styled<React.FC<IconProps>>(({
   icon,
-  className,
-  size = 'medium',
-  color,
-  stroke,
-  strokeWidth,
   ...props
-}:IconProps) => {
-  const klass = classnames('icon', icon, className);
+}) => {
   const Ikon = icons[icon];
   if (!Ikon) return null;
-  return <Ikon {...props} className={klass} />;
+  return <Ikon {...props} />;
 })`
-height:${({ size }) => `${!size ? sizeMap.medium : typeof size === 'number' ? size : sizeMap[size]}rem`};
-width:auto;
-color:${({ color }) => color};
-fill:${({ color }) => color};
-stroke:${({ stroke }) => stroke};
-stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth || 2)};
+  height:${({ size }) => (size === IconSize.small ? '15px' : size === IconSize.large ? '45px' : '30px')};
+  width: auto;
+  color: ${({ color }) => color};
 
+  ${({ color }) => color && css`
+  path, polygon {
+    fill: currentColor;
+  }
+  `}
 `;
