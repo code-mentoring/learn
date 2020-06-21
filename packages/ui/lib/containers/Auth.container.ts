@@ -27,7 +27,8 @@ const useAuth = () => {
     { login: LoginOutput },
     MutationLoginArgs>(loginMutation);
 
-  const [verifyQuery, { data: verifyData }] = useLazyQuery<{ verifyToken: boolean }>(verifyToken);
+  const [verifyQuery, { data: verifyData, client }] = useLazyQuery<
+    { verifyToken: boolean }>(verifyToken);
   const [status, setStatus] = useState<AuthStatus>('signingIn');
   const [checked, setChecked] = useState<boolean>(false);
   const [redirect, setRedirect] = useState<string | null>(null);
@@ -90,7 +91,8 @@ const useAuth = () => {
     login,
     loginError,
     loginLoading,
-    signOut
+    signOut,
+    client
   };
 };
 
