@@ -21,6 +21,9 @@ export interface IconProps extends PropsWithRef<any> {
 
 export const Icon = styled<React.FC<IconProps>>(({
   icon,
+  color,
+  stroke,
+  strokeWidth,
   ...props
 }) => {
   const Ikon = icons[icon];
