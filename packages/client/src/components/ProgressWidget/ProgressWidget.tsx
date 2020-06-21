@@ -1,4 +1,4 @@
-import { Card, CardProps, Icon } from '@codement/ui';
+import { Card, CardProps, Icon, IconSize } from '@codement/ui';
 import React, { useState } from 'react';
 
 import { Path } from '../../containers/Path.container';
@@ -41,7 +41,7 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
           </svg>
           <Icon
             icon="plus"
-            size={2}
+            size={IconSize.medium}
             className="absolute left-0 top-0 m-2 text-grey-200"
             onClick={() => setShowModal(true)}
           />
