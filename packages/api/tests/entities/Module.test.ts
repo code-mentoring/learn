@@ -136,7 +136,7 @@ describe('Module entity', () => {
       path = await TestClient.createPath(pathInput);
     });
 
-    it('join a module successfully', async () => {
+    it('should join a module successfully', async () => {
       expect.assertions(1);
 
       const module = await TestClient.createModule({
