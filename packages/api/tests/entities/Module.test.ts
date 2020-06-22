@@ -149,7 +149,7 @@ describe('Module entity', () => {
       await expect(res).toBe(true);
     });
 
-    it('should not allow to join a module twice', async () => {
+    it('should not allow a user to join a module more than once', async () => {
       expect.assertions(1);
 
       const module = await TestClient.createModule({
@@ -157,7 +157,6 @@ describe('Module entity', () => {
         pathId: path.id
       });
 
-      await TestClient.createUser();
       await TestClient.joinModule(module.id);
 
       try {
