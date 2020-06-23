@@ -25,6 +25,7 @@ import { IconHTML } from '../PathIcon/path-icons/html';
 import { IconJS } from '../PathIcon/path-icons/js';
 import { IconNodeJS } from '../PathIcon/path-icons/nodejs';
 import { IconReact } from '../PathIcon/path-icons/react';
+import { IconArrowDown } from './icons/solid/cis-arrow-down';
 
 export const icons = {
   check: IconCheck,
@@ -54,5 +55,6 @@ export const icons = {
   html: IconHTML,
   js: IconJS,
   nodejs: IconNodeJS,
-  react: IconReact
+  react: IconReact,
+  arrowDown: IconArrowDown
 };

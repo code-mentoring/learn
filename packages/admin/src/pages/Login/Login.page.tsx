@@ -26,7 +26,7 @@ export const LoginPage = () => {
       <Form onSubmit={submit} error={getGQLError(loginError)} validationSchema={loginValidation}>
         <FormField name="email" type="text" placeholder="Email" icon="user" iconColor="grey-40" />
         <FormField name="password" placeholder="Password" type="password" icon="lock" iconColor="grey-40" />
-        <Button>Login</Button>
+        <Button btnType="secondary" size="large">Login</Button>
       </Form>
     </Card>
   </Page>;
