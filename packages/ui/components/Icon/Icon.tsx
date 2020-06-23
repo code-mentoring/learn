@@ -8,7 +8,7 @@ export type IconType = keyof typeof icons;
 
 export interface IconProps extends PropsWithRef<any> {
   icon: IconType;
-  size?: keyof typeof theme.iconSizes;
+  size?: keyof typeof theme.iconSizes | number;
   color: keyof typeof theme.colors;
   stroke: string;
   strokeWidth: string;
@@ -25,7 +25,7 @@ export const Icon = styled<React.FC<IconProps>>(({
   if (!Ikon) return null;
   return <Ikon {...props} />;
 })`
-  height: ${({ size, theme }) => size ? theme.iconSizes[size] : theme.iconSizes['medium']};
+  height: ${({ size, theme }) => !size ? theme.iconSizes['medium'] : typeof size === 'number' ? `${size}px` : theme.iconSizes[size]};
   width: auto;
   color: ${({ color }) => color};
   stroke:${({ stroke }) => stroke};
