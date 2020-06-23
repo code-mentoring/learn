@@ -12,6 +12,8 @@ const files = [
   'updateAssignment',
   'deleteAssignment',
   'createAssignmentFile',
+  'updateAssignmentFile',
+  'deleteAssignmentFile',
   'respondToFriendRequest',
   'createFriendship',
   'deleteFriendship',

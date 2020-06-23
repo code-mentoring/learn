@@ -133,6 +133,14 @@ export abstract class TestClient {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
+  static updateAssignmentFile(assignmentFile: UpdateAssignmentFileInput): Promise<AssignmentFile> {
+      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { assignmentFile });
+  }
+
+  static deleteAssignmentFile(assignmentFileId: string): Promise<AssignmentFile> {
+      return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
+  }
+
   static createFriendship(toId: String): Promise<FriendOutput> {
     return this._request('createFriendship', mutations.createFriendship, { toId });
   }
@@ -219,8 +227,12 @@ export abstract class TestClient {
   }
 
   static getAssignments(): Promise<Assignment[]> {
-      return this._request('assignments', queries.assignments);
-    }
+    return this._request('assignments', queries.assignments);
+  }
+
+  static getAssignmentFiles(): Promise<AssignmentFile[]> {
+    return this._request('assignmentFiles', queries.assignmentFiles);
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {

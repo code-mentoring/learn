@@ -1,5 +1,5 @@
-mutation updateAssignmentFile($update: UpdateAssignmentFileInput!) {
-  updateAssignmentFile(update: $update) {
+mutation updateAssignmentFile($assignmentFile: UpdateAssignmentFileInput!) {
+  updateAssignmentFile(assignmentFile: $assignmentFile) {
     id
     name
     type
