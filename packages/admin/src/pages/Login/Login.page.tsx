@@ -20,13 +20,13 @@ export const LoginPage = () => {
     login(e.email, e.password);
   };
 
-  return <Page title="Login" type="login" header={false} className="grid items-center justify-center bg-blue-500 text-center">
+  return <Page title="Login" type="login" sideBar={false} header={false} className="grid items-center justify-center bg-blue-500 text-center">
     <Card className="center bg-white w-64" padding={4}>
       <Logo className="logo h-12 inline m-6" />
       <Form onSubmit={submit} error={getGQLError(loginError)} validationSchema={loginValidation}>
         <FormField name="email" type="text" placeholder="Email" icon="user" iconColor="grey-40" />
         <FormField name="password" placeholder="Password" type="password" icon="lock" iconColor="grey-40" />
-        <Button>Login</Button>
+        <Button btnType="secondary" size="large">Login</Button>
       </Form>
     </Card>
   </Page>;

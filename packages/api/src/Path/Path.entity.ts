@@ -35,6 +35,7 @@ export class Path extends CMBaseEntity {
   pathUser: PathUser[];
 
   @OneToMany(() => Module, module => module.path)
+  @Field(() => [Module])
   modules: Module[];
 
   @OneToOne(() => Character, { nullable: true })

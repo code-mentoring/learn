@@ -6,7 +6,12 @@ const files = [
   'me',
   'modules',
   'getUserFriends',
-  'getCharacters'
+  'search',
+  'users',
+  'getUserFriends',
+  'getCharacters',
+  'assignments',
+  'getConceptByName'
 ];
 
 export default files.reduce((obj, file) => {

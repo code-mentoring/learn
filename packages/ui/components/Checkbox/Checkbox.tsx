@@ -1,24 +1,43 @@
 import classnames from 'classnames';
-import React, { HTMLProps } from 'react';
+import React, { useState } from 'react';
+import {
+  CheckboxProps,
+  CheckboxDiv,
+  CheckboxIconContainer,
+  CheckboxInput
+} from './Checkbox.styles';
 
 import { Icon } from '../Icon/Icon';
 
-
-export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
-  indeterminate?: boolean;
-}
-
-
 export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   indeterminate,
-  ...props
+  defaultChecked,
+  onChange,
+  text
+  // ...props
 }) => {
-  if (props.checked === undefined) props.checked = Boolean(props.value);
+  const [checked, setChecked] = useState(defaultChecked);
 
-  return <label className={classnames('checkbox', { indeterminate })}>
-    <input type="checkbox" {...props} />
-    <span>
-      {<Icon icon={indeterminate ? 'minus' : 'check'} color="white" />}
-    </span>
-  </label>;
+  return (
+    <CheckboxDiv
+      className={classnames({
+        indeterminate,
+        checked
+      })}
+    >
+      <CheckboxInput
+        type="checkbox"
+        // {...props}
+        checked={checked}
+        onChange={(e: any) => {
+          setChecked(e.target.checked);
+          if (onChange) onChange(e);
+        }}
+      />
+      <CheckboxIconContainer checked={checked}>
+        <Icon icon={indeterminate ? 'minus' : 'check'} color="white" />
+      </CheckboxIconContainer>
+      {text && <span>{text}</span>}
+    </CheckboxDiv>
+  );
 };

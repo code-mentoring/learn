@@ -1,0 +1,18 @@
+query ($id: String!) {
+
+  path(id: $id) {
+    id
+    name
+    icon
+    description
+    createdAt
+  }
+
+  pathModules(pathId: $id) {
+    id
+    name
+    icon
+    type
+    previous { id }
+  }
+}

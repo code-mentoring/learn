@@ -9,6 +9,8 @@ const files = [
   'updatePath',
   'updatePreferences',
   'createAssignment',
+  'updateAssignment',
+  'deleteAssignment',
   'createAssignmentFile',
   'respondToFriendRequest',
   'createFriendship',
@@ -19,7 +21,10 @@ const files = [
   'joinModule',
   'createCharacter',
   'updateCharacter',
-  'deleteCharacter'
+  'deleteCharacter',
+  'createConcept',
+  'learnConcept',
+  'updateConcept'
 ];
 
 export default files.reduce((obj, file) => {

@@ -1,33 +1,26 @@
-import { useQuery } from '@apollo/react-hooks';
-import { Path } from '@codement/api';
 import { Card, CardProps, Icon } from '@codement/ui';
-import gql from 'graphql-tag';
 import React, { useState } from 'react';
 
+import { Path } from '../../containers/Path.container';
 import { ModalJoinPath } from '../../modals/JoinPath/JoinPath.modal';
 import { ProgressPath } from './ProgressPath';
 
-
-const myPathsQuery = gql`query {
-  myPaths { id name icon }
-}`;
 
 export interface ProgressWidgetProps extends CardProps { }
 
 export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
 
-  const { data } = useQuery<{ myPaths: Path[] }>(myPathsQuery);
+  const { myPaths } = Path.useContainer();
   const [showModal, setShowModal] = useState(false);
 
   return <Card {...cardProps}>
     <h4 className="text-center mb-4">Progress</h4>
     <div className="grid grid-cols-3">
-      {data?.myPaths.map(path =>
+      {myPaths?.map(path =>
         <ProgressPath
-          key={path.id}
-          icon={path.icon}
-          // TODO: Add progress to myPaths
-          progress={50}
+          key={path.pathId}
+          icon={path.path.icon}
+          progress={path.progress}
         />
       )}
       <div

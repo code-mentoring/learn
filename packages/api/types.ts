@@ -27,6 +27,15 @@ export type UserPreferences = {
   codingAbility: Scalars['Float'];
 };
 
+export type UserModule = {
+   __typename?: 'UserModule';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  moduleId: Scalars['String'];
+  completedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
 export type User = {
    __typename?: 'User';
   id: Scalars['ID'];
@@ -38,6 +47,15 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
+export type PathUser = {
+   __typename?: 'PathUser';
+  id: Scalars['String'];
+  pathId: Scalars['String'];
+  userId: Scalars['String'];
+  completed: Scalars['Boolean'];
+  progress: Scalars['Float'];
+  path: Path;
+};
 
 export type Path = {
    __typename?: 'Path';
@@ -46,6 +64,7 @@ export type Path = {
   icon: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  modules: Array<Module>;
   character?: Maybe<Character>;
   characterId?: Maybe<Scalars['String']>;
 };
@@ -138,6 +157,7 @@ export type Query = {
   assignmentFiles: Array<AssignmentFile>;
   userAssignmentFiles: Array<AssignmentFile>;
   users: Array<User>;
+  searchUsers: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
   getCharacters: Array<Character>;
@@ -148,8 +168,9 @@ export type Query = {
   modules: Array<Module>;
   pathModules: Array<Module>;
   paths: Array<Path>;
+  path: Path;
   getPathByName: Path;
-  myPaths: Array<Path>;
+  myPaths: Array<PathUser>;
 };
 
 
@@ -165,6 +186,11 @@ export type QueryAssignmentFilesArgs = {
 
 export type QueryUserAssignmentFilesArgs = {
   authorId: Scalars['String'];
+};
+
+
+export type QuerySearchUsersArgs = {
+  query: Scalars['String'];
 };
 
 
@@ -185,6 +211,11 @@ export type QueryGetUserFriendsArgs = {
 
 export type QueryPathModulesArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type QueryPathArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -214,12 +245,14 @@ export type Mutation = {
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
   createModule: Module;
+  joinModule: Scalars['Boolean'];
   updateModule: Module;
   deleteModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
+  completeModule: UserModule;
 };
 
 
@@ -326,6 +359,11 @@ export type MutationCreateModuleArgs = {
 };
 
 
+export type MutationJoinModuleArgs = {
+  moduleId: Scalars['String'];
+};
+
+
 export type MutationUpdateModuleArgs = {
   module: UpdateModuleInput;
 };
@@ -353,6 +391,11 @@ export type MutationJoinPathsArgs = {
 
 export type MutationUpdatePathArgs = {
   path: UpdatePathInput;
+};
+
+
+export type MutationCompleteModuleArgs = {
+  moduleId: Scalars['String'];
 };
 
 export type CreateAssignmentInput = {

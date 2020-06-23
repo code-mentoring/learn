@@ -1,0 +1,11 @@
+query {
+  myPaths {
+    id
+    pathId
+    progress
+    path{
+     name
+     icon
+    }
+  }
+}

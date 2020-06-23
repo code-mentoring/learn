@@ -26,6 +26,8 @@ import { AssignmentFileService } from '../AssignmentFile/AssignmentFile.service'
 import { CharacterService } from '../Character/Character.service';
 import { Character } from '../Character/Character.entity';
 import { UserModule } from '../UserModule/UserModule.entity';
+import { UserModuleService } from '../UserModule/UserModule.service';
+import { PathUserService } from '../PathUser/PathUser.service';
 
 
 /**
@@ -61,7 +63,9 @@ import { UserModule } from '../UserModule/UserModule.entity';
     ConceptService,
     UserConceptService,
     FriendService,
-    CharacterService
+    CharacterService,
+    PathUserService,
+    UserModuleService
   ],
   exports: [DatabaseService, SeederService]
 })
