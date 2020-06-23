@@ -35,6 +35,11 @@ declare module 'styled-components' {
     borderRadius: {
       default: string,
       circle: string
+    },
+    iconSizes: {
+      small: string,
+      medium: string,
+      large: string
     }
   }
 }

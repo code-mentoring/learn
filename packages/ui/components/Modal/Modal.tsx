@@ -4,9 +4,9 @@ import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import { Card } from '../Card/Card';
-import { Icon, IconSize } from '../Icon/Icon';
+import { Icon } from '../Icon/Icon';
 import styles from './Modal.module.css';
-import { theme } from '../../css/theme';
+import { grey } from '../../css/colors';
 
 
 export interface ModalProps extends React.HTMLProps<HTMLElement> {
@@ -55,8 +55,8 @@ export const Modal: React.FC<ModalProps> = ({
         <Icon
           className={`absolute right-0 top-0 mt-${padding} mr-${padding} cursor-pointer`}
           icon="x"
-          color={theme.colors.grey[300]}
-          size={IconSize.medium}
+          color={grey[300]}
+          size="medium"
           onClick={() => setShow(false)}
         />
       </header>
