@@ -1,3 +1,11 @@
 query {
-  myPaths { id name icon }
+  myPaths {
+    id
+    pathId
+    progress
+    path{
+     name
+     icon
+    }
+  }
 }

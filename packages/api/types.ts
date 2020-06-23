@@ -27,6 +27,15 @@ export type UserPreferences = {
   codingAbility: Scalars['Float'];
 };
 
+export type UserModule = {
+   __typename?: 'UserModule';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  moduleId: Scalars['String'];
+  completedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
 export type User = {
    __typename?: 'User';
   id: Scalars['ID'];
@@ -38,6 +47,15 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
+export type PathUser = {
+   __typename?: 'PathUser';
+  id: Scalars['String'];
+  pathId: Scalars['String'];
+  userId: Scalars['String'];
+  completed: Scalars['Boolean'];
+  progress: Scalars['Float'];
+  path: Path;
+};
 
 export type Path = {
    __typename?: 'Path';
@@ -46,6 +64,7 @@ export type Path = {
   icon: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  modules: Array<Module>;
   character?: Maybe<Character>;
   characterId?: Maybe<Scalars['String']>;
 };
@@ -151,7 +170,7 @@ export type Query = {
   paths: Array<Path>;
   path: Path;
   getPathByName: Path;
-  myPaths: Array<Path>;
+  myPaths: Array<PathUser>;
 };
 
 
@@ -233,6 +252,7 @@ export type Mutation = {
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
+  completeModule: UserModule;
 };
 
 
@@ -371,6 +391,11 @@ export type MutationJoinPathsArgs = {
 
 export type MutationUpdatePathArgs = {
   path: UpdatePathInput;
+};
+
+
+export type MutationCompleteModuleArgs = {
+  moduleId: Scalars['String'];
 };
 
 export type CreateAssignmentInput = {

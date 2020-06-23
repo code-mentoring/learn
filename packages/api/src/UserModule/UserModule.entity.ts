@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, PrimaryGeneratedColumn, Entity, Unique, ManyToOne } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, Unique, ManyToOne } from 'typeorm';
 import { CMBaseEntity } from '../lib/Base.entity';
 import { UserWithPassword } from '../User/User.entity';
 import { Module } from '../Module/Module.entity';
@@ -20,8 +20,9 @@ export class UserModule extends CMBaseEntity {
     @Field()
     moduleId: string;
 
-    @CreateDateColumn()
-    completedAt: Date;
+    @Column({ nullable: true })
+    @Field({ nullable: true })
+    completedAt?: Date;
 
     @ManyToOne(() => UserWithPassword, user => user.userModules)
     user: UserWithPassword;

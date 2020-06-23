@@ -18,10 +18,9 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
     <div className="grid grid-cols-3">
       {myPaths?.map(path =>
         <ProgressPath
-          key={path.id}
-          icon={path.icon}
-          // TODO: Add progress to myPaths
-          progress={50}
+          key={path.pathId}
+          icon={path.path.icon}
+          progress={path.progress}
         />
       )}
       <div

@@ -4,6 +4,7 @@ import { Button } from '@codement/ui';
 import { Modal, ModalProps } from '@codement/ui/components/Modal/Modal';
 import gql from 'graphql-tag';
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import { PathsList } from '../../components/PathsList/PathsList';
 
@@ -15,6 +16,10 @@ const joinSelectedPaths = gql`
 `;
 
 interface ModalJoinPathProps extends ModalProps { }
+
+const BeginButton = styled(Button)`
+  margin-top: 32px;
+`;
 
 export const ModalJoinPath: React.FC<ModalJoinPathProps> = ({
   show: showInitial,
@@ -41,14 +46,9 @@ export const ModalJoinPath: React.FC<ModalJoinPathProps> = ({
 
 
     <div className="flex justify-end">
-      <Button
-        disabled={!selectedPaths.length}
-        color="success"
-        className="mt-8"
-        onClick={joinPathHandler}
-      >
+      <BeginButton disabled={!selectedPaths.length} btnType="secondary" onClick={joinPathHandler}>
         Begin
-      </Button>
+      </BeginButton>
     </div>
   </Modal>;
 };

@@ -3,7 +3,7 @@ node_modules/
 .DS_Store
 packages/api/config/development.yml
 dist
-.vscode
+.vscode/
 
 /database
 packages/*/coverage

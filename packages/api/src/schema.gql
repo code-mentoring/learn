@@ -17,6 +17,18 @@ type UserPreferences {
   codingAbility: Float!
 }
 
+type UserModule {
+  id: String!
+  userId: String!
+  moduleId: String!
+  completedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: ID!
   firstName: String!
@@ -27,10 +39,14 @@ type User {
   createdAt: DateTime!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
+type PathUser {
+  id: String!
+  pathId: String!
+  userId: String!
+  completed: Boolean!
+  progress: Float!
+  path: Path!
+}
 
 type Path {
   id: String!
@@ -38,6 +54,7 @@ type Path {
   icon: String!
   description: String!
   createdAt: DateTime!
+  modules: [Module!]!
   character: Character
   characterId: String
 }
@@ -134,7 +151,7 @@ type Query {
   paths: [Path!]!
   path(id: String!): Path!
   getPathByName(name: String!): Path!
-  myPaths: [Path!]!
+  myPaths: [PathUser!]!
 }
 
 type Mutation {
@@ -165,6 +182,7 @@ type Mutation {
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
+  completeModule(moduleId: String!): UserModule!
 }
 
 input CreateAssignmentInput {

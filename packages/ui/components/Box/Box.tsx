@@ -1,21 +1,14 @@
-import React, { HTMLAttributes } from 'react';
-import classnames from 'classnames';
+import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export interface BoxProps extends HTMLAttributes<any> {
+export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   padding?: number;
   margin?: number;
   shadow?: number;
   className?: string;
 }
 
-export const CBox: React.FunctionComponent<BoxProps> = ({
-  className,
-  children,
-  ...props
-}) => <div className={classnames(className)} {...props}>{children}</div>;
-
-export const Box = styled(CBox)`
+export const Box = styled.div<BoxProps>`
 padding:  ${({ padding }) => (padding ? `${padding}rem` : '2rem')};
 margin: ${({ margin }) => (margin ? `${margin}rem` : undefined)};
 box-shadow: ${({ shadow }) => (shadow ? `${shadow}rem` : '2rem')};

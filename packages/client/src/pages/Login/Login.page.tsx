@@ -38,7 +38,7 @@ export const LoginPage = () => {
         <FormField className="mb-2" name="email" type="text" placeholder="Email" />
         <FormField name="password" placeholder="Password" type="password" />
         <FormField className="mb-2" type="checkbox" name="rememberMe" text="Remember me" />
-        <Button color="success">Login</Button>
+        <Button btnType="secondary" size="large">Login</Button>
       </Form>
       <p className="body-2 mt-40 mb-4">New to Code Mentoring? <a href="https://codementoring.co/signup" className="text-primary-500">Join now</a></p>
     </div>
