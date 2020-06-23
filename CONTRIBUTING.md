@@ -33,7 +33,6 @@ This is a running list of those who are actively contributing to this project.
 | 🧢 Marc Tessier     | Design                     | `@Marc Tessier`       | [@mtess88](https://github.com/mtess88)                 | 15 hours             | May 2020  |
 | 🧢 Rajat Bansal     | WWW Lead                   | `@Rajat Bansal`       | [@rjtbansal](https://github.com/rjtbansal)             | 15-20 hours          | Apr 2020  |
 | Frank Kim           | Documentation / Front-end  | `@Frank Kim`          | [@heyfranksmile](https://github.com/heyfranksmile)     | 10 hours             | Apr 2020  |
-| Frankie Law         | Full stack                 | `@Frankie`            | [@FrankieLaw](https://github.com/FrankieLaw)           | 5-10 hours           | Apr 2020  |
 | Suzy Nakayama       | Full-stack                 | `@Suzy Nakayama`      | [@suzynakayama](https://github.com/suzynakayama)       | 10 hours             | Apr 2020  |
 | Tomoya Kuroda       | Full-stack                 | `@Tomoya`             | [@tomoyakuroda](https://github.com/tomoyakuroda)       | 10 hours             | Apr 2020  |
 | Ellie Xiang         | Full-stack                 | `@Ellie`.             | [@Ellie-2020](https://github.com/Ellie-2020)           | 8+ hours             | Apr 2020  |
@@ -44,7 +43,6 @@ This is a running list of those who are actively contributing to this project.
 | Kevin Gilbert       | Back-end                   | `@Kevin`              | [@NoSoEpicCoder](https://github.com/NoSoEpicCoder)     | 5-10 hours           | Apr 2020  |
 | Rayser Castrillo    | Back-end                   | `@rayser`             | [@raysercast1](https://github.com/raysercast1)         | 5 - 10 hours         | Apr 2020  |
 | Lan Phan            | Testing & Front-end        | `@Lan Phan`           | [@lanphantastic](https://github.com/lanphantastic)     | 3 - 6 hours          | Apr 2020  |
-| Jeff Norman         | Front-end & Design         | `@Jeff`               | [@crizzpy](https://github.com/crizzpy)                 | 10 hours             | May 2020  |
 | Marc Tessier        | Design                     | `@Marc Tessier`       | [@mtess88](https://github.com/mtess88)                 | 15 hours             | May 2020  |
 | Andrea Morreale     | Design                     | `@Andre M`            | [@akimdesign](https://github.com.akimdesign)           | 20 hours             | May 2020  |
 | Waqas Daimee        | Full Stack                 | `@Waqas Daimee`       | [@wdaimee](https://github.com/wdaimee)                 | 10 hours             | May 2020  |
