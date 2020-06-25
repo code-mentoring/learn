@@ -1,4 +1,5 @@
 import { PathIcon } from '@codement/ui';
+import styled from 'styled-components';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -19,6 +20,16 @@ interface PathProgress {
   baseStroke?: string;
   progressStroke?: string;
 }
+
+const Styledp = styled.p`
+font-size: .875rem;
+text-align: center;
+margin-bottom: 2rem;
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+font-weight: 800;
+letter-spacing: 0.1em;
+color: ${props => props.theme.colors.secondary[500]};
+`;
 
 export const ProgressPath: React.FC<PathProgress> = ({
   size = 48,
@@ -61,6 +72,6 @@ export const ProgressPath: React.FC<PathProgress> = ({
       </svg>
       <PathIconProgressWidget icon={icon} />
     </div>
-    <p className={`text-center text-sm text-${progressStroke} font-sans font-extrabold tracking-widest`}>{`${progress}%`}</p>
+    <Styledp>{`${progress}%`}</Styledp>
   </div>;
 };

@@ -6,7 +6,19 @@ import { getGQLError } from '@codement/ui/lib/apollo';
 import Logo from '@codement/ui/images/logo.svg';
 import People from '@codement/ui/images/welcome-people.svg';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
+import styled from 'styled-components';
 import { Page } from '../../components/Page/Page';
+
+const Styledp = styled.p`
+margin-top: 0.5rem;
+margin-bottom: 1rem;
+font-size: .875rem;
+`;
+
+const StyledFooterp = styled(Styledp)`
+margin-top: 10rem;
+
+`;
 
 const loginValidation = yup.object().shape({
   email: yup.string().email().required(),
@@ -25,7 +37,7 @@ export const LoginPage = () => {
     <div className="mt-24">
       <h1>Welcome back!</h1>
 
-      <p className="body-2 mt-2 mb-4">Lets get coding <Emoji text="😊" /></p>
+      <Styledp>Lets get coding <Emoji text="😊" /></Styledp>
       <Form
         className="max-w-xs mx-auto"
         onSubmit={submit}
@@ -40,7 +52,7 @@ export const LoginPage = () => {
         <FormField className="mb-2" type="checkbox" name="rememberMe" text="Remember me" />
         <Button btnType="secondary" size="large">Login</Button>
       </Form>
-      <p className="body-2 mt-40 mb-4">New to Code Mentoring? <a href="https://codementoring.co/signup" className="text-primary-500">Join now</a></p>
+      <StyledFooterp>New to Code Mentoring? <a href="https://codementoring.co/signup" className="text-primary-500">Join now</a></StyledFooterp>
     </div>
     <People className="fixed bottom-0 left-0 h-56" />
   </Page>;

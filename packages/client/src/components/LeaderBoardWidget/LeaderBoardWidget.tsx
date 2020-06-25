@@ -17,14 +17,13 @@ const usersQuery = gql`query {
 
 export interface LeaderboardWidgetProps extends CardProps { }
 
-
 export const LeaderboardWidget: React.FC<LeaderboardWidgetProps> = props => {
   const { data, loading, error } = useQuery<{ users: User[] }>(usersQuery);
 
   if (loading) return <Card><Loader /></Card>;
 
   return <Card {...props}>
-    <h4 className="text-center mb-4">Leaderboard</h4>
+    <h4 className="titleCentred">Leaderboard</h4>
     {error
       ? <ErrorMessage error={error.message} />
       : data!.users.map(u => <div className="text-primary-500 font-semibold mb-2">
