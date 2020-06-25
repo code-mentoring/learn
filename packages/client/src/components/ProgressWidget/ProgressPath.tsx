@@ -1,8 +1,15 @@
 import { PathIcon } from '@codement/ui';
 import React from 'react';
+import styled from 'styled-components';
 
 import styles from './ProgressPath.module.css';
 
+const PathIconProgressWidget = styled(PathIcon)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 interface PathProgress {
   icon: any;
@@ -52,11 +59,7 @@ export const ProgressPath: React.FC<PathProgress> = ({
           className={`stroke-current text-${progressStroke} ${styles.svgRotate} transform -rotate-90`}
         />
       </svg>
-      <PathIcon
-        icon={icon}
-        size={8}
-        className="absolute left-0 top-0 m-2 text-grey-200"
-      />
+      <PathIconProgressWidget icon={icon} />
     </div>
     <p className={`text-center text-sm text-${progressStroke} font-sans font-extrabold tracking-widest`}>{`${progress}%`}</p>
   </div>;

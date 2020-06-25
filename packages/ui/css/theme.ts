@@ -23,5 +23,10 @@ export const theme: DefaultTheme = {
   borderRadius: {
     default: '8px',
     circle: '50%'
+  },
+  iconSizes: {
+    small: '18px',
+    medium: '36px',
+    large: '48px'
   }
 };

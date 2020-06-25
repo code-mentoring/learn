@@ -1,37 +1,39 @@
-import classnames from 'classnames';
 import React, { PropsWithRef } from 'react';
+import styled, { css } from 'styled-components';
 
 import { icons } from './icons';
-
+import { theme } from '../../css/theme';
 
 export type IconType = keyof typeof icons;
 
 export interface IconProps extends PropsWithRef<any> {
   icon: IconType;
-  color?: string;
-  size?: 'large' | 'small' | 'medium' | number;
+  size?: keyof typeof theme.iconSizes | number;
+  color: keyof typeof theme.colors;
+  stroke: string;
+  strokeWidth: string;
 }
 
-export const sizeMap = {
-  small: '4',
-  medium: '10',
-  large: '20'
-};
-
-
-export const Icon: React.FunctionComponent<IconProps> = ({
+export const Icon = styled<React.FC<IconProps>>(({
   icon,
   color,
-  className,
-  size = 'medium',
+  stroke,
+  strokeWidth,
   ...props
 }) => {
-  const colorClass = color ? `text-${color}` : null;
-
-  const sizeClass = `h-${typeof size === 'number' ? size : sizeMap[size]}`;
-
-  const klass = classnames('icon', className, sizeClass, colorClass);
   const Ikon = icons[icon];
   if (!Ikon) return null;
-  return <Ikon {...props} className={klass} />;
-};
+  return <Ikon {...props} />;
+})`
+  height: ${({ size, theme }) => !size ? theme.iconSizes['medium'] : typeof size === 'number' ? `${size}px` : theme.iconSizes[size]};
+  width: auto;
+  color: ${({ color }) => color};
+  stroke:${({ stroke }) => stroke};
+  stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth || '2')};
+
+  ${({ color }) => color && css`
+  path, polygon {
+    fill: currentColor;
+  }
+  `}
+`;

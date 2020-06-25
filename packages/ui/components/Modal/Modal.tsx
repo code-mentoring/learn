@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Card } from '../Card/Card';
 import { Icon } from '../Icon/Icon';
 import styles from './Modal.module.css';
+import { grey } from '../../css/colors';
 
 
 export interface ModalProps extends React.HTMLProps<HTMLElement> {
@@ -54,8 +55,8 @@ export const Modal: React.FC<ModalProps> = ({
         <Icon
           className={`absolute right-0 top-0 mt-${padding} mr-${padding} cursor-pointer`}
           icon="x"
-          color="grey-300"
-          size={6}
+          color={grey[300]}
+          size="medium"
           onClick={() => setShow(false)}
         />
       </header>

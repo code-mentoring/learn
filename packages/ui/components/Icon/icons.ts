@@ -13,13 +13,18 @@ import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
 import { IconChevronTopAlt } from './icons/solid/cis-chevron-top-alt';
 import { IconCloudUpload } from './icons/solid/cis-cloud-upload';
 import { IconExclamation } from './icons/solid/cis-exclamation';
-import { IconEyeSlash} from './icons/solid/cis-eye-slash';
+import { IconEyeSlash } from './icons/solid/cis-eye-slash';
 import { IconFire } from './icons/solid/cis-fire';
 import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
 import { IconShieldAlt } from './icons/solid/cis-shield-alt';
+import { IconCSS } from '../PathIcon/path-icons/css';
+import { IconHTML } from '../PathIcon/path-icons/html';
+import { IconJS } from '../PathIcon/path-icons/js';
+import { IconNodeJS } from '../PathIcon/path-icons/nodejs';
+import { IconReact } from '../PathIcon/path-icons/react';
 import { IconArrowDown } from './icons/solid/cis-arrow-down';
 
 export const icons = {
@@ -46,5 +51,10 @@ export const icons = {
   userLine: IconUserLine,
   x: IconX,
   shieldAlt: IconShieldAlt,
+  css: IconCSS,
+  html: IconHTML,
+  js: IconJS,
+  nodejs: IconNodeJS,
+  react: IconReact,
   arrowDown: IconArrowDown
 };
