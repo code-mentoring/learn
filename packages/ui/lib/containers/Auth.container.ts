@@ -34,6 +34,7 @@ const useAuth = () => {
 
   const signOut = () => {
     LocalStorage.token = null;
+    localStorage.clear();
     setChecked(true);
     setStatus('signedOut');
   };

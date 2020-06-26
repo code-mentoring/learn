@@ -52,5 +52,5 @@ html {
     font-size: 1rem;
     line-height: 1.5rem;
     color: ${props => props.theme.colors.grey[700]};
-  } 
+  }
 `;

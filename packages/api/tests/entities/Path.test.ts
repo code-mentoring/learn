@@ -1,6 +1,6 @@
 import { PathInput } from '../../types';
 import { TestClient } from '../utils/TestClient';
-import * as random from '../../src/Database/seeders/random'
+import * as random from '../../src/Database/seeders/random';
 
 export const pathInput: PathInput = {
   name: 'Path name',
@@ -32,10 +32,10 @@ describe('Path entity', () => {
       expect(path.createdAt).toBeDefined();
       expect(path.characterId).toBe(null);
     });
-  
+
     it('should create a path successfully with characterId', async () => {
       const character = await TestClient.createCharacter(random.characterInput());
-      const path = await TestClient.createPath({...pathInput, characterId: character.id});
+      const path = await TestClient.createPath({ ...pathInput, characterId: character.id });
 
       expect(path.id).toBeDefined();
       expect(path.name).toEqual(pathInput.name);
@@ -91,16 +91,16 @@ describe('Path entity', () => {
       }
     });
   });
-  
+
   describe('Mutation: updatePath', () => {
     beforeEach(setup);
 
     it('should update a path successfully', async () => {
       const path = await TestClient.createPath(pathInput);
       const character = await TestClient.createCharacter(random.characterInput());
-      try{
-        await TestClient.updatePath({id: path.id, characterId: character.id});
-      }catch(e) {}
+      try {
+        await TestClient.updatePath({ id: path.id, characterId: character.id });
+      } catch (e) {}
 
       const updatePath = await TestClient.getPathByName(path.name);
 

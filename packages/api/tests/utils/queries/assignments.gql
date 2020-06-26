@@ -10,5 +10,5 @@ query assignments {
         type
         pathId
     }
-    }
+  }
 }
