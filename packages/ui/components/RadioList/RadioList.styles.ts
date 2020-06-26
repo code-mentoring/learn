@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const RadioListDiv = styled.div`
   --webkit-user-select: none;
@@ -8,49 +8,49 @@ export const RadioListDiv = styled.div`
   width: 100%;
 `;
 
-export const RadioListLabel = styled.label`
+export const RadioListLabel = styled.label`${({ theme: t }) => css`
   position: relative;
   display: flex;
   align-items: center;
-  border: 2px solid ${props => props.theme.colors.grey[500]};
+  border: ${t.borders.main};
   border-bottom: none;
-  padding: 0 0.75rem;
-  height: 3rem;
-  color: ${props => props.theme.colors.grey[800]};
+  padding: 0 ${t.size('xsm')};
+  height: ${t.size('lg')};;
+  color: ${t.color('primary')};
   cursor: pointer;
   transition: all;
 
   &:hover {
-    background-color: ${props => props.theme.colors.primary[100]};
+    background-color: ${t.color('primary.100')};
   }
 
   &:first-of-type {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: ${t.borderRadius.medium};
+    border-top-right-radius: ${t.borderRadius.medium};
   }
 
   &:last-of-type {
-    border-bottom: 2px solid ${props => props.theme.colors.grey[500]};
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-bottom: ${t.borders.main};
+    border-bottom-left-radius: ${t.borderRadius.medium};
+    border-bottom-right-radius: ${t.borderRadius.medium};
   }
 
   &.active {
-    background-color: ${props => props.theme.colors.primary[100]};
-    border-color: ${props => props.theme.colors.primary[500]};
+    background-color: ${t.color('primary.100')};
+    border-color: ${t.color('primary')};
 
     &:not(:last-of-type)::after {
       content: "";
       position: absolute;
       left: 0;
       width: 100%;
-      background-color: ${props => props.theme.colors.primary[500]};
+      background-color: ${t.color('primary')};
       bottom: -2px;
       height: 2px;
       z-index: 10;
     }
   }
-`;
+`}`;
 
 export const RadioListSmall = styled.small`
   margin-left: auto;

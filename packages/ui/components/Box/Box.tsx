@@ -1,15 +1,15 @@
-import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
-  padding?: number;
+import { Size } from '../../types/styled';
+
+export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  padding?: number | Size;
   margin?: number;
   shadow?: number;
-  className?: string;
 }
 
 export const Box = styled.div<BoxProps>`
-padding:  ${({ padding }) => (padding ? `${padding}rem` : '2rem')};
-margin: ${({ margin }) => (margin ? `${margin}rem` : undefined)};
-box-shadow: ${({ shadow }) => (shadow ? `${shadow}rem` : '2rem')};
+  padding:  ${p => p.theme.size(p.padding)};
+  padding:  ${p => p.theme.size(p.margin)};
+  box-shadow: ${({ shadow }) => (shadow ? `${shadow}rem` : '2rem')};
 `;

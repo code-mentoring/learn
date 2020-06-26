@@ -1,39 +1,31 @@
-import React, { PropsWithRef } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
+import { Color, Size } from '../../types/styled';
 import { icons } from './icons';
-import { theme } from '../../css/theme';
+
 
 export type IconType = keyof typeof icons;
 
-export interface IconProps extends PropsWithRef<any> {
+export interface IconProps extends React.HTMLAttributes<HTMLOrSVGElement>{
   icon: IconType;
-  size?: keyof typeof theme.iconSizes | number;
-  color: keyof typeof theme.colors;
-  stroke: string;
-  strokeWidth: string;
+  size?: Size | number;
+  color?: Color;
 }
 
-export const Icon = styled<React.FC<IconProps>>(({
-  icon,
-  color,
-  stroke,
-  strokeWidth,
-  ...props
-}) => {
+const IconNoStyle: React.FC<IconProps> = ({ icon, ...props }) => {
   const Ikon = icons[icon];
   if (!Ikon) return null;
   return <Ikon {...props} />;
-})`
-  height: ${({ size, theme }) => !size ? theme.iconSizes['medium'] : typeof size === 'number' ? `${size}px` : theme.iconSizes[size]};
-  width: auto;
-  color: ${({ color }) => color};
-  stroke:${({ stroke }) => stroke};
-  stroke-width: ${({ stroke, strokeWidth }) => (stroke) && (strokeWidth || '2')};
+};
 
-  ${({ color }) => color && css`
+export const Icon = styled(IconNoStyle)`
+  height: ${p => p.theme.size(p.size)};
+  width: ${p => p.theme.size(p.size)};
+  color: ${p => p.theme.color(p.color)};
+  content: '${p => p.theme.color(p.color)}';
+
   path, polygon {
     fill: currentColor;
   }
-  `}
 `;

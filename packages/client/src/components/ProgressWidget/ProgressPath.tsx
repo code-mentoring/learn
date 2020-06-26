@@ -1,9 +1,9 @@
 import { PathIcon } from '@codement/ui';
-import styled from 'styled-components';
 import React from 'react';
 import styled from 'styled-components';
 
 import styles from './ProgressPath.module.css';
+
 
 const PathIconProgressWidget = styled(PathIcon)`
   position: absolute;

@@ -41,7 +41,7 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
   const [disable, setDisable] = useState(true);
 
   return <>
-    <BackButton btnType="transparent" size="large">
+    <BackButton text size="large">
       <Link className="text-grey-500" to={backLink}>Go back</Link>
     </BackButton>
     <div className={`absolute rightWiz bottomWiz flex items-center ${styles.footerSteps}`}>
@@ -100,7 +100,7 @@ export const FooterSteps: React.FunctionComponent<FooterStepsProps> = ({
         </div>
         <NextButton
           size="large"
-          btnType="secondary"
+          color="secondary"
           disabled={Boolean(disable)}
           onClick={() => (submit ? submit() : history.push(nextLink!))}
         >

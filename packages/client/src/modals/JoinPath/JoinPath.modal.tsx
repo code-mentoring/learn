@@ -49,7 +49,7 @@ export const ModalJoinPath: React.FC<ModalJoinPathProps> = ({
 
 
     <div className="flex justify-end">
-      <BeginButton disabled={!selectedPaths.length} btnType="secondary" onClick={joinPathHandler}>
+      <BeginButton disabled={!selectedPaths.length} color="secondary" onClick={joinPathHandler}>
         Begin
       </BeginButton>
     </div>

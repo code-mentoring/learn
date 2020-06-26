@@ -1,15 +1,15 @@
-import classnames from 'classnames';
 import React, { HTMLProps, MutableRefObject } from 'react';
 
+import { Color } from '../../types/styled';
 import { Icon, IconType } from '../Icon/Icon';
 import { Loader } from '../Loader/Loader';
-
+import { BaseFieldProps, StyledInput, StyledTextarea, StyledTextField } from './TextField.styles';
 
 export interface TextFieldProps extends HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
   icon?: IconType;
   iconSecondary?: IconType;
-  iconColor?: string;
-  iconSecondaryColor?: string;
+  iconColor?: Color;
+  iconSecondaryColor?: Color;
   error?: string | Error;
   suffix?: string;
   forwardRef?: MutableRefObject<HTMLInputElement | null>;
@@ -18,16 +18,17 @@ export interface TextFieldProps extends HTMLProps<HTMLInputElement | HTMLTextAre
   textarea?: boolean;
 }
 
-const Comp = ({ textarea, ...props }: any) => {
-  if (textarea) return <textarea {...props} />;
-  return <input {...props} />;
+type CompProps = BaseFieldProps & TextFieldProps;
+const Comp: React.FC<CompProps> = ({ textarea, ...props }: any) => {
+  if (textarea) return <StyledTextarea {...props} />;
+  return <StyledInput {...props} />;
 };
 
 
 export const TextField: React.FunctionComponent<TextFieldProps> = ({
   icon,
   iconSecondary,
-  iconColor = 'grey-30',
+  iconColor = 'grey.300',
   iconSecondaryColor,
   className,
   error,
@@ -35,7 +36,6 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
   suffix,
   loading,
   value,
-  forwardRef,
   textarea,
   ...props
 }) => {
@@ -50,28 +50,28 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
   const icon2: IconType | undefined = err ? 'exclamation' : iconSecondary;
   const icon2Color = err ? 'error' : iconSecondaryColor;
 
-  return <div className={classnames('input', className, {
-    loading,
-    suffix,
-    disabled,
-    error
-  })}
-  >
+  const states = { loading, suffix, disabled, error };
+
+  const hasIcon = (icon && icon2) ? 'both'
+    : icon ? 'left' : icon2 ? 'right' : undefined;
+
+
+  return <StyledTextField {...states} className={className}>
     {loading
       ? <Loader />
-      : icon && <Icon icon={icon} color={iconColor} className="icon1" />}
-    {icon2 && <Icon icon={icon2} color={icon2Color} className="icon2" />}
+      : icon && <Icon icon={icon} color={iconColor} />}
+    {icon2 && <Icon icon={icon2} color={icon2Color} data-second="true" />}
+
     <Comp
-      className={classnames({
-        'icon-left': Boolean(icon),
-        'icon-right': Boolean(icon2)
-      })}
+      hasIcon={hasIcon}
       textarea={textarea}
       {...props}
       value={value}
       disabled={disabled}
       style={suffix && !error ? { paddingRight: `calc(1.5rem + ${state}px)` } : {}}
     />
+
     {suffix && !err && <span ref={callback}>{suffix}</span>}
-  </div>;
+
+  </StyledTextField>;
 };

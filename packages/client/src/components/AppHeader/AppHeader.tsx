@@ -46,7 +46,6 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
       <div className="inline font-semibold float-right mr-1 sm:mr-16">
         {!minimal && <PathIcon
           icon="js"
-          size="medium"
           className="inline cursor-pointer"
           onMouseEnter={() => setShowPathMenu(true)}
           onMouseLeave={() => setShowPathMenu(false)}
@@ -65,7 +64,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
 
         {!minimal && <div className="text-tertiary-500 inline ml-8 mr-8">
           <span className="text-lg">5</span>
-          <Icon icon="fire" size="small" className="inline ml-1 mb-1" />
+          <Icon icon="fire" size="sm" className="inline ml-1 mb-1" />
         </div>}
 
         <button

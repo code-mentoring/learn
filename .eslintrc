@@ -62,6 +62,7 @@
     "react/jsx-wrap-multilines": [0, "never"],
     "react/prop-types": 0, // Typescript handles this,
     "react/static-property-placement": 0,
-    "no-nested-ternary": 0
+    "no-nested-ternary": 0,
+    "no-case-declarations": 0
   }
 }

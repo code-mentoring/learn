@@ -1,5 +1,5 @@
 import React, { HTMLProps } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   text?: string;
@@ -13,7 +13,7 @@ export interface InputProps extends CheckboxProps {
   defaultChecked?: boolean;
 }
 
-export interface SpanProps extends InputProps {}
+export interface SpanProps extends InputProps { }
 
 export const CheckboxDiv = styled.div<CheckboxProps>`
   position: relative;
@@ -31,19 +31,23 @@ export const CheckboxInput = styled.input<InputProps>`
 `;
 
 export const CheckboxIconContainer = styled.span<SpanProps>`
-  display: inline-flex;
-  height: 1rem;
-  width: 1rem;
-  border: 2px solid ${props => (props.checked ? props.theme.colors.primary['500'] : props.theme.colors.grey['500'])};
-  border-radius: 2px;
-  margin-right: 0.5rem;
-  background-color: ${props => (props.checked ? props.theme.colors.primary['500'] : undefined)};
+  ${({ theme: t }) => css`
+    display: inline-flex;
+    height: ${t.size('big')};
+    width: ${t.size('big')};
+    border: ${t.borders.main};
+    border-radius: ${t.borderRadius.small};
+    margin-right: ${t.size('xsm')};
+  `}
+
+  ${p => {
+    const bg = p.theme.color(p.checked ? 'primary' : 'transparent');
+    const border = p.theme.color(p.checked ? 'primary' : 'grey.300');
+    return `background-color: ${bg}; border-color: ${border};`;
+  }}
+
   & svg {
     height: 100%;
     width: 100%;
-  }
-  & +span {
-    color: ${props => props.theme.colors.grey['500']};
-    font-size: 0.875rem;
   }
 `;

@@ -5,7 +5,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 
-const PostCSSConfig = require('@codement/ui/postcss.config');
 
 // const favicon = require('favicons-webpack-plugin');
 const replacePlugin = require('webpack-plugin-replace');
@@ -48,8 +47,7 @@ const config: Configuration = {
               importLoaders: 1,
               modules: true
             }
-          },
-          { loader: 'postcss-loader', options: PostCSSConfig }
+          }
         ]
       },
       // General CSS
@@ -63,8 +61,7 @@ const config: Configuration = {
               hmr: process.env.NODE_ENV === 'development'
             }
           },
-          'css-loader',
-          { loader: 'postcss-loader', options: PostCSSConfig }
+          'css-loader'
         ]
       },
       { test: /\.html/, loader: 'html-loader' },

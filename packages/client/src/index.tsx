@@ -1,5 +1,3 @@
-import './css/base.css';
-
 import { ApolloProvider } from '@apollo/react-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';

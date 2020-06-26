@@ -1,13 +1,9 @@
 import classnames from 'classnames';
 import React, { useState } from 'react';
-import {
-  CheckboxProps,
-  CheckboxDiv,
-  CheckboxIconContainer,
-  CheckboxInput
-} from './Checkbox.styles';
 
 import { Icon } from '../Icon/Icon';
+import { Text } from '../Text/Text';
+import { CheckboxDiv, CheckboxIconContainer, CheckboxInput, CheckboxProps } from './Checkbox.styles';
 
 export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   indeterminate,
@@ -37,7 +33,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
       <CheckboxIconContainer checked={checked}>
         <Icon icon={indeterminate ? 'minus' : 'check'} color="white" />
       </CheckboxIconContainer>
-      {text && <span>{text}</span>}
+      {text && <Text as="small" color="grey.800">{text}</Text>}
     </CheckboxDiv>
   );
 };

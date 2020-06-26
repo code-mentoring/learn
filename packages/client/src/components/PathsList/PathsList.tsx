@@ -67,7 +67,7 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
           {isSelected && <>
             <span className={classnames(`w-full h-full absolute top-0 left-0 ${styles.selectedLayer}`)} />
             <span className="absolute w-full h-full bg-green-400 opacity-25 top-0 left-0" />
-            <Icon icon="check" size="small" color="white" className={`absolute ${styles.checkIcon}`} />
+            <Icon icon="check" size="sm" color="white" className={`absolute ${styles.checkIcon}`} />
           </>}
         </div>
         <span className={styles.name}>{name}</span>

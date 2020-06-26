@@ -1,35 +1,36 @@
 import React, { useEffect } from 'react';
-import classnames from 'classnames';
+import styled from 'styled-components';
+
 import { AppHeader } from '../AppHeader/AppHeader';
 
 
 export interface PageProps {
   title: string;
-  type?: string;
   header?: boolean;
-  className?:string
+  className?: string
 }
+
+const StyledPage = styled.main`
+  position: absolute;
+  top:0; left: 0; width: 100%; height: 100%;
+`;
 
 export const Page: React.FunctionComponent<PageProps> = ({
   title,
-  type,
   header = true,
   children,
   className
 }) => {
   useEffect(() => { document.title = title; }, [title]);
 
-  return (
-    <main
-      className={classnames('absolute t-0 l-0 w-full h-full', type, className)}
-    >
-      {header && <AppHeader />}
-      {children}
-    </main>
-  );
+  return <StyledPage className={className}>
+    {header && <AppHeader />}
+    {children}
+  </StyledPage>;
 };
 
 
+// TODO: Refactor/remove this
 export const PageContent: React.FunctionComponent = ({ children }) => (
   <div className="page-content">{children}</div>
 );

@@ -13,6 +13,7 @@ export * from './PathIcon/PathIcon';
 export * from './RadioList/RadioList';
 export * from './Select/Select';
 export * from './SliderField/SliderField';
+export * from './Text/Text';
 // export * from './Table/convertColsFromWidget';
 // export * from './Table/QueryTable';
 // export * from './Table/Table';

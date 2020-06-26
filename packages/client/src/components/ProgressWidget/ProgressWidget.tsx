@@ -41,7 +41,6 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
           </svg>
           <Icon
             icon="plus"
-            size="medium"
             className="absolute left-0 top-0 m-2 text-grey-200"
             onClick={() => setShowModal(true)}
           />

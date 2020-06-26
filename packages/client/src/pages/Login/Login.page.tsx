@@ -1,29 +1,51 @@
-import { Button, Form, FormField, Emoji, theme } from '@codement/ui';
-import React from 'react';
-import * as yup from 'yup';
-import { Auth } from '@codement/ui/lib/containers/Auth.container';
-import { getGQLError } from '@codement/ui/lib/apollo';
+import { Button, Emoji, Form, FormField, Text, Box } from '@codement/ui';
 import Logo from '@codement/ui/images/logo.svg';
 import People from '@codement/ui/images/welcome-people.svg';
+import { getGQLError } from '@codement/ui/lib/apollo';
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { css } from 'styled-components';
+import * as yup from 'yup';
+
 import { Page } from '../../components/Page/Page';
 
-const Styledp = styled.p`
-margin-top: 0.5rem;
-margin-bottom: 1rem;
-font-size: .875rem;
+const StyledPage = styled(Page)`${({ theme: t }) => css`
+  display: grid;
+  margin-top: ${t.size('xbig')};
+  grid-template-rows: ${t.size('huge')} 1fr;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+  form {
+    width: 40rem;
+    margin: ${t.size('huge')} 0;
+  }
+
+  & > svg:first-child { margin: auto; }
+
+  form + small {
+    display: block;
+  }
+`}`;
+
+const Container = styled(Box)`
+  margin-top: -20rem;
 `;
 
-const StyledFooterp = styled(Styledp)`
-margin-top: 10rem;
-
+const StyledPeople = styled(People)`
+  position: fixed;
+  bottom:0; left:0; height: 22rem;
+  opacity: 0.2;
 `;
+
 
 const loginValidation = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required()
 });
+
 
 export const LoginPage = () => {
   const { login, loginError } = Auth.useContainer();
@@ -32,12 +54,15 @@ export const LoginPage = () => {
     login(e.email, e.password, e.rememberMe);
   };
 
-  return <Page title="Login" type="login" header={false} className="bg-white text-center">
-    <Logo className="logo h-12 inline m-6" />
-    <div className="mt-24">
-      <h1>Welcome back!</h1>
+  return <StyledPage title="Login to Code Mentoring" header={false}>
+    <a href="https://codementoring.co">
+      <Logo className="logo h-12 inline m-6" />
+    </a>
 
-      <Styledp>Lets get coding <Emoji text="😊" /></Styledp>
+    <Container>
+      <Text as="h1">Welcome back!</Text>
+      <Text>Let&apos;s get coding <Emoji text="😊" /></Text>
+
       <Form
         className="max-w-xs mx-auto"
         onSubmit={submit}
@@ -47,13 +72,17 @@ export const LoginPage = () => {
           email: LocalStorage.email || undefined
         }}
       >
-        <FormField className="mb-2" name="email" type="text" placeholder="Email" icon="plus" iconColor={theme.colors.primary['500']} />
-        <FormField name="password" placeholder="Password" type="password" />
-        <FormField className="mb-2" type="checkbox" name="rememberMe" text="Remember me" />
-        <Button btnType="secondary" size="large">Login</Button>
+        <FormField className="mb-2" name="email" type="text" placeholder="Email" icon="user" />
+        <FormField name="password" placeholder="Password" type="password" icon="password" />
+        <FormField className="mb-2" type="checkbox" name="rememberMe" text="Remember me?" />
+        <Button size="large">Login</Button>
       </Form>
-      <StyledFooterp>New to Code Mentoring? <a href="https://codementoring.co/signup" className="text-primary-500">Join now</a></StyledFooterp>
-    </div>
-    <People className="fixed bottom-0 left-0 h-56" />
-  </Page>;
+
+      <Text as="small">
+        New to Code Mentoring? <a href="https://codementoring.co/signup" className="text-primary-500">Join now</a>
+      </Text>
+    </Container>
+
+    <StyledPeople />
+  </StyledPage>;
 };
