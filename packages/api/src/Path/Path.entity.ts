@@ -46,6 +46,9 @@ export class Path extends CMBaseEntity {
   @Column({ nullable: true })
   @Field({ nullable: true })
   characterId?: string;
+
+  @Field()
+  progress: number;
 }
 
 @InputType()
