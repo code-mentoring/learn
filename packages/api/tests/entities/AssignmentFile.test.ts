@@ -49,10 +49,7 @@ describe('AssignmentFile entity', () => {
         const assignmentFileInput = random.assignmentFileInput(assignmentId);
         const assignmentFile = await TestClient.createAssignmentFile(assignmentFileInput);
 
-        //debugging
-        console.log(assignmentFile)
-
-        const getAssignmentFile = await TestClient.getAssignmentFiles();
+        const getAssignmentFile = await TestClient.getAssignmentFiles(assignmentFileInput.assignmentId);
 
         expect(getAssignmentFile).toBeArrayOfSize(1);
         expect(getAssignmentFile[0]).toMatchObject(assignmentFileInput);
@@ -89,7 +86,7 @@ describe('AssignmentFile entity', () => {
           const assignmentFileInput = random.assignmentFileInput(assignmentId);
           const assignmentFile = await TestClient.createAssignmentFile(assignmentFileInput);
           await TestClient.deleteAssignmentFile(assignmentFile.id);
-          const assignmentFiles = await TestClient.getAssignmentFiles();
+          const assignmentFiles = await TestClient.getAssignmentFiles(assignmentFileInput.assignmentId);
 
           expect(assignmentFiles).toBeArrayOfSize(0);
       });

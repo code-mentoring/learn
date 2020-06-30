@@ -35,6 +35,8 @@ import { TestLogger } from './TestLogger.service';
 import { UserWithPassword } from '../../src/User/User.entity';
 import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
 import { UpdatePathInput } from '../../src/Path/Path.entity';
+import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
+import { UpdateAssignmentInput } from '../../src/Assignment/Assignment.entity';
 
 
 /**
@@ -133,8 +135,8 @@ export abstract class TestClient {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
-  static updateAssignmentFile(assignmentFile: UpdateAssignmentFileInput): Promise<AssignmentFile> {
-      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { assignmentFile });
+  static updateAssignmentFile(file: UpdateAssignmentFileInput): Promise<AssignmentFile> {
+      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
   }
 
   static deleteAssignmentFile(assignmentFileId: string): Promise<AssignmentFile> {
@@ -234,8 +236,8 @@ export abstract class TestClient {
     return this._request('assignments', queries.assignments);
   }
 
-  static getAssignmentFiles(): Promise<AssignmentFile[]> {
-    return this._request('assignmentFiles', queries.assignmentFiles);
+  static getAssignmentFiles(assignmentId: string): Promise<AssignmentFile[]> {
+    return this._request('assignmentFiles', queries.assignmentFiles, { assignmentId });
   }
 
   // ----------------------------------------------------------------- Workflows

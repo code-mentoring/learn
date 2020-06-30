@@ -1,5 +1,5 @@
-query AssignmentFile {
-    assignmentFiles {
+query AssignmentFile ($assignmentId: String!){
+    assignmentFiles (assignmentId: $assignmentId){
         id
         name
         type
