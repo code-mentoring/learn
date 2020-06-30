@@ -75,7 +75,7 @@ export const Onboarding = createContainer(() => {
       const { paths, ...preferences } = values;
       submit({
         variables: {
-          paths: paths!.map(p => p.id),
+          paths: paths!.map(_p => _p.id),
           preferences
         }
       });
