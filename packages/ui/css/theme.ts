@@ -61,10 +61,15 @@ export const theme: DefaultTheme = {
     small: '2px',
     medium: '4px',
     default: '8px',
+    large: '16px',
     circle: '50%'
   },
   borders: {
     main: `2px solid ${grey['200']}`
+  },
+
+  shadows: {
+    main: `0 4px 10px ${grey[900]}10`
   }
 };
 

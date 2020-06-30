@@ -1,11 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
+import { theme as t } from '../../css/theme';
+import { Box, BoxProps } from '../Box/Box';
 
-import { BoxProps, Box } from '../Box/Box';
 
 export interface CardProps extends BoxProps { }
 
-export const Card = styled(props => <Box {...props} />)`
-  border: ${p => p.theme.border.main};
-  border-radius: ${p => p.borderRadius.default};
+export const Card = styled(Box)`
+  background: ${t.color('white')};
+  border-radius: ${t.borderRadius.default};
+  box-shadow: ${t.shadows.main};
 `;

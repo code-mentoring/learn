@@ -1,32 +1,33 @@
 import styled from 'styled-components';
 import { RadioProps } from './Radio';
+import { theme as t } from '../../css/theme';
 
 export const RadioDiv = styled.div`
   display: flex;
-  margin-right: ${p => p.theme.size('xsm')};
+  margin-right: ${t.size('xsm')};
 `;
 
 export const RadioInput: React.FC<RadioProps> = styled.input`
   display: none;
   &:checked + span {
-    border-color: ${p => p.theme.color('primary.500')};
+    border-color: ${t.color('primary.500')};
     &::after {
       content: "";
-      height: 0.5rem;
-      width: 0.5rem;
-      background-color: ${p => p.theme.color('primary.500')};
-      border-radius: ${p => p.theme.borderRadius.circle};
+      height: ${t.size('tiny')};
+      width: ${t.size('tiny')};
+      background-color: ${t.color('primary.500')};
+      border-radius: ${t.borderRadius.circle};
     }
   }
 `;
 
 export const RadioSpan = styled.span`
   display: inline-flex;
-  border: ${p => p.theme.borders.main};
-  border-radius: ${p => p.theme.borderRadius.circle};
+  border: ${t.borders.main};
+  border-radius: ${t.borderRadius.circle};
   justify-content: center;
   align-items: center;
-  height: ${p => p.theme.size()};
-  width: ${p => p.theme.size()};
+  height: ${t.size()};
+  width: ${t.size()};
   font-size: 0;
 `;

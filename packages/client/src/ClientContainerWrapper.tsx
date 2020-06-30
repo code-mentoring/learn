@@ -1,8 +1,8 @@
 import React from 'react';
-import { Path } from './containers/Path.container';
+import { Paths } from './containers/Paths.container';
 
 export const ClientContainerWrapper: React.FC = ({ children }) => (
-  <Path.Provider>
+  <Paths.Provider>
     {children}
-  </Path.Provider>
+  </Paths.Provider>
 );

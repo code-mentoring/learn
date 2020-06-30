@@ -3,9 +3,10 @@ import React, { HTMLProps, MutableRefObject } from 'react';
 import { Color } from '../../types/styled';
 import { Icon, IconType } from '../Icon/Icon';
 import { Loader } from '../Loader/Loader';
-import { BaseFieldProps, StyledInput, StyledTextarea, StyledTextField } from './TextField.styles';
+import { BaseFieldProps, StyledInput, StyledTextarea } from './TextField.styles';
 
-export interface TextFieldProps extends HTMLProps<HTMLInputElement | HTMLTextAreaElement> {
+
+export interface TextFieldProps extends Omit<HTMLProps<HTMLInputElement | HTMLTextAreaElement>, 'size'> {
   icon?: IconType;
   iconSecondary?: IconType;
   iconColor?: Color;
@@ -16,6 +17,7 @@ export interface TextFieldProps extends HTMLProps<HTMLInputElement | HTMLTextAre
   loading?: boolean;
   initialValue?: string;
   textarea?: boolean;
+  size?: 'main' | 'small'
 }
 
 type CompProps = BaseFieldProps & TextFieldProps;
@@ -25,7 +27,7 @@ const Comp: React.FC<CompProps> = ({ textarea, ...props }: any) => {
 };
 
 
-export const TextField: React.FunctionComponent<TextFieldProps> = ({
+export const BaseTextField: React.FunctionComponent<TextFieldProps> = ({
   icon,
   iconSecondary,
   iconColor = 'grey.300',
@@ -52,19 +54,15 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
 
   const states = { loading, suffix, disabled, error };
 
-  const hasIcon = (icon && icon2) ? 'both'
-    : icon ? 'left' : icon2 ? 'right' : undefined;
-
-
-  return <StyledTextField {...states} className={className}>
+  return <div {...states} className={className}>
     {loading
       ? <Loader />
       : icon && <Icon icon={icon} color={iconColor} />}
     {icon2 && <Icon icon={icon2} color={icon2Color} data-second="true" />}
 
     <Comp
-      hasIcon={hasIcon}
-      textarea={textarea}
+      iconLeft={Boolean(icon)}
+      iconRight={Boolean(icon2)}
       {...props}
       value={value}
       disabled={disabled}
@@ -73,5 +71,5 @@ export const TextField: React.FunctionComponent<TextFieldProps> = ({
 
     {suffix && !err && <span ref={callback}>{suffix}</span>}
 
-  </StyledTextField>;
+  </div>;
 };

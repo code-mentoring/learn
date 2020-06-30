@@ -8,6 +8,7 @@ import { IconLogout } from './icons/linear/cil-account-logout';
 import { IconMinus } from './icons/linear/cil-minus';
 import { IconPage } from './icons/linear/cil-page';
 import { IconUser as IconUserLine } from './icons/linear/cil-user';
+import { IconArrowDown } from './icons/solid/cis-arrow-down';
 import { IconCheck } from './icons/solid/cis-check';
 import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
 import { IconChevronTopAlt } from './icons/solid/cis-chevron-top-alt';
@@ -17,20 +18,19 @@ import { IconEyeSlash } from './icons/solid/cis-eye-slash';
 import { IconFire } from './icons/solid/cis-fire';
 import { IconLockMinus } from './icons/solid/cis-lock-minus';
 import { IconPlus } from './icons/solid/cis-plus';
+import { IconSearch } from './icons/solid/cis-search';
+import { IconShieldAlt } from './icons/solid/cis-shield-alt';
 import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
-import { IconShieldAlt } from './icons/solid/cis-shield-alt';
-import { IconCSS } from '../PathIcon/path-icons/css';
-import { IconHTML } from '../PathIcon/path-icons/html';
-import { IconJS } from '../PathIcon/path-icons/js';
-import { IconNodeJS } from '../PathIcon/path-icons/nodejs';
-import { IconReact } from '../PathIcon/path-icons/react';
-import { IconArrowDown } from './icons/solid/cis-arrow-down';
+import { IconDashboard } from './icons/solid/cis-dashboard';
+import { IconSettings } from './icons/solid/cis-settings';
 
 export const icons = {
+  arrowDown: IconArrowDown,
   check: IconCheck,
   chevronDown: IconChevronBottomAlt,
   chevronUp: IconChevronTopAlt,
+  dashboard: IconDashboard,
   error: IconWarning,
   exclamation: IconExclamation,
   fire: IconFire,
@@ -44,17 +44,13 @@ export const icons = {
   password: IconLockMinus,
   passwordEye: IconEyeSlash,
   plus: IconPlus,
+  search: IconSearch,
+  settings: IconSettings,
+  shieldAlt: IconShieldAlt,
   trash: IconTrash,
   upload: IconCloudUpload,
   uploadDuotone: IconCloudUploadDuotone,
   user: IconUser,
   userLine: IconUserLine,
-  x: IconX,
-  shieldAlt: IconShieldAlt,
-  css: IconCSS,
-  html: IconHTML,
-  js: IconJS,
-  nodejs: IconNodeJS,
-  react: IconReact,
-  arrowDown: IconArrowDown
+  x: IconX
 };

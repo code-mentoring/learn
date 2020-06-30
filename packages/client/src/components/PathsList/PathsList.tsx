@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import { Path } from '@codement/api';
-import { PathIcon, Icon } from '@codement/ui';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import classnames from 'classnames';
+import { Icon, PathIcon, PathIconType, Text } from '@codement/ui';
+import React, { useEffect, useState } from 'react';
 
-import styles from './PathsList.module.css';
+import { Paths } from '../../containers/Paths.container';
+import { IconWrapper, PathListWrapper, SelectablePath } from './PathsList.styles';
 
 export type SelectedPath = Pick<Path, 'id'>;
-
-const getPaths = gql`{
-  paths {
-    id
-    name
-    icon
-    description
-  }
-}`;
 
 interface PathsListProps {
   selectedPaths?: Path[];
@@ -29,49 +18,33 @@ export const PathsList: React.FunctionComponent<PathsListProps> = ({
 }) => {
 
   const [selectedPaths, setSelectedPaths] = useState<Path[]>(selected);
-  const { data } = useQuery<{ paths: Path[] }>(getPaths);
-  const path = data?.paths;
+  const { unjoinedData: paths, fetchUnjoined } = Paths.useContainer();
+
+  useEffect(() => { fetchUnjoined(); }, []);
 
   useEffect(() => {
     if (onChange) onChange(selectedPaths);
   }, [selectedPaths]);
 
-  const handleSelectPaths = (id: Path) => {
-    if (selectedPaths.includes(id)) return setSelectedPaths(selectedPaths.filter(p => p !== id));
-    setSelectedPaths([...selectedPaths, id]);
+  const toggle = (p: Path) => {
+    if (selectedPaths.includes(p)) return setSelectedPaths(selectedPaths.filter(_p => _p !== p));
+    setSelectedPaths(cur => [...cur, p]);
   };
 
 
-  return <div className="flex overflow-auto justify-center whitespace-no-wrap container select-none">
-    {path?.map(({ id, name, icon }) => {
-      const isSelected = selectedPaths.includes(id as unknown as Path);
-      return <div
-        key={name}
-        className="flex flex-col items-center relative mr-2 cursor-pointer"
-        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-          if (e.key === 'Enter') {
-            handleSelectPaths(id as unknown as Path);
-          }
-
-        }}
-        onClick={() => handleSelectPaths(id as unknown as Path)}
-        role="button"
-        tabIndex={0}
+  return <PathListWrapper>
+    {paths?.paths.map(p => {
+      const isSelected = selectedPaths.includes(p);
+      return <SelectablePath
+        key={p.name}
+        onClick={() => toggle(p)}
       >
-        <div className={classnames('p-2 border-2 border-solid rounded w-20 h-20 relative', {
-          'border-grey-200': !isSelected,
-          'border-green-400': isSelected
-        })}
-        >
-          <PathIcon className="absolute center-element" icon={icon as PathIcon} />
-          {isSelected && <>
-            <span className={classnames(`w-full h-full absolute top-0 left-0 ${styles.selectedLayer}`)} />
-            <span className="absolute w-full h-full bg-green-400 opacity-25 top-0 left-0" />
-            <Icon icon="check" size="sm" color="white" className={`absolute ${styles.checkIcon}`} />
-          </>}
-        </div>
-        <span className={styles.name}>{name}</span>
-      </div>;
+        <IconWrapper selected={isSelected}>
+          <PathIcon icon={p.icon as PathIconType} size="lg" />
+          {isSelected && <Icon icon="check" size="lg" color="white" />}
+        </IconWrapper>
+        <Text>{p.name}</Text>
+      </SelectablePath>;
     })}
-  </div>;
+  </PathListWrapper>;
 };

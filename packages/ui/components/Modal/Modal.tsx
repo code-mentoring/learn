@@ -1,31 +1,25 @@
-import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
-import styled from 'styled-components';
 
-import { Card } from '../Card/Card';
-import { Icon } from '../Icon/Icon';
-import styles from './Modal.module.css';
+import { CardProps } from '../Card/Card';
+import { Text } from '../Text/Text';
+import { CloseIcon, ModalContent, ModalWrapper, StyledTransition, ModalBackground, ModalHeader } from './Modal.styles';
 
 
 export interface ModalProps extends React.HTMLProps<HTMLElement> {
   show?: boolean
   heading?: string | React.ComponentType;
-  padding?: number;
+  padding?: CardProps['padding'];
   onClose?: () => void;
 }
 
-const Heading = styled.h2`
-text-align: center;
-`;
 
 export const Modal: React.FC<ModalProps> = ({
   children,
   show: showInitial,
   heading,
   className,
-  padding = 8,
+  padding = 'lg',
   onClose
 }) => {
   const [show, setShow] = useState(showInitial);
@@ -47,43 +41,41 @@ export const Modal: React.FC<ModalProps> = ({
   }, [show]);
 
 
-  const Title = (typeof heading === 'string') ? <Heading>{heading}</Heading> : heading;
+  const Title = (typeof heading === 'string') ? <Text as="h2">{heading}</Text> : heading;
 
 
-  const content = <aside className={styles.modalContainer}>
-    <span onClick={() => setShow(false)} className="cursor-pointer" /> {/* Background */}
-    <Card className={classnames('relative bg-white border-none', className)} padding={padding}>
-      <header className="mb-6">
+  const content = <ModalWrapper>
+    <ModalBackground onClick={() => setShow(false)} />
+    <ModalContent className={className} padding={padding}>
+      <ModalHeader>
         {Title}
-        <Icon
-          className={`absolute right-0 top-0 mt-${padding} mr-${padding} cursor-pointer`}
+        <CloseIcon
           icon="x"
           color="grey.300"
-          size="md"
+          size="xbig"
           onClick={() => setShow(false)}
         />
-      </header>
+      </ModalHeader>
       <main>{children}</main>
-    </Card>
-  </aside>;
+    </ModalContent>
+  </ModalWrapper>;
 
 
   return createPortal(
-    <CSSTransition
+    <StyledTransition
       in={show}
       timeout={300}
       classNames={{
-        enter: styles.transitionEnter,
-        enterActive: styles.transitionEnterActive,
-        exit: styles.transitionExit,
-        exitActive: styles.transitionExitActive
+        enter: 'transition-enter',
+        enterActive: 'transition-enter-active',
+        exit: 'transition-exit',
+        exitActive: 'transition-exit-active'
       }}
       unmountOnExit
       mountOnEnter
-      o
     >
       {content}
-    </CSSTransition>,
+    </StyledTransition>,
     document.body
   );
 };

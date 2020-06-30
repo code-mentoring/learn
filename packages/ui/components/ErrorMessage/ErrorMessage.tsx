@@ -1,5 +1,7 @@
 import React, { HTMLProps } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+import { theme as t } from '../../css/theme';
 import { firstUpper } from '../../lib/text';
 
 export interface ErrorMessageProps extends HTMLProps<HTMLSpanElement> {
@@ -8,15 +10,13 @@ export interface ErrorMessageProps extends HTMLProps<HTMLSpanElement> {
 }
 
 const StyledError: React.FC<HTMLProps<HTMLSpanElement>> = styled.span<ErrorMessageProps>`
-  ${({ theme: t, center }) => css`
-    display: block;
-    text-align: ${center ? 'center' : 'right'};
-    color: ${t.color('error')};
-    font-size: ${t.size('xsm')};
-    font-weight: ${t.fontWeight.bold};
-    margin-top: ${t.size('xtiny')};
-    margin-bottom: ${t.size('tiny')};
-  `}
+  display: block;
+  text-align: ${p => (p.center ? 'center' : 'right')};
+  color: ${t.color('error')};
+  font-size: ${t.size('xsm')};
+  font-weight: ${t.fontWeight.bold};
+  margin-top: ${t.size('xtiny')};
+  margin-bottom: ${t.size('tiny')};
 `;
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({

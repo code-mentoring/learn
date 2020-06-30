@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Slider from 'rc-slider';
 
-// TODO: change to module
-import './style.css';
-import 'rc-slider/assets/index.css';
+export * from './SliderField.styles';
 
 interface SliderFieldProps {
   min?: number;

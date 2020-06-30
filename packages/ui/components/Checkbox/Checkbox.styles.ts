@@ -1,5 +1,7 @@
 import React, { HTMLProps } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+import { theme as t } from '../../css/theme';
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   text?: string;
@@ -31,18 +33,16 @@ export const CheckboxInput = styled.input<InputProps>`
 `;
 
 export const CheckboxIconContainer = styled.span<SpanProps>`
-  ${({ theme: t }) => css`
-    display: inline-flex;
-    height: ${t.size('big')};
-    width: ${t.size('big')};
-    border: ${t.borders.main};
-    border-radius: ${t.borderRadius.small};
-    margin-right: ${t.size('xsm')};
-  `}
+  display: inline-flex;
+  height: ${t.size('big')};
+  width: ${t.size('big')};
+  border: ${t.borders.main};
+  border-radius: ${t.borderRadius.small};
+  margin-right: ${t.size('xsm')};
 
   ${p => {
-    const bg = p.theme.color(p.checked ? 'primary' : 'transparent');
-    const border = p.theme.color(p.checked ? 'primary' : 'grey.300');
+    const bg = t.color(p.checked ? 'primary' : 'transparent');
+    const border = t.color(p.checked ? 'primary' : 'grey.300');
     return `background-color: ${bg}; border-color: ${border};`;
   }}
 

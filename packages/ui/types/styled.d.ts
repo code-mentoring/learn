@@ -48,7 +48,34 @@ declare module 'styled-components' {
     fontFamily: { sans: string, title: string },
     fontWeight: { normal: 400, bold: 600, heavy: 800 },
     letterSpacing: { sm: string; md: string; lg: string; }
-    borderRadius: { small: string, medium: string, default: string, circle: string }
+    borderRadius: { small: string, medium: string, default: string, circle: string, large: string }
     borders: {main: string}
+    shadows: {main: string}
   }
+  // export interface DefaultTheme {
+  //   colors: {
+  //     primary: Colors,
+  //     blue: Colors,
+  //     secondary: Colors,
+  //     green: Colors,
+  //     tertiary: Colors,
+  //     pink: Colors,
+  //     grey: Colors,
+
+  //     transparent: string,
+  //     white: string,
+  //     black: string,
+  //     error: string
+  //   },
+  //   color(color?: Color): string,
+
+  //   sizes: { [size in Size]: string },
+  //   size(size?: number | Size): string,
+
+  //   fontFamily: { sans: string, title: string },
+  //   fontWeight: { normal: 400, bold: 600, heavy: 800 },
+  //   letterSpacing: { sm: string; md: string; lg: string; }
+  //   borderRadius: { small: string, medium: string, default: string, circle: string }
+  //   borders: {main: string}
+  // }
 }

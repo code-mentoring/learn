@@ -11,8 +11,8 @@ export interface Options {
 }
 
 export interface RadioListProps {
-  className?: string;
   name: string;
+  className?: string;
   options: Array<Options>;
   value?: any;
   onChange?: (value: any) => void;
@@ -34,33 +34,28 @@ export const RadioList: React.FC<RadioListProps> = ({
     if (onChange) onChange(chosenOption);
   }, [chosenOption]);
 
-  return <RadioListDiv
-    className={className}
-    {...props}
-  >
-    {options.map(option => {
+  return <RadioListDiv className={className} {...props}>
+    {options.map(o => {
       // Is the current option selected?
-      const check = chosenOption === option.value;
+      const check = chosenOption === o.value;
 
-      return (
-        <RadioListLabel
-          key={option.label}
-          className={classnames({ active: check })}
-        >
-          <Radio
-            name={name}
-            value={option.label}
-            onChange={e => {
-              if ((e.target as HTMLInputElement).checked) setChosenOption(option.value);
-            }}
-            defaultChecked={check}
-          />
-          <span>{option.label}</span>
-          {option.subLabel && (
-            <RadioListSmall>{option.subLabel}</RadioListSmall>
-          )}
-        </RadioListLabel>
-      );
+      return <RadioListLabel
+        key={o.label}
+        className={classnames({ active: check })}
+      >
+        <Radio
+          name={name}
+          value={o.label}
+          onChange={e => {
+            if ((e.target as HTMLInputElement).checked) setChosenOption(o.value);
+          }}
+          defaultChecked={check}
+        />
+        <span>{o.label}</span>
+        {o.subLabel && (
+          <RadioListSmall>{o.subLabel}</RadioListSmall>
+        )}
+      </RadioListLabel>;
     })}
   </RadioListDiv>;
 };

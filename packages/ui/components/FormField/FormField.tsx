@@ -8,7 +8,7 @@ import { CheckboxProps } from '../Checkbox/Checkbox.styles';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useBrixFormContext } from '../Form/Form';
 import { Select } from '../Select/Select';
-import { TextField, TextFieldProps } from '../TextField/TextField';
+import { TextField, TextFieldProps } from '..';
 
 
 // import { OptionProps } from 'react-select';

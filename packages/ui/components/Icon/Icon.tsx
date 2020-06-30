@@ -13,17 +13,16 @@ export interface IconProps extends React.HTMLAttributes<HTMLOrSVGElement>{
   color?: Color;
 }
 
-const IconNoStyle: React.FC<IconProps> = ({ icon, ...props }) => {
+const BaseIcon: React.FC<IconProps> = ({ icon, ...props }) => {
   const Ikon = icons[icon];
   if (!Ikon) return null;
   return <Ikon {...props} />;
 };
 
-export const Icon = styled(IconNoStyle)`
+export const Icon = styled(BaseIcon)`
   height: ${p => p.theme.size(p.size)};
   width: ${p => p.theme.size(p.size)};
   color: ${p => p.theme.color(p.color)};
-  content: '${p => p.theme.color(p.color)}';
 
   path, polygon {
     fill: currentColor;

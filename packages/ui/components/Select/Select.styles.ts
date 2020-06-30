@@ -1,5 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const StyledSelect = styled.div`${({ theme: t }) => css`
+import { theme as t } from '../../css/theme';
+
+export const StyledSelect = styled.div`
   height: ${t.size('xl')};
-`}`;
+`;

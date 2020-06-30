@@ -1,29 +1,34 @@
-import { Loader } from '@codement/ui';
+import { theme as t } from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
-import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
+import styled from 'styled-components';
 
-import { LeaderboardWidget } from '../../components/LeaderBoardWidget/LeaderBoardWidget';
 import { ModuleTree } from '../../components/ModuleTree/ModuleTree';
-import { Page } from '../../components/Page/Page';
-import { ProgressWidget } from '../../components/ProgressWidget/ProgressWidget';
-import { Path } from '../../containers/Path.container';
+import { AppPageContent, Page } from '../../components/Page/Page';
+import { LeaderboardWidget } from '../../components/widgets/LeaderBoard/LeaderBoard.widget';
+import { ProgressWidget } from '../../components/widgets/PathProgress/PathProgress.widget';
 import { routes } from '../../router/routes';
-import styles from './Dashboard.module.css';
 
+const Content = styled(AppPageContent)`
+  display: grid;
+  grid-template-columns: 1fr minmax(20rem, 42rem);
+  grid-gap: ${t.size()};
+`;
+
+const StyledModuleTree = styled(ModuleTree)`grid-row: span 2;`;
 
 export const DashboardPage = () => {
-  const history = useHistory();
   const { me } = Me.useContainer();
-  const { loading } = Path.useContainer();
 
-  if (!me?.userPreferences) history.push(routes.onboardingWorkflow());
-  if (loading) return <Loader />;
-  return <Page title="Dashboard">
-    <div className={styles.dashboard}>
-      <ModuleTree />
-      <ProgressWidget className="w-64 my-6 bg-white" />
-      <LeaderboardWidget className="w-64" />
-    </div>
+  // TODO: Move to container
+  if (!me?.userPreferences) return <Redirect to={routes.onboardingWorkflow()} />;
+
+  return <Page title="Dashboard" header sidebar>
+    <Content>
+      <StyledModuleTree />
+      <ProgressWidget />
+      <LeaderboardWidget />
+    </Content>
   </Page>;
 };

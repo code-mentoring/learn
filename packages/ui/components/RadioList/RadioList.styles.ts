@@ -1,4 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+import { theme as t } from '../../css/theme';
 
 export const RadioListDiv = styled.div`
   --webkit-user-select: none;
@@ -8,14 +10,14 @@ export const RadioListDiv = styled.div`
   width: 100%;
 `;
 
-export const RadioListLabel = styled.label`${({ theme: t }) => css`
+export const RadioListLabel = styled.label`
   position: relative;
   display: flex;
   align-items: center;
   border: ${t.borders.main};
   border-bottom: none;
   padding: 0 ${t.size('xsm')};
-  height: ${t.size('lg')};;
+  height: ${t.size('huge')};;
   color: ${t.color('primary')};
   cursor: pointer;
   transition: all;
@@ -50,7 +52,7 @@ export const RadioListLabel = styled.label`${({ theme: t }) => css`
       z-index: 10;
     }
   }
-`}`;
+`;
 
 export const RadioListSmall = styled.small`
   margin-left: auto;
