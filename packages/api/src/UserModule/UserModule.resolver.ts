@@ -21,23 +21,28 @@ export class UserModuleResolver {
     @CurrentUser() user: User,
     @Args('moduleId') moduleId: string
   ) {
-    const updatedUserModule = await this.userModuleService.update(user.id, moduleId, new Date());
+    try {
+      await this.userModuleService.create(user.id, moduleId);
+    } catch (e) {
+      throw new Error('User has already completed that module');
+    }
+    const um = (await this.userModuleService.findOne(user.id, moduleId))!;
 
-    if (!updatedUserModule) throw new Error('No module updated');
+    // TODO: Refactor all this to an inner join as it's very inefficient
 
     // when user module complete, update user path progress
     const userModules = await this.userModuleService.findByUser(user.id);
 
     const numCompletedModule = userModules?.filter(
-      um => um.module.pathId === updatedUserModule.module.pathId
+      _um => _um.module.pathId === um.module.pathId
     ).filter(upm => upm.completedAt).length;
 
     this.pathUserService.updatePathUserProgress(
       user.id,
-      updatedUserModule.module.pathId,
+      um.module.pathId,
       (numCompletedModule === undefined) ? 0 : numCompletedModule
     );
 
-    return updatedUserModule;
+    return um;
   }
 }

@@ -1,8 +1,10 @@
 import classnames from 'classnames';
-import { Form as FormikForm, FormikConfig, FormikContextType, FormikProvider, useFormik } from 'formik';
+import { FormikConfig, FormikContextType, FormikProvider, useFormik } from 'formik';
 import React, { PropsWithoutRef, useEffect } from 'react';
 
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { StyledForm } from './Form.styles';
+
 
 export interface FormProps<Values extends object> extends
   Partial<FormikConfig<Values>>,
@@ -24,16 +26,16 @@ export const useBrixFormContext = () => React.useContext<BrixFormContext>(BrixFo
 export const Form: React.FunctionComponent<FormProps<any>> = ({
   onChange,
   children,
-  withSubmit,
   className,
   onSubmit = () => { },
   initialValues = {},
   style,
   setForm,
   error,
-  success,
+  // success,
   ...formikProps
 }) => {
+
   // Establishes the context for FormField to call onChange
   const ctx: BrixFormContext = {
     onChange: (e, formik) => {
@@ -57,14 +59,19 @@ export const Form: React.FunctionComponent<FormProps<any>> = ({
     if (onChange && Object.keys(initialValues).length) onChange(initialValues, {} as any);
   }, [initialValues]);
 
-  const canSubmit = form.dirty && withSubmit;
+  const valid = form.dirty && form.isValid;
 
   return <BrixFormContext.Provider value={ctx}>
     <FormikProvider value={form}>
-      {error && <ErrorMessage error={error} /> }
-      <FormikForm className={classnames(className, { 'with-submit': canSubmit })} style={style}>
+      {error && <ErrorMessage error={error} center /> }
+      <StyledForm
+        className={classnames(className, { valid, invalid: !valid })}
+        style={style}
+        onReset={form.handleReset}
+        onSubmit={form.handleSubmit}
+      >
         {children}
-      </FormikForm>
+      </StyledForm>
     </FormikProvider>
   </BrixFormContext.Provider>;
 };

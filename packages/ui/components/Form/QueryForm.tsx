@@ -20,9 +20,12 @@ export const MutationForm: React.FunctionComponent<MutationFormProps> = ({
   ...formProps
 }) => {
   const [m] = useMutation(gql(mutation));
-  return <Form {...formProps} onSubmit={
-    v => m({ variables: { [variablesKey]: removeKeys(v, ['__typename']) } })
-  } />;
+  return <Form
+    {...formProps}
+    onSubmit={
+      v => m({ variables: { [variablesKey]: removeKeys(v, ['__typename']) } })
+    }
+  />;
 };
 
 
@@ -32,7 +35,10 @@ export const QueryForm: React.FunctionComponent<QueryFormProps> = ({
   ...formProps
 }) => {
   const [q] = useLazyQuery(gql(query));
-  return <Form {...formProps} onSubmit={
-    v => q({ variables: { [variablesKey]: removeKeys(v, ['__typename']) } })
-  } />;
+  return <Form
+    {...formProps}
+    onSubmit={
+      v => q({ variables: { [variablesKey]: removeKeys(v, ['__typename']) } })
+    }
+  />;
 };

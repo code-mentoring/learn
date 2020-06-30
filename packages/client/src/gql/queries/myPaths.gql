@@ -1,11 +1,8 @@
 query {
-  myPaths {
+  paths(onlyJoined: true) {
     id
-    pathId
+    name
+    icon
     progress
-    path{
-     name
-     icon
-    }
   }
 }

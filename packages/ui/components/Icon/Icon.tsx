@@ -1,37 +1,30 @@
-import classnames from 'classnames';
-import React, { PropsWithRef } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
+import { Color, Size } from '../../types/styled';
 import { icons } from './icons';
 
 
 export type IconType = keyof typeof icons;
 
-export interface IconProps extends PropsWithRef<any> {
+export interface IconProps extends React.HTMLAttributes<HTMLOrSVGElement>{
   icon: IconType;
-  color?: string;
-  size?: 'large' | 'small' | 'medium' | number;
+  size?: Size | number;
+  color?: Color;
 }
 
-export const sizeMap = {
-  small: '4',
-  medium: '10',
-  large: '20'
-};
-
-
-export const Icon: React.FunctionComponent<IconProps> = ({
-  icon,
-  color,
-  className,
-  size = 'medium',
-  ...props
-}) => {
-  const colorClass = color ? `text-${color}` : null;
-
-  const sizeClass = `h-${typeof size === 'number' ? size : sizeMap[size]}`;
-
-  const klass = classnames('icon', className, sizeClass, colorClass);
+const BaseIcon: React.FC<IconProps> = ({ icon, ...props }) => {
   const Ikon = icons[icon];
   if (!Ikon) return null;
-  return <Ikon {...props} className={klass} />;
+  return <Ikon {...props} />;
 };
+
+export const Icon = styled(BaseIcon)`
+  height: ${p => p.theme.size(p.size)};
+  width: ${p => p.theme.size(p.size)};
+  color: ${p => p.theme.color(p.color)};
+
+  path, polygon {
+    fill: currentColor;
+  }
+`;
