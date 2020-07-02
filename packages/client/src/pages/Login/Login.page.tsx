@@ -36,12 +36,14 @@ const StyledPage = styled(Page)`
 
 const Container = styled(Box)`
   margin-top: -20rem;
+  z-index: 2;
 `;
 
 const StyledPeople = styled(People)`
   position: fixed;
   bottom:0; left:0; height: 22rem;
   opacity: 0.2;
+  z-index: 1;
 `;
 
 
