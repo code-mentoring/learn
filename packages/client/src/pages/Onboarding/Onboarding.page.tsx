@@ -1,142 +1,123 @@
-import { Button, Options, RadioList, SliderField, TextField } from '@codement/ui';
+import { Button, Options, RadioList, SliderField, Text, TextField } from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
-import { LocalStorage } from '@codement/ui/lib/localStorage';
-import React, { useEffect, useState } from 'react';
-import { Switch, useHistory } from 'react-router';
+import React, { useMemo } from 'react';
+import Emoji from 'react-emoji-render';
+import { Redirect, useHistory } from 'react-router-dom';
 
-import { Path } from '@codement/api';
 import { AppHeader } from '../../components/AppHeader/AppHeader';
 import { PathsList } from '../../components/PathsList/PathsList';
-import { Wizard } from '../../containers/Wizard.container';
+import { Onboarding } from '../../containers/Onboarding.container';
 import { routes } from '../../router/routes';
-import { OnboardingStep } from './OnboardingStep';
+import { BackButton, Center, Footer, Graphic, NextButton, Step, StyledPage, Wrapper } from './Onboarding.styles';
+import { SliderText } from './Slider';
 import { steps } from './steps';
-import { SliderText } from './Wizard/Typography/SliderText';
 
 
-export interface WizardFormValues {
-  codingAbility: number;
-  why: string;
-  paths: Path[],
-  practiceGoal: number
-}
+const radioOptions: Options[] = [
+  { label: 'Casual', value: 1, subLabel: '1 lesson / day' },
+  { label: 'Regular', value: 2, subLabel: '2 lessons / day' },
+  { label: 'Serious', value: 3, subLabel: '3 lessons / day' },
+  { label: 'Hardcore', value: 4, subLabel: '4 lessons / day' }
+];
 
 
 export const OnboardingPage = () => {
+
+  const { me } = Me.useContainer();
   const history = useHistory();
+  const { goTo, page, values, setValue, step, valid, hold } = Onboarding.useContainer();
 
-  const {
-    codingAbility,
-    setCodingAbility,
-    why,
-    setWhy,
-    paths,
-    setPaths,
-    practiceGoal,
-    setPracticeGoal
-  } = Wizard.useContainer();
-  const { refetch } = Me.useContainer();
+  const content = useMemo(() => {
+    switch (page) {
+      /* 1. Welcome page */
+      case 0: return <Button
+        color="secondary"
+        size="large"
+        onClick={() => goTo(1)}
+      > Get started! </Button>;
 
-  const radioOptions: Options[] = [
-    { label: 'Casual', value: 1, subLabel: '1 lesson / day' },
-    { label: 'Regular', value: 2, subLabel: '2 lessons / day' },
-    { label: 'Serious', value: 3, subLabel: '3 lessons / day' },
-    { label: 'Hardcore', value: 4, subLabel: '4 lessons / day' }
-  ];
 
-  const [loading, setLoading] = useState(true);
+      /* 2. Coding ability */
+      case 1: return <SliderText value={values.codingAbility}>
+        <SliderField
+          value={values.codingAbility}
+          onChange={v => setValue('codingAbility', v)}
+        />
+      </SliderText>;
 
-  useEffect(() => {
-    if (LocalStorage.onbordingPreferences) {
-      setCodingAbility(
-        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).codingAbility
-          || 0)
-      );
-      setWhy(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).why || '');
-      setPaths(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).paths || []);
-      setPracticeGoal(
-        Number(((LocalStorage.onbordingPreferences as unknown) as WizardFormValues).practiceGoal
-          || 0)
-      );
+
+      /* 3. Why */
+      case 2: return <TextField
+        textarea
+        rows={4}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue('why', e.target.value)}
+        placeholder="I'm here because..."
+        value={values.why}
+      />;
+
+
+      /* 4. Paths */
+      case 3: return <PathsList
+        selectedPaths={values.paths}
+        onChange={v => setValue('paths', v)}
+      />;
+
+
+      /* 5. Practice Goal */
+      case 4: return <RadioList
+        name="practiceGoal"
+        options={radioOptions}
+        value={values.practiceGoal || 0}
+        onChange={v => setValue('practiceGoal', v)}
+      />;
+
+
+      /* 6. Completed */
+      case 5: return <Button
+        size="large"
+        color="secondary"
+        onClick={() => history.push(routes.home())}
+      > Start learning! </Button>;
+
+      default: return null;
     }
-    setLoading(false);
-  }, []);
+  }, [step, values]);
 
-  if (loading) return <></>;
 
-  return <div className="relative h-screen overflow-hidden bg-white">
+  // If the user has already filled out form, redirect.
+  // "hold" is used here to wait for the last page ONLY on first time
+  if (me?.userPreferences && !hold) return <Redirect to={routes.home()} />;
+
+  return <StyledPage title="Welcome to Code Mentoring!">
     <AppHeader minimal />
-    <Switch>
 
-      {/* 1. Welcome page */}
-      <OnboardingStep {...steps[0]} exact>
-        <Button
-          color="success"
-          size="large"
-          onClick={() => history.push(routes.onboardingWorkflowCodingAbility())}
-        > Get started! </Button>
-      </OnboardingStep>
+    <Wrapper>
+      <Center>
+        <Text as="h2"><Emoji text={step.title} /></Text>
+        <Text>{step.text}</Text>
+        {content}
+      </Center>
+    </Wrapper>
 
+    <Graphic>{step.graphic}</Graphic>
 
-      {/* 2. Coding ability */}
-      <OnboardingStep {...steps[1]}>
-        <SliderText value={codingAbility}>
-          <SliderField
-            value={codingAbility}
-            onChange={(value: number) => setCodingAbility(value)}
-          />
-        </SliderText>
-      </OnboardingStep>
-
-
-      {/* 3. Why */}
-      <OnboardingStep {...steps[2]}>
-        <TextField
-          textarea
-          rows={4}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setWhy(e.target.value)}
-          placeholder="I'm here because..."
-          value={why}
-        />
-      </OnboardingStep>
-
-
-      {/* 4. Paths */}
-      <OnboardingStep {...steps[3]}>
-        <PathsList
-          selectedPaths={paths}
-          onChange={(selectedPaths: Path[]) => setPaths(selectedPaths)}
-        />
-      </OnboardingStep>
-
-
-      {/* 5. Practice Goal */}
-      <OnboardingStep {...steps[4]} submit>
-        <RadioList
-          name="practiceGoal"
-          options={radioOptions}
-          value={practiceGoal || 0}
-          onChange={(value: number) => setPracticeGoal(value)}
-        />
-      </OnboardingStep>
-
-
-      {/* 6. Completed */}
-      <OnboardingStep {...steps[5]}>
-        <Button
-          size="large"
-          color="success"
-          onClick={async () => {
-            // TODO: Update in Wizard after submission
-            const res = await refetch(); // Update the user preferences
-            if (res.data) {
-              LocalStorage.onbordingPreferences = null;
-            }
-            history.push(routes.home());
-          }}
-        >Start learning!</Button>
-      </OnboardingStep>
-
-    </Switch>
-  </div>;
+    {(page !== 0) && (page !== steps.length - 1) && <Footer>
+      {new Array(steps.length - 2).fill(1).map((_, i) => <Step
+        active={(i + 1) === page}
+        completed={valid[i + 1]}
+        onClick={() => goTo(i + 1)}
+      />)}
+      <BackButton
+        text
+        size="large"
+        onClick={() => goTo(page - 1)}
+      >Back</BackButton>
+      <NextButton
+        size="large"
+        color="secondary"
+        disabled={!valid[page]}
+        onClick={() => goTo(page + 1)}
+      > Next </NextButton>
+    </Footer>}
+  </StyledPage>;
 };

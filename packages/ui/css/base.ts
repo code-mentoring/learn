@@ -1,56 +1,75 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme as t } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
-*, *:focus {
-  outline: none !important;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-body, #app {
-  background: #e4e0f3;
-  min-height: 100vh;
-  /* fallback */
-  /* font-size: 10px; */
-  /* font-size: 62.5%;  TODO: uncomment when transition to styled components is finished */ 
+*, *:focus {
+  outline: none !important;
+  box-sizing: border-box;
 }
 
 html {
-  color:  ${props => props.theme.colors.primary[500]};
-  }
-  
-  h1,h2,h3 {
-    font-family: "Open Sans", helvetica, sans-serif;
-    color: ${props => props.theme.colors.primary[500]};
-  }
-  
-  h1{
-    font-size: 1.5rem;
-    font-weight: 800;
-  }
-  
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.25;
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 900;
-    line-height: 1.25;
-  }
-  
-  h4 {
-    font-size: .875rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: ${props => props.theme.colors.grey[700]};
-  }
-  
-  p {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: ${props => props.theme.colors.grey[700]};
-  } 
+  font-size: 10px;
+  font-family: ${t.fontFamily.sans};
+}
+
+body, #app {
+  background: #fff;
+  min-height: 100vh;
+  font-size: ${t.size()};
+}
+
+a {
+	text-decoration: none;
+}
+
+button {
+	border: none;
+	background: none;
+}
 `;

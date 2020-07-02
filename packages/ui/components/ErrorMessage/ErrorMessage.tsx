@@ -1,24 +1,25 @@
 import React, { HTMLProps } from 'react';
 import styled from 'styled-components';
+
+import { theme as t } from '../../css/theme';
 import { firstUpper } from '../../lib/text';
 
-export interface ErrorMessageProps extends HTMLProps<HTMLSpanElement>{
+export interface ErrorMessageProps extends HTMLProps<HTMLSpanElement> {
   error: string;
-  className?: string;
+  center?: boolean;
 }
 
-export const ErrorMessage = styled<React.FC<ErrorMessageProps>>(({
-  error,
-  className,
-  ...props
-}) =>
-  <span className={className} {...props}>
-    {firstUpper(error)}
-  </span>)`
+const StyledError: React.FC<HTMLProps<HTMLSpanElement>> = styled.span<ErrorMessageProps>`
   display: block;
-  color: ${props => props.theme.colors.error};
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: .25rem;
-  margin-bottom: 0.5rem;
-  `;
+  text-align: ${p => (p.center ? 'center' : 'right')};
+  color: ${t.color('error')};
+  font-size: ${t.size('xsm')};
+  font-weight: ${t.fontWeight.bold};
+  margin-top: ${t.size('xtiny')};
+  margin-bottom: ${t.size('tiny')};
+`;
+
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  error,
+  ...props
+}) => <StyledError {...props}> {firstUpper(error)} </StyledError>;

@@ -88,9 +88,9 @@ export class SeederService {
 
   async seedPaths(users: UserWithPassword[], characters: Character[]) {
     const paths = [
-      { name: 'javascript', icon: 'js' },
-      { name: 'css', icon: 'css' },
-      { name: 'html  ', icon: 'html' }
+      { name: 'Javascript', icon: 'js' },
+      { name: 'CSS', icon: 'css' },
+      { name: 'HTML', icon: 'html' }
     ];
 
     return Promise.all(paths.map(async (path, i) => {

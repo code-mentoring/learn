@@ -1,0 +1,3 @@
+query {
+  paths(notJoined: true) { id name icon progress }
+}

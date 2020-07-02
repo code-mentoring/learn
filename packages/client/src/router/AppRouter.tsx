@@ -1,16 +1,14 @@
 import { AuthRoute, UnAuthRoute } from '@codement/ui';
-import React from 'react';
-import {
-  Redirect, Route, Router, Switch
-} from 'react-router';
 import { history as History } from '@codement/ui/lib/history';
+import React from 'react';
+import { Redirect, Route, Router, Switch } from 'react-router';
 
+import { Onboarding } from '../containers/Onboarding.container';
 import { ClientContainerWrapper } from '../ClientContainerWrapper';
-import { Wizard } from '../containers/Wizard.container';
-import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
+import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { routes } from './routes';
 
 
@@ -25,9 +23,9 @@ export const AppRouter = () => (
             <Route exact path={routes.home(false)} component={DashboardPage} />
             <Route exact path={routes.logout(false)} component={LogoutPage} />
             <Route path={routes.onboardingWorkflow(false)}>
-              <Wizard.Provider>
+              <Onboarding.Provider>
                 <OnboardingPage />
-              </Wizard.Provider>
+              </Onboarding.Provider>
             </Route>
 
             <Redirect to={routes.home(false)} />

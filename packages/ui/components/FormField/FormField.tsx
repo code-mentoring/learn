@@ -1,14 +1,14 @@
-import classnames from 'classnames';
 import { FormikHandlers, getIn, useField, useFormikContext } from 'formik';
 import React, { FunctionComponent, useMemo } from 'react';
+import styled from 'styled-components';
 
 import { firstUpper } from '../../lib/text';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { CheckboxProps } from '../Checkbox/Checkbox.styles';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { useBrixFormContext } from '../Form/Form';
 import { Select } from '../Select/Select';
-import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
-import { TextField, TextFieldProps } from '../TextField/TextField';
+import { TextField, TextFieldProps } from '..';
 
 
 // import { OptionProps } from 'react-select';
@@ -54,7 +54,7 @@ export type FormFieldBaseProps = {
   render?: (type: string, options: FormFieldCustomProps) => [React.FC<any>, { [key: string]: any }] | undefined;
 };
 
-export type FormFieldProps<T = {type: string}> = FormFieldBaseProps & (FormFieldType | T | {
+export type FormFieldProps<T = { type: string }> = FormFieldBaseProps & (FormFieldType | T | {
   component?: React.ComponentType | FunctionComponent<any>,
   [prop: string]: any
 });
@@ -63,19 +63,16 @@ export interface FormFieldCustomProps {
   onChange: (v: any) => void;
 }
 
-export const FormField: React.FunctionComponent<FormFieldProps> = (
-  {
-    name,
-    label,
-    labelComponent,
-    className,
-    colSpan = 2,
-    changeOnBlur,
-    // onChange: overridenOnChange,
-    render,
-    ...compProps
-  }: FormFieldProps
-) => {
+export const BaseFormField: React.FunctionComponent<FormFieldProps> = ({
+  name,
+  label,
+  labelComponent,
+  className,
+  changeOnBlur,
+  // onChange: overridenOnChange,
+  render,
+  ...compProps
+}) => {
 
   const [fieldFormik] = useField(name);
   const form = useFormikContext<any>();
@@ -103,9 +100,10 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
 
 
   let error;
+
   if (name === 'time' && getIn(form.errors, name)) {
     if (getIn(form.touched.time, 'hours') && getIn(form.touched.time, 'minutes')) {
-      error = Object.values(getIn(form.errors, name))[0];
+      [error] = Object.values(getIn(form.errors, name));
     }
   } else {
     error = getIn(form.errors, name) && (form.submitCount > 0 || getIn(form.touched, name))
@@ -115,11 +113,10 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
 
   let extraProps: any = { error };
 
-  if (changeOnBlur) {
-    extraProps.onBlur = () => brixForm.onChange(form.values, form);
-  }
+  if (changeOnBlur) extraProps.onBlur = () => brixForm.onChange(form.values, form);
 
   let Comp;
+
   if ('type' in compProps) {
     const { type } = compProps;
 
@@ -225,27 +222,31 @@ export const FormField: React.FunctionComponent<FormFieldProps> = (
         Comp = C;
         extraProps = { ...extraProps, ...props };
     }
-  } else {
-    Comp = compProps.component;
-  }
+
+  } else Comp = compProps.component;
 
   const LC = labelComponent;
 
-  return <div className={classnames('form-field', className, {
-    [`col-span-${colSpan}`]: colSpan !== 2,
-    'pt-2': !label
-  })}
-  >
+  return <div className={className}>
     {label
       && (LC ? <LC htmlFor={name}>{label}</LC> : <label htmlFor={name}>{firstUpper(label)}</label>)
     }
-    {Comp ? <Comp
+    {Comp && <Comp
       id={name}
       {...fieldFormik}
       {...compProps as any}
       {...extraProps}
       onChange={extraProps.onChange || onChange}
-    /> : null}
+    />}
     {typeof error === 'string' && <ErrorMessage error={error} className="text-right" />}
   </div>;
 };
+
+
+// eslint-disable-next-line
+export const FormField: React.FC<FormFieldProps> = styled(BaseFormField)`
+  margin-bottom: ${p => p.theme.size()};
+  ${p => p.colSpan && `grid-column: span ${p.colSpan};`}
+`;
+
+FormField.defaultProps = { colSpan: 2 };

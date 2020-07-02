@@ -1,11 +1,11 @@
 query ($id: String!) {
-
   path(id: $id) {
     id
     name
     icon
     description
     createdAt
+    progress
   }
 
   pathModules(pathId: $id) {
@@ -14,5 +14,6 @@ query ($id: String!) {
     icon
     type
     previous { id }
+    completed
   }
 }

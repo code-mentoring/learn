@@ -11,6 +11,7 @@ const files = [
   'getUserFriends',
   'getCharacters',
   'assignments',
+  'assignmentFiles',
   'getConceptByName'
 ];
 

@@ -35,6 +35,8 @@ import { TestLogger } from './TestLogger.service';
 import { UserWithPassword } from '../../src/User/User.entity';
 import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
 import { UpdatePathInput } from '../../src/Path/Path.entity';
+import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
+import { UpdateAssignmentInput } from '../../src/Assignment/Assignment.entity';
 
 
 /**
@@ -133,6 +135,14 @@ export abstract class TestClient {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
+  static updateAssignmentFile(file: UpdateAssignmentFileInput): Promise<AssignmentFile> {
+      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
+  }
+
+  static deleteAssignmentFile(assignmentFileId: string): Promise<AssignmentFile> {
+      return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
+  }
+
   static createFriendship(toId: String): Promise<FriendOutput> {
     return this._request('createFriendship', mutations.createFriendship, { toId });
   }
@@ -159,6 +169,10 @@ export abstract class TestClient {
 
   static deleteModule(moduleId: string): Promise<Module> {
     return this._request('deleteModule', mutations.deleteModule, { moduleId });
+  }
+
+  static joinModule(moduleId: string): Promise<Boolean> {
+    return this._request('joinModule', mutations.joinModule, { moduleId });
   }
 
   static createCharacter(character: CreateCharacterInput): Promise<Character> {
@@ -219,8 +233,12 @@ export abstract class TestClient {
   }
 
   static getAssignments(): Promise<Assignment[]> {
-      return this._request('assignments', queries.assignments);
-    }
+    return this._request('assignments', queries.assignments);
+  }
+
+  static getAssignmentFiles(assignmentId: string): Promise<AssignmentFile[]> {
+    return this._request('assignmentFiles', queries.assignmentFiles, { assignmentId });
+  }
 
   // ----------------------------------------------------------------- Workflows
   static async workflowSignup() {

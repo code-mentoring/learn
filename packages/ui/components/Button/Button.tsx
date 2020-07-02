@@ -1,31 +1,33 @@
-import classnames from 'classnames';
-import React from 'react';
-import { Size, WithColor } from '../../lib/classes';
+import { Icon } from '@codement/ui';
+import React, { HTMLAttributes } from 'react';
+
+import { IconType } from '../Icon/Icon';
+import { StyledButton } from './Button.styles';
 
 
-export type ButtonProps = WithColor & {
+export type ButtonSize = 'small' | 'large';
+export type ButtonColor = 'primary' | 'secondary' | 'tertiary';
+
+
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   text?: boolean;
-  size?: Size;
-};
+  color?: ButtonColor
+  disabled?: boolean;
+  size?: ButtonSize;
+  icon?: IconType;
+  iconPosition?: 'left' | 'right'
+  className?: string;
+}
 
-export const Button: React.FunctionComponent<ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'>> = ({
+export const Button: React.FC<ButtonProps> = ({
+  icon,
+  iconPosition = 'left',
   children,
-  className,
-  text,
-  color,
-  size,
-  type = 'submit',
+  color = 'primary',
   ...props
-}) => {
-  const classes: any = {};
-  if (color) classes[`btn-${color}`] = true;
-  if (size) classes[`btn-${size}`] = true;
-  if (text) classes[`btn-${text}`] = true;
-  // eslint-disable-next-line react/button-has-type
-  return <button
-    type={type}
-    className={classnames('btn', classes, className)}
-    {...props}
-  >{children}
-  </button>;
-};
+}) =>
+  <StyledButton color={color} {...props}>
+    {icon && iconPosition === 'left' && <Icon icon={icon} className="left" />}
+    <span>{children}</span>
+    {icon && iconPosition === 'right' && <Icon icon={icon} className="right" />}
+  </StyledButton>;

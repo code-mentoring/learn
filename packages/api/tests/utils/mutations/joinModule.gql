@@ -1,0 +1,3 @@
+mutation joinModule($moduleId: String!) {
+  joinModule(moduleId: $moduleId) 
+}

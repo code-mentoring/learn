@@ -1,5 +1,5 @@
-mutation updateAssignmentFile($update: UpdateAssignmentFileInput!) {
-  updateAssignmentFile(update: $update) {
+mutation updateAssignmentFile($file: UpdateAssignmentFileInput!) {
+  updateAssignmentFile(file: $file) {
     id
     name
     type
@@ -8,3 +8,11 @@ mutation updateAssignmentFile($update: UpdateAssignmentFileInput!) {
     assignmentId
   }
 }
+
+  # @Mutation(() => AssignmentFile)
+  # updateAssignmentFile(
+  #   @CurrentUser() user: User,
+  #   @Args('file') file: UpdateAssignmentFileInput
+  # ) {
+  #   return this.assignmentFileService.update(user.id, file);
+  # }

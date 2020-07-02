@@ -39,4 +39,13 @@ export class PathUserService {
     if (affected && (affected === 1)) return this.pathUserRepository.findOne({ userId, pathId });
     throw new NotFoundException('PathUser not found');
   }
+
+  async getProgress(userId: string, pathId: string) {
+    const p = await this.pathUserRepository.findOne({
+      where: { userId, pathId },
+      select: ['progress']
+    });
+    if (!p) return null;
+    return p.progress;
+  }
 }
