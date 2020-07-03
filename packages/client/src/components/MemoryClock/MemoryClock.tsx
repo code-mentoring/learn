@@ -5,10 +5,10 @@ export interface MemoryClockProps {
 }
 
 export const MemoryClock: React.FC<MemoryClockProps> = ({ time = 10 }) => {
-  //let timeMillisec = time * 1000;
-  const timeMillisec = time * 1000;
+  const [counter, setCounter] = useState(time);
 
-  const [counter, setCounter] = useState(timeMillisec);
+  let displayMin = counter > 60 ? Math.floor((counter % 3600) / 60) % 60 : 0;
+  let displaySec = counter > 0 ? Math.floor((counter % 3600) % 60) : 0;
 
   useEffect(() => {
     const timer =
@@ -16,5 +16,9 @@ export const MemoryClock: React.FC<MemoryClockProps> = ({ time = 10 }) => {
     return () => clearInterval(Number(timer));
   }, [counter]);
 
-  return <div>CounterTest: {counter}</div>;
+  return (
+    <div>
+      {displayMin} : {displaySec}
+    </div>
+  );
 };
