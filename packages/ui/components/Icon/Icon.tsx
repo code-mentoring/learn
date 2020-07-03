@@ -25,8 +25,8 @@ export const Icon = styled(BaseIcon)`
   height: ${p => p.theme.size(p.size)};
   width: ${p => p.theme.size(p.size)};
   color: ${p => p.theme.color(p.color)};
-  stroke: ${p => p.strokecolor ? p.theme.color(p.strokecolor) : 'transparent'};
-  stroke-width: ${p => p.storkethickness ? p.theme.size(p.storkethickness)  : 'transparent'};
+  stroke: ${p => p.strokecolor ? p.theme.color(p.strokecolor) : p.theme.color('transparent')};
+  stroke-width: ${p => p.storkethickness ? p.theme.size(p.storkethickness)  : 0};
 
   path, polygon {
     fill: currentColor;

@@ -25,5 +25,5 @@ background: ${t.color('green')};
 height: ${t.size('xbig')};
 border-radius: ${t.borderRadius.default} 0 0 ${t.borderRadius.default};
 transition: width .2s ease-in;
-width: ${(props) => props.current && props.max ? props.current/props.max * 100 : 0}%;
+width: ${(props) => props.current ? props.current : 0}%;
 `;

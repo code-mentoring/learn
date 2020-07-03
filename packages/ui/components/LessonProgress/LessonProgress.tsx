@@ -10,8 +10,13 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
     max = 1,
     current = 0,
 }) => {
+    max = max === 0 ? 1 : max;
+    let completedPercentage = current / max * 100;
+    if (completedPercentage > 100) {
+        completedPercentage = 100;
+    }
     return <ProgressBarDiv> 
-        <FinishedProgress current={current} max={max} />
+        <FinishedProgress current={completedPercentage} max={max} />
         <Icon icon="hex" size="huge" color="secondary.200" strokecolor="secondary.400" storkethickness="tiny" />
         <UnfinishedProgressDiv />
     </ProgressBarDiv>
