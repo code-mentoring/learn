@@ -11,6 +11,8 @@ export interface IconProps extends React.HTMLAttributes<HTMLOrSVGElement>{
   icon: IconType;
   size?: Size | number;
   color?: Color;
+  strokecolor?: Color;
+  storkethickness?: Size;
 }
 
 const BaseIcon: React.FC<IconProps> = ({ icon, ...props }) => {
@@ -23,6 +25,8 @@ export const Icon = styled(BaseIcon)`
   height: ${p => p.theme.size(p.size)};
   width: ${p => p.theme.size(p.size)};
   color: ${p => p.theme.color(p.color)};
+  stroke: ${p => p.strokecolor ? p.theme.color(p.strokecolor) : 'transparent'};
+  stroke-width: ${p => p.storkethickness ? p.theme.size(p.storkethickness)  : 'transparent'};
 
   path, polygon {
     fill: currentColor;
