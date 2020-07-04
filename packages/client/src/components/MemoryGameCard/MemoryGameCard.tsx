@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { theme as t, CardProps, Card, Icon, centerAbsolute } from '@codement/ui';
 
@@ -9,18 +9,54 @@ export interface MemoryGameCardProps extends CardProps {
     content?: string;
 }
 
-const StyledCard = styled(Card)<MemoryGameCardProps>`
+const relativePosition = css`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+const styledCard = css`
+  border-radius: ${t.borderRadius.large};
+`;
+
+const FlipCard = styled.div<MemoryGameCardProps>`
+  ${relativePosition};
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  ${p => p.flipped && `
+    transform: rotateY(180deg);
+  `};
+`;
+
+const cardFace = css`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+
+  ${styledCard};
+`;
+
+const CardFront = styled(Card)`
+  ${cardFace};
+`;
+
+const CardBack = styled(Card)`
+  ${cardFace};
+  transform: rotateY(180deg);
+`;
+
+const CardContainer = styled.div`
   position: relative;
   width: 16rem;
   height: 16rem;
   left: 0%;
   top: 0%;
-
-  border-radius: ${t.borderRadius.large};
-  
   align-items: center;
 
-  & > span {
+  perspective: 1000px;
+
+  & span {
     ${centerAbsolute};
     display: flex;
     text-align: center;
@@ -30,6 +66,11 @@ const StyledCard = styled(Card)<MemoryGameCardProps>`
     line-height: ${t.size('xbig')};
     color: ${t.color('primary.600')};
   }
+`;
+
+const StateCard = styled(Card)<MemoryGameCardProps>`
+  ${relativePosition};
+  ${styledCard};
 
   ${p => p.state === 'incorrect' && `
     border: 2px solid ${t.color('tertiary.500')};
@@ -37,7 +78,7 @@ const StyledCard = styled(Card)<MemoryGameCardProps>`
 
   ${p => p.state === 'correct' && `
     transform: scale(0.875);
-    background: ${t.color('secondary.100')};
+    background: ${t.color('transparent')};
     opacity: 0.2;
     border: 2px solid ${t.color('secondary.400')};
   `};
@@ -49,12 +90,23 @@ const StyledIcon = styled(Icon)`
   right: ${t.size('tiny')};
 `;
 
-export const MemoryGameCard: React.FC<MemoryGameCardProps> = ({ flipped, state, content }) =>
-  <StyledCard flipped={flipped} state={state}>
-    { state === 'correct'
-      && <StyledIcon icon="checkCircle" size="xbig" color="secondary.400" />
+export const MemoryGameCard: React.FC<MemoryGameCardProps> = (
+  { flipped, state, content, ...props }
+) =>
+  <CardContainer>
+    {
+      !state && <FlipCard flipped={flipped} {...props}>
+        <CardFront />
+        <CardBack>
+          <span>{content}</span>
+        </CardBack>
+      </FlipCard>
     }
-    { (flipped || state)
-      && <span>{content}</span>
+    {
+      state && <StateCard state={state} {...props}>
+        <span>{content}</span>
+        {state === 'correct'
+      && <StyledIcon icon="checkCircle" size="xbig" color="secondary.400" />}
+      </StateCard>
     }
-  </StyledCard>;
+  </CardContainer>;
