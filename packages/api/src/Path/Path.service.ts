@@ -17,13 +17,13 @@ export class PathService {
   }
 
   async findById(id: string): Promise<Path> {
-    const path = await this.pathRepository.findOne({ where: { id }, relations: ['character'] });
+    const path = await this.pathRepository.findOne({ where: { id }, relations: ['character', 'modules'] });
     if (!path) throw new NotFoundException('Path not found');
     return path;
   }
 
   async findByName(name: string): Promise<Path> {
-    const path = await this.pathRepository.findOne({ where: { name }, relations: ['character'] });
+    const path = await this.pathRepository.findOne({ where: { name }, relations: ['character', 'modules'] });
     if (!path) throw new NotFoundException('Path not found');
     return path;
   }

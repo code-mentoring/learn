@@ -2,11 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import fm from 'front-matter';
 import MarkdownIt from 'markdown-it';
+import YAML from 'yaml';
 
 const tree = require('directory-tree');
 
 const MD = new MarkdownIt();
-
 
 export interface CMSPaths {
   [pathName: string]: CMSPath;
@@ -17,10 +17,14 @@ export interface CMSPath {
   modules: CMSModule[];
 }
 
+export interface CMSQ {
+  questions: Object[];
+}
+
 export interface CMSModule {
   name: string;
   storySections: string[];
-  questions: string[];
+  questions: Object[];
 }
 
 type Dir = {
@@ -29,7 +33,6 @@ type Dir = {
   type: 'file' | 'directory';
   children?: Dir[];
 }
-
 
 export class CMSLoader {
   paths: CMSPaths;
@@ -57,12 +60,19 @@ export class CMSLoader {
 
   private _getModule(pathName: string, moduleDir: Dir): CMSModule {
     const [name, storySections] = this._readStoryFile(pathName, moduleDir.name);
-    return { name, storySections, questions: [] };
+    const questions = this._readQuestionsFile(pathName, moduleDir.name);
+    return { name, storySections, questions };
   }
 
   private _readStoryFile(pathName: string, mod: string): [string, string[]] {
     const md = fs.readFileSync(path.resolve(`./content/paths/${pathName}/${mod}/story.md`)).toString();
     const { body, attributes } = fm<{title: string}>(md);
     return [attributes.title, MD.render(body).split('<hr>')];
+  }
+
+  private _readQuestionsFile(pathName: string, mod: string): Object[] {
+    const yml = fs.readFileSync(path.resolve(`./content/paths/${pathName}/${mod}/questions.yml`)).toString();
+    const { questions } = <CMSQ> YAML.parse(yml);
+    return questions;
   }
 }

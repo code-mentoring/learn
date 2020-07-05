@@ -59,6 +59,33 @@ type Path {
   characterId: String
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+  storySection: StorySection!
+}
+
+type StorySection {
+  id: String!
+  order: Float!
+  content: String!
+  lessonId: String!
+  conceptId: String!
+  concept: Concept!
+  lesson: Lesson!
+}
+
+type Lesson {
+  id: String!
+  moduleId: String!
+  module: Module!
+  storySection: [StorySection!]!
+}
+
 type Module {
   id: String!
   name: String!
@@ -68,6 +95,7 @@ type Module {
   pathId: String!
   previous: Module
   path: Path!
+  lessons: [Lesson!]!
 }
 
 type Assignment {
@@ -90,15 +118,6 @@ type AssignmentFile {
 
 type LoginOutput {
   accessToken: String!
-}
-
-type Concept {
-  id: String!
-  name: String!
-  description: String!
-  icon: String!
-  taughtInId: String!
-  taughtIn: Module!
 }
 
 type UserConcept {
@@ -132,6 +151,17 @@ type FriendOutput {
   since: DateTime
 }
 
+type CodeCompleteQuestion {
+  file: String!
+  answers: [String!]!
+}
+
+type Question {
+  type: String!
+  files: [CodeCompleteQuestion!]
+  pairs: [[String!]!]
+}
+
 type Query {
   assignments: [Assignment!]!
   moduleAssignments(moduleId: String!): [Assignment!]!
@@ -152,6 +182,10 @@ type Query {
   path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [PathUser!]!
+  lessonStorySections(lessonId: String!): [StorySection!]!
+  lesson(id: String!): Lesson!
+  moduleLessons(moduleId: String!): [Lesson!]!
+  questions(type: String, moduleIndex: Float!, pathName: String!): [Question!]!
 }
 
 type Mutation {
@@ -183,6 +217,8 @@ type Mutation {
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
   completeModule(moduleId: String!): UserModule!
+  createStorySection(storySectionInput: CreateStorySectionInput!): StorySection!
+  createLesson(moduleId: String!): Lesson!
 }
 
 input CreateAssignmentInput {
@@ -285,4 +321,11 @@ input UpdatePathInput {
   icon: String
   description: String
   characterId: String
+}
+
+input CreateStorySectionInput {
+  order: Float!
+  content: String!
+  lessonId: String!
+  conceptId: String!
 }

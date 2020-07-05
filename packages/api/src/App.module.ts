@@ -15,6 +15,9 @@ import { PathUserModule } from './PathUser';
 import { UserModule } from './User';
 import { UserConceptModule } from './UserConcepts';
 import { UserModuleModule } from './UserModule';
+import { StorySectionModule } from './StorySection';
+import { LessonModule } from './Lesson';
+import { QuestionModule } from './Question';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -32,6 +35,9 @@ export const appImports = [
   ConceptModule,
   UserConceptModule,
   UserModuleModule,
+  StorySectionModule,
+  LessonModule,
+  QuestionModule,
 
   DatabaseModule,
 
