@@ -51,6 +51,33 @@ type Path {
   progress: Float!
 }
 
+type Concept {
+  id: String!
+  name: String!
+  description: String!
+  icon: String!
+  taughtInId: String!
+  taughtIn: Module!
+  storySection: StorySection!
+}
+
+type StorySection {
+  id: String!
+  order: Float!
+  content: String!
+  lessonId: String!
+  conceptId: String!
+  concept: Concept!
+  lesson: Lesson!
+}
+
+type Lesson {
+  id: String!
+  moduleId: String!
+  module: Module!
+  storySection: [StorySection!]!
+}
+
 type Module {
   id: String!
   name: String!
@@ -85,15 +112,6 @@ type LoginOutput {
   accessToken: String!
 }
 
-type Concept {
-  id: String!
-  name: String!
-  description: String!
-  icon: String!
-  taughtInId: String!
-  taughtIn: Module!
-}
-
 type UserConcept {
   id: String!
   userId: String!
@@ -123,6 +141,17 @@ type FriendOutput {
   status: String!
   initiator: String!
   since: DateTime
+}
+
+type CodeCompleteQuestion {
+  file: String!
+  answers: [String!]!
+}
+
+type Question {
+  type: String!
+  files: [CodeCompleteQuestion!]
+  pairs: [[String!]!]
 }
 
 type Query {
@@ -181,6 +210,8 @@ type Mutation {
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
   completeModule(moduleId: String!): UserModule!
+  createStorySection(storySectionInput: CreateStorySectionInput!): StorySection!
+  createLesson(moduleId: String!): Lesson!
 }
 
 input CreateAssignmentInput {
@@ -283,4 +314,11 @@ input UpdatePathInput {
   icon: String
   description: String
   characterId: String
+}
+
+input CreateStorySectionInput {
+  order: Float!
+  content: String!
+  lessonId: String!
+  conceptId: String!
 }

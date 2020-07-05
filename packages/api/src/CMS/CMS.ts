@@ -29,4 +29,13 @@ export class CMS {
     if (!m) return;
     return m.storySections[storyIndex];
   }
+
+  findQuestions(
+    pathName: string,
+    moduleNameOrIndex: string | number
+  ): Object[] | undefined {
+    const m = this.findModule(pathName, moduleNameOrIndex);
+    if (!m) return;
+    return m.questions;
+  }
 }

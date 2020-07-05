@@ -4,6 +4,7 @@ import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql'
 import { CMBaseEntity } from '../lib/Base.entity';
 import { Path } from '../Path/Path.entity';
 import { UserModule } from '../UserModule/UserModule.entity';
+import { Lesson } from '../Lesson/Lesson.entity';
 
 export enum ModuleType {
   assignment = 'assignment',
@@ -53,6 +54,9 @@ export class Module extends CMBaseEntity {
 
   @Field(() => Boolean)
   completed?: boolean;
+
+  @Field(() => [Lesson])
+  lessons: Lesson[];
 }
 
 @InputType()
