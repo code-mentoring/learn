@@ -14,7 +14,7 @@ const menuItems: { icon: IconType, text: string, to: string }[] = [
 
 export const AppSidebar: React.FC<AppSidebarProps> = () =>
   <StyledAppSidebar>
-    {menuItems.map(i => <SidebarLink to={i.to}>
+    {menuItems.map((i, index) => <SidebarLink key={index} to={i.to}>
       <Icon icon={i.icon} size="xbig" />
       <Text as="h3">{i.text}</Text>
     </SidebarLink>)}
