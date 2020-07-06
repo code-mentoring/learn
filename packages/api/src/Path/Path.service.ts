@@ -10,7 +10,7 @@ export class PathService {
   constructor(
     @InjectRepository(Path) private readonly pathRepository: Repository<Path>,
     @InjectRepository(PathUser) private readonly pathUserRepository: Repository<PathUser>
-  ) {}
+  ) { }
 
   async findAll(): Promise<Path[]> {
     return this.pathRepository.find({ relations: ['character'] });
@@ -28,12 +28,34 @@ export class PathService {
     return path;
   }
 
-  async findByUser(userId: string): Promise<PathUser[]> {
-    const userPaths = await this.pathUserRepository.find({
-      relations: ['path'],
-      where: { userId }
-    });
-    return userPaths;
+  /**
+   * Return a list of paths user has or has not joined
+   * @param userId User's ID
+   * @param notJoined Filter for paths user has NOT joined yet
+   */
+  async findByUser(
+    userId: string,
+    notJoined: boolean = false
+  ): Promise<Path[]> {
+    const qb = this.pathRepository.createQueryBuilder('path');
+
+    // Return paths that the user has not joined yet
+    if (notJoined) {
+      return qb
+        .where(`path.id NOT IN ${
+          qb.subQuery()
+            .select('pu.pathId').from(PathUser, 'pu')
+            .where('pu."userId" = :userId', { userId })
+            .getQuery()
+        }`)
+        .getMany();
+    }
+
+    // Otherwise return paths user belongs to
+    return qb
+      .leftJoin(PathUser, 'pu', 'pu."pathId" = path."id"')
+      .where('pu."userId" = :userId', { userId })
+      .getMany();
   }
 
   async create(pathInput: PathInput): Promise<Path> {

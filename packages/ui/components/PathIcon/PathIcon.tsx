@@ -1,26 +1,24 @@
 import React from 'react';
-import classnames from 'classnames';
+import styled from 'styled-components';
 
-import { IconProps, sizeMap } from '../Icon/Icon';
+import { Size } from '../../types/styled';
 import icons from './path-icons/icons';
 
-export type PathIcon = keyof typeof icons;
 
-export interface PathIconProps extends Omit<IconProps, 'color' | 'type'> {
-  icon: PathIcon;
-  className?: string;
+export type PathIconType = keyof typeof icons;
+
+export interface PathIconProps extends React.HTMLAttributes<HTMLOrSVGElement> {
+  icon: PathIconType;
+  size?: Size | number;
 }
 
-export const PathIcon: React.FunctionComponent<PathIconProps> = ({
-  icon,
-  className,
-  size = 'medium',
-  ...props
-}) => {
-  const sizeClass = `h-${typeof size === 'number' ? size : sizeMap[size as keyof typeof sizeMap]}`;
-
-  const klass = classnames('path-icon', className, sizeClass);
+const BasePathIcon: React.FC<PathIconProps> = ({ icon, ...props }) => {
   const Ikon = icons[icon];
   if (!Ikon) return null;
-  return <Ikon {...props} className={klass} />;
+  return <Ikon {...props} />;
 };
+
+export const PathIcon = styled(BasePathIcon)`
+  height: ${p => p.theme.size(p.size)};
+  width: ${p => p.theme.size(p.size)};
+`;

@@ -1,24 +1,34 @@
+import { Card, Text, Loader, theme } from '@codement/ui';
 import React from 'react';
 
-import { Path } from '../../containers/Path.container';
-import styles from './ModuleTree.module.css';
+import styled from 'styled-components';
+import { Paths } from '../../containers/Paths.container';
 import { Module } from './Module/Module';
-
 
 export interface ModuleTreeProps { }
 
-export const ModuleTree: React.FC<ModuleTreeProps> = () => {
+const StyledCard = styled(Card)`
+  text-align: center;
 
-  const { currentPath, currentModules } = Path.useContainer();
+  h2 {
+    margin-bottom: ${theme.size('xl')};
+  }
+`;
 
-  if (!currentPath) return null;
+export const ModuleTree: React.FC<ModuleTreeProps> = props => {
 
-  return <div className={styles.tree}>
-    <h1 className="my-5">{currentPath.name}</h1>
+  const { currentPath, currentModules } = Paths.useContainer();
 
-    <div className="modules">
-      {currentModules?.map(m => <Module module={m} />)}
-    </div>
+  return <StyledCard {...props}>
+    {!currentPath
+      ? <Loader />
+      : <>
+        <Text as="h2" color="grey.600">{currentPath.name}</Text>
 
-  </div>;
+        <div>
+          {currentModules?.map(m => <Module module={m} />)}
+        </div>
+      </>
+    }
+  </StyledCard>;
 };

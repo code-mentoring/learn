@@ -47,16 +47,6 @@ export type User = {
   createdAt: Scalars['DateTime'];
 };
 
-export type PathUser = {
-   __typename?: 'PathUser';
-  id: Scalars['String'];
-  pathId: Scalars['String'];
-  userId: Scalars['String'];
-  completed: Scalars['Boolean'];
-  progress: Scalars['Float'];
-  path: Path;
-};
-
 export type Path = {
    __typename?: 'Path';
   id: Scalars['String'];
@@ -67,6 +57,7 @@ export type Path = {
   modules: Array<Module>;
   character?: Maybe<Character>;
   characterId?: Maybe<Scalars['String']>;
+  progress: Scalars['Float'];
 };
 
 export type Concept = {
@@ -249,6 +240,12 @@ export type QueryGetUserFriendsArgs = {
 
 export type QueryPathModulesArgs = {
   pathId: Scalars['String'];
+};
+
+
+export type QueryPathsArgs = {
+  notJoined?: Maybe<Scalars['Boolean']>;
+  onlyJoined?: Maybe<Scalars['Boolean']>;
 };
 
 

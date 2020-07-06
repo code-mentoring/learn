@@ -52,9 +52,8 @@ export class Module extends CMBaseEntity {
   @OneToMany(() => UserModule, userModules => userModules.module)
   userModules: UserModule[];
 
-  @OneToMany(() => Lesson, lessons => lessons.module)
-  @Field(() => [Lesson])
-  lessons: Lesson[];
+  @Field(() => Boolean)
+  completed?: boolean;
 }
 
 @InputType()

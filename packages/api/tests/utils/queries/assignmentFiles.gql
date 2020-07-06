@@ -1,0 +1,15 @@
+query AssignmentFile ($assignmentId: String!){
+    assignmentFiles (assignmentId: $assignmentId){
+        id
+        name
+        type
+        content
+        assignmentId
+        authorId
+        assignment {
+            id
+            description
+            moduleId
+        }
+    }
+}

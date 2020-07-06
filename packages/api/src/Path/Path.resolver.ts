@@ -1,20 +1,36 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
+import { PathUserService } from '../PathUser/PathUser.service';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
-import { PathInput, Path, UpdatePathInput } from './Path.entity';
+import { Path, PathInput, UpdatePathInput } from './Path.entity';
 import { PathService } from './Path.service';
-import { PathUser } from '../PathUser/PathUser.entity';
 
-@Resolver('Path')
+@Resolver(() => Path)
 export class PathResolver {
-  constructor(private readonly pathService: PathService) {}
+  constructor(
+    private readonly pathService: PathService,
+    private readonly pathUserService: PathUserService
+  ) {}
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Path])
-  paths() {
+  paths(
+    @Args('onlyJoined', {
+      description: 'Only get the current user\'s paths',
+      nullable: true,
+      defaultValue: false
+    }) onlyJoined: boolean,
+    @Args('notJoined', {
+      description: 'Only get paths the current user has not joined',
+      nullable: true,
+      defaultValue: false
+    }) notJoined: boolean,
+    @CurrentUser() user: User
+  ) {
+    if (onlyJoined || notJoined) return this.pathService.findByUser(user.id, notJoined);
     return this.pathService.findAll();
   }
 
@@ -34,12 +50,6 @@ export class PathResolver {
   @Mutation(() => Path)
   createPath(@Args('path') path: PathInput) {
     return this.pathService.create(path);
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Query(() => [PathUser])
-  myPaths(@CurrentUser() user: User) {
-    return this.pathService.findByUser(user.id);
   }
 
   @UseGuards(GQLAuthGuard)
@@ -66,5 +76,17 @@ export class PathResolver {
     @Args('path') path: UpdatePathInput
   ) {
     return this.pathService.update(path);
+  }
+
+  // ---------------------------------------------------------------------------
+  // -------------------------------------------------------------------- Fields
+  // ---------------------------------------------------------------------------
+
+  @ResolveField(() => Number)
+  async progress(
+    @CurrentUser() user: User,
+    @Parent() path: Path
+  ) {
+    return (await this.pathUserService.getProgress(user.id, path.id)) || 0;
   }
 }

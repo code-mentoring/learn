@@ -39,15 +39,6 @@ type User {
   createdAt: DateTime!
 }
 
-type PathUser {
-  id: String!
-  pathId: String!
-  userId: String!
-  completed: Boolean!
-  progress: Float!
-  path: Path!
-}
-
 type Path {
   id: String!
   name: String!
@@ -57,6 +48,7 @@ type Path {
   modules: [Module!]!
   character: Character
   characterId: String
+  progress: Float!
 }
 
 type Concept {
@@ -178,7 +170,13 @@ type Query {
   getUserFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
-  paths: [Path!]!
+  paths(
+    """Only get paths the current user has not joined"""
+    notJoined: Boolean = false
+
+    """Only get the current user's paths"""
+    onlyJoined: Boolean = false
+  ): [Path!]!
   path(id: String!): Path!
   getPathByName(name: String!): Path!
   myPaths: [PathUser!]!

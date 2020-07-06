@@ -6,12 +6,12 @@ interface EmojiProps {
   className?: string;
   text?: string;
 }
-export const Emoji = styled<React.FC<EmojiProps>>(
-  ({ text, className }) => <Twemoji svg text={text} className={className} />
-)`
-img{
-  margin: 0 !important;
-  display: inline-block
-}
-  
+
+const StyledTwemoji = styled(Twemoji)`
+  img{
+    margin: 0 !important;
+    display: inline-block
+  }
 `;
+
+export const Emoji: React.FC<EmojiProps> = p => <StyledTwemoji svg {...p} />;

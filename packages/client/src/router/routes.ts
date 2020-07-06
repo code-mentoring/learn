@@ -22,7 +22,7 @@ export const routes = {
 
   // Authed
   home: linkParams('/'),
-  users: linkParams('/users'),
+  settings: linkParams('/settings'),
 
   // Onboarding workflow
   onboardingWorkflow: linkParams('/welcome'),
