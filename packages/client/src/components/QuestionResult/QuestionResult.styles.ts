@@ -20,8 +20,8 @@ export const QuestionResultDiv = styled.div`
     animation: ${slideUp} 0.9s linear;
     position: relative;
     display: flex;
-    width: 718px;
-    height: 88px;
+    width: 71.8rem;
+    height: 8.8rem;
     flex-direction: row;
     align-items: center;
     align-content: center;
@@ -31,11 +31,11 @@ export const QuestionResultDiv = styled.div`
 `;
 
 export const IconBorder = styled.div<QuestionResultProps>`
-    width: 40px;
-    height: 40px;
+    width: 4.0rem;
+    height: 4.0rem;
     border-radius: ${t.borderRadius.circle};
     background: ${props => (props.state === 'success' ? t.color('secondary.400') : t.color('tertiary.500'))};
-    margin: 23px 15px 23px 11px;
+    margin: ${t.sizes.xbig} ${t.sizes.sm} ${t.sizes.xbig} ${t.sizes.xsm}
 `;
 
 export const StyledIcon = styled(Icon)`
@@ -45,6 +45,6 @@ export const StyledIcon = styled(Icon)`
 `;
 
 export const StyledTextDiv = styled.div`
-    width: 650px;
-    padding-right: 11px;
+    width: 65rem;
+    padding-right: ${t.sizes.xsm};
 `;
