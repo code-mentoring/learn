@@ -17,7 +17,7 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
     }
     return <ProgressBarDiv> 
         <FinishedProgress current={completedPercentage} max={max} />
-        <Icon icon="hex" size="huge" color="secondary.200" strokecolor="secondary.400" storkethickness="tiny" />
+        <Icon icon="hex" size="huge" color="secondary.200" strokeColor="secondary.400" strokeThickness="tiny" />
         <UnfinishedProgressDiv />
     </ProgressBarDiv>
 }
