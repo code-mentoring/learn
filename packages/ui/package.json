@@ -2,6 +2,9 @@
   "name": "@codement/ui",
   "version": "0.0.2",
   "main": "index.ts",
+  "scripts": {
+    "storybook": "start-storybook -p 6006"
+  },
   "peerDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/react-table": "^7.0.16",
@@ -18,5 +21,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
+  "devDependencies": {
+    "@storybook/cli": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "babel-loader": "^8.1.0",
+    "react-docgen-typescript-loader": "^3.7.2"
+  }
 }
