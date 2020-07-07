@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Box from '../components/Box/Box.tsx';
+import { Box } from './Box';
 
 export default {
   title: 'Box',
