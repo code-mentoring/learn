@@ -18,5 +18,25 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
+  "dependencies": {
+    "@babel/core": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.6"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
 }
