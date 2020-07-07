@@ -25,6 +25,7 @@ import { IconX } from './icons/solid/cis-x';
 import { IconDashboard } from './icons/solid/cis-dashboard';
 import { IconSettings } from './icons/solid/cis-settings';
 import { IconHex } from './icons/solid/cis-hex';
+import { IconCheckCircle } from './icons/solid/cis-check-circle'
 
 export const icons = {
   arrowDown: IconArrowDown,
@@ -54,5 +55,6 @@ export const icons = {
   uploadDuotone: IconCloudUploadDuotone,
   user: IconUser,
   userLine: IconUserLine,
-  x: IconX
+  x: IconX,
+  checkCircle: IconCheckCircle
 };
