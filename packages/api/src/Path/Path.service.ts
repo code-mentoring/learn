@@ -69,8 +69,8 @@ export class PathService {
         await this.pathUserRepository.create({ userId, pathId: path }).save();
       }));
     }
-    return this.pathUserRepository.create({ userId, pathId: paths }).save();
 
+    return this.pathUserRepository.create({ userId, pathId: paths }).save();
   }
 
   async update(pathInput: UpdatePathInput): Promise<Path | undefined> {

@@ -46,16 +46,16 @@ describe('Friend entity', () => {
     });
   });
 
-  describe('Query: getUserFriends', () => {
+  describe('Query: myFriends', () => {
     beforeEach(setup);
     it('should return null since no friends', async () => {
-      const friends = await TestClient.getUserFriends(me.id);
+      const friends = await TestClient.myFriends(me.id);
       expect(friends.length).toEqual(0);
     });
 
     it('should return one friend', async () => {
       const addFriend = await TestClient.createFriendship(user2.id);
-      const friends = await TestClient.getUserFriends(me.id);
+      const friends = await TestClient.myFriends(me.id);
 
       expect(friends[0]).toMatchObject(addFriend);
     });
@@ -63,7 +63,7 @@ describe('Friend entity', () => {
     it('should return two friend', async () => {
       const addFriend1 = await TestClient.createFriendship(user2.id);
       const addFriend2 = await TestClient.createFriendship(user3.id);
-      const friends = await TestClient.getUserFriends(me.id);
+      const friends = await TestClient.myFriends(me.id);
 
       expect(friends.length).toEqual(2);
       expect(friends[0]).toMatchObject(addFriend1);
@@ -76,10 +76,10 @@ describe('Friend entity', () => {
 
     it('should delete success', async () => {
       await TestClient.createFriendship(user2.id);
-      const query1 = await TestClient.getUserFriends(me.id);
+      const query1 = await TestClient.myFriends(me.id);
 
       await TestClient.deleteFriendship(user2.id);
-      const query2 = await TestClient.getUserFriends(me.id);
+      const query2 = await TestClient.myFriends(me.id);
 
       // since sqlite doesn't return affected property as Postgres does,
       // the result always return false, alternatively to check the result by query.

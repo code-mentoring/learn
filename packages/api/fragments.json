@@ -1,5 +1,36 @@
 {
   "__schema": {
-    "types": []
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "Question",
+        "possibleTypes": [
+          {
+            "name": "QuestionMultiChoice"
+          },
+          {
+            "name": "QuestionMemory"
+          },
+          {
+            "name": "QuestionDragDrop"
+          },
+          {
+            "name": "QuestionBugHighlight"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Module",
+        "possibleTypes": [
+          {
+            "name": "ModuleAssignment"
+          },
+          {
+            "name": "ModuleLesson"
+          }
+        ]
+      }
+    ]
   }
 }

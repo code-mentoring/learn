@@ -1,4 +1,4 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { ConceptService } from './Concept.service';
@@ -8,23 +8,26 @@ import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { UserConceptService } from '../UserConcepts/UserConcept.service';
 import { UserConcept } from '../UserConcepts/UserConcept.entity';
+import { LessonModule } from '../Lesson';
+import { CMS } from '../CMS/CMS';
 
-@Resolver('concept')
+@Resolver(Concept)
 export class ConceptResolver {
   constructor(
     private readonly conceptService: ConceptService,
-    private readonly userConceptService: UserConceptService
+    private readonly userConceptService: UserConceptService,
+    private readonly cms: CMS
   ) { }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Concept])
-  getConcepts() {
+  concepts() {
     return this.conceptService.findConcepts();
   }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => Concept)
-  getConceptByName(@Args('name') name: string) {
+  concept(@Args('name') name: string) {
     return this.conceptService.findByName(name);
   }
 
@@ -60,5 +63,16 @@ export class ConceptResolver {
     @CurrentUser() user: User
   ) {
     return Boolean(await this.conceptService.addUserConcept(conceptId, user.id));
+  }
+
+  // ---------------------------------------------------------------------------
+  // -------------------------------------------------------------------- Fields
+  // ---------------------------------------------------------------------------
+
+  @ResolveField(() => LessonModule)
+  async taughtIn(
+    @Parent() concept: Concept
+  ) {
+    return this.cms.findModuleById(concept.taughtInId);
   }
 }

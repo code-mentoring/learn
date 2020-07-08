@@ -10,41 +10,91 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type StorySection = {
+   __typename?: 'StorySection';
+  content: Scalars['String'];
+};
+
+export type Lesson = {
+   __typename?: 'Lesson';
+  storySections: Array<StorySection>;
+  questions: Array<Question>;
+};
+
+export type Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | QuestionBugHighlight;
+
+export type QuestionMultiChoice = {
+   __typename?: 'QuestionMultiChoice';
+  id: Scalars['String'];
+  type: Scalars['String'];
+  options: Array<Scalars['String']>;
+  code: Scalars['String'];
+};
+
+export type QuestionMemory = {
+   __typename?: 'QuestionMemory';
+  id: Scalars['String'];
+  type: Scalars['String'];
+  pairs: Array<Array<Scalars['String']>>;
+};
+
+export type QuestionDragDrop = {
+   __typename?: 'QuestionDragDrop';
+  id: Scalars['String'];
+  type: Scalars['String'];
+  options: Array<Scalars['String']>;
+  code: Scalars['String'];
+};
+
+export type QuestionBugHighlight = {
+   __typename?: 'QuestionBugHighlight';
+  id: Scalars['String'];
+  type: Scalars['String'];
+  code: Scalars['String'];
+};
+
+export type ModuleAssignment = {
+   __typename?: 'ModuleAssignment';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+  previous?: Maybe<Module>;
+  completed: Scalars['Boolean'];
+  assignment: Assignment;
+};
+
+export type Module = ModuleAssignment | ModuleLesson;
+
+export type ModuleLesson = {
+   __typename?: 'ModuleLesson';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  icon: Scalars['String'];
+  type: Scalars['String'];
+  previousId?: Maybe<Scalars['String']>;
+  pathId: Scalars['String'];
+  previous?: Maybe<Module>;
+  completed: Scalars['Boolean'];
+  lesson: Lesson;
+};
+
+export type Assignment = {
+   __typename?: 'Assignment';
+  id: Scalars['String'];
+  description: Scalars['String'];
+  moduleId: Scalars['String'];
+  module: ModuleAssignment;
+};
+
 export type Character = {
    __typename?: 'Character';
   id: Scalars['String'];
   name: Scalars['String'];
   displayName: Scalars['String'];
   path?: Maybe<Path>;
-};
-
-export type UserPreferences = {
-   __typename?: 'UserPreferences';
-  id: Scalars['String'];
-  userId: Scalars['String'];
-  practiceGoal: Scalars['Float'];
-  why: Scalars['String'];
-  codingAbility: Scalars['Float'];
-};
-
-export type UserModule = {
-   __typename?: 'UserModule';
-  id: Scalars['String'];
-  userId: Scalars['String'];
-  moduleId: Scalars['String'];
-  completedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type User = {
-   __typename?: 'User';
-  id: Scalars['ID'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  profileImage: Scalars['String'];
-  userPreferences?: Maybe<UserPreferences>;
-  createdAt: Scalars['DateTime'];
 };
 
 export type Path = {
@@ -60,25 +110,34 @@ export type Path = {
   progress: Scalars['Float'];
 };
 
-export type Module = {
-   __typename?: 'Module';
+
+export type UserPreferences = {
+   __typename?: 'UserPreferences';
   id: Scalars['String'];
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  type: Scalars['String'];
-  previousId?: Maybe<Scalars['String']>;
-  pathId: Scalars['String'];
-  previous?: Maybe<Module>;
-  path: Path;
-  completed: Scalars['Boolean'];
+  userId: Scalars['String'];
+  practiceGoal: Scalars['Float'];
+  why: Scalars['String'];
+  codingAbility: Scalars['Float'];
 };
 
-export type Assignment = {
-   __typename?: 'Assignment';
+export type UserModule = {
+   __typename?: 'UserModule';
   id: Scalars['String'];
-  description: Scalars['String'];
+  userId: Scalars['String'];
   moduleId: Scalars['String'];
-  module: Module;
+  path: Path;
+  completedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type User = {
+   __typename?: 'User';
+  id: Scalars['ID'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  profileImage: Scalars['String'];
+  userPreferences?: Maybe<UserPreferences>;
+  createdAt: Scalars['DateTime'];
 };
 
 export type AssignmentFile = {
@@ -105,7 +164,8 @@ export type Concept = {
   description: Scalars['String'];
   icon: Scalars['String'];
   taughtInId: Scalars['String'];
-  taughtIn: Module;
+  taughtIn: ModuleLesson;
+  storySection: StorySection;
 };
 
 export type UserConcept = {
@@ -144,29 +204,26 @@ export type FriendOutput = {
 
 export type Query = {
    __typename?: 'Query';
-  assignments: Array<Assignment>;
-  moduleAssignments: Array<Assignment>;
   assignmentFiles: Array<AssignmentFile>;
   userAssignmentFiles: Array<AssignmentFile>;
+  assignments: Array<Assignment>;
+  moduleAssignments: Array<Assignment>;
   users: Array<User>;
   searchUsers: Array<User>;
   me: User;
   verifyToken: Scalars['Boolean'];
-  getCharacters: Array<Character>;
-  getConcepts: Array<Concept>;
-  getConceptByName: Concept;
+  characters: Array<Character>;
+  lesson: Lesson;
+  concepts: Array<Concept>;
+  concept: Concept;
   userLearnedConcepts: Array<UserConcept>;
-  getUserFriends: Array<Friend>;
+  myFriends: Array<Friend>;
   modules: Array<Module>;
   pathModules: Array<Module>;
   paths: Array<Path>;
   path: Path;
-  getPathByName: Path;
-};
-
-
-export type QueryModuleAssignmentsArgs = {
-  moduleId: Scalars['String'];
+  questions: Array<Question>;
+  lessonStorySections: Array<StorySection>;
 };
 
 
@@ -180,6 +237,11 @@ export type QueryUserAssignmentFilesArgs = {
 };
 
 
+export type QueryModuleAssignmentsArgs = {
+  moduleId: Scalars['String'];
+};
+
+
 export type QuerySearchUsersArgs = {
   query: Scalars['String'];
 };
@@ -190,12 +252,17 @@ export type QueryVerifyTokenArgs = {
 };
 
 
-export type QueryGetConceptByNameArgs = {
+export type QueryLessonArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryConceptArgs = {
   name: Scalars['String'];
 };
 
 
-export type QueryGetUserFriendsArgs = {
+export type QueryMyFriendsArgs = {
   userId: Scalars['String'];
 };
 
@@ -216,15 +283,19 @@ export type QueryPathArgs = {
 };
 
 
-export type QueryGetPathByNameArgs = {
-  name: Scalars['String'];
+export type QueryQuestionsArgs = {
+  type?: Maybe<Scalars['String']>;
+  moduleIndex: Scalars['Float'];
+  pathId: Scalars['String'];
+};
+
+
+export type QueryLessonStorySectionsArgs = {
+  lessonId: Scalars['String'];
 };
 
 export type Mutation = {
    __typename?: 'Mutation';
-  createAssignment: Assignment;
-  updateAssignment: Assignment;
-  deleteAssignment: Scalars['Boolean'];
   createAssignmentFile: AssignmentFile;
   updateAssignmentFile: AssignmentFile;
   deleteAssignmentFile: Scalars['Boolean'];
@@ -241,30 +312,12 @@ export type Mutation = {
   createFriendship: FriendOutput;
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
-  createModule: Module;
   joinModule: Scalars['Boolean'];
-  updateModule: Module;
-  deleteModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
   completeModule: UserModule;
-};
-
-
-export type MutationCreateAssignmentArgs = {
-  assignment: CreateAssignmentInput;
-};
-
-
-export type MutationUpdateAssignmentArgs = {
-  assignment: UpdateAssignmentInput;
-};
-
-
-export type MutationDeleteAssignmentArgs = {
-  assignmentId: Scalars['String'];
 };
 
 
@@ -351,22 +404,7 @@ export type MutationDeleteFriendshipArgs = {
 };
 
 
-export type MutationCreateModuleArgs = {
-  module: CreateModuleInput;
-};
-
-
 export type MutationJoinModuleArgs = {
-  moduleId: Scalars['String'];
-};
-
-
-export type MutationUpdateModuleArgs = {
-  module: UpdateModuleInput;
-};
-
-
-export type MutationDeleteModuleArgs = {
   moduleId: Scalars['String'];
 };
 
@@ -392,18 +430,7 @@ export type MutationUpdatePathArgs = {
 
 
 export type MutationCompleteModuleArgs = {
-  moduleId: Scalars['String'];
-};
-
-export type CreateAssignmentInput = {
-  description: Scalars['String'];
-  moduleId: Scalars['String'];
-};
-
-export type UpdateAssignmentInput = {
-  id: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  moduleId?: Maybe<Scalars['String']>;
+  moduleName: Scalars['String'];
 };
 
 export type CreateAssignmentFileInput = {
@@ -459,28 +486,6 @@ export type UpdateConceptInput = {
   description?: Maybe<Scalars['String']>;
   taughtInId?: Maybe<Scalars['String']>;
 };
-
-export type CreateModuleInput = {
-  name: Scalars['String'];
-  icon: Scalars['String'];
-  type: Scalars['String'];
-  previousId?: Maybe<Scalars['String']>;
-  pathId: Scalars['String'];
-};
-
-export type UpdateModuleInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-  type?: Maybe<ModuleType>;
-  previousId?: Maybe<Scalars['String']>;
-  pathId?: Maybe<Scalars['String']>;
-};
-
-export enum ModuleType {
-  Assignment = 'assignment',
-  Lesson = 'lesson'
-}
 
 export type PathInput = {
   name: Scalars['String'];

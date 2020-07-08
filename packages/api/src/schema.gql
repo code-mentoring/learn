@@ -2,41 +2,82 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type StorySection {
+  content: String!
+}
+
+type Lesson {
+  storySections: [StorySection!]!
+  questions: [Question!]!
+}
+
+union Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | QuestionBugHighlight
+
+type QuestionMultiChoice {
+  id: String!
+  type: String!
+  options: [String!]!
+  code: String!
+}
+
+type QuestionMemory {
+  id: String!
+  type: String!
+  pairs: [[String!]!]!
+}
+
+type QuestionDragDrop {
+  id: String!
+  type: String!
+  options: [String!]!
+  code: String!
+}
+
+type QuestionBugHighlight {
+  id: String!
+  type: String!
+  code: String!
+}
+
+type ModuleAssignment {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  completed: Boolean!
+  lesson: Lesson!
+  assignment: Assignment!
+}
+
+union Module = ModuleAssignment | ModuleLesson
+
+type ModuleLesson {
+  id: String!
+  name: String!
+  icon: String!
+  type: String!
+  previousId: String
+  pathId: String!
+  previous: Module
+  completed: Boolean!
+  lesson: Lesson!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: ModuleAssignment!
+}
+
 type Character {
   id: String!
   name: String!
   displayName: String!
   path: Path
-}
-
-type UserPreferences {
-  id: String!
-  userId: String!
-  practiceGoal: Float!
-  why: String!
-  codingAbility: Float!
-}
-
-type UserModule {
-  id: String!
-  userId: String!
-  moduleId: String!
-  completedAt: DateTime
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type User {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
-  profileImage: String!
-  userPreferences: UserPreferences
-  createdAt: DateTime!
 }
 
 type Path {
@@ -51,23 +92,35 @@ type Path {
   progress: Float!
 }
 
-type Module {
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserPreferences {
   id: String!
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
-  previous: Module
-  path: Path!
-  completed: Boolean!
+  userId: String!
+  practiceGoal: Float!
+  why: String!
+  codingAbility: Float!
 }
 
-type Assignment {
+type UserModule {
   id: String!
-  description: String!
+  userId: String!
   moduleId: String!
-  module: Module!
+  path: Path!
+  completedAt: DateTime
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  profileImage: String!
+  userPreferences: UserPreferences
+  createdAt: DateTime!
 }
 
 type AssignmentFile {
@@ -91,7 +144,8 @@ type Concept {
   description: String!
   icon: String!
   taughtInId: String!
-  taughtIn: Module!
+  taughtIn: ModuleLesson!
+  storySection: StorySection!
 }
 
 type UserConcept {
@@ -126,19 +180,20 @@ type FriendOutput {
 }
 
 type Query {
-  assignments: [Assignment!]!
-  moduleAssignments(moduleId: String!): [Assignment!]!
   assignmentFiles(assignmentId: String!): [AssignmentFile!]!
   userAssignmentFiles(authorId: String!): [AssignmentFile!]!
+  assignments: [Assignment!]!
+  moduleAssignments(moduleId: String!): [Assignment!]!
   users: [User!]!
   searchUsers(query: String!): [User!]!
   me: User!
   verifyToken(accessToken: String!): Boolean!
-  getCharacters: [Character!]!
-  getConcepts: [Concept!]!
-  getConceptByName(name: String!): Concept!
+  characters: [Character!]!
+  lesson(id: String!): Lesson!
+  concepts: [Concept!]!
+  concept(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!
-  getUserFriends(userId: String!): [Friend!]!
+  myFriends(userId: String!): [Friend!]!
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   paths(
@@ -149,13 +204,11 @@ type Query {
     onlyJoined: Boolean = false
   ): [Path!]!
   path(id: String!): Path!
-  getPathByName(name: String!): Path!
+  questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
+  lessonStorySections(lessonId: String!): [StorySection!]!
 }
 
 type Mutation {
-  createAssignment(assignment: CreateAssignmentInput!): Assignment!
-  updateAssignment(assignment: UpdateAssignmentInput!): Assignment!
-  deleteAssignment(assignmentId: String!): Boolean!
   createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
   updateAssignmentFile(file: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
@@ -172,26 +225,12 @@ type Mutation {
   createFriendship(toId: String!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
-  createModule(module: CreateModuleInput!): Module!
   joinModule(moduleId: String!): Boolean!
-  updateModule(module: UpdateModuleInput!): Module!
-  deleteModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
-  completeModule(moduleId: String!): UserModule!
-}
-
-input CreateAssignmentInput {
-  description: String!
-  moduleId: String!
-}
-
-input UpdateAssignmentInput {
-  id: String!
-  description: String
-  moduleId: String
+  completeModule(moduleName: String!): UserModule!
 }
 
 input CreateAssignmentFileInput {
@@ -246,28 +285,6 @@ input UpdateConceptInput {
   icon: String
   description: String
   taughtInId: String
-}
-
-input CreateModuleInput {
-  name: String!
-  icon: String!
-  type: String!
-  previousId: String
-  pathId: String!
-}
-
-input UpdateModuleInput {
-  id: String!
-  name: String
-  icon: String
-  type: ModuleType
-  previousId: String
-  pathId: String
-}
-
-enum ModuleType {
-  assignment
-  lesson
 }
 
 input PathInput {
