@@ -1,7 +1,7 @@
+import { v4 as uuid } from 'uuid';
 import { TestClient } from '../utils/TestClient';
 import { CreateCharacterInput, UpdateCharacterInput } from '../../types';
 import * as random from '../../src/Database/seeders/random';
-import { v4 as uuid } from 'uuid';
 
 export const characterInput1 = random.characterInput();
 export const characterInput2 = random.characterInput();
@@ -47,13 +47,13 @@ describe('Character entity', () => {
     });
   });
 
-  describe('Query: getCharacters', () => {
+  describe('Query: characters', () => {
     beforeEach(setup);
 
     it('should query a character successfully', async () => {
       expect.assertions(2);
       await TestClient.createCharacter(characterInput1);
-      const characters = await TestClient.getCharacters();
+      const characters = await TestClient.characters();
 
       expect(characters.length).toEqual(1);
       expect(characters[0]).toMatchObject(characterInput1);
@@ -63,7 +63,7 @@ describe('Character entity', () => {
       expect.assertions(3);
       await TestClient.createCharacter(characterInput1);
       await TestClient.createCharacter(characterInput2);
-      const characters = await TestClient.getCharacters();
+      const characters = await TestClient.characters();
 
       expect(characters.length).toEqual(2);
       expect(characters[0]).toMatchObject(characterInput1);
@@ -72,7 +72,7 @@ describe('Character entity', () => {
 
     it('should return an empty array if there is no characters', async () => {
       expect.assertions(1);
-      const characters = await TestClient.getCharacters();
+      const characters = await TestClient.characters();
       expect(characters.length).toEqual(0);
     });
   });
@@ -83,9 +83,9 @@ describe('Character entity', () => {
     it('should delete a character successfully', async () => {
       expect.assertions(2);
       await TestClient.createCharacter(characterInput1);
-      const characters1 = await TestClient.getCharacters();
+      const characters1 = await TestClient.characters();
       await TestClient.deleteCharacter(characters1[0].id);
-      const characters2 = await TestClient.getCharacters();
+      const characters2 = await TestClient.characters();
 
       expect(characters1.length).toEqual(1);
       expect(characters2.length).toEqual(0);
@@ -99,11 +99,11 @@ describe('Character entity', () => {
       expect.assertions(2);
       const updateInput = { name: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      try{
+      try {
         await TestClient.updateCharacter({ id: character.id, ...updateInput });
-      }catch(e) {};
+      } catch (e) {}
 
-      const updateResult = await TestClient.getCharacters();
+      const updateResult = await TestClient.characters();
 
       expect(updateResult[0].name).toEqual(updateInput.name);
       expect(updateResult[0].displayName).toEqual(characterInput1.displayName);
@@ -113,11 +113,11 @@ describe('Character entity', () => {
       expect.assertions(2);
       const updateInput = { displayName: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      try{
+      try {
         await TestClient.updateCharacter({ id: character.id, ...updateInput });
-      }catch(e) {};
+      } catch (e) {}
 
-      const updateResult = await TestClient.getCharacters();
+      const updateResult = await TestClient.characters();
 
       expect(updateResult[0].name).toEqual(characterInput1.name);
       expect(updateResult[0].displayName).toEqual(updateInput.displayName);
@@ -128,10 +128,10 @@ describe('Character entity', () => {
       const updateInput = { name: 'New' };
       const id = uuid();
       try {
-        const d = await TestClient.updateCharacter({ id: id, ...updateInput});
+        const d = await TestClient.updateCharacter({ id, ...updateInput });
       } catch (e) {
         expect(e.message).toMatch('not found');
       }
     });
-  });  
+  });
 });

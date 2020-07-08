@@ -8,12 +8,13 @@ import { PathUserService } from '../PathUser/PathUser.service';
 import { Path } from './Path.entity';
 import { PathResolver } from './Path.resolver';
 import { PathService } from './Path.service';
+import { CMS } from '../CMS/CMS';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Path, PathUser, Character])
   ],
-  providers: [PathResolver, PathService, CharacterService, PathUserService],
+  providers: [PathResolver, PathService, CharacterService, PathUserService, CMS],
   exports: [PathService]
 })
 export class PathModule {}

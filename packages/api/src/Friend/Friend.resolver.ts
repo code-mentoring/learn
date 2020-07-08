@@ -15,7 +15,7 @@ export class FriendResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Friend])
-  getUserFriends(@Args('userId') userId: string) {
+  myFriends(@Args('userId') userId: string) {
     return this.friendService.findByUser(userId);
   }
 

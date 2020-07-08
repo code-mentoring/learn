@@ -4,45 +4,43 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
+import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
+import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
+import { CMS } from '../../src/CMS/CMS';
 import { DatabaseService } from '../../src/Database/Database.service';
 import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
-import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { UpdatePathInput } from '../../src/Path/Path.entity';
+import { UserWithPassword } from '../../src/User/User.entity';
 import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 import {
   Assignment,
   AssignmentFile,
   Character,
+  Concept,
   CreateAssignmentFileInput,
-  CreateAssignmentInput,
-  CreateModuleInput,
+  CreateConceptInput,
   Friend,
   FriendOutput,
   LoginOutput,
   Module,
   Path,
   PathInput,
+  UpdateConceptInput,
   User,
-  UserInput,
-  Concept,
-  CreateConceptInput,
-  UserConcept,
-  UpdateConceptInput
+  UserInput
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import { UserWithPassword } from '../../src/User/User.entity';
-import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
-import { UpdatePathInput } from '../../src/Path/Path.entity';
-import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
-import { UpdateAssignmentInput } from '../../src/Assignment/Assignment.entity';
 
 
 /**
  * A helper class to test the API
  */
 export abstract class TestClient {
+  static cms: CMS;
+
   static db: DatabaseService;
 
   static seeder: SeederService;
@@ -54,8 +52,9 @@ export abstract class TestClient {
   /**
    * Reset the entire database
    */
-  static async resetDatabase() {
+  static async resetDatabase(initial?: boolean) {
     await this.db.DANGEROUSLY_RESET_DATABASE();
+    if (initial) await this.workflowInitial();
   }
 
   /**
@@ -69,6 +68,7 @@ export abstract class TestClient {
       exports: [TestLogger]
     }).compile();
 
+    this.cms = await moduleFixture.resolve(CMS);
     this.db = await moduleFixture.resolve(DatabaseService);
     this.seeder = await moduleFixture.get(SeederService);
     if (resetDatabase) await this.resetDatabase();
@@ -119,28 +119,16 @@ export abstract class TestClient {
     return this._request('updatePreferences', mutations.updatePreferences, { preferences });
   }
 
-  static createAssignment(assignment: CreateAssignmentInput): Promise<Assignment> {
-    return this._request('createAssignment', mutations.createAssignment, { assignment });
-  }
-
-  static updateAssignment(assignment: UpdateAssignmentInput): Promise<Assignment> {
-    return this._request('updateAssignment', mutations.updateAssignment, { assignment });
-  }
-
-  static deleteAssignment(assignmentId: string): Promise<Assignment> {
-    return this._request('deleteAssignment', mutations.deleteAssignment, { assignmentId });
-  }
-
   static createAssignmentFile(assignmentFile: CreateAssignmentFileInput): Promise<AssignmentFile> {
     return this._request('createAssignmentFile', mutations.createAssignmentFile, { assignmentFile });
   }
 
   static updateAssignmentFile(file: UpdateAssignmentFileInput): Promise<AssignmentFile> {
-      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
+    return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
   }
 
   static deleteAssignmentFile(assignmentFileId: string): Promise<AssignmentFile> {
-      return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
+    return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
   }
 
   static createFriendship(toId: String): Promise<FriendOutput> {
@@ -157,18 +145,6 @@ export abstract class TestClient {
 
   static deleteFriendship(friendId: string): Promise<Boolean> {
     return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
-  }
-
-  static createModule(module: CreateModuleInput): Promise<Module> {
-    return this._request('createModule', mutations.createModule, { module });
-  }
-
-  static updateModule(module: UpdateModuleInput): Promise<Module> {
-    return this._request('updateModule', mutations.updateModule, { module });
-  }
-
-  static deleteModule(moduleId: string): Promise<Module> {
-    return this._request('deleteModule', mutations.deleteModule, { moduleId });
   }
 
   static joinModule(moduleId: string): Promise<Boolean> {
@@ -192,7 +168,7 @@ export abstract class TestClient {
   }
 
   static learnConcept(conceptId: string): Promise<Boolean> {
-    return this._request('learnConcept', mutations.learnConcept, { conceptId })
+    return this._request('learnConcept', mutations.learnConcept, { conceptId });
   }
 
   static updateConcept(concept: UpdateConceptInput): Promise<Concept> {
@@ -200,8 +176,8 @@ export abstract class TestClient {
   }
   // ------------------------------------------------------------------- Queries
 
-  static getPathByName(name: string): Promise<Path> {
-    return this._request('getPathByName', queries.getPathByName, { name });
+  static path(id: string): Promise<Path> {
+    return this._request('path', queries.path, { id });
   }
 
   static me(): Promise<User> {
@@ -216,18 +192,18 @@ export abstract class TestClient {
     return this._request('modules', queries.modules);
   }
 
-  static getUserFriends(userId: string): Promise< Friend[] > {
-    return this._request('getUserFriends', queries.getUserFriends, { userId });
+  static myFriends(userId: string): Promise< Friend[] > {
+    return this._request('myFriends', queries.myFriends, { userId });
   }
 
-  static getCharacters(): Promise<Character[]> {
-    return this._request('getCharacters', queries.getCharacters);
+  static characters(): Promise<Character[]> {
+    return this._request('characters', queries.characters);
   }
 
-  static getConceptByName(name: string): Promise<Concept> {
-    return this._request('getConceptByName', queries.getConceptByName, { name });
+  static concept(name: string): Promise<Concept> {
+    return this._request('concept', queries.concept, { name });
   }
-  
+
   static users(): Promise<User[]> {
     return this._request('users', queries.users);
   }
@@ -241,6 +217,10 @@ export abstract class TestClient {
   }
 
   // ----------------------------------------------------------------- Workflows
+  static async workflowInitial() {
+    await this.seeder.seedPaths();
+  }
+
   static async workflowSignup() {
     const userInput = random.userInput();
     const user = await this.createUser(userInput);
@@ -265,7 +245,9 @@ export abstract class TestClient {
       .set('Authorization', `Bearer ${this.token}`)
       .send({ query, variables });
 
-    if (res.body.errors) throw new Error(res.body.errors[0].message);
+    if (res.body.errors) {
+      throw new Error(res.body.errors[0].message);
+    }
     return res.body.data[name];
   }
 }
