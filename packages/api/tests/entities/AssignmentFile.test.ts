@@ -90,7 +90,8 @@ describe('AssignmentFile entity', () => {
 //       const assignmentFileInput = random.assignmentFileInput(assignmentId);
 //       const assignmentFile = await TestClient.createAssignmentFile(assignmentFileInput);
 //       await TestClient.deleteAssignmentFile(assignmentFile.id);
-//       const assignmentFiles = await TestClient.getAssignmentFiles(assignmentFileInput.assignmentId);
+//       const assignmentFiles = await TestClient.getAssignmentFiles(
+// assignmentFileInput.assignmentId);
 
 //       expect(assignmentFiles).toBeArrayOfSize(0);
 //     });
