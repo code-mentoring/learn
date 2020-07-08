@@ -1,4 +1,4 @@
-import { theme as t, LessonProgress } from '@codement/ui';
+import { theme as t } from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { Redirect } from 'react-router';
@@ -29,9 +29,6 @@ export const DashboardPage = () => {
       <StyledModuleTree />
       <ProgressWidget />
       <LeaderboardWidget />
-      <div>
-        <LessonProgress />
-      </div>
     </Content>
   </Page>;
 };
