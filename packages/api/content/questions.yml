@@ -1,0 +1,9 @@
+- name: text
+  title:
+    enUS: Choose the correct code to complete this section.
+    es: Elija el código correcto para completar esta sección.
+
+- name: cards
+  title:
+    enUS: Match the correct items.
+    es: Une los artículos correctos.

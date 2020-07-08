@@ -1,0 +1,36 @@
+questions:
+  - type: codeComplete
+    files:
+      - file: ./files/a1.html
+        answers:
+        - </a>
+      - file: ./files/a2.html
+        answers:
+        - </body>
+      - file: ./files/a3.html
+        answers:
+        - <form>
+      - file: ./files/a4.html
+        answers:
+        - </li>
+
+
+  - type: memoryCards
+    pairs:
+        - - "<a ????=\"http://...\">"
+          - "href"
+
+        - - "<img ???=\"http://...\">"
+          - "src"
+
+        - - "<body>"
+          - "</body>"
+
+        - - "<img ???=\"http://...\">"
+          - "src"
+
+        - - "<img ???=\"http://...\">"
+          - "src"
+
+        - - "<img ???=\"http://...\">"
+          - "src"
