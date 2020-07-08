@@ -2,42 +2,45 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import path from 'path';
 
-import { AssignmentModule } from './Assignment';
 import { AssignmentFileModule } from './AssignmentFile';
+import { AssignmentModule } from './Assignment';
 import { AuthModule } from './Auth';
 import { CharacterModule } from './Character';
+import { CMSModule } from './CMS';
 import { ConceptModule } from './Concept';
 import { DatabaseModule } from './Database';
 import { FriendModule } from './Friend';
+import { LessonModule } from './Lesson';
 import { ModuleModule } from './Module';
 import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
-import { UserModule } from './User';
-import { UserConceptModule } from './UserConcepts';
-import { UserModuleModule } from './UserModule';
-import { StorySectionModule } from './StorySection';
-import { LessonModule } from './Lesson';
 import { QuestionModule } from './Question';
+import { StorySectionModule } from './StorySection';
+import { UserConceptModule } from './UserConcepts';
+import { UserModule } from './User';
+import { UserModuleModule } from './UserModule';
 
 /**
  * Export these dependencies so they can be used in testing
  */
 export const appImports = [
-  AuthModule,
-  UserModule,
-  PathModule,
-  PathUserModule,
-  AssignmentModule,
+  CMSModule,
+
   AssignmentFileModule,
-  FriendModule,
-  ModuleModule,
+  AssignmentModule,
+  AuthModule,
   CharacterModule,
   ConceptModule,
-  UserConceptModule,
-  UserModuleModule,
-  StorySectionModule,
+  FriendModule,
   LessonModule,
+  ModuleModule,
+  PathModule,
+  PathUserModule,
   QuestionModule,
+  StorySectionModule,
+  UserConceptModule,
+  UserModule,
+  UserModuleModule,
 
   DatabaseModule,
 

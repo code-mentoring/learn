@@ -1,41 +1,86 @@
-import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+/**
+ * NOTE: This entity is NOT stored in the database
+ * Instead, it is stored in the `content` directory, and exposed with the CMS
+ */
+import { createUnionType, Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+
 
 export enum QuestionType {
-  codeComplete = 'codeComplete',
-  memoryCards = 'memoryCards'
+  multiChoice = 'multiChoice',
+  memory = 'memory',
+  dragDrop = 'dragDrop',
+  bugHighlight = 'bugHighlight'
 }
 
-registerEnumType(QuestionType, { name: 'QuestionType' });
+registerEnumType(QuestionType, {
+  name: 'QuestionType'
+});
 
 @ObjectType()
-export class CodeCompleteQuestion {
+export class BaseQuestion {
   @Field()
-  file: string;
+  id: string;
 
-  @Field(() => [String])
-  answers: string[];
-}
-
-@ObjectType()
-export class Question {
   @Field()
   type: QuestionType;
-
-  @Field(() => [CodeCompleteQuestion], { nullable: true })
-  files?: CodeCompleteQuestion[];
-
-  @Field(() => [[String]], { nullable: true })
-  pairs?: string[][];
 }
 
-@InputType()
-export class QuestionInput {
-  @Field()
-  pathId: string;
+
+// ---------------------------------------------------------------- Multi choice
+
+@ObjectType()
+export class QuestionMultiChoice extends BaseQuestion {
+  @Field(() => [String])
+  options: string[];
 
   @Field()
-  moduleIndex: number;
-
-  @Field()
-  type?: string;
+  code: string;
 }
+
+
+// ---------------------------------------------------------------------- Memory
+@ObjectType()
+export class QuestionMemory extends BaseQuestion {
+  @Field(() => [[String]])
+  pairs: [string, string][]
+}
+
+
+// ----------------------------------------------------------------- Drag & Drop
+@ObjectType()
+export class QuestionDragDrop extends BaseQuestion {
+  @Field(() => [String])
+  options: string[]
+
+  @Field()
+  code: string;
+}
+
+// ----------------------------------------------------------------- Drag & Drop
+@ObjectType()
+export class QuestionBugHighlight extends BaseQuestion {
+  @Field()
+  code: string;
+}
+
+
+// ----------------------------------------------------------------------- Union
+export type Question =
+  QuestionMultiChoice |
+  QuestionMemory |
+  QuestionDragDrop |
+  QuestionBugHighlight;
+
+export const QuestionUnion = createUnionType({
+  name: 'Question',
+  types: () => [QuestionMultiChoice, QuestionMemory, QuestionDragDrop, QuestionBugHighlight],
+  resolveType(value) {
+    switch (value.type) {
+      case QuestionType.multiChoice: return QuestionMultiChoice;
+      case QuestionType.memory: return QuestionMemory;
+      case QuestionType.dragDrop: return QuestionDragDrop;
+      case QuestionType.bugHighlight: return QuestionBugHighlight;
+      default: return null;
+    }
+  }
+});

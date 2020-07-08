@@ -1,3 +1,5 @@
+#import '../fragments/modules.gql'
+
 query ($id: String!) {
   path(id: $id) {
     id
@@ -9,11 +11,6 @@ query ($id: String!) {
   }
 
   pathModules(pathId: $id) {
-    id
-    name
-    icon
-    type
-    previous { id }
-    completed
+    ...ModuleLesson
   }
 }

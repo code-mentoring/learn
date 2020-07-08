@@ -1,5 +1,5 @@
-query ($name: String!) {
-  getPathByName( name : $name) {
+query ($id: String!) {
+  path(id: $id) {
     id
     name
     icon

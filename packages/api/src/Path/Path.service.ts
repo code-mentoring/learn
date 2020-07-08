@@ -17,13 +17,13 @@ export class PathService {
   }
 
   async findById(id: string): Promise<Path> {
-    const path = await this.pathRepository.findOne({ where: { id }, relations: ['character', 'modules'] });
+    const path = await this.pathRepository.findOne({ where: { id }, relations: ['character'] });
     if (!path) throw new NotFoundException('Path not found');
     return path;
   }
 
   async findByName(name: string): Promise<Path> {
-    const path = await this.pathRepository.findOne({ where: { name }, relations: ['character', 'modules'] });
+    const path = await this.pathRepository.findOne({ where: { name }, relations: ['character'] });
     if (!path) throw new NotFoundException('Path not found');
     return path;
   }
@@ -69,8 +69,8 @@ export class PathService {
         await this.pathUserRepository.create({ userId, pathId: path }).save();
       }));
     }
-    return this.pathUserRepository.create({ userId, pathId: paths }).save();
 
+    return this.pathUserRepository.create({ userId, pathId: paths }).save();
   }
 
   async update(pathInput: UpdatePathInput): Promise<Path | undefined> {

@@ -1,5 +1,5 @@
-query getCharacters {
-  getCharacters {
+query characters {
+  characters {
     id
     name
     displayName

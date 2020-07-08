@@ -1,26 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
-import { ObjectType, Field } from '@nestjs/graphql';
+/**
+ * NOTE: This entity is NOT stored in the database
+ * Instead, it is stored in the `content` directory, and exposed with the CMS
+ */
+import { Field, ObjectType } from '@nestjs/graphql';
 
-import { CMBaseEntity } from '../lib/Base.entity';
-import { Module } from '../Module/Module.entity';
+import { Question, QuestionUnion } from '../Question/Question.entity';
 import { StorySection } from '../StorySection/StorySection.entity';
 
+
 @ObjectType()
-@Entity('lesson')
-export class Lesson extends CMBaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  @Field()
-  id: string;
+export class Lesson {
 
-  @Column()
-  @Field()
-  moduleId: string;
-
-  @ManyToOne(() => Module, module => module.lessons)
-  @Field(() => Module)
-  module: Module;
-
-  @OneToMany(() => StorySection, storySection => storySection.lesson)
   @Field(() => [StorySection])
-  storySection: StorySection[];
+  storySections: StorySection[];
+
+  @Field(() => [QuestionUnion])
+  questions: Question[]
 }

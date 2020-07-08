@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique, ManyToOne, OneToMany } from 'typeorm';
-import { ObjectType, Field, InputType, registerEnumType } from '@nestjs/graphql';
+import { createUnionType, Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import { CMBaseEntity } from '../lib/Base.entity';
-import { Path } from '../Path/Path.entity';
-import { UserModule } from '../UserModule/UserModule.entity';
+import { Assignment } from '../Assignment/Assignment.entity';
 import { Lesson } from '../Lesson/Lesson.entity';
+
 
 export enum ModuleType {
   assignment = 'assignment',
@@ -14,88 +12,63 @@ export enum ModuleType {
 registerEnumType(ModuleType, { name: 'ModuleType' });
 
 @ObjectType()
-@Entity('module')
-@Unique('module_name', ['name'])
-export class Module extends CMBaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+export class ModuleBase {
   @Field()
   id: string;
 
-  @Column()
   @Field()
   name: string;
 
-  @Column()
   @Field()
   icon: string;
 
-  @Column({ type: 'simple-enum', enum: ModuleType })
   @Field()
   type: ModuleType;
 
-  @Column({ nullable: true })
   @Field({ nullable: true })
   previousId?: string;
 
-  @Column()
   @Field()
   pathId: string;
 
-  @ManyToOne(() => Module, { nullable: true })
-  @Field(() => Module, { nullable: true })
+  // eslint-disable-next-line no-use-before-define
+  @Field(() => ModuleUnion, { nullable: true })
   previous?: Module;
-
-  @ManyToOne(() => Path, path => path.modules, { nullable: false })
-  @Field(() => Path)
-  path: Path;
-
-  @OneToMany(() => UserModule, userModules => userModules.module)
-  userModules: UserModule[];
 
   @Field(() => Boolean)
   completed?: boolean;
 
-  @Field(() => [Lesson])
-  lessons: Lesson[];
+  @Field(() => Lesson)
+  lesson: Lesson;
 }
 
-@InputType()
-export class CreateModuleInput {
 
-  @Field()
-  name: string;
-
-  @Field()
-  icon: string;
-
-  @Field()
-  type: ModuleType;
-
-  @Field({ nullable: true })
-  previousId?: string;
-
-  @Field()
-  pathId: string;
+@ObjectType()
+export class ModuleAssignment extends ModuleBase {
+  @Field(() => Assignment)
+  assignment: Assignment;
 }
 
-@InputType()
-export class UpdateModuleInput {
-
-  @Field()
-  id: string;
-
-  @Field({ nullable: true })
-  name?: string;
-
-  @Field({ nullable: true })
-  icon?: string;
-
-  @Field(() => ModuleType, { nullable: true })
-  type?: ModuleType;
-
-  @Field({ nullable: true })
-  previousId?: string;
-
-  @Field({ nullable: true })
-  pathId?: string;
+@ObjectType()
+export class ModuleLesson extends ModuleBase {
+  @Field(() => Lesson)
+  lesson: Lesson;
 }
+
+
+// ----------------------------------------------------------------------- Union
+export type Module =
+  ModuleAssignment |
+  ModuleLesson;
+
+export const ModuleUnion = createUnionType({
+  name: 'Module',
+  types: () => [ModuleAssignment, ModuleLesson],
+  resolveType(value) {
+    switch (value.type) {
+      case ModuleType.assignment: return ModuleAssignment;
+      case ModuleType.lesson: return ModuleLesson;
+      default: return null;
+    }
+  }
+});

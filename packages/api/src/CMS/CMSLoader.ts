@@ -1,30 +1,36 @@
-import path from 'path';
-import fs from 'fs';
 import fm from 'front-matter';
-import MarkdownIt from 'markdown-it';
+import fs from 'fs';
+import path from 'path';
 import YAML from 'yaml';
+
+import { Module, ModuleBase, ModuleLesson, ModuleType } from '../Module/Module.entity';
+import {
+  Question,
+  QuestionBugHighlight,
+  QuestionDragDrop,
+  QuestionMemory,
+  QuestionMultiChoice,
+  QuestionType
+} from '../Question/Question.entity';
+import { StorySection } from '../StorySection/StorySection.entity';
+import {
+  CMSQuestionBugHighlight,
+  CMSQuestionDragDrop,
+  CMSQuestionFile,
+  CMSQuestionMemory,
+  CMSQuestionMultiChoice,
+  shapeQuestionBugHighlight,
+  shapeQuestionDragDrop,
+  shapeQuestionMemory,
+  shapeQuestionMultiChoice
+} from './Questions.types';
+
 
 const tree = require('directory-tree');
 
-const MD = new MarkdownIt();
 
 export interface CMSPaths {
-  [pathName: string]: CMSPath;
-}
-
-export interface CMSPath {
-  name: string;
-  modules: CMSModule[];
-}
-
-export interface CMSQ {
-  questions: Object[];
-}
-
-export interface CMSModule {
-  name: string;
-  storySections: string[];
-  questions: Object[];
+  [pathId: string]: Module[];
 }
 
 type Dir = {
@@ -34,45 +40,143 @@ type Dir = {
   children?: Dir[];
 }
 
+interface ModuleFile extends Pick<ModuleBase, 'id' | 'name' | 'icon' | 'type' | 'previousId'> {}
+const fileTestName = new RegExp('\\/(\\w+)\\.(\\d+)\\.md$');
+
+/**
+ * Handles reading all the file system files for paths, stories, questions, etc
+ */
 export class CMSLoader {
   paths: CMSPaths;
 
-  constructor() {
-    this.paths = this._getPaths();
+  modules: { [id: string]: Module }
+
+  /** Load all data */
+  async setup() {
+    this.paths = await this._loadPaths();
   }
 
-  private _getPaths(): CMSPaths {
+  /** Load all path data with modules, stories, questions, etc */
+  private async _loadPaths(): Promise<CMSPaths> {
     const t = tree(path.resolve('./content/paths'), { extensions: /\.md$/ });
 
-    return t.children.reduce((paths: CMSPaths, dir: Dir) => {
+    const paths: CMSPaths = {};
+
+    await Promise.all(t.children.map(async (dir: Dir) => {
+      const dirChildren = dir.children?.filter(c => c.type === 'directory');
       // eslint-disable-next-line no-param-reassign
-      paths[dir.name] = this._getPath(dir);
+      paths[dir.name] = await Promise.all(
+        (dirChildren || []).map(m => this._loadModule(dir.name, m))
+      );
       return paths;
-    }, {} as CMSPaths);
+    }));
+
+    return paths;
   }
 
-  private _getPath(pathDir: Dir): CMSPath {
-    return {
-      name: pathDir.name,
-      modules: pathDir.children?.map(m => this._getModule(pathDir.name, m)) || []
-    };
+
+  /**
+   * Load a module from the directory and convert to Module entity
+   * @param pathId Path id
+   * @param moduleDir Dir of module
+   */
+  private async _loadModule(pathId: string, moduleDir: Dir): Promise<Module> {
+    const fp = path.resolve(`./content/paths/${pathId}/${moduleDir.name}/module.yml`);
+    const yml = fs.readFileSync(fp).toString();
+    const m = <ModuleFile>YAML.parse(yml);
+
+    if (!m.type) throw new Error(`Unknown module type for file '${fp}'`);
+
+    if (m.type === ModuleType.lesson) {
+      const storySections = this._loadStory(moduleDir.path);
+      const questions = await this._loadQuestions(pathId, moduleDir);
+      const lesson: ModuleLesson = {
+        ...m,
+        pathId,
+        lesson: { questions, storySections }
+      };
+      return lesson;
+    }
+
+    throw new Error('TODO: Assignment');
   }
 
-  private _getModule(pathName: string, moduleDir: Dir): CMSModule {
-    const [name, storySections] = this._readStoryFile(pathName, moduleDir.name);
-    const questions = this._readQuestionsFile(pathName, moduleDir.name);
-    return { name, storySections, questions };
+
+  /**
+   * Loads a `story.md` for a module, and convert to StorySection[]
+   * @param dir Path/Module directory to load
+   */
+  private _loadStory(dir: string): StorySection[] {
+    const md = fs.readFileSync(path.resolve(`${dir}/story.md`)).toString();
+    const { body } = fm<{ title: string }>(md);
+    return body.split('<hr>').map(content => ({ content }));
   }
 
-  private _readStoryFile(pathName: string, mod: string): [string, string[]] {
-    const md = fs.readFileSync(path.resolve(`./content/paths/${pathName}/${mod}/story.md`)).toString();
-    const { body, attributes } = fm<{title: string}>(md);
-    return [attributes.title, MD.render(body).split('<hr>')];
-  }
 
-  private _readQuestionsFile(pathName: string, mod: string): Object[] {
-    const yml = fs.readFileSync(path.resolve(`./content/paths/${pathName}/${mod}/questions.yml`)).toString();
-    const { questions } = <CMSQ> YAML.parse(yml);
-    return questions;
+  /**
+   * Loads all question markdown files, validates them, and converts to Question list
+   * @param pathId Path to load
+   * @param moduleDir Module to load
+   */
+  private async _loadQuestions(pathId: string, moduleDir: Dir): Promise<Question[]> {
+    if (!moduleDir.children) return [];
+
+    const questionsDir = moduleDir.children.find(c => c.name === 'questions');
+    if (!questionsDir) throw new Error(`Could not load questions directory for '${moduleDir.path}'`);
+
+    return Promise.all((questionsDir.children || []).map<Promise<Question>>(async qf => {
+      if (!fileTestName.test(qf.path)) throw new Error(`Unknown file format ${qf.path}`);
+
+      const [, type, id] = fileTestName.exec(qf.path) as unknown as [any, QuestionType, string];
+
+      const _md = fs.readFileSync(qf.path).toString();
+      const { body: code, attributes } = fm<CMSQuestionFile>(_md);
+
+      const base = {
+        id: `${pathId}-${type}-${moduleDir.name}-${id}`,
+        type: type as QuestionType
+      };
+
+
+      switch (type) {
+        case QuestionType.multiChoice:
+          const mc: QuestionMultiChoice = {
+            ...base,
+            ...(attributes as CMSQuestionMultiChoice),
+            code
+          };
+          await shapeQuestionMultiChoice.validate(mc);
+          return mc;
+
+        case QuestionType.memory:
+          const mem: QuestionMemory = {
+            ...base,
+            ...(attributes as CMSQuestionMemory)
+          };
+          await shapeQuestionMemory.validate(mem);
+          return mem;
+
+        case QuestionType.dragDrop:
+          const dnd: QuestionDragDrop = {
+            ...base,
+            ...(attributes as CMSQuestionDragDrop),
+            code
+          };
+          await shapeQuestionDragDrop.validate(dnd);
+          return dnd;
+
+        case QuestionType.bugHighlight:
+          const bh: QuestionBugHighlight = {
+            ...base,
+            ...(attributes as CMSQuestionBugHighlight),
+            code
+          };
+          await shapeQuestionBugHighlight.validate(bh);
+          return bh;
+        default:
+          throw new Error(`Unknown question file type '${type}' for '${qf.path}'`);
+      }
+
+    }));
   }
 }
