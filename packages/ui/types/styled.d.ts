@@ -10,7 +10,7 @@ export type Color =
   'grey' | 'grey.100' | 'grey.200' | 'grey.300' | 'grey.400' | 'grey.500' | 'grey.600' | 'grey.700' | 'grey.800' | 'grey.900' |
   'error' | 'white' | 'transparent';
 
-interface Colors {
+export interface Colors {
   100: string;
   200: string;
   300: string;

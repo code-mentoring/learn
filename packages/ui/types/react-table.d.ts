@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import * as ReactTable from 'react-table';
 
 declare module 'react-table' {

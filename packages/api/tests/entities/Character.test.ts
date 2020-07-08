@@ -1,7 +1,7 @@
-import { TestClient } from '../utils/TestClient';
-import { CreateCharacterInput, UpdateCharacterInput } from '../../types';
-import * as random from '../../src/Database/seeders/random';
 import { v4 as uuid } from 'uuid';
+
+import * as random from '../../src/Database/seeders/random';
+import { TestClient } from '../utils/TestClient';
 
 export const characterInput1 = random.characterInput();
 export const characterInput2 = random.characterInput();
@@ -99,9 +99,9 @@ describe('Character entity', () => {
       expect.assertions(2);
       const updateInput = { name: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      try{
+      try {
         await TestClient.updateCharacter({ id: character.id, ...updateInput });
-      }catch(e) {};
+      } catch (e) {}
 
       const updateResult = await TestClient.getCharacters();
 
@@ -113,9 +113,9 @@ describe('Character entity', () => {
       expect.assertions(2);
       const updateInput = { displayName: 'New' };
       const character = await TestClient.createCharacter(characterInput1);
-      try{
+      try {
         await TestClient.updateCharacter({ id: character.id, ...updateInput });
-      }catch(e) {};
+      } catch (e) {}
 
       const updateResult = await TestClient.getCharacters();
 
@@ -128,10 +128,10 @@ describe('Character entity', () => {
       const updateInput = { name: 'New' };
       const id = uuid();
       try {
-        const d = await TestClient.updateCharacter({ id: id, ...updateInput});
+        await TestClient.updateCharacter({ id, ...updateInput });
       } catch (e) {
         expect(e.message).toMatch('not found');
       }
     });
-  });  
+  });
 });

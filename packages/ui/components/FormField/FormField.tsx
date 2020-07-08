@@ -51,7 +51,10 @@ export type FormFieldBaseProps = {
   className?: string;
   colSpan?: 1 | 2;
   changeOnBlur?: boolean;
-  render?: (type: string, options: FormFieldCustomProps) => [React.FC<any>, { [key: string]: any }] | undefined;
+  render?: (type: string, options: FormFieldCustomProps) => [
+    React.FC<any>,
+    { [key: string]: any }
+  ] | undefined;
 };
 
 export type FormFieldProps<T = { type: string }> = FormFieldBaseProps & (FormFieldType | T | {
