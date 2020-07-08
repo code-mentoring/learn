@@ -34,7 +34,7 @@ export const IconBorder = styled.div<QuestionResultProps>`
     width: 4.0rem;
     height: 4.0rem;
     border-radius: ${t.borderRadius.circle};
-    background: ${props => (props.state === 'success' ? t.color('secondary.400') : t.color('tertiary.500'))};
+    background: ${p => (p.state === 'success' ? t.color('secondary.400') : t.color('tertiary.500'))};
     margin: ${t.sizes.xbig} ${t.sizes.sm} ${t.sizes.xbig} ${t.sizes.xsm}
 `;
 
