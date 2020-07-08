@@ -17,11 +17,8 @@ const slideUp = keyframes`
 `;
 
 export const QuestionResultDiv = styled.div`
-    animation: ${slideUp} 0.9s linear;
-    position: relative;
+    animation: ${slideUp} 0.3s ease-out;
     display: flex;
-    width: 71.8rem;
-    height: 8.8rem;
     flex-direction: row;
     align-items: center;
     align-content: center;
@@ -42,9 +39,4 @@ export const StyledIcon = styled(Icon)`
     position: relative;
     top: 15%;
     left: 15%;
-`;
-
-export const StyledTextDiv = styled.div`
-    width: 65rem;
-    padding-right: ${t.sizes.xsm};
 `;

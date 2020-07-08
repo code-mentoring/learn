@@ -10,6 +10,8 @@ import { LeaderboardWidget } from '../../components/widgets/LeaderBoard/LeaderBo
 import { ProgressWidget } from '../../components/widgets/PathProgress/PathProgress.widget';
 import { routes } from '../../router/routes';
 
+import { QuestionResult } from '../../components/QuestionResult/QuestionResult';
+
 const Content = styled(AppPageContent)`
   display: grid;
   grid-template-columns: 1fr minmax(20rem, 42rem);
@@ -29,6 +31,9 @@ export const DashboardPage = () => {
       <StyledModuleTree />
       <ProgressWidget />
       <LeaderboardWidget />
+      <QuestionResult state="success">
+        Lorem ipsum and some other crap text
+      </QuestionResult>
     </Content>
   </Page>;
 };
