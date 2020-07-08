@@ -3,6 +3,12 @@
   "plugins": ["@typescript-eslint", "import"],
   "extends": ["airbnb"],
 
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "packages/api/types.ts"
+  ],
+
   "env":{
     "browser": true,
     "node": true,
@@ -49,6 +55,9 @@
     "linebreak-style": 0,
     "max-classes-per-file": 0, // Leads to too many files
     "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
+    "no-empty": [2, {
+      "allowEmptyCatch": true
+    }],
     "no-underscore-dangle": 0,
     "no-useless-constructor": 0, // Needed by NestJS dep injection
     "object-curly-newline": 0,
