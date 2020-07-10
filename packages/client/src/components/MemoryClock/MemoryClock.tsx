@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { StyledCardProgress, StyledTime } from './MemoryClock.styles';
 
 export interface MemoryClockProps {
   time: number;
+  onDone: (cb: any) => void;
 }
-
-export const MemoryClock: React.FC<MemoryClockProps> = ({ time = 10 }) => {
+const MemoryClock: React.FC<MemoryClockProps> = ({ time, onDone }) => {
   const [counter, setCounter] = useState(time);
 
   const [tickTockCounter, setTickTockCounter] = useState(0);
@@ -14,8 +15,11 @@ export const MemoryClock: React.FC<MemoryClockProps> = ({ time = 10 }) => {
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     addTickTockSound();
 
+    if (counter === 0) {
+      return onDone((cb: any) => cb());
+    }
     return () => clearInterval(Number(timer));
-  }, [counter]);
+  }, [counter, onDone]);
 
   function addTickTockSound(): void {
     setTickTockCounter(tickTockCounter + 1);
@@ -35,8 +39,12 @@ export const MemoryClock: React.FC<MemoryClockProps> = ({ time = 10 }) => {
   const displaySec = sec >= 10 ? String(sec) : `0${String(sec)}`;
 
   return (
-    <div>
-      {displayMin} : {displaySec}
-    </div>
+    <StyledCardProgress>
+      <StyledTime as="h2">
+        {displayMin} : {displaySec}
+      </StyledTime>
+    </StyledCardProgress>
   );
 };
+
+export default MemoryClock;
