@@ -67,5 +67,6 @@ export const Module: React.FC<ModuleProps> = ({ module }) =>
         <Icon icon="check" color="white" />
       </Status>}
     </Box>
-    <Text as="small" color="grey.600">{module.name}</Text>
+    <Text variant="small" color="grey.700">{module.name}</Text>
   </StyledModule>;
+};
