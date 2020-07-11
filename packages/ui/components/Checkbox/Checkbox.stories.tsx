@@ -1,11 +1,10 @@
 import React from 'react';
 
-
 export default {
-  title: 'Card',
+  title: 'Checkbox',
   parameters: {
     info: { inline: true }
   }
 };
 
-export const Default = () => <div>Card Placeholder</div>;
+export const Default = () => <div>Checkbox Placeholder</div>;

@@ -9,4 +9,9 @@ export default {
   }
 };
 
-export const Default = () => <Button>Test</Button>;
+export const Default = () => <Button>Test one</Button>;
+export const newButton = () => <Button
+  color="secondary"
+  iconPosition="right"
+  style={{ width: '150px', height: '200px' }}
+>Test Two</Button>;

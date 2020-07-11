@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { Form } from './Form';
 
 export default {
-  title: 'Card',
+  title: 'Form',
   parameters: {
     info: { inline: true }
   }
 };
 
-export const Default = () => <div>Card Placeholder</div>;
+export const Default = () => <Form>Test</Form>;
