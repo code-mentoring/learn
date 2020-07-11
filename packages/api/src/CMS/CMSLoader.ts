@@ -1,5 +1,7 @@
 import fm from 'front-matter';
 import fs from 'fs';
+import MarkdownIt from 'markdown-it';
+import MDPrism from 'markdown-it-prism';
 import path from 'path';
 import YAML from 'yaml';
 
@@ -25,6 +27,9 @@ import {
   shapeQuestionMultiChoice
 } from './Questions.types';
 
+
+const md = new MarkdownIt();
+md.use(MDPrism);
 
 const tree = require('directory-tree');
 
@@ -107,9 +112,11 @@ export class CMSLoader {
    * @param dir Path/Module directory to load
    */
   private _loadStory(dir: string): StorySection[] {
-    const md = fs.readFileSync(path.resolve(`${dir}/story.md`)).toString();
-    const { body } = fm<{ title: string }>(md);
-    return body.split('<hr>').map(content => ({ content }));
+    const raw = fs.readFileSync(path.resolve(`${dir}/story.md`)).toString();
+    const { body } = fm<{ title: string }>(raw);
+    return body.split('---').map(content => ({
+      content: md.render(content)
+    }));
   }
 
 

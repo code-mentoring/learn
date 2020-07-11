@@ -47,6 +47,7 @@
     "jwt-decode": "^2.2.0",
     "listr": "^0.14.3",
     "markdown-it": "^11.0.0",
+    "markdown-it-prism": "^2.1.0",
     "md5": "^2.2.1",
     "mongodb": "^3.5.6",
     "passport": "^0.4.1",
@@ -66,6 +67,7 @@
   },
   "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
   "devDependencies": {
-    "@types/markdown-it": "^10.0.1"
+    "@types/markdown-it": "^10.0.1",
+    "@types/prismjs": "^1.16.1"
   }
 }
