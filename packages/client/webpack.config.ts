@@ -4,7 +4,7 @@ import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 
 
-// const favicon = require('favicons-webpack-plugin');
+const Favicon = require('favicons-webpack-plugin');
 const ReplacePlugin = require('webpack-plugin-replace');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -46,7 +46,8 @@ const config: Configuration = {
         '%%IS_PROD%%': isProd
       }
     }),
-    new CopyPlugin([{ from: './_redirects', to: './' }])
+    new CopyPlugin([{ from: './_redirects', to: './' }]),
+    new Favicon('../ui/images/favicon-logo.png')
   ]
 
 };
