@@ -1,8 +1,10 @@
 import { Module as EModule } from '@codement/api';
-import { Icon, theme as t, Text, Box } from '@codement/ui';
+import { Box, Icon, Text, theme as t } from '@codement/ui';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { routes } from '../../../router/routes';
 import Hex from './hex.svg';
 
 
@@ -14,7 +16,8 @@ interface Props {
   state: null | boolean; // Null = locked, false = incomplete, true = complete
 }
 
-const StyledModule = styled.div<Props>`
+const StyledModule = styled(Link)<Props>`
+  display: block;
   position: relative;
   text-align: center;
   margin: auto;
@@ -28,6 +31,21 @@ const StyledModule = styled.div<Props>`
       case true: return t.color('green');
     }
   }};
+
+  &, small {
+    transition: all 0.1s ease-in-out;
+  }
+
+  &:hover {
+    color: ${p => {
+    switch (p.state) {
+      default:
+      case false: return t.color('primary.300');
+      case true: return t.color('green.400');
+    }
+  }};
+    small { color: ${t.color('grey.600')}}
+  }
 
   & > div {
     position: relative;
@@ -58,8 +76,12 @@ const Status = styled.span`
   font-weight: ${t.fontWeight.bold};
 `;
 
-export const Module: React.FC<ModuleProps> = ({ module }) =>
-  <StyledModule state={module.completed}>
+export const Module: React.FC<ModuleProps> = ({ module }) => {
+  const href = (module.type === 'lesson')
+    ? routes.lesson({ lessonId: module.id })
+    : '';
+
+  return <StyledModule state={module.completed} to={href}>
     <Box padding="none">
       <Hex />
       <StyledIcon icon="fire" size="lg" color="white" />
