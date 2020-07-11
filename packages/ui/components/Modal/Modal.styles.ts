@@ -14,12 +14,14 @@ export const ModalBackground = styled.span`
 
 export const ModalContent = styled(Card)`
   position: relative;
+  padding: ${t.size('xbig')};
+  padding-top: ${t.size()};
 `;
 
 
 export const CloseIcon = styled(Icon)`
   position: absolute;
-  top: ${t.size('lg')};
+  top: ${t.size('xbig')};
   right: ${t.size('lg')};
   cursor: pointer;
 
@@ -29,6 +31,15 @@ export const CloseIcon = styled(Icon)`
 export const ModalHeader = styled.header`
   margin-bottom: ${t.size('lg')};
   text-align: center;
+`;
+
+export const ModalFooter = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: -${t.size('sm')};
+  margin-right: -${t.size('sm')};
+  margin-top: ${t.size('xbig')};
 `;
 
 
