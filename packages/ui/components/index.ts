@@ -20,4 +20,6 @@ export * from './MenuPop/MenuPop';
 // export * from './Table/QueryTable';
 // export * from './Table/Table';
 export * from './TextField';
+export * from './NavDots/NavDots';
 export * from './Character/Character';
+export * from './CodeInputRegex/CodeInputRegex';

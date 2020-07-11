@@ -15,7 +15,12 @@ export const theme: DefaultTheme = {
     white: '#fff',
     black: '#000',
     grey,
-    error: tertiary['900']
+    error: tertiary['900'],
+
+    code: {
+      color: '#9efeff',
+      background: '#1e1e3f'
+    }
   },
   color: (color: Color = 'primary') => {
     const cn = color as keyof DefaultTheme['colors'];
@@ -49,7 +54,7 @@ export const theme: DefaultTheme = {
   fontFamily: {
     sans: ['"Open Sans"', 'helvetica', 'sans-serif'].join(', '),
     title: ['"Butler"', 'serif'].join(', '),
-    code: ['"Source Code Pro"', 'Open Sans', 'helvetica', 'sans-serif'].join(', ')
+    code: ['"Source Code Pro"', 'monospace'].join(', ')
   },
   fontWeight: { normal: 400, bold: 600, heavy: 800 },
   letterSpacing: {
