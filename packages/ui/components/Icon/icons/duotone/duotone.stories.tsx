@@ -7,7 +7,7 @@ import { IconTrash } from './cid-trash';
 import { IconWarning } from './cid-warning';
 
 export default {
-  title: 'DuoTone Icons',
+  title: 'Duo Tone Icons',
   parameters: {
     info: { inline: true }
   }
