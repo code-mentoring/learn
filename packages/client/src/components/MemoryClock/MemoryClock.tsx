@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyledCardProgress, StyledTime } from './MemoryClock.styles';
+import { StyledCardProgress, StyledTimer } from './MemoryClock.styles';
 
 export interface MemoryClockProps {
   time: number;
@@ -40,9 +40,9 @@ const MemoryClock: React.FC<MemoryClockProps> = ({ time, onDone }) => {
 
   return (
     <StyledCardProgress>
-      <StyledTime as="h2">
+      <StyledTimer>
         {displayMin} : {displaySec}
-      </StyledTime>
+      </StyledTimer>
     </StyledCardProgress>
   );
 };
