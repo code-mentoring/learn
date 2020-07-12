@@ -24,7 +24,7 @@ import { IconUser } from './icons/solid/cis-user';
 import { IconX } from './icons/solid/cis-x';
 import { IconDashboard } from './icons/solid/cis-dashboard';
 import { IconSettings } from './icons/solid/cis-settings';
-import { IconCheckCircle } from './icons/solid/cis-check-circle'
+import { IconCheckCircle } from './icons/solid/cis-check-circle';
 
 export const icons = {
   arrowDown: IconArrowDown,

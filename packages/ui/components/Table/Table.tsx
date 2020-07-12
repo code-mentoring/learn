@@ -1,3 +1,4 @@
+/* eslint-disable */
 // import '../../types/react-table';
 // import './table.scss';
 

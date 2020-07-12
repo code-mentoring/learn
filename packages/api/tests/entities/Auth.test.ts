@@ -22,7 +22,7 @@ describe('Auth entity', () => {
       expect(login.accessToken).not.toBeNull();
     });
 
-    ['email', 'password'].forEach((key) => {
+    ['email', 'password'].forEach(key => {
       it(`should throw an error if ${key} is invalid`, async () => {
         const input = random.userInput();
         await TestClient.createUser(input);

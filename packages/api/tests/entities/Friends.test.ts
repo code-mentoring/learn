@@ -21,12 +21,12 @@ describe('Friend entity', () => {
     beforeEach(setup);
 
     it('should create friend successfully', async () => {
-      const toId = user2.id
+      const toId = user2.id;
       const friend = await TestClient.createFriendship(toId);
 
       expect(friend.id).toBeDefined();
-      expect(friend.user1Id).toEqual((me.id < user2.id)? me.id: user2.id);
-      expect(friend.user2Id).toEqual((me.id > user2.id)? me.id: user2.id);
+      expect(friend.user1Id).toEqual((me.id < user2.id) ? me.id : user2.id);
+      expect(friend.user2Id).toEqual((me.id > user2.id) ? me.id : user2.id);
       expect(friend.requested).toBeDefined();
       expect(friend.initiator).toEqual(me.id);
       expect(friend.status).toEqual('pending');
@@ -102,7 +102,11 @@ describe('Friend entity', () => {
 
       const request = await TestClient.createFriendship(user2.id);
 
-      const result = await TestClient.respondToFriendRequest(request.user1Id, request.user2Id, response);
+      const result = await TestClient.respondToFriendRequest(
+        request.user1Id,
+        request.user2Id,
+        response
+      );
 
       expect(result.status).toEqual(response);
       expect(result.since).toBeDefined();
@@ -115,7 +119,11 @@ describe('Friend entity', () => {
 
       const request = await TestClient.createFriendship(user2.id);
 
-      const result = await TestClient.respondToFriendRequest(request.user2Id, request.user1Id, response);
+      const result = await TestClient.respondToFriendRequest(
+        request.user2Id,
+        request.user1Id,
+        response
+      );
 
       expect(result.status).toEqual(response);
       expect(result.since).toBeDefined();
@@ -128,7 +136,11 @@ describe('Friend entity', () => {
 
       const request = await TestClient.createFriendship(user2.id);
 
-      const result = await TestClient.respondToFriendRequest(request.user2Id, request.user1Id, response);
+      const result = await TestClient.respondToFriendRequest(
+        request.user2Id,
+        request.user1Id,
+        response
+      );
 
       expect(result.status).toEqual(response);
       expect(result.since).toBeDefined();

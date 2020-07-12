@@ -4,17 +4,24 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
 import { appImports } from '../../src/App.module';
+import { UpdateAssignmentInput } from '../../src/Assignment/Assignment.entity';
+import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
+import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
 import { DatabaseService } from '../../src/Database/Database.service';
 import * as random from '../../src/Database/seeders/random';
 import { SeederService } from '../../src/Database/seeders/Seeders.service';
 import { UpdateModuleInput } from '../../src/Module/Module.entity';
+import { UpdatePathInput } from '../../src/Path/Path.entity';
+import { UserWithPassword } from '../../src/User/User.entity';
 import { UserPreferences, UserPreferencesInput } from '../../src/UserPreferences/UserPreferences.entity';
 import {
   Assignment,
   AssignmentFile,
   Character,
+  Concept,
   CreateAssignmentFileInput,
   CreateAssignmentInput,
+  CreateConceptInput,
   CreateModuleInput,
   Friend,
   FriendOutput,
@@ -22,21 +29,13 @@ import {
   Module,
   Path,
   PathInput,
+  UpdateConceptInput,
   User,
-  UserInput,
-  Concept,
-  CreateConceptInput,
-  UserConcept,
-  UpdateConceptInput
+  UserInput
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
-import { UserWithPassword } from '../../src/User/User.entity';
-import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
-import { UpdatePathInput } from '../../src/Path/Path.entity';
-import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
-import { UpdateAssignmentInput } from '../../src/Assignment/Assignment.entity';
 
 
 /**
@@ -136,11 +135,11 @@ export abstract class TestClient {
   }
 
   static updateAssignmentFile(file: UpdateAssignmentFileInput): Promise<AssignmentFile> {
-      return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
+    return this._request('updateAssignmentFile', mutations.updateAssignmentFile, { file });
   }
 
   static deleteAssignmentFile(assignmentFileId: string): Promise<AssignmentFile> {
-      return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
+    return this._request('deleteAssignmentFile', mutations.deleteAssignmentFile, { assignmentFileId });
   }
 
   static createFriendship(toId: String): Promise<FriendOutput> {
@@ -192,7 +191,7 @@ export abstract class TestClient {
   }
 
   static learnConcept(conceptId: string): Promise<Boolean> {
-    return this._request('learnConcept', mutations.learnConcept, { conceptId })
+    return this._request('learnConcept', mutations.learnConcept, { conceptId });
   }
 
   static updateConcept(concept: UpdateConceptInput): Promise<Concept> {
@@ -227,7 +226,7 @@ export abstract class TestClient {
   static getConceptByName(name: string): Promise<Concept> {
     return this._request('getConceptByName', queries.getConceptByName, { name });
   }
-  
+
   static users(): Promise<User[]> {
     return this._request('users', queries.users);
   }

@@ -38,7 +38,6 @@ export const BaseTextField: React.FunctionComponent<TextFieldProps> = ({
   suffix,
   loading,
   value,
-  textarea,
   ...props
 }) => {
 
