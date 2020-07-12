@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Text } from '@codement/ui/components/Text/Text';
-import { QuestionResultDiv, IconBorder, StyledIcon } from './QuestionResult.styles';
+import { Icon } from '@codement/ui/components/Icon/Icon';
+import { QuestionResultDiv, IconBorder } from './QuestionResult.styles';
 
 export interface QuestionResultProps extends React.HTMLAttributes<HTMLDivElement> {
     state: 'success' | 'error'
@@ -10,7 +11,7 @@ export interface QuestionResultProps extends React.HTMLAttributes<HTMLDivElement
 export const QuestionResult: React.FC<QuestionResultProps> = ({ state, children }) => (
   <QuestionResultDiv>
     <IconBorder state={state}>
-      <StyledIcon icon={state === 'success' ? 'check' : 'x'} size="lg" color="white" />
+      <Icon icon={state === 'success' ? 'check' : 'x'} size="lg" color="white" />
     </IconBorder>
     <Text as="body2">
       {children}

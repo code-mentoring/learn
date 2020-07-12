@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-import { Icon } from '@codement/ui/components/Icon/Icon';
 import { theme as t } from '@codement/ui/css/theme';
 import { QuestionResultProps } from './QuestionResult';
 
@@ -28,15 +27,12 @@ export const QuestionResultDiv = styled.div`
 `;
 
 export const IconBorder = styled.div<QuestionResultProps>`
-    width: 4.0rem;
-    height: 4.0rem;
+    width: ${t.sizes.xl};
+    height: ${t.sizes.xl};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: ${t.borderRadius.circle};
     background: ${p => (p.state === 'success' ? t.color('secondary.400') : t.color('tertiary.500'))};
-    margin: ${t.sizes.xbig} ${t.sizes.sm} ${t.sizes.xbig} ${t.sizes.xsm}
-`;
-
-export const StyledIcon = styled(Icon)`
-    position: relative;
-    top: 15%;
-    left: 15%;
+    margin: ${t.sizes.xbig} ${t.sizes.sm} ${t.sizes.xbig} ${t.sizes.xsm};
 `;
