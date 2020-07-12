@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon } from '../Icon';
+
+// Import Icon
 
 export default {
   title: 'Icon',
@@ -8,4 +9,4 @@ export default {
   }
 };
 
-export const Default = () => <Icon height="16px" width="16px" color="red" />;
+export const Default = () => <div>Icon PlaceHolder</div>;
