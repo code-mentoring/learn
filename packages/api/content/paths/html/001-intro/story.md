@@ -25,7 +25,7 @@ We can write elements in HTML with 3 parts.
 The beginning, the middle and the end 😃. It looks like this.
 
 ```html
-<beggining> middle </end>
+<beginning> middle </end>
 ```
 
 This is *slightly* incorrect though, because in HTML, the ["opening tag"](#concept-html-opening-tag)
