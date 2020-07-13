@@ -65,5 +65,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
+  "devDependencies": {
+    "file-loader": "^6.0.0"
+  }
 }

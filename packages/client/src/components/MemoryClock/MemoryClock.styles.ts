@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
+interface TimerProps {
+  duration: null | string;
+}
+
 const flashCardAnimation = keyframes`
   from {background:  #FF91D0;
               box-shadow: 0px 2px 10px #EAE7F6;
@@ -13,7 +17,7 @@ const flashTimerAnimation = keyframes`
   to      {color: #74727C; }
     `;
 
-export const StyledCardProgress = styled.div`
+export const StyledCardProgress = styled.div<TimerProps>`
   position: absolute;
 
   left: 0%;
@@ -32,11 +36,12 @@ export const StyledCardProgress = styled.div`
 
   /*Flashing card animation*/
   animation-name: ${flashCardAnimation};
-  animation-duration: 0.5s;
+  animation-duration: ${(p) => p.duration};
+  animation-play-state: ${(p) => (p.duration = '0ms' ? 'running' : 'paused')};
   animation-iteration-count: infinite;
 `;
 
-export const StyledTimer = styled.div`
+export const StyledTimer = styled.div<TimerProps>`
   position: absolute;
   left: 24.77%;
   right: 24.77%;
@@ -60,6 +65,7 @@ export const StyledTimer = styled.div`
 
   /*Flashing timer animation*/
   animation-name: ${flashTimerAnimation};
-  animation-duration: 1s;
+  animation-duration: ${(p) => p.duration};
+  animation-play-state: ${(p) => (p.duration = '0ms' ? 'running' : 'paused')};
   animation-iteration-count: infinite;
 `;
