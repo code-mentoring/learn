@@ -27,7 +27,7 @@ export const Form: React.FunctionComponent<FormProps<any>> = ({
   onChange,
   children,
   className,
-  onSubmit = () => { },
+  onSubmit = () => {}, // eslint-disable-line no-empty-function
   initialValues = {},
   style,
   setForm,

@@ -23,7 +23,8 @@ const StyledPage = styled(Page)`
   }
 
   form {
-    width: 40rem;
+    width: 90vw;
+    max-width: 40rem;
     margin: ${t.size('huge')} 0;
   }
 
@@ -36,12 +37,22 @@ const StyledPage = styled(Page)`
 
 const Container = styled(Box)`
   margin-top: -20rem;
+  z-index: 2;
+
+  @media (max-width: 600px) {
+    margin-top: -5rem;
+  }
 `;
 
 const StyledPeople = styled(People)`
   position: fixed;
   bottom:0; left:0; height: 22rem;
   opacity: 0.2;
+  z-index: 1;
+
+  @media (max-width: 600px) {
+    bottom:0; left:0; height: 16rem;
+  }
 `;
 
 

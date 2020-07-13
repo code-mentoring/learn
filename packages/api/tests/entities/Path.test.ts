@@ -100,7 +100,9 @@ describe('Path entity', () => {
       const character = await TestClient.createCharacter(random.characterInput());
       try {
         await TestClient.updatePath({ id: path.id, characterId: character.id });
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
 
       const updatePath = await TestClient.getPathByName(path.name);
 
