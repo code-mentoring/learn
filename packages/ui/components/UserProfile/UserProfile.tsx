@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { User } from '@codement/api';
 import { Size } from '../../types/styled';
 
-export interface UserProfileProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserProfileProps extends React.HTMLAttributes<HTMLImageElement> {
   user: User | string;
   size?: Size | number;
 }
