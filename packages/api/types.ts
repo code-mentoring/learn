@@ -63,6 +63,7 @@ export type ModuleAssignment = {
   pathId: Scalars['String'];
   previous?: Maybe<Module>;
   completed: Scalars['Boolean'];
+  lesson: Lesson;
   assignment: Assignment;
 };
 
@@ -213,7 +214,7 @@ export type Query = {
   me: User;
   verifyToken: Scalars['Boolean'];
   characters: Array<Character>;
-  lesson: Lesson;
+  lesson: ModuleLesson;
   concepts: Array<Concept>;
   concept: Concept;
   userLearnedConcepts: Array<UserConcept>;

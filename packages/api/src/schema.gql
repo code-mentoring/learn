@@ -189,7 +189,7 @@ type Query {
   me: User!
   verifyToken(accessToken: String!): Boolean!
   characters: [Character!]!
-  lesson(id: String!): Lesson!
+  lesson(id: String!): ModuleLesson!
   concepts: [Concept!]!
   concept(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!

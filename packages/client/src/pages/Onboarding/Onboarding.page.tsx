@@ -93,7 +93,7 @@ export const OnboardingPage = () => {
 
     <Wrapper>
       <Center>
-        <Text as="h2"><Emoji text={step.title} /></Text>
+        <Text variant="h2"><Emoji text={step.title} /></Text>
         <Text>{step.text}</Text>
         {content}
       </Center>

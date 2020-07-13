@@ -23,7 +23,7 @@ export const ModuleTree: React.FC<ModuleTreeProps> = props => {
     {!currentPath
       ? <Loader />
       : <>
-        <Text as="h2" color="grey.600">{currentPath.name}</Text>
+        <Text variant="h2" color="grey.600">{currentPath.name}</Text>
 
         <div>
           {currentModules?.map(m => <Module module={m} />)}

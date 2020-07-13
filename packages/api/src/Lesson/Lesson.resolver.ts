@@ -3,20 +3,18 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
 import { CMS } from '../CMS/CMS';
-import { Lesson } from './Lesson.entity';
+import { ModuleLesson } from '../Module/Module.entity';
 
-@Resolver(() => Lesson)
+
+@Resolver(() => ModuleLesson)
 export class LessonResolver {
   constructor(
     private readonly cms: CMS
   ) {}
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => Lesson)
-  lesson(
-    @Args('id') id: string
-  ) {
+  @Query(() => ModuleLesson)
+  lesson(@Args('id') id: string) {
     return this.cms.findLessonById(id);
   }
-
 }
