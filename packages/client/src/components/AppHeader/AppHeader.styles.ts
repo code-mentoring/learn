@@ -1,4 +1,5 @@
 import { TextField, theme as t } from '@codement/ui';
+import { fade } from '@codement/ui/css/animations';
 import styled, { css } from 'styled-components';
 import { Color } from '@codement/ui/types/styled';
 
@@ -6,6 +7,7 @@ export const StyledAppHeader = styled.nav<{ minimal?: boolean }>`${({
   minimal
 }) => css`
   padding: ${t.size('big')} ${t.size('lg')};
+  animation: ${fade} 0.5s ease-out;
 
   ${minimal
     ? 'text-align: center;'
