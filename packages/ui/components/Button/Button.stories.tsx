@@ -9,9 +9,13 @@ export default {
   }
 };
 
-export const Default = () => <Button>Test one</Button>;
-export const newButton = () => <Button
-  color="secondary"
-  iconPosition="right"
-  style={{ width: '150px', height: '200px' }}
->Test Two</Button>;
+export const ButtonWithIcon = () => <Button
+  text={false}
+  color="primary"
+  disabled={false}
+  size="large"
+  icon="fire"
+  iconPosition="left"
+/>;
+
+export const ButtonWithText = () => <Button color="tertiary" disabled={false} size="large">Text Here</Button>;

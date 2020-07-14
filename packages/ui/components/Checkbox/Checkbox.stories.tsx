@@ -1,4 +1,5 @@
 import React from 'react';
+import { Checkbox } from './Checkbox';
 
 export default {
   title: 'Checkbox',
@@ -7,4 +8,4 @@ export default {
   }
 };
 
-export const Default = () => <div>Checkbox Placeholder</div>;
+export const Default = () => <Checkbox />;

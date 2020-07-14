@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { QueryForm } from './QueryForm';
 
 export default {
   title: 'QueryForm',
@@ -8,4 +8,4 @@ export default {
   }
 };
 
-export const Default = () => <div>hello</div>;
+export const Default = () => <QueryForm query="" variablesKey="" />;

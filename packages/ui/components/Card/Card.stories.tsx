@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Card } from './Card';
 
 export default {
   title: 'Card',
@@ -8,4 +8,4 @@ export default {
   }
 };
 
-export const Default = () => <div>Card Placeholder</div>;
+export const Default = () => <Card>Card</Card>;

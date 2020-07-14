@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Emoji } from './Emoji';
 
 export default {
   title: 'Emoji',
@@ -8,4 +8,4 @@ export default {
   }
 };
 
-export const Default = () => <div>emoji placeholder</div>;
+export const Default = () => <Emoji />;
