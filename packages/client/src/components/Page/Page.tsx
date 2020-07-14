@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { AppSidebar } from '../AppSidebar/AppSidebar';
 
-
 export interface PageProps {
   title: string;
   header?: boolean;
@@ -15,9 +14,14 @@ export interface PageProps {
 
 const StyledPage = styled.main<{ sidebar?: boolean }>`
   position: absolute;
-  top:0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-  ${p => p.sidebar && `
+  ${(p) =>
+    p.sidebar &&
+    `
     display: grid;
     grid-template-rows: min-content 1fr;
     grid-template-columns: 25rem 1fr;
@@ -35,16 +39,19 @@ export const Page: React.FunctionComponent<PageProps> = ({
   header = false,
   sidebar = false,
   children,
-  className
+  className,
 }) => {
-  useEffect(() => { document.title = title; }, [title]);
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
-  return <StyledPage sidebar={sidebar} className={className}>
-    {header && <AppHeader />}
-    {sidebar && <AppSidebar />}
-    {children}
-  </StyledPage>;
+  return (
+    <StyledPage sidebar={sidebar} className={className}>
+      {header && <AppHeader />}
+      {sidebar && <AppSidebar />}
+      {children}
+    </StyledPage>
+  );
 };
-
 
 export const AppPageContent = StyledPageContent;

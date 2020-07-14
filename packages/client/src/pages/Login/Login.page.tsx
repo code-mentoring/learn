@@ -15,11 +15,7 @@ import { LocalStorage } from '@codement/ui/lib/localStorage';
 import React from 'react';
 import styled from 'styled-components';
 import * as yup from 'yup';
-
 import { Page } from '../../components/Page/Page';
-
-//memoryclock test
-import MemoryClock from '../../components/MemoryClock/MemoryClock';
 
 const StyledPage = styled(Page)`
   display: grid;
@@ -87,12 +83,6 @@ export const LoginPage = () => {
         <Text>
           Let&apos;s get coding <Emoji text="😊" />
         </Text>
-        <MemoryClock
-          time={5}
-          onDone={() => {
-            console.log('Done!');
-          }}
-        />
         <Form
           onSubmit={submit}
           error={getGQLError(loginError)}
@@ -117,7 +107,6 @@ export const LoginPage = () => {
           <a href="https://codementoring.co/signup">Join now</a>
         </Text>
       </Container>
-
       <StyledPeople />
     </StyledPage>
   );
