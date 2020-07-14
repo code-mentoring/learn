@@ -1,10 +1,15 @@
-import styled from 'styled-components';
-import { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface TimerProps {
   duration: null | string;
 }
 
+const animState = (duration: string | null) => {
+  if (duration === null) {
+    return 'paused';
+  }
+  return 'running';
+};
 const flashCardAnimation = keyframes`
   from {background:  #FF91D0;
               box-shadow: 0px 2px 10px #EAE7F6;
@@ -36,8 +41,8 @@ export const StyledCardProgress = styled.div<TimerProps>`
 
   /*Flashing card animation*/
   animation-name: ${flashCardAnimation};
-  animation-duration: ${(p) => p.duration};
-  animation-play-state: ${(p) => (p.duration = '0ms' ? 'running' : 'paused')};
+  animation-duration: ${p => p.duration};
+  animation-play-state: ${p => animState(p.duration)};
   animation-iteration-count: infinite;
 `;
 
@@ -65,7 +70,7 @@ export const StyledTimer = styled.div<TimerProps>`
 
   /*Flashing timer animation*/
   animation-name: ${flashTimerAnimation};
-  animation-duration: ${(p) => p.duration};
-  animation-play-state: ${(p) => (p.duration = '0ms' ? 'running' : 'paused')};
+  animation-duration: ${p => p.duration};
+  animation-play-state: ${p => animState(p.duration)};
   animation-iteration-count: infinite;
 `;

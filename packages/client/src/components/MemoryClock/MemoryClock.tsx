@@ -18,11 +18,20 @@ const MemoryClock: React.FC<MemoryClockProps> = ({ time, onDone }) => {
   const tickAudio = new Audio(tickSound);
   const tockAudio = new Audio(tockSound);
 
-  useEffect(() => {
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    addTickTockSound();
+  function addTickTockSound(): void {
+    setTickTockCounter(tickTockCounter + 1);
+    if (tickTockCounter === 2) {
+      tickAudio.play();
+    }
+    if (tickTockCounter === 4) {
+      tockAudio.play();
+      setTickTockCounter(0);
+    }
+  }
 
+  useEffect(() => {
+    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    addTickTockSound();
     if (counter <= 10 && counter > 5) {
       setAnimDuration('1000ms');
     } else if (counter <= 5 && counter > 3) {
@@ -41,17 +50,6 @@ const MemoryClock: React.FC<MemoryClockProps> = ({ time, onDone }) => {
     }
     return () => clearInterval(Number(timer));
   }, [counter, onDone]);
-
-  function addTickTockSound(): void {
-    setTickTockCounter(tickTockCounter + 1);
-    if (tickTockCounter === 2) {
-      tickAudio.play();
-    }
-    if (tickTockCounter === 4) {
-      tockAudio.play();
-      setTickTockCounter(0);
-    }
-  }
 
   const min = counter > 60 ? Math.floor((counter % 3600) / 60) % 60 : 0;
   const sec = counter > 0 ? Math.floor((counter % 3600) % 60) : 0;

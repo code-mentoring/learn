@@ -19,9 +19,9 @@ const StyledPage = styled.main<{ sidebar?: boolean }>`
   width: 100%;
   height: 100%;
 
-  ${(p) =>
-    p.sidebar &&
-    `
+  ${p =>
+    p.sidebar
+    && `
     display: grid;
     grid-template-rows: min-content 1fr;
     grid-template-columns: 25rem 1fr;
@@ -39,7 +39,7 @@ export const Page: React.FunctionComponent<PageProps> = ({
   header = false,
   sidebar = false,
   children,
-  className,
+  className
 }) => {
   useEffect(() => {
     document.title = title;
