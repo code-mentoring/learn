@@ -40,6 +40,15 @@ const UserRow = styled.li`
   }
 `;
 
+const EmptyIcon = styled.div`
+  position: relative;
+  width: ${t.size('lg')};
+  height: ${t.size('lg')};
+  margin-right: ${t.size('md')};
+  border-radius: ${t.borderRadius.circle};
+  background-color: ${t.colors.grey[200]};
+`;
+
 export const LeaderboardWidget: React.FC<CardProps> = props => {
   const { data, loading, error } = useQuery<{ users: User[] }>(usersQuery);
   const { currentPath } = Paths.useContainer();
@@ -49,7 +58,10 @@ export const LeaderboardWidget: React.FC<CardProps> = props => {
       ? <Loader />
       : <>
         <Text as="h2" color="grey.600">
-          {currentPath && <PathIcon icon={currentPath.icon as PathIconType} size="lg" />}
+          {currentPath
+            ? <PathIcon icon={currentPath.icon as PathIconType} size="lg" />
+            : <EmptyIcon />
+           }
           Leaderboard
         </Text>
         {error

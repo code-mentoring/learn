@@ -48,7 +48,8 @@ const p3Keyframes = keyframes`
   to { transform: translateX(-20%); }
 `;
 
-// animation: ${svgKeyframes} 0.66s infinite cubic-bezier(0.25, 0.75, 0.36, 0.9);: ${svgKeyframes} 0.66s infinite cubic-bezier(0.25, 0.75, 0.36, 0.9);
+// animation: ${svgKeyframes} 0.66s infinite cubic-bezier(0.25, 0.75, 0.36, 0.9);
+// : ${svgKeyframes} 0.66s infinite cubic-bezier(0.25, 0.75, 0.36, 0.9);
 // animation: ${svgKeyframes} 0.66s infinite cubic-bezier(0.3, 0.75, 0.36, 0.8);
 const P1 = styled.path`
   animation: ${svgKeyframes} 0.66s infinite cubic-bezier(0.7, 0.3, 1, 0.8);
