@@ -10,7 +10,7 @@ export type Color =
   'grey' | 'grey.100' | 'grey.200' | 'grey.300' | 'grey.400' | 'grey.500' | 'grey.600' | 'grey.700' | 'grey.800' | 'grey.900' |
   'error' | 'white' | 'transparent';
 
-interface Colors {
+export interface Colors {
   100: string;
   200: string;
   300: string;
@@ -45,7 +45,7 @@ declare module 'styled-components' {
     sizes: { [size in Size]: string },
     size(size?: number | Size): string,
 
-    fontFamily: { sans: string, title: string },
+    fontFamily: { sans: string, title: string, code: string },
     fontWeight: { normal: 400, bold: 600, heavy: 800 },
     letterSpacing: { sm: string; md: string; lg: string; }
     borderRadius: { small: string, medium: string, default: string, circle: string, large: string }

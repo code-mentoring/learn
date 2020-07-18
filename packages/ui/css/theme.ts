@@ -48,7 +48,8 @@ export const theme: DefaultTheme = {
 
   fontFamily: {
     sans: ['"Open Sans"', 'helvetica', 'sans-serif'].join(', '),
-    title: ['"Butler"', 'serif'].join(', ')
+    title: ['"Butler"', 'serif'].join(', '),
+    code: ['"Source Code Pro"', 'Open Sans', 'helvetica', 'sans-serif'].join(', ')
   },
   fontWeight: { normal: 400, bold: 600, heavy: 800 },
   letterSpacing: {

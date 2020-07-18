@@ -5,11 +5,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 
+// eslint-disable-next-line
 const PostCSSConfig = require('@codement/ui/postcss.config');
 
 // const favicon = require('favicons-webpack-plugin');
-const replacePlugin = require('webpack-plugin-replace');
-const copyPlugin = require('copy-webpack-plugin');
+const ReplacePlugin = require('webpack-plugin-replace');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -83,13 +84,13 @@ const config: Configuration = {
     new HTMLWebpack({
       template: './src/index.html'
     }),
-    new replacePlugin({
+    new ReplacePlugin({
       values: {
         '%%API_HOST%%': isProd ? 'https://api.codementoring.co' : 'http://localhost:4000',
         '%%IS_PROD%%': isProd
       }
     }),
-    new copyPlugin([{ from: './_redirects', to: './' }])
+    new CopyPlugin([{ from: './_redirects', to: './' }])
   ]
 
 };
