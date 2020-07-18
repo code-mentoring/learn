@@ -67,6 +67,8 @@
   },
   "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
   "devDependencies": {
-    "file-loader": "^6.0.0"
+    "@types/lodash": "^4.14.157",
+    "file-loader": "^6.0.0",
+    "lodash": "^4.17.19"
   }
 }

@@ -34,7 +34,7 @@ const config: Configuration = {
       { test: /\.svg/, loader: 'react-svg-loader' },
       { test: /\.gql/, loader: 'graphql-tag/loader' },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|wav)$/,
         loader: 'file-loader',
         query: { name: 'static/media/[name].[hash:8].[ext]' }
       }
