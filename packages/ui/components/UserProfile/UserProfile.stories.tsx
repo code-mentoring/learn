@@ -3,10 +3,7 @@ import React from 'react';
 import { UserProfile } from './UserProfile';
 
 export default {
-  title: 'UserProfile',
-  parameters: {
-    info: { inline: true }
-  }
+  title: 'UserProfile'
 };
 
-export const Default = () => <UserProfile user="Test">Folke</UserProfile>;
+export const Default = () => <UserProfile user="https://www.gravatar.com/avatar/test" />;
