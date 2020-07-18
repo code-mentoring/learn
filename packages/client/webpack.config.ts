@@ -32,7 +32,12 @@ const config: Configuration = {
       { test: /\.html/, loader: 'html-loader' },
       { test: /\.png/, loader: 'url-loader' },
       { test: /\.svg/, loader: 'react-svg-loader' },
-      { test: /\.gql/, loader: 'graphql-tag/loader' }
+      { test: /\.gql/, loader: 'graphql-tag/loader' },
+      {
+        test: /\.(mp3|wav)$/,
+        loader: 'file-loader',
+        query: { name: 'static/media/[name].[hash:8].[ext]' }
+      }
     ]
   },
 
