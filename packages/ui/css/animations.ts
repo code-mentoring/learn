@@ -11,3 +11,19 @@ export const fadeRight = keyframes`
     opacity: 1;
   }
 `;
+
+export const fadeUp = keyframes`
+  from {
+    transform: translateY(${theme.size('xbig')});
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+`;
+
+export const fade = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
