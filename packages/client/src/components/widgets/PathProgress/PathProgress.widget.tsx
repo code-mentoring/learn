@@ -10,6 +10,13 @@ const Widget = styled(Card)`
   text-align: center;
 `;
 
+const EmptyIcon = styled.div`
+  width: ${t.size('huge')};
+  height: ${t.size('huge')};
+  border-radius: ${t.borderRadius.circle};
+  background-color: ${t.colors.grey[200]};
+`;
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -49,7 +56,9 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
 
     <Grid>
 
-      {myPaths?.map(p => <PathProgress path={p} key={p.id} />)}
+      {myPaths
+        ? myPaths.map(p => <PathProgress path={p} key={p.id} />)
+        : <EmptyIcon />}
 
       <JoinButton onClick={() => setShowModal(true)}>
         <svg>
