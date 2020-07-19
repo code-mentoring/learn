@@ -13,9 +13,9 @@ const StyledError: React.FC<HTMLProps<HTMLSpanElement>> = styled.span<ErrorMessa
   display: block;
   text-align: ${p => (p.center ? 'center' : 'right')};
   color: ${t.color('error')};
-  font-size: ${t.size('xsm')};
+  font-size: ${t.size('big')};
   font-weight: ${t.fontWeight.bold};
-  margin-top: ${t.size('xtiny')};
+  margin-top: ${t.size('tiny')};
   margin-bottom: ${t.size('tiny')};
 `;
 
