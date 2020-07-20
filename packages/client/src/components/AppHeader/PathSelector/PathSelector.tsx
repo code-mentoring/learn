@@ -35,6 +35,12 @@ const PathItem = styled(Box)`
   &:hover { background: ${t.color('primary.100')}; }
 `;
 
+const EmptyIcon = styled.div`
+  width: ${t.size('huge')};
+  height: ${t.size('huge')};
+  border-radius: ${t.borderRadius.circle};
+  background-color: ${t.color('grey.100')};
+`;
 
 const PathList: React.FC = () => {
   const { myPaths, setCurrentPathId } = Paths.useContainer();
@@ -52,7 +58,7 @@ const PathList: React.FC = () => {
 
 export const PathSelector = () => {
   const { currentPath } = Paths.useContainer();
-  if (!currentPath) return null;
+  if (!currentPath) return <EmptyIcon />;
 
   return <StyledPathSelector>
     <MenuPop overlay={<PathList />} placement="bottom">
