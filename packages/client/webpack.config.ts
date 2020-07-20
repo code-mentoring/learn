@@ -43,7 +43,6 @@ const config: Configuration = {
           }
         }
       },
-      { test: /\.svg/, loader: 'react-svg-loader' },
       { test: /\.gql/, loader: 'graphql-tag/loader' },
       {
         test: /\.(mp3|wav)$/,

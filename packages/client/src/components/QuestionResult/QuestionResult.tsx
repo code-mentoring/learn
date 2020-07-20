@@ -13,7 +13,7 @@ export const QuestionResult: React.FC<QuestionResultProps> = ({ state, children 
     <IconBorder state={state}>
       <Icon icon={state === 'success' ? 'check' : 'x'} size="lg" color="white" />
     </IconBorder>
-    <Text as="body2">
+    <Text variant="body2">
       {children}
     </Text>
   </QuestionResultDiv>
