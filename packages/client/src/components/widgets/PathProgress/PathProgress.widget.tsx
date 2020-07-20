@@ -14,7 +14,7 @@ const EmptyIcon = styled.div`
   width: ${t.size('huge')};
   height: ${t.size('huge')};
   border-radius: ${t.borderRadius.circle};
-  background-color: ${t.colors.grey[200]};
+  background-color: ${t.color('grey.100')};
 `;
 
 const Grid = styled.div`

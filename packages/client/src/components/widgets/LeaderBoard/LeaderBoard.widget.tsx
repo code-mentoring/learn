@@ -46,7 +46,7 @@ const EmptyIcon = styled.div`
   height: ${t.size('lg')};
   margin-right: ${t.size('md')};
   border-radius: ${t.borderRadius.circle};
-  background-color: ${t.colors.grey[200]};
+  background-color: ${t.color('grey.100')};
 `;
 
 export const LeaderboardWidget: React.FC<CardProps> = props => {
