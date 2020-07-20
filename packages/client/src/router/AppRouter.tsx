@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
 import { routes } from './routes';
+import { QuoteLoadingPage } from '../pages/QuoteLoading/QuoteLoading.page';
 
 
 export const AppRouter = () => (
@@ -19,7 +20,7 @@ export const AppRouter = () => (
       <UnAuthRoute routes={routes} path={routes.login(false)} component={LoginPage} />
 
       <ClientContainerWrapper>
-        <AuthRoute routes={routes} path="*">
+        <AuthRoute routes={routes} loadingPage={<QuoteLoadingPage />} path="*">
           <Switch>
             <Route exact path={routes.home(false)} component={DashboardPage} />
             <Route exact path={routes.logout(false)} component={LogoutPage} />

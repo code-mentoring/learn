@@ -4,7 +4,7 @@ import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 
 
-// const favicon = require('favicons-webpack-plugin');
+const Favicon = require('favicons-webpack-plugin');
 const ReplacePlugin = require('webpack-plugin-replace');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -43,7 +43,13 @@ const config: Configuration = {
           }
         }
       },
-      { test: /\.gql/, loader: 'graphql-tag/loader' }
+      { test: /\.svg/, loader: 'react-svg-loader' },
+      { test: /\.gql/, loader: 'graphql-tag/loader' },
+      {
+        test: /\.(mp3|wav)$/,
+        loader: 'file-loader',
+        query: { name: 'static/media/[name].[hash:8].[ext]' }
+      }
     ]
   },
 
@@ -57,7 +63,8 @@ const config: Configuration = {
         '%%IS_PROD%%': isProd
       }
     }),
-    new CopyPlugin([{ from: './_redirects', to: './' }])
+    new CopyPlugin([{ from: './_redirects', to: './' }]),
+    new Favicon('../ui/images/favicon-logo.png')
   ]
 
 };
