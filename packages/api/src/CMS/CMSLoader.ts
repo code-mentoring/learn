@@ -46,7 +46,7 @@ type Dir = {
 }
 
 interface ModuleFile extends Pick<ModuleBase, 'id' | 'name' | 'icon' | 'type' | 'previousId'> {}
-const fileTestName = new RegExp('\\/(\\w+)\\.(\\d+)\\.md$');
+const fileTestName = new RegExp('(\\w+)\\.(\\d+)\\.md$');
 
 /**
  * Handles reading all the file system files for paths, stories, questions, etc
