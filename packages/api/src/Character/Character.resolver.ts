@@ -12,7 +12,7 @@ export class CharacterResolver {
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [Character])
-  getCharacters() {
+  characters() {
     return this.characterService.findAll();
   }
 

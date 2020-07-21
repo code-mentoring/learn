@@ -73,7 +73,7 @@ export const LoginPage = () => {
     <a href="https://codementoring.co"> <Logo /> </a>
 
     <Container>
-      <Text as="h1">Welcome back!</Text>
+      <Text variant="h1">Welcome back!</Text>
       <Text>Let&apos;s get coding <Emoji text="😊" /></Text>
 
       <Form
@@ -90,7 +90,7 @@ export const LoginPage = () => {
         <Button size="large">Login</Button>
       </Form>
 
-      <Text as="small">
+      <Text variant="small">
         New to Code Mentoring? <a href="https://codementoring.co/signup">Join now</a>
       </Text>
     </Container>

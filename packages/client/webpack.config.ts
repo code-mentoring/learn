@@ -31,7 +31,18 @@ const config: Configuration = {
       { test: /\.ts/, loader: 'ts-loader' },
       { test: /\.html/, loader: 'html-loader' },
       { test: /\.png/, loader: 'url-loader' },
-      { test: /\.svg/, loader: 'react-svg-loader' },
+      {
+        test: /\.svg/,
+        loader: 'react-svg-loader',
+        options: {
+          svgo: {
+            plugins: [
+              { removeViewBox: false, cleanupIDs: false }
+            ],
+            floatPrecision: 2
+          }
+        }
+      },
       { test: /\.gql/, loader: 'graphql-tag/loader' },
       {
         test: /\.(mp3|wav)$/,

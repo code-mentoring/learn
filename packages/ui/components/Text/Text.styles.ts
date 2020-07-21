@@ -59,8 +59,11 @@ h5.defaultProps = { color: 'grey', fontSize: 'xsm', fontWeight: 'heavy', upperca
 export const body1 = styled.p`${baseText}`;
 body1.defaultProps = { color: 'grey.900', letterSpacing: 'sm' };
 
-export const body2 = styled.p`${baseText}`;
+export const body2 = styled.span`${baseText}`;
 body2.defaultProps = { color: 'grey.700', fontSize: 'sm' };
+
+export const span = styled.span`${baseText}`;
+span.defaultProps = { color: 'grey.700', fontSize: 'sm' };
 
 export const small = styled.small`${baseText}`;
 small.defaultProps = { color: 'grey.600', fontSize: 'xsm', letterSpacing: 'sm' };
