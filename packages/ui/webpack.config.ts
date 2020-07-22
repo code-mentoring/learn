@@ -23,7 +23,7 @@ const config: Configuration = {
       { test: /\.ts/, loader: 'ts-loader' },
       {
         test: /\.mdx?$/,
-        use: [ 'babel-loader', 'mdx-loader' ]
+        use: ['babel-loader', 'mdx-loader']
       },
       { test: /\.html/, loader: 'html-loader' },
       { test: /\.png/, loader: 'url-loader' },

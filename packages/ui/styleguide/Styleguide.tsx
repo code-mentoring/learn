@@ -19,7 +19,7 @@ export interface Story {
 
 const stories: Story[] = [
   { id: 'buttons', title: 'Buttons', story: StoryButtons }
-]
+];
 
 const Article = () => {
   const { comp } = useParams<{ comp: string }>();
@@ -33,29 +33,27 @@ const Article = () => {
   const Story = useMemo(() => stories.find(s => s.id === comp), [comp]);
   if (!Story) return <span>Not found</span>;
 
-  return <StyleguideArticle ref={wrapper}> <Story.story /> </StyleguideArticle>
-}
-
-export const Styleguide = () => {
-  return <Router history={history}>
-    <StyleguidePage>
-
-      <StyleguideSidebar>
-        <Text variant="h3">Code Mentoring Style Guide  </Text>
-        <nav>
-          {stories.map(({ title, id }) => <NavLink to={id}>
-            {title}
-          </NavLink>)}
-        </nav>
-      </StyleguideSidebar>
-
-      <Switch>
-        <Route path="/:comp" component={Article} />
-        <Route path="*" component={Article}>
-          Not found
-        </Route>
-
-      </Switch>
-    </StyleguidePage>
-  </Router>
+  return <StyleguideArticle ref={wrapper}> <Story.story /> </StyleguideArticle>;
 };
+
+export const Styleguide = () => <Router history={history}>
+  <StyleguidePage>
+
+    <StyleguideSidebar>
+      <Text variant="h3">Code Mentoring Style Guide  </Text>
+      <nav>
+        {stories.map(({ title, id }) => <NavLink to={id}>
+          {title}
+        </NavLink>)}
+      </nav>
+    </StyleguideSidebar>
+
+    <Switch>
+      <Route path="/:comp" component={Article} />
+      <Route path="*" component={Article}>
+        Not found
+      </Route>
+
+    </Switch>
+  </StyleguidePage>
+</Router>;
