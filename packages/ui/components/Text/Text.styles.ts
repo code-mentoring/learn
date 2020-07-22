@@ -1,5 +1,5 @@
-import styled, { css, DefaultTheme, ThemedStyledProps } from 'styled-components';
-
+import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components';
+import { theme as t } from '../../css/theme';
 import { Color, Size } from '../../types/styled';
 
 
@@ -12,15 +12,14 @@ interface BaseTypeProps {
   uppercase?: boolean
 }
 
-const baseText = css<BaseTypeProps>(({
-  theme: t,
+export const baseText = ({
   color,
   fontSize = 'md',
   fontFamily,
   letterSpacing,
   fontWeight,
   uppercase
-}) => {
+}: BaseTypeProps) => {
   const styles: ThemedStyledProps<any, any> = {};
   if (color) styles.color = t.color(color);
   if (fontSize) styles.fontSize = t.size(fontSize);
@@ -30,8 +29,7 @@ const baseText = css<BaseTypeProps>(({
   if (uppercase) styles.textTransform = 'uppercase';
   styles.lineHeight = 1.75;
   return styles;
-});
-
+};
 
 export const title = styled.h1`${baseText}`;
 title.defaultProps = { color: 'primary', fontFamily: 'title', fontSize: 'giant', fontWeight: 'heavy', letterSpacing: 'sm' };
@@ -43,7 +41,7 @@ export const h1 = styled.h1`${baseText}`;
 h1.defaultProps = { color: 'primary.400', fontSize: 'xbig', fontWeight: 'heavy' };
 
 export const h2 = styled.h2`${baseText}`;
-h2.defaultProps = { color: 'primary', fontSize: 21, fontWeight: 'bold' };
+h2.defaultProps = { color: 'primary.300', fontSize: 21, fontWeight: 'bold' };
 
 export const h3 = styled.h3`${baseText}`;
 h3.defaultProps = { color: 'primary.300', fontSize: 'big', fontWeight: 'bold' };
@@ -69,3 +67,4 @@ export const small = styled.small`${baseText}`;
 small.defaultProps = { color: 'grey.600', fontSize: 'xsm', letterSpacing: 'sm' };
 
 export const strong = styled.strong`${baseText}`;
+strong.defaultProps = { letterSpacing: 'lg', fontWeight: 'bold' };
