@@ -44,7 +44,14 @@ export const StyleguideArticle = styled.article`
     margin-bottom: ${theme.size('tiny')};
   }
   p {
-    margin-bottom: ${theme.size('big')}
+    margin-bottom: ${theme.size('big')};
+    code {
+      background: ${theme.colors.code.background};
+      color: ${theme.colors.code.color};
+      font-family: ${theme.fontFamily.code};
+      border-radius: ${theme.borderRadius.medium};
+      padding: ${theme.size('xtiny')};
+    }
   }
 
   ${Card} {
