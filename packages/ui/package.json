@@ -18,5 +18,22 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a"
+  "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
+  "devDependencies": {
+    "@types/prismjs": "^1.16.1",
+    "@types/react-router": "^5.1.8",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react-app": "^9.1.2",
+    "history": "^5.0.0",
+    "mdx-loader": "^3.0.2",
+    "prismjs": "^1.20.0",
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack -p"
+  }
 }
