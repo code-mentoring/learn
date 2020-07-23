@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  id: String!
-  description: String!
-  moduleId: String!
-  module: ModuleAssignment!
-}
-
 type StorySection {
   content: String!
 }
@@ -71,6 +64,13 @@ type ModuleLesson {
   previous: Module
   completed: Boolean!
   lesson: Lesson!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: ModuleAssignment!
 }
 
 type Character {
