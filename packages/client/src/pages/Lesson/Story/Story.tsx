@@ -38,7 +38,7 @@ export const Story: React.FC<StoryProps> = ({
   lesson
 }) => {
   const { me } = Me.useContainer();
-  const { setState } = Lesson.useContainer();
+  const { setLessonState: setState } = Lesson.useContainer();
   const steps = lesson.lesson.storySections;
 
   const [page, setPage] = useState(0);

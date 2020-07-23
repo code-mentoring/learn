@@ -10,7 +10,10 @@ query ($id: String!) {
     lesson {
       storySections { content }
       questions {
-        ... on QuestionMultiChoice { options code type }
+        ... on QuestionMultiChoice  { id type options code type }
+        ... on QuestionMemory       { id type pairs }
+        ... on QuestionDragDrop     { id type code options }
+        ... on QuestionBugHighlight { id type code }
       }
     }
   }
