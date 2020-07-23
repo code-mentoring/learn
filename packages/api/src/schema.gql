@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  id: String!
-  description: String!
-  moduleId: String!
-  module: ModuleAssignment!
-}
-
 type StorySection {
   content: String!
 }
@@ -22,27 +15,34 @@ union Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | Quest
 
 type QuestionMultiChoice {
   id: String!
-  type: String!
+  type: QuestionType!
   options: [String!]!
   code: String!
 }
 
+enum QuestionType {
+  multiChoice
+  memory
+  dragDrop
+  bugHighlight
+}
+
 type QuestionMemory {
   id: String!
-  type: String!
+  type: QuestionType!
   pairs: [[String!]!]!
 }
 
 type QuestionDragDrop {
   id: String!
-  type: String!
+  type: QuestionType!
   options: [String!]!
   code: String!
 }
 
 type QuestionBugHighlight {
   id: String!
-  type: String!
+  type: QuestionType!
   code: String!
 }
 
@@ -71,6 +71,13 @@ type ModuleLesson {
   previous: Module
   completed: Boolean!
   lesson: Lesson!
+}
+
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: ModuleAssignment!
 }
 
 type Character {

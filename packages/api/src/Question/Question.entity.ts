@@ -21,7 +21,7 @@ export class BaseQuestion {
   @Field()
   id: string;
 
-  @Field()
+  @Field(() => QuestionType)
   type: QuestionType;
 }
 
