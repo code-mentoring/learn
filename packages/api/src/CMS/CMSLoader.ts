@@ -137,7 +137,8 @@ export class CMSLoader {
       const [, type, id] = fileTestName.exec(qf.path) as unknown as [any, QuestionType, string];
 
       const _md = fs.readFileSync(qf.path).toString();
-      const { body: code, attributes } = fm<CMSQuestionFile>(_md);
+      const { body, attributes } = fm<CMSQuestionFile>(_md);
+      const code = md.render(body);
 
       const base = {
         id: `${pathId}-${type}-${moduleDir.name}-${id}`,
