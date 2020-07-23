@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
-
+import React, { useEffect, useState } from 'react';
+import { shortid } from '../../lib/shortid';
 import { Radio } from '../Radio/Radio';
-import { RadioListSmall, RadioListDiv, RadioListLabel } from './RadioList.styles';
+import { RadioListDiv, RadioListLabel, RadioListSmall } from './RadioList.styles';
+
 
 export interface Options {
   label: string;
@@ -11,7 +12,7 @@ export interface Options {
 }
 
 export interface RadioListProps {
-  name: string;
+  name?: string;
   className?: string;
   options: Array<Options>;
   value?: any;
@@ -22,7 +23,7 @@ export const RadioList: React.FC<RadioListProps> = ({
   className,
   options,
   onChange,
-  name,
+  name = shortid(),
   value,
   ...props
 }) => {
