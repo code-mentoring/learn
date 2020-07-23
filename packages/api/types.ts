@@ -26,22 +26,29 @@ export type Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop |
 export type QuestionMultiChoice = {
    __typename?: 'QuestionMultiChoice';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   options: Array<Scalars['String']>;
   code: Scalars['String'];
 };
 
+export enum QuestionType {
+  MultiChoice = 'multiChoice',
+  Memory = 'memory',
+  DragDrop = 'dragDrop',
+  BugHighlight = 'bugHighlight'
+}
+
 export type QuestionMemory = {
    __typename?: 'QuestionMemory';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   pairs: Array<Array<Scalars['String']>>;
 };
 
 export type QuestionDragDrop = {
    __typename?: 'QuestionDragDrop';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   options: Array<Scalars['String']>;
   code: Scalars['String'];
 };
@@ -49,7 +56,7 @@ export type QuestionDragDrop = {
 export type QuestionBugHighlight = {
    __typename?: 'QuestionBugHighlight';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   code: Scalars['String'];
 };
 

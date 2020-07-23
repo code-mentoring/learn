@@ -10,6 +10,7 @@
     "coverage": "yarn test --coverage",
     "seed": "ts-node src/Database/seeders"
   },
+  "main": "types.ts",
   "types": "types.ts",
   "dependencies": {
     "@graphql-codegen/cli": "^1.13.2",
