@@ -45,7 +45,7 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
   const [showModal, setShowModal] = useState(false);
 
   return <Widget {...cardProps}>
-    <Text as="h2" color="grey.600">Progress</Text>
+    <Text variant="h2" color="grey.600">Progress</Text>
 
     <Grid>
 

@@ -2,23 +2,24 @@ import { Inject, Injectable } from '@nestjs/common';
 import Listr from 'listr';
 import { Connection, Repository } from 'typeorm';
 
-import { UserService } from '../../User/User.service';
-import { DatabaseService } from '../Database.service';
-import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
-import * as random from './random';
-import { UserWithPassword } from '../../User/User.entity';
-import { Path } from '../../Path/Path.entity';
-import { PathService } from '../../Path/Path.service';
-import { CharacterService } from '../../Character/Character.service';
-import { Character } from '../../Character/Character.entity';
-import { ModuleService } from '../../Module/Module.service';
-import { Module, ModuleType } from '../../Module/Module.entity';
 import { Assignment } from '../../Assignment/Assignment.entity';
 import { AssignmentService } from '../../Assignment/Assignment.service';
 import { AssignmentFileService } from '../../AssignmentFile/AssignmentFile.service';
+import { Character } from '../../Character/Character.entity';
+import { CharacterService } from '../../Character/Character.service';
 import { ConceptService } from '../../Concept/Concept.service';
-import { FriendService } from '../../Friend/Friend.service';
 import { FriendStatus } from '../../Friend/Friend.entity';
+import { FriendService } from '../../Friend/Friend.service';
+import { Module } from '../../Module/Module.entity';
+import { ModuleService } from '../../Module/Module.service';
+import { Path } from '../../Path/Path.entity';
+import { PathService } from '../../Path/Path.service';
+import { UserWithPassword } from '../../User/User.entity';
+import { UserService } from '../../User/User.service';
+import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
+import { DatabaseService } from '../Database.service';
+import * as random from './random';
+import { CMS } from '../../CMS/CMS';
 
 
 interface CTX {
@@ -38,6 +39,7 @@ export class SeederService {
    */
   constructor(
     @Inject('Connection') public connection: Connection,
+    public cms: CMS,
     public userService: UserService,
     public userPreferencesService: UserPreferencesService,
     public pathService: PathService,
@@ -86,11 +88,11 @@ export class SeederService {
   }
 
 
-  async seedPaths(users: UserWithPassword[], characters: Character[]) {
+  async seedPaths(users: UserWithPassword[] = [], characters: Character[] = []) {
     const paths = [
-      { name: 'Javascript', icon: 'js' },
-      { name: 'CSS', icon: 'css' },
-      { name: 'HTML', icon: 'html' }
+      { id: 'js', name: 'Javascript', icon: 'js' },
+      { id: 'css', name: 'CSS', icon: 'css' },
+      { id: 'html', name: 'HTML', icon: 'html' }
     ];
 
     return Promise.all(paths.map(async (path, i) => {
@@ -98,61 +100,27 @@ export class SeederService {
 
       if ((i % 2 === 0) && (i < characters.length)) {
         newPath = await this.pathService.create(
-          random.pathInput({ name: path.name, icon: path.icon, characterId: characters[i].id })
+          random.pathInput({ ...path, characterId: characters[i].id })
         );
       } else {
         newPath = await this.pathService.create(
-          random.pathInput({ name: path.name, icon: path.icon })
+          random.pathInput(path)
         );
       }
-      if (i === 0) {
+      if (i === 0 && users.length) {
         await this.pathService.addUserToPath(users[0].id, newPath.id);
       }
       return newPath;
     }));
   }
 
-  // seed modules onto path[0]
-  async seedModules(paths: Path[]) {
-    const modules = [
-      { name: 'Intro to JS', type: ModuleType.lesson },
-      { name: 'Variables', type: ModuleType.assignment },
-      { name: 'Functions', type: ModuleType.lesson },
-      { name: 'Basic Maths', type: ModuleType.assignment }
-    ];
-    const newModules: Module[] = [];
-    let previousId: string | undefined;
-    /* eslint-disable no-restricted-syntax, no-await-in-loop  */
-    for (const module of modules) {
-      const newModule = await this.moduleService.create(
-        random.moduleInput(module.name, paths[0].id,
-          { type: module.type, previousId })
-      );
-      previousId = newModule.id;
-      newModules.push(newModule);
-    }
-    return newModules;
-  }
-
-  async seedAssignment(modules: Module[]) {
-    return Promise.all(modules
-      .filter(m => m.type === ModuleType.assignment)
-      .map((_, i) => this.assignmentService.create(random.assignmentInput(modules[i].id))));
-  }
-
-  async seedAssignmentFile(assignments: Assignment[], users: UserWithPassword[]) {
-    await this.assignmentFileService.create(
-      users[0].id,
-      random.assignmentFileInput(assignments[0].id)
-    );
-  }
 
   async seedConcept(
     numConcept: number = 3,
     numModule: number = 2,
-    modules: Module[],
     users: UserWithPassword[]
   ) {
+    const modules = Object.values(this.cms.modules);
     const numMod = (numModule < modules.length) ? numModule : modules.length;
     return Promise.all(Array(numConcept).fill(undefined).map(async (_, i) => {
       const concept = await this.conceptService.create(
@@ -217,28 +185,28 @@ export class SeederService {
           ctx.paths = await this.seedPaths(ctx.users, ctx.characters);
         }
       },
+      // {
+      //   title: 'Create module',
+      //   task: async (ctx: CTX) => {
+      //     ctx.modules = await this.seedModules(ctx.paths);
+      //   }
+      // },
+      // {
+      //   title: 'Create assignment',
+      //   task: async (ctx: CTX) => {
+      //     ctx.assignments = await this.seedAssignment(ctx.modules);
+      //   }
+      // },
+      // {
+      //   title: 'Create assignmentFile',
+      //   task: async (ctx: CTX) => {
+      //     await this.seedAssignmentFile(ctx.assignments, ctx.users);
+      //   }
+      // },
       {
-        title: 'Create module',
+        title: 'Create concepts',
         task: async (ctx: CTX) => {
-          ctx.modules = await this.seedModules(ctx.paths);
-        }
-      },
-      {
-        title: 'Create assignment',
-        task: async (ctx: CTX) => {
-          ctx.assignments = await this.seedAssignment(ctx.modules);
-        }
-      },
-      {
-        title: 'Create assignmentFile',
-        task: async (ctx: CTX) => {
-          await this.seedAssignmentFile(ctx.assignments, ctx.users);
-        }
-      },
-      {
-        title: 'Create concept',
-        task: async (ctx: CTX) => {
-          await this.seedConcept(3, 2, ctx.modules, ctx.users);
+          await this.seedConcept(3, 2, ctx.users);
         }
       },
       {

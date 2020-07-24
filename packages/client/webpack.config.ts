@@ -31,8 +31,24 @@ const config: Configuration = {
       { test: /\.ts/, loader: 'ts-loader' },
       { test: /\.html/, loader: 'html-loader' },
       { test: /\.png/, loader: 'url-loader' },
-      { test: /\.svg/, loader: 'react-svg-loader' },
-      { test: /\.gql/, loader: 'graphql-tag/loader' }
+      {
+        test: /\.svg/,
+        loader: 'react-svg-loader',
+        options: {
+          svgo: {
+            plugins: [
+              { removeViewBox: false, cleanupIDs: false }
+            ],
+            floatPrecision: 2
+          }
+        }
+      },
+      { test: /\.gql/, loader: 'graphql-tag/loader' },
+      {
+        test: /\.(mp3|wav)$/,
+        loader: 'file-loader',
+        query: { name: 'static/media/[name].[hash:8].[ext]' }
+      }
     ]
   },
 

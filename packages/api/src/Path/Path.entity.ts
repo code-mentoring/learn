@@ -1,17 +1,27 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, Unique } from 'typeorm';
 
 import { Character } from '../Character/Character.entity';
 import { CMBaseEntity } from '../lib/Base.entity';
+import { Module, ModuleUnion } from '../Module/Module.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
-import { Module } from '../Module/Module.entity';
 
+
+export enum PathName {
+  html = 'html',
+  js = 'js',
+  css = 'css'
+}
+
+registerEnumType(PathName, {
+  name: 'PathName'
+});
 
 @ObjectType()
 @Entity('path')
 @Unique('Name', ['name'])
 export class Path extends CMBaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ enum: Object.values(PathName) })
   @Field()
   id: string;
 
@@ -34,8 +44,7 @@ export class Path extends CMBaseEntity {
   @OneToMany(() => PathUser, pathUser => pathUser.path)
   pathUser: PathUser[];
 
-  @OneToMany(() => Module, module => module.path)
-  @Field(() => [Module])
+  @Field(() => [ModuleUnion])
   modules: Module[];
 
   @OneToOne(() => Character, { nullable: true })

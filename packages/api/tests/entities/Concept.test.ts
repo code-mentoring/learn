@@ -10,9 +10,7 @@ let taughtInId: string;
 const setup = async () => {
   await TestClient.resetDatabase();
   await TestClient.workflowSignup();
-  const { id } = await TestClient.createPath();
-  const { id: modId } = await TestClient.createModule(random.moduleInput('name', id));
-  taughtInId = modId;
+  [taughtInId] = Object.keys(TestClient.cms.modules);
 };
 
 describe('Concept', () => {
@@ -73,7 +71,7 @@ describe('Concept', () => {
       const concept = await TestClient.createConcept(conceptInput);
       const result = await TestClient.updateConcept({ id: concept.id, taughtInId });
 
-      const updatedConcept = await TestClient.getConceptByName(concept.name);
+      const updatedConcept = await TestClient.concept(concept.name);
 
       expect(updatedConcept.taughtInId).toEqual(result.taughtInId);
 

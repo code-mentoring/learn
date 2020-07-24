@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Color } from '../../types/styled';
 import { ButtonProps } from './Button';
 import { theme as t } from '../../css/theme';
+import { Icon } from '../Icon/Icon';
 
 
 export const StyledButton = styled.button<ButtonProps>`
@@ -43,4 +44,10 @@ export const StyledButton = styled.button<ButtonProps>`
     height: ${t.size('huge')};
     font-size: 16px;
   `}
+`;
+
+
+export const ButtonIcon = styled(Icon)<{position: 'left' | 'right'}>`
+  margin-${p => (p.position === 'right' ? 'left' : 'right')}: ${t.size()};
+  color: currentColor;
 `;

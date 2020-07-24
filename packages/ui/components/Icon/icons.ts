@@ -9,6 +9,9 @@ import { IconMinus } from './icons/linear/cil-minus';
 import { IconPage } from './icons/linear/cil-page';
 import { IconUser as IconUserLine } from './icons/linear/cil-user';
 import { IconArrowDown } from './icons/solid/cis-arrow-down';
+import IconArrowRight from './icons/solid/cis-arrow-right.svg';
+import IconArrowLeft from './icons/solid/cis-arrow-left.svg';
+import IconMediaSkipForward from './icons/solid/cis-media-skip-forward.svg';
 import { IconCheck } from './icons/solid/cis-check';
 import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
 import { IconChevronTopAlt } from './icons/solid/cis-chevron-top-alt';
@@ -29,6 +32,8 @@ import { IconEmpty } from './icons/solid/cis-empty-circle';
 
 export const icons = {
   arrowDown: IconArrowDown,
+  arrowRight: IconArrowRight,
+  arrowLeft: IconArrowLeft,
   check: IconCheck,
   chevronDown: IconChevronBottomAlt,
   chevronUp: IconChevronTopAlt,
@@ -56,5 +61,6 @@ export const icons = {
   userLine: IconUserLine,
   x: IconX,
   checkCircle: IconCheckCircle,
-  emptyIcon: IconEmpty
+  emptyIcon: IconEmpty,
+  mediaSkipForward: IconMediaSkipForward
 };

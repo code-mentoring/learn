@@ -1,5 +1,5 @@
 query ($userId: String!)  {
-  getUserFriends (userId : $userId){    
+  myFriends (userId : $userId){
     id
     user1Id
     user2Id
@@ -36,6 +36,6 @@ query ($userId: String!)  {
       codingAbility
       }
       createdAt
-    }    
+    }
   }
 }

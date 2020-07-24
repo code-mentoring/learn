@@ -94,9 +94,9 @@ export const PathProgress: React.FC<PathProgressProps> = ({
         />
       </Svg>
       <StyledPathIcon icon={path.icon as PathIconType} size="xbig" />
-      <Text as="small">{path.progress}%</Text>
+      <Text variant="small">{path.progress}%</Text>
     </Wrapper>
 
-    <Text as="small">{path.name}</Text>
+    <Text variant="small">{path.name}</Text>
   </StyledPathProgress>;
 };

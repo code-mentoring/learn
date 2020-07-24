@@ -2,37 +2,40 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { Module, CreateModuleInput, UpdateModuleInput } from './Module.entity';
-import { ModuleService } from './Module.service';
-import { User } from '../User/User.entity';
 import { CurrentUser } from '../User/CurrentUser.decorator';
+import { User } from '../User/User.entity';
+import { ModuleUnion, ModuleLesson, Module } from './Module.entity';
+import { ModuleService } from './Module.service';
 import { UserModuleService } from '../UserModule/UserModule.service';
 
-@Resolver(() => Module)
+
+@Resolver(() => ModuleLesson)
 export class ModuleResolver {
   constructor(
     private readonly moduleService: ModuleService,
     private readonly userModuleService: UserModuleService
   ) { }
 
+  // // Needed for union resolve
+  // @ResolveField(() => ModuleUnion)
+  // __resolveType(value: Module) {
+  //   switch (value.type) {
+  //     case ModuleType.assignment: return ModuleAssignment;
+  //     case ModuleType.lesson: return ModuleLesson;
+  //     default: return null;
+  //   }
+  // }
+
   @UseGuards(GQLAuthGuard)
-  @Query(() => [Module])
+  @Query(() => [ModuleUnion])
   modules() {
     return this.moduleService.findAll();
   }
 
   @UseGuards(GQLAuthGuard)
-  @Query(() => [Module])
+  @Query(() => [ModuleUnion])
   pathModules(@Args('pathId') pathId: string) {
-    return this.moduleService.findByPath(pathId);
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Mutation(() => Module)
-  createModule(
-    @Args('module') module: CreateModuleInput
-  ) {
-    return this.moduleService.create(module);
+    return this.moduleService.findByPathId(pathId);
   }
 
   @UseGuards(GQLAuthGuard)
@@ -42,22 +45,6 @@ export class ModuleResolver {
     @Args('moduleId') moduleId: string
   ) {
     return Boolean(await this.moduleService.addUserToModule(user.id, moduleId));
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Mutation(() => Module)
-  updateModule(
-    @Args('module') module: UpdateModuleInput
-  ) {
-    return this.moduleService.update(module);
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Mutation(() => Boolean)
-  deleteModule(
-    @Args('moduleId') moduleId: string
-  ) {
-    return this.moduleService.delete(moduleId);
   }
 
   // ---------------------------------------------------------------------------

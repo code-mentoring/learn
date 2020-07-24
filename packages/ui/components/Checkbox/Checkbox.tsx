@@ -33,7 +33,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
       <CheckboxIconContainer checked={checked}>
         <Icon icon={indeterminate ? 'minus' : 'check'} color="white" />
       </CheckboxIconContainer>
-      {text && <Text as="small" color="grey.800">{text}</Text>}
+      {text && <Text variant="small" color="grey.800">{text}</Text>}
     </CheckboxDiv>
   );
 };

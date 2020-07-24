@@ -38,7 +38,12 @@ declare module 'styled-components' {
       transparent: string,
       white: string,
       black: string,
-      error: string
+      error: string,
+
+      code: {
+        color: string,
+        background: string,
+      }
     },
     color(color?: Color): string,
 

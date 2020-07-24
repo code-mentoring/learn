@@ -2,6 +2,8 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
+import { CMS } from '../CMS/CMS';
+import { ModuleUnion } from '../Module/Module.entity';
 import { PathUserService } from '../PathUser/PathUser.service';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
@@ -12,7 +14,8 @@ import { PathService } from './Path.service';
 export class PathResolver {
   constructor(
     private readonly pathService: PathService,
-    private readonly pathUserService: PathUserService
+    private readonly pathUserService: PathUserService,
+    private readonly cms: CMS
   ) {}
 
   @UseGuards(GQLAuthGuard)
@@ -38,12 +41,6 @@ export class PathResolver {
   @Query(() => Path)
   path(@Args('id') id: string) {
     return this.pathService.findById(id);
-  }
-
-  @UseGuards(GQLAuthGuard)
-  @Query(() => Path)
-  getPathByName(@Args('name') name: string) {
-    return this.pathService.findByName(name);
   }
 
   @UseGuards(GQLAuthGuard)
@@ -88,5 +85,12 @@ export class PathResolver {
     @Parent() path: Path
   ) {
     return (await this.pathUserService.getProgress(user.id, path.id)) || 0;
+  }
+
+  @ResolveField(() => [ModuleUnion])
+  async modules(
+    @Parent() path: Path
+  ) {
+    return this.cms.findModulesByPathId(path.id);
   }
 }

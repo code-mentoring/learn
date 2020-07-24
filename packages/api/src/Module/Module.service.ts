@@ -2,28 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { CMS } from '../CMS/CMS';
 import { UserModule } from '../UserModule/UserModule.entity';
-import { Module, CreateModuleInput, UpdateModuleInput } from './Module.entity';
+import { Module } from './Module.entity';
+
 
 @Injectable()
 export class ModuleService {
   constructor(
-    @InjectRepository(Module) private readonly moduleRepository: Repository<Module>,
+    private readonly cms: CMS,
     @InjectRepository(UserModule) private readonly userModuleRepository: Repository<UserModule>
   ) {}
 
-  async findAll(): Promise<Module[]> {
-    return this.moduleRepository.find({ relations: ['previous', 'path'] });
+  async findAll() {
+    return this.cms.modules;
   }
 
-  async findByPath(pathId: string): Promise<Module[]> {
-    return this.moduleRepository.find({ where: { pathId }, relations: ['previous', 'path'] });
-  }
-
-  async create(
-    moduleInput: CreateModuleInput
-  ): Promise<Module> {
-    return this.moduleRepository.create(moduleInput).save();
+  findByPathId(pathId: string): Module[] {
+    return this.cms.findModulesByPathId(pathId);
   }
 
   async addUserToModule(
@@ -31,20 +27,5 @@ export class ModuleService {
     moduleId: string
   ): Promise<UserModule> {
     return this.userModuleRepository.create({ userId, moduleId }).save();
-  }
-
-  async update(
-    updateInput: UpdateModuleInput
-  ): Promise<Module | undefined> {
-    await this.moduleRepository.update({ id: updateInput.id }, updateInput);
-    return this.moduleRepository.findOne({ id: updateInput.id }, { relations: ['previous', 'path'] });
-  }
-
-  async delete(
-    moduleId: string
-  ): Promise<Boolean> {
-    const { affected } = await this.moduleRepository.delete({ id: moduleId });
-    if (affected && affected > 0) return true;
-    return false;
   }
 }
