@@ -1,4 +1,4 @@
-import { PathIcon, theme as t, PathIconType, MenuPop, Card, Text, Box } from '@codement/ui';
+import { PathIcon, theme as t, PathIconType, MenuPop, Card, Text, Box, Icon } from '@codement/ui';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -35,13 +35,6 @@ const PathItem = styled(Box)`
   &:hover { background: ${t.color('primary.100')}; }
 `;
 
-const EmptyIcon = styled.div`
-  width: ${t.size('huge')};
-  height: ${t.size('huge')};
-  border-radius: ${t.borderRadius.circle};
-  background-color: ${t.color('grey.100')};
-`;
-
 const PathList: React.FC = () => {
   const { myPaths, setCurrentPathId } = Paths.useContainer();
   return <PathListCard padding="none">
@@ -58,7 +51,7 @@ const PathList: React.FC = () => {
 
 export const PathSelector = () => {
   const { currentPath } = Paths.useContainer();
-  if (!currentPath) return <EmptyIcon />;
+  if (!currentPath) return <Icon icon="emptyIcon" size="huge" color="grey.100" />;
 
   return <StyledPathSelector>
     <MenuPop overlay={<PathList />} placement="bottom">

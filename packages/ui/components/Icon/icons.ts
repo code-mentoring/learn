@@ -25,6 +25,7 @@ import { IconX } from './icons/solid/cis-x';
 import { IconDashboard } from './icons/solid/cis-dashboard';
 import { IconSettings } from './icons/solid/cis-settings';
 import { IconCheckCircle } from './icons/solid/cis-check-circle';
+import { IconEmpty } from './icons/solid/cis-empty-circle';
 
 export const icons = {
   arrowDown: IconArrowDown,
@@ -54,5 +55,6 @@ export const icons = {
   user: IconUser,
   userLine: IconUserLine,
   x: IconX,
-  checkCircle: IconCheckCircle
+  checkCircle: IconCheckCircle,
+  emptyIcon: IconEmpty
 };

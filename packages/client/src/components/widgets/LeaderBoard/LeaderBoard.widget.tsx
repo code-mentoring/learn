@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { User } from '@codement/api';
-import { Loader, Text, PathIcon, PathIconType, theme as t, UserProfile } from '@codement/ui';
+import { Loader, Text, PathIcon, PathIconType, theme as t, UserProfile, Icon } from '@codement/ui';
 import { Card, CardProps } from '@codement/ui/components/Card/Card';
 import { ErrorMessage } from '@codement/ui/components/ErrorMessage/ErrorMessage';
 import gql from 'graphql-tag';
@@ -40,13 +40,8 @@ const UserRow = styled.li`
   }
 `;
 
-const EmptyIcon = styled.div`
-  position: relative;
-  width: ${t.size('lg')};
-  height: ${t.size('lg')};
+const StyledIcon = styled(Icon)`
   margin-right: ${t.size('md')};
-  border-radius: ${t.borderRadius.circle};
-  background-color: ${t.color('grey.100')};
 `;
 
 export const LeaderboardWidget: React.FC<CardProps> = props => {
@@ -60,7 +55,7 @@ export const LeaderboardWidget: React.FC<CardProps> = props => {
         <Text as="h2" color="grey.600">
           {currentPath
             ? <PathIcon icon={currentPath.icon as PathIconType} size="lg" />
-            : <EmptyIcon />
+            : <StyledIcon icon="emptyIcon" size="lg" color="grey.100" />
            }
           Leaderboard
         </Text>
