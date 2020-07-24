@@ -1,2 +1,5 @@
+[context.production]
+  environment = { NODE_ENV = "production", API_URL = "https://code-mentoring.herokuapp.com" }
+
 [context.develop]
-  environment: { NODE_ENV = 'staging', API_URL = 'staging-codementoring.herokuapp.com' }
+  environment = { NODE_ENV = "staging", API_URL = "https://staging-code-mentoring.herokuapp.com" }
