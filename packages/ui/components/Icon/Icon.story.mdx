@@ -1,0 +1,39 @@
+import {Icon} from './Icon';
+import {Card} from '../Card/Card';
+import {Row} from '../../styleguide/Story';
+
+
+# ArrowDown Icon
+
+## Sizes
+There are a number of sizes that we use for icons, which can be set with the `size` property.
+<Card>
+    <Row>
+      <Icon icon="arrowDown" color="primary" size="xl" />
+      <Icon icon="arrowDown" color="primary" size="huge" />
+    </Row>
+</Card>
+
+```tsx
+<Icon icon="arrowDown" color="primary" size="xl" />
+<Icon icon="arrowDown" color="primary" size="huge" />
+```
+
+---
+
+## Colors
+<Card>
+    <Row>
+      <Icon icon="arrowDown" color="primary" size="xl" />
+      <Icon icon="arrowDown" color="secondary" size="xl" />
+      <Icon icon="arrowDown" color="tertiary" size="xl" />
+      <Icon icon="arrowDown" color="error" size="xl" />
+    </Row>
+</Card>
+
+```tsx
+<Icon icon="arrowDown" color="primary">primay</Icon>
+<Icon icon="arrowDown" color="secondary">secondary</Icon>
+<Icon icon="arrowDown" color="tertiary">tertiary</Icon>
+<Icon icon="arrowDown" color="error">error</Icon>
+```
