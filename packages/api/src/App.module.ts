@@ -19,6 +19,7 @@ import { StorySectionModule } from './StorySection';
 import { UserConceptModule } from './UserConcepts';
 import { UserModule } from './User';
 import { UserModuleModule } from './UserModule';
+import { RoleModule } from './Role/Role.module';
 
 /**
  * Export these dependencies so they can be used in testing
@@ -41,20 +42,21 @@ export const appImports = [
   UserConceptModule,
   UserModule,
   UserModuleModule,
+  RoleModule,
 
   DatabaseModule,
 
   GraphQLModule.forRoot({
     installSubscriptionHandlers: true,
     autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
-    context: ({ req }) => ({ req })
-  })
+    context: ({ req }) => ({ req }),
+  }),
 ];
 
 /**
  * Main App module for NestJS
  */
 @Module({
-  imports: appImports
+  imports: appImports,
 })
 export class AppModule {}

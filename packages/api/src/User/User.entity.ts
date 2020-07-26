@@ -1,10 +1,22 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
 import { UserModule } from '../UserModule/UserModule.entity';
+import { Role, Roles } from '../Role/Role.entity';
+import { RoleType } from '../Role/RoleType.enum';
 
 @ObjectType()
 export class User {
@@ -22,6 +34,9 @@ export class User {
 
   @Field()
   profileImage: string;
+
+  @Field(() => Roles)
+  roles: Roles[];
 
   @Field(() => UserPreferences, { nullable: true })
   userPreferences?: UserPreferences;
@@ -54,11 +69,15 @@ export class UserWithPassword extends CMBaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => PathUser, pathUser => pathUser.user)
+  @OneToMany(() => PathUser, (pathUser) => pathUser.user)
   pathUser: PathUser[];
 
-  @OneToMany(() => UserModule, userModules => userModules.user)
+  @OneToMany(() => UserModule, (userModules) => userModules.user)
   userModules: UserModule[];
+
+  @ManyToMany(() => Role, (role) => role.users, { eager: true })
+  @JoinTable({ name: 'user_roles' })
+  roles: Role[];
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
@@ -77,4 +96,22 @@ export class UserInput {
 
   @Field()
   password: string;
+}
+
+@InputType()
+export class UserUpdate {
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field({ nullable: true })
+  password?: string;
+
+  @Field(() => RoleType)
+  roles?: RoleType[];
 }

@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  id: String!
-  description: String!
-  moduleId: String!
-  module: ModuleAssignment!
-}
-
 type StorySection {
   content: String!
 }
@@ -73,6 +66,13 @@ type ModuleLesson {
   lesson: Lesson!
 }
 
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: ModuleAssignment!
+}
+
 type Character {
   id: String!
   name: String!
@@ -113,12 +113,19 @@ type UserModule {
   completedAt: DateTime
 }
 
+type Roles {
+  id: ID!
+  name: String!
+  description: String!
+}
+
 type User {
   id: ID!
   firstName: String!
   lastName: String!
   email: String!
   profileImage: String!
+  roles: Roles!
   userPreferences: UserPreferences
   createdAt: DateTime!
 }
@@ -206,6 +213,9 @@ type Query {
   path(id: String!): Path!
   questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
   lessonStorySections(lessonId: String!): [StorySection!]!
+  sayHello: String!
+  searchRoles(roleId: String!): Roles!
+  findAll: [Roles!]!
 }
 
 type Mutation {
@@ -231,6 +241,9 @@ type Mutation {
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
   completeModule(moduleName: String!): UserModule!
+  createRole(role: RoleInput!): Roles!
+  updateRole(role: String!): Roles!
+  deleteRole(roleId: String!): Boolean!
 }
 
 input CreateAssignmentFileInput {
@@ -300,4 +313,9 @@ input UpdatePathInput {
   icon: String
   description: String
   characterId: String
+}
+
+input RoleInput {
+  name: String!
+  description: String!
 }
