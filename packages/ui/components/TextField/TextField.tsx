@@ -52,12 +52,14 @@ export const BaseTextField: React.FunctionComponent<TextFieldProps> = ({
   const icon2Color = err ? 'error' : iconSecondaryColor;
 
   const states = { loading, suffix, disabled, error };
+  const { name } = props;
+  const excludedIconField = ['email', 'password'];
 
   return <div {...states} className={className}>
     {loading
       ? <Loader />
       : icon && <Icon icon={icon} color={iconColor} />}
-    {icon2 && <Icon icon={icon2} color={icon2Color} data-second="true" />}
+    {!excludedIconField.some(v => v === name) && icon2 && <Icon icon={icon2} color={icon2Color} data-second="true" />}
 
     <Comp
       iconLeft={Boolean(icon)}
