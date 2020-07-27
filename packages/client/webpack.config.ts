@@ -63,7 +63,7 @@ const config: Configuration = {
       }
     }),
     new CopyPlugin([{ from: './_redirects', to: './' }]),
-    new Favicon('../ui/images/favicon-logo.png')
+    new Favicon('../ui/images/favicon.jpg')
   ]
 
 };
