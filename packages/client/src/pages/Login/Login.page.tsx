@@ -61,6 +61,13 @@ const loginValidation = yup.object().shape({
   password: yup.string().required()
 });
 
+const ToggleField = styled.div`
+  display:flex;
+  justify-content: space-between;
+  width: 90vw;    
+  max-width: 40rem;
+`;
+
 
 export const LoginPage = () => {
   const { login, loginError } = Auth.useContainer();
@@ -86,7 +93,10 @@ export const LoginPage = () => {
       >
         <FormField name="email" type="text" placeholder="Email" icon="user" />
         <FormField name="password" placeholder="Password" type="password" icon="password" />
-        <FormField type="checkbox" name="rememberMe" text="Remember me?" />
+        <ToggleField>
+          <FormField type="checkbox" name="rememberMe" text="Remember me?" />
+          <FormField type="checkbox" name="showPassword" text="Show password" />
+        </ToggleField>
         <Button size="large">Login</Button>
       </Form>
 
