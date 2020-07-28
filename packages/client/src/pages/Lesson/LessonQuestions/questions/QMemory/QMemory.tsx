@@ -35,12 +35,12 @@ export const QMemory: React.FC<QMemoryProps> = ({ question: q }) => {
   // Get randomized list of cards with their answers
   const [answers, cards] = useMemo(() => {
     // Turn the pairs into sorted, combined strings as a single array of strings
-    const answers = q.pairs.reduce((a, cur) => {
-      a.push(cur.sort().join(":"));
-      return a;
+    const a = q.pairs.reduce((_a, cur) => {
+      _a.push(cur.sort().join(':'));
+      return _a;
     }, []);
-    const cards = shuffle(q.pairs.flat());
-    return [answers, cards];
+    const c = shuffle(q.pairs.flat());
+    return [a, c];
   }, [q]);
 
 
@@ -49,17 +49,17 @@ export const QMemory: React.FC<QMemoryProps> = ({ question: q }) => {
     if (!clockRunning) setClockRunning(true); // Start the clock on the first click
     if (flip1 === undefined) return setFlip1(i);
     if (flip2 === undefined) setFlip2(i);
-  }
+  };
 
   const resetFlip = () => {
     setFlip1(undefined);
     setFlip2(undefined);
-  }
+  };
 
   // Handle flips
   useEffect(() => {
     if (flip1 === undefined || flip2 === undefined) return;
-    const answer = [cards[flip1], cards[flip2]].sort().join(":")
+    const answer = [cards[flip1], cards[flip2]].sort().join(':');
     // If the answers don't match
     if (!answers.includes(answer)) {
       setTimeout(resetFlip, 500);
@@ -98,8 +98,9 @@ export const QMemory: React.FC<QMemoryProps> = ({ question: q }) => {
         flipped={isCorrect || [flip1, flip2].includes(i)}
         onClick={state ? undefined : () => flip(i)}
         state={state}
+        // eslint-disable-next-line react/no-array-index-key
         key={i}
-      >{c}</MemoryGameCard>
+      >{c}</MemoryGameCard>;
     })}
-  </MemoryGame>
-}
+  </MemoryGame>;
+};

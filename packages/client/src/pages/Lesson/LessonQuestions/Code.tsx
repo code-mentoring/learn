@@ -93,21 +93,23 @@ export const Code: React.FC<CodeProps> = ({
   }, [code]);
 
   const pieces = useMemo<React.ReactNode[]>(() => {
-    if (!innerCode) return []
+    if (!innerCode) return [];
 
     const p: React.ReactNode[] = innerCode.split(/%%(\w+)%%/);
 
     for (let i = 0; i < p.length; i += 2) {
-      p[i] = <span dangerouslySetInnerHTML={{ __html: p[i] as string }} />
+      p[i] = <span dangerouslySetInnerHTML={{ __html: p[i] as string }} />;
       const v = values[i / 2] || {};
       const state: MissingState = (!v.value)
         ? null
         : (v.grade === null) ? 'filled' : v.grade;
 
-      if (p[i + 1]) p[i + 1] = <Missing state={state}>
-        {v.value || <>&nbsp;&nbsp;&nbsp;</>}
-        {(v.grade !== null) && <Icon icon={v.grade ? 'check' : 'x'} color="white" size="xbig" />}
-      </Missing>;
+      if (p[i + 1]) {
+        p[i + 1] = <Missing state={state}>
+          {v.value || <>&nbsp;&nbsp;&nbsp;</>}
+          {(v.grade !== null) && <Icon icon={v.grade ? 'check' : 'x'} color="white" size="xbig" />}
+        </Missing>;
+      }
     }
 
     return p;

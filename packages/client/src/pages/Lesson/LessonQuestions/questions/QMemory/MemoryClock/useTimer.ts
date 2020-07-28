@@ -10,13 +10,13 @@ export const useCountdown = (
   const startTime = React.useRef<number>();
 
   // Ticker function
-  const animate = (running:boolean) => throttle((t: number) => {
+  const animate = (run: boolean) => throttle((t: number) => {
     if (!startTime.current) startTime.current = t;
     const delta = startTime.current - t;
     let remaining = Math.floor(time + delta);
     if (remaining < 0) remaining = 0;
 
-    if (remaining > 0 && running) requestRef.current = requestAnimationFrame(animate(true));
+    if (remaining > 0 && run) requestRef.current = requestAnimationFrame(animate(true));
     callback(remaining);
   }, 100); // 10 times a second
 

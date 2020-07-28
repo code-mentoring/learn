@@ -16,4 +16,4 @@ export const cover = css`
 `;
 
 
-export const timingBounce = `cubic-bezier(0.175, 0.885, 0.32, 1.275)`;
+export const timingBounce = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';

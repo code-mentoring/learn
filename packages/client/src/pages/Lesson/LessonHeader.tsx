@@ -4,10 +4,9 @@ import LogoMark from '@codement/ui/images/logo-mark.svg';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
-import { Lesson, LessonState } from '../..//containers/Lesson.container';
+import { Lesson, LessonState } from '../../containers/Lesson.container';
 import { LessonProgress } from '../../components/LessonProgress/LessonProgress';
 import { routes } from '../../router/routes';
-
 
 
 // const offset: Size = 'lg';
@@ -53,7 +52,7 @@ const CloseConfirmModal: React.FC<{ onClose: () => void } & ModalProps> = ({
     onClose();
     reset();
     setRedirect(true);
-  }
+  };
 
   return <Modal
     {...props}

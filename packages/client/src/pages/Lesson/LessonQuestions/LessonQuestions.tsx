@@ -49,7 +49,7 @@ const questionTitles: { [key in QuestionType]: string } = {
   memory: 'Match the correct items.',
   multiChoice: 'Choose the correct code to complete this section.',
   bugHighlight: 'Highlight the bug in the following code.'
-}
+};
 
 export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
   const { footerButton, attempts } = Lesson.useContainer();
@@ -64,6 +64,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
       case QuestionType.Memory:
         return () => <QMemory question={q as QuestionMemory} key={attempts!} />;
       default:
+        // eslint-disable-next-line no-console
         console.warn(`Unknown question type '${q.type}'`);
         return null;
     }
@@ -75,11 +76,11 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
    * If you also hold "Alt" it will complete with a failure
    */
   if (!CONFIG.isProd) {
-    useEffect(() =>{
-      window.addEventListener('keyup', (e) => {
+    useEffect(() => {
+      window.addEventListener('keyup', e => {
         if (e.keyCode === 32 && e.shiftKey) completeQuestion(!e.altKey);
-      })
-    }, [])
+      });
+    }, []);
   }
 
 
@@ -94,8 +95,8 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
     </QuestionWrapper>
 
     <LessonFooter>
-      {(questionGrade !== null) &&
-        <Result>
+      {(questionGrade !== null)
+        && <Result>
           <QuestionResult state={questionGrade ? 'success' : 'error'}>
             Some result
           </QuestionResult>
@@ -103,9 +104,9 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
       }
 
       <Button
-        disabled={!Boolean(footerButton?.onClick)}
+        disabled={!footerButton?.onClick}
         {...footerButton}
       />
     </LessonFooter>
-  </>
-}
+  </>;
+};

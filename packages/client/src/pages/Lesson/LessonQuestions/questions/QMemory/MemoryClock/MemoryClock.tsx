@@ -22,7 +22,7 @@ export interface MemoryClockProps {
 const MemoryClock: React.FC<MemoryClockProps> = ({
   time = 30000,
   running = false,
-  onDone,
+  onDone
 }) => {
 
   const [counter, setCounter] = useState(time);
@@ -52,7 +52,7 @@ const MemoryClock: React.FC<MemoryClockProps> = ({
       // stopClock();
       playSound.cancel();
     }
-  }, [running, counter])
+  }, [running, counter]);
 
   return <StyledCardProgress duration={counter} started={running}>
     {formatted}

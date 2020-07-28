@@ -1,4 +1,4 @@
-import styled, { DefaultTheme} from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
 import { Size } from '../../types/styled';
 import { theme as t } from '../../css/theme';

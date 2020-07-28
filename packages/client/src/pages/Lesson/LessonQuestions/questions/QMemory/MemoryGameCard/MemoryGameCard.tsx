@@ -14,16 +14,14 @@ export const MemoryGameCard: React.FC<MemoryGameCardProps> = ({
   state,
   children,
   ...props
-}) => {
-  return <CardContainer>
-    <FlipCard flipped={flipped} {...props} state={state}>
-      <CardFront />
-      <CardBack state={state}>
-        {children}
-        {state === 'correct'
+}) => <CardContainer>
+  <FlipCard flipped={flipped} {...props} state={state}>
+    <CardFront />
+    <CardBack state={state}>
+      {children}
+      {state === 'correct'
           && <StyledIcon icon="checkCircle" size="xbig" color="secondary.400" />
         }
-      </CardBack>
-    </FlipCard>
-  </CardContainer>;
-}
+    </CardBack>
+  </FlipCard>
+</CardContainer>;

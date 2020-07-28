@@ -66,5 +66,5 @@ export const QMultiChoice: React.FC<QMultiChoiceProps> = ({ question: q }) => {
         />
       </Card>
     </RightSide>
-  </Wrapper>
+  </Wrapper>;
 };

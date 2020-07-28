@@ -23,7 +23,7 @@ const intialFooterButton: ButtonProps = {
   onClick: undefined,
   children: 'Check',
   color: 'primary'
-}
+};
 
 export const Lesson = createContainer(() => {
   const [lessonState, setLessonState] = useState<LessonState | null>(null);
@@ -53,12 +53,12 @@ export const Lesson = createContainer(() => {
     setLessonState(LessonState.lesson);
     setProgress(0);
     setAttempts(0);
-  }
+  };
 
   const resetLesson = () => {
     setLessonState(LessonState.story);
     setProgress(null);
-  }
+  };
 
   const completeLesson = () => {
     setLessonState(LessonState.lessonCompleted);
@@ -73,7 +73,7 @@ export const Lesson = createContainer(() => {
       case FooterNext.incorrect:
         return setFooterButton({
           onClick: () => {
-            setProgress(p => (p || 0) + (funcOrNext === FooterNext.correct ? 1 : -1))
+            setProgress(p => (p || 0) + (funcOrNext === FooterNext.correct ? 1 : -1));
             setAttempts(a => a! + 1);
           },
           children: 'Next',
@@ -98,7 +98,7 @@ export const Lesson = createContainer(() => {
           color: 'primary'
         });
     }
-  }
+  };
 
   return {
     fetchLesson,

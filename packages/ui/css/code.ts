@@ -2,30 +2,30 @@ import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
 
 export const codeColors = {
-  textShadow: "#222245",
-  selection: "#a599e9",
-  comment: "#b362ff",
+  textShadow: '#222245',
+  selection: '#a599e9',
+  comment: '#b362ff',
   delimiter: theme.colors.code.color,
-  operator: "#FFB300",
+  operator: '#FFB300',
   punctuation: theme.color('white'),
   boolean: 'rgb(255, 98, 140)',
   tag: theme.color('primary.300'),
   entity: '#6897bb',
-  number: "#ff628c",
-  variable: "#ff628c",
-  string: "#a5ff90",
+  number: '#ff628c',
+  variable: '#ff628c',
+  string: '#a5ff90',
   attrValue: theme.color('secondary'),
-  attrValueFirst: "#a9b7c6",
+  attrValueFirst: '#a9b7c6',
   url: theme.color('primary.400'),
   function: 'rgb(250, 208, 0)',
   regex: '#364135',
   inserted: '#00ff00',
   deleted: '#ff000d',
-  className: "#fb94ff",
+  className: '#fb94ff',
 
-  cssProperty: "#a9b7c6",
-  cssSelector: '#ffc66d',
-}
+  cssProperty: '#a9b7c6',
+  cssSelector: '#ffc66d'
+};
 
 export const CodeStyle = createGlobalStyle`
 /**

@@ -15,7 +15,6 @@ import {
 } from './Questions.types';
 
 
-
 const md = new MarkdownIt();
 md.use(MDPrism);
 
@@ -85,8 +84,8 @@ export class CMSLoader {
       // TODO: Temp filtering of questions to test individually
       const questions = (await this._loadQuestions(pathId, moduleDir))
         .filter(q => (
-          (q.type === QuestionType.multiChoice) ||
-          (q.type === QuestionType.memory)
+          (q.type === QuestionType.multiChoice)
+          || (q.type === QuestionType.memory)
         ));
 
       const lesson: ModuleLesson = {
@@ -151,7 +150,7 @@ export class CMSLoader {
           const mem: QuestionMemory = {
             ...base,
             ...(attributes as QuestionMemory),
-            type: QuestionType.memory,
+            type: QuestionType.memory
           };
           await shapeQuestionMemory.validate(mem);
           return mem;

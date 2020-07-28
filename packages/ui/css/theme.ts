@@ -19,7 +19,7 @@ export const theme: DefaultTheme = {
 
     code: {
       background: '#0A0041',
-      color: '#fff',
+      color: '#fff'
     }
   },
   color: (color: Color = 'primary') => {

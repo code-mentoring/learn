@@ -21,9 +21,9 @@ const StyledPage = styled(Page)`
 
 export const LessonPage = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
-  const { fetchLesson: getLesson, lesson, loading, lessonState: state, called } = Lesson.useContainer();
+  const { fetchLesson, lesson, loading, lessonState: state, called } = Lesson.useContainer();
 
-  useEffect(() => getLesson({ variables: { id: lessonId } }), [lessonId]);
+  useEffect(() => fetchLesson({ variables: { id: lessonId } }), [lessonId]);
 
   const content = useMemo(() => {
     if (loading || !called) return <Loader />;

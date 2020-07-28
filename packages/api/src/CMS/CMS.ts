@@ -102,7 +102,7 @@ export class CMS implements OnModuleInit {
     if (!q) throw new NotFoundException(`Question could not be found with id ${questionId}`);
 
 
-    switch(q.type) {
+    switch (q.type) {
       case QuestionType.multiChoice:
         return answer === q.options[q.answer];
 

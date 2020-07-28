@@ -35,7 +35,7 @@ export const Question = createContainer(() => {
 
   const shuffleQ = (questions: APIQuestion[]) => {
     setQuestionQueue(shuffle([...questions]));
-  }
+  };
 
   // Initially, set question queue to lesson questions
   useEffect(() => {
@@ -65,17 +65,11 @@ export const Question = createContainer(() => {
     if (checkAnswerData !== undefined) setAnswerState(checkAnswerData.checkAnswer);
   }, [checkAnswerData]);
 
-  // If the question answered (incorrect OR correct), complete question
-  useEffect(() => {
-    if (answerState !== null) completeQuestion(answerState);
-  }, [answerState]);
-
 
   const checkAnswer = (answer: string) => {
     if (!question) return;
-    checkAnswerQuery({ variables: { answer, questionId: question.id } })
-  }
-
+    checkAnswerQuery({ variables: { answer, questionId: question.id } });
+  };
 
   const completeQuestion = (correct: boolean) => {
     let next: FooterNext = correct ? FooterNext.correct : FooterNext.incorrect;
@@ -84,10 +78,10 @@ export const Question = createContainer(() => {
     setQuestionState(correct);
 
     if (correct) {
-      const [correct] = questionQueue;
+      const [c] = questionQueue;
       // Remove first question from questionQueue and add to completedQueue
       setQuestionQueue(_q => _q.slice(1));
-      setCompletedQueue(_q => [..._q, correct]);
+      setCompletedQueue(_q => [..._q, c]);
     } else {
       /**
        * Otherwise, if user was incorrect, add the questiont to the back of the
@@ -99,6 +93,11 @@ export const Question = createContainer(() => {
       });
     }
   };
+
+  // If the question answered (incorrect OR correct), complete question
+  useEffect(() => {
+    if (answerState !== null) completeQuestion(answerState);
+  }, [answerState]);
 
   return {
     question,

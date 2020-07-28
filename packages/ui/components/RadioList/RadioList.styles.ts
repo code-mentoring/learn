@@ -1,20 +1,6 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { theme as t } from '../../css/theme';
-
-export const RadioListDiv = styled.div<{disabled?: boolean}>`
-  --webkit-user-select: none;
-  --moz-user-select: none;
-  --ms-user-select: none;
-  user-select: none;
-  width: 100%;
-  ${p => p.disabled && css`
-    pointer-events: none;
-    ${RadioListLabel}:not(.active) span {
-      color: ${t.color('grey.500')};
-    }
-  `}
-`;
 
 export const RadioListLabel = styled.label`
   position: relative;
@@ -58,6 +44,20 @@ export const RadioListLabel = styled.label`
       z-index: 10;
     }
   }
+`;
+
+export const RadioListDiv = styled.div<{ disabled?: boolean }>`
+  --webkit-user-select: none;
+  --moz-user-select: none;
+  --ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  ${p => p.disabled && css`
+    pointer-events: none;
+    ${RadioListLabel}:not(.active) span {
+      color: ${t.color('grey.500')};
+    }
+  `}
 `;
 
 export const RadioListSmall = styled.small`
