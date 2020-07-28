@@ -1,6 +1,6 @@
 import { Loader, theme as t } from '@codement/ui';
 import React, { useEffect, useMemo } from 'react';
-import { Redirect, useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Page } from '../../components/Page/Page';
