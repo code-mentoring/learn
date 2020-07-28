@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDirs": ["./", "../api"],
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "declaration": false
   },
   "include": [
     "./**/*.ts",
