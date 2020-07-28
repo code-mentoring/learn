@@ -1,8 +1,7 @@
 import { AuthRoute, UnAuthRoute } from '@codement/ui';
-import { history as History } from '@codement/ui/lib/history';
 import React from 'react';
-import { Redirect, Route, Router, Switch } from 'react-router';
-
+import { Redirect, Route, Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import { ClientContainerWrapper } from '../ClientContainerWrapper';
 import { Onboarding } from '../containers/Onboarding.container';
 import { DashboardPage } from '../pages/Dashboard/Dashboard.page';
@@ -10,12 +9,12 @@ import { LessonPage } from '../pages/Lesson/Lesson.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { LogoutPage } from '../pages/Logout/Logout.page';
 import { OnboardingPage } from '../pages/Onboarding/Onboarding.page';
-import { routes } from './routes';
 import { QuoteLoadingPage } from '../pages/QuoteLoading/QuoteLoading.page';
+import { routes } from './routes';
 
 
 export const AppRouter = () => (
-  <Router history={History}>
+  <BrowserRouter>
     <Switch>
       <UnAuthRoute routes={routes} path={routes.login(false)} component={LoginPage} />
 
@@ -36,5 +35,5 @@ export const AppRouter = () => (
         </AuthRoute>
       </ClientContainerWrapper>
     </Switch>
-  </Router>
+  </BrowserRouter>
 );
