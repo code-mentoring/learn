@@ -4,7 +4,7 @@ import LogoMark from '@codement/ui/images/logo-mark.svg';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
-import { Lesson } from '../..//containers/Lesson.container';
+import { Lesson, LessonState } from '../..//containers/Lesson.container';
 import { LessonProgress } from '../../components/LessonProgress/LessonProgress';
 import { routes } from '../../router/routes';
 
@@ -72,7 +72,7 @@ export const LessonHeader: React.FC<{ title?: string }> = ({
   title
 }) => {
   const [modal, setModal] = useState(false);
-  const { progress } = Lesson.useContainer();
+  const { progress, lesson, lessonState } = Lesson.useContainer();
 
 
   return <Header withProgress={progress !== undefined}>
@@ -80,7 +80,10 @@ export const LessonHeader: React.FC<{ title?: string }> = ({
 
     <div>
       {title && <Title as="h2">{title}</Title>}
-      {progress !== undefined && <LessonProgress current={progress} />}
+      {lessonState === LessonState.lesson && <LessonProgress
+        current={progress!}
+        max={lesson!.lesson.questions.length}
+      />}
     </div>
 
     <CloseIcon

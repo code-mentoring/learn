@@ -1,10 +1,10 @@
-import { useLazyQuery, QueryLazyOptions } from '@apollo/react-hooks';
-import { Query, QueryLessonArgs, Question } from '@codement/api';
+import { QueryLazyOptions, useLazyQuery } from '@apollo/react-hooks';
+import { Query, QueryLessonArgs } from '@codement/api';
+import { ButtonProps } from '@codement/ui';
+import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
-import random from 'lodash/sample';
-
-import { useState, useEffect } from 'react';
 import lessonQuery from '../gql/queries/lesson.gql';
+
 
 export enum LessonState {
   story = 'story',
@@ -13,13 +13,23 @@ export enum LessonState {
   lessonCompleted = 'lessonCompleted',
 }
 
+export enum FooterNext {
+  complete,
+  correct,
+  incorrect
+}
+
+const intialFooterButton: ButtonProps = {
+  onClick: undefined,
+  children: 'Check',
+  color: 'primary'
+}
+
 export const Lesson = createContainer(() => {
   const [lessonState, setLessonState] = useState<LessonState | null>(null);
-  const [progress, setProgress] = useState<number>();
-  const [footerButtonClick, _setFooterButtonClick] = useState<null | Function>(null);
-  const [footerButtonText, setFooterButtonText] = useState<'Check' | 'Next'>('Check');
-  const [question, setQuestion] = useState<null | Question>(null);
-  const [questionGrade, setQuestionState] = useState<null | boolean>(null)
+  const [progress, setProgress] = useState<number | null>(null);
+  const [attempts, setAttempts] = useState<number | null>(null);
+  const [footerButton, setFooterButton] = useState<ButtonProps>(intialFooterButton);
 
   const [query, { data, loading, called }] = useLazyQuery<
     { lesson: Query['lesson'] },
@@ -40,49 +50,53 @@ export const Lesson = createContainer(() => {
   };
 
   const beginLesson = () => {
-    getRandomQuestion();
     setLessonState(LessonState.lesson);
     setProgress(0);
+    setAttempts(0);
   }
 
   const resetLesson = () => {
     setLessonState(LessonState.story);
-    setProgress(undefined);
-    setQuestion(null);
+    setProgress(null);
   }
 
-  // Fetch new question and reset
-  const getRandomQuestion = () => {
-    if (!data?.lesson) throw new Error('Lesson is not loaded yet');
-    const q = random(data.lesson.lesson.questions)!;
-    setQuestion(q);
-    setQuestionState(null);
-    return q;
-  }
+  const completeLesson = () => {
+    setLessonState(LessonState.lessonCompleted);
+  };
 
-  const completeQuestion = (success: boolean) => {
-    setFooterButtonClick('next');
-    setProgress(p =>(p || 0) + (success ? 1 : -1));
-    setQuestionState(success);
-  }
-
-
-  const setFooterButtonClick = (funcOrNext: 'next' | Function | null) => {
-    switch(funcOrNext) {
+  const setFooterButtonClick = (funcOrNext: FooterNext | Function | null) => {
+    switch (funcOrNext) {
       case null:
-        _setFooterButtonClick(null);
-        setFooterButtonText('Check');
-        break;
+        return setFooterButton(intialFooterButton);
 
-      case 'next':
-        _setFooterButtonClick(() => getRandomQuestion);
-        setFooterButtonText('Next');
-        break;
+      case FooterNext.correct:
+      case FooterNext.incorrect:
+        return setFooterButton({
+          onClick: () => {
+            setProgress(p => (p || 0) + (funcOrNext === FooterNext.correct ? 1 : -1))
+            setAttempts(a => a! + 1);
+          },
+          children: 'Next',
+          color: funcOrNext === FooterNext.correct ? 'secondary' : 'tertiary',
+          icon: 'arrowRight',
+          iconPosition: 'right'
+        });
+
+      case FooterNext.complete:
+        return setFooterButton({
+          onClick: () => completeLesson(),
+          children: 'Complete',
+          color: 'secondary',
+          icon: 'check',
+          iconPosition: 'right'
+        });
 
       default: // Set to "check" function (check answer with API)
-        _setFooterButtonClick(() => funcOrNext);
-        setFooterButtonText('Check');
-        break;
+        return setFooterButton({
+          onClick: () => funcOrNext(),
+          children: 'Check',
+          color: 'primary'
+        });
     }
   }
 
@@ -94,15 +108,11 @@ export const Lesson = createContainer(() => {
     lessonState,
     setLessonState,
     progress,
-    setProgress,
     resetLesson,
     beginLesson,
-    getRandomQuestion,
-    question,
-    footerButtonClick,
+    footerButton,
     setFooterButtonClick,
-    footerButtonText,
-    completeQuestion,
-    questionGrade
+    attempts,
+    setAttempts
   };
 });

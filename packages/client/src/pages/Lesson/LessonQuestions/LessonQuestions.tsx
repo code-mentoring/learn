@@ -1,11 +1,14 @@
-import { ModuleLesson, QuestionType, QuestionMultiChoice } from '@codement/api';
-import { theme as t, Text, Button } from '@codement/ui';
-import React, { useMemo } from 'react';
+import { ModuleLesson, QuestionType, QuestionMultiChoice, QuestionMemory } from '@codement/api';
+import { theme as t, Text, Button, aniFadeUp } from '@codement/ui';
+import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import { Lesson } from '../../../containers/Lesson.container';
+import { Question } from '../../../containers/Question.container';
 import { QMultiChoice } from './questions/QMultiChoice/QMultiChoice';
 import { LessonFooter } from '../LessonFooter';
 import { QuestionResult } from '../../../components/QuestionResult/QuestionResult';
+import { QMemory } from './questions/QMemory/QMemory';
+import { CONFIG } from '../../../config';
 
 export interface LessonQuestionsProps {
   lesson: ModuleLesson;
@@ -22,18 +25,16 @@ const QuestionWrapper = styled.div`
 const QuestionTitle = styled(Text)`
   text-align: center;
   margin-bottom: ${t.size('xbig')};
+  ${aniFadeUp}
 `;
 
 const QuestionFrame = styled.article`
   background: ${t.color('grey.100')};
   border-radius: ${t.borderRadius.default};
-  display: flex;
   max-width: 92rem;
   width: 100%;
-  & > * {
-    flex-basis: 50%;
-    justify-content: center;
-  }
+  ${aniFadeUp};
+  animation-delay: 0.1s;
 `;
 
 const Result = styled.div`
@@ -51,28 +52,45 @@ const questionTitles: { [key in QuestionType]: string } = {
 }
 
 export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
-  const { question, footerButtonClick, footerButtonText, questionGrade} = Lesson.useContainer();
-  const q = question!;
+  const { footerButton, attempts } = Lesson.useContainer();
+  const { question, questionGrade, completeQuestion } = Question.useContainer();
+  const q = question;
 
-  const content = useMemo(() => {
+  const Content = useMemo(() => {
+    if (!q) return null;
     switch (q.type) {
       case QuestionType.MultiChoice:
-        return <QMultiChoice question={q as QuestionMultiChoice} key={q.id} />;
+        return () => <QMultiChoice question={q as QuestionMultiChoice} key={attempts!} />;
+      case QuestionType.Memory:
+        return () => <QMemory question={q as QuestionMemory} key={attempts!} />;
       default:
         console.warn(`Unknown question type '${q.type}'`);
         return null;
     }
-  }, [q.id]);
+  }, [attempts, q]);
+
+
+  /**
+   * Cheat mode on dev to skip questions with "shift" + "space"
+   * If you also hold "Alt" it will complete with a failure
+   */
+  if (!CONFIG.isProd) {
+    useEffect(() =>{
+      window.addEventListener('keyup', (e) => {
+        if (e.keyCode === 32 && e.shiftKey) completeQuestion(!e.altKey);
+      })
+    }, [])
+  }
+
 
   return <>
     <QuestionWrapper>
       <QuestionTitle variant="h2" color="grey.700">
-        {questionTitles[q.type]}
+        {q && questionTitles[q.type]}
       </QuestionTitle>
 
-      <QuestionFrame>
-        {content}
-      </QuestionFrame>
+      <QuestionFrame> {Content && <Content />} </QuestionFrame>
+
     </QuestionWrapper>
 
     <LessonFooter>
@@ -85,9 +103,9 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
       }
 
       <Button
-        disabled={!Boolean(footerButtonClick)}
-        onClick={() => footerButtonClick?.()}
-      >{footerButtonText}</Button>
+        disabled={!Boolean(footerButton?.onClick)}
+        {...footerButton}
+      />
     </LessonFooter>
   </>
 }

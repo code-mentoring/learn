@@ -59,7 +59,7 @@ const config: Configuration = {
     new ReplacePlugin({
       values: {
         '%%API_HOST%%': isProd ? 'https://api.codementoring.co' : 'http://localhost:4000',
-        '%%IS_PROD%%': isProd
+        '\'%%IS_PROD%%\'': isProd
       }
     }),
     new CopyPlugin([{ from: './_redirects', to: './' }]),

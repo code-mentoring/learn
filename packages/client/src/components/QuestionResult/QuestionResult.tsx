@@ -29,7 +29,7 @@ const Wrapper = styled(Card)<QuestionResultProps>`
 `;
 
 export const QuestionResult: React.FC<QuestionResultProps> = ({ state, children }) =>
-  <Wrapper state={state} shadow={'error'}>
+  <Wrapper state={state} shadow={state}>
     <Icon icon={state === 'success' ? 'check' : 'x'} size="xl" color="white" />
     <Text variant="body2"> {children} </Text>
   </Wrapper>;
