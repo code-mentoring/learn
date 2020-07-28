@@ -26,9 +26,9 @@ export type Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop |
 export type QuestionMultiChoice = {
    __typename?: 'QuestionMultiChoice';
   id: Scalars['String'];
-  type: QuestionType;
   options: Array<Scalars['String']>;
   code: Scalars['String'];
+  type: QuestionType;
 };
 
 export enum QuestionType {
@@ -231,6 +231,7 @@ export type Query = {
   paths: Array<Path>;
   path: Path;
   questions: Array<Question>;
+  checkAnswer: Scalars['Boolean'];
   lessonStorySections: Array<StorySection>;
 };
 
@@ -295,6 +296,12 @@ export type QueryQuestionsArgs = {
   type?: Maybe<Scalars['String']>;
   moduleIndex: Scalars['Float'];
   pathId: Scalars['String'];
+};
+
+
+export type QueryCheckAnswerArgs = {
+  answer: Scalars['String'];
+  questionId: Scalars['String'];
 };
 
 

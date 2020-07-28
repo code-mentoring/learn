@@ -20,9 +20,6 @@ registerEnumType(QuestionType, {
 export class BaseQuestion {
   @Field()
   id: string;
-
-  @Field(() => QuestionType)
-  type: QuestionType;
 }
 
 
@@ -35,20 +32,31 @@ export class QuestionMultiChoice extends BaseQuestion {
 
   @Field()
   code: string;
+
+  @Field(() => QuestionType)
+  type: QuestionType.multiChoice;
+
+  answer: number;
 }
 
 
 // ---------------------------------------------------------------------- Memory
 @ObjectType()
 export class QuestionMemory extends BaseQuestion {
+  @Field(() => QuestionType)
+  type: QuestionType.memory;
+
   @Field(() => [[String]])
-  pairs: [string, string][]
+  pairs: [string, string][];
 }
 
 
 // ----------------------------------------------------------------- Drag & Drop
 @ObjectType()
 export class QuestionDragDrop extends BaseQuestion {
+  @Field(() => QuestionType)
+  type: QuestionType.dragDrop;
+
   @Field(() => [String])
   options: string[]
 
@@ -59,6 +67,9 @@ export class QuestionDragDrop extends BaseQuestion {
 // ----------------------------------------------------------------- Drag & Drop
 @ObjectType()
 export class QuestionBugHighlight extends BaseQuestion {
+  @Field(() => QuestionType)
+  type: QuestionType.bugHighlight;
+
   @Field()
   code: string;
 }

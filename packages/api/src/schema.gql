@@ -15,9 +15,9 @@ union Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | Quest
 
 type QuestionMultiChoice {
   id: String!
-  type: QuestionType!
   options: [String!]!
   code: String!
+  type: QuestionType!
 }
 
 enum QuestionType {
@@ -212,6 +212,7 @@ type Query {
   ): [Path!]!
   path(id: String!): Path!
   questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
+  checkAnswer(answer: String!, questionId: String!): Boolean!
   lessonStorySections(lessonId: String!): [StorySection!]!
 }
 

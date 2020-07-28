@@ -1,9 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { QuestionType, QuestionUnion, Question } from './Question.entity';
 import { CMS } from '../CMS/CMS';
+import { Question, QuestionType, QuestionUnion } from './Question.entity';
+
 
 @Resolver('Question')
 export class QuestionResolver {
@@ -22,5 +22,14 @@ export class QuestionResolver {
       return questions.filter(q => q.type === type);
     }
     return questions;
+  }
+
+  @UseGuards(GQLAuthGuard)
+  @Query(() => Boolean)
+  checkAnswer(
+    @Args('questionId') questionId: string,
+    @Args('answer') answer: string
+  ) {
+    return this.cms.checkAnswer(questionId, answer);
   }
 }

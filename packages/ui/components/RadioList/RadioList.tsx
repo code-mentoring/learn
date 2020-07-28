@@ -16,6 +16,7 @@ export interface RadioListProps {
   className?: string;
   options: Array<Options>;
   value?: any;
+  disabled?: boolean;
   onChange?: (value: any) => void;
 }
 
@@ -25,6 +26,7 @@ export const RadioList: React.FC<RadioListProps> = ({
   onChange,
   name = shortid(),
   value,
+  disabled,
   ...props
 }) => {
   // Internal state for which value is selected
@@ -35,7 +37,11 @@ export const RadioList: React.FC<RadioListProps> = ({
     if (onChange) onChange(chosenOption);
   }, [chosenOption]);
 
-  return <RadioListDiv className={className} {...props}>
+  return <RadioListDiv
+    className={className}
+    disabled={disabled}
+    {...props}
+  >
     {options.map(o => {
       // Is the current option selected?
       const check = chosenOption === o.value;
@@ -45,6 +51,7 @@ export const RadioList: React.FC<RadioListProps> = ({
         className={classnames({ active: check })}
       >
         <Radio
+          disabled={disabled}
           name={name}
           value={o.label}
           onChange={e => {

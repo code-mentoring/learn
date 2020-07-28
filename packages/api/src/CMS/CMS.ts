@@ -1,7 +1,6 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
-
+import { BadRequestException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { Module, ModuleLesson, ModuleType } from '../Module/Module.entity';
-import { Question } from '../Question/Question.entity';
+import { QuestionType, Question } from '../Question/Question.entity';
 import { CMSLoader } from './CMSLoader';
 
 
@@ -96,5 +95,20 @@ export class CMS implements OnModuleInit {
     const m = this.findLesson(pathId, moduleNameOrIndex);
     if (!m) return;
     return m.lesson.questions;
+  }
+
+  checkAnswer(questionId: string, answer: string): boolean {
+    const q = this.questions[questionId];
+    if (!q) throw new NotFoundException(`Question could not be found with id ${questionId}`);
+
+
+    switch(q.type) {
+      case QuestionType.multiChoice:
+        return answer === q.options[q.answer];
+
+      default:
+      case QuestionType.memory:
+        throw new BadRequestException(`Question type '${q.type}' is not check-able`);
+    }
   }
 }

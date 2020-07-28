@@ -76,7 +76,7 @@ export const theme: DefaultTheme = {
 
   shadows: {
     main: `0 4px 10px ${grey[900]}10`,
-    success: `0 4px 12px ${secondary[500]}50`,
+    success: `0 4px 12px ${secondary[500]}25`,
     error: `0 4px 12px ${tertiary[500]}50`
   }
 };
