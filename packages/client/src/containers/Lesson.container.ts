@@ -81,7 +81,7 @@ export const Lesson = createContainer(() => {
 
     completeLesonQuery({
       variables: { answers, id: data!.beginLesson.lesson.id }
-    })
+    });
   };
 
 
@@ -130,8 +130,8 @@ export const Lesson = createContainer(() => {
   };
 
   const addCorrectAnswer = (qId: string, answer: string[]) => {
-    setCorrectAnswers(a => ({ ...a, [qId]: answer }))
-  }
+    setCorrectAnswers(a => ({ ...a, [qId]: answer }));
+  };
 
   return {
     fetchLesson,

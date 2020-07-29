@@ -2,11 +2,11 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import SimpleCrypto from 'simple-crypto-js';
+import config from 'config';
 import { UserModule } from './UserModule.entity';
 
-import SimpleCrypto from 'simple-crypto-js'
 import { CMS } from '../CMS/CMS';
-import config from 'config';
 import { QuestionType } from '../Question/Question.entity';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class UserModuleService {
       this.userModuleRepository.update(
         { userId, moduleId },
         { secret, viewed: existing.viewed + 1 } // Update secret and viewed counter
-      )
+      );
     } else {
       await this.userModuleRepository.create({
         userId,
@@ -76,6 +76,7 @@ export class UserModuleService {
       const correct = this.cms.checkAnswer(q.id, answers[q.id]).every(a => a);
 
       if (config.get('env') === 'development' && !correct) {
+        // eslint-disable-next-line no-console
         console.log(`Incorrect question answer ${q.id}. Expected ${JSON.stringify(q, null, 2)}`);
       }
 

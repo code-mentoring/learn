@@ -67,10 +67,10 @@ export const Question = createContainer(() => {
   }, [checkAnswerData]);
 
 
-  const checkAnswer = (answer: string[]) => {
+  const checkAnswer = (a: string[]) => {
     if (!question) return;
-    setAnswer(answer);
-    checkAnswerQuery({ variables: { answer, questionId: question.id } });
+    setAnswer(a);
+    checkAnswerQuery({ variables: { answer: a, questionId: question.id } });
   };
 
   const completeQuestion = (correct: boolean) => {

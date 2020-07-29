@@ -7,6 +7,6 @@ import { UserModuleModule } from '../UserModule';
 
 @Module({
   imports: [CMSModule, UserModuleModule],
-  providers: [ LessonResolver, CMS]
+  providers: [LessonResolver, CMS]
 })
 export class LessonModule {}

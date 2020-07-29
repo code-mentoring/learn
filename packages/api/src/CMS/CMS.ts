@@ -107,7 +107,7 @@ export class CMS implements OnModuleInit {
         if (answer.length !== 1) {
           throw new BadRequestException(
             `There should only be one answer for question type '${q.type}'`
-          )
+          );
         }
         return [answer[0] === q.options[q.answer]];
 
@@ -116,10 +116,9 @@ export class CMS implements OnModuleInit {
           // Get index of answer from options
           q.options.indexOf(a)
           // Compare index to the solution
-          === q.answer[i]
-        );
+          === q.answer[i]);
 
-          default:
+      default:
       case QuestionType.memory:
         throw new BadRequestException(`Question type '${q.type}' is not check-able`);
     }

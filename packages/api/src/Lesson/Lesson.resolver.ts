@@ -20,7 +20,7 @@ class BeginLesson {
 export class LessonResolver {
   constructor(
     private readonly cms: CMS,
-    private readonly userModuleService: UserModuleService,
+    private readonly userModuleService: UserModuleService
   ) { }
 
   @UseGuards(GQLAuthGuard)
@@ -32,7 +32,7 @@ export class LessonResolver {
     const lesson = this.cms.findLessonById(id);
     if (!lesson) throw new NotFoundException(`Lesson '${id}' could not be found`);
     const secret = await this.userModuleService.beginModule(user.id, id);
-    return { lesson, secret }
+    return { lesson, secret };
   }
 
   @UseGuards(GQLAuthGuard)

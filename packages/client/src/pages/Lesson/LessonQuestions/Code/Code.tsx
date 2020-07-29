@@ -18,7 +18,6 @@ export interface CodeSlotValue {
 }
 
 
-
 const StyledCode = styled.pre`
   &[class*="language-"] {
     margin: 0;
@@ -91,7 +90,7 @@ export const Code: React.FC<CodeProps> = ({
 
         p[i + 1] = <CodeSlot
           state={state}
-          onDrop={v => onDrop?.(i / 2, v)}
+          onDrop={_v => onDrop?.(i / 2, _v)}
         >
           {v.value || <>&nbsp;&nbsp;&nbsp;</>}
           {icon && <Icon {...icon} size="xbig" /> }

@@ -31,8 +31,7 @@ export const QDragDrop: React.FC<QDragDropProps> = ({ question: q }) => {
   const { questionGrade, checkAnswer, gradeData } = Question.useContainer();
 
   const [values, setValues] = useState<(number | null)[]>(
-    new Array(q.slots).fill(null) // Initialize to number of droppable slots
-  );
+    new Array(q.slots).fill(null)); // Initialize to number of droppable slots
 
   const options = useMemo(() => shuffle(q.options), [q.options]);
 
@@ -46,12 +45,12 @@ export const QDragDrop: React.FC<QDragDropProps> = ({ question: q }) => {
 
 
   const updateValue = (index: number, value: string | null) => {
-    setValues(v => {
-      const _v = [...v];
+    setValues(old => {
+      const _v = [...old];
       _v[index] = value ? options.indexOf(value) : null;
       return _v;
     });
-  }
+  };
 
   const remove = (idx: number) => {
     updateValue(idx, null);
@@ -63,7 +62,7 @@ export const QDragDrop: React.FC<QDragDropProps> = ({ question: q }) => {
 
   // Once value is populated, enable footer button
   useEffect(() => {
-    if (values.every(v => v !== null)) setFooterButtonClick(check);
+    if (values.every(_v => _v !== null)) setFooterButtonClick(check);
   }, [values]);
 
   return <Wrapper>

@@ -82,7 +82,7 @@ export const CodeSlot: React.FC<CodeSlotProps> = ({
   children,
   state,
   onDrop
- }) => {
+}) => {
   const [dragging, setDragging] = useState(false);
 
   return <CodeSlotStyles
