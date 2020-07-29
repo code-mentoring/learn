@@ -33,7 +33,7 @@ export const StyledButton = styled.button<ButtonProps>`
       &:hover { background: ${t.color('grey.100')} }
       &:focus, &:active { background: ${t.color('grey.200')} }
     ` : css`
-      color: white;
+      &, span { color: ${t.color('white')}; }
       background: ${t.color(p.color)};
       &:hover { background: ${t.color(`${p.color}.400` as Color)} }
       &:focus, &:active { background: ${t.color(`${p.color}.600` as Color)} }

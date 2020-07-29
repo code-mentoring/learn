@@ -2,7 +2,7 @@ import { IconCloudUpload as IconCloudUploadDuotone } from './icons/duotone/cid-c
 import { IconImages } from './icons/duotone/cid-images';
 import { IconMenu } from './icons/duotone/cid-menu';
 import { IconNote } from './icons/duotone/cid-note';
-import { IconTrash } from './icons/duotone/cid-trash';
+import IconTrash from './icons/solid/cis-trash.svg';
 import { IconWarning } from './icons/duotone/cid-warning';
 import { IconLogout } from './icons/linear/cil-account-logout';
 import { IconMinus } from './icons/linear/cil-minus';

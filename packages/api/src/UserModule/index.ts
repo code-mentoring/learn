@@ -13,6 +13,7 @@ import { CMS } from '../CMS/CMS';
   imports: [
     TypeOrmModule.forFeature([UserModule, PathUser, Path])
   ],
-  providers: [UserModuleResolver, UserModuleService, PathUserService, PathService, CMS]
+  providers: [UserModuleResolver, UserModuleService, PathUserService, PathService, CMS],
+  exports: [UserModuleService]
 })
 export class UserModuleModule {}

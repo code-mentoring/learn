@@ -147,9 +147,9 @@ export abstract class TestClient {
     return this._request('deleteFriendship', mutations.deleteFriendship, { friendId });
   }
 
-  static joinModule(moduleId: string): Promise<Boolean> {
-    return this._request('joinModule', mutations.joinModule, { moduleId });
-  }
+  // static joinModule(moduleId: string): Promise<Boolean> {
+  //   return this._request('joinModule', mutations.joinModule, { moduleId });
+  // }
 
   static createCharacter(character: CreateCharacterInput): Promise<Character> {
     return this._request('createCharacter', mutations.createCharacter, { character });

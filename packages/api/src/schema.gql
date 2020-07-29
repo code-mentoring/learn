@@ -15,27 +15,35 @@ union Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | Quest
 
 type QuestionMultiChoice {
   id: String!
-  type: String!
   options: [String!]!
   code: String!
+  type: QuestionType!
+}
+
+enum QuestionType {
+  multiChoice
+  memory
+  dragDrop
+  bugHighlight
 }
 
 type QuestionMemory {
   id: String!
-  type: String!
+  type: QuestionType!
   pairs: [[String!]!]!
 }
 
 type QuestionDragDrop {
   id: String!
-  type: String!
+  type: QuestionType!
   options: [String!]!
   code: String!
+  slots: Float!
 }
 
 type QuestionBugHighlight {
   id: String!
-  type: String!
+  type: QuestionType!
   code: String!
 }
 
@@ -164,6 +172,11 @@ type UserConcept {
   user: User!
 }
 
+type BeginLesson {
+  secret: String!
+  lesson: ModuleLesson!
+}
+
 type Friend {
   id: String!
   user1Id: String!
@@ -196,7 +209,6 @@ type Query {
   me: User!
   verifyToken(accessToken: String!): Boolean!
   characters: [Character!]!
-  lesson(id: String!): ModuleLesson!
   concepts: [Concept!]!
   concept(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!
@@ -211,7 +223,7 @@ type Query {
     onlyJoined: Boolean = false
   ): [Path!]!
   path(id: String!): Path!
-  questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
+  checkAnswer(answer: [String!]!, questionId: String!): [Boolean!]!
   lessonStorySections(lessonId: String!): [StorySection!]!
   searchRoleById(roleId: String!): Roles!
   findRoles: [Roles!]!
@@ -229,6 +241,9 @@ type Mutation {
   createCharacter(character: CreateCharacterInput!): Character!
   updateCharacter(character: UpdateCharacterInput!): Character!
   deleteCharacter(id: String!): Boolean!
+  beginLesson(id: String!): BeginLesson!
+  completeLesson(answers: String!, id: String!): Boolean!
+  completeModule(moduleName: String!): UserModule!
   createConcept(concept: CreateConceptInput!): Concept!
   updateConcept(concept: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
@@ -236,12 +251,10 @@ type Mutation {
   createFriendship(toId: String!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
-  joinModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
-  completeModule(moduleName: String!): UserModule!
   createRole(role: RoleInput!): Roles!
   updateRole(role: RoleUpdateInput!): Roles!
   deleteRole(roleId: String!): Boolean!
