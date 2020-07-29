@@ -2,12 +2,11 @@ import {
   Injectable,
   BadRequestException,
   NotFoundException,
-  InternalServerErrorException,
+  InternalServerErrorException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Role, RoleInput } from './Role.entity';
-
 import { Repository } from 'typeorm';
+import { Role, RoleInput, RoleUpdateInput } from './Role.entity';
 
 @Injectable()
 export class RoleService {
@@ -56,11 +55,10 @@ export class RoleService {
 
     try {
       foundRole = await this._roleRepository.findOne({
-        where: { name: role.name },
+        where: { name: role.name }
       });
     } catch (error) {
-      console.log(error);
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException(error.message);
     }
 
     if (foundRole) {
@@ -68,31 +66,30 @@ export class RoleService {
       throw new BadRequestException({ message });
     } else {
       try {
-        savedRole = await this._roleRepository.save(role);
+        savedRole = await this._roleRepository.create(role).save();
       } catch (error) {
-        console.log(error);
-        throw new InternalServerErrorException();
+        throw new InternalServerErrorException(error.message);
       }
     }
 
     return savedRole;
   }
 
-  async update(roleId: string, role: RoleInput): Promise<Role | undefined> {
-    const foundRole = await this._roleRepository.findOne(roleId);
+  async update(role: RoleUpdateInput): Promise<Role | undefined> {
+    let foundRole = await this._roleRepository.findOne(role.id);
 
     if (!foundRole) {
       throw new NotFoundException('roles search failed');
     }
-    let updateRole;
+
     try {
-      await this._roleRepository.update({ id: roleId }, role);
-      updateRole = await this._roleRepository.findOne(roleId);
+      foundRole.description = role.description;
+      foundRole = await this._roleRepository.save(foundRole);
     } catch (error) {
       throw new InternalServerErrorException();
     }
 
-    return updateRole;
+    return foundRole;
   }
 
   async delete(roleId: string): Promise<Boolean> {

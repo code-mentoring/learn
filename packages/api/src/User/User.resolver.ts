@@ -17,6 +17,7 @@ import {
   UserPreferencesInput
 } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
+import { RoleType } from '../Role/RoleType.enum';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -53,7 +54,7 @@ export class UserResolver {
   updatePreferences(
     @CurrentUser() user: User,
     @Args('preferences', { type: () => UserPreferencesInput })
-      preferences: UserPreferencesInput
+    preferences: UserPreferencesInput
   ) {
     return this.userPreferencesService.update(user.id, preferences);
   }
@@ -64,8 +65,26 @@ export class UserResolver {
 
   @ResolveField(() => UserPreferences)
   async userPreferences(@Parent() user: User) {
-    return this.userPreferencesService.findByUser(
-      user.id
-    );
+    return this.userPreferencesService.findByUser(user.id);
+  }
+
+  // ----------------------------
+  // -----------Roles -----------
+  // ----------------------------
+
+  @Mutation(() => User)
+  addRoleToUser(
+    @Args('userId') userId: string,
+    @Args('roleName') roleName: RoleType
+  ) {
+    return this.userService.addRoleToUser(userId, roleName);
+  }
+
+  @Mutation(() => User)
+  removeRoleToUser(
+    @Args('userId') userId: string,
+    @Args('roleName') roleName: RoleType
+  ) {
+    return this.userService.removeRoleToUser(userId, roleName);
   }
 }

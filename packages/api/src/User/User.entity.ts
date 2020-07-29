@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
   ManyToMany,
-  JoinTable,
+  JoinTable
 } from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
@@ -35,7 +35,7 @@ export class User {
   @Field()
   profileImage: string;
 
-  @Field(() => Roles)
+  @Field(() => [Roles])
   roles: Roles[];
 
   @Field(() => UserPreferences, { nullable: true })
@@ -69,13 +69,13 @@ export class UserWithPassword extends CMBaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => PathUser, (pathUser) => pathUser.user)
+  @OneToMany(() => PathUser, pathUser => pathUser.user)
   pathUser: PathUser[];
 
-  @OneToMany(() => UserModule, (userModules) => userModules.user)
+  @OneToMany(() => UserModule, userModules => userModules.user)
   userModules: UserModule[];
 
-  @ManyToMany(() => Role, (role) => role.users, { eager: true })
+  @ManyToMany(() => Role, role => role.users, { eager: true })
   @JoinTable({ name: 'user_roles' })
   roles: Role[];
 

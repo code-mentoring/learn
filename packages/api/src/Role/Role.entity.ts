@@ -4,21 +4,23 @@ import {
   ManyToMany,
   JoinColumn,
   Unique,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from 'typeorm';
-import { UserWithPassword } from '../User/User.entity';
-import { CMBaseEntity } from '../lib/Base.entity';
-import { RoleType } from './RoleType.enum';
+
 import {
   ObjectType,
   Field,
   ID,
   InputType,
-  registerEnumType,
+  registerEnumType
 } from '@nestjs/graphql';
 
+import { CMBaseEntity } from '../lib/Base.entity';
+import { RoleType } from './RoleType.enum';
+import { UserWithPassword } from '../User/User.entity';
+
 registerEnumType(RoleType, {
-  name: 'RoleType',
+  name: 'RoleType'
 });
 
 @ObjectType()
@@ -42,14 +44,14 @@ export class Role extends CMBaseEntity {
   @Column({
     type: 'simple-enum',
     enum: RoleType,
-    default: RoleType.STUDENT,
+    default: RoleType.STUDENT
   })
   name: RoleType;
 
   @Column({ type: 'varchar', length: 100 })
-  description!: string;
+  description: string;
 
-  @ManyToMany(() => UserWithPassword, (user) => user.roles)
+  @ManyToMany(() => UserWithPassword, user => user.roles)
   @JoinColumn()
   users!: UserWithPassword[];
 }
@@ -58,6 +60,15 @@ export class Role extends CMBaseEntity {
 export class RoleInput {
   @Field()
   name: RoleType;
+
+  @Field()
+  description: string;
+}
+
+@InputType()
+export class RoleUpdateInput {
+  @Field()
+  id: string;
 
   @Field()
   description: string;

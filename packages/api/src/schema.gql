@@ -125,7 +125,7 @@ type User {
   lastName: String!
   email: String!
   profileImage: String!
-  roles: Roles!
+  roles: [Roles!]!
   userPreferences: UserPreferences
   createdAt: DateTime!
 }
@@ -213,9 +213,8 @@ type Query {
   path(id: String!): Path!
   questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
   lessonStorySections(lessonId: String!): [StorySection!]!
-  sayHello: String!
-  searchRoles(roleId: String!): Roles!
-  findAll: [Roles!]!
+  searchRoleById(roleId: String!): Roles!
+  findRoles: [Roles!]!
 }
 
 type Mutation {
@@ -224,6 +223,8 @@ type Mutation {
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createUser(user: UserInput!): User!
   updatePreferences(preferences: UserPreferencesInput!): UserPreferences!
+  addRoleToUser(roleName: String!, userId: String!): User!
+  removeRoleToUser(roleName: String!, userId: String!): User!
   login(password: String!, email: String!): LoginOutput!
   createCharacter(character: CreateCharacterInput!): Character!
   updateCharacter(character: UpdateCharacterInput!): Character!
@@ -242,7 +243,7 @@ type Mutation {
   updatePath(path: UpdatePathInput!): Path!
   completeModule(moduleName: String!): UserModule!
   createRole(role: RoleInput!): Roles!
-  updateRole(role: String!): Roles!
+  updateRole(role: RoleUpdateInput!): Roles!
   deleteRole(roleId: String!): Boolean!
 }
 
@@ -317,5 +318,10 @@ input UpdatePathInput {
 
 input RoleInput {
   name: String!
+  description: String!
+}
+
+input RoleUpdateInput {
+  id: String!
   description: String!
 }
