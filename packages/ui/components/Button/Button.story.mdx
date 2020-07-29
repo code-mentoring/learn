@@ -1,0 +1,41 @@
+import {Button} from './Button';
+import {Card} from '../Card/Card';
+import {Row} from '../../styleguide/Story';
+
+
+# Button
+
+## Sizes
+We use two sizes for our buttons; `small` and `large`. They can be set with the `size` property.
+<Card>
+    <Row>
+      <Button>Button</Button>
+    </Row>
+    <Row>
+      <Button size="large">Large Button</Button>
+    </Row>
+</Card>
+
+```tsx
+<Button>Button</Button>
+<Button size="large">Large Button</Button>
+```
+
+---
+
+## Colors
+<Card>
+    <Row>
+      <Button color="primary">primay</Button>
+      <Button color="secondary">secondary</Button>
+      <Button color="tertiary">tertiary</Button>
+      <Button color="error">error</Button>
+    </Row>
+</Card>
+
+```tsx
+<Button color="primary">primay</Button>
+<Button color="secondary">secondary</Button>
+<Button color="tertiary">tertiary</Button>
+<Button color="error">error</Button>
+```

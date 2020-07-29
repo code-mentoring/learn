@@ -2,7 +2,7 @@ import { Button, Icon, Text, theme as t } from '@codement/ui';
 import { Modal, ModalProps } from '@codement/ui/components/Modal/Modal';
 import LogoMark from '@codement/ui/images/logo-mark.svg';
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { Lesson, LessonState } from '../../containers/Lesson.container';
 import { LessonProgress } from '../../components/LessonProgress/LessonProgress';

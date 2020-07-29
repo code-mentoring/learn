@@ -1,12 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDirs": ["./", "../api"],
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "declaration": false
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "./**/*.ts",
+    "./**/*.tsx"
   ]
 }

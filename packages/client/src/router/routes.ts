@@ -1,4 +1,4 @@
-import { generatePath } from 'react-router';
+import { generatePath } from 'react-router-dom';
 import { CONFIG } from '../config';
 
 interface Params {
