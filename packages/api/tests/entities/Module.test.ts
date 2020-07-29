@@ -26,6 +26,8 @@ describe('Module entity', () => {
     beforeEach(async () => {
       await setup();
     });
+
+    it('TODO: beginLesson', () => expect(true).toBeTrue());
     // TODO: Replace with beginLesson, beginAssignment
 
     // it('should join a module successfully', async () => {
