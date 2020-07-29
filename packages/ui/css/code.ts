@@ -1,6 +1,32 @@
 import { createGlobalStyle } from 'styled-components';
 import { theme } from './theme';
 
+export const codeColors = {
+  textShadow: '#222245',
+  selection: '#a599e9',
+  comment: '#b362ff',
+  delimiter: theme.colors.code.color,
+  operator: '#FFB300',
+  punctuation: theme.color('white'),
+  boolean: 'rgb(255, 98, 140)',
+  tag: theme.color('primary.300'),
+  entity: '#6897bb',
+  number: '#ff628c',
+  variable: '#ff628c',
+  string: '#a5ff90',
+  attrValue: theme.color('secondary'),
+  attrValueFirst: '#a9b7c6',
+  url: theme.color('primary.400'),
+  function: 'rgb(250, 208, 0)',
+  regex: '#364135',
+  inserted: '#00ff00',
+  deleted: '#ff000d',
+  className: '#fb94ff',
+
+  cssProperty: '#a9b7c6',
+  cssSelector: '#ffc66d'
+};
+
 export const CodeStyle = createGlobalStyle`
 /**
  * Shades of Purple Theme for Prism.js
@@ -33,7 +59,7 @@ body pre[class*='language-'] {
   font-size: ${theme.size()};
   line-height: 1.75;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px #222245;
+  text-shadow: 0 1px ${codeColors.textShadow};
 }
 
 pre[class*='language-']::-moz-selection,
@@ -45,7 +71,7 @@ pre[class*='language-'] ::selection,
 code[class*='language-']::selection,
 code[class*='language-'] ::selection {
   color: inherit;
-  background: #a599e9;
+  background: ${codeColors.selection};
 }
 
 /* Code blocks. */
@@ -59,7 +85,7 @@ pre[class*='language-'] {
 
 :not(pre) > code[class*='language-'],
 pre[class*='language-'] {
-  background: ${theme.colors.code.background};
+background: ${theme.colors.code.background};
 }
 
 /* Inline code */
@@ -75,7 +101,7 @@ pre[class*='language-'] {
 .token.comment,
 .token.prolog,
 .token.cdata {
-  color: #b362ff;
+  color: ${codeColors.comment};
 }
 
 .token.delimiter,
@@ -83,69 +109,69 @@ pre[class*='language-'] {
 .token.selector,
 .token.important,
 .token.atrule {
-  color: #ff9d00;
+  color: ${codeColors.delimiter};
 }
 
 .token.operator,
 .token.attr-name {
-  color: rgb(255, 180, 84);
+  color: ${codeColors.operator};
 }
 
 .token.punctuation {
-  color: #ffffff;
+  color: ${codeColors.punctuation};
 }
 
 .token.boolean {
-  color: rgb(255, 98, 140);
+  color: ${codeColors.boolean};
 }
 
 .token.tag,
 .token.tag .punctuation,
 .token.doctype,
 .token.builtin {
-  color: rgb(255, 157, 0);
+  color: ${codeColors.tag};
 }
 
 .token.entity,
 .token.symbol {
-  color: #6897bb;
+  color: ${codeColors.entity};
 }
 
 .token.number {
-  color: #ff628c;
+  color: ${codeColors.number};
 }
 
 .token.property,
 .token.constant,
 .token.variable {
-  color: #ff628c;
+  color: ${codeColors.variable};
 }
 
 .token.string,
 .token.char {
-  color: #a5ff90;
+  color: ${codeColors.string};
 }
 
 .token.attr-value,
 .token.attr-value .punctuation {
-  color: #a5c261;
+  color: ${codeColors.attrValue};
 }
 
 .token.attr-value .punctuation:first-child {
-  color: #a9b7c6;
+  color: ${codeColors.attrValueFirst};
 }
 
 .token.url {
-  color: #287bde;
+  color: ${codeColors.url};
   text-decoration: underline;
 }
 
 .token.function {
-  color: rgb(250, 208, 0);
+  color: ${codeColors.function};
 }
 
 .token.regex {
-  background: #364135;
+  background: ${codeColors.regex};
 }
 
 .token.bold {
@@ -157,31 +183,31 @@ pre[class*='language-'] {
 }
 
 .token.inserted {
-  background: #00ff00;
+  background: ${codeColors.inserted};
 }
 
 .token.deleted {
-  background: #ff000d;
+  background: ${codeColors.deleted};
 }
 
 code.language-css .token.property,
 code.language-css .token.property + .token.punctuation {
-  color: #a9b7c6;
+  color: ${codeColors.cssProperty};
 }
 
 code.language-css .token.id {
-  color: #ffc66d;
+  color: ${codeColors.cssSelector};
 }
 
 code.language-css .token.selector > .token.class,
 code.language-css .token.selector > .token.attribute,
 code.language-css .token.selector > .token.pseudo-class,
 code.language-css .token.selector > .token.pseudo-element {
-  color: #ffc66d;
+  color: ${codeColors.cssSelector};
 }
 
 .token.class-name {
-  color: #fb94ff;
+  color: ${codeColors.className};
 }
 
 .token.operator,

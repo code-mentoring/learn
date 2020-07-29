@@ -13,16 +13,16 @@ const flashCardAnimation = keyframes`
   }
 `;
 
-export const StyledCardProgress = styled(Card)<{ duration: number; }>`
+export const StyledCardProgress = styled(Card)<{ duration: number; started?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   height: ${theme.size('xl')};
   font-weight: ${theme.fontWeight.bold};
-  padding: 0;
   color: ${theme.color('grey.600')};
+  user-select: none;
 
-  ${({ duration }) => {
+  ${({ duration, started }) => {
     if (duration > 10000) return;
     if (duration <= 0) {
       return css`
@@ -30,6 +30,7 @@ export const StyledCardProgress = styled(Card)<{ duration: number; }>`
         color: ${theme.color('white')};
       `;
     }
+    if (!started) return;
     return css`
       animation: ${flashCardAnimation} infinite 1s;
     `;

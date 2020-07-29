@@ -1,7 +1,6 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
-
+import { BadRequestException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { Module, ModuleLesson, ModuleType } from '../Module/Module.entity';
-import { Question } from '../Question/Question.entity';
+import { QuestionType, Question } from '../Question/Question.entity';
 import { CMSLoader } from './CMSLoader';
 
 
@@ -96,5 +95,32 @@ export class CMS implements OnModuleInit {
     const m = this.findLesson(pathId, moduleNameOrIndex);
     if (!m) return;
     return m.lesson.questions;
+  }
+
+  checkAnswer(questionId: string, answer: string[]): boolean[] {
+    const q = this.questions[questionId];
+    if (!q) throw new NotFoundException(`Question could not be found with id ${questionId}`);
+
+
+    switch (q.type) {
+      case QuestionType.multiChoice:
+        if (answer.length !== 1) {
+          throw new BadRequestException(
+            `There should only be one answer for question type '${q.type}'`
+          );
+        }
+        return [answer[0] === q.options[q.answer]];
+
+      case QuestionType.dragDrop:
+        return answer.map((a, i) =>
+          // Get index of answer from options
+          q.options.indexOf(a)
+          // Compare index to the solution
+          === q.answer[i]);
+
+      default:
+      case QuestionType.memory:
+        throw new BadRequestException(`Question type '${q.type}' is not check-able`);
+    }
   }
 }

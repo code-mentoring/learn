@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
-
+import React, { useEffect, useState } from 'react';
+import { shortid } from '../../lib/shortid';
 import { Radio } from '../Radio/Radio';
-import { RadioListSmall, RadioListDiv, RadioListLabel } from './RadioList.styles';
+import { RadioListDiv, RadioListLabel, RadioListSmall } from './RadioList.styles';
+
 
 export interface Options {
   label: string;
@@ -11,10 +12,11 @@ export interface Options {
 }
 
 export interface RadioListProps {
-  name: string;
+  name?: string;
   className?: string;
   options: Array<Options>;
   value?: any;
+  disabled?: boolean;
   onChange?: (value: any) => void;
 }
 
@@ -22,8 +24,9 @@ export const RadioList: React.FC<RadioListProps> = ({
   className,
   options,
   onChange,
-  name,
+  name = shortid(),
   value,
+  disabled,
   ...props
 }) => {
   // Internal state for which value is selected
@@ -34,7 +37,11 @@ export const RadioList: React.FC<RadioListProps> = ({
     if (onChange) onChange(chosenOption);
   }, [chosenOption]);
 
-  return <RadioListDiv className={className} {...props}>
+  return <RadioListDiv
+    className={className}
+    disabled={disabled}
+    {...props}
+  >
     {options.map(o => {
       // Is the current option selected?
       const check = chosenOption === o.value;
@@ -44,6 +51,7 @@ export const RadioList: React.FC<RadioListProps> = ({
         className={classnames({ active: check })}
       >
         <Radio
+          disabled={disabled}
           name={name}
           value={o.label}
           onChange={e => {

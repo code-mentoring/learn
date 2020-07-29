@@ -1,28 +1,32 @@
-import React from 'react';
 import throttle from 'lodash/throttle';
+import React from 'react';
 
 export const useCountdown = (
   callback: (t: number) => void,
-  time = 30000
+  time = 30000,
+  running = false
 ) => {
   const requestRef = React.useRef<number>();
   const startTime = React.useRef<number>();
 
   // Ticker function
-  const animate = throttle((t: number) => {
+  const animate = (run: boolean) => throttle((t: number) => {
     if (!startTime.current) startTime.current = t;
     const delta = startTime.current - t;
     let remaining = Math.floor(time + delta);
     if (remaining < 0) remaining = 0;
-    callback(remaining);
-    if (remaining > 0) requestRef.current = requestAnimationFrame(animate);
-  }, 100);
 
-  // Kick off the process
+    if (remaining > 0 && run) requestRef.current = requestAnimationFrame(animate(true));
+    callback(remaining);
+  }, 100); // 10 times a second
+
+  // Kick off the process when stopped is set to false
   React.useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
+    if (requestRef.current) window.cancelAnimationFrame(requestRef.current);
+    if (running) requestRef.current = requestAnimationFrame(animate(running));
+    else cancelAnimationFrame(requestRef.current!);
     return () => cancelAnimationFrame(requestRef.current!);
-  }, []); // Make sure the effect runs only once
+  }, [running]); // Make sure the effect runs only once
 };
 
 

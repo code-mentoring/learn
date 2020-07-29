@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { TextField } from '..';
-import { IconProps } from '../Icon/Icon';
-import { Color } from '../../types/styled';
-import { TextFieldProps } from '../TextField';
 import { theme } from '../../css/theme';
+import { Color } from '../../types/styled';
+import { IconProps } from '../Icon/Icon';
 import { Text } from '../Text/Text';
+import { TextField, TextFieldProps } from '../TextField';
 
 
 const StyledTextField: React.FC<TextFieldProps> = styled(TextField)`
