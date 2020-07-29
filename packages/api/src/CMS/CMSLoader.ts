@@ -4,23 +4,10 @@ import MarkdownIt from 'markdown-it';
 import MDPrism from 'markdown-it-prism';
 import path from 'path';
 import YAML from 'yaml';
-
 import { Module, ModuleBase, ModuleLesson, ModuleType } from '../Module/Module.entity';
-import {
-  Question,
-  QuestionBugHighlight,
-  QuestionDragDrop,
-  QuestionMemory,
-  QuestionMultiChoice,
-  QuestionType
-} from '../Question/Question.entity';
+import { QuestionType, Question, QuestionMultiChoice, QuestionMemory, QuestionDragDrop, QuestionBugHighlight } from '../Question/Question.entity';
 import { StorySection } from '../StorySection/StorySection.entity';
 import {
-  CMSQuestionBugHighlight,
-  CMSQuestionDragDrop,
-  CMSQuestionFile,
-  CMSQuestionMemory,
-  CMSQuestionMultiChoice,
   shapeQuestionBugHighlight,
   shapeQuestionDragDrop,
   shapeQuestionMemory,
@@ -94,7 +81,14 @@ export class CMSLoader {
 
     if (m.type === ModuleType.lesson) {
       const storySections = this._loadStory(moduleDir.path);
-      const questions = await this._loadQuestions(pathId, moduleDir);
+      // TODO: Temp filtering of questions to test individually
+      const questions = (await this._loadQuestions(pathId, moduleDir))
+        .filter(q => (
+          (q.type === QuestionType.multiChoice)
+          || (q.type === QuestionType.memory)
+          || (q.type === QuestionType.dragDrop)
+        ));
+
       const lesson: ModuleLesson = {
         ...m,
         pathId,
@@ -137,19 +131,17 @@ export class CMSLoader {
       const [, type, id] = fileTestName.exec(qf.path) as unknown as [any, QuestionType, string];
 
       const _md = fs.readFileSync(qf.path).toString();
-      const { body: code, attributes } = fm<CMSQuestionFile>(_md);
+      const { body, attributes } = fm<Question>(_md);
+      const code = md.render(body);
 
-      const base = {
-        id: `${pathId}-${type}-${moduleDir.name}-${id}`,
-        type: type as QuestionType
-      };
-
+      const base = { id: `${pathId}-${type}-${moduleDir.name}-${id}` };
 
       switch (type) {
         case QuestionType.multiChoice:
           const mc: QuestionMultiChoice = {
             ...base,
-            ...(attributes as CMSQuestionMultiChoice),
+            ...(attributes as QuestionMultiChoice),
+            type: QuestionType.multiChoice,
             code
           };
           await shapeQuestionMultiChoice.validate(mc);
@@ -158,15 +150,19 @@ export class CMSLoader {
         case QuestionType.memory:
           const mem: QuestionMemory = {
             ...base,
-            ...(attributes as CMSQuestionMemory)
+            ...(attributes as QuestionMemory),
+            type: QuestionType.memory
           };
           await shapeQuestionMemory.validate(mem);
           return mem;
 
         case QuestionType.dragDrop:
+          const slots = code.match(/%%CODE%%/gm)?.length || 0;
           const dnd: QuestionDragDrop = {
             ...base,
-            ...(attributes as CMSQuestionDragDrop),
+            ...(attributes as QuestionDragDrop),
+            type: QuestionType.dragDrop,
+            slots,
             code
           };
           await shapeQuestionDragDrop.validate(dnd);
@@ -175,7 +171,8 @@ export class CMSLoader {
         case QuestionType.bugHighlight:
           const bh: QuestionBugHighlight = {
             ...base,
-            ...(attributes as CMSQuestionBugHighlight),
+            ...(attributes as QuestionBugHighlight),
+            type: QuestionType.bugHighlight,
             code
           };
           await shapeQuestionBugHighlight.validate(bh);

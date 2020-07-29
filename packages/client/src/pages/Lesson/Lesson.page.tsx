@@ -12,6 +12,7 @@ import { LessonQuestionsCompleted } from './LessonQuestions/LessonQuestionsCompl
 import { Story } from './Story/Story';
 import { StoryCompleted } from './Story/StoryCompleted';
 
+
 const StyledPage = styled(Page)`
   display: grid;
   grid-template-rows: ${t.size('massive')} 1fr ${t.size('massive')};
@@ -20,9 +21,9 @@ const StyledPage = styled(Page)`
 
 export const LessonPage = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
-  const { getLesson, lesson, loading, state, called } = Lesson.useContainer();
+  const { fetchLesson, lesson, loading, lessonState: state, called } = Lesson.useContainer();
 
-  useEffect(() => getLesson({ variables: { id: lessonId } }), [lessonId]);
+  useEffect(() => fetchLesson({ variables: { id: lessonId } }), [lessonId]);
 
   const content = useMemo(() => {
     if (loading || !called) return <Loader />;

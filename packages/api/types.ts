@@ -26,30 +26,38 @@ export type Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop |
 export type QuestionMultiChoice = {
    __typename?: 'QuestionMultiChoice';
   id: Scalars['String'];
-  type: Scalars['String'];
   options: Array<Scalars['String']>;
   code: Scalars['String'];
+  type: QuestionType;
 };
+
+export enum QuestionType {
+  MultiChoice = 'multiChoice',
+  Memory = 'memory',
+  DragDrop = 'dragDrop',
+  BugHighlight = 'bugHighlight'
+}
 
 export type QuestionMemory = {
    __typename?: 'QuestionMemory';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   pairs: Array<Array<Scalars['String']>>;
 };
 
 export type QuestionDragDrop = {
    __typename?: 'QuestionDragDrop';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   options: Array<Scalars['String']>;
   code: Scalars['String'];
+  slots: Scalars['Float'];
 };
 
 export type QuestionBugHighlight = {
    __typename?: 'QuestionBugHighlight';
   id: Scalars['String'];
-  type: Scalars['String'];
+  type: QuestionType;
   code: Scalars['String'];
 };
 
@@ -179,6 +187,12 @@ export type UserConcept = {
   user: User;
 };
 
+export type BeginLesson = {
+   __typename?: 'BeginLesson';
+  secret: Scalars['String'];
+  lesson: ModuleLesson;
+};
+
 export type Friend = {
    __typename?: 'Friend';
   id: Scalars['String'];
@@ -214,7 +228,6 @@ export type Query = {
   me: User;
   verifyToken: Scalars['Boolean'];
   characters: Array<Character>;
-  lesson: ModuleLesson;
   concepts: Array<Concept>;
   concept: Concept;
   userLearnedConcepts: Array<UserConcept>;
@@ -223,7 +236,7 @@ export type Query = {
   pathModules: Array<Module>;
   paths: Array<Path>;
   path: Path;
-  questions: Array<Question>;
+  checkAnswer: Array<Scalars['Boolean']>;
   lessonStorySections: Array<StorySection>;
 };
 
@@ -253,11 +266,6 @@ export type QueryVerifyTokenArgs = {
 };
 
 
-export type QueryLessonArgs = {
-  id: Scalars['String'];
-};
-
-
 export type QueryConceptArgs = {
   name: Scalars['String'];
 };
@@ -284,10 +292,9 @@ export type QueryPathArgs = {
 };
 
 
-export type QueryQuestionsArgs = {
-  type?: Maybe<Scalars['String']>;
-  moduleIndex: Scalars['Float'];
-  pathId: Scalars['String'];
+export type QueryCheckAnswerArgs = {
+  answer: Array<Scalars['String']>;
+  questionId: Scalars['String'];
 };
 
 
@@ -306,6 +313,9 @@ export type Mutation = {
   createCharacter: Character;
   updateCharacter: Character;
   deleteCharacter: Scalars['Boolean'];
+  beginLesson: BeginLesson;
+  completeLesson: Scalars['Boolean'];
+  completeModule: UserModule;
   createConcept: Concept;
   updateConcept: Concept;
   deleteConcept: Scalars['Boolean'];
@@ -313,12 +323,10 @@ export type Mutation = {
   createFriendship: FriendOutput;
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
-  joinModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
-  completeModule: UserModule;
 };
 
 
@@ -368,6 +376,22 @@ export type MutationDeleteCharacterArgs = {
 };
 
 
+export type MutationBeginLessonArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationCompleteLessonArgs = {
+  answers: Scalars['String'];
+  id: Scalars['String'];
+};
+
+
+export type MutationCompleteModuleArgs = {
+  moduleName: Scalars['String'];
+};
+
+
 export type MutationCreateConceptArgs = {
   concept: CreateConceptInput;
 };
@@ -405,11 +429,6 @@ export type MutationDeleteFriendshipArgs = {
 };
 
 
-export type MutationJoinModuleArgs = {
-  moduleId: Scalars['String'];
-};
-
-
 export type MutationCreatePathArgs = {
   path: PathInput;
 };
@@ -427,11 +446,6 @@ export type MutationJoinPathsArgs = {
 
 export type MutationUpdatePathArgs = {
   path: UpdatePathInput;
-};
-
-
-export type MutationCompleteModuleArgs = {
-  moduleName: Scalars['String'];
 };
 
 export type CreateAssignmentFileInput = {
