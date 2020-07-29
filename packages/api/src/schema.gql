@@ -240,7 +240,6 @@ type Mutation {
   createFriendship(toId: String!): FriendOutput!
   respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
   deleteFriendship(friendId: String!): Boolean!
-  joinModule(moduleId: String!): Boolean!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!

@@ -323,7 +323,6 @@ export type Mutation = {
   createFriendship: FriendOutput;
   respondToFriendRequest: Friend;
   deleteFriendship: Scalars['Boolean'];
-  joinModule: Scalars['Boolean'];
   createPath: Path;
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
@@ -427,11 +426,6 @@ export type MutationRespondToFriendRequestArgs = {
 
 export type MutationDeleteFriendshipArgs = {
   friendId: Scalars['String'];
-};
-
-
-export type MutationJoinModuleArgs = {
-  moduleId: Scalars['String'];
 };
 
 

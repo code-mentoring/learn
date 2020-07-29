@@ -26,29 +26,30 @@ describe('Module entity', () => {
     beforeEach(async () => {
       await setup();
     });
+    // TODO: Replace with beginLesson, beginAssignment
 
-    it('should join a module successfully', async () => {
-      expect.assertions(1);
+    // it('should join a module successfully', async () => {
+    //   expect.assertions(1);
 
-      const [module] = Object.keys(TestClient.cms.modules);
+    //   const [module] = Object.keys(TestClient.cms.modules);
 
-      await TestClient.createUser();
-      const res = await TestClient.joinModule(module);
-      await expect(res).toBe(true);
-    });
+    //   await TestClient.createUser();
+    //   const res = await TestClient.joinModule(module);
+    //   await expect(res).toBe(true);
+    // });
 
-    it('should not allow a user to join a module more than once', async () => {
-      expect.assertions(1);
+    // it('should not allow a user to join a module more than once', async () => {
+    //   expect.assertions(1);
 
-      const [module] = Object.keys(TestClient.cms.modules);
+    //   const [module] = Object.keys(TestClient.cms.modules);
 
-      await TestClient.joinModule(module);
+    //   await TestClient.joinModule(module);
 
-      try {
-        await TestClient.joinModule(module);
-      } catch (e) {
-        expect(e.message).toMatch(/unique constraint/i);
-      }
-    });
+    //   try {
+    //     await TestClient.joinModule(module);
+    //   } catch (e) {
+    //     expect(e.message).toMatch(/unique constraint/i);
+    //   }
+    // });
   });
 });
