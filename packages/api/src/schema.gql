@@ -11,7 +11,11 @@ type Lesson {
   questions: [Question!]!
 }
 
-union Question = QuestionMultiChoice | QuestionMemory | QuestionDragDrop | QuestionBugHighlight
+union Question =
+    QuestionMultiChoice
+  | QuestionMemory
+  | QuestionDragDrop
+  | QuestionBugHighlight
 
 type QuestionMultiChoice {
   id: String!
@@ -216,10 +220,14 @@ type Query {
   modules: [Module!]!
   pathModules(pathId: String!): [Module!]!
   paths(
-    """Only get paths the current user has not joined"""
+    """
+    Only get paths the current user has not joined
+    """
     notJoined: Boolean = false
 
-    """Only get the current user's paths"""
+    """
+    Only get the current user's paths
+    """
     onlyJoined: Boolean = false
   ): [Path!]!
   path(id: String!): Path!
@@ -230,7 +238,9 @@ type Query {
 }
 
 type Mutation {
-  createAssignmentFile(assignmentFile: CreateAssignmentFileInput!): AssignmentFile!
+  createAssignmentFile(
+    assignmentFile: CreateAssignmentFileInput!
+  ): AssignmentFile!
   updateAssignmentFile(file: UpdateAssignmentFileInput!): AssignmentFile!
   deleteAssignmentFile(assignmentFileId: String!): Boolean!
   createUser(user: UserInput!): User!
@@ -249,7 +259,11 @@ type Mutation {
   deleteConcept(conceptId: String!): Boolean!
   learnConcept(conceptId: String!): Boolean!
   createFriendship(toId: String!): FriendOutput!
-  respondToFriendRequest(response: String!, user2Id: String!, user1Id: String!): Friend!
+  respondToFriendRequest(
+    response: String!
+    user2Id: String!
+    user1Id: String!
+  ): Friend!
   deleteFriendship(friendId: String!): Boolean!
   createPath(path: PathInput!): Path!
   joinPath(pathId: String!): Boolean!
