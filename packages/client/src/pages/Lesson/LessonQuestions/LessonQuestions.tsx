@@ -1,4 +1,4 @@
-import { ModuleLesson, QuestionType, QuestionMultiChoice, QuestionMemory } from '@codement/api';
+import { ModuleLesson, QuestionType, QuestionMultiChoice, QuestionMemory, QuestionDragDrop } from '@codement/api';
 import { theme as t, Text, Button, aniFadeUp } from '@codement/ui';
 import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
@@ -9,6 +9,7 @@ import { LessonFooter } from '../LessonFooter';
 import { QuestionResult } from '../../../components/QuestionResult/QuestionResult';
 import { QMemory } from './questions/QMemory/QMemory';
 import { CONFIG } from '../../../config';
+import { QDragDrop } from './questions/QDragDrop/QDragDrop';
 
 export interface LessonQuestionsProps {
   lesson: ModuleLesson;
@@ -63,6 +64,8 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = () => {
         return () => <QMultiChoice question={q as QuestionMultiChoice} key={attempts!} />;
       case QuestionType.Memory:
         return () => <QMemory question={q as QuestionMemory} key={attempts!} />;
+      case QuestionType.DragDrop:
+        return () => <QDragDrop question={q as QuestionDragDrop} key={attempts!} />;
       default:
         // eslint-disable-next-line no-console
         console.warn(`Unknown question type '${q.type}'`);

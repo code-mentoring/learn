@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Lesson } from '../../../../../containers/Lesson.container';
 import { Question } from '../../../../../containers/Question.container';
-import { Code, CodeSlot } from '../../Code';
+import { Code, CodeSlotValue } from '../../Code/Code';
 
 export interface QMultiChoiceProps {
   question: QuestionMultiChoice
@@ -37,14 +37,14 @@ export const QMultiChoice: React.FC<QMultiChoiceProps> = ({ question: q }) => {
 
   const options = useMemo(() => shuffle(q.options), [q.options]);
 
-  const v = useMemo<CodeSlot>(() => ({
+  const v = useMemo<CodeSlotValue>(() => ({
     value: (value !== null) ? options[value] : null,
     grade: questionGrade
   }), [value, questionGrade, options]);
 
 
   const check = () => {
-    checkAnswer(options[value!]);
+    checkAnswer([options[value!]]);
   };
 
   // Once value is populated, enable footer button

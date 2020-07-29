@@ -7,7 +7,7 @@ import { createContainer } from 'unstated-next';
 import { Lesson, FooterNext } from './Lesson.container';
 
 const checkAnswerGQ = gql`
-query ($questionId: String!, $answer: String!) {
+query ($questionId: String!, $answer: [String!]!) {
   checkAnswer(questionId: $questionId, answer: $answer)
 }`;
 
@@ -18,20 +18,21 @@ export const Question = createContainer(() => {
     lesson,
     setFooterButtonClick,
     progress,
-    attempts
+    attempts,
+    addCorrectAnswer
   } = Lesson.useContainer();
 
   const [question, setQuestion] = useState<null | APIQuestion>(null);
-  const [answerState, setAnswerState] = useState<null | boolean>(null);
+  const [gradeData, setGradeData] = useState<null | boolean[]>(null);
   const [questionGrade, setQuestionState] = useState<null | boolean>(null);
   const [questionQueue, setQuestionQueue] = useState<APIQuestion[]>([]);
   const [completedQueue, setCompletedQueue] = useState<APIQuestion[]>([]);
+  const [answer, setAnswer] = useState<null | string[]>(null);
 
   const [checkAnswerQuery, { data: checkAnswerData }] = useLazyQuery<
     { checkAnswer: Query['checkAnswer'] },
     QueryCheckAnswerArgs
   >(checkAnswerGQ, { fetchPolicy: 'network-only' });
-
 
   const shuffleQ = (questions: APIQuestion[]) => {
     setQuestionQueue(shuffle([...questions]));
@@ -56,18 +57,19 @@ export const Question = createContainer(() => {
       setQuestion(questionQueue[0]);
     }
 
-    setAnswerState(null);
+    setGradeData(null);
   }, [attempts]);
 
 
   // Once the answer is checked, update the state
   useEffect(() => {
-    if (checkAnswerData !== undefined) setAnswerState(checkAnswerData.checkAnswer);
+    if (checkAnswerData !== undefined) setGradeData(checkAnswerData.checkAnswer);
   }, [checkAnswerData]);
 
 
-  const checkAnswer = (answer: string) => {
+  const checkAnswer = (answer: string[]) => {
     if (!question) return;
+    setAnswer(answer);
     checkAnswerQuery({ variables: { answer, questionId: question.id } });
   };
 
@@ -82,6 +84,8 @@ export const Question = createContainer(() => {
       // Remove first question from questionQueue and add to completedQueue
       setQuestionQueue(_q => _q.slice(1));
       setCompletedQueue(_q => [..._q, c]);
+      if (answer) addCorrectAnswer(question!.id, answer);
+      setAnswer(null);
     } else {
       /**
        * Otherwise, if user was incorrect, add the questiont to the back of the
@@ -96,13 +100,14 @@ export const Question = createContainer(() => {
 
   // If the question answered (incorrect OR correct), complete question
   useEffect(() => {
-    if (answerState !== null) completeQuestion(answerState);
-  }, [answerState]);
+    if (gradeData !== null) completeQuestion(gradeData.every(c => c));
+  }, [gradeData]);
 
   return {
     question,
     completeQuestion,
     questionGrade,
-    checkAnswer
+    checkAnswer,
+    gradeData
   };
 });
