@@ -62,6 +62,11 @@ export class QuestionDragDrop extends BaseQuestion {
 
   @Field()
   code: string;
+
+  @Field()
+  slots: number;
+
+  answer: number[];
 }
 
 // ----------------------------------------------------------------- Drag & Drop

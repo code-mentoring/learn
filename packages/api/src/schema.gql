@@ -38,6 +38,7 @@ type QuestionDragDrop {
   type: QuestionType!
   options: [String!]!
   code: String!
+  slots: Float!
 }
 
 type QuestionBugHighlight {
@@ -164,6 +165,11 @@ type UserConcept {
   user: User!
 }
 
+type BeginLesson {
+  secret: String!
+  lesson: ModuleLesson!
+}
+
 type Friend {
   id: String!
   user1Id: String!
@@ -196,7 +202,6 @@ type Query {
   me: User!
   verifyToken(accessToken: String!): Boolean!
   characters: [Character!]!
-  lesson(id: String!): ModuleLesson!
   concepts: [Concept!]!
   concept(name: String!): Concept!
   userLearnedConcepts: [UserConcept!]!
@@ -211,8 +216,7 @@ type Query {
     onlyJoined: Boolean = false
   ): [Path!]!
   path(id: String!): Path!
-  questions(type: String, moduleIndex: Float!, pathId: String!): [Question!]!
-  checkAnswer(answer: String!, questionId: String!): Boolean!
+  checkAnswer(answer: [String!]!, questionId: String!): [Boolean!]!
   lessonStorySections(lessonId: String!): [StorySection!]!
 }
 
@@ -226,6 +230,9 @@ type Mutation {
   createCharacter(character: CreateCharacterInput!): Character!
   updateCharacter(character: UpdateCharacterInput!): Character!
   deleteCharacter(id: String!): Boolean!
+  beginLesson(id: String!): BeginLesson!
+  completeLesson(answers: String!, id: String!): Boolean!
+  completeModule(moduleName: String!): UserModule!
   createConcept(concept: CreateConceptInput!): Concept!
   updateConcept(concept: UpdateConceptInput!): Concept!
   deleteConcept(conceptId: String!): Boolean!
@@ -238,7 +245,6 @@ type Mutation {
   joinPath(pathId: String!): Boolean!
   joinPaths(paths: [String!]!): Boolean!
   updatePath(path: UpdatePathInput!): Path!
-  completeModule(moduleName: String!): UserModule!
 }
 
 input CreateAssignmentFileInput {

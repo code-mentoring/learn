@@ -51,6 +51,7 @@ export type QuestionDragDrop = {
   type: QuestionType;
   options: Array<Scalars['String']>;
   code: Scalars['String'];
+  slots: Scalars['Float'];
 };
 
 export type QuestionBugHighlight = {
@@ -186,6 +187,12 @@ export type UserConcept = {
   user: User;
 };
 
+export type BeginLesson = {
+   __typename?: 'BeginLesson';
+  secret: Scalars['String'];
+  lesson: ModuleLesson;
+};
+
 export type Friend = {
    __typename?: 'Friend';
   id: Scalars['String'];
@@ -221,7 +228,6 @@ export type Query = {
   me: User;
   verifyToken: Scalars['Boolean'];
   characters: Array<Character>;
-  lesson: ModuleLesson;
   concepts: Array<Concept>;
   concept: Concept;
   userLearnedConcepts: Array<UserConcept>;
@@ -230,8 +236,7 @@ export type Query = {
   pathModules: Array<Module>;
   paths: Array<Path>;
   path: Path;
-  questions: Array<Question>;
-  checkAnswer: Scalars['Boolean'];
+  checkAnswer: Array<Scalars['Boolean']>;
   lessonStorySections: Array<StorySection>;
 };
 
@@ -261,11 +266,6 @@ export type QueryVerifyTokenArgs = {
 };
 
 
-export type QueryLessonArgs = {
-  id: Scalars['String'];
-};
-
-
 export type QueryConceptArgs = {
   name: Scalars['String'];
 };
@@ -292,15 +292,8 @@ export type QueryPathArgs = {
 };
 
 
-export type QueryQuestionsArgs = {
-  type?: Maybe<Scalars['String']>;
-  moduleIndex: Scalars['Float'];
-  pathId: Scalars['String'];
-};
-
-
 export type QueryCheckAnswerArgs = {
-  answer: Scalars['String'];
+  answer: Array<Scalars['String']>;
   questionId: Scalars['String'];
 };
 
@@ -320,6 +313,9 @@ export type Mutation = {
   createCharacter: Character;
   updateCharacter: Character;
   deleteCharacter: Scalars['Boolean'];
+  beginLesson: BeginLesson;
+  completeLesson: Scalars['Boolean'];
+  completeModule: UserModule;
   createConcept: Concept;
   updateConcept: Concept;
   deleteConcept: Scalars['Boolean'];
@@ -332,7 +328,6 @@ export type Mutation = {
   joinPath: Scalars['Boolean'];
   joinPaths: Scalars['Boolean'];
   updatePath: Path;
-  completeModule: UserModule;
 };
 
 
@@ -379,6 +374,22 @@ export type MutationUpdateCharacterArgs = {
 
 export type MutationDeleteCharacterArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationBeginLessonArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationCompleteLessonArgs = {
+  answers: Scalars['String'];
+  id: Scalars['String'];
+};
+
+
+export type MutationCompleteModuleArgs = {
+  moduleName: Scalars['String'];
 };
 
 
@@ -441,11 +452,6 @@ export type MutationJoinPathsArgs = {
 
 export type MutationUpdatePathArgs = {
   path: UpdatePathInput;
-};
-
-
-export type MutationCompleteModuleArgs = {
-  moduleName: Scalars['String'];
 };
 
 export type CreateAssignmentFileInput = {

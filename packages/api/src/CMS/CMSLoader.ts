@@ -86,6 +86,7 @@ export class CMSLoader {
         .filter(q => (
           (q.type === QuestionType.multiChoice)
           || (q.type === QuestionType.memory)
+          || (q.type === QuestionType.dragDrop)
         ));
 
       const lesson: ModuleLesson = {
@@ -156,10 +157,12 @@ export class CMSLoader {
           return mem;
 
         case QuestionType.dragDrop:
+          const slots = code.match(/%%CODE%%/gm)?.length || 0;
           const dnd: QuestionDragDrop = {
             ...base,
             ...(attributes as QuestionDragDrop),
             type: QuestionType.dragDrop,
+            slots,
             code
           };
           await shapeQuestionDragDrop.validate(dnd);
