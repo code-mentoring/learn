@@ -7,6 +7,7 @@
     "@types/react-table": "^7.0.16",
     "@types/react-transition-group": "^4.4.0",
     "@types/styled-components": "^5.1.0",
+    "canvas-confetti": "^1.2.0",
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
     "graphql-tag": "^2.10.3",
@@ -20,6 +21,7 @@
   },
   "gitHead": "891323ca81958851d5adf69ce92a071abda9c09a",
   "devDependencies": {
+    "@types/canvas-confetti": "^1.0.0",
     "@types/prismjs": "^1.16.1",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",

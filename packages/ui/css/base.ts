@@ -88,7 +88,4 @@ h3 { ${text.baseText(text.h3.defaultProps!)} }
 h5 { ${text.baseText(text.h5.defaultProps!)} }
 p { ${text.baseText(text.body1.defaultProps!)} }
 p.body2 { ${text.baseText(text.body2.defaultProps!)} }
-span { ${text.baseText(text.span.defaultProps!)} }
-small { ${text.baseText(text.small.defaultProps!)} }
-strong { ${text.baseText(text.strong.defaultProps!)} }
 `;
