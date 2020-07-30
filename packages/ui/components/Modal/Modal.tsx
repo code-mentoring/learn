@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { CardProps } from '../Card/Card';
 import { Text } from '../Text/Text';
-import { CloseIcon, ModalContent, ModalWrapper, StyledTransition, ModalBackground, ModalHeader } from './Modal.styles';
+import { CloseIcon, ModalContent, ModalWrapper, StyledTransition, ModalBackground, ModalHeader, ModalFooter } from './Modal.styles';
 
 
 export interface ModalProps extends React.HTMLProps<HTMLElement> {
@@ -11,6 +11,7 @@ export interface ModalProps extends React.HTMLProps<HTMLElement> {
   heading?: string | React.ComponentType;
   padding?: CardProps['padding'];
   onClose?: () => void;
+  buttons?: React.ReactNode[]
 }
 
 
@@ -20,7 +21,8 @@ export const Modal: React.FC<ModalProps> = ({
   heading,
   className,
   padding = 'lg',
-  onClose
+  onClose,
+  buttons
 }) => {
   const [show, setShow] = useState(showInitial);
   useEffect(() => setShow(showInitial), [showInitial]);
@@ -41,7 +43,7 @@ export const Modal: React.FC<ModalProps> = ({
   }, [show]);
 
 
-  const Title = (typeof heading === 'string') ? <Text as="h2">{heading}</Text> : heading;
+  const Title = (typeof heading === 'string') ? <Text variant="h2" color="grey.800">{heading}</Text> : heading;
 
 
   const content = <ModalWrapper>
@@ -57,6 +59,7 @@ export const Modal: React.FC<ModalProps> = ({
         />
       </ModalHeader>
       <main>{children}</main>
+      {buttons?.length ? <ModalFooter>{buttons}</ModalFooter> : null}
     </ModalContent>
   </ModalWrapper>;
 

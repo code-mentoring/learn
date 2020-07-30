@@ -31,8 +31,24 @@ const config: Configuration = {
       { test: /\.ts/, loader: 'ts-loader' },
       { test: /\.html/, loader: 'html-loader' },
       { test: /\.png/, loader: 'url-loader' },
-      { test: /\.svg/, loader: 'react-svg-loader' },
-      { test: /\.gql/, loader: 'graphql-tag/loader' }
+      {
+        test: /\.svg/,
+        loader: 'react-svg-loader',
+        options: {
+          svgo: {
+            plugins: [
+              { removeViewBox: false, cleanupIDs: false }
+            ],
+            floatPrecision: 2
+          }
+        }
+      },
+      { test: /\.gql/, loader: 'graphql-tag/loader' },
+      {
+        test: /\.(mp3|wav)$/,
+        loader: 'file-loader',
+        query: { name: 'static/media/[name].[hash:8].[ext]' }
+      }
     ]
   },
 
@@ -42,12 +58,12 @@ const config: Configuration = {
     }),
     new ReplacePlugin({
       values: {
-        '%%API_HOST%%': isProd ? 'https://api.codementoring.co' : 'http://localhost:4000',
+        '%%API_HOST%%': process.env.API_HOST || 'http://localhost:4000',
         '%%IS_PROD%%': isProd
       }
     }),
     new CopyPlugin([{ from: './_redirects', to: './' }]),
-    new Favicon('../ui/images/favicon-logo.png')
+    new Favicon('../ui/images/favicon.jpg')
   ]
 
 };

@@ -39,6 +39,9 @@ export const Page: React.FunctionComponent<PageProps> = ({
 }) => {
   useEffect(() => { document.title = title; }, [title]);
 
+  // TODO: Page level query for better data optimization.
+  // Would be great to get each page down to one API call for load
+
   return <StyledPage sidebar={sidebar} className={className}>
     {header && <AppHeader />}
     {sidebar && <AppSidebar />}

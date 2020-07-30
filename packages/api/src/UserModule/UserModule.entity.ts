@@ -1,8 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn, Entity, Unique, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { CMBaseEntity } from '../lib/Base.entity';
+import { Path } from '../Path/Path.entity';
 import { UserWithPassword } from '../User/User.entity';
-import { Module } from '../Module/Module.entity';
+
+
+// TODO: Remove graphql here. It should be DB only
 
 @ObjectType()
 @Entity()
@@ -20,13 +23,27 @@ export class UserModule extends CMBaseEntity {
     @Field()
     moduleId: string;
 
-    @CreateDateColumn()
+    @ManyToOne(() => Path)
+    @JoinColumn({ name: 'name' })
+    @Field()
+    path: Path;
+
+    @Column({ nullable: true })
     @Field({ nullable: true })
     completedAt?: Date;
 
     @ManyToOne(() => UserWithPassword, user => user.userModules)
     user: UserWithPassword;
 
-    @ManyToOne(() => Module, module => module.userModules)
-    module: Module;
+    /**
+     * Every time the user requests a lesson, this secret will get updated.
+     * The secret is sent to the client, so when the answer is submitted,
+     * it's encrypted with this key. This means when answers are sent (and decrypted
+     * by the API), nobody can inspect and cheat. It's also locked down to the user
+     */
+    @Column()
+    secret: string;
+
+    @Column({ default: 1 })
+    viewed: number;
 }

@@ -2,17 +2,16 @@ import fs from 'fs';
 import path from 'path';
 
 const files = [
-  'getPathByName',
+  'path',
   'me',
   'modules',
-  'getUserFriends',
+  'myFriends',
   'search',
   'users',
-  'getUserFriends',
-  'getCharacters',
+  'characters',
   'assignments',
   'assignmentFiles',
-  'getConceptByName'
+  'concept'
 ];
 
 export default files.reduce((obj, file) => {

@@ -38,7 +38,12 @@ declare module 'styled-components' {
       transparent: string,
       white: string,
       black: string,
-      error: string
+      error: string,
+
+      code: {
+        color: string,
+        background: string,
+      }
     },
     color(color?: Color): string,
 
@@ -50,7 +55,7 @@ declare module 'styled-components' {
     letterSpacing: { sm: string; md: string; lg: string; }
     borderRadius: { small: string, medium: string, default: string, circle: string, large: string }
     borders: {main: string}
-    shadows: {main: string}
+    shadows: { main: string, success: string, error: string}
   }
   // export interface DefaultTheme {
   //   colors: {

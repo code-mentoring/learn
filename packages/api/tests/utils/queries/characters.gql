@@ -1,0 +1,14 @@
+query characters {
+  characters {
+    id
+    name
+    displayName
+    path{
+      id
+      name
+      icon
+      description
+      createdAt
+    }
+  }
+}

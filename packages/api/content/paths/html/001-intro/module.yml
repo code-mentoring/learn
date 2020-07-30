@@ -1,0 +1,20 @@
+id: html-introduction
+name: Introduction
+type: lesson
+icon: fire
+
+questions:
+  - type: codeComplete
+    files:
+      - file: ./files/a1.html
+        answers:
+        - </a>
+      - file: ./files/a2.html
+        answers:
+        - </body>
+      - file: ./files/a3.html
+        answers:
+        - <form>
+      - file: ./files/a4.html
+        answers:
+        - </li>

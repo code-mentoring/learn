@@ -1,0 +1,15 @@
+query ($id: String!) {
+  path(id: $id) {
+    id
+    name
+    icon
+    description
+    createdAt
+    character{
+      id
+      name
+      displayName
+    }
+    characterId
+  }
+}

@@ -1,0 +1,31 @@
+# fragment ModuleAssignment on ModuleAssignment {
+#   id
+#   name
+#   icon
+#   type
+#   previousId
+#   pathName
+#   previous {
+#     ... on ModuleAssignment { id name }
+#     ... on ModuleLesson { id name }
+#   }
+#   completed
+#   assignment { id description }
+# }
+
+fragment ModuleLesson on ModuleLesson {
+  id
+  name
+  icon
+  type
+  previousId
+  pathId
+  previous {
+    # ... on ModuleAssignment { id name }
+    ... on ModuleLesson { id name }
+  }
+  completed
+  lesson {
+    storySections { content }
+  }
+}

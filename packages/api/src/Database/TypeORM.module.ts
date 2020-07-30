@@ -3,7 +3,7 @@ import config from 'config';
 import path from 'path';
 
 // Database connection details based on the NODE_ENV
-const db = process.env.NODE_ENV === 'production'
+const db = process.env.DATABASE_URL
   ? { type: 'postgres', url: process.env.DATABASE_URL }
   : config.get('db') as {};
 

@@ -1,4 +1,4 @@
-import { generatePath } from 'react-router';
+import { generatePath } from 'react-router-dom';
 import { CONFIG } from '../config';
 
 interface Params {
@@ -17,11 +17,13 @@ export const linkParams = <T extends Params = {}>(
     };
 
 export const routes = {
+  notFound: linkParams('/not-found'),
   login: linkParams('/login'),
   logout: linkParams('/logout'),
 
   // Authed
   home: linkParams('/'),
+  lesson: linkParams<{lessonId: string}>('/lesson/:lessonId'),
   settings: linkParams('/settings'),
 
   // Onboarding workflow

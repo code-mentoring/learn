@@ -4,12 +4,12 @@ import * as Comps from './Text.styles';
 import { Color } from '../../types/styled';
 
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  as?: keyof typeof Comps
+  variant?: keyof typeof Comps
   color?: Color
 }
 
-export const Text: React.FC<TextProps> = ({ as = 'body1', ...props }) => {
-  const T = Comps[as];
-  if (!T) throw new Error(`Unknown text type '${as}'`);
+export const Text: React.FC<TextProps> = ({ variant = 'body1', ...props }) => {
+  const T = Comps[variant];
+  if (!T) throw new Error(`Unknown text type '${variant}'`);
   return <T {...props} />;
 };

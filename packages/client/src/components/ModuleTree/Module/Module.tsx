@@ -1,25 +1,30 @@
 import { Module as EModule } from '@codement/api';
-import { Icon, theme as t, Text, Box } from '@codement/ui';
+import { Box, Icon, Text, theme as t, centerAbsolute } from '@codement/ui';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { routes } from '../../../router/routes';
 import Hex from './hex.svg';
 
 
 export interface ModuleProps {
-  module: EModule
+  module: EModule,
+  showText?: boolean;
 }
 
 interface Props {
   state: null | boolean; // Null = locked, false = incomplete, true = complete
 }
 
-const StyledModule = styled.div<Props>`
+const StyledModule = styled(Link) <Props>`
+  display: block;
   position: relative;
   text-align: center;
   margin: auto;
   margin-bottom: ${t.size('xbig')};
   width: ${t.size('massive')};
+
   color: ${p => {
     switch (p.state) {
       default:
@@ -29,6 +34,21 @@ const StyledModule = styled.div<Props>`
     }
   }};
 
+  &, small {
+    transition: all 0.1s ease-in-out;
+  }
+
+  &:hover {
+    color: ${p => {
+    switch (p.state) {
+      default:
+      case false: return t.color('primary.300');
+      case true: return t.color('green.400');
+    }
+  }};
+    small { color: ${t.color('grey.600')} }
+  }
+
   & > div {
     position: relative;
     width: ${t.size('massive')};
@@ -36,12 +56,7 @@ const StyledModule = styled.div<Props>`
   }
 `;
 
-const StyledIcon = styled(Icon)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+const StyledIcon = styled(Icon)` ${centerAbsolute} `;
 
 const Status = styled.span`
   position: absolute;
@@ -58,8 +73,16 @@ const Status = styled.span`
   font-weight: ${t.fontWeight.bold};
 `;
 
-export const Module: React.FC<ModuleProps> = ({ module }) =>
-  <StyledModule state={module.completed}>
+export const Module: React.FC<ModuleProps> = ({
+  module,
+  showText = true,
+  ...props
+}) => {
+  const href = (module.type === 'lesson')
+    ? routes.lesson({ lessonId: module.id })
+    : '';
+
+  return <StyledModule state={module.completed} to={href} {...props}>
     <Box padding="none">
       <Hex />
       <StyledIcon icon="fire" size="lg" color="white" />
@@ -67,5 +90,6 @@ export const Module: React.FC<ModuleProps> = ({ module }) =>
         <Icon icon="check" color="white" />
       </Status>}
     </Box>
-    <Text as="small" color="grey.600">{module.name}</Text>
+    {showText && <Text variant="small" color="grey.700">{module.name}</Text>}
   </StyledModule>;
+};

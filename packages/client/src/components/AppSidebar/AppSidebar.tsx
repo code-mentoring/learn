@@ -16,6 +16,6 @@ export const AppSidebar: React.FC<AppSidebarProps> = () =>
   <StyledAppSidebar>
     {menuItems.map(i => <SidebarLink key={i.text} to={i.to}>
       <Icon icon={i.icon} size="xbig" />
-      <Text as="h3">{i.text}</Text>
+      <Text variant="h3">{i.text}</Text>
     </SidebarLink>)}
   </StyledAppSidebar>;
