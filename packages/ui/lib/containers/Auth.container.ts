@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
@@ -31,10 +31,14 @@ const useAuth = () => {
   const [status, setStatus] = useState<AuthStatus>('signingIn');
   const [checked, setChecked] = useState<boolean>(false);
   const [redirect, setRedirect] = useState<string | null>(null);
+  const client = useApolloClient();
 
   const signOut = () => {
+    // Clear apollo query cache when logging out
+    client.resetStore();
     LocalStorage.token = null;
     localStorage.clear();
+
     setChecked(true);
     setStatus('signedOut');
   };
