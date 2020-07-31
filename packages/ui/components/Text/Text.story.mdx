@@ -1,0 +1,68 @@
+import {Text} from './Text';
+import {Card} from '../Card/Card';
+import {Row} from '../../styleguide/Story';
+
+# Text
+## Default
+<Card>
+    <Row>
+      <Text>Default Text is body1</Text>
+    </Row>
+</Card>
+
+```tsx
+<Text>Style Guide for Text</Text>
+
+```
+
+---
+## Variant
+There are a number of variant that we use for text, which can be set with the `variant` property.
+<Card>
+    <Row>
+      <Text variant="title">title</Text>
+      <Text variant="subTitle">subTitle</Text>
+      <Text variant="h1">h1</Text>
+      <Text variant="h2">h2</Text>
+      <Text variant="h3">h3</Text>
+      <Text variant="h5">h5</Text>
+      <Text variant="body1">body1</Text>
+      <Text variant="body2">body2</Text>
+      <Text variant="span">span</Text>
+      <Text variant="small">small</Text>
+      <Text variant="strong">strong</Text>
+    </Row>
+</Card>
+
+```tsx
+<Text variant="title">title</Text>
+<Text variant="subTitle">subTitle</Text>
+<Text variant="h1">h1</Text>
+<Text variant="h2">h2</Text>
+<Text variant="h3">h3</Text>
+<Text variant="h5">h5</Text>
+<Text variant="body1">body1</Text>
+<Text variant="body2">body2</Text>
+<Text variant="span">span</Text>
+<Text variant="small">small</Text>
+<Text variant="strong">strong</Text>
+```
+
+---
+
+## Colors
+<Card>
+    <Row>
+      <Text color="primary">primary</Text>
+      <Text color="secondary">secondary</Text>
+      <Text color="tertiary">tertiary</Text>
+      <Text color="error">error</Text>
+    </Row>
+</Card>
+
+```tsx
+<Text color="primary">primary</Text>
+<Text color="secondary">secondary</Text>
+<Text color="tertiary">tertiary</Text>
+<Text color="error">error</Text>
+```
