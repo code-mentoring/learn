@@ -6,17 +6,14 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  Unique,
-  ManyToMany,
-  JoinTable
+  Unique
 } from 'typeorm';
-
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
-import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
-import { UserModule } from '../UserModule/UserModule.entity';
-import { Role, Roles } from '../Role/Role.entity';
 import { RoleType } from '../Role/RoleType.enum';
+import { UserModule } from '../UserModule/UserModule.entity';
+import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
+
 
 @ObjectType()
 export class User {
@@ -35,8 +32,8 @@ export class User {
   @Field()
   profileImage: string;
 
-  @Field(() => [Roles])
-  roles: Roles[];
+  @Field(() => RoleType)
+  role: RoleType;
 
   @Field(() => UserPreferences, { nullable: true })
   userPreferences?: UserPreferences;
@@ -75,9 +72,8 @@ export class UserWithPassword extends CMBaseEntity {
   @OneToMany(() => UserModule, userModules => userModules.user)
   userModules: UserModule[];
 
-  @ManyToMany(() => Role, role => role.users, { eager: true })
-  @JoinTable({ name: 'user_roles' })
-  roles: Role[];
+  @Column({ type: 'simple-enum', enum: RoleType, default: RoleType.user })
+  role: RoleType;
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
@@ -96,22 +92,4 @@ export class UserInput {
 
   @Field()
   password: string;
-}
-
-@InputType()
-export class UserUpdate {
-  @Field({ nullable: true })
-  firstName?: string;
-
-  @Field({ nullable: true })
-  lastName?: string;
-
-  @Field({ nullable: true })
-  email?: string;
-
-  @Field({ nullable: true })
-  password?: string;
-
-  @Field(() => RoleType)
-  roles?: RoleType[];
 }

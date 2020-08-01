@@ -28,8 +28,6 @@ import { DatabaseService } from './Database.service';
 import { SeederService } from './seeders/Seeders.service';
 import { TypeORMModule } from './TypeORM.module';
 import { CMS } from '../CMS/CMS';
-import { Role } from '../Role/Role.entity';
-import { RoleService } from '../Role/Role.service';
 
 /**
  * Main Database Module, used in App.module and testing
@@ -48,8 +46,7 @@ import { RoleService } from '../Role/Role.service';
       UserConcept,
       Friend,
       Character,
-      UserModule,
-      Role
+      UserModule
     ])
   ],
   providers: [
@@ -67,8 +64,7 @@ import { RoleService } from '../Role/Role.service';
     FriendService,
     CharacterService,
     PathUserService,
-    UserModuleService,
-    RoleService
+    UserModuleService
   ],
   exports: [DatabaseService, SeederService]
 })

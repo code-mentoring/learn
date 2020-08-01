@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import Listr from 'listr';
 import { Connection, Repository } from 'typeorm';
-
 import { Assignment } from '../../Assignment/Assignment.entity';
 import { AssignmentService } from '../../Assignment/Assignment.service';
 import { AssignmentFileService } from '../../AssignmentFile/AssignmentFile.service';
 import { Character } from '../../Character/Character.entity';
 import { CharacterService } from '../../Character/Character.service';
+import { CMS } from '../../CMS/CMS';
 import { ConceptService } from '../../Concept/Concept.service';
 import { FriendStatus } from '../../Friend/Friend.entity';
 import { FriendService } from '../../Friend/Friend.service';
@@ -19,9 +19,8 @@ import { UserService } from '../../User/User.service';
 import { UserPreferencesService } from '../../UserPreferences/UserPreferences.service';
 import { DatabaseService } from '../Database.service';
 import * as random from './random';
-import { CMS } from '../../CMS/CMS';
-import { RoleService } from '../../Role/Role.service';
-import { RoleType } from '../../Role/RoleType.enum';
+// import { RoleType } from '../../Role/RoleType.enum';
+
 
 interface CTX {
   users: UserWithPassword[];
@@ -48,8 +47,7 @@ export class SeederService {
     public assignmentFileService: AssignmentFileService,
     public conceptService: ConceptService,
     public friendService: FriendService,
-    public characterService: CharacterService,
-    public roleService: RoleService
+    public characterService: CharacterService
   ) {}
 
   db = new DatabaseService(this.connection);
@@ -71,9 +69,12 @@ export class SeederService {
       Array(num)
         .fill(undefined)
         .map(async (_, i) => {
-          const user = await this.userService.create(
-            random.userInput({ email: `user${i}@test.com` })
-          );
+          const input = random.userInput({ email: `user${i}@test.com` });
+          if (i === 0) {
+            input.email = 'admin@test.com';
+            // (input as UserWithPassword).role = RoleType.admin;
+          }
+          const user = await this.userService.create(input);
 
           if (i % 2 === 0) {
             await this.userPreferencesService.update(
@@ -169,25 +170,6 @@ export class SeederService {
   }
 
   /**
-   *  Add Roles
-   */
-
-  async seedRoles() {
-    await this.roleService.create({
-      name: RoleType.ADMIN,
-      description: 'Site Admin'
-    });
-    await this.roleService.create({
-      name: RoleType.MENTOR,
-      description: 'Site Mentor'
-    });
-    await this.roleService.create({
-      name: RoleType.STUDENT,
-      description: 'Site STUDENT'
-    });
-  }
-
-  /**
    * Seeds all entities in the database
    */
   async seedAll() {
@@ -196,12 +178,6 @@ export class SeederService {
         title: 'Reset DB',
         task: async () => {
           this.db.DANGEROUSLY_RESET_DATABASE();
-        }
-      },
-      {
-        title: 'Create Roles',
-        task: async () => {
-          await this.seedRoles();
         }
       },
       {

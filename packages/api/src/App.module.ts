@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import path from 'path';
-
-import { AssignmentFileModule } from './AssignmentFile';
 import { AssignmentModule } from './Assignment';
+import { AssignmentFileModule } from './AssignmentFile';
 import { AuthModule } from './Auth';
 import { CharacterModule } from './Character';
 import { CMSModule } from './CMS';
@@ -16,10 +15,10 @@ import { PathModule } from './Path';
 import { PathUserModule } from './PathUser';
 import { QuestionModule } from './Question';
 import { StorySectionModule } from './StorySection';
-import { UserConceptModule } from './UserConcepts';
 import { UserModule } from './User';
+import { UserConceptModule } from './UserConcepts';
 import { UserModuleModule } from './UserModule';
-import { RoleModule } from './Role/Role.module';
+
 
 /**
  * Export these dependencies so they can be used in testing
@@ -42,7 +41,6 @@ export const appImports = [
   UserConceptModule,
   UserModule,
   UserModuleModule,
-  RoleModule,
 
   DatabaseModule,
 

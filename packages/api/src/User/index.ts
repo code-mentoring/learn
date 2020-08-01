@@ -9,7 +9,6 @@ import { UserPreferencesService } from '../UserPreferences/UserPreferences.servi
 import { PathService } from '../Path/Path.service';
 import { PathUser } from '../PathUser/PathUser.entity';
 import { Path } from '../Path/Path.entity';
-import { Role } from '../Role/Role.entity';
 
 @Module({
   imports: [
@@ -17,8 +16,7 @@ import { Role } from '../Role/Role.entity';
       UserWithPassword,
       UserPreferences,
       Path,
-      PathUser,
-      Role
+      PathUser
     ])
   ],
   providers: [
