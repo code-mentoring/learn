@@ -17,7 +17,11 @@ mutation($user: UserInput!) {
 }`;
 
 const useUser = () => {
-  const [createUserFunc, { data: createUserData, error: signupError, loading: signupLoading }] = useMutation<
+  const [createUserFunc, {
+    data: createUserData,
+    error: signupError,
+    loading: signupLoading
+  }] = useMutation<
     { user: UserInput },
     MutationCreateUserArgs>(createUserMutation);
   const { login } = Auth.useContainer();

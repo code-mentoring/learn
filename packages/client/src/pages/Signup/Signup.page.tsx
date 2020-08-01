@@ -68,7 +68,13 @@ const signupValidation = yup.object().shape({
 export const SignupPage = () => {
   const { signup, signupError } = User.useContainer();
 
-  const submit = async (e: { firstName: string, lastName: string, email: string, password: string, rememberMe: boolean }) => {
+  const submit = async (e: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    rememberMe: boolean
+  }) => {
     await signup(e);
   };
 
