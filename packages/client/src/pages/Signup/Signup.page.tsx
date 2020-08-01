@@ -119,10 +119,36 @@ export const SignupPage = () => {
             email: LocalStorage.email || undefined
           }}
         >
-          <FormField name="firstName" type="text" placeholder="First Name" icon="user" disabled={loading} />
-          <FormField name="lastName" type="text" placeholder="Last Name" icon="user" disabled={loading} />
-          <FormField name="email" type="text" placeholder="Email" icon="user" disabled={loading} />
-          <FormField name="password" placeholder="Password" type="password" icon="password" disabled={loading} />
+          <FormField
+            name="firstName"
+            type="text"
+            placeholder="First Name"
+            icon="user"
+            disabled={loading}
+            colSpan={1}
+          />
+          <FormField
+            name="lastName"
+            type="text"
+            placeholder="Last Name"
+            icon="user"
+            disabled={loading}
+            colSpan={1}
+          />
+          <FormField
+            name="email"
+            type="text"
+            placeholder="Email"
+            icon="at"
+            disabled={loading}
+          />
+          <FormField
+            name="password"
+            placeholder="Password"
+            type="password"
+            icon="password"
+            disabled={loading}
+          />
           <Button size="large" disabled={loading}>Signup</Button>
         </Form>
 
