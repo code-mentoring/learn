@@ -1,14 +1,19 @@
+import { useMutation } from '@apollo/react-hooks';
+import { MutationCreateUserArgs, UserInput, Mutation } from '@codement/api';
 import { Box, Button, Emoji, Form, FormField, Text, theme as t } from '@codement/ui';
 import Logo from '@codement/ui/images/logo.svg';
 import People from '@codement/ui/images/welcome-people.svg';
 import { getGQLError } from '@codement/ui/lib/apollo';
-import { User } from '@codement/ui/lib/containers/User.container';
+import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
-import React from 'react';
+import gql from 'graphql-tag';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
-
 import { Page } from '../../components/Page/Page';
+import { routes } from '../../router/routes';
+
 
 const StyledPage = styled(Page)`
   display: grid;
@@ -23,9 +28,8 @@ const StyledPage = styled(Page)`
   }
 
   form {
-    width: 90vw;
+    margin: ${t.size('huge')} auto;
     max-width: 40rem;
-    margin: ${t.size('huge')} 0;
   }
 
   & > svg:first-child {
@@ -40,6 +44,8 @@ const StyledPage = styled(Page)`
 const Container = styled(Box)`
   margin-top: -20rem;
   z-index: 2;
+  width: 90vw;
+  max-width: 50rem;
 
   @media (max-width: 600px) {
     margin-top: -5rem;
@@ -65,18 +71,32 @@ const signupValidation = yup.object().shape({
 });
 
 
-export const SignupPage = () => {
-  const { signup, signupError } = User.useContainer();
+const createUserMutation = gql`
+mutation($user: UserInput!) {
+  createUser(user: $user) {
+    email
+  }
+}`;
 
-  const submit = async (e: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    rememberMe: boolean
-  }) => {
-    await signup(e);
+
+export const SignupPage = () => {
+  const { login } = Auth.useContainer();
+  const [newUser, setNewUser] = useState<UserInput>();
+
+  const [signup, { data, error, loading }] = useMutation<
+    { createUser: Mutation['createUser'] },
+    MutationCreateUserArgs
+  >(createUserMutation);
+
+  const submit = async (user: UserInput) => {
+    setNewUser(user);
+    await signup({ variables: { user } });
   };
+
+  // Once user has signed up, and it's returned, log user in
+  useEffect(() => {
+    if (data?.createUser && newUser) login(newUser.email, newUser.password);
+  }, [data, newUser]);
 
   return (
     <StyledPage title="Signup to Code Mentoring">
@@ -87,44 +107,27 @@ export const SignupPage = () => {
       <Container>
         <Text variant="h1">Start learning how to code today!</Text>
         <Text>
-          You&apos;ll see how easy it really is <Emoji text="😊" />. Fill out your <br />
+          You&apos;ll see how easy it really is <Emoji text="😊" />. Fill out your
           details below to join our community and platform.
         </Text>
 
         <Form
           onSubmit={submit}
-          error={getGQLError(signupError)}
+          error={getGQLError(error)}
           validationSchema={signupValidation}
           initialValues={{
             email: LocalStorage.email || undefined
           }}
         >
-          <FormField
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-            icon="user"
-          />
-          <FormField
-            name="lastName"
-            type="text"
-            placeholder="Last Name"
-            icon="user"
-          />
-          <FormField name="email" type="text" placeholder="Email" icon="user" />
-          <FormField
-            name="password"
-            placeholder="Password"
-            type="password"
-            icon="password"
-          />
-          <FormField type="checkbox" name="rememberMe" text="Remember me?" />
-          <Button size="large">Signup</Button>
+          <FormField name="firstName" type="text" placeholder="First Name" icon="user" disabled={loading} />
+          <FormField name="lastName" type="text" placeholder="Last Name" icon="user" disabled={loading} />
+          <FormField name="email" type="text" placeholder="Email" icon="user" disabled={loading} />
+          <FormField name="password" placeholder="Password" type="password" icon="password" disabled={loading} />
+          <Button size="large" disabled={loading}>Signup</Button>
         </Form>
 
         <Text variant="small">
-          Already have an account?{' '}
-          <a href="https://codementoring.co/login">Sign in here</a>
+          Already have an account? <Link to={routes.login()}>Sign in here</Link>
         </Text>
       </Container>
 
