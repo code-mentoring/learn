@@ -1,2 +1,3 @@
 auth:
   jwtSecret: JWT_SECRET
+env: NODE_ENV

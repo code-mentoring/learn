@@ -9,12 +9,12 @@ pairs:
   - - "<body>"
     - "</body>"
 
-  - - "<img ???=\"http://...\">"
-    - "src"
+  - - "<li>"
+    - "</li>"
 
-  - - "<img ???=\"http://...\">"
-    - "src"
+  - - "<input ????=\"password\" />"
+    - "type"
 
-  - - "<img ???=\"http://...\">"
-    - "src"
+  - - "<hr />"
+    - ""
 ---

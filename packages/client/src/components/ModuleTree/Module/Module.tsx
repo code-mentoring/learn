@@ -1,5 +1,5 @@
 import { Module as EModule } from '@codement/api';
-import { Box, Icon, Text, theme as t } from '@codement/ui';
+import { Box, Icon, Text, theme as t, centerAbsolute } from '@codement/ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,20 +9,22 @@ import Hex from './hex.svg';
 
 
 export interface ModuleProps {
-  module: EModule
+  module: EModule,
+  showText?: boolean;
 }
 
 interface Props {
   state: null | boolean; // Null = locked, false = incomplete, true = complete
 }
 
-const StyledModule = styled(Link)<Props>`
+const StyledModule = styled(Link) <Props>`
   display: block;
   position: relative;
   text-align: center;
   margin: auto;
   margin-bottom: ${t.size('xbig')};
   width: ${t.size('massive')};
+
   color: ${p => {
     switch (p.state) {
       default:
@@ -44,7 +46,7 @@ const StyledModule = styled(Link)<Props>`
       case true: return t.color('green.400');
     }
   }};
-    small { color: ${t.color('grey.600')}}
+    small { color: ${t.color('grey.600')} }
   }
 
   & > div {
@@ -54,12 +56,7 @@ const StyledModule = styled(Link)<Props>`
   }
 `;
 
-const StyledIcon = styled(Icon)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+const StyledIcon = styled(Icon)` ${centerAbsolute} `;
 
 const Status = styled.span`
   position: absolute;
@@ -76,12 +73,16 @@ const Status = styled.span`
   font-weight: ${t.fontWeight.bold};
 `;
 
-export const Module: React.FC<ModuleProps> = ({ module }) => {
+export const Module: React.FC<ModuleProps> = ({
+  module,
+  showText = true,
+  ...props
+}) => {
   const href = (module.type === 'lesson')
     ? routes.lesson({ lessonId: module.id })
     : '';
 
-  return <StyledModule state={module.completed} to={href}>
+  return <StyledModule state={module.completed} to={href} {...props}>
     <Box padding="none">
       <Hex />
       <StyledIcon icon="fire" size="lg" color="white" />
@@ -89,6 +90,6 @@ export const Module: React.FC<ModuleProps> = ({ module }) => {
         <Icon icon="check" color="white" />
       </Status>}
     </Box>
-    <Text variant="small" color="grey.700">{module.name}</Text>
+    {showText && <Text variant="small" color="grey.700">{module.name}</Text>}
   </StyledModule>;
 };
