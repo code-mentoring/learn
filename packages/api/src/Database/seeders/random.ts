@@ -7,13 +7,11 @@ import { PathInput } from '../../Path/Path.entity';
 import { UserInput } from '../../User/User.entity';
 import { UserPreferencesInput } from '../../UserPreferences/UserPreferences.entity';
 
-
-export const userInput = (
-  input: Partial<UserInput> = {}
-): UserInput => ({
+export const userInput = (input: Partial<UserInput> = {}): UserInput => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
+  isAdmin: false,
   password: 'secret',
   ...input
 });
@@ -27,9 +25,7 @@ export const userPreferenceInput = (
   ...input
 });
 
-export const pathInput = (
-  input: Partial<PathInput> = {}
-): PathInput => ({
+export const pathInput = (input: Partial<PathInput> = {}): PathInput => ({
   name: faker.random.word(),
   icon: faker.lorem.word(),
   description: faker.lorem.words(10),

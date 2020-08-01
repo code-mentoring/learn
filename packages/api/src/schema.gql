@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  id: String!
-  description: String!
-  moduleId: String!
-  module: ModuleAssignment!
-}
-
 type StorySection {
   content: String!
 }
@@ -73,6 +66,13 @@ type ModuleLesson {
   lesson: Lesson!
 }
 
+type Assignment {
+  id: String!
+  description: String!
+  moduleId: String!
+  module: ModuleAssignment!
+}
+
 type Character {
   id: String!
   name: String!
@@ -118,6 +118,7 @@ type User {
   firstName: String!
   lastName: String!
   email: String!
+  isAdmin: Boolean!
   profileImage: String!
   userPreferences: UserPreferences
   createdAt: DateTime!
@@ -253,6 +254,7 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+  isAdmin: Boolean!
 }
 
 input UserPreferencesInput {

@@ -1,5 +1,13 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Unique
+} from 'typeorm';
 
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
@@ -19,6 +27,9 @@ export class User {
 
   @Field()
   email: string;
+
+  @Field()
+  isAdmin: boolean;
 
   @Field()
   profileImage: string;
@@ -51,6 +62,9 @@ export class UserWithPassword extends CMBaseEntity {
   @Column()
   password: string;
 
+  @Column({ default: false })
+  isAdmin: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -77,4 +91,7 @@ export class UserInput {
 
   @Field()
   password: string;
+
+  @Field()
+  isAdmin: boolean;
 }
