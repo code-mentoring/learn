@@ -27,8 +27,9 @@ This is a running list of those who are actively contributing to this project.
 | Name                | Role                       | Slack handle          | Github                                                 | Weekly Availability  | Joined    |
 | ------------------- | -------------------------- | --------------------- | ------------------------------------------------------ | -------------------  | --------- |
 | 🧢 Tristan Matthias | Project Lead               | `@Tristan Matthias`   | [@tristanMatthias](https://github.com/tristanMatthias) | 20 hours             | Apr 2020  |
-| 🧢 Shane Sheridan   | Back-end                   | `@Shane Sheridan`     | [@shane215](https://github.com/shane215)               | 5 hours              | Apr 2020  |
+| 🧢 Shane Sheridan   | Back-end                   | `@Shane Sheridan`     | [@shaneSheridan](https://github.com/shaneSheridan)     | 5 hours              | Apr 2020  |
 | 🧢 Suzy Nakayama    | Full-stack                 | `@Suzy Nakayama`      | [@suzynakayama](https://github.com/suzynakayama)       | 10 hours             | Apr 2020  |
+| 🧢 Quim Granados    | Full-stack                 | `@Quim Granados`      | [@quimgv](https://github.com/quimgv)                   | 10-20 hours          | Apr 2020  |
 | Frank Kim           | Documentation / Front-end  | `@Frank Kim`          | [@heyfranksmile](https://github.com/heyfranksmile)     | 10 hours             | Apr 2020  |
 | Tomoya Kuroda       | Full-stack                 | `@Tomoya`             | [@tomoyakuroda](https://github.com/tomoyakuroda)       | 10 hours             | Apr 2020  |
 | Ellie Xiang         | Full-stack                 | `@Ellie`.             | [@Ellie-2020](https://github.com/Ellie-2020)           | 8+ hours             | Apr 2020  |
