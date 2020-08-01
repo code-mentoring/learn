@@ -199,6 +199,12 @@ export class SeederService {
         }
       },
       {
+        title: 'Create Roles',
+        task: async () => {
+          await this.seedRoles();
+        }
+      },
+      {
         title: 'Create users',
         task: async (ctx: CTX) => {
           ctx.users = await this.seedUsers();
@@ -244,12 +250,6 @@ export class SeederService {
         title: 'Create friend',
         task: async (ctx: CTX) => {
           await this.seedFriend(ctx.users);
-        }
-      },
-      {
-        title: 'Create Roles',
-        task: async () => {
-          await this.seedRoles();
         }
       }
     ]).run();
