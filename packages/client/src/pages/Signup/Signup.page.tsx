@@ -2,7 +2,6 @@ import { Box, Button, Emoji, Form, FormField, Text, theme as t } from '@codement
 import Logo from '@codement/ui/images/logo.svg';
 import People from '@codement/ui/images/welcome-people.svg';
 import { getGQLError } from '@codement/ui/lib/apollo';
-import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { User } from '@codement/ui/lib/containers/User.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
 import React from 'react';
@@ -67,16 +66,10 @@ const signupValidation = yup.object().shape({
 
 
 export const SignupPage = () => {
-  const { login } = Auth.useContainer();
   const { signup, signupError } = User.useContainer();
 
   const submit = async (e: { firstName: string, lastName: string, email: string, password: string, rememberMe: boolean }) => {
     await signup(e);
-
-    // .then(res => {
-    //   if (res.ok)
-    await login(e.email, e.password, e.rememberMe);
-    // })
   };
 
   return (
@@ -86,11 +79,10 @@ export const SignupPage = () => {
       </a>
 
       <Container>
-        <Text variant="h1">
-          Start learning how to code today!
-        </Text>
+        <Text variant="h1">Start learning how to code today!</Text>
         <Text>
-          Fill out your details below. <Emoji text="😊" />
+          You&apos;ll see how easy it really is <Emoji text="😊" />. Fill out your <br />
+          details below to join our community and platform.
         </Text>
 
         <Form
@@ -126,7 +118,7 @@ export const SignupPage = () => {
 
         <Text variant="small">
           Already have an account?{' '}
-          <a href="https://codementoring.co/login">Login</a>
+          <a href="https://codementoring.co/login">Sign in here</a>
         </Text>
       </Container>
 
