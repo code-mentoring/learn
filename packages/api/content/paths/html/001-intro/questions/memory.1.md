@@ -1,20 +1,20 @@
 ---
 pairs:
-  - - "<a ????=\"http://...\">"
-    - "href"
+  - - "```html\n<a ????=\"http://...\">\n```"
+    - "```html\nhref\n```"
 
-  - - "<img ???=\"http://...\">"
-    - "src"
+  - - "```html\n<img ???=\"http://...\">\n```"
+    - "```html\nsrc\n```"
 
-  - - "<body>"
-    - "</body>"
+  - - "```html\n<body>\n```"
+    - "```html\n</body>\n```"
 
-  - - "<li>"
-    - "</li>"
+  - - "```html\n<li>\n```"
+    - "```html\n</li>\n```"
 
-  - - "<input ????=\"password\" />"
-    - "type"
+  - - "```html\n<input ????=\"text\" />\n```"
+    - "```html\ntype\n```"
 
-  - - "<hr />"
-    - ""
+  - - "```html\n<hr />\n```"
+    - "```html\n\n```"
 ---

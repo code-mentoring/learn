@@ -95,12 +95,13 @@ export const QMemory: React.FC<QMemoryProps> = ({ question: q }) => {
       const isCorrect = correct.includes(i);
       const state = isCorrect ? 'correct' : (questionGrade !== null) ? 'incorrect' : undefined;
       return <MemoryGameCard
+        value={c}
         flipped={isCorrect || [flip1, flip2].includes(i)}
         onClick={state ? undefined : () => flip(i)}
         state={state}
         // eslint-disable-next-line react/no-array-index-key
         key={i}
-      >{c}</MemoryGameCard>;
+      />;
     })}
   </MemoryGame>;
 };
