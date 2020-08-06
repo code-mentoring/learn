@@ -11,6 +11,7 @@ import { IconUser as IconUserLine } from './icons/linear/cil-user';
 import { IconArrowDown } from './icons/solid/cis-arrow-down';
 import IconArrowRight from './icons/solid/cis-arrow-right.svg';
 import IconArrowLeft from './icons/solid/cis-arrow-left.svg';
+import IconAt from './icons/solid/cis-at.svg';
 import IconMediaSkipForward from './icons/solid/cis-media-skip-forward.svg';
 import { IconCheck } from './icons/solid/cis-check';
 import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
@@ -60,5 +61,6 @@ export const icons = {
   userLine: IconUserLine,
   x: IconX,
   checkCircle: IconCheckCircle,
-  mediaSkipForward: IconMediaSkipForward
+  mediaSkipForward: IconMediaSkipForward,
+  at: IconAt
 };

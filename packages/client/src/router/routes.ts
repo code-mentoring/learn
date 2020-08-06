@@ -19,6 +19,7 @@ export const linkParams = <T extends Params = {}>(
 export const routes = {
   notFound: linkParams('/not-found'),
   login: linkParams('/login'),
+  signup: linkParams('/signup'),
   logout: linkParams('/logout'),
 
   // Authed

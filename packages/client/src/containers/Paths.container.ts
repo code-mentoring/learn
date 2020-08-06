@@ -30,19 +30,17 @@ export const Paths = createContainer(() => {
     paths: Query['paths']
   }>(unjoinedPathsQuery);
 
-  // First run, load paths if no initial path
   useEffect(() => {
+    // If no path selected first run, select the first one (if loaded)
     if (!currentPathId && myPaths?.paths?.length) {
       setCurrentPathId(myPaths.paths[0].id);
 
-    // Check if currentPathId is valid
+      // Check if currentPathId is valid
     } else if (currentPathId && myPaths?.paths?.length) {
       if (!myPaths.paths.some(path => path.id === currentPathId)) {
         setCurrentPathId(myPaths.paths[0].id);
       }
-
-    // If currentPathId is set but no myPaths, remove path from local storage
-    } else if (currentPathId && !myPaths?.paths?.length) setCurrentPathId(null);
+    }
   }, [myPaths?.paths]);
 
 
@@ -53,7 +51,7 @@ export const Paths = createContainer(() => {
       fetchPathWithModules({
         variables: { id: currentPathId }
       });
-    } else localStorage.removeItem(LS_PATH);
+    }
   }, [currentPathId]);
 
   return {

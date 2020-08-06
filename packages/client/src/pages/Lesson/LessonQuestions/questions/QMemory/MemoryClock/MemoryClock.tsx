@@ -20,7 +20,7 @@ export interface MemoryClockProps {
 
 
 const MemoryClock: React.FC<MemoryClockProps> = ({
-  time = 30000,
+  time = 60000,
   running = false,
   onDone
 }) => {

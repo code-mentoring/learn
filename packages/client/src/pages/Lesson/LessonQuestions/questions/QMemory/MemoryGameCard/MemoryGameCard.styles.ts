@@ -1,9 +1,9 @@
 import { Card, Icon, theme as t } from '@codement/ui';
 import styled from 'styled-components';
-
 import { MemoryGameCardProps } from './MemoryGameCard';
 
-export const FlipCard = styled.div<MemoryGameCardProps>`
+
+export const FlipCard = styled.div<Omit<MemoryGameCardProps, 'value'>>`
   width: 100%;
   height: 100%;
   position: relative;
@@ -29,6 +29,7 @@ export const CardFront = styled(Card)`
 
 export const CardBack = styled(CardFront)<{state: MemoryGameCardProps['state']}>`
   transform: rotateY(180deg);
+  background: ${t.colors.code.background};
 
   ${p => p.state === 'incorrect' && `
     border: 2px solid ${t.color('tertiary.500')};
@@ -36,10 +37,24 @@ export const CardBack = styled(CardFront)<{state: MemoryGameCardProps['state']}>
 
   ${p => p.state === 'correct' && `
     transform: scale(0.875) rotateY(180deg);
-    background: ${t.color('transparent')};
     opacity: 0.2;
     border: 2px solid ${t.color('secondary.400')};
   `};
+
+  & > div {
+    display: flex;
+  }
+
+  pre[class*="language-"] {
+    padding: ${t.size('xtiny')};
+    margin: 0;
+  }
+
+  code[class*="language-"] {
+    font-size: ${t.size('xsm')};
+    white-space: pre-wrap;
+  }
+
 `;
 
 export const CardContainer = styled.div`
