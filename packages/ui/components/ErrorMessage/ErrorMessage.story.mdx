@@ -1,0 +1,23 @@
+import {ErrorMessage} from './ErrorMessage.tsx';
+import {Card} from '../Card/Card.tsx';
+import {Row} from '../../styleguide/Story.tsx';
+
+# Error Message
+
+# Text Alignment
+There are two text alignment options for the Error Message; `center` and `right`. They can be set with the `center` property set to `true` or `false`.
+Setting the `center` property to `true` will center the Error Message and setting the property to `false` will right align the Error Message.
+
+<Card>
+    <Row>
+      <ErrorMessage error="Error" />
+    </Row>
+    <Row>
+      <ErrorMessage error="Error" center=true />
+    </Row>
+</Card>
+
+```tsx
+<ErrorMessage error="Error" />
+<ErrorMessage error="Error" center=true />
+```
