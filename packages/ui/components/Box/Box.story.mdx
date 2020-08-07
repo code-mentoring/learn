@@ -1,0 +1,18 @@
+import {Box} from './Box.tsx';
+import {Row} from '../../styleguide/Story';
+
+# Box
+
+## Properties
+There are three properties that can be used with the Box component: `padding`, `margin`, `shadow`. All three are optional.
+- Padding and Margin: it can be a `number` or a `Size` (from the theme). If not set, it will use the `md` size (1.6rem).
+
+- Shadow: it can be one of the theme's options (`main`, `success`, `error`). If not set, the box will have no shadows.
+
+```tsx
+<Box>...content...</Box>
+<Box padding="lg">...content...</Box>
+<Box margin="sm">...content...</Box>
+<Box shadow="main">...content...</Box>
+<Box padding="lg" margin="sm" shadow="main">...content...</Box>
+```

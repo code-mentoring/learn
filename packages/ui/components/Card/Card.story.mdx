@@ -1,0 +1,19 @@
+import {Card} from './Card';
+import {Row} from '../../styleguide/Story';
+
+# Card
+
+## Properties
+The `Card` uses the `Box` as a base, so you can pass the same properties as the `Box`. Other than that, the `Card` also has a background color of white, position relative, the theme's default border-radius (8px) and main shadow.
+
+<Card>
+  <Row>
+    <Card>
+      Content
+    </Card>
+  </Row>
+</Card>
+
+```tsx
+<Card>...content...</Card>
+```
