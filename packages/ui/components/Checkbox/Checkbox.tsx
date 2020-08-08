@@ -9,7 +9,8 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   indeterminate,
   defaultChecked,
   onChange,
-  text
+  text,
+  name
   // ...props
 }) => {
   const [checked, setChecked] = useState(defaultChecked);
@@ -23,6 +24,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = ({
     >
       <CheckboxInput
         type="checkbox"
+        name={name}
         // {...props}
         checked={checked}
         onChange={(e: any) => {
