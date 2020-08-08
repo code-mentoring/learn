@@ -25,7 +25,6 @@ const StyledCharacter = styled.div`
   :after {
     content: "";
     display: block;
-    /*padding-bottom: 150%;*/
     padding-bottom: 130%;
   }
 `;

@@ -28,7 +28,6 @@ const SkipButton = styled(Button)`
 export const StyledCharacter = styled(CharacterHTML)`
   position: absolute;
   bottom: ${t.size('big')};
- /* bottom: 0rem;*/
   left: 50%;
   margin-left: -30rem;
   transform: translateX(-100%);
