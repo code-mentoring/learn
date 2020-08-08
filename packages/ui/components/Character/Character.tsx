@@ -25,7 +25,8 @@ const StyledCharacter = styled.div`
   :after {
     content: "";
     display: block;
-    padding-bottom: 150%;
+    /*padding-bottom: 150%;*/
+    padding-bottom: 130%;
   }
 `;
 
@@ -49,13 +50,13 @@ const StyledBody = styled(Svg)`
 const StyledHead = styled(Svg)`
   width: 50%;
   left: 56%;
-  bottom: 52%;
+  bottom: 50%;
 `;
 
 const StyledFace = styled(Svg)`
   width: 34%;
   left: 61%;
-  bottom: 59%;
+  bottom: 48%;
 `;
 
 export interface CharacterProps {
@@ -67,7 +68,7 @@ export interface CharacterProps {
 export const Character: React.FC<CharacterProps> = ({
   body, head, face, ...props
 }) => <StyledCharacter {...props}>
-  <StyledBody value={body} obj={svgBody} />
-  <StyledHead value={head} obj={svgHead} />
-  {face && <StyledFace value={face} obj={svgFace} />}
-</StyledCharacter>;
+    <StyledBody value={body} obj={svgBody} />
+    <StyledHead value={head} obj={svgHead} />
+    {face && <StyledFace value={face} obj={svgFace} />}
+  </StyledCharacter>;
