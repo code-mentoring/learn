@@ -2,7 +2,7 @@ import { Button, Icon, Text, theme as t } from '@codement/ui';
 import { Modal, ModalProps } from '@codement/ui/components/Modal/Modal';
 import LogoMark from '@codement/ui/images/logo-mark.svg';
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Lesson, LessonState } from '../../containers/Lesson.container';
 import { LessonProgress } from '../../components/LessonProgress/LessonProgress';
@@ -11,6 +11,7 @@ import { routes } from '../../router/routes';
 
 // const offset: Size = 'lg';
 const CloseIcon = styled(Icon)`
+  cursor: pointer;
 `;
 
 const StyledLogo = styled(LogoMark)`
@@ -18,28 +19,36 @@ const StyledLogo = styled(LogoMark)`
 `;
 
 const Header = styled.header<{ withProgress: boolean }>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: ${t.size()} ${t.size('lg')};
+position: relative;
+display: flex;
+align - items: center;
+padding: ${ t.size()} ${t.size('lg')};
 
   & > div {
-    flex: 1;
-    text-align: center;
-    div {
-      margin: auto;
-      margin-top: ${t.size('sm')};
-      max-width: 40rem;
-    }
+  flex: 1;
+  text - align: center;
+  div {
+    margin: auto;
+    margin - top: ${ t.size('sm')};
+    max - width: 40rem;
   }
+}
 `;
 
 const Title = styled(Text)`
-  font-weight: ${t.fontWeight.bold};
-  color: ${t.color('grey')};
+font - weight: ${ t.fontWeight.bold};
+color: ${ t.color('grey')};
 `;
 
-
+const DashboardLogo = () => {
+  return (
+    <div>
+      <Link to="/dashboard">
+        <StyledLogo />
+      </Link>
+    </div>
+  )
+};
 const CloseConfirmModal: React.FC<{ onClose: () => void } & ModalProps> = ({
   onClose,
   ...props
@@ -75,7 +84,9 @@ export const LessonHeader: React.FC<{ title?: string }> = ({
 
 
   return <Header withProgress={progress !== undefined}>
-    <StyledLogo />
+
+
+    <DashboardLogo />
 
     <div>
       {title && <Title as="h2">{title}</Title>}
