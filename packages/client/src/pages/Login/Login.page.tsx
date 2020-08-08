@@ -64,16 +64,21 @@ const loginValidation = yup.object().shape({
 const ToggleField = styled.div`
   display:flex;
   justify-content: space-between;
-  width: 90vw;    
+  width: 90vw;
   max-width: 40rem;
 `;
 
 
 export const LoginPage = () => {
   const { login, loginError } = Auth.useContainer();
+  const [passwordType, setPasswordType] = useState('password');
 
   const submit = (e: { email: string, password: string, rememberMe: boolean }) => {
     login(e.email, e.password, e.rememberMe);
+  };
+  const togglePasswordVisibility = (e: any) => {
+    e.preventDefault();
+    setPasswordType(type => (type === 'password' ? 'text' : 'password'));
   };
 
   return <StyledPage title="Login to Code Mentoring">
@@ -93,10 +98,12 @@ export const LoginPage = () => {
         }}
       >
         <FormField name="email" type="text" placeholder="Email" icon="user" />
-        <FormField name="password" placeholder="Password" type="password" icon="password" />
+        <FormField name="password" type={passwordType} placeholder="Password" icon="password" />
         <ToggleField>
-          <FormField type="checkbox" name="rememberMe" text="Remember me?" />
-          <FormField type="checkbox" name="showPassword" text="Show password" />
+          <FormField name="rememberMe" type="checkbox" text="Remember me?" />
+          <div onClick={togglePasswordVisibility}>
+            <FormField name="showPassword" type="checkbox" text="Show password" />
+          </div>
         </ToggleField>
         <Button size="large">Login</Button>
       </Form>
