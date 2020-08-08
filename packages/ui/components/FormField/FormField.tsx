@@ -51,6 +51,8 @@ export type FormFieldBaseProps = {
   className?: string;
   colSpan?: 1 | 2;
   changeOnBlur?: boolean;
+  placeholder?: string;
+  icon?: string;
   render?: (type: string, options: FormFieldCustomProps) => [
     React.FC<any>,
     { [key: string]: any }
@@ -142,76 +144,76 @@ export const BaseFormField: React.FunctionComponent<FormFieldProps> = ({
         extraProps.textarea = true;
         break;
 
-        // case 'color':
-        //   Comp = ColorField;
-        //   break;
+      // case 'color':
+      //   Comp = ColorField;
+      //   break;
 
-        // case 'time':
-        //   Comp = TimeField;
-        //   extraProps.onChange = (e: React.ChangeEvent<HTMLInputElement | any>) => {
-        //     form.setFieldTouched(e.target.name);
-        //     form.setFieldValue(e.target.name,
-        //       e.target.value === ''
-        //         ? undefined
-        //         : e.target.name.includes('ampm')
-        //           ? e.target.value
-        //           : parseInt(e.target.value));
-        //   };
-        //   break;
+      // case 'time':
+      //   Comp = TimeField;
+      //   extraProps.onChange = (e: React.ChangeEvent<HTMLInputElement | any>) => {
+      //     form.setFieldTouched(e.target.name);
+      //     form.setFieldValue(e.target.name,
+      //       e.target.value === ''
+      //         ? undefined
+      //         : e.target.name.includes('ampm')
+      //           ? e.target.value
+      //           : parseInt(e.target.value));
+      //   };
+      //   break;
 
-        // case 'date':
-        //   Comp = DateField;
-        //   extraProps.onChange = (e: any) => {
-        //     form.setFieldValue(e.target.name, e.target.value);
-        //   };
-        //   break;
+      // case 'date':
+      //   Comp = DateField;
+      //   extraProps.onChange = (e: any) => {
+      //     form.setFieldValue(e.target.name, e.target.value);
+      //   };
+      //   break;
 
       case 'checkbox':
         Comp = Checkbox;
         extraProps.defaultChecked = Boolean(fieldFormik!.value);
         break;
 
-        // case 'switch':
-        //   Comp = Switch;
-        //   extraProps.form = form;
-        //   // @ts-ignore
-        //   if (compProps.label2) {
-        //     extraProps.label = label;
-        //     label = undefined;
-        //   }
-        //   break;
+      // case 'switch':
+      //   Comp = Switch;
+      //   extraProps.form = form;
+      //   // @ts-ignore
+      //   if (compProps.label2) {
+      //     extraProps.label = label;
+      //     label = undefined;
+      //   }
+      //   break;
 
       case 'select':
         Comp = Select;
         break;
 
-        // case 'multiselect':
-        //   Comp = MultiSelect;
-        //   extraProps.onChange = (opts: OptionProps<{ value: number | string }>[]) => {
-        //     form.setFieldTouched(name);
-        //     form.setFieldValue(name, opts);
-        //   };
-        //   break;
+      // case 'multiselect':
+      //   Comp = MultiSelect;
+      //   extraProps.onChange = (opts: OptionProps<{ value: number | string }>[]) => {
+      //     form.setFieldTouched(name);
+      //     form.setFieldValue(name, opts);
+      //   };
+      //   break;
 
-        // case 'image':
-        //   Comp = ImageField;
-        //   extraProps.form = form;
-        //   break;
+      // case 'image':
+      //   Comp = ImageField;
+      //   extraProps.form = form;
+      //   break;
 
-        // case 'entity-image':
-        //   Comp = EntityImageField;
-        //   extraProps.form = form;
-        //   break;
+      // case 'entity-image':
+      //   Comp = EntityImageField;
+      //   extraProps.form = form;
+      //   break;
 
-        // case 'radio-tab':
-        //   Comp = RadioTab;
-        //   extraProps.form = form;
-        //   break;
+      // case 'radio-tab':
+      //   Comp = RadioTab;
+      //   extraProps.form = form;
+      //   break;
 
-        // case 'radio':
-        //   Comp = Radio;
-        //   extraProps.form = form;
-        //   break;
+      // case 'radio':
+      //   Comp = Radio;
+      //   extraProps.form = form;
+      //   break;
 
       default:
         const noComp = new Error(`Could not find field type for '${type}'`);

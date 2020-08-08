@@ -6,6 +6,7 @@ import { theme as t } from '../../css/theme';
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   text?: string;
   indeterminate?: boolean;
+  name?: string;
 }
 
 export interface InputProps extends CheckboxProps {
@@ -13,6 +14,7 @@ export interface InputProps extends CheckboxProps {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   checked?: boolean;
   defaultChecked?: boolean;
+  name?: string;
 }
 
 export interface SpanProps extends InputProps { }
