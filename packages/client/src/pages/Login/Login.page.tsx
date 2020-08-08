@@ -14,7 +14,7 @@ import { routes } from '../../router/routes';
 
 const StyledPage = styled(Page)`
   display: grid;
-  margin-top: ${t.size('xbig')};
+  padding-top: ${t.size('xbig')};
   grid-template-rows: ${t.size('huge')} 1fr;
   justify-content: center;
   text-align: center;
