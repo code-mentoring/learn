@@ -49,7 +49,9 @@ export const ProgressWidget: React.FC<ProgressWidgetProps> = cardProps => {
 
     <Grid>
 
-      {myPaths?.map(p => <PathProgress path={p} key={p.id} />)}
+      {myPaths
+        ? myPaths.map(p => <PathProgress path={p} key={p.id} />)
+        : <Icon icon="emptyIcon" size="huge" color="grey.100" />}
 
       <JoinButton onClick={() => setShowModal(true)}>
         <svg>
