@@ -6,7 +6,8 @@ import {Row} from '../../styleguide/Story';
 # SliderField
 
 ## Default
-By default, min = 0, max = 10, value = 0.
+By default, `min` = `0`, `max` = `10`, `value` = `0`.
+
 <Card>
     <Row>
       <SliderField  onChange = {v => console.log("The value is " + v)} />
@@ -20,6 +21,7 @@ By default, min = 0, max = 10, value = 0.
 ---
 
 ## Change default value
+
 <Card>
     <Row>
       <SliderField min={1} max={8} value={5} onChange = {v => console.log("The value is " + v)}/>
@@ -27,5 +29,10 @@ By default, min = 0, max = 10, value = 0.
 </Card>
 
 ```tsx
-<SliderField min={1} max={8} value={5} onChange = {v => console.log("The value is " + v)}/>
+<SliderField
+  min={1}
+  max={8}
+  value={5}
+  onChange={v => console.log("The value is " + v)}
+/>
 ```
