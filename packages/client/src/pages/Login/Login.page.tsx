@@ -14,7 +14,7 @@ import { routes } from '../../router/routes';
 
 const StyledPage = styled(Page)`
   display: grid;
-  margin-top: ${t.size('xbig')};
+  padding-top: ${t.size('xbig')};
   grid-template-rows: ${t.size('huge')} 1fr;
   justify-content: center;
   text-align: center;
@@ -38,22 +38,20 @@ const StyledPage = styled(Page)`
 `;
 
 const Container = styled(Box)`
-  margin-top: -20rem;
-  z-index: 2;
-
-  @media (max-width: 600px) {
-    margin-top: -5rem;
-  }
+  margin-top: ${t.size('xbig')};
+  z-index: 1;
 `;
 
 const StyledPeople = styled(People)`
   position: fixed;
   bottom:0; left:0; height: 22rem;
   opacity: 0.2;
-  z-index: 1;
 
   @media (max-width: 600px) {
     bottom:0; left:0; height: 16rem;
+  }
+  @media (max-height: 600px) {
+    display: none;
   }
 `;
 

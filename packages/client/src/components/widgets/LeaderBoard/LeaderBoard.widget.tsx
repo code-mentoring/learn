@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { User } from '@codement/api';
-import { Loader, Text, PathIcon, PathIconType, theme as t, UserProfile } from '@codement/ui';
+import { Loader, Text, PathIcon, PathIconType, theme as t, UserProfile, Icon } from '@codement/ui';
 import { Card, CardProps } from '@codement/ui/components/Card/Card';
 import { ErrorMessage } from '@codement/ui/components/ErrorMessage/ErrorMessage';
 import gql from 'graphql-tag';
@@ -40,6 +40,10 @@ const UserRow = styled.li`
   }
 `;
 
+const StyledIcon = styled(Icon)`
+  margin-right: ${t.size('md')};
+`;
+
 export const LeaderboardWidget: React.FC<CardProps> = props => {
   const { data, loading, error } = useQuery<{ users: User[] }>(usersQuery);
   const { currentPath } = Paths.useContainer();
@@ -49,7 +53,10 @@ export const LeaderboardWidget: React.FC<CardProps> = props => {
       ? <Loader />
       : <>
         <Text variant="h2" color="grey.600">
-          {currentPath && <PathIcon icon={currentPath.icon as PathIconType} size="lg" />}
+          {currentPath
+            ? <PathIcon icon={currentPath.icon as PathIconType} size="lg" />
+            : <StyledIcon icon="emptyIcon" size="lg" color="grey.100" />
+           }
           Leaderboard
         </Text>
         {error
