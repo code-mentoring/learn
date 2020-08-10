@@ -52,7 +52,7 @@ export const LeaderboardWidget: React.FC<CardProps> = props => {
     {loading
       ? <Loader />
       : <>
-        <Text as="h2" color="grey.600">
+        <Text variant="h2" color="grey.600">
           {currentPath
             ? <PathIcon icon={currentPath.icon as PathIconType} size="lg" />
             : <StyledIcon icon="emptyIcon" size="lg" color="grey.100" />
