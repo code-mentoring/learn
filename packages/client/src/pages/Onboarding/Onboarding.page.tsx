@@ -2,8 +2,7 @@ import { Button, Options, RadioList, SliderField, Text, TextField } from '@codem
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React, { useMemo } from 'react';
 import Emoji from 'react-emoji-render';
-import { Redirect, useHistory } from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
 import { AppHeader } from '../../components/AppHeader/AppHeader';
 import { PathsList } from '../../components/PathsList/PathsList';
 import { Onboarding } from '../../containers/Onboarding.container';
@@ -24,7 +23,6 @@ const radioOptions: Options[] = [
 export const OnboardingPage = () => {
 
   const { me } = Me.useContainer();
-  const history = useHistory();
   const { goTo, page, values, setValue, step, valid, hold } = Onboarding.useContainer();
 
   const content = useMemo(() => {
@@ -76,7 +74,7 @@ export const OnboardingPage = () => {
       case 5: return <Button
         size="large"
         color="secondary"
-        onClick={() => history.push(routes.home())}
+        onClick={() => { window.location.pathname = routes.home(); }}
       > Start learning! </Button>;
 
       default: return null;

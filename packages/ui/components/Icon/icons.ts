@@ -2,7 +2,7 @@ import { IconCloudUpload as IconCloudUploadDuotone } from './icons/duotone/cid-c
 import { IconImages } from './icons/duotone/cid-images';
 import { IconMenu } from './icons/duotone/cid-menu';
 import { IconNote } from './icons/duotone/cid-note';
-import { IconTrash } from './icons/duotone/cid-trash';
+import IconTrash from './icons/solid/cis-trash.svg';
 import { IconWarning } from './icons/duotone/cid-warning';
 import { IconLogout } from './icons/linear/cil-account-logout';
 import { IconMinus } from './icons/linear/cil-minus';
@@ -11,6 +11,7 @@ import { IconUser as IconUserLine } from './icons/linear/cil-user';
 import { IconArrowDown } from './icons/solid/cis-arrow-down';
 import IconArrowRight from './icons/solid/cis-arrow-right.svg';
 import IconArrowLeft from './icons/solid/cis-arrow-left.svg';
+import IconAt from './icons/solid/cis-at.svg';
 import IconMediaSkipForward from './icons/solid/cis-media-skip-forward.svg';
 import { IconCheck } from './icons/solid/cis-check';
 import { IconChevronBottomAlt } from './icons/solid/cis-chevron-bottom-alt';
@@ -62,5 +63,6 @@ export const icons = {
   x: IconX,
   checkCircle: IconCheckCircle,
   emptyIcon: IconEmpty,
-  mediaSkipForward: IconMediaSkipForward
+  mediaSkipForward: IconMediaSkipForward,
+  at: IconAt
 };

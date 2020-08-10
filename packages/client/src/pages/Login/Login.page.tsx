@@ -5,10 +5,12 @@ import { getGQLError } from '@codement/ui/lib/apollo';
 import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
-
 import { Page } from '../../components/Page/Page';
+import { routes } from '../../router/routes';
+
 
 const StyledPage = styled(Page)`
   display: grid;
@@ -91,7 +93,7 @@ export const LoginPage = () => {
       </Form>
 
       <Text variant="small">
-        New to Code Mentoring? <a href="https://codementoring.co/signup">Join now</a>
+        New to Code Mentoring? <Link to={routes.signup()}>Join now</Link>
       </Text>
     </Container>
 

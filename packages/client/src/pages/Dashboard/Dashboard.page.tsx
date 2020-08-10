@@ -1,7 +1,7 @@
 import { theme as t, Card } from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { fadeUp } from '@codement/ui/css/animations';

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import * as text from '../components/Text/Text.styles';
 import { theme as t } from './theme';
 
 
@@ -72,4 +73,19 @@ button {
   border: none;
   background: none;
 }
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: ${t.color('grey.200')};
+}
+
+h1.title { ${text.baseText(text.title.defaultProps!)} }
+h2.subTitle { ${text.baseText(text.subTitle.defaultProps!)} }
+h1 { ${text.baseText(text.h1.defaultProps!)} }
+h2 { ${text.baseText(text.h2.defaultProps!)} }
+h3 { ${text.baseText(text.h3.defaultProps!)} }
+h5 { ${text.baseText(text.h5.defaultProps!)} }
+p { ${text.baseText(text.body1.defaultProps!)} }
+p.body2 { ${text.baseText(text.body2.defaultProps!)} }
 `;

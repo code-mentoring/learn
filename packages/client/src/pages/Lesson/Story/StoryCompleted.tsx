@@ -19,7 +19,7 @@ const BeginButton = styled(Button)`
 export interface StoryCompletedProps { lesson: ModuleLesson; }
 
 export const StoryCompleted: React.FC<StoryCompletedProps> = ({ lesson }) => {
-  const { setState } = Lesson.useContainer();
+  const { beginLesson, setLessonState: setState } = Lesson.useContainer();
 
   return <>
     <StoryArticle>
@@ -40,7 +40,7 @@ export const StoryCompleted: React.FC<StoryCompletedProps> = ({ lesson }) => {
       > Go back </Button>
 
       <BeginButton
-        onClick={() => setState(LessonState.lesson)}
+        onClick={beginLesson}
         color="secondary"
         icon="arrowRight"
         iconPosition="right"

@@ -18,8 +18,8 @@ export const theme: DefaultTheme = {
     error: tertiary['900'],
 
     code: {
-      color: '#9efeff',
-      background: '#1e1e3f'
+      background: '#0A0041',
+      color: '#fff'
     }
   },
   color: (color: Color = 'primary') => {
@@ -75,7 +75,9 @@ export const theme: DefaultTheme = {
   },
 
   shadows: {
-    main: `0 4px 10px ${grey[900]}10`
+    main: `0 4px 10px ${grey[900]}10`,
+    success: `0 4px 12px ${secondary[500]}25`,
+    error: `0 4px 12px ${tertiary[500]}50`
   }
 };
 

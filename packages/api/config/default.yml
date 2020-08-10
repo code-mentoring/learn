@@ -1,3 +1,4 @@
+env: development
 server:
   port: 4000
   logger: ['error', 'warn']

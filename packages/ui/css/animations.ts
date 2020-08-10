@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components';
+import { keyframes, css } from 'styled-components';
 import { theme } from './theme';
 
 export const fadeRight = keyframes`
@@ -21,6 +21,10 @@ export const fadeUp = keyframes`
     transform: none;
     opacity: 1;
   }
+`;
+export const aniFadeUp = css`
+  opacity: 0;
+  animation: ${fadeUp} 0.3s ease-out forwards
 `;
 
 export const fade = keyframes`

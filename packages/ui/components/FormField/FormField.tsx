@@ -248,7 +248,6 @@ export const BaseFormField: React.FunctionComponent<FormFieldProps> = ({
 
 // eslint-disable-next-line
 export const FormField: React.FC<FormFieldProps> = styled(BaseFormField)`
-  margin-bottom: ${p => p.theme.size()};
   ${p => p.colSpan && `grid-column: span ${p.colSpan};`}
 `;
 
