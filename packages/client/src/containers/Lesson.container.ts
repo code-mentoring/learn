@@ -38,7 +38,7 @@ export const Lesson = createContainer(() => {
   const [progress, setProgress] = useState<number | null>(null);
   const [attempts, setAttempts] = useState<number | null>(null);
   const [footerButton, setFooterButton] = useState<ButtonProps>(intialFooterButton);
-  const [correctAnswers, setCorrectAnswers] = useState<{ [key: string]: string[] }>({});
+  const [correctAnswers, setCorrectAnswers] = useState<{ [questionId: string]: string[] }>({});
 
   const [query, { data, loading, called }] = useMutation<
     { beginLesson: Mutation['beginLesson'] },

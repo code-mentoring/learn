@@ -1,0 +1,3 @@
+mutation completeModule($moduleName: String!) {
+  completeModule(moduleName: $moduleName)
+}

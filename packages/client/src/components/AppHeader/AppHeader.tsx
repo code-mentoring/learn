@@ -32,7 +32,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
       </Figure>
 
       <Figure color="tertiary">
-        <span>5</span>
+        <span>{me?.streak}</span>
         <Icon icon="fire" color="tertiary" size="lg" />
       </Figure>
 

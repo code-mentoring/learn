@@ -18,6 +18,7 @@ const files = [
   'createFriendship',
   'deleteFriendship',
   'createModule',
+  'completeModule',
   'updateModule',
   'deleteModule',
   'createCharacter',
@@ -25,7 +26,9 @@ const files = [
   'deleteCharacter',
   'createConcept',
   'learnConcept',
-  'updateConcept'
+  'updateConcept',
+  'beginLesson',
+  'completeLesson'
 ];
 
 export default files.reduce((obj, file) => {

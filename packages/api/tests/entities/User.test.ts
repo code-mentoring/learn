@@ -56,7 +56,7 @@ describe('User entity', () => {
   describe('Query: me', () => {
     beforeEach(setup);
     it('should return a user when logged in', async () => {
-      expect.assertions(6);
+      expect.assertions(7);
       const user = await TestClient.me();
       expect(user.id).toBeDefined();
       expect(user.email).toBeDefined();
@@ -64,6 +64,7 @@ describe('User entity', () => {
       expect(user.lastName).toBeDefined();
       expect(user.userPreferences).toBeNull();
       expect(user.createdAt).toBeDefined();
+      expect(user.streak).toBeDefined();
     });
   });
 
@@ -139,5 +140,44 @@ describe('User entity', () => {
         }
       });
     });
+  });
+
+  describe.only('ResolveField: updateStreak', () => {
+
+    // beforeEach(setup);
+
+    // it('should return the current streak if there is no completeAt date', async () => {
+    //   const newUser = await TestClient.createUser();
+    //   const module = Object.values(TestClient.cms.modules);
+
+    //   // console.log(module[0]);
+    //   // console.log(module[0].id);
+    //   // console.log(module[0].name);
+    //   try {
+    //     const userModule = await TestClient.completeModule(module[0].name);
+    //     console.log(userModule.completedAt);
+    //     console.log(newUser.streak);
+
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+
+    // });
+
+    // beforeEach(setup);
+
+    // it('should reset streak to 0 when completedAt date is greater than 24', async () => {
+    //   const newUser = await TestClient.createUser();
+    //   const module = Object.values(TestClient.cms.modules);
+    //   const userModule = await TestClient.completeModule(module[0].name);
+
+    // });
+
+    // beforeEach(setup);
+    // it('should increment streak to 1 when completedAt date is less than 24', async () => {
+    //   const newUser = await TestClient.createUser();
+    //   const module = Object.values(TestClient.cms.modules);
+    //   const userModule = await TestClient.completeModule(module[0].name);
+    // });
   });
 });

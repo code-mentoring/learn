@@ -12,6 +12,7 @@ query me {
       codingAbility
       practiceGoal
     }
+    streak
     createdAt
   }
 }

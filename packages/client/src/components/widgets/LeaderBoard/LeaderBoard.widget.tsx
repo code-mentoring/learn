@@ -15,6 +15,7 @@ const usersQuery = gql`query {
     lastName
     profileImage
     id
+    streak
   }
 }`;
 

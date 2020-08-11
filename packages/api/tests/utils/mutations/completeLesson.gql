@@ -1,0 +1,3 @@
+mutation completeLesson($answers: String!, $id: String!) {
+  completeLesson(answers: $answers, id: $id)
+}

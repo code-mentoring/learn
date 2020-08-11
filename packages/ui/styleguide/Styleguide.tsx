@@ -23,7 +23,6 @@ const Article: React.FC<{ story: Story }> = ({ story }) => {
   </StyleguideArticle>;
 };
 
-
 export const Styleguide = () => <BrowserRouter>
   <StyleguidePage>
 
