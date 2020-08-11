@@ -76,9 +76,14 @@ export const LoginPage = () => {
   const submit = (e: { email: string, password: string, rememberMe: boolean }) => {
     login(e.email, e.password, e.rememberMe);
   };
-  const togglePasswordVisibility = (e: any) => {
-    e.preventDefault();
-    setPasswordType(type => (type === 'password' ? 'text' : 'password'));
+  const togglePasswordVisibility = (e: { showPassword: any }) => {
+    if (Array.isArray(e.showPassword)) {
+      if (e.showPassword[0] === 'on') {
+        setPasswordType('text');
+      } else if (e.showPassword[0] === undefined) {
+        setPasswordType('password');
+      }
+    }
   };
 
   return <StyledPage title="Login to Code Mentoring">
@@ -95,14 +100,13 @@ export const LoginPage = () => {
         initialValues={{
           email: LocalStorage.email || undefined
         }}
+        onChange={togglePasswordVisibility}
       >
         <FormField name="email" type="text" placeholder="Email" icon="user" />
         <FormField name="password" type={passwordType} placeholder="Password" icon="password" />
         <ToggleField>
           <FormField name="rememberMe" type="checkbox" text="Remember me?" />
-          <div onClick={togglePasswordVisibility}>
-            <FormField name="showPassword" type="checkbox" text="Show password" />
-          </div>
+          <FormField name="showPassword" type="checkbox" text="Show password" />
         </ToggleField>
         <Button size="large">Login</Button>
       </Form>
