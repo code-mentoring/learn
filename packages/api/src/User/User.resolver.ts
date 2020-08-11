@@ -1,22 +1,16 @@
 import { UseGuards } from '@nestjs/common';
-import {
-  Args,
-  Mutation,
-  Query,
-  Resolver,
-  ResolveField,
-  Parent
-} from '@nestjs/graphql';
-
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { User, UserInput } from './User.entity';
-import { UserService } from './User.service';
-import { CurrentUser } from './CurrentUser.decorator';
+import { Roles } from '../Role/Role.guard';
 import {
   UserPreferences,
   UserPreferencesInput
 } from '../UserPreferences/UserPreferences.entity';
 import { UserPreferencesService } from '../UserPreferences/UserPreferences.service';
+import { CurrentUser } from './CurrentUser.decorator';
+import { User, UserInput } from './User.entity';
+import { UserService } from './User.service';
+
 
 @Resolver(() => User)
 export class UserResolver {
@@ -25,7 +19,7 @@ export class UserResolver {
     private readonly userPreferencesService: UserPreferencesService
   ) {}
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Query(() => [User])
   users() {
     return this.userService.findAll();
@@ -64,8 +58,6 @@ export class UserResolver {
 
   @ResolveField(() => UserPreferences)
   async userPreferences(@Parent() user: User) {
-    return this.userPreferencesService.findByUser(
-      user.id
-    );
+    return this.userPreferencesService.findByUser(user.id);
   }
 }

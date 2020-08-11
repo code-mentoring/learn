@@ -8,17 +8,18 @@ import { AuthService } from './Auth.service';
 import { JWTStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
-
 @Module({
   imports: [
     UserModule,
-    PassportModule,
+    PassportModule.register({
+      defaultStrategy: 'jwt'
+    }),
     JwtModule.register({
       secret: config.get('auth.jwtSecret'),
       signOptions: { expiresIn: '1h' }
     })
   ],
   providers: [AuthResolver, AuthService, LocalStrategy, JWTStrategy],
-  exports: [AuthService]
+  exports: [AuthService, PassportModule]
 })
 export class AuthModule {}

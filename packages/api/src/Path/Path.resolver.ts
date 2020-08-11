@@ -9,6 +9,7 @@ import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
 import { Path, PathInput, UpdatePathInput } from './Path.entity';
 import { PathService } from './Path.service';
+import { Roles } from '../Role/Role.guard';
 
 @Resolver(() => Path)
 export class PathResolver {
@@ -43,7 +44,7 @@ export class PathResolver {
     return this.pathService.findById(id);
   }
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Mutation(() => Path)
   createPath(@Args('path') path: PathInput) {
     return this.pathService.create(path);
@@ -67,7 +68,7 @@ export class PathResolver {
     return Boolean(await this.pathService.addUserToPath(user.id, paths));
   }
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Mutation(() => Path)
   async updatePath(
     @Args('path') path: UpdatePathInput

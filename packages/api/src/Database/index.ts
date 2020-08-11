@@ -29,7 +29,6 @@ import { SeederService } from './seeders/Seeders.service';
 import { TypeORMModule } from './TypeORM.module';
 import { CMS } from '../CMS/CMS';
 
-
 /**
  * Main Database Module, used in App.module and testing
  */
@@ -69,4 +68,4 @@ import { CMS } from '../CMS/CMS';
   ],
   exports: [DatabaseService, SeederService]
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

@@ -3,15 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import bcrypt from 'bcrypt';
 import md5 from 'md5';
 import { Repository } from 'typeorm';
+import { UserWithPassword } from './User.entity';
 
-import { UserInput, UserWithPassword } from './User.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserWithPassword)
     private readonly userRepository: Repository<UserWithPassword>
-  ) {}
+  ) { }
 
   async findAll(): Promise<UserWithPassword[]> {
     return this.userRepository.find();
@@ -27,13 +27,19 @@ export class UserService {
     });
   }
 
-  async create(input: UserInput): Promise<UserWithPassword> {
+  async create(input: Partial<UserWithPassword>): Promise<UserWithPassword> {
     const user = this.userRepository.create(input);
     user.password = await bcrypt.hash(input.password, 10);
     // When in production add
     // ?r=pg&d=https:%3A%2F%2Fapi.codementoring.co%2Fstatic%2Fdefault-profile.svg;
     // to end of profileImage URL.
-    user.profileImage = `https://www.gravatar.com/avatar/${md5(input.email)}`;
+    user.profileImage = `https://www.gravatar.com/avatar/${md5(input.email!)}`;
     return this.userRepository.save(user);
+  }
+
+  async update(id: string, input: Partial<UserWithPassword>): Promise<UserWithPassword> {
+    const _input = { ...input };
+    if (_input.password) _input.password = await bcrypt.hash(input.password, 10);
+    return this.userRepository.save({ id, ..._input });
   }
 }

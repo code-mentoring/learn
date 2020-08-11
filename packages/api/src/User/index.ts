@@ -11,12 +11,14 @@ import { PathUser } from '../PathUser/PathUser.entity';
 import { Path } from '../Path/Path.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([
-    UserWithPassword,
-    UserPreferences,
-    Path,
-    PathUser
-  ])],
+  imports: [
+    TypeOrmModule.forFeature([
+      UserWithPassword,
+      UserPreferences,
+      Path,
+      PathUser
+    ])
+  ],
   providers: [
     UserResolver,
     UserService,

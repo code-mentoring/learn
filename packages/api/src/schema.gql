@@ -105,14 +105,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type UserPreferences {
-  id: String!
-  userId: String!
-  practiceGoal: Float!
-  why: String!
-  codingAbility: Float!
-}
-
 type UserModule {
   id: String!
   userId: String!
@@ -121,14 +113,28 @@ type UserModule {
   completedAt: DateTime
 }
 
+type UserPreferences {
+  id: String!
+  userId: String!
+  practiceGoal: Float!
+  why: String!
+  codingAbility: Float!
+}
+
 type User {
   id: ID!
   firstName: String!
   lastName: String!
   email: String!
   profileImage: String!
+  role: RoleType!
   userPreferences: UserPreferences
   createdAt: DateTime!
+}
+
+enum RoleType {
+  admin
+  user
 }
 
 type AssignmentFile {
@@ -193,10 +199,10 @@ type FriendOutput {
 }
 
 type Query {
-  assignmentFiles(assignmentId: String!): [AssignmentFile!]!
-  userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   assignments: [Assignment!]!
   moduleAssignments(moduleId: String!): [Assignment!]!
+  assignmentFiles(assignmentId: String!): [AssignmentFile!]!
+  userAssignmentFiles(authorId: String!): [AssignmentFile!]!
   users: [User!]!
   searchUsers(query: String!): [User!]!
   me: User!

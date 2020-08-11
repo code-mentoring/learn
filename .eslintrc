@@ -3,13 +3,9 @@
   "plugins": ["@typescript-eslint", "import"],
   "extends": ["airbnb"],
 
-  "ignorePatterns": [
-    "node_modules",
-    "dist",
-    "packages/api/types.ts"
-  ],
+  "ignorePatterns": ["node_modules", "dist", "packages/api/types.ts"],
 
-  "env":{
+  "env": {
     "browser": true,
     "node": true,
     "jasmine": true
@@ -34,11 +30,14 @@
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
     "import-name": 0,
-    "no-unused-vars": ["error", {
-      "argsIgnorePattern": "^_",
-      "args": "after-used",
-      "ignoreRestSiblings": true
-    }],
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
 
     "@typescript-eslint/no-unused-vars": ["error"],
     "no-unused-expressions": "off",
@@ -56,10 +55,13 @@
     "jsx-a11y/no-static-element-interactions": 0,
     "linebreak-style": 0,
     "max-classes-per-file": 0, // Leads to too many files
-    "no-empty-function": ["error", {"allow": ["constructors"]}], // Needed by NestJS dep injection
-    "no-empty": [2, {
-      "allowEmptyCatch": true
-    }],
+    "no-empty-function": ["error", { "allow": ["constructors"] }], // Needed by NestJS dep injection
+    "no-empty": [
+      2,
+      {
+        "allowEmptyCatch": true
+      }
+    ],
     "no-underscore-dangle": 0,
     "no-useless-constructor": 0, // Needed by NestJS dep injection
     "object-curly-newline": 0,

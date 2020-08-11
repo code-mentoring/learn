@@ -1,15 +1,16 @@
-import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-
-import { ConceptService } from './Concept.service';
-import { Concept, CreateConceptInput, UpdateConceptInput } from './Concept.entity';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
+import { CMS } from '../CMS/CMS';
+import { LessonModule } from '../Lesson';
+import { Roles } from '../Role/Role.guard';
 import { CurrentUser } from '../User/CurrentUser.decorator';
 import { User } from '../User/User.entity';
-import { UserConceptService } from '../UserConcepts/UserConcept.service';
 import { UserConcept } from '../UserConcepts/UserConcept.entity';
-import { LessonModule } from '../Lesson';
-import { CMS } from '../CMS/CMS';
+import { UserConceptService } from '../UserConcepts/UserConcept.service';
+import { Concept, CreateConceptInput, UpdateConceptInput } from './Concept.entity';
+import { ConceptService } from './Concept.service';
+
 
 @Resolver(Concept)
 export class ConceptResolver {
@@ -37,19 +38,19 @@ export class ConceptResolver {
     return this.userConceptService.findByUser(user.id);
   }
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Mutation(() => Concept)
   createConcept(@Args('concept') concept: CreateConceptInput) {
     return this.conceptService.create(concept);
   }
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Mutation(() => Concept)
   updateConcept(@Args('concept') concept: UpdateConceptInput) {
     return this.conceptService.update(concept);
   }
 
-  @UseGuards(GQLAuthGuard)
+  @Roles('admin')
   @Mutation(() => Boolean)
   deleteConcept(@Args('conceptId') conceptId: string) {
     return this.conceptService.delete(conceptId);

@@ -1,10 +1,19 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Unique
+} from 'typeorm';
 import { CMBaseEntity } from '../lib/Base.entity';
 import { PathUser } from '../PathUser/PathUser.entity';
-import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
+import { RoleType } from '../Role/RoleType.enum';
 import { UserModule } from '../UserModule/UserModule.entity';
+import { UserPreferences } from '../UserPreferences/UserPreferences.entity';
+
 
 @ObjectType()
 export class User {
@@ -22,6 +31,9 @@ export class User {
 
   @Field()
   profileImage: string;
+
+  @Field(() => RoleType)
+  role: RoleType;
 
   @Field(() => UserPreferences, { nullable: true })
   userPreferences?: UserPreferences;
@@ -59,6 +71,9 @@ export class UserWithPassword extends CMBaseEntity {
 
   @OneToMany(() => UserModule, userModules => userModules.user)
   userModules: UserModule[];
+
+  @Column({ type: 'simple-enum', enum: RoleType, default: RoleType.user })
+  role: RoleType;
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
