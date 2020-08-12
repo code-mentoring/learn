@@ -9,7 +9,7 @@ import {
 } from '@nestjs/graphql';
 
 import { GQLAuthGuard } from '../Auth/GQLAuth.guard';
-import { User, UserInput } from './User.entity';
+import { User, UserInput, UserWithPassword } from './User.entity';
 import { UserService } from './User.service';
 import { CurrentUser } from './CurrentUser.decorator';
 import {
@@ -23,7 +23,7 @@ export class UserResolver {
   constructor(
     private readonly userService: UserService,
     private readonly userPreferencesService: UserPreferencesService
-  ) {}
+  ) { }
 
   @UseGuards(GQLAuthGuard)
   @Query(() => [User])
@@ -67,5 +67,10 @@ export class UserResolver {
     return this.userPreferencesService.findByUser(
       user.id
     );
+  }
+
+  @ResolveField(() => Number)
+  async streak(@Parent() user: UserWithPassword) {
+    return this.userService.getOrResetStreak(user.id);
   }
 }

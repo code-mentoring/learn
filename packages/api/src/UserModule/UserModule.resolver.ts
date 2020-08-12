@@ -39,7 +39,6 @@ export class UserModuleResolver {
       totalCompleted / totalModulesInPath
     );
 
-
     return um;
   }
 }

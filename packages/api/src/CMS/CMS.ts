@@ -1,21 +1,24 @@
-import { BadRequestException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  OnModuleInit
+} from '@nestjs/common';
 import { Module, ModuleLesson, ModuleType } from '../Module/Module.entity';
 import { QuestionType, Question } from '../Question/Question.entity';
 import { CMSLoader } from './CMSLoader';
 
-
 @Injectable()
 export class CMS implements OnModuleInit {
-
   questions: { [id: string]: Question } = {};
 
   modules: { [id: string]: Module } = {};
 
-  data = new CMSLoader()
+  data = new CMSLoader();
+
 
   /** Initialize the loading of all data */
   async onModuleInit() {
-
     await this.data.setup();
 
     // Convert modules to {id: Module, ...} format
@@ -27,8 +30,9 @@ export class CMS implements OnModuleInit {
     }, {} as CMS['modules']);
 
     // Convert modules to {id: Question, ...} format
-    const questions = (modules
-      .filter(m => m.type === ModuleType.lesson) as ModuleLesson[])
+    const questions = (modules.filter(
+      m => m.type === ModuleType.lesson
+    ) as ModuleLesson[])
       .map(l => l.lesson.questions)
       .flat();
 
@@ -45,34 +49,39 @@ export class CMS implements OnModuleInit {
     return this.data.paths[pathId];
   }
 
-
   findModuleById(moduleId: string) {
     return this.modules[moduleId];
   }
-
 
   findModuleByName(moduleName: string) {
     return Object.values(this.modules).find(m => m.name === moduleName);
   }
 
 
-  findLesson(pathId: string, lessonNameOrIndex: string | number): ModuleLesson | undefined {
+  findLesson(
+    pathId: string,
+    lessonNameOrIndex: string | number
+  ): ModuleLesson | undefined {
     const p = this.findModulesByPathId(pathId);
     if (!p) return p;
     if (
       typeof lessonNameOrIndex === 'number'
       && p[lessonNameOrIndex].type === ModuleType.lesson
-    ) return p[lessonNameOrIndex] as ModuleLesson;
+    ) {
+      return p[lessonNameOrIndex] as ModuleLesson;
+    }
 
-    return p.find(m =>
-      m.name === lessonNameOrIndex
-      && m.type === ModuleType.lesson) as ModuleLesson;
+    return p.find(
+      m => m.name === lessonNameOrIndex && m.type === ModuleType.lesson
+    ) as ModuleLesson;
   }
 
 
   findLessonById(lessonId: string): ModuleLesson | undefined {
     const p = this.findModuleById(lessonId);
-    if (!p || p.type !== ModuleType.lesson) throw new NotFoundException('Lesson not found');
+    if (!p || p.type !== ModuleType.lesson) {
+      throw new NotFoundException('Lesson not found');
+    }
     return p as ModuleLesson;
   }
 
@@ -97,10 +106,14 @@ export class CMS implements OnModuleInit {
     return m.lesson.questions;
   }
 
+
   checkAnswer(questionId: string, answer: string[]): boolean[] {
     const q = this.questions[questionId];
-    if (!q) throw new NotFoundException(`Question could not be found with id ${questionId}`);
-
+    if (!q) {
+      throw new NotFoundException(
+        `Question could not be found with id ${questionId}`
+      );
+    }
 
     switch (q.type) {
       case QuestionType.multiChoice:
@@ -112,15 +125,19 @@ export class CMS implements OnModuleInit {
         return [answer[0] === q.options[q.answer]];
 
       case QuestionType.dragDrop:
-        return answer.map((a, i) =>
-          // Get index of answer from options
-          q.options.indexOf(a)
-          // Compare index to the solution
-          === q.answer[i]);
+        return answer.map(
+          (a, i) =>
+            // Get index of answer from options
+            q.options.indexOf(a)
+            // Compare index to the solution
+            === q.answer[i]
+        );
 
       default:
       case QuestionType.memory:
-        throw new BadRequestException(`Question type '${q.type}' is not check-able`);
+        throw new BadRequestException(
+          `Question type '${q.type}' is not check-able`
+        );
     }
   }
 }

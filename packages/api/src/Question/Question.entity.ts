@@ -2,7 +2,7 @@
  * NOTE: This entity is NOT stored in the database
  * Instead, it is stored in the `content` directory, and exposed with the CMS
  */
-import { createUnionType, Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { createUnionType, Field, ObjectType, registerEnumType, HideField } from '@nestjs/graphql';
 
 
 export enum QuestionType {
@@ -36,6 +36,7 @@ export class QuestionMultiChoice extends BaseQuestion {
   @Field(() => QuestionType)
   type: QuestionType.multiChoice;
 
+  @HideField()
   answer: number;
 }
 
@@ -66,6 +67,7 @@ export class QuestionDragDrop extends BaseQuestion {
   @Field()
   slots: number;
 
+  @HideField()
   answer: number[];
 }
 

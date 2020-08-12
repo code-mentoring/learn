@@ -3,6 +3,7 @@ import 'jest-extended';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 
+import { Type } from '@nestjs/common';
 import { appImports } from '../../src/App.module';
 import { UpdateAssignmentFileInput } from '../../src/AssignmentFile/AssignmentFile.entity';
 import { CreateCharacterInput, UpdateCharacterInput } from '../../src/Character/Character.entity';
@@ -28,17 +29,22 @@ import {
   PathInput,
   UpdateConceptInput,
   User,
-  UserInput
+  UserModule,
+  UserInput,
+  BeginLesson
 } from '../../types';
 import mutations from './mutations';
 import queries from './queries';
 import { TestLogger } from './TestLogger.service';
+import { UserModuleService } from '../../src/UserModule/UserModule.service';
 
 
 /**
  * A helper class to test the API
  */
 export abstract class TestClient {
+  static module: TestingModule;
+
   static cms: CMS;
 
   static db: DatabaseService;
@@ -48,6 +54,12 @@ export abstract class TestClient {
   static app: any;
 
   static token: string;
+
+
+  static get<TInput = any>(t: Type<TInput>) {
+    return this.module.get(t);
+  }
+
 
   /**
    * Reset the entire database
@@ -62,18 +74,18 @@ export abstract class TestClient {
    * @param resetDatabase Reset the database
    */
   static async start(resetDatabase = true) {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    this.module = await Test.createTestingModule({
       imports: appImports,
       providers: [TestLogger],
       exports: [TestLogger]
     }).compile();
 
-    this.cms = await moduleFixture.resolve(CMS);
-    this.db = await moduleFixture.resolve(DatabaseService);
-    this.seeder = await moduleFixture.get(SeederService);
+    this.cms = await this.module.resolve(CMS);
+    this.db = await this.module.resolve(DatabaseService);
+    this.seeder = await this.module.get(SeederService);
     if (resetDatabase) await this.resetDatabase();
 
-    this.app = moduleFixture.createNestApplication();
+    this.app = this.module.createNestApplication();
     this.app.useLogger(this.app.get(TestLogger));
     await this.app.init();
   }
@@ -105,6 +117,10 @@ export abstract class TestClient {
 
   static createPath(path: PathInput = random.pathInput()): Promise<Path> {
     return this._request('createPath', mutations.createPath, { path });
+  }
+
+  static completeModule(moduleName: string): Promise<UserModule> {
+    return this._request('completeModule', mutations.completeModule, { moduleName });
   }
 
   static joinPath(pathId: string): Promise<Boolean> {
@@ -174,6 +190,15 @@ export abstract class TestClient {
   static updateConcept(concept: UpdateConceptInput): Promise<Concept> {
     return this._request('updateConcept', mutations.updateConcept, { concept });
   }
+
+  static beginLesson(id: string): Promise<BeginLesson> {
+    return this._request('beginLesson', mutations.beginLesson, { id });
+  }
+
+  static completeLesson(answers: string, id: string): Promise<boolean> {
+    return this._request('completeLesson', mutations.completeLesson, { answers, id });
+  }
+
   // ------------------------------------------------------------------- Queries
 
   static path(id: string): Promise<Path> {
@@ -192,7 +217,7 @@ export abstract class TestClient {
     return this._request('modules', queries.modules);
   }
 
-  static myFriends(userId: string): Promise< Friend[] > {
+  static myFriends(userId: string): Promise<Friend[]> {
     return this._request('myFriends', queries.myFriends, { userId });
   }
 
@@ -226,6 +251,19 @@ export abstract class TestClient {
     const user = await this.createUser(userInput);
     const { accessToken } = await this.login(user.email, userInput.password);
     return { password: userInput.password, user, accessToken };
+  }
+
+  static async workflowLesson(lessonID1 = 'html-introduction', lessonID2 = 'html-text') {
+    const umService = this.get(UserModuleService);
+    const { user: me } = await this.workflowSignup();
+    const mod1 = this.cms.findLessonById(lessonID1);
+    const mod2 = this.cms.findLessonById(lessonID2);
+    const { lesson: lesson1, secret: secret1 } = await this.beginLesson(mod1.id);
+    const { lesson: lesson2, secret: secret2 } = await this.beginLesson(mod2.id);
+    const answers1 = await umService.prepareLessonAnswer(lesson1.id, secret1);
+    const answers2 = await umService.prepareLessonAnswer(lesson2.id, secret2);
+
+    return { me, mod1, mod2, lesson1, lesson2, secret1, secret2, answers1, answers2 };
   }
 
   // ----------------------------------------------------------------- Private

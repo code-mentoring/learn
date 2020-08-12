@@ -12,6 +12,7 @@ mutation($user: UserInput!){
       codingAbility
       practiceGoal
     }
+    streak
     createdAt
   }
 }
