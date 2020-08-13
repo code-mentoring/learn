@@ -76,7 +76,7 @@ export const LoginPage = () => {
   const submit = (e: { email: string, password: string, rememberMe: boolean }) => {
     login(e.email, e.password, e.rememberMe);
   };
-  const togglePasswordVisibility = (e: { showPassword: any }) => {
+  const togglePasswordVisibility = (e: { showPassword: string[] }) => {
     if (Array.isArray(e.showPassword)) {
       if (e.showPassword[0] === 'on') {
         setPasswordType('text');
