@@ -1,5 +1,12 @@
 import { ModuleLesson } from '@codement/api';
-import { Button, centerAbsolute, NavDots, theme as t, CharacterHTML, CharacterProps } from '@codement/ui';
+import {
+  Button,
+  centerAbsolute,
+  NavDots,
+  theme as t,
+  CharacterHTML,
+  CharacterProps,
+} from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
@@ -33,10 +40,7 @@ export const StyledCharacter = styled(CharacterHTML)`
   transform: translateX(-100%);
 `;
 
-
-export const Story: React.FC<StoryProps> = ({
-  lesson
-}) => {
+export const Story: React.FC<StoryProps> = ({ lesson }) => {
   const { me } = Me.useContainer();
   const { setLessonState: setState } = Lesson.useContainer();
   const steps = lesson.lesson.storySections;
@@ -56,38 +60,43 @@ export const Story: React.FC<StoryProps> = ({
     'cute',
     'explaining',
     'calm',
-    'contempt'
+    'contempt',
   ];
   const face = useMemo(() => faces[page % faces.length], [page]);
 
-  return <>
-    <StoryArticle>
-      <StoryContent text={step.content} obj={me!} key={page} />
-    </StoryArticle>
+  return (
+    <>
+      <StoryArticle>
+        <StoryContent text={step.content} obj={me!} key={page} />
+      </StoryArticle>
 
-    <StyledCharacter face={face} />
+      <StyledCharacter face={face} />
 
-    <LessonFooter>
-      <StyledNavDots
-        steps={new Array(steps.length).fill(true)}
-        value={page}
-        onChange={setPage}
-      />
-      <Button
-        text
-        size="large"
-        icon="arrowRight"
-        iconPosition="right"
-        onClick={() => goTo(page + 1)}
-      >
-        Next
-      </Button>
-      <SkipButton
-        text
-        icon="mediaSkipForward"
-        onClick={() => setState(LessonState.storyCompleted)}
-        color="grey"
-      > Skip story </SkipButton>
-    </LessonFooter>
-  </>;
+      <LessonFooter>
+        <StyledNavDots
+          steps={new Array(steps.length).fill(true)}
+          value={page}
+          onChange={setPage}
+        />
+        <Button
+          text
+          size="large"
+          icon="arrowRight"
+          iconPosition="right"
+          onClick={() => goTo(page + 1)}
+        >
+          Next
+        </Button>
+        <SkipButton
+          text
+          icon="mediaSkipForward"
+          onClick={() => setState(LessonState.storyCompleted)}
+          color="grey"
+        >
+          {' '}
+          Skip story{' '}
+        </SkipButton>
+      </LessonFooter>
+    </>
+  );
 };
