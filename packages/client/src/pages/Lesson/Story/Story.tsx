@@ -5,7 +5,7 @@ import {
   NavDots,
   theme as t,
   CharacterHTML,
-  CharacterProps,
+  CharacterProps
 } from '@codement/ui';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React, { useState, useMemo } from 'react';
@@ -60,7 +60,7 @@ export const Story: React.FC<StoryProps> = ({ lesson }) => {
     'cute',
     'explaining',
     'calm',
-    'contempt',
+    'contempt'
   ];
   const face = useMemo(() => faces[page % faces.length], [page]);
 

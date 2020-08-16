@@ -39,16 +39,6 @@ font - weight: ${t.fontWeight.bold};
 color: ${t.color('grey')};
 `;
 
-/*const DashboardLogo = () => {
-  return (
-    <div>
-      <Link to="/dashboard">
-        <StyledLogo />
-      </Link>
-    </div>
-  );
-};*/
-
 const CloseConfirmModal: React.FC<{ onClose: () => void } & ModalProps> = ({
   onClose,
   ...props
@@ -74,7 +64,7 @@ const CloseConfirmModal: React.FC<{ onClose: () => void } & ModalProps> = ({
         </Button>,
         <Button text color="tertiary" onClick={resetLesson}>
           Quit lesson
-        </Button>,
+        </Button>
       ]}
     >
       <Text>If you quit now, you will lose all your lesson progress!</Text>
