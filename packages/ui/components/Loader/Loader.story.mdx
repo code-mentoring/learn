@@ -1,0 +1,59 @@
+import {Loader} from './Loader.tsx';
+import {Card} from '../Card/Card.tsx';
+import {Row} from '../../styleguide/Story.tsx';
+
+# Loader
+
+## Sizes
+The Loader by default has a size property of XL. However, the size can be changed through the `size` property.
+<Card>
+    <Row>
+        <Loader center={false} />
+        <Loader size="xtiny" center={false} />
+        <Loader size="tiny" center={false} />
+        <Loader size="xsm" center={false} />
+        <Loader size="sm" center={false} />
+        <Loader size="md" center={false} />
+        <Loader size="big" center={false} />
+        <Loader size="xbig" center={false} />
+        <Loader size="lg" center={false} />
+        <Loader size="xl" center={false} />
+        <Loader size="huge" center={false} />
+        <Loader size="giant" center={false} />
+        <Loader size="massive" center={false} />
+    </Row>
+</Card>
+
+```tsx
+<Loader center={false} />
+<Loader size="xtiny" center={false} />
+<Loader size="tiny" center={false} />
+<Loader size="xsm" center={false} />
+<Loader size="sm" center={false} />
+<Loader size="md" center={false} />
+<Loader size="big" center={false} />
+<Loader size="xbig" center={false} />
+<Loader size="lg" center={false} />
+<Loader size="xl" center={false} />
+<Loader size="huge" center={false} />
+<Loader size="giant" center={false} />
+<Loader size="massive" center={false} />
+```
+
+---
+
+## Center
+
+By default the Loader is set to be centered within the parent container. This can be changed by setting the `center` property to `false`.
+
+<Card>
+    <Row>
+        <Loader center={false} />
+        <Loader />
+    </Row>
+</Card>
+
+```tsx
+<Loader center={false} />
+<Loader />
+```
