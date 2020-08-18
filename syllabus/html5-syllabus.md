@@ -8,12 +8,21 @@ __Expected Outcome__ :By the end of this module, the Learner will be able to und
 
 * __Lesson 1__ -  What is HTML and what is it role between the three pillars of web development (html/css/javascript)
 
-*  __Lesson 2__ -  Basic HTML page structure
+* __Lesson 2__ -  Basic HTML page structure
 
-*  __Lesson 3__ - Simple static text formatting using basic HTML elements
+* __Lesson 3__ - Simple static text formatting using basic HTML elements
 
 * __Lesson 4__ - More complex text formatting using basic HTML elements
 
+* __Lesson 5__ - Your first form
+
+* __Lesson 6__ - Play Multimedia on the web
+
+* __Lesson 7__ - Important meta tags (viewport, OGP, etc.)
+
+* __Lesson 8__ - Useful Unicode
+
+* __Lesson 9__ - (Advanced Topic) Introduction of WAI-ARIA
 
 
 ---
