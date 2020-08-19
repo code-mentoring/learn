@@ -1,0 +1,20 @@
+id: html-whatIs
+name: whatIs
+type: lesson
+icon: fire
+
+questions:
+  -type: codeComplete
+    files:
+      - file: ./files/a1.html
+        answers:
+        - CSS
+      - file: ./files/a2.html
+        answers:
+        - HTML
+      - file: ./files/a3.html
+        answers:
+        - Javascript
+      - file: ./files/a4.html
+        answers:
+        - HTML
