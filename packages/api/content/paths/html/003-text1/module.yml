@@ -1,0 +1,20 @@
+id: html-text1
+name: text1
+type: lesson
+icon: fire
+
+questions:
+  -type: codeComplete
+    files:
+      - file: ./files/a1.html
+        answers:
+        - <h6></h6>
+      - file: ./files/a2.html
+        answers:
+        - <p></p>
+      - file: ./files/a3.html
+        answers:
+        - <abbr><abbr>
+      - file: ./files/a4.html
+        answers:
+        - <blockquote></blockquote>
