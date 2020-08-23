@@ -1,5 +1,5 @@
 # COURSE TEMPLATE:
-HTML foundations
+This basic template offers a common lesson structure to be followed by all Learn courses.
 
 ---
 
@@ -9,7 +9,12 @@ HTML foundations
 ```
 
 ---
-## Narrative
+## Expected Outcomes
+```
+By the end of this course, the Learner will be able to...
+```
+---
+## The Narrative
 ```
 -Learn is a narrative driven platform. 
 -What the narrative that comes along with this course is about?
@@ -24,10 +29,14 @@ HTML foundations
 ```
 
 ---
-## Expected Outcomes
-```
-By the end of this course, the Learner will be able to...
-```
 
 ## Course structure
-__Expected Outcome__ :By the end of this module, the Learner will be able to understand th
+### Module
+```
+A course is built upon modules,  each module should solve a problem contributes to achieve par of the course outcome. The module is divided into lessons, offering learn resource and activities that will help the learner solve the problem proposed in this module.
+```
+__The Problem__ : Starts by offering the students a concrete problem to be solved, or give them a glimpse of the application they will be able to built after learning and practice with each lesson. This is also an opportunity to present the course outcomes to the students.
+
+__Lesson__ : The lessons will cover the topics proposed by the course syllabus. It contains learning resources and activities, providing the Learners the knowledge they need to solve the problem suggested in this module. Lessons have a narrative form, presented by the course Storyteller character.
+
+---
