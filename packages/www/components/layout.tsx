@@ -10,6 +10,7 @@ import Logo from '../public/logo.svg';
 const StyledHomePage = styled.div`
   background: linear-gradient(180deg, ${t.color('white')}, ${t.colors.primary[100]});
   height: 100vh;
+  position: relative;
 `;
 
 const StyledNav = styled.nav`

@@ -4,6 +4,8 @@ import React from 'react';
 import { centerAbsolute, Button, theme as t } from '@codement/ui';
 import styled from 'styled-components';
 import Layout from '../components/layout';
+import Languages from '../components/languages';
+import { getIcon } from '../lib/icons';
 
 const StyledHeroText = styled.div`
   width: 600px;
@@ -24,7 +26,7 @@ const StyledHeroText = styled.div`
 `;
 
 
-export default function Home() {
+export default function Home({ icons }) {
   return (
     <Layout people>
       <StyledHeroText>
@@ -38,6 +40,16 @@ export default function Home() {
           Learn coding for free
         </Button>
       </StyledHeroText>
+      <Languages icons={icons} />
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const icons = getIcon();
+  return {
+    props: {
+      icons
+    }
+  };
 }
