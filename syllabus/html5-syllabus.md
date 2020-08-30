@@ -85,4 +85,7 @@ __Expected Outcome__ :By the end of this module, the Learner will be able to und
 ## Story ideas
 - Warehouse metaphor
 - Pet shop (Maybe css)
+- Building portfolio website with form
 
+## ASSIGNMENT idea
+- Customize website template (e.g. rename website, change website logo)
