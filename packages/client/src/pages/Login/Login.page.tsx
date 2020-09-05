@@ -81,7 +81,8 @@ export const LoginPage = () => {
         error={getGQLError(loginError)}
         validationSchema={loginValidation}
         initialValues={{
-          email: LocalStorage.email || undefined
+          email: LocalStorage.email || '',
+          password: ''
         }}
       >
         <FormField name="email" type="text" placeholder="Email" icon="user" />
