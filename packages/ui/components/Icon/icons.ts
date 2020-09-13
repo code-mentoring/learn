@@ -30,6 +30,7 @@ import { IconDashboard } from './icons/solid/cis-dashboard';
 import { IconSettings } from './icons/solid/cis-settings';
 import { IconCheckCircle } from './icons/solid/cis-check-circle';
 import { IconEmpty } from './icons/solid/cis-empty-circle';
+import { IconStarCircle } from './icons/solid/cis-star-circle';
 
 export const icons = {
   arrowDown: IconArrowDown,
@@ -64,5 +65,6 @@ export const icons = {
   checkCircle: IconCheckCircle,
   emptyIcon: IconEmpty,
   mediaSkipForward: IconMediaSkipForward,
-  at: IconAt
+  at: IconAt,
+  starCircle: IconStarCircle
 };

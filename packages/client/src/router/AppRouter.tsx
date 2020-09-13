@@ -13,6 +13,7 @@ import { QuoteLoadingPage } from '../pages/QuoteLoading/QuoteLoading.page';
 import { Lesson } from '../containers/Lesson.container';
 import { Question } from '../containers/Question.container';
 import { routes } from './routes';
+import { LeaderBoard } from '../components/widgets/LeaderBoard/LeaderBoard.contianer';
 
 
 export const AppRouter = () => (
@@ -24,7 +25,11 @@ export const AppRouter = () => (
       <ClientContainerWrapper>
         <AuthRoute routes={routes} loadingPage={<QuoteLoadingPage />} path="*">
           <Switch>
-            <Route exact path={routes.home(false)} component={DashboardPage} />
+            <Route exact path={routes.home(false)}>
+              <LeaderBoard.Provider>
+                <DashboardPage />
+              </LeaderBoard.Provider>
+            </Route>
             <Route exact path={routes.logout(false)} component={LogoutPage} />
             <Route exact path={routes.lesson(false)}>
               <Lesson.Provider>
