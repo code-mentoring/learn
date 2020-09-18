@@ -27,7 +27,7 @@ const StyledPage = styled.main<{ sidebar?: boolean }>`
 const StyledPageContent = styled.div`
   background: ${t.color('primary.100')};
   border-top-left-radius: ${t.borderRadius.large};
-  padding: ${t.size('xbig')};
+  // padding: ${t.size('xbig')};
 `;
 
 export const Page: React.FunctionComponent<PageProps> = ({

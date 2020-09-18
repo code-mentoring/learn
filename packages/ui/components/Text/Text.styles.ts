@@ -27,7 +27,7 @@ export const baseText = ({
   if (fontFamily) styles.fontFamily = t.fontFamily[fontFamily];
   if (fontWeight) styles.fontWeight = t.fontWeight[fontWeight];
   if (uppercase) styles.textTransform = 'uppercase';
-  styles.lineHeight = 1.75;
+  styles.lineHeight = '1.75rem';
   return styles;
 };
 

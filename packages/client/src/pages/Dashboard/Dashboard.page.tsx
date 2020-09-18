@@ -7,14 +7,15 @@ import styled from 'styled-components';
 import { fadeUp } from '@codement/ui/css/animations';
 import { ModuleTree } from '../../components/ModuleTree/ModuleTree';
 import { AppPageContent, Page } from '../../components/Page/Page';
-import { LeaderboardWidget } from '../../components/widgets/LeaderBoard/LeaderBoard.widget';
-import { ProgressWidget } from '../../components/widgets/PathProgress/PathProgress.widget';
 import { routes } from '../../router/routes';
+import { DashboardLeftSidebar } from './Sidebar/DashboardLeftSidebar';
+import { DashboardRightSidebar } from './Sidebar/DashboardRightSidebar';
 
 const Content = styled(AppPageContent)`
   display: grid;
-  grid-template-columns: 1fr minmax(20rem, 42rem);
-  grid-gap: ${t.size()};
+  grid-template-columns: 28rem 1fr 28rem;
+  grid-gap: ${t.size('none')};
+  height:100%;
 
   ${Card} {
     opacity: 0; animation: ${fadeUp} 0.5s ease-out forwards;
@@ -25,7 +26,6 @@ const Content = styled(AppPageContent)`
   }
 `;
 
-const StyledModuleTree = styled(ModuleTree)`grid-row: span 2;`;
 
 export const DashboardPage = () => {
   const { me } = Me.useContainer();
@@ -33,11 +33,11 @@ export const DashboardPage = () => {
   // TODO: Move to container
   if (!me?.userPreferences) return <Redirect to={routes.onboardingWorkflow()} />;
 
-  return <Page title="Dashboard" header sidebar>
+  return <Page title="Dashboard" header>
     <Content>
-      <StyledModuleTree />
-      <ProgressWidget />
-      <LeaderboardWidget />
+      <DashboardLeftSidebar />
+      <ModuleTree />
+      <DashboardRightSidebar />
     </Content>
   </Page>;
 };

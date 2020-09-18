@@ -9,6 +9,7 @@ export interface ModuleTreeProps { }
 
 const StyledCard = styled(Card)`
   text-align: center;
+  background: ${theme.colors.primary[100]};
 
   h2 {
     margin-bottom: ${theme.size('xl')};
