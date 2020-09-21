@@ -1,36 +1,39 @@
-import 'webpack-dev-server';
 
-import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
-
+import HTMLPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const Favicon = require('favicons-webpack-plugin');
 const ReplacePlugin = require('webpack-plugin-replace');
-const CopyPlugin = require('copy-webpack-plugin');
 
-const isProd = process.env.NODE_ENV === 'production';
-
-
-const config: Configuration = {
-  entry: ['./src/index.tsx'],
+export default {
+  entry: './src/index.tsx',
+  output: {
+    filename: '[hash].js',
+    chunkFilename: '[chunkhash].js',
+    publicPath: '/'
+  },
 
   resolve: {
     extensions: ['.ts', '.js', '.tsx', '.gql', '.css']
   },
 
-  output: {
-    publicPath: '/'
-  },
-
-  devServer: {
-    historyApiFallback: true
-  },
-
   module: {
     rules: [
-      { test: /\.ts/, loader: 'ts-loader' },
+      {
+        test: /\.(ts|tsx)/,
+        loaders: [{
+          loader: 'babel-loader',
+          options: {
+            rootMode: 'upward'
+          }
+        }]
+      },
+
       { test: /\.html/, loader: 'html-loader' },
+
       { test: /\.png/, loader: 'url-loader' },
+
       {
         test: /\.svg/,
         loader: 'react-svg-loader',
@@ -43,7 +46,9 @@ const config: Configuration = {
           }
         }
       },
+
       { test: /\.gql/, loader: 'graphql-tag/loader' },
+
       {
         test: /\.(mp3|wav)$/,
         loader: 'file-loader',
@@ -53,20 +58,13 @@ const config: Configuration = {
   },
 
   plugins: [
-    new HTMLWebpack({
-      template: './src/index.html'
-    }),
+    new HTMLPlugin({ template: './src/index.html' }),
+    new CleanWebpackPlugin(),
     new ReplacePlugin({
       values: {
-        '%%API_HOST%%': process.env.API_HOST || 'http://localhost:4000',
-        '%%IS_PROD%%': isProd
+        '%%API_HOST%%': process.env.API_HOST || 'http://localhost:4000'
       }
     }),
-    new CopyPlugin([{ from: './_redirects', to: './' }]),
     new Favicon('../ui/images/favicon.jpg')
   ]
-
-};
-
-// tslint:disable-next-line
-export default config;
+} as Configuration;

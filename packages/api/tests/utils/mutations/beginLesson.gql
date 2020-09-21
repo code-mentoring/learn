@@ -1,0 +1,23 @@
+mutation ($id: String!) {
+  beginLesson(id: $id) {
+    secret
+    lesson {
+      id
+      name
+      icon
+      type
+      previousId
+      pathId
+      completed
+      lesson {
+        storySections { content }
+        questions {
+          ... on QuestionMultiChoice  { id type options code type }
+          ... on QuestionMemory       { id type pairs }
+          ... on QuestionDragDrop     { id type code options slots }
+          ... on QuestionBugHighlight { id type code }
+        }
+      }
+    }
+  }
+}

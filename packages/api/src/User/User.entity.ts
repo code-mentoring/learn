@@ -28,6 +28,9 @@ export class User {
 
   @Field()
   createdAt: Date;
+
+  @Field()
+  streak: number;
 }
 
 @Entity('user')
@@ -54,6 +57,12 @@ export class UserWithPassword extends CMBaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({ default: 0 })
+  streak: number;
+
+  @Column({ nullable: true })
+  updatedStreak?: Date;
+
   @OneToMany(() => PathUser, pathUser => pathUser.user)
   pathUser: PathUser[];
 
@@ -62,6 +71,12 @@ export class UserWithPassword extends CMBaseEntity {
 
   @OneToOne(() => UserPreferences)
   userPreferences: UserPreferences;
+
+  setStreak(s: number) {
+    this.streak = s;
+    this.updatedStreak = new Date();
+    return this.save();
+  }
 }
 
 @InputType()

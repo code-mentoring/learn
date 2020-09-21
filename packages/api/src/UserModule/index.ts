@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserWithPassword } from '../User/User.entity';
+import { UserService } from '../User/User.service';
 import { UserModule } from './UserModule.entity';
 import { UserModuleService } from './UserModule.service';
 import { UserModuleResolver } from './UserModule.resolver';
@@ -11,9 +13,22 @@ import { CMS } from '../CMS/CMS';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserModule, PathUser, Path])
+    TypeOrmModule.forFeature([
+      UserModule,
+      PathUser,
+      Path,
+      UserWithPassword
+    ])],
+  providers: [
+    UserModuleResolver,
+    UserModuleService,
+    UserModule,
+    PathUserService,
+    PathService,
+    CMS,
+    UserService,
+    UserWithPassword
   ],
-  providers: [UserModuleResolver, UserModuleService, PathUserService, PathService, CMS],
   exports: [UserModuleService]
 })
 export class UserModuleModule {}

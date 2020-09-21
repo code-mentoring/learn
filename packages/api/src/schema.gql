@@ -129,6 +129,7 @@ type User {
   profileImage: String!
   userPreferences: UserPreferences
   createdAt: DateTime!
+  streak: Float!
 }
 
 type AssignmentFile {
