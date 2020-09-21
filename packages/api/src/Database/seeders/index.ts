@@ -4,7 +4,7 @@ import { AppModule } from '../../App.module';
 import { SeederService } from './Seeders.service';
 
 export async function bootstrap() {
-  const app = await NestFactory.createApplicationContext(AppModule);
+  const app = await NestFactory.createApplicationContext(AppModule, { logger: false });
 
   const seedersService = app.get(SeederService);
   await seedersService.seedAll();
