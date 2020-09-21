@@ -16,6 +16,8 @@ export interface Story {
 export const stories: Story[] = [
   { id: 'buttons', title: 'Buttons', story: StoryButtons },
   { id: 'icons', title: 'Icons', story: StoryIcons },
+  { id: 'box', title: 'Box', story: StoryBox },
+  { id: 'card', title: 'Card', story: StoryCard },
   { id: 'sliderField', title: 'SliderField', story: StorySliderField },
   { id: 'error-message', title: 'Error Message', story: StoryErrorMessage },
   { id: 'text', title: 'Text', story: StoryText },
