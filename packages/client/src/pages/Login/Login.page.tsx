@@ -4,7 +4,7 @@ import People from '@codement/ui/images/welcome-people.svg';
 import { getGQLError } from '@codement/ui/lib/apollo';
 import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
@@ -25,8 +25,6 @@ const StyledPage = styled(Page)`
   }
 
   form {
-    width: 90vw;
-    max-width: 40rem;
     margin: ${t.size('huge')} 0;
   }
 
@@ -38,6 +36,7 @@ const StyledPage = styled(Page)`
 `;
 
 const Container = styled(Box)`
+  width: 40rem;
   margin-top: ${t.size('xbig')};
   z-index: 1;
 `;
@@ -62,10 +61,9 @@ const loginValidation = yup.object().shape({
 });
 
 const ToggleField = styled.div`
-  display:flex;
+  display: flex;
+  grid-column: span 2;
   justify-content: space-between;
-  width: 90vw;
-  max-width: 40rem;
 `;
 
 
