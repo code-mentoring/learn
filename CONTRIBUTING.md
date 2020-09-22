@@ -45,6 +45,7 @@ This is a running list of those who are actively contributing to this project.
 | Yago Mackay         | Front End                  | `@Yago Mackay`        | [@YagoMackay](https://github.com/YagoMackay)           | 8 hours              | May 2020  |
 | Roso Peñaranda      | Full Stack                 | `@Roso Peñaranda`     | [@RosoPenaranda](https://github.com/RosoPenaranda)     | 10 - 12 hours        | Jun 2020  |
 | Mayura Wijeyaratne  | Front End                  | `@Mayura Wijeyaratne` | [@podiman](https://github.com/podiman)                 | 5 - 10 hours         | Jun 2020  |
+| Mathias Ssenabulya  | Full Stack                 | `@Mathias Ssenabulya` | [@MathiasSsenabulya](https://github.com/MathiasSsenabulya)| 5 - 10 hours      | Sep 2020  |
 
 
 ## 🔧 What can I work on?
