@@ -5,6 +5,7 @@ import StoryCard from '../components/Card/Card.story.mdx';
 import StorySliderField from '../components/SliderField/SliderField.story.mdx';
 import StoryErrorMessage from '../components/ErrorMessage/ErrorMessage.story.mdx';
 import StoryText from '../components/Text/Text.story.mdx';
+import StoryLoader from '../components/Loader/Loader.story.mdx';
 
 export interface Story {
   id: string;
@@ -19,5 +20,6 @@ export const stories: Story[] = [
   { id: 'card', title: 'Card', story: StoryCard },
   { id: 'sliderField', title: 'SliderField', story: StorySliderField },
   { id: 'error-message', title: 'Error Message', story: StoryErrorMessage },
-  { id: 'text', title: 'Text', story: StoryText }
+  { id: 'text', title: 'Text', story: StoryText },
+  { id: 'loader', title: 'Loader', story: StoryLoader }
 ];
