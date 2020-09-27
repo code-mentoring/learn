@@ -4,7 +4,7 @@ import People from '@codement/ui/images/welcome-people.svg';
 import { getGQLError } from '@codement/ui/lib/apollo';
 import { Auth } from '@codement/ui/lib/containers/Auth.container';
 import { LocalStorage } from '@codement/ui/lib/localStorage';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
@@ -25,8 +25,6 @@ const StyledPage = styled(Page)`
   }
 
   form {
-    width: 90vw;
-    max-width: 40rem;
     margin: ${t.size('huge')} 0;
   }
 
@@ -38,6 +36,7 @@ const StyledPage = styled(Page)`
 `;
 
 const Container = styled(Box)`
+  width: 40rem;
   margin-top: ${t.size('xbig')};
   z-index: 1;
 `;
@@ -61,12 +60,28 @@ const loginValidation = yup.object().shape({
   password: yup.string().required()
 });
 
+const ToggleField = styled.div`
+  display: flex;
+  grid-column: span 2;
+  justify-content: space-between;
+`;
+
 
 export const LoginPage = () => {
   const { login, loginError } = Auth.useContainer();
+  const [passwordType, setPasswordType] = useState('password');
 
   const submit = (e: { email: string, password: string, rememberMe: boolean }) => {
     login(e.email, e.password, e.rememberMe);
+  };
+  const togglePasswordVisibility = (e: { showPassword: string[] }) => {
+    if (Array.isArray(e.showPassword)) {
+      if (e.showPassword[0] === 'on') {
+        setPasswordType('text');
+      } else if (e.showPassword[0] === undefined) {
+        setPasswordType('password');
+      }
+    }
   };
 
   return <StyledPage title="Login to Code Mentoring">
@@ -83,10 +98,14 @@ export const LoginPage = () => {
         initialValues={{
           email: LocalStorage.email || undefined
         }}
+        onChange={togglePasswordVisibility}
       >
         <FormField name="email" type="text" placeholder="Email" icon="user" />
-        <FormField name="password" placeholder="Password" type="password" icon="password" />
-        <FormField type="checkbox" name="rememberMe" text="Remember me?" />
+        <FormField name="password" type={passwordType} placeholder="Password" icon="password" />
+        <ToggleField>
+          <FormField name="rememberMe" type="checkbox" text="Remember me?" />
+          <FormField name="showPassword" type="checkbox" text="Show password" />
+        </ToggleField>
         <Button size="large">Login</Button>
       </Form>
 
