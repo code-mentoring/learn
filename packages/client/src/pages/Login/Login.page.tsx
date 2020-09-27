@@ -96,7 +96,8 @@ export const LoginPage = () => {
         error={getGQLError(loginError)}
         validationSchema={loginValidation}
         initialValues={{
-          email: LocalStorage.email || undefined
+          email: LocalStorage.email || '',
+          password: ''
         }}
         onChange={togglePasswordVisibility}
       >
