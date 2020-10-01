@@ -28,7 +28,7 @@ const StyledHeroText = styled.div`
 
 export default function Home({ icons }) {
   return (
-    <Layout people>
+    <Layout page="Welcome" people>
       <StyledHeroText>
         <h2>
           Coding got you lost? We&apos;re here to help!

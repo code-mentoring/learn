@@ -90,7 +90,7 @@ const SignupButton = styled(Button)`
 
 export default function Pricing({ pricings }) {
   return (
-    <Layout>
+    <Layout page="Pricing">
       <Price>
         <StyledHeroText>
           {pricings.headline.map(p => (

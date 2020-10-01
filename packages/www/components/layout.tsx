@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import { theme as t } from '@codement/ui';
 import styled from 'styled-components';
 import People from '../public/people.svg';
@@ -47,11 +48,18 @@ const StyledPeople = styled(People)`
   bottom: -${t.size('tiny')};
 `;
 
-export default function Layout({ children, people = false }) {
+export default function Layout({ children, page, people = false }) {
   return (
     <StyledHomePage>
+      <Head>
+        <title>{page} - Code Mentoring</title>
+      </Head>
       <StyledNav>
-        <Logo />
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
         <StyledNavList>
           <li>
             <Link href="/pricing">
