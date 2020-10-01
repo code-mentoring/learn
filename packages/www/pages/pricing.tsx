@@ -7,11 +7,7 @@ import styled, { css } from 'styled-components';
 import Layout from '../components/layout';
 import { getPricing } from '../lib/pricing';
 
-const buttonColor = [
-  'secondary',
-  'primary',
-  'tertiary'
-];
+const buttonColor = ['secondary', 'primary', 'tertiary'];
 
 const cardColor = [
   t.colors.secondary[600],
@@ -47,39 +43,42 @@ const Price = styled.div`
   padding: ${t.size('big')};
 `;
 
-const PriceCard = styled(Card)`${props => {
-  const { color } = props;
-  return css`
-    text-align: center;
-    border: 2px solid ${color};
-    min-height: 40rem;
+const PriceCard = styled(Card)`
+  ${props => {
+    const { color } = props;
+    return css`
+      text-align: center;
+      border: 2px solid ${color};
+      min-height: 40rem;
 
-    font-family: ${t.fontFamily.code};
-    
-    h3 {
-      font-size: ${t.size('lg')};
-      color: ${color};
-      line-height: ${t.size('xl')};
-    }
+      font-family: ${t.fontFamily.code};
 
-    p {
-      ${t.colors.grey[800]};
-      margin: ${t.size('xsm')} 0;
-    }
+      h3 {
+        font-size: ${t.size('lg')};
+        color: ${color};
+        line-height: ${t.size('xl')};
+      }
 
-    #price {
-      font-size: ${t.size('xbig')};
-      color: ${color};
-      line-height: ${t.size('xl')};
-      font-weight: bold;
-    }
+      p {
+        ${t.colors.grey[800]};
+        margin: ${t.size('xsm')} 0;
+      }
 
-    #limit {
-      font-size: ${t.size('xbig')};
-      color: ${t.colors.grey[500]};
-      font-weight: bold;
-    }`;
-}}`;
+      #price {
+        font-size: ${t.size('xbig')};
+        color: ${color};
+        line-height: ${t.size('xl')};
+        font-weight: bold;
+      }
+
+      #limit {
+        font-size: ${t.size('xbig')};
+        color: ${t.colors.grey[500]};
+        font-weight: bold;
+      }
+    `;
+  }}
+`;
 
 const SignupButton = styled(Button)`
   position: absolute;
@@ -94,35 +93,28 @@ export default function Pricing({ pricings }) {
     <Layout>
       <Price>
         <StyledHeroText>
-          {
-            pricings.headline.map(p =>
-              <h2>
-                {p}
-              </h2>)
-          }
-          {
-            pricings.description.map(d =>
-              <p>
-                {d}
-              </p>)
-          }
+          {pricings.headline.map(p => (
+            <h2 key={p}>{p}</h2>
+          ))}
+          {pricings.description.map(d => (
+            <p key={d}>{d}</p>
+          ))}
         </StyledHeroText>
-        {
-          pricings.pricing.map((p, i) => (
-            <PriceCard color={cardColor[i]}>
-              <h3>{p.level}</h3>
-              <br />
-              <p>{p.description}</p>
-              <br />
-              <p id="price">{p.price}</p>
-              <p id="limit">{p.limit}</p>
-              <SignupButton size="small" color={buttonColor[i]}>
-                <Link href="/signup">
-                  <span>SIGNUP</span>
-                </Link>
-              </SignupButton>
-            </PriceCard>))
-        }
+        {pricings.pricing.map((p, i) => (
+          <PriceCard color={cardColor[i]} key={p.level}>
+            <h3>{p.level}</h3>
+            <br />
+            <p>{p.description}</p>
+            <br />
+            <p id="price">{p.price}</p>
+            <p id="limit">{p.limit}</p>
+            <SignupButton size="small" color={buttonColor[i]}>
+              <Link href="/signup">
+                <span>SIGNUP</span>
+              </Link>
+            </SignupButton>
+          </PriceCard>
+        ))}
       </Price>
     </Layout>
   );
