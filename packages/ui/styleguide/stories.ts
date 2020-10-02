@@ -1,5 +1,7 @@
 import StoryButtons from '../components/Button/Button.story.mdx';
 import StoryIcons from '../components/Icon/Icon.story.mdx';
+import StoryBox from '../components/Box/Box.story.mdx';
+import StoryCard from '../components/Card/Card.story.mdx';
 import StorySliderField from '../components/SliderField/SliderField.story.mdx';
 import StoryErrorMessage from '../components/ErrorMessage/ErrorMessage.story.mdx';
 import StoryText from '../components/Text/Text.story.mdx';
