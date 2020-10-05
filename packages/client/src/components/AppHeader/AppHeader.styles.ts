@@ -64,26 +64,3 @@ export const CenterPosition = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-export const User = styled.div`
-  text-align: center;
-  justify-items: center;
-  align-content: center;
-  
-  width:fit-content;
-  height: ${t.size('huge')};
-  padding: ${t.size('tiny')};
-  
-  display: grid;
-  grid-template-columns: min-content auto min-content;
-  
-  border: ${t.borders.main};
-  box-sizing: border-box;
-  border-radius: ${t.size('tiny')};
-
-  small {
-    align-self: center;
-    padding: ${t.size('tiny')};
-    font-weight: bold;
-  }
-`;
