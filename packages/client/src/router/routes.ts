@@ -26,6 +26,8 @@ export const routes = {
   home: linkParams('/'),
   lesson: linkParams<{lessonId: string}>('/lesson/:lessonId'),
   settings: linkParams('/settings'),
+  // TODO: placeholder, the profile page need to be added
+  profile: linkParams('/profile'),
 
   // Onboarding workflow
   onboardingWorkflow: linkParams('/welcome'),
