@@ -1,7 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
-import { theme as t } from '@codement/ui';
+import { Icon, IconType, theme as t, Text } from '@codement/ui';
 
-export const SectionHeader = styled.div<{noBorder?:boolean}>`
+
+export interface SectionHeaderProps {
+  noBorder?: boolean;
+  icon: IconType;
+}
+
+const StyledSectionHeader = styled.div<{noBorder?:boolean}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,3 +19,13 @@ export const SectionHeader = styled.div<{noBorder?:boolean}>`
     padding: ${t.size('tiny')};
   }
 `;
+
+export const SectionHeader: React.FC<SectionHeaderProps> = ({
+  noBorder = false,
+  icon,
+  children
+}) =>
+  <StyledSectionHeader noBorder={noBorder}>
+    <Icon icon={icon} color="grey.400" size="big" />
+    <Text color="grey.400" fontWeight="bold" uppercase>{children}</Text>
+  </StyledSectionHeader>;
