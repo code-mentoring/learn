@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, PathIcon, PathIconType, Text } from '@codement/ui';
-import { SectionHeader, SectionBody } from './DashbaordSideBar.styles';
+import { SectionBody } from './DashboardSideBar.styles';
+import { SectionHeader } from '../../../components/AppSidebar/SectionHeader';
 
 // TODO: need to be replaced by real API and move to DashBoard.container
 // it should return 3 eletments

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Icon, Text } from '@codement/ui';
 import { LeaderboardWidget } from '../../../components/widgets/LeaderBoard/LeaderBoard.widget';
-import { SectionHeader, Siderbar } from './DashbaordSideBar.styles';
 import { AdSpace } from './AdSpace';
+import { Siderbar } from '../../../components/AppSidebar/Sidebar';
+import { SectionHeader } from '../../../components/AppSidebar/SectionHeader';
 
 export const DashboardRightSidebar: React.FC<{}> = () =>
   <Siderbar>
