@@ -1,12 +1,12 @@
 import React from 'react';
-import { Siderbar } from '../../../components/AppSidebar/Sidebar';
+import { Sidebar } from '../../../components/AppSidebar/Sidebar';
 import { NeedsPractice } from './NeedsPractice';
 import { RecentlyLearned } from './RecentlyLearned';
 import { TrainConcepts } from './TrainConcepts';
 
 export const DashboardLeftSidebar: React.FC<{}> = () =>
-  <Siderbar>
+  <Sidebar>
     <NeedsPractice />
     <TrainConcepts />
     <RecentlyLearned />
-  </Siderbar>;
+  </Sidebar>;
