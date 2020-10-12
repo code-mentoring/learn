@@ -1,31 +1,11 @@
-import { theme as t, Card } from '@codement/ui';
-import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-
-import { fadeUp } from '@codement/ui/css/animations';
+import { Me } from '@codement/ui/lib/containers/Me.container';
 import { ModuleTree } from '../../components/ModuleTree/ModuleTree';
-import { AppPageContent, Page } from '../../components/Page/Page';
+import { Page } from '../../components/Page/Page';
 import { routes } from '../../router/routes';
 import { DashboardLeftSidebar } from './Sidebar/DashboardLeftSidebar';
 import { DashboardRightSidebar } from './Sidebar/DashboardRightSidebar';
-
-const Content = styled(AppPageContent)`
-  display: grid;
-  grid-template-columns: 28rem 1fr 28rem;
-  grid-gap: ${t.size('none')};
-  height:100%;
-
-  ${Card} {
-    opacity: 0; animation: ${fadeUp} 0.5s ease-out forwards;
-
-    &::nth-child(1) { animation-delay: 0.1s; }
-    &::nth-child(2) { animation-delay: 0.4s; }
-    &::nth-child(3) { animation-delay: 0.5s; }
-  }
-`;
-
 
 export const DashboardPage = () => {
   const { me } = Me.useContainer();
@@ -33,11 +13,9 @@ export const DashboardPage = () => {
   // TODO: Move to container
   if (!me?.userPreferences) return <Redirect to={routes.onboardingWorkflow()} />;
 
-  return <Page title="Dashboard" header>
-    <Content>
-      <DashboardLeftSidebar />
-      <ModuleTree />
-      <DashboardRightSidebar />
-    </Content>
+  return <Page title="Dashboard" header twoSidebar>
+    <DashboardLeftSidebar />
+    <ModuleTree />
+    <DashboardRightSidebar />
   </Page>;
 };

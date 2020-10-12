@@ -14,7 +14,7 @@ export interface AppHeaderProps {
 export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
   const { me } = Me.useContainer();
 
-  return <StyledAppHeader minimal={minimal}>
+  return <StyledAppHeader minimal={minimal} className="appHeader">
     <Link to="/dashboard">
       <LogoMark className="logo" />
     </Link>
