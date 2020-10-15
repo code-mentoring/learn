@@ -2,8 +2,6 @@
 
 Welcome back {{firstName}}! We have covered a lot in the last couple of lessons and things are starting to take shape with our Zine! 
 
-In the last lesson we looked at how to organize our Zine in paragraphs and introduced the Paragraph tag `<p></p>`. 
-
 Our Zine is starting to look really good! But lets dig deeper and see how we can futher organize our Zine and have our content really stand out. We are going to take a look at some of the commonly used HTML tags.
 
 # Span Tag
@@ -104,7 +102,7 @@ Our lesson on common HTML tags would not be complete without talking about image
 
 Adding images to our website is simple! We use the Img `<img />` tag in our HTML to add images. 
 
-Wait, something looks a bit off! In our previous examples, we had an opening and closing tag but the Img Tag `<img />` only has one tag, is this right? Ofcourse it is! The Img `<img />` tag is a `self closing` tag. We can open and close the tag all within one tag by adding a `/` just before the `>` symbol in the opening tag.
+Wait, something looks a bit off! In our previous examples, we had an opening and closing tag but the Img Tag `<img />` only has one tag, is this right? Of course it is! The Img `<img />` tag is a `self closing` tag. We can open and close the tag all within one tag by adding a `/` just before the `>` symbol in the opening tag.
 
 Now that we have introduced the Img tag `<img />`, let's take a look at an example:
 
@@ -118,7 +116,7 @@ That's a good looking cupcake we got! Ok, let's take a look at the HTML code on 
 <img src="..img/cupcake.png" alt="cupcake image" />
 ```
 
-You maybe wondering what `src` and `alt` are within our Img tag? Well these are `Attributes`. All HTML tags or elements can have some `Attributes`, they provide some more information about our HTML tag. Think about our cupcakes example for a moment. If our HTML tag was a cupcake, we can use `Attributes` to convey what ingredients we are using and how much. `Attributes` usually come with a name and value and are always specified in the start tag. In our example above, the Img `<img />` tag has two attributes, `src` which tells our website which image we are using, and `alt` which helps give a description of the image for screen readers or if the image does not load. For the `src` attribute, we will show you how to add images from our code base or through website URLs in our upcoming `Links` lesson, we will discuss `Absolute` vs `Relative` URLs.
+You maybe wondering what `src` and `alt` are within our Img tag? Well these are `Attributes`. All HTML tags or elements can have some `Attributes`, they provide some more information about our HTML tag. Think about our cupcakes example for a moment. If our HTML tag was a cupcake, we can use `Attributes` to convey what ingredients we are using and how much. `Attributes` usually come with a name and value and are always specified in the start tag. In our example above, the Img `<img />` tag has two attributes, `src` which tells our website which image we are using, and `alt` which helps give a description of the image for screen readers or if the image does not load. For the `src` attribute, I will show you how to add images from our code base or through website URLs in our upcoming `Links` lesson, we will discuss `Absolute` vs `Relative` URLs.
 
 Just one more word on images and self closing tags! You can see in our example code above as to why we use a `self closing` tag. There is no content needed between the opening and closing tags! In our previous examples for the Paragraph tag `<p></p>` or Span tag `<span></span>`, we added words between the tags so that the content was being displayed on our website. For the Img tag `<img />`, we specify what image to display using the `src` attribute, no other information is needed so we can close the tag with a `self closing` tag.
 
