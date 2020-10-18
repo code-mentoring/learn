@@ -1,12 +1,10 @@
-import { Icon, UserProfile } from '@codement/ui';
-import LogoMark from '@codement/ui/images/logo-mark.svg';
+import { Icon, UserProfile, Text } from '@codement/ui';
+import LogoMark from '@codement/ui/images/logo-new.svg';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Figure, Search, StyledAppHeader } from './AppHeader.styles';
-import { PathSelector } from './PathSelector/PathSelector';
-
+import { CurrentProgressWidget } from '../widgets/PathProgress/CurrentPathProgress.widget';
+import { CenterPosition, Figure, StyledAppHeader, User } from './AppHeader.styles';
 
 export interface AppHeaderProps {
   /* Only shows the logo and the user profile. Example of use: Welcome wizard */
@@ -16,27 +14,35 @@ export interface AppHeaderProps {
 export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
   const { me } = Me.useContainer();
 
-  return <StyledAppHeader minimal={minimal}>
+  return <StyledAppHeader minimal={minimal} className="appHeader">
     <Link to="/dashboard">
       <LogoMark className="logo" />
     </Link>
 
     {!minimal && <>
-      <Search size="small" placeholder="Search for anything…" iconColor="grey.700" icon="search" />
-      <PathSelector />
-
+      <CenterPosition>
+        <CurrentProgressWidget />
+      </CenterPosition>
       {/* TODO: Replace with concept icon */}
-      <Figure color="green">
+      <Figure color="secondary.500" background="secondary.200">
+        <Icon icon="puzzle" color="secondary.500" size="big" />
         <span>100</span>
-        <Icon icon="fire" color="green" size="lg" />
       </Figure>
 
-      <Figure color="tertiary">
+      <Figure color="tertiary.500" background="tertiary.200">
+        <Icon icon="fire" color="tertiary.500" size="big" />
         <span>{me?.streak}</span>
-        <Icon icon="fire" color="tertiary" size="lg" />
       </Figure>
 
-      {me && <UserProfile user={me} />}
+      {me
+        && <User>
+          <UserProfile user={me} />
+          <Text variant="small">{me.firstName}</Text>
+          {/* TODO: Add dropdown menu */}
+          <button type="button">
+            <Icon icon="chevronDown" color="grey.300" size="xsm" />
+          </button>
+        </User>}
     </>}
   </StyledAppHeader>;
 };
