@@ -3,13 +3,30 @@ import LogoMark from '@codement/ui/images/logo-new.svg';
 import { Me } from '@codement/ui/lib/containers/Me.container';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { routes } from '../../router/routes';
 import { CurrentProgressWidget } from '../widgets/PathProgress/CurrentPathProgress.widget';
-import { CenterPosition, Figure, StyledAppHeader, User } from './AppHeader.styles';
+import { CenterPosition, Figure, StyledAppHeader } from './AppHeader.styles';
+import { Menu, DropdownMenu } from './DropdownMenu';
 
 export interface AppHeaderProps {
   /* Only shows the logo and the user profile. Example of use: Welcome wizard */
   minimal?: boolean;
 }
+
+const userDropdownMenu: Menu[] = [
+  {
+    title: 'home',
+    link: routes.home()
+  },
+  {
+    title: 'my profile',
+    link: routes.profile()
+  },
+  {
+    title: 'logout',
+    link: routes.logout()
+  }
+];
 
 export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
   const { me } = Me.useContainer();
@@ -35,14 +52,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ minimal }) => {
       </Figure>
 
       {me
-        && <User>
+        && <DropdownMenu menu={userDropdownMenu}>
           <UserProfile user={me} />
           <Text variant="small">{me.firstName}</Text>
-          {/* TODO: Add dropdown menu */}
-          <button type="button">
-            <Icon icon="chevronDown" color="grey.300" size="xsm" />
-          </button>
-        </User>}
+          <Icon icon="chevronDown" color="grey.300" size="xsm" />
+        </DropdownMenu>
+      }
     </>}
   </StyledAppHeader>;
 };
