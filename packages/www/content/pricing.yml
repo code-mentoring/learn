@@ -1,0 +1,21 @@
+headline: 
+ - We’re with you.
+ - Every step of the way.
+description:
+ - Ever wanted a mentor to help you through your coding career?
+ - We’ve designed our platform to be with you every step along the way.
+ - We’re always by your side.
+pricing:
+ - level: BEGINNER
+   description: To help you get started on your coding journey.
+   price: FREE
+   limit: 1 Lesson/Day
+ - level: HOBBYIST
+   description: Take your coding to the next level.
+   price: $10/Month
+   limit: 5 lessons/Day
+ - level: JOB SEEKER
+   description: For the serious learners looking to get a job.
+   price: $20/Month
+   limit: Unlimited lessons!
+
