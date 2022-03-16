@@ -4,7 +4,9 @@ import { theme } from '../../css/theme';
 import { Color } from '../../types/styled';
 import { IconProps } from '../Icon/Icon';
 import { Text } from '../Text/Text';
-import { TextField, TextFieldProps } from '../TextField';
+// import { TextField, TextFieldProps } from '../TextField';
+import { TextField } from '../TextField';
+import { TextFieldProps } from '../TextField/TextField';
 
 
 const StyledTextField: React.FC<TextFieldProps> = styled(TextField)`
